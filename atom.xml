@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://caifxh.github.io</id>
-    <title>blog</title>
-    <updated>2020-03-26T13:57:27.655Z</updated>
+    <title>fxh</title>
+    <updated>2020-03-26T13:59:37.453Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://caifxh.github.io"/>
     <link rel="self" href="https://caifxh.github.io/atom.xml"/>
     <subtitle>菜</subtitle>
     <logo>https://caifxh.github.io/images/avatar.png</logo>
     <icon>https://caifxh.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2020, blog</rights>
+    <rights>All rights reserved 2020, fxh</rights>
     <entry>
         <title type="html"><![CDATA[数论]]></title>
         <id>https://caifxh.github.io/post/shu-lun/</id>
