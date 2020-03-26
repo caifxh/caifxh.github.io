@@ -1,0 +1,1025 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>数论 | blog</title>
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1585230018938">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://caifxh.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="数论 | blog - Atom Feed" href="https://caifxh.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="数论
+除法和模运算
+计算机中整数和整数的除法是整数除法，即 a ÷ b = ⌊ ab ⌋.
+模运算即是两数相除的余数，在 c++ 的代码中用 a%b 来计算这
+个数字，通过一些小学知识我们容易得到
+a % b = a − ⌊a/b⌋ × b..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://caifxh.github.io">
+  <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1585230018938" alt="">
+  </a>
+  <h1 class="site-title">
+    blog
+  </h1>
+  <p class="site-description">
+    菜
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              数论
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-03-26
+              </span>
+              <span>
+                30 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h3 id="数论">数论</h3>
+<h4 id="除法和模运算">除法和模运算</h4>
+<p>计算机中整数和整数的除法是整数除法，即 a ÷ b = ⌊ ab ⌋.<br>
+模运算即是两数相除的余数，在 c++ 的代码中用 a%b 来计算这<br>
+个数字，通过一些小学知识我们容易得到<br>
+a % b = a − ⌊a/b⌋ × b</p>
+<h4 id="整除性和约数">整除性和约数</h4>
+<p>整除是数论中的一个中心概念。<br>
+如果两个数字 a, b, 满足 a % b = 0 , 那么我们就说 a 是 b 的倍数，同时也说 b 是 a 的约数，计做 b | a 。<br>
+在通常情况下，我们考虑一个数字的约数和倍数，都只考虑他的正约数和正倍数。<br>
+• 记号 d | a 意味着对某个整数 k，有 a = kd。<br>
+• 0 可被任何整数整除。0=0*d,d|0<br>
+• 如果 d | a 我们称 a 是 d 的倍数，d 是 a 的约数。<br>
+• 一个整数 a 的约数最小为 1， 最大为 |a|。 • 例如：12 的约数有 1, 2, 3, 4, 6, 12</p>
+<p>求约数<br>
+如何才能求出一个数字 n 的所有约数呢？<br>
+一个非常朴素的方法, 从 1 到 n 枚举，复杂度 O(n)<br>
+注意到约数总是成对出现的，即如果有 a ÷ b = c 就一定会有a ÷ c = b<br>
+我们以 ⌊√n⌋ 作为一个限度，只枚举到 √n(注意 n 是完全平方数的情况)</p>
+<pre><code>vector&lt;int&gt; get_div(int x)
+{
+    vector&lt;int&gt; res;
+    for (int i = 1; i &lt;= x / i; i ++ )
+        if (x % i == 0)
+        {
+            res.push_back(i);
+            if (i != x / i) res.push_back(x / i);
+        }
+    sort(res.begin(), res.end());
+    return res;
+}
+
+int main()
+{
+    int n;
+    cin &gt;&gt; n;
+
+    while (n -- )
+    {
+        int x;
+        cin &gt;&gt; x;
+        auto res = get_div(x);
+
+        for (auto x : res) cout &lt;&lt; x &lt;&lt; ' ';
+        cout &lt;&lt; endl;
+    }
+    return 0;
+}
+</code></pre>
+<h4 id="求倍数">求倍数</h4>
+<p>一个数字的倍数有无穷多个，所以很难求出所有的倍数，我们通常只求出 n 以内 a 的所有倍数。<br>
+和求约数相同，我们同样可以想到一个 O(n) 的简单方法，即枚举<br>
+对于一个数字 a , 他的所有倍数一定是 a, 2a, 3a, 4a, . . . , ⌊n/a⌋a, 每个倍数都比前一个倍数多 a, 所以我们可以从 a 开始每次加 a 枚举他的下一个倍数<br>
+复杂度分析：考虑一种极限情况，a = 1 , 此时枚举相当于从 1枚举到 n , 所以复杂度其实还是 O(n)<br>
+然而我们后面会看到，如果对于每个数字都枚举倍数的话，复杂度会有所下降。</p>
+<h4 id="素数和合数">素数和合数</h4>
+<p>对于某个整数 a &gt; 1，如果它仅有约数 1 和 a，则称 a 为素数（或质数）<br>
+前 10 个素数: 2, 3, 5, 11, 13, 17, 19, 23, 29, 31<br>
+不是素数的整数 a &gt; 1 称为合数。<br>
+例如，因为 2 | 10，所以 10 是合数。<br>
+整数 1 既不是素数也不是合数<br>
+如何判断一个数字是否是质数呢？定义判断即可</p>
+<pre><code>bool is_prime(int x)
+{
+    if(x&lt;2)
+        return false;
+    for(int i=2;i&lt;=x/i;i++)
+    {
+        if(x%i==0)
+            return false;
+    }
+    return true;
+}
+
+int main()
+{
+    int n;
+    cin&gt;&gt;n;
+    while(n--)
+    {
+        int x;
+        scanf(&quot;%d&quot;,&amp;x);
+        if(is_prime(x))
+            puts(&quot;Yes&quot;);
+        else
+            puts(&quot;No&quot;);
+    }
+    return 0;
+}
+</code></pre>
+<h4 id="埃拉托斯特尼筛法">埃拉托斯特尼筛法</h4>
+<p>埃氏筛法的原理是：每个合数都是多个质数的积；那么从最小的质数2开始，用每一个质数去筛比它大的数，就能筛掉合数。埃氏筛法低效的原因是，一个合数会被它的多个质因子重复筛。<br>
+我们考虑这样一个事实，如果一个数字是另外一个数字的倍数，那么这个数字一定不是素数，既然这样我们每枚举到一个数字 i，就可以把他所有的倍数全都设置成不是质数，这样从来没被标记过的数字就是质数了。<br>
+算法思想：每个质数都可以把它的倍数筛掉<br>
+时间复杂度：O(nloglogn)</p>
+<pre><code>int primes[N], cnt;
+bool st[N];
+
+void get_primes(int n)
+{
+    for (int i = 2; i &lt;= n; i ++ )
+    {
+        if (st[i]) continue;
+        primes[cnt ++ ] = i;
+        for (int j = i + i; j &lt;= n; j += i)
+            st[j] = true;
+    }
+}
+</code></pre>
+<h4 id="例题">例题</h4>
+<p><a href="https://www.luogu.com.cn/problem/P2926">bzoj1607</a><br>
+题意：给定 n 个数，对于其中的每一个数字，询问有多少个数是他的约数。<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/13/9969_96e374aa65-24.PNG" alt="24.PNG" loading="lazy"><br>
+<a href="https://paste.ubuntu.com/p/XdnQz8KSnG/">代码</a></p>
+<h4 id="线性筛欧拉筛">线性筛（欧拉筛）</h4>
+<p>再次把眼光放回如何判断 [1, n]中哪些数字是质数这个问题上来。考虑之前的做法为什么会运行的比较缓慢呢？事实上我们在确认一个数字不是质数的时候，要用很多数字来筛选他才可以，比如数字 6, 我们在枚举 2的倍数的时候筛了他一次，在枚举 3 的倍数的时候筛了他一次，有没有什么办法能够让他只被筛选一次呢？<br>
+考虑这样一种想法，如果每个数字都只被他最小的质约数筛一次，那么复杂度就可以达到 O(n)。可是如何才能实现呢？这是一个类似构造的想法</p>
+<p>$i=p_1^{k_1} * p_2^{k_2} * ... * p_s^{k_s} <span class="katex"><span class="katex-mathml"><math><semantics><mrow></mrow><annotation encoding="application/x-tex">
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"></span></span>i * primes[j]=primes[j] * p_1^{k_1} * p_2^{k_2} * ... * p_s^{k_s}<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">当</mi><mi>i</mi><mi mathvariant="normal">当</mi><mi>i</mi></mrow><annotation encoding="application/x-tex">
+当i%primes[j]不为0时，i*primes[j]的最小质因数为primes[j];
+当i%primes[j]为0之后，i*primes[j]的最小质因数为</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord cjk_fallback">当</span><span class="mord mathdefault">i</span><span class="mord cjk_fallback">当</span><span class="mord mathdefault">i</span></span></span></span>p_1$而不是primes[j],此时不能再用primes[j]筛去，否则违背只用最小质因数筛的方法。<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/13/9969_f46c7ee064-14.png" alt="14.png" loading="lazy"></p>
+<pre><code>int primes[N], cnt;
+bool st[N];
+
+void get_primes(int n)
+{
+    for (int i = 2; i &lt;= n; i ++ )
+    {
+        if (!st[i]) primes[cnt ++ ] = i;
+        for (int j = 0; primes[j] &lt;= n / i; j ++ )
+        {
+            st[primes[j] * i] = true;
+            if (i % primes[j] == 0) break;
+        }
+    }
+}
+</code></pre>
+<h4 id="线性筛欧拉函数">线性筛欧拉函数</h4>
+<p>回顾一下，我们在求逆元的时候介绍了一个函数，欧拉函数φ(n), 并介绍了一种 √n求一个欧拉函数的方法，现在我们考虑能不能 O(n) 时间内求出 [1, n] 每个数字的欧拉函数函数值呢？<br>
+考虑在线性筛的同时能不能把欧拉函数值也更新一下，注意到线性筛的时候每个数字只会被筛到一次，我们能否在这个时候顺便求出欧拉函数的函数值呢？<br>
+考虑他在被筛的时候函数的取值应该是多少</p>
+<p>i. I是个质数,phi(p)=p-1<br>
+2.如果i % primes[j] = 0, 那么phi(i * primes[j])=primes[j] * phi(i)<br>
+原因：i<em>primes[j]的质因数构成和i相同，但primes[j]的次数多1<br>
+3.如果 i%prime[j] 不为 0，即primes[j]小于i的最小质因子<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>p</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">p_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>,<br>
+phi(i * primes[j]) = phi(i) * primes[j]</em>(1-1/primes[j]) = phi(i)*(primes[j]-1)<br>
+也可根据欧拉函数的积性， i mod primes[j] 不为0且primes[j]为质数,所以i与primes[j]互质,<br>
+phi(i * primes[j])=phi(i) * phi(primes[j]) 其中phi(primes[j])=primes[j]-1即第一条性质</p>
+<pre><code>int primes[N],cnt;
+int eulers[N];
+bool st[N];
+
+void get_eulers(int n)
+{
+    eulers[1]=1;
+    for(int i=2;i&lt;=n;i++)
+    {
+        if(!st[i])
+        {
+            primes[cnt++]=i;
+            eulers[i]=i-1;
+        }
+        for(int j=0;primes[j]&lt;=n/i;j++)
+        {
+            int t=i*primes[j];
+            st[t]=true;
+            if(i%primes[j]==0)
+            {
+                eulers[t]=eulers[i]*primes[j];
+                break;
+            }
+            eulers[t]=eulers[i]*(primes[j]-1);
+        }
+    }
+}
+</code></pre>
+<p>积性函数都可以用欧拉筛来求</p>
+<h4 id="整除分块数论分块">整除分块（数论分块）</h4>
+<p><img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_86fb14d668-10.PNG" alt="10.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_a913289c68-11.PNG" alt="11.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_fa92443268-12.PNG" alt="12.PNG" loading="lazy"><br>
+证明细节见：<br>
+https://blog.csdn.net/qq_41021816/article/details/84842956</p>
+<pre><code>#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int main(){
+    long long n,ans=0;
+    cin &gt;&gt; n;
+    for(long long l=1,r;l&lt;=n;l=r+1){
+        r = n/(n/l);            //计算r，让分块右移
+        ans += (r-l+1)*(n/l);   //求和
+        cout &lt;&lt; l &lt;&lt;&quot;&quot;&lt;&lt; r &lt;&lt;&quot;: &quot;&lt;&lt; n/r &lt;&lt; endl;  //打印分块
+    }
+    cout &lt;&lt; ans;               //打印和
+}
+</code></pre>
+<h4 id="积性函数">积性函数</h4>
+<p><img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_8743c9c868-3.PNG" alt="3.PNG" loading="lazy"><br>
+常见的积性函数<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_ea94e71e68-5.PNG" alt="5.PNG" loading="lazy"><br>
+积性函数性质<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/13/9969_65c35fe064-17.png" alt="17.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/13/9969_b8d1239864-18.png" alt="18.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/13/9969_fffea8de65-19.PNG" alt="19.PNG" loading="lazy"><br>
+p为质数</p>
+<h4 id="积性函数的基本问题">积性函数的基本问题</h4>
+<figure data-type="image" tabindex="1"><img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_a550991468-4.PNG" alt="4.PNG" loading="lazy"></figure>
+<h4 id="狄利克雷卷积">狄利克雷卷积</h4>
+<p><img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_b252416668-13.PNG" alt="13.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_f4f399a268-14.png" alt="14.png" loading="lazy"></p>
+<h4 id="线性筛求莫比乌斯函数">线性筛求莫比乌斯函数</h4>
+<figure data-type="image" tabindex="2"><img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_ec2a1d2c68-17.PNG" alt="17.PNG" loading="lazy"></figure>
+<pre><code>int primes[N],cnt;
+int miu[N];
+bool st[N];
+
+void get_eulers(int n)
+{
+	memset(st,0,sizeof st);
+    miu[1]=1;
+    for(int i=2;i&lt;=n;i++)
+    {
+        if(!st[i])
+        {
+            primes[cnt++]=i;
+            miu[i]=-1;
+        }
+        for(int j=0;i*primes[j]&lt;=n;j++)
+        {
+            int t=i*primes[j];
+            st[t]=true;
+            if(i%primes[j]==0)
+            {
+                miu[t]=0;
+                break;
+            }
+            miu[t]=-miu[i];//积性函数性质，miu[i]*miu[primes[j]]
+        }
+    }
+}
+</code></pre>
+<h5 id="莫比乌斯函数性质">莫比乌斯函数性质</h5>
+<p><img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_174abc2868-18.PNG" alt="18.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_52dc47a668-19.PNG" alt="19.PNG" loading="lazy"></p>
+<h4 id="莫比乌斯函数的由来">莫比乌斯函数的由来</h4>
+<p><img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_558a917668-15.PNG" alt="15.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_b130ab1468-16.PNG" alt="16.PNG" loading="lazy"></p>
+<h4 id="杜教筛">杜教筛</h4>
+<p><img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_e027961068-20.png" alt="20.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_a04adc4668-50.PNG" alt="50.PNG" loading="lazy"><br>
+经典的杜教筛题目，例如洛谷P4213，求数论函数的前缀和。<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_c85d9f1668-1.PNG" alt="1.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_0c2fb4a468-2.png" alt="2.png" loading="lazy"></p>
+<h4 id="杜教筛公式推导">杜教筛公式推导</h4>
+<p><img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_56ae7dbc68-21.PNG" alt="21.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_5d014d2868-22.PNG" alt="22.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_5f7f273c68-23.png" alt="23.png" loading="lazy"></p>
+<h4 id="唯一的因子分解">唯一的因子分解</h4>
+<figure data-type="image" tabindex="3"><img src="https://cdn.acwing.com/media/article/image/2020/03/09/9969_27bbfea661-35.PNG" alt="35.PNG" loading="lazy"></figure>
+<h4 id="约数倍数的特征">约数倍数的特征</h4>
+<figure data-type="image" tabindex="4"><img src="https://cdn.acwing.com/media/article/image/2020/03/12/9969_c51b34ec64-28.PNG" alt="28.PNG" loading="lazy"></figure>
+<h4 id="求质约数">求质约数</h4>
+<p>注意到一个数字 n 最多只有一个 &gt; √n 的质约数，所以我们仍然只需要枚举到 √n<br>
+一个非常朴素的方法是枚举每个数字，判断是否是约数并判断是否是素数，但是这个方法的复杂度接近 O(n)，并不是一个非常明智的选择<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/12/9969_eefac25a64-29.PNG" alt="29.PNG" loading="lazy"></p>
+<pre><code>void divide(int x)
+{
+    for (int i = 2; i &lt;= x / i; i ++ )
+        if (x % i == 0)
+        {
+            int s = 0;
+            while (x % i == 0) x /= i, s ++ ;
+            cout &lt;&lt; i &lt;&lt; ' ' &lt;&lt; s &lt;&lt; endl;
+        }
+    if (x &gt; 1) cout &lt;&lt; x &lt;&lt; ' ' &lt;&lt; 1 &lt;&lt; endl;
+    cout &lt;&lt; endl;
+}
+
+int main()
+{
+    int n;
+    cin &gt;&gt; n;
+    while (n -- )
+    {
+        int x;
+        cin &gt;&gt; x;
+        divide(x);
+    }
+
+    return 0;
+}
+</code></pre>
+<h4 id="快速分解质因数">快速分解质因数</h4>
+<p>我们来考虑求出的 prime 数组的一个应用<br>
+如何能够在线性筛之后快速的分解一个数字的质约数呢？考虑在筛掉一个数字的时候记录一下他是被哪个质数筛掉的也即他的最小的质约数是谁。这样我们只要每次除掉一个最小的质约数就可以了。</p>
+<pre><code>for(int j = 1; prime[j] * i &lt;= Max; ++ j) {
+	from[i*prime[j]] = prime[j];
+	...
+}
+</code></pre>
+<p>查询时只需递归查询from[x],from[x/from[x]]...,一次查询的时间复杂度是O(logn)</p>
+<h4 id="约数个数-约数和">约数个数 约数和</h4>
+<p>对于一个大于1正整数n可以分解质因数：n=p1<sup>a1*p2</sup>a2*p3<sup>a3*…*pk</sup>ak,<br>
+则由约数个数定理可知n的正约数有(a₁+1)(a₂+1)(a₃+1)…(ak+1)个，</p>
+<pre><code>int main()
+{
+    int n;
+    cin &gt;&gt; n;
+
+    unordered_map&lt;int, int&gt; primes;
+
+    while (n -- )
+    {
+        int x;
+        cin &gt;&gt; x;
+
+        for (int i = 2; i &lt;= x / i; i ++ )
+            while (x % i == 0)
+            {
+                x /= i;
+                primes[i] ++ ;
+            }
+
+        if (x &gt; 1) primes[x] ++ ;
+    }
+
+    LL res = 1;
+    for (auto p : primes) res = res * (p.second + 1) % mod;
+
+    cout &lt;&lt; res &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre>
+<p>n的(a₁+1)(a₂+1)(a₃+1)…(ak+1)个正约数的和为<br>
+f(n)=(p1<sup>0+p1</sup>1+p1<sup>2+…p1</sup>a1)(p2<sup>0+p2</sup>1+p2<sup>2+…p2</sup>a2)…(pk<sup>0+pk</sup>1+pk<sup>2+…pk</sup>ak）</p>
+<pre><code>LL res = 1;
+for (auto p : primes)
+{
+    LL a = p.first, b = p.second;
+    LL t = 1;
+    while (b -- ) t = (t * a + 1) % mod;
+    res = res * t % mod;
+}
+cout &lt;&lt; res &lt;&lt; endl;
+</code></pre>
+<h4 id="除法定理">除法定理</h4>
+<p>对任意整数 a 和任意正整数 n， 存在唯一的整数 q 和 r，<br>
+满足 0 &lt;= r &lt; n，并且 a = qn + r.<br>
+值 q = a / n称为除法的商<br>
+值 r = a mod n 称为除法的余数。<br>
+n | a 当且仅当 a mod n = 0。</p>
+<h4 id="模-n-等价类">模 n 等价类</h4>
+<p>包含整数 a 的模 n 等价类为：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mi>𝒂</mi><msub><mo>]</mo><mi>𝒏</mi></msub></mrow><annotation encoding="application/x-tex">[𝒂]_𝒏</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord boldsymbol" style="margin-right:0.09426em;">a</span><span class="mclose"><span class="mclose">]</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.161108em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord boldsymbol mtight" style="margin-right:0.09426em;">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>= {𝒂 + 𝒌𝒏: 𝒌𝝐𝒁}<br>
+例如，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mi>𝟑</mi><msub><mo>]</mo><mi>𝟕</mi></msub></mrow><annotation encoding="application/x-tex">[𝟑]_𝟕</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathbf">3</span><span class="mclose"><span class="mclose">]</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathbf mtight">7</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>= {… , −11, −𝟒, 𝟑, 10, 17, … }<br>
+𝒃𝝐<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mi>𝒂</mi><msub><mo>]</mo><mi>𝒏</mi></msub></mrow><annotation encoding="application/x-tex">[𝒂]_𝒏</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord boldsymbol" style="margin-right:0.09426em;">a</span><span class="mclose"><span class="mclose">]</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.161108em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord boldsymbol mtight" style="margin-right:0.09426em;">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 等同于b = a (mod n)<br>
+-1 = n – 1 (mod n)</p>
+<h4 id="公约数与最大公约数">公约数与最大公约数</h4>
+<p>如果 d 是 a 的约数并且也是 b 的约数，则 d 是 a 与 b 的公约数。<br>
+例如，12 的约数是 1, 2, 3, 4, 6, 12，因此 8 与 12 的公约数为 1, 2, 4。 1 是任意两个整数的公约数。<br>
+公约数的重要性质为：<br>
+d | a 且 d | b 蕴含着 d | (a + b) 且 d | (a–b)<br>
+更一般的，对任意整数 x 和 y，有<br>
+d | a 且 d | b 蕴含着 d | (ax + by)</p>
+<p>两个不同时为 0 的整数 a 与 b 的最大公约数表示成gcd(a, b)。<br>
+例如 gcd(12, 8) = 4，gcd(5, 9) = 1, gcd(0, 4) = 4.<br>
+定义 gcd(0, 0) = 0<br>
+gcd 函数的基本性质：<br>
+• gcd(a, b) = gcd(b, a)<br>
+• gcd(a, b) = gcd(-a, b)<br>
+• gcd(a, b) = gcd(|a|, |b|)<br>
+• gcd(a, 0) = |a|<br>
+• gcd(a, ka) = |a|</p>
+<h4 id="gcd-的其他性质">gcd 的其他性质</h4>
+<p>如果 a 和 b 是不都为 0 的任意整数，则 gcd(a, b) 是a 与 b 的线性组合集合 {ax + by: x, y ∈ Z}中的最小正元素。<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/09/9969_f657763461-34.PNG" alt="34.PNG" loading="lazy"></p>
+<h4 id="裴蜀定理">裴蜀定理</h4>
+<p>对任何整数a、b和它们的最大公约数d，关于未知数x和y的线性不定方程（称为裴蜀等式）：若a,b是整数,且gcd(a,b)=d，那么对于任意的整数x,y,ax+by都一定是d的倍数，特别地，一定存在整数x,y，使ax+by=d成立。<br>
+它的一个重要推论是：a,b互质的充要条件是存在整数x,y使ax+by=1.<br>
+上述裴蜀定理针对的是两个变量。那么我们很自然的就想到这样的定理能否推广到多个变量呢？显然可以，证明方法同上<br>
+<a href="https://www.luogu.com.cn/problem/P4549">模板题</a><br>
+我们只需要对这所有的数字求一个gcd，值得注意的是不要忘记数据中有负数，要将其变为正数再求gcd,因为系数的最终答案没有影响。</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+using namespace std;
+int n;
+
+int gcd(int a,int b)
+{
+	return b?gcd(b,a%b) : a;
+}
+
+int main()
+{
+	scanf(&quot;%d&quot;,&amp;n);
+	int ans=0;
+	for(int i=0;i&lt;n;i++)
+	{
+		int x;
+		scanf(&quot;%d&quot;,&amp;x);
+		if(x&lt;0)	
+			x=-x;
+		ans=gcd(ans,x);
+	}
+	printf(&quot;%d\n&quot;,ans);
+	return 0;
+}
+</code></pre>
+<h4 id="gcd-的其他性质-2">gcd 的其他性质</h4>
+<p>• 对于任意整数 a 和 b，如果 d | a 并且 d | b，则d | gcd(a, b)<br>
+证明：gcd(a,b)|a,gcd(a,b)|b,则gcd为最大的约数，则d | gcd(a, b)</p>
+<p>• 对所有正整数 n, a 和 b，如果 n | ab 且 gcd(a, n)=1，则 n | b</p>
+<h4 id="互质数">互质数</h4>
+<p>如果两个整数 a 和 b 仅有公因数 1，即如果 gcd(a, b) = 1，则 a 与 b 称为互质数。<br>
+例如，5 和 9 是互质数。</p>
+<p>对任意整数 p, a 和 b，如果 gcd(a, p) = gcd(b, p) = 1， 则 gcd(ab, p) = 1<br>
+证明：由线性组合的定理可知，存在整数x,y,x’ ，y’, 满足ax+py=1,bx’+py’=1<br>
+把上面两个等式两边相乘，整理得<br>
+ab(x x’)+p(ybx’+y’ax+pyy’)=1<br>
+因为1是ab与p的一个正线性组合，所以可以证明所需结论</p>
+<h4 id="欧几里得算法">欧几里得算法</h4>
+<p>欧几里得算法求最大公约数<br>
+利用性质：gcd(a, b) = gcd(b, a % b)</p>
+<pre><code>int gcd(int a, int b)
+{
+    return b?gcd(b,a%b):a;
+}
+</code></pre>
+<p>因为每次取模，a 至少会变成原来的二分之一。<br>
+整个算法是 O(log n) 的。<br>
+求出了 gcd，就可以求出 lcm。</p>
+<pre><code>int lcm(int a, int b)
+{
+    return a / gcd(a, b) * b;
+}
+</code></pre>
+<figure data-type="image" tabindex="5"><img src="https://cdn.acwing.com/media/article/image/2020/03/12/9969_80e1553864-30.png" alt="30.png" loading="lazy"></figure>
+<h4 id="例题-2">例题</h4>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=2503">hdu2503</a><br>
+给定 a, b, c, d (0 &lt; a,b,c,d &lt; 1000)。 求 a/b + c/d 的最简形式 e/f。</p>
+<blockquote></blockquote>
+<p>样例输入：<br>
+1 2 1 3<br>
+样例输出：<br>
+5 6</p>
+<p>先通分，求b和d的最小公倍数。<br>
+分子相加后，再约掉分子和分母的最大公约数就是答案。<br>
+<a href="https://paste.ubuntu.com/p/8ScCf2zhgh/">代码</a></p>
+<h4 id="扩展欧几里得算法与二元一次方程的整数解">扩展欧几里得算法与二元一次方程的整数解</h4>
+<p>给出整数a,b,n,问方程ax+by=n什么时候有整数解？如何求出所有的整数解?<br>
+<code>有解的充分必要条件是gcd(a,b)可以整除n</code><br>
+证明：令a=gcd(a,b)a',b=gcd(a,b)b',有ax+by=gcd(a,b)(a'x+b'y)=n;如果x,y,a',b'都是整数，那么n必须是gcd(a,b)的倍数才有解.<br>
+例如，4x+6y=8,2x+3y=4有整数解，4x+6y=7没有整数解。<br>
+如果有解，一种解题方法是先找到一个解（x0,y0）,那么通解公式如下：<br>
+x=x0+bt,y=y0-at,t是任意整数。</p>
+<p>扩展欧几里得算法能计算出满足下列条件的整系数 x 和 y：gcd(a, b) = ax + by<br>
+我们来直接推倒一下：<br>
+ax + by = gcd(a, b)<br>
+注意到由欧几里得算法得：<br>
+gcd(a, b) = gcd(b, a % b)<br>
+因此：<br>
+ax + by = bx' + (a % b)y'<br>
+= bx' + (a - int(a / b)b)y'<br>
+= ay' + b(x - int(a / b)y')<br>
+ax + by = ay' + b(x' - int(a / b)y')<br>
+每次求gcd的递归过程中同时将系数x，y计算出来，令x=y',y=x'-a/b*y'</p>
+<p>例：求 9x + 7y = 1 的一组整数解<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/12/9969_ad03d25864-31.png" alt="31.png" loading="lazy"></p>
+<pre><code>int exgcd(int a, int b, int &amp;x, int &amp;y) {
+	if (!b) {
+		x = 1, y = 0;
+		return a;
+	}
+	int d = exgcd(b, a % b, x, y);
+	int t = x;
+	x = y;
+	y = t - a / b * y;
+	return d;
+}
+</code></pre>
+<h4 id="拓展欧几里得算法的应用">拓展欧几里得算法的应用</h4>
+<p>更一般的，求解 ax + by = c<br>
+只要 gcd(a, b) | c 就有无数解，否则无解<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/13/9969_4a0f4a9464-4.PNG" alt="4.PNG" loading="lazy"></p>
+<h4 id="逆元">逆元</h4>
+<p>乘法逆元：对于一个数字 a, 在模 p 意义下如果存在一个数字 b,<br>
+满足 a × b ≡ 1 (mod p), 我们就称 b 是模 p 意义下 a 的乘法逆元，记做 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>a</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">a^{-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span> 。<br>
+容易发现<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/13/9969_992c32c264-2.PNG" alt="2.PNG" loading="lazy"><br>
+现在我们可以对分子分母取模了！所以进行模运算的重点变成了求逆元。</p>
+<h4 id="欧拉函数">欧拉函数</h4>
+<p>欧拉函数 φ(n), 定义为 1 到 n 中与 n 互质的数字的个数。<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_154c8e8068-6.PNG" alt="6.PNG" loading="lazy"><br>
+通过定义容易得到欧拉函数的前几项 1, 1, 2, 2, 4, 2, 6, · · ·<br>
+通过定义我们也很容易得到一个质数 p 的欧拉函数 φ(p) = p-1<br>
+我们也很容易写出一个求欧拉函数的简易做法，枚举<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_08442e5e68-9.png" alt="9.png" loading="lazy"><br>
+注意相同的质约数都是相同的 pi<br>
+有了这个公式我们就可以快速的求出一个数字 n 的欧拉函数φ(n) 了。<br>
+所以，欧拉函数ϕ(n)的求解，归结到了分解质因子这个问题。试除法：求n的质因子时，逐个检查从2到√n的所有质数，如果它能整除n，就是一个因子。试除法的复杂度是O(√n)</p>
+<pre><code>#include&lt;iostream&gt;
+using namespace std;
+
+int phi(int x)
+{
+    int res=x;
+    for(int i=2;i&lt;=x/i;i++)
+    {
+        if(x%i==0)
+            res=res/i*(i-1);
+        while(x%i==0)
+            x/=i;
+    }
+    if(x&gt;1)
+        res=res/x*(x-1);
+    return res;
+}
+
+int main()
+{
+    int n;
+    scanf(&quot;%d&quot;,&amp;n);
+    while(n--)
+    {
+        int x;
+        scanf(&quot;%d&quot;,&amp;x);
+        cout&lt;&lt;phi(x)&lt;&lt;endl;
+    }
+    return 0;
+}
+</code></pre>
+<h4 id="数论中的欧拉定理">数论中的欧拉定理</h4>
+<p>如果 gcd(a, p) = 1 , 即 a, p 互质则有 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>a</mi><mrow><mi>φ</mi><mo>(</mo><mi>p</mi><mo>)</mo></mrow></msup></mrow><annotation encoding="application/x-tex">a^{φ(p)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8879999999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">φ</span><span class="mopen mtight">(</span><span class="mord mathdefault mtight">p</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span></span></span></span> ≡ 1 (mod p)<br>
+注意这个定理的强制性要求是 a, p 互质，如果 a, p 不互质直接用这个做法是做不了的，我们还需要拓展欧拉定理才能处理这个问题<br>
+由此可以得到求 a 模 m 的逆的方法。<br>
+<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>a</mi><mrow><mi>φ</mi><mo>(</mo><mi>m</mi><mo>)</mo></mrow></msup></mrow><annotation encoding="application/x-tex">a^{φ(m)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8879999999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">φ</span><span class="mopen mtight">(</span><span class="mord mathdefault mtight">m</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span></span></span></span>≡ 1 (mod m)<br>
+<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mo>∗</mo><msup><mi>a</mi><mrow><mi>φ</mi><mo>(</mo><mi>m</mi><mo>)</mo><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">a * a^{φ(m)-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.46528em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8879999999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">φ</span><span class="mopen mtight">(</span><span class="mord mathdefault mtight">m</span><span class="mclose mtight">)</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span> ≡ 1 (mod m)<br>
+<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>a</mi><mrow><mi>φ</mi><mo>(</mo><mi>m</mi><mo>)</mo><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">a^{φ(m)-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8879999999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">φ</span><span class="mopen mtight">(</span><span class="mord mathdefault mtight">m</span><span class="mclose mtight">)</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span> 就是 a 模 m 的逆。</p>
+<h4 id="欧拉定理求逆元">欧拉定理求逆元</h4>
+<p>有了这个定理我们要怎么求逆元呢？考虑逆元的定义，对于一个数字 a , 我所要寻找的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>a</mi><mrow><mi mathvariant="normal">−</mi><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">a^{−1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span> 需要满足 a × <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>a</mi><mrow><mi mathvariant="normal">−</mi><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">a^{−1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span> ≡ 1 (mod p), 而 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>a</mi><mrow><mi>φ</mi><mo>(</mo><mi>p</mi><mo>)</mo></mrow></msup></mrow><annotation encoding="application/x-tex">a^{φ(p)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8879999999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">φ</span><span class="mopen mtight">(</span><span class="mord mathdefault mtight">p</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span></span></span></span> ≡ 1 (mod p), 这对于我们是否有一些启示呢？<br>
+我们将 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>a</mi><mrow><mi>φ</mi><mo>(</mo><mi>p</mi><mo>)</mo></mrow></msup></mrow><annotation encoding="application/x-tex">a^{φ(p)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8879999999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">φ</span><span class="mopen mtight">(</span><span class="mord mathdefault mtight">p</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span></span></span></span>写成 a × <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>a</mi><mrow><mi>φ</mi><mo>(</mo><mi>p</mi><mo>)</mo><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">a^{φ(p)-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8879999999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">φ</span><span class="mopen mtight">(</span><span class="mord mathdefault mtight">p</span><span class="mclose mtight">)</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span> 我们惊喜的发现原来 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>a</mi><mrow><mi mathvariant="normal">−</mi><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">a^{−1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span> 启示就是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>a</mi><mrow><mi>φ</mi><mo>(</mo><mi>p</mi><mo>)</mo><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">a^{φ(p)-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8879999999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">φ</span><span class="mopen mtight">(</span><span class="mord mathdefault mtight">p</span><span class="mclose mtight">)</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span> !<br>
+所以在求出欧拉函数之后我们只需要快速幂就能得到一个数字的逆元了。</p>
+<pre><code>int get_inv(int a) {
+    return Pow(a,phi(p)-1);
+}
+</code></pre>
+<p>有很多题目中给定的 p 是个质数，就是费马小定理。<br>
+如果 a, p 不互质怎么求逆元呢？事实上在后面我们会看到，<code>a, p 不互质的情况下是不存在模 p 意义下 a的逆元的</code>。</p>
+<h4 id="欧拉定理求同余方程">欧拉定理求同余方程</h4>
+<p>对于同余方程 ax ≡ b (mod m)<br>
+两边同乘 a 的逆 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>a</mi><mrow><mi>φ</mi><mo>(</mo><mi>m</mi><mo>)</mo><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">a^{φ(m)-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8879999999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">φ</span><span class="mopen mtight">(</span><span class="mord mathdefault mtight">m</span><span class="mclose mtight">)</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span> ax ≡ <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>a</mi><mrow><mi>φ</mi><mo>(</mo><mi>m</mi><mo>)</mo><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">a^{φ(m)-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8879999999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">φ</span><span class="mopen mtight">(</span><span class="mord mathdefault mtight">m</span><span class="mclose mtight">)</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span> b (mod m)<br>
+就可以得到 x ≡ <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>a</mi><mrow><mi>φ</mi><mo>(</mo><mi>m</mi><mo>)</mo><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">a^{φ(m)-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8879999999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">φ</span><span class="mopen mtight">(</span><span class="mord mathdefault mtight">m</span><span class="mclose mtight">)</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span> b (mod m)<br>
+比如：由φ(10) = 4，对于同余方程 3x ≡ 7 (mod 10)<br>
+解为 x ≡ <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>a</mi><mrow><mi>φ</mi><mo>(</mo><mi>m</mi><mo>)</mo><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">a^{φ(m)-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8879999999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">φ</span><span class="mopen mtight">(</span><span class="mord mathdefault mtight">m</span><span class="mclose mtight">)</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span> b ≡ <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>3</mn><mn>3</mn></msup></mrow><annotation encoding="application/x-tex">3^3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">3</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span></span></span></span> * 7 ≡ 9 (mod 10)</p>
+<h4 id="扩展欧拉定理">扩展欧拉定理</h4>
+<p><img src="https://cdn.acwing.com/media/article/image/2020/03/13/9969_453fa94264-3.PNG" alt="3.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/14/9969_fad90a3c65-25.png" alt="25.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/14/9969_e91b801865-%E6%8D%95%E8%8E%B7.PNG" alt="捕获.PNG" loading="lazy"><br>
+<a href="https://www.luogu.com.cn/problem/P5091">模板题</a><br>
+<a href="https://paste.ubuntu.com/p/4gKK4xy8YN/">代码</a></p>
+<h4 id="欧拉函数的性质">欧拉函数的性质</h4>
+<p><img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_4fb5316c68-7.PNG" alt="7.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/13/9969_e0b6619c64-10.PNG" alt="10.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/13/9969_02be7b0864-11.PNG" alt="11.PNG" loading="lazy"></p>
+<p>φ(36)=φ(4)φ(9)<br>
+第二行和第四行，每个元素都不和 4 互素。<br>
+剩下的两行，每个元素都和 4 互素，但各有 6 个数和 9 互素<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/13/9969_823451c864-12.PNG" alt="12.PNG" loading="lazy"></p>
+<figure data-type="image" tabindex="6"><img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_a838dfd268-8.PNG" alt="8.PNG" loading="lazy"></figure>
+<h4 id="同余">同余</h4>
+<p>一个便于理解的定义：如果对于两个数字 a, b , 对于一个数字 m的余数相等，我们认为他们对于 m 同余<br>
+在数学上的标准定义：设 m 是给定的一个正整数，a, b 是整数，<br>
+若满足 m|(a - b) , 则称 a 与 b 对模 m 同余，记做 a ≡ b (mod m)</p>
+<ol>
+<li>(a + b)%c 是否等于 ((a%c) + (b%c))%c</li>
+<li>a ∗ b%c 是否等于 ((a%c) ∗ (b%c))%c</li>
+<li>a/b%c 是否等于 (a%c)/(b%c)<br>
+对于 1，2 两个式子来说，是正确的，而对于第三个式子来说，是错误的</li>
+</ol>
+<h4 id="线性同余方程">线性同余方程</h4>
+<p>设 x 是未知整数，形如ax ≡ b (mod m)的同余式成为一元线性同余方程<br>
+ax ≡ b (mod m)，即ax除以m,b除以m,两者余数相同，这里a,b,m都是整数，求解x的值。<br>
+方程也可以这样理解，ax-b是m的整数倍。设y是倍数，那么ax-b=my,移项得到ax-my=b.因为y可以是负数，改写为ax+my=b，这就是在扩展欧几里得算法中提到的二元一次不定方程。<br>
+<code>当且仅当gcd(a,m)能整除b时有整数解。</code></p>
+<p>ax ≡ 1 (mod m) 的解称为 a 模 m 的逆。<br>
+如 7x ≡ 1 (mod 31) 的解满足 x ≡ 9 (mod 31)<br>
+设a 模 m 的一个逆为 k，即 ak ≡ 1 (mod m)<br>
+对于 ax ≡ b (mod m)，两边同乘以 k，得到 akx ≡ bk(mod m)<br>
+也即 x ≡ bk (mod m)</p>
+<p>定理：设 p 是素数，正整数 a 是其自身模 p 的逆，当且仅当 a ≡ 1 (mod p) 或 a ≡ -1 (mod p)<br>
+证明：若a ≡ 1 (mod p) 或 a ≡ -1 (mod p),则a² ≡ 1 (mod p) ,所以a其自身模p的逆。反过来，若a是其自身模p<br>
+的逆，则a²=a·a ≡ 1 (mod p) 。因此，p |(a² -1)。又因为a² -1=（a-1）（a+1），所以p |（a-1）或p |（a+1）。<br>
+因此，或者a ≡ 1 (mod p) ，或者a ≡ -1 (mod p)</p>
+<pre><code>#include&lt;iostream&gt;
+using namespace std;
+
+int exgcd(int a,int b,int &amp;x,int &amp;y)
+{
+    if(!b)
+    {
+        x=1,y=0;
+        return a;
+    }
+    
+    int d=exgcd(b,a%b,x,y);
+    int t=x;
+    x=y;
+    y=t-a/b*y;
+    return d;
+}
+
+int main()
+{
+    int n;
+    scanf(&quot;%d&quot;,&amp;n);
+    while(n--)
+    {
+        int a,b,m;
+        scanf(&quot;%d%d%d&quot;,&amp;a,&amp;b,&amp;m);
+        int x,y;
+        int d=exgcd(a,m,x,y);
+        if(b%d)
+            puts(&quot;impossible&quot;);
+        else
+            printf(&quot;%d\n&quot;,((long long)b/d*x%m+m)%m);
+    }
+    return 0;
+}
+</code></pre>
+<h4 id="扩展欧几里得求乘法逆元">扩展欧几里得求乘法逆元</h4>
+<p>ax = 1 (mod m)<br>
+ax + my = 1<br>
+也就是 a, m 是已知数，现在要求出一组 x, y , 使得上面的式子成立。<br>
+这也就印证了上面欧拉定理中的一句话，如果想要存在 a 对 m 的逆元，必须要 gcd(a, m) = 1 (1%gcd(a,m) = 0)才可以<br>
+当然如果 gcd(a, m) != 1，就无解<br>
+注意到 x 的解是 x0 + km （k是任意整数）<br>
+我们只要求出一个 k 使得 x0 + km 是最小的正整数即可。<br>
+另外需要注意的是我们求出的 x 有可能是负数，这时候我们可以让 x 加上若个个 p, 这样显然是不会影响方程的，例如我在 x 上加了一个 p, 那么在 y 上减去 a 就能保证方程依然成立。<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/12/9969_ab98002464-1.PNG" alt="1.PNG" loading="lazy"></p>
+<h4 id="费马小定理">费马小定理</h4>
+<p>假如 p 是质数，且 (a, p)=1，那么<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>a</mi><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">a^{p-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">p</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span> ≡ 1 (mod p)<br>
+因此可以得到，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mo>∗</mo><msup><mi>a</mi><mrow><mi>p</mi><mo>−</mo><mn>2</mn></mrow></msup></mrow><annotation encoding="application/x-tex">a * a^{p-2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.46528em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">p</span><span class="mbin mtight">−</span><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span> ≡ 1 (mod p)<br>
+所以 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>a</mi><mrow><mi>p</mi><mo>−</mo><mn>2</mn></mrow></msup></mrow><annotation encoding="application/x-tex">a^{p-2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">p</span><span class="mbin mtight">−</span><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span> 是 a 模 p 的一个逆。<br>
+可以用快速幂加速计算。</p>
+<pre><code>#include&lt;iostream&gt;
+using namespace std;
+typedef long long LL;
+int qml(int a,int b,int p)
+{
+    int res=1;
+    while(b)
+    {
+        if(b&amp;1)
+            res=(LL)res*a%p;
+        a=(LL)a*a%p;
+        b&gt;&gt;=1;
+    }
+    return res;
+}
+
+int main()
+{
+    int n;
+    scanf(&quot;%d&quot;,&amp;n);
+    while(n--)
+    {
+        int b,p;
+        scanf(&quot;%d%d&quot;,&amp;b,&amp;p);
+        if(b%p==0)
+            puts(&quot;impossible&quot;);
+        else
+            printf(&quot;%d\n&quot;,qml(b,p-2,p));
+    }
+    return 0;
+}
+</code></pre>
+<h4 id="线性求逆元">线性求逆元</h4>
+<p>给定 n, p 求 [1, n] 中所有整数在模 p 意义下的乘法逆元，n ≤ 2 × 1e6, p ≤ 2 × 1e7。<br>
+我们考虑从 1 到 n 依此求出每个数字的逆元，枚举变量 i, 1 → n,<br>
+默认 [1, i - 1] 每个数字对于 p 的逆元都已经求完,现在我们考虑 i 对 p 的逆元要怎么求。<br>
+不妨把 p 写成 ki + b 的形式也即<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/13/9969_2c9b0d0664-5.PNG" alt="5.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/13/9969_3ba6cc0464-6.PNG" alt="6.PNG" loading="lazy"><br>
+<a href="https://www.luogu.com.cn/problem/P3811">模板题</a></p>
+<pre><code>#include&lt;cstdio&gt;
+using namespace std;
+typedef long long LL;
+const int N=3e6+10;
+int inv[N];
+int main()
+{
+    int n,p;
+    scanf(&quot;%d%d&quot;,&amp;n,&amp;p);
+    inv[1]=1;
+    for(int i=2;i&lt;=n;i++)
+        inv[i]=(LL)(p-p/i)*inv[p%i]%p;
+    for(int i=1;i&lt;=n;i++)
+    	printf(&quot;%d\n&quot;,inv[i]);
+    return 0;
+}
+</code></pre>
+<h4 id="阶乘的逆元">阶乘的逆元</h4>
+<p>这里特别列出阶乘的逆元，因为后面有组合数学和组合数取模相关的问题，所以这里特别列出了阶乘如何求逆元。<br>
+有很多同学会认为先求出 [1, n] 每个数字对p的逆元就可以了。这样处理确实可以，但是过于繁琐，我们考虑一共更简单的做法。<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/13/9969_8a75940664-7.PNG" alt="7.PNG" loading="lazy"></p>
+<pre><code>int ifac[N], fac = 1, mod;
+for(int i = 2; i &lt;= n; ++ i) 
+	fac = (long long) fac * i % mod;
+ifac[n] = get_inv(fac, mod);
+for(int i = n - 1; i &gt;= 0; -- i) 
+	ifac[i] = (long long)ifac[i + 1] * (i + 1) % mod;
+</code></pre>
+<h4 id="线性同余方程组">线性同余方程组</h4>
+<p>第一种：有两个以上的不同模的一元线性同余方程；<br>
+第二种：变元数大于 1，方程数大于 1，但是方程的模相同</p>
+<h4 id="中国剩余定理">中国剩余定理</h4>
+<p>下面取自成书于公元 3 世纪晚期的《孙子算经》的问题。<br>
+求一个数，它被 3 除余 1，被 5 除余 2，被 7 除余 3。<br>
+这也就等价于如下方程组：<br>
+x ≡ 1 (mod 3)<br>
+x ≡ 2 (mod 5)<br>
+x ≡ 3 (mod 7)</p>
+<p><img src="https://cdn.acwing.com/media/article/image/2020/03/13/9969_6222a04265-21.PNG" alt="21.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/13/9969_82650ca065-22.PNG" alt="22.PNG" loading="lazy"><br>
+正确性显然，代入即可。还需要证明唯一性。<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/13/9969_b28449d265-23.PNG" alt="23.PNG" loading="lazy"></p>
+<p>x ≡ 1 (mod 3)<br>
+x ≡ 2 (mod 5)<br>
+x ≡ 3 (mod 7)<br>
+现在回到开头的那个方程组，首先有 M = 105<br>
+M1 = 35，M2 = 21，M3 = 15<br>
+y1 = 2, y2 = 1, y3 = 1<br>
+因此 x ≡ 1 * 35 * 2 + 2 * 21 * 1 + 3 * 15 * 1 ≡ 157≡ 52 (mod 105)</p>
+<p>中国剩余定理给出了模数两两互质的线性同余方程组的一个特殊解。方程组的通解可以表示为x+kM（k∈Z）。有些题目要求我们求出最小的非负整数解，只需把x对M取模，并让x落在0~M-1的范围内即可。<br>
+<a href="https://www.luogu.com.cn/problem/P1495">模板题</a></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+using namespace std;
+typedef long long LL;
+const int N=15;
+int n;
+int a[N],b[N];
+
+void exgcd(LL a,LL b,LL &amp;x,LL &amp;y)
+{
+	if(!b)
+	{
+		x=1,y=0;
+		return;
+	}
+	exgcd(b,a%b,x,y);
+	LL t=x;
+	x=y;
+	y=t-a/b*y;
+}
+
+LL crt()
+{
+	LL M=1,res=0;
+	for(int i=1;i&lt;=n;i++)
+		M*=a[i];
+	for(int i=1;i&lt;=n;i++)
+	{
+		LL m,x,y;
+		m=M/a[i];
+		exgcd(m,a[i],x,y);
+		res=(res+m*x*b[i])%M;
+	}
+	return (res%M+M)%M;
+}
+
+int main()
+{
+	scanf(&quot;%d&quot;,&amp;n);
+	for(int i=1;i&lt;=n;i++)
+		scanf(&quot;%d%d&quot;,&amp;a[i],&amp;b[i]);
+	printf(&quot;%lld\n&quot;,crt());
+	return 0;
+}
+</code></pre>
+<h4 id="扩展中国剩余定理">扩展中国剩余定理</h4>
+<p><img src="https://cdn.acwing.com/media/article/image/2020/03/16/9969_7649d6c267-36.PNG" alt="36.PNG" loading="lazy"><br>
+证明：<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/16/9969_64d72d8667-35.png" alt="35.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/16/9969_34150df667-37.png" alt="37.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/16/9969_3788205467-38.png" alt="38.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/16/9969_7294073067-39.png" alt="39.png" loading="lazy"><br>
+<a href="https://www.acwing.com/problem/content/206/">模板题</a><br>
+<a href="https://www.acwing.com/activity/content/code/content/238790/">code</a></p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E6%95%B0%E8%AE%BA">数论</a>
+<ul>
+<li><a href="#%E9%99%A4%E6%B3%95%E5%92%8C%E6%A8%A1%E8%BF%90%E7%AE%97">除法和模运算</a></li>
+<li><a href="#%E6%95%B4%E9%99%A4%E6%80%A7%E5%92%8C%E7%BA%A6%E6%95%B0">整除性和约数</a></li>
+<li><a href="#%E6%B1%82%E5%80%8D%E6%95%B0">求倍数</a></li>
+<li><a href="#%E7%B4%A0%E6%95%B0%E5%92%8C%E5%90%88%E6%95%B0">素数和合数</a></li>
+<li><a href="#%E5%9F%83%E6%8B%89%E6%89%98%E6%96%AF%E7%89%B9%E5%B0%BC%E7%AD%9B%E6%B3%95">埃拉托斯特尼筛法</a></li>
+<li><a href="#%E4%BE%8B%E9%A2%98">例题</a></li>
+<li><a href="#%E7%BA%BF%E6%80%A7%E7%AD%9B%E6%AC%A7%E6%8B%89%E7%AD%9B">线性筛（欧拉筛）</a></li>
+<li><a href="#%E7%BA%BF%E6%80%A7%E7%AD%9B%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0">线性筛欧拉函数</a></li>
+<li><a href="#%E6%95%B4%E9%99%A4%E5%88%86%E5%9D%97%E6%95%B0%E8%AE%BA%E5%88%86%E5%9D%97">整除分块（数论分块）</a></li>
+<li><a href="#%E7%A7%AF%E6%80%A7%E5%87%BD%E6%95%B0">积性函数</a></li>
+<li><a href="#%E7%A7%AF%E6%80%A7%E5%87%BD%E6%95%B0%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%97%AE%E9%A2%98">积性函数的基本问题</a></li>
+<li><a href="#%E7%8B%84%E5%88%A9%E5%85%8B%E9%9B%B7%E5%8D%B7%E7%A7%AF">狄利克雷卷积</a></li>
+<li><a href="#%E7%BA%BF%E6%80%A7%E7%AD%9B%E6%B1%82%E8%8E%AB%E6%AF%94%E4%B9%8C%E6%96%AF%E5%87%BD%E6%95%B0">线性筛求莫比乌斯函数</a>
+<ul>
+<li><a href="#%E8%8E%AB%E6%AF%94%E4%B9%8C%E6%96%AF%E5%87%BD%E6%95%B0%E6%80%A7%E8%B4%A8">莫比乌斯函数性质</a></li>
+</ul>
+</li>
+<li><a href="#%E8%8E%AB%E6%AF%94%E4%B9%8C%E6%96%AF%E5%87%BD%E6%95%B0%E7%9A%84%E7%94%B1%E6%9D%A5">莫比乌斯函数的由来</a></li>
+<li><a href="#%E6%9D%9C%E6%95%99%E7%AD%9B">杜教筛</a></li>
+<li><a href="#%E6%9D%9C%E6%95%99%E7%AD%9B%E5%85%AC%E5%BC%8F%E6%8E%A8%E5%AF%BC">杜教筛公式推导</a></li>
+<li><a href="#%E5%94%AF%E4%B8%80%E7%9A%84%E5%9B%A0%E5%AD%90%E5%88%86%E8%A7%A3">唯一的因子分解</a></li>
+<li><a href="#%E7%BA%A6%E6%95%B0%E5%80%8D%E6%95%B0%E7%9A%84%E7%89%B9%E5%BE%81">约数倍数的特征</a></li>
+<li><a href="#%E6%B1%82%E8%B4%A8%E7%BA%A6%E6%95%B0">求质约数</a></li>
+<li><a href="#%E5%BF%AB%E9%80%9F%E5%88%86%E8%A7%A3%E8%B4%A8%E5%9B%A0%E6%95%B0">快速分解质因数</a></li>
+<li><a href="#%E7%BA%A6%E6%95%B0%E4%B8%AA%E6%95%B0-%E7%BA%A6%E6%95%B0%E5%92%8C">约数个数 约数和</a></li>
+<li><a href="#%E9%99%A4%E6%B3%95%E5%AE%9A%E7%90%86">除法定理</a></li>
+<li><a href="#%E6%A8%A1-n-%E7%AD%89%E4%BB%B7%E7%B1%BB">模 n 等价类</a></li>
+<li><a href="#%E5%85%AC%E7%BA%A6%E6%95%B0%E4%B8%8E%E6%9C%80%E5%A4%A7%E5%85%AC%E7%BA%A6%E6%95%B0">公约数与最大公约数</a></li>
+<li><a href="#gcd-%E7%9A%84%E5%85%B6%E4%BB%96%E6%80%A7%E8%B4%A8">gcd 的其他性质</a></li>
+<li><a href="#%E8%A3%B4%E8%9C%80%E5%AE%9A%E7%90%86">裴蜀定理</a></li>
+<li><a href="#gcd-%E7%9A%84%E5%85%B6%E4%BB%96%E6%80%A7%E8%B4%A8-2">gcd 的其他性质</a></li>
+<li><a href="#%E4%BA%92%E8%B4%A8%E6%95%B0">互质数</a></li>
+<li><a href="#%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95">欧几里得算法</a></li>
+<li><a href="#%E4%BE%8B%E9%A2%98-2">例题</a></li>
+<li><a href="#%E6%89%A9%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95%E4%B8%8E%E4%BA%8C%E5%85%83%E4%B8%80%E6%AC%A1%E6%96%B9%E7%A8%8B%E7%9A%84%E6%95%B4%E6%95%B0%E8%A7%A3">扩展欧几里得算法与二元一次方程的整数解</a></li>
+<li><a href="#%E6%8B%93%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95%E7%9A%84%E5%BA%94%E7%94%A8">拓展欧几里得算法的应用</a></li>
+<li><a href="#%E9%80%86%E5%85%83">逆元</a></li>
+<li><a href="#%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0">欧拉函数</a></li>
+<li><a href="#%E6%95%B0%E8%AE%BA%E4%B8%AD%E7%9A%84%E6%AC%A7%E6%8B%89%E5%AE%9A%E7%90%86">数论中的欧拉定理</a></li>
+<li><a href="#%E6%AC%A7%E6%8B%89%E5%AE%9A%E7%90%86%E6%B1%82%E9%80%86%E5%85%83">欧拉定理求逆元</a></li>
+<li><a href="#%E6%AC%A7%E6%8B%89%E5%AE%9A%E7%90%86%E6%B1%82%E5%90%8C%E4%BD%99%E6%96%B9%E7%A8%8B">欧拉定理求同余方程</a></li>
+<li><a href="#%E6%89%A9%E5%B1%95%E6%AC%A7%E6%8B%89%E5%AE%9A%E7%90%86">扩展欧拉定理</a></li>
+<li><a href="#%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0%E7%9A%84%E6%80%A7%E8%B4%A8">欧拉函数的性质</a></li>
+<li><a href="#%E5%90%8C%E4%BD%99">同余</a></li>
+<li><a href="#%E7%BA%BF%E6%80%A7%E5%90%8C%E4%BD%99%E6%96%B9%E7%A8%8B">线性同余方程</a></li>
+<li><a href="#%E6%89%A9%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E6%B1%82%E4%B9%98%E6%B3%95%E9%80%86%E5%85%83">扩展欧几里得求乘法逆元</a></li>
+<li><a href="#%E8%B4%B9%E9%A9%AC%E5%B0%8F%E5%AE%9A%E7%90%86">费马小定理</a></li>
+<li><a href="#%E7%BA%BF%E6%80%A7%E6%B1%82%E9%80%86%E5%85%83">线性求逆元</a></li>
+<li><a href="#%E9%98%B6%E4%B9%98%E7%9A%84%E9%80%86%E5%85%83">阶乘的逆元</a></li>
+<li><a href="#%E7%BA%BF%E6%80%A7%E5%90%8C%E4%BD%99%E6%96%B9%E7%A8%8B%E7%BB%84">线性同余方程组</a></li>
+<li><a href="#%E4%B8%AD%E5%9B%BD%E5%89%A9%E4%BD%99%E5%AE%9A%E7%90%86">中国剩余定理</a></li>
+<li><a href="#%E6%89%A9%E5%B1%95%E4%B8%AD%E5%9B%BD%E5%89%A9%E4%BD%99%E5%AE%9A%E7%90%86">扩展中国剩余定理</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://caifxh.github.io/post/kuai-su-mi-andju-zhen-kuai-su-mi/">
+              <h3 class="post-title">
+                快速幂&amp;矩阵快速幂
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://caifxh.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
