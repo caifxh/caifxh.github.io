@@ -1,0 +1,362 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>
+    数位dp | fxh
+</title>
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1585326404439">
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://caifxh.github.io/styles/main.css">
+<!-- js -->
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://caifxh.github.io/media/js/jquery.sticky-sidebar.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+        
+</head>
+
+<body>
+    <div class="main">
+        <div class="header">
+    <div class="nav">
+        <div class="logo">
+            <a href="https://caifxh.github.io">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1585326404439" alt="">
+            </a>
+            <div class="site-title">
+                <h1>
+                    fxh
+                </h1>
+            </div>
+        </div>
+        <span class="menu-btn fa fa-align-justify"></span>
+        <div class="menu-container">
+            <ul>
+                
+                    
+                            <li>
+                                <a href="/" class="menu">
+                                    首页
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/archives" class="menu">
+                                    归档
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/tags" class="menu">
+                                    标签
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/post/about" class="menu">
+                                    关于
+                                </a>
+                            </li>
+                            
+                                
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $(".menu-btn").click(function() {
+            $(".menu-container").slideToggle();
+        });
+        $(window).resize(function() {
+
+            if (window.matchMedia('(min-width: 960px)').matches) {
+                $(".menu-container").css('display', 'block')
+            } else {
+                $(".menu-container").css('display', 'none')
+            }
+
+        });
+    });
+</script>
+
+            <div id="main-content" class="post-detail main-container">
+                <!-- left -->
+                <div id="content" class="main-container-left">
+                    <article class="post i-card">
+                        <h2 class="post-title">
+                            数位dp
+                        </h2>
+                        <div class="post-info">
+                            <time class="post-time">2020-03-28</time>
+                            
+                        </div>
+                        
+                                <div class="post-content">
+                                    <p><a href="https://www.acwing.com/problem/content/1087/">acwing1085</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_5b537e9670-1.png" alt="1.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_a726651870-3.PNG" alt="3.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_55592c3c70-16.PNG" alt="16.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_1cf88f0a70-6.PNG" alt="6.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_2cd3e1cc70-7.PNG" alt="7.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_46b4d2ae70-8.PNG" alt="8.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_5d38098870-9.PNG" alt="9.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_8bf3feda70-10.PNG" alt="10.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_a49f78ce70-11.PNG" alt="11.PNG" loading="lazy"></p>
+<pre><code>#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+using namespace std;
+int dp[15][15];
+int num[15];
+
+void init(){//预处理 
+    dp[0][0]=1;
+    for(int i=1;i&lt;=9;i++)
+        for(int j=0;j&lt;=9;j++){
+            if(j==4)
+                dp[i][j]=0;
+            else
+                for(int k=0;k&lt;=9;k++){
+                    if(j==6&amp;&amp;k==2)
+                        continue;
+                    dp[i][j]+=dp[i-1][k];
+                }
+        }
+}
+
+int solve(int x)//求解[1..x]之间满足条件的个数 
+{
+    int ans=0,cnt=0;
+    while(x)
+        num[++cnt]=x%10,x/=10;
+    num[cnt+1]=0;
+    for(int i=cnt;i&gt;=1;i--){//高位向低位计算 
+        for(int j=0;j&lt;num[i];j++)
+            if(j==4||(j==2&amp;&amp;num[i+1]==6))
+            	continue;
+            else
+				ans+=dp[i][j];
+        if(num[i]==4||(num[i]==2&amp;&amp;num[i+1]==6)){
+			ans--;//减1，例如4，统计0，1 ，2，3共4个其实只有3个满足（不包括0） 
+				 //例如3，统计0，1 ，2共3个满足，0相当于统计了3本身 
+            break;
+    	}
+    }
+    return ans;
+}
+
+void print(){//输出初始化处理后的dp数组 
+	printf(&quot;  j=\t&quot;);
+	for(int j=0;j&lt;=9;j++)
+		printf(&quot;%-10d&quot;,j);
+	printf(&quot;\n&quot;);
+	for(int i=1;i&lt;=9;i++){
+    	printf(&quot;i=%d\t&quot;,i);
+		for(int j=0;j&lt;=9;j++)
+			printf(&quot;%-10d&quot;,dp[i][j]);	
+		printf(&quot;\n&quot;);
+	}
+}
+
+int main()
+{
+    int n,m;
+    memset(dp,0,sizeof dp);
+    init();//初始化处理 
+    //print();//输出dp数组 
+    while(~scanf(&quot;%d%d&quot;,&amp;m,&amp;n),n+m){//测试 1 24  62 386
+    	//printf(&quot;%d\n&quot;,solve(n));
+    	//printf(&quot;%d\n&quot;,solve(m));
+        printf(&quot;%d\n&quot;,solve(n)-solve(m-1));
+	}
+    return 0;
+}
+</code></pre>
+<h4 id="记忆化递归">记忆化递归</h4>
+<p><img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_e2f83cfa70-12.PNG" alt="12.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_ef66924870-13.PNG" alt="13.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_038a069c70-14.PNG" alt="14.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_17c8b8e270-15.PNG" alt="15.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_752403fc70-17.PNG" alt="17.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_b902736a70-18.PNG" alt="18.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_de4ca76c70-19.PNG" alt="19.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_134187bc70-20.PNG" alt="20.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_2799b6c670-21.PNG" alt="21.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_4679d09470-22.PNG" alt="22.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_6c99dc9c70-23.PNG" alt="23.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_6f0abf1470-24.PNG" alt="24.PNG" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+using namespace std;
+int a[20];
+int dp[20][2];
+//dp[pos][sta]表示当前第pos位，sta状态下满足条件的个数，sta表示前一位是否是6，只有0和1两种状态
+int dfs(int pos,bool sta,bool limit)
+{
+    if(pos==0) return 1;
+    if(!limit&amp;&amp;dp[pos][sta]!=-1) return dp[pos][sta];
+    int len=limit?a[pos]:9;
+    int ans=0;
+    for(int i=0;i&lt;=len;i++)
+    {
+        if(sta&amp;&amp;i==2)continue;
+        if(i==4) continue;//都是保证枚举合法性
+        ans+=dfs(pos-1,i==6,limit&amp;&amp;i==len);
+    }
+    if(!limit) dp[pos][sta]=ans;
+    return ans;
+}
+
+int solve(int x)//求解[0..x]之间满足条件的个数 
+{
+    int pos=0;
+    while(x){
+        a[++pos]=x%10;
+        x/=10;
+    }
+    return dfs(pos,0,1);//如果不包括0，此处减1即可
+}
+
+void print(){//输出dp数组 
+	printf(&quot;  j=\t&quot;);
+	for(int j=0;j&lt;=1;j++)
+		printf(&quot;%-10d&quot;,j);
+	printf(&quot;\n&quot;);
+	for(int i=1;i&lt;=9;i++){
+    	printf(&quot;i=%d\t&quot;,i);
+		for(int j=0;j&lt;=1;j++)
+			printf(&quot;%-10d&quot;,dp[i][j]);	
+		printf(&quot;\n&quot;);
+	}
+}
+
+int main()
+{
+    int a,b;
+    memset(dp,-1,sizeof dp);
+    while(~scanf(&quot;%d%d&quot;,&amp;a,&amp;b),a+b)//测试24 386 
+    {
+		//printf(&quot;%d\n&quot;,solve(a));
+		//print();
+    	//printf(&quot;%d\n&quot;,solve(b));
+    	//print();
+		printf(&quot;%d\n&quot;,solve(b)-solve(a-1));
+    }
+    return 0;
+}
+</code></pre>
+
+                                </div>
+                    </article>
+                    <!--  -->
+                    
+                        <div class="next-post">
+                            <div class="next">下一篇</div>
+                            <a href="https://caifxh.github.io/post/zi-fu-chuan-fu-xi-er/">
+                                <h3 class="post-title">
+                                    字符串复习（二）
+                                </h3>
+                            </a>
+                        </div>
+                        
+                            <div id="disqus_thread"></div>
+                            <div id="gitalk-container"></div>
+                </div>
+                <!-- middle -->
+                <div class="main-container-middle"></div>
+                <!-- right -->
+                <div id="sidebar" class="main-container-right">
+                    
+                        <!-- toc -->
+                        
+    <div class="toc-card i-card ">
+        <div class="toc-title i-card-title">目录</div>
+        <div class="toc-content">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E8%AE%B0%E5%BF%86%E5%8C%96%E9%80%92%E5%BD%92">记忆化递归</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+        <script>
+            function locateCatelogList() {
+                /*获取文章目录集合,可通过:header过滤器*/
+                var alis = $('.post-content :header');
+                /*获取侧边栏目录列表集合**/
+                var sidebar_alis = $('.markdownIt-TOC a');
+                /*获取滚动条到顶部的距离*/
+                var scroll_height = $(window).scrollTop();
+                for (var i = 0; i < alis.length; i++) {
+                    /*获取锚点集合中的元素分别到顶点的距离*/
+                    var a_height = $(alis[i]).offset().top;
+                    if (a_height < scroll_height) {
+                        /*高亮显示*/
+                        sidebar_alis.removeClass('on');
+                        $(sidebar_alis[i]).addClass('on');
+                    }
+                }
+            }
+            $(function() {
+                /*绑定滚动事件 */
+                $(window).bind('scroll', locateCatelogList);
+            });
+        </script>
+    </div>
+    
+                            
+
+                </div>
+
+
+
+
+            </div>
+
+
+            <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://caifxh.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+
+    </div>
+    <script>
+        $('#sidebar').stickySidebar({
+            topSpacing: 80,
+            // bottomSpacing: 60
+        });
+    </script>
+    
+</body>
+
+</html>
