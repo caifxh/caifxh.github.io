@@ -1,0 +1,483 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>
+    单调队列优化dp | fxh
+</title>
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1585301067622">
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://caifxh.github.io/styles/main.css">
+<!-- js -->
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://caifxh.github.io/media/js/jquery.sticky-sidebar.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+        
+</head>
+
+<body>
+    <div class="main">
+        <div class="header">
+    <div class="nav">
+        <div class="logo">
+            <a href="https://caifxh.github.io">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1585301067622" alt="">
+            </a>
+            <div class="site-title">
+                <h1>
+                    fxh
+                </h1>
+            </div>
+        </div>
+        <span class="menu-btn fa fa-align-justify"></span>
+        <div class="menu-container">
+            <ul>
+                
+                    
+                            <li>
+                                <a href="/" class="menu">
+                                    首页
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/archives" class="menu">
+                                    归档
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/tags" class="menu">
+                                    标签
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/post/about" class="menu">
+                                    关于
+                                </a>
+                            </li>
+                            
+                                
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $(".menu-btn").click(function() {
+            $(".menu-container").slideToggle();
+        });
+        $(window).resize(function() {
+
+            if (window.matchMedia('(min-width: 960px)').matches) {
+                $(".menu-container").css('display', 'block')
+            } else {
+                $(".menu-container").css('display', 'none')
+            }
+
+        });
+    });
+</script>
+
+            <div id="main-content" class="post-detail main-container">
+                <!-- left -->
+                <div id="content" class="main-container-left">
+                    <article class="post i-card">
+                        <h2 class="post-title">
+                            单调队列优化dp
+                        </h2>
+                        <div class="post-info">
+                            <time class="post-time">2020-03-27</time>
+                            
+                        </div>
+                        
+                                <div class="post-content">
+                                    <p><a href="https://www.acwing.com/problem/content/1090/">acwing1088</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/27/9969_76add7ca6f-34.PNG" alt="34.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/27/9969_8d36e0fe6f-35.PNG" alt="35.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/27/9969_8fa6f3ba6f-36.PNG" alt="36.PNG" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+const int N=2e6+10;
+typedef long long LL;
+int p[N],d[N];
+LL s[N];
+int q[N];
+bool ans[N];
+int n;
+
+int main()
+{
+    scanf(&quot;%d&quot;,&amp;n);
+    for(int i=1;i&lt;=n;i++)
+    {
+        scanf(&quot;%d%d&quot;,&amp;p[i],&amp;d[i]);
+        p[i+n]=p[i];
+        d[i+n]=d[i];
+    }
+
+    for(int i=1;i&lt;=n*2;i++) s[i]=s[i-1]+p[i]-d[i];
+
+    int hh=0,tt=-1;
+    for(int i=1;i&lt;=n*2;i++)//顺时针求长度为n的窗口内前缀和的最小值
+    {
+        if(hh &lt;= tt &amp;&amp; i - q[hh] &gt;= n) hh++;
+
+        while(hh &lt;= tt &amp;&amp; s[q[tt]] &gt;= s[i])
+            tt--;
+        q[++tt]=i;
+        if(i &gt;= n &amp;&amp; s[q[hh]] &gt;= s[i-n])
+            ans[i-n+1]=true;
+    }
+
+    d[0]=d[n];
+    for(int i=n*2;i&gt;=1;i--) s[i]=s[i+1]+p[i]-d[i-1];
+
+    hh=0,tt=-1;
+    for(int i=n*2;i&gt;=1;i--)//逆时针求长度为n的窗口内后缀和的最小值
+    {
+        if(hh &lt;= tt &amp;&amp; q[hh]-i &gt;= n) hh++;
+
+        while(hh &lt;= tt &amp;&amp; s[q[tt]] &gt;= s[i])
+            tt--;
+        q[++tt]=i;
+        if(i&lt;=n+1 &amp;&amp; s[q[hh]] &gt;= s[i+n])
+            ans[i-1]=true;
+    }
+
+    for(int i=1;i&lt;=n;i++)
+        if(ans[i]) puts(&quot;TAK&quot;);
+        else puts(&quot;NIE&quot;);
+    return 0;   
+}
+</code></pre>
+<p><a href="https://www.acwing.com/problem/content/1091/">acwing1089</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/27/9969_85f4d2e66f-37.PNG" alt="37.PNG" loading="lazy"></p>
+<pre><code>#include &lt;cstring&gt;
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+const int N = 2e5 + 10, INF = 0x3f3f3f3f;
+int n, m;
+int w[N], q[N];
+int f[N];
+
+int main()
+{
+    scanf(&quot;%d%d&quot;, &amp;n, &amp;m);
+    for (int i = 1; i &lt;= n; i ++ ) scanf(&quot;%d&quot;, &amp;w[i]);
+
+    int hh = 0, tt = 0;
+    q[0]=0;
+    for (int i = 1; i &lt;= n; i ++ )
+    {
+        if (i - q[hh] &gt; m) hh ++ ;
+        f[i] = f[q[hh]] + w[i];
+        while (hh &lt;= tt &amp;&amp; f[q[tt]] &gt;= f[i]) tt -- ;
+        q[ ++ tt] = i;
+    }
+
+    int res = INF;
+    for (int i = n - m + 1; i &lt;= n; i ++ ) res = min(res, f[i]);
+    printf(&quot;%d\n&quot;, res);
+
+    return 0;
+}
+</code></pre>
+<p><a href="https://www.acwing.com/problem/content/description/1092/">acwing1090</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/27/9969_54a8eb906f-38.PNG" alt="38.PNG" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstdio&gt;
+using namespace std;
+const int N=50010,INF=0x3f3f3f3f;
+int n,t;
+int a[N];
+int f[N];
+int q[N];
+
+bool check(int mid)
+{
+    int hh=0,tt=-1;
+    q[++tt]=0;
+    for(int i=1;i&lt;=n;i++)
+    {
+        if(hh &lt;= tt &amp;&amp; i - q[hh] &gt; mid+1) hh++;
+        f[i]=f[q[hh]]+a[i];
+        while(hh &lt;= tt &amp;&amp; f[q[tt]] &gt;= f[i])
+            tt--;
+        q[++tt]=i;
+    }
+    
+    int res=INF;
+    for(int i=n-mid;i&lt;=n;i++)
+        res=min(res,f[i]);
+    
+    return res&lt;=t;
+}
+
+int main()
+{
+    cin&gt;&gt;n&gt;&gt;t;
+    for(int i=1;i&lt;=n;i++)
+        cin&gt;&gt;a[i];
+
+    int l=0,r=n;
+    while(l &lt; r)
+    {
+        int mid=l+r&gt;&gt;1;
+        if(check(mid))
+            r=mid;
+        else
+            l=mid+1;
+    }
+    
+    cout&lt;&lt;l&lt;&lt;endl;
+    return 0;
+}
+</code></pre>
+<p><a href="https://www.acwing.com/problem/content/1089/">acwing1087</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/27/9969_0b8755dc6f-39.PNG" alt="39.PNG" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+typedef long long LL;
+const int N=100010;
+LL f[N][2];
+int n,k;
+int e[N];
+LL s[N];
+int q[N];
+
+int main()
+{
+    cin&gt;&gt;n&gt;&gt;k;
+    
+    for(int i=1;i&lt;=n;i++)
+        cin&gt;&gt;e[i];
+        
+    for(int i=1;i&lt;=n;i++)
+    	s[i]=s[i-1]+e[i];
+    
+    int hh=0,tt=-1;
+    q[++tt]=0;
+    for(int i=1;i&lt;=n;i++)
+    {
+    	f[i][0]=max(f[i-1][0],f[i-1][1]);
+    	if(hh &lt;= tt &amp;&amp; i-q[hh] &gt; k) hh++;
+    	
+    	f[i][1]=f[q[hh]][0]-s[q[hh]]+s[i];
+    	while(hh &lt;= tt &amp;&amp; f[i][0]-s[i] &gt;= f[q[tt]][0] -s[q[tt]])
+    		tt--;
+    	q[++tt]=i;
+	}
+	
+	cout&lt;&lt;max(f[n][0],f[n][1])&lt;&lt;endl;
+	return 0;
+}
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://cdn.acwing.com/media/article/image/2020/03/27/9969_3893cee86f-40.PNG" alt="40.PNG" loading="lazy"></figure>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+typedef long long LL;
+const int N=100010,INF=0x3f3f3f3f;
+LL f[N];
+int n,k;
+int e[N];
+LL s[N];
+int q[N];
+
+int main()
+{
+    cin&gt;&gt;n&gt;&gt;k;
+    
+    for(int i=1;i&lt;=n;i++)
+        cin&gt;&gt;e[i];
+        
+    for(int i=1;i&lt;=n;i++)
+    	s[i]=s[i-1]+e[i];
+    
+    int hh=0,tt=-1;
+    q[++tt]=0;
+    for(int i=1;i&lt;=n;i++)
+    {
+    	if(hh &lt;= tt &amp;&amp; i-q[hh] &gt; k) hh++;
+    	
+    	f[i]=f[q[hh]-1]-s[q[hh]]+s[i];
+    	while(hh &lt;= tt &amp;&amp; f[i-1]-s[i] &gt;= f[q[tt]-1] -s[q[tt]])
+    		tt--;
+    	q[++tt]=i;
+	}
+	
+	LL res=-1e18;
+	for(int i=n-k;i&lt;=n;i++)
+	    res=max(res,f[i]);
+	cout&lt;&lt;res&lt;&lt;endl;
+	return 0;
+}
+</code></pre>
+<p><a href="https://www.acwing.com/problem/content/1093/">acwing1091</a><br>
+先用滑动窗口+单调队列求出每一行长度为k的连续序列中的最大值、最小值，<br>
+存到rmin[i][j],rmax[i][j]两个数组里，<br>
+再用相同的方法求这两个数组中每一列长度为k的连续序列的最大值、最小值存到cmin[i],cmax[i]中。<br>
+遍历cmin,cmax得出答案。</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+const int N=1010,INF=0x3f3f3f3f;
+int n,m,k;
+int a[N][N];
+int rmax[N][N],rmin[N][N];
+int cmax[N],cmin[N];
+int tmp[N];
+int q[N];
+
+void get(int a[],int b[],int len,int type)//0:最小值，1：最大值 
+{
+    int hh=0,tt=-1;
+    for(int i=1;i&lt;=len;i++)
+    {
+        if(hh &lt;= tt &amp;&amp; i-q[hh] &gt;=k) hh++;
+        while(hh &lt;= tt &amp;&amp;(type?a[q[tt]]&lt;=a[i]:a[q[tt]]&gt;=a[i]))
+            tt--;
+        q[++tt]=i;
+        b[i]=a[q[hh]];
+    }
+}
+
+int main()
+{
+    scanf(&quot;%d%d%d&quot;,&amp;n,&amp;m,&amp;k);
+
+    for(int i=1;i&lt;=n;i++)
+        for(int j=1;j&lt;=m;j++)
+            scanf(&quot;%d&quot;,&amp;a[i][j]);
+
+    for(int i=1;i&lt;=n;i++)
+    {
+        get(a[i],rmin[i],m,0);
+        get(a[i],rmax[i],m,1);
+    }
+
+    int ans=INF;
+    for(int i=k;i&lt;=m;i++)
+    {
+        for(int j=1;j&lt;=n;j++) tmp[j]=rmin[j][i];
+        get(tmp,cmin,n,0);
+
+        for(int j=1;j&lt;=n;j++) tmp[j]=rmax[j][i];
+        get(tmp,cmax,n,1);
+
+        for(int j=k;j&lt;=n;j++)
+            ans=min(ans,cmax[j]-cmin[j]);
+    }
+
+    printf(&quot;%d\n&quot;,ans);
+
+    return 0;   
+}
+</code></pre>
+
+                                </div>
+                    </article>
+                    <!--  -->
+                    
+                        <div class="next-post">
+                            <div class="next">下一篇</div>
+                            <a href="https://caifxh.github.io/post/shu-zhuang-shu-zu/">
+                                <h3 class="post-title">
+                                    树状数组
+                                </h3>
+                            </a>
+                        </div>
+                        
+                            <div id="disqus_thread"></div>
+                            <div id="gitalk-container"></div>
+                </div>
+                <!-- middle -->
+                <div class="main-container-middle"></div>
+                <!-- right -->
+                <div id="sidebar" class="main-container-right">
+                    
+                                <!-- id-card -->
+                                
+    <div class="id_card i-card">
+        <div class="id_card-avatar" style="background-image: url(https://caifxh.github.io/images/avatar.png?v=1585301067622)">
+        </div>
+        <h1 class="id_card-title">
+            fxh
+        </h1>
+        <h2 class="id_card-description">
+            菜
+        </h2>
+        <!--  -->
+        <div class="id_card-sns">
+            <!-- github -->
+            
+                    <!-- twitter -->
+                    
+                            <!-- weibo -->
+                            
+                                    <!-- facebook -->
+                                    
+
+        </div>
+    </div>
+    
+                                    
+
+                </div>
+
+
+
+
+            </div>
+
+
+            <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://caifxh.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+
+    </div>
+    <script>
+        $('#sidebar').stickySidebar({
+            topSpacing: 80,
+            // bottomSpacing: 60
+        });
+    </script>
+    
+</body>
+
+</html>
