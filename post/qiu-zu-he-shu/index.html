@@ -1,0 +1,358 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>
+    求组合数 | fxh
+</title>
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1585724161677">
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://caifxh.github.io/styles/main.css">
+<!-- js -->
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://caifxh.github.io/media/js/jquery.sticky-sidebar.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+        
+</head>
+
+<body>
+    <div class="main">
+        <div class="header">
+    <div class="nav">
+        <div class="logo">
+            <a href="https://caifxh.github.io">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1585724161677" alt="">
+            </a>
+            <div class="site-title">
+                <h1>
+                    fxh
+                </h1>
+            </div>
+        </div>
+        <span class="menu-btn fa fa-align-justify"></span>
+        <div class="menu-container">
+            <ul>
+                
+                    
+                            <li>
+                                <a href="/" class="menu">
+                                    首页
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/archives" class="menu">
+                                    归档
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/tags" class="menu">
+                                    标签
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/post/about" class="menu">
+                                    关于
+                                </a>
+                            </li>
+                            
+                                
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $(".menu-btn").click(function() {
+            $(".menu-container").slideToggle();
+        });
+        $(window).resize(function() {
+
+            if (window.matchMedia('(min-width: 960px)').matches) {
+                $(".menu-container").css('display', 'block')
+            } else {
+                $(".menu-container").css('display', 'none')
+            }
+
+        });
+    });
+</script>
+
+            <div id="main-content" class="post-detail main-container">
+                <!-- left -->
+                <div id="content" class="main-container-left">
+                    <article class="post i-card">
+                        <h2 class="post-title">
+                            求组合数
+                        </h2>
+                        <div class="post-info">
+                            <time class="post-time">2020-03-28</time>
+                            
+                        </div>
+                        
+                                <div class="post-content">
+                                    <h4 id="组合数的计算">组合数的计算</h4>
+<h4 id="求组合数-i杨辉三角递推法">求组合数 I（杨辉三角递推法）</h4>
+<p>给定 n, m，计算<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msubsup><mi>C</mi><mi>n</mi><mi>m</mi></msubsup></mrow><annotation encoding="application/x-tex">C_n^m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.93033em;vertical-align:-0.247em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-2.4530000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">m</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span></span></span></span>对 109+7 取模的结果。<br>
+当 n，m 都比较小的时候且需要频繁地调用组合数的时候,采用 Pascal 公式预处理出所有对a，b对应的<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msubsup><mi>C</mi><mi>a</mi><mi>b</mi></msubsup></mrow><annotation encoding="application/x-tex">C_a^b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.096108em;vertical-align:-0.247em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-2.4530000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">a</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">b</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span></span></span></span><br>
+若只要求一个组合数的话，也可以滚动一下这个数组，节约空间，但同时m这一维要倒着枚举，就像01背包一样。程序如下：</p>
+<pre><code>#include&lt;iostream&gt;
+using namespace std;
+const int N=2010,mod=1e9+7;
+int c[N][N];
+
+int main()
+{
+    for(int i=0;i&lt;N;i++)
+        for(int j=0;j&lt;=i;j++)
+            if(!j)
+                c[i][j]=1;
+            else
+                c[i][j]=(c[i-1][j]+c[i-1][j-1])%mod;
+    
+    int n;
+    cin&gt;&gt;n;
+    while(n--)
+    {
+        int a,b;
+        scanf(&quot;%d%d&quot;,&amp;a,&amp;b);
+        printf(&quot;%d\n&quot;,c[a][b]);
+    }
+    return 0;
+}
+</code></pre>
+<p>滚动数组优化:</p>
+<pre><code>#include&lt;iostream&gt;
+using namespace std;
+int n,m;
+long long c[10005];
+int main()
+{
+    cin&gt;&gt;n&gt;&gt;m;
+    m=min(m,n-m);
+    c[0]=1;
+    for (int i=1;i&lt;=n;i++)
+    {
+        for (int j=m;j&gt;=1;j--)
+        {
+            c[j]=c[j]+c[j-1];
+        }
+    }
+    cout&lt;&lt;c[m];
+}
+</code></pre>
+<p>因为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msubsup><mi>C</mi><mi>n</mi><mi>m</mi></msubsup><mo>=</mo><msubsup><mi>C</mi><mi>n</mi><mrow><mi>n</mi><mi mathvariant="normal">−</mi><mi>m</mi></mrow></msubsup></mrow><annotation encoding="application/x-tex">C_n^m=C_n^{n−m}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.93033em;vertical-align:-0.247em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-2.4530000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">m</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.0183309999999999em;vertical-align:-0.247em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.771331em;"><span style="top:-2.4530000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mord mtight">−</span><span class="mord mathdefault mtight">m</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span></span></span></span>，所以m可以取m和n-m中小的那一个，以节省时间。但复杂度还是过高，约为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><msup><mi>n</mi><mn>2</mn></msup><mo>)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>。</p>
+<h4 id="求组合数-ii乘法逆元">求组合数 II（乘法逆元）</h4>
+<p><code>这种方法只适用于对答案模一个大质数的情况</code>。<br>
+当 n, m &gt; 10000的时候，就不能再使用 O(n^2) 的做法了。需要使用公式：<img src="https://cdn.acwing.com/media/article/image/2020/03/16/9969_e3438e0c67-40.PNG" alt="40.PNG" loading="lazy"><br>
+第一种做法：（费马小定理）<br>
+令 fact[n]=n!</p>
+<pre><code>fact[0] = 1;
+for (int i = 1;i &lt;= n;i ++)
+    fact[i] =(LL) fact[i - 1] * i % p;
+</code></pre>
+<p>令分母 k =(LL)fact[m] * fact[n - m] % p<br>
+计算 k 模 p 的逆元，即 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>k</mi><mrow><mi>p</mi><mo>−</mo><mn>2</mn></mrow></msup></mrow><annotation encoding="application/x-tex">k^{p-2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">p</span><span class="mbin mtight">−</span><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span> MOD p<br>
+答案就是(LL)fact[n] *  <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>k</mi><mrow><mi>p</mi><mo>−</mo><mn>2</mn></mrow></msup></mrow><annotation encoding="application/x-tex">k^{p-2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">p</span><span class="mbin mtight">−</span><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span> MOD p<br>
+这样需要一次快速幂，时间复杂度 O(nlog n)</p>
+<pre><code>#include&lt;iostream&gt;
+using namespace std;
+const int N=100010,mod=1e9+7;
+int fact[N],infact[N];
+typedef long long LL;
+
+int qmi(int a,int k,int p)
+{
+    int res=1;
+    while(k)
+    {
+        if(k&amp;1)
+            res=(LL)res*a%p;
+        a=(LL)a*a%p;
+        k&gt;&gt;=1;
+    }
+    return res;
+}
+
+void init()
+{
+    fact[0]=infact[0]=1;
+    for(int i=1;i&lt;N;i++)
+    {
+        fact[i]=(LL)fact[i-1]*i%mod;
+        infact[i]=qmi(fact[i],mod-2,mod);
+    }
+}
+
+int main()
+{
+    init();
+    
+    int n;
+    cin&gt;&gt;n;
+    while(n--)
+    {
+        int a,b;
+        scanf(&quot;%d%d&quot;,&amp;a,&amp;b);
+        printf(&quot;%d\n&quot;,(LL)fact[a]*infact[b]%mod*infact[a-b]%mod);
+    }
+    return 0;
+}
+</code></pre>
+<p>第二种做法：(递推)<br>
+我们先处理每个数关于 p 的逆元 inv[n]。<br>
+inv[1] = 1<br>
+现在假设我们要求 inv[i]，首先拿 p 除以 i，得到 k，余数是 r。<br>
+那么 p = ki + r (r &lt; i, 1 &lt; i &lt; p)<br>
+两边都 MOD p，得到 ki + r = 0 (mod p)<br>
+ki + r = 0 (mod p)<br>
+两边同时乘上 i<sup>{-1}r</sup>{-1}<br>
+得到 kr^{-1} + i^{-1} = 0 (mod p)<br>
+i^{-1} = -kr^{-1} (mod p)<br>
+k = p / i, r = p % i<br>
+由于 r &lt; i，所以算inv[i]的时候，inv[r]显然已经算好了<br>
+因此 inv[i] = (-p / i) * inv[p % i]</p>
+<p>在处理出了每个数关于 p 的逆元。</p>
+<pre><code>for (int i = 2;i &lt;= n;i ++)
+    inv[i] = (LL)inv[i - 1] * inv[i] % p;
+</code></pre>
+<p>就可以得到 i! 关于 p 的逆元<br>
+此时答案就是<br>
+(LL)fact[n] * inv[m] % p * inv[n - m] % p</p>
+<p>p一定要是大质数!，起码得大于m。为什么呢？若要求a在模p下的乘法逆元，必须要保证a与p互质。在此题中，要求m!的乘法逆元，那么p必须与m!互质，那么p就要大于m，且是个质数。</p>
+<h4 id="求组合数-iiilucas定理">求组合数 III（Lucas定理）：</h4>
+<p>适用于对答案模一个质数的情况。<br>
+和上面的乘法逆元求组合数的条件对比一下，只相差了一个大字。也就是说这个质数不用很大，非常小也行。<br>
+给定 n, m，计算<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msubsup><mi>C</mi><mi>n</mi><mi>m</mi></msubsup></mrow><annotation encoding="application/x-tex">C_n^m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.93033em;vertical-align:-0.247em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-2.4530000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">m</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span></span></span></span>对 1000003 取模的结果。n, m &lt;= 1e18<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/16/9969_9dc1cf7267-41.PNG" alt="41.PNG" loading="lazy"><br>
+<a href="https://www.acwing.com/activity/content/code/content/122436/">code</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/16/9969_610b591267-42.PNG" alt="42.PNG" loading="lazy"></p>
+<h4 id="求组合数-iv分解质因数">求组合数 IV（分解质因数）</h4>
+<p>乘法逆元只能处理模数为大质数的情况，卢卡斯定理只能处理模数为质数的情况，那有没有一种方法能处理模数不是质数的情况呢？显然是有的。而且不取模也是可以的。<br>
+我们可以把组合数中要乘或除的每一个数分解质因数，再把分母的质因数减掉，最后把剩下的质因数乘起来，边乘边模p就行了。 （如果需要取模的话）<br>
+对于n!包含质因子x个数：fac[x]=n/x+n/x2+……+n/xk(直到n/xk=0结束)。<br>
+<a href="https://www.acwing.com/activity/content/code/content/122520/">code</a></p>
+<h4 id="总结">总结</h4>
+<p>每种算法都有其优点与局限性。递推写起来快，思维简单，但时间复杂度高。乘法逆元用得比较普遍，因为一般都是模一个大质数，复杂度也几乎是线性的。卢卡斯定理只会在特定的题目里做到，但其实编程复杂度并不高，就是在乘法逆元的基础上加几句话。质因数分解的适用性最广，编程复杂度也最高，这就是完美的代价吧。<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/20/9969_d1e87a9c6a-15.png" alt="15.png" loading="lazy"></p>
+
+                                </div>
+                    </article>
+                    <!--  -->
+                    
+                        <div class="next-post">
+                            <div class="next">下一篇</div>
+                            <a href="https://caifxh.github.io/post/bei-zeng-st-biao-rmq/">
+                                <h3 class="post-title">
+                                    倍增 ST表 RMQ
+                                </h3>
+                            </a>
+                        </div>
+                        
+                            <div id="disqus_thread"></div>
+                            <div id="gitalk-container"></div>
+                </div>
+                <!-- middle -->
+                <div class="main-container-middle"></div>
+                <!-- right -->
+                <div id="sidebar" class="main-container-right">
+                    
+                        <!-- toc -->
+                        
+    <div class="toc-card i-card ">
+        <div class="toc-title i-card-title">目录</div>
+        <div class="toc-content">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E7%BB%84%E5%90%88%E6%95%B0%E7%9A%84%E8%AE%A1%E7%AE%97">组合数的计算</a></li>
+<li><a href="#%E6%B1%82%E7%BB%84%E5%90%88%E6%95%B0-i%E6%9D%A8%E8%BE%89%E4%B8%89%E8%A7%92%E9%80%92%E6%8E%A8%E6%B3%95">求组合数 I（杨辉三角递推法）</a></li>
+<li><a href="#%E6%B1%82%E7%BB%84%E5%90%88%E6%95%B0-ii%E4%B9%98%E6%B3%95%E9%80%86%E5%85%83">求组合数 II（乘法逆元）</a></li>
+<li><a href="#%E6%B1%82%E7%BB%84%E5%90%88%E6%95%B0-iiilucas%E5%AE%9A%E7%90%86">求组合数 III（Lucas定理）：</a></li>
+<li><a href="#%E6%B1%82%E7%BB%84%E5%90%88%E6%95%B0-iv%E5%88%86%E8%A7%A3%E8%B4%A8%E5%9B%A0%E6%95%B0">求组合数 IV（分解质因数）</a></li>
+<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+        <script>
+            function locateCatelogList() {
+                /*获取文章目录集合,可通过:header过滤器*/
+                var alis = $('.post-content :header');
+                /*获取侧边栏目录列表集合**/
+                var sidebar_alis = $('.markdownIt-TOC a');
+                /*获取滚动条到顶部的距离*/
+                var scroll_height = $(window).scrollTop();
+                for (var i = 0; i < alis.length; i++) {
+                    /*获取锚点集合中的元素分别到顶点的距离*/
+                    var a_height = $(alis[i]).offset().top;
+                    if (a_height < scroll_height) {
+                        /*高亮显示*/
+                        sidebar_alis.removeClass('on');
+                        $(sidebar_alis[i]).addClass('on');
+                    }
+                }
+            }
+            $(function() {
+                /*绑定滚动事件 */
+                $(window).bind('scroll', locateCatelogList);
+            });
+        </script>
+    </div>
+    
+                            
+
+                </div>
+
+
+
+
+            </div>
+
+
+            <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://caifxh.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+
+    </div>
+    <script>
+        $('#sidebar').stickySidebar({
+            topSpacing: 80,
+            // bottomSpacing: 60
+        });
+    </script>
+    
+</body>
+
+</html>

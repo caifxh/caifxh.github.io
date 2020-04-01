@@ -7,7 +7,7 @@
 <title>
     数位dp | fxh
 </title>
-<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1585326654289">
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1585724161677">
 <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
 <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
@@ -28,7 +28,7 @@
     <div class="nav">
         <div class="logo">
             <a href="https://caifxh.github.io">
-                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1585326654289" alt="">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1585724161677" alt="">
             </a>
             <div class="site-title">
                 <h1>
@@ -107,7 +107,16 @@
                         </div>
                         
                                 <div class="post-content">
-                                    <p><a href="https://www.acwing.com/problem/content/1087/">acwing1085</a><br>
+                                    <p>问题的一般形式是这样的：<br>
+定义一个条件 A，比如：被 7 整除、数位中含有 3 等等。<br>
+询问区间 [L, R] 中有几个数满足条件 A L 和 R 的范围一般非常大，比如<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><msup><mn>0</mn><mn>18</mn></msup></mrow><annotation encoding="application/x-tex">10^{18}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">8</span></span></span></span></span></span></span></span></span></span></span></span><br>
+通过数位 DP，我们会发现这些问题的规模实际上是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>10</mn></msub><mi>R</mi></mrow><annotation encoding="application/x-tex">log_{10} R</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">0</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span></span></span></span></p>
+<p>数位 DP 就是考虑数字的每一位。<br>
+问题的规模变为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>10</mn></msub><mi>R</mi></mrow><annotation encoding="application/x-tex">log_{10} R</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">0</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span></span></span></span><br>
+每一位作为不同的阶段，设计状态。<br>
+我们从高位往低位依次枚举。<br>
+每一位的数选择的范围是不同的，依据前面选的数决定。</p>
+<p><a href="https://www.acwing.com/problem/content/1087/">acwing1085</a><br>
 <img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_5b537e9670-1.png" alt="1.png" loading="lazy"><br>
 <img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_a726651870-3.PNG" alt="3.PNG" loading="lazy"><br>
 <img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_55592c3c70-16.PNG" alt="16.PNG" loading="lazy"><br>
@@ -194,7 +203,7 @@ int main()
 <img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_752403fc70-17.PNG" alt="17.PNG" loading="lazy"><br>
 <img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_b902736a70-18.PNG" alt="18.PNG" loading="lazy"><br>
 <img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_de4ca76c70-19.PNG" alt="19.PNG" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_134187bc70-20.PNG" alt="20.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_89782eea70-25.PNG" alt="25.PNG" loading="lazy"><br>
 <img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_2799b6c670-21.PNG" alt="21.PNG" loading="lazy"><br>
 <img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_4679d09470-22.PNG" alt="22.PNG" loading="lazy"><br>
 <img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_6c99dc9c70-23.PNG" alt="23.PNG" loading="lazy"><br>
@@ -260,6 +269,726 @@ int main()
     return 0;
 }
 </code></pre>
+<h4 id="例题">例题</h4>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=3555">hdu3555</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_0523299470-26.png" alt="26.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_00483fe070-27.png" alt="27.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_11b93f5470-28.png" alt="28.png" loading="lazy"></p>
+<h4 id="正向做法">正向做法</h4>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+typedef long long LL;
+const int N=20;
+LL f[N][2];
+LL ten[N];
+int num[N];
+LL n;
+
+LL dfs(int pos,bool sta,bool limit)
+{
+	if(pos == 0) return 0;
+	if(!limit &amp;&amp; f[pos][sta] != -1)
+		return f[pos][sta];
+	
+	int len=limit?num[pos]:9;
+	LL ans=0;
+	for(int i=0;i&lt;=len;i++)
+	{
+		if(sta &amp;&amp; i==9)
+			ans+=limit?n%ten[pos-1]+1:ten[pos-1];
+		else
+			ans+=dfs(pos-1,i==4,limit&amp;&amp;i==len);
+	}
+	if(!limit)
+		f[pos][sta]=ans;
+	return ans;
+}
+
+LL dp(LL n)//求解[1..x]之间满足条件的个数 
+{
+	int pos=0;
+	while(n)
+	{
+		num[++pos]=n%10;
+		n/=10;
+	}
+	
+	return dfs(pos,0,1);
+}
+
+int main()
+{
+	int T;
+	cin&gt;&gt;T;
+	memset(f,-1,sizeof f);
+	ten[0]=1;
+	for(int i=1;i&lt;N;i++)
+		ten[i]=ten[i-1]*10;
+	while(T--)
+	{
+		scanf(&quot;%lld&quot;,&amp;n);
+		printf(&quot;%lld\n&quot;,dp(n));
+	}
+	return 0;
+}
+</code></pre>
+<h4 id="反向做法">反向做法</h4>
+<pre><code>#include&lt;cstdio&gt;//求不包含49的个数ans(不包括0)，然后n-ans
+#include&lt;cstring&gt;
+using namespace std;
+typedef long long LL;//注意！！本题数据类型为ll 
+const int N=30;
+int dig[N];
+LL dp[N][2],n;
+//dp[pos][sta]表示当前第pos位，sta状态下满足条件的个数，sta表示前一位是否是4，只有0和1两种状态
+LL dfs(int pos,bool sta,bool limit)//求不包含49的个数
+{
+    if(!pos) return 1;//包括0 
+    if(!limit&amp;&amp;dp[pos][sta]!=-1) return dp[pos][sta];
+    int len=limit?dig[pos]:9;
+    LL ans=0;
+    for(int i=0;i&lt;=len;i++)
+    {
+        if(sta&amp;&amp;i==9)
+        	continue;
+        ans+=dfs(pos-1,i==4,limit&amp;&amp;i==len);
+    }
+    if(!limit) dp[pos][sta]=ans;
+    return ans;
+}
+
+LL solve(LL x)//求解[1..x]之间不包含49的个数 
+{
+    int pos=0;
+    while(x){
+        dig[++pos]=x%10;
+        x/=10;
+    }
+    return dfs(pos,0,1)-1;//除去0 
+}
+
+int main()
+{
+    memset(dp,-1,sizeof(dp));
+	int T;
+	scanf(&quot;%d&quot;,&amp;T);
+	while(T--){
+		scanf(&quot;%I64d&quot;,&amp;n);
+		printf(&quot;%I64d\n&quot;,n-solve(n));
+	}
+    return 0;
+}
+</code></pre>
+<p><a href="https://www.acwing.com/problem/content/340/">acwing338</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_79719d0070-29.png" alt="29.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_7c8b84ec70-30.png" alt="30.png" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+const int N=10;
+int f[N][10][N];
+int num[N];
+int ans1[N];
+int ans2[N];
+
+int dfs(int pos,int val,int cnt,bool lead,bool limit)
+{
+    if(pos == 0) return cnt;
+    if(!limit &amp;&amp; !lead &amp;&amp; f[pos][val][cnt] != -1)
+        return f[pos][val][cnt];
+
+    int len=limit?num[pos]:9;
+    int ans=0,t=0;
+    for(int i=0;i&lt;=len;i++)
+    {
+        if(val != i) t=cnt;
+        else 
+        {
+            if(lead &amp;&amp; val==0)
+                t=0;
+            else  
+                t=cnt+1;
+        }
+        ans+=dfs(pos-1,val,t,lead&amp;&amp;i==0,limit&amp;&amp;i==len);
+    }
+    if(!limit &amp;&amp; !lead) f[pos][val][cnt]=ans;
+    return ans;
+}
+
+void dp(int n,int ans[])
+{
+    int pos=0;
+    while(n)
+    {
+        num[++pos]=n%10;
+        n/=10;
+    }
+
+    for(int i=0;i&lt;=9;i++)
+        ans[i]=dfs(pos,i,0,1,1);
+}
+
+int main()
+{
+    memset(f,-1,sizeof f);
+    int a,b;
+    while(~scanf(&quot;%d%d&quot;,&amp;a,&amp;b))
+    {
+        if(!a &amp;&amp; !b) break;
+        if(a&gt;b) swap(a,b);
+        dp(b,ans1);
+        dp(a-1,ans2);
+        for(int i=0;i&lt;10;i++)
+            printf(&quot;%d &quot;,ans1[i]-ans2[i]);
+    }
+    return 0;
+}
+</code></pre>
+<p><a href="https://vjudge.net/problem/POJ-3252">poj3252</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_5712eaa670-32.png" alt="32.png" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+const int N=35;
+int f[N][N][N];
+int num[N];
+
+int dfs(int pos,int cnt0,int cnt1,bool lead,bool limit)
+{
+	if(pos == 0) return cnt0&gt;=cnt1;
+	if(!limit &amp;&amp; !lead &amp;&amp; f[pos][cnt0][cnt1] != -1)
+		return f[pos][cnt0][cnt1];
+
+	int len=limit?num[pos]:1;
+	int ans=0;
+	for(int i=0;i&lt;=len;i++)
+	{
+		if(lead &amp;&amp; !i)
+			ans+=dfs(pos-1,0,0,1,limit&amp;&amp;i==len);
+		else 
+			ans+=dfs(pos-1,cnt0+(i==0),cnt1+(i==1),0,limit&amp;&amp;i==len);
+	}
+	if(!limit &amp;&amp; !lead)
+		f[pos][cnt0][cnt1]=ans;
+	return ans;
+}
+
+int dp(int n)
+{
+	int pos=0;
+	while(n)
+	{
+		num[++pos]=n%2;
+		n/=2;
+	}
+	
+	return dfs(pos,0,0,1,1);
+}
+
+int main()
+{
+	int a,b;
+	memset(f,-1,sizeof f);
+	while(~scanf(&quot;%d%d&quot;,&amp;a,&amp;b))
+		printf(&quot;%d\n&quot;,dp(b)-dp(a-1));
+	return 0;
+}
+</code></pre>
+<p><a href="https://vjudge.net/problem/HDU-4734">hdu4734</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_3d9a111a70-43.png" alt="43.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_50fd7d5070-44.png" alt="44.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_5440e4d470-45.png" alt="45.png" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+const int N=10,M=4610;
+int f[N][M];
+int num[N];
+int a,b;
+
+int dfs(int pos,int val,bool limit)
+{
+	if(pos == 0) return val&gt;=0;
+	if(val &lt; 0) return 0;
+	if(!limit &amp;&amp; f[pos][val] != -1)
+		return f[pos][val];
+	
+	int ans=0;
+	int len=limit?num[pos]:9;
+	for(int i=0;i&lt;=len;i++)
+		ans+=dfs(pos-1,val-i*(1&lt;&lt;pos-1),limit &amp;&amp; i==len);
+	if(!limit) f[pos][val]=ans;
+	return ans;
+
+}
+
+
+int F(int n)
+{
+	int ans=0,len=0;
+	while(n)
+	{
+		ans+=(n%10)*(1&lt;&lt;len);
+		len++;
+		n/=10;
+	}
+	return ans;
+}
+
+int dp(int n)//求解小于等于f(a)的数的个数 
+{
+	int pos=0;
+	while(n)
+	{
+		num[++pos]=n%10;
+		n/=10;
+	}
+	
+	return dfs(pos,F(a),1);
+}
+
+int main()
+{
+	int T,kas=1;
+	cin&gt;&gt;T;
+	memset(f,-1,sizeof f);
+	while(T--)
+	{
+		scanf(&quot;%d%d&quot;,&amp;a,&amp;b);
+		printf(&quot;Case #%d: %d\n&quot;,kas++,dp(b));
+	}
+	return 0;
+}
+</code></pre>
+<p><a href="https://www.acwing.com/problem/content/1083/">acwing1081</a><br>
+统计区间内一个数的B进制表示下恰好有k位为1的数的个数</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+const int N=35;
+int f[N][N];
+int num[N];
+int k,b;
+
+int dfs(int pos,int cnt,bool limit)
+{
+    if(cnt &gt; k) return 0;
+	if(pos == 0) return cnt==k;
+	
+	if(f[pos][cnt] != -1 &amp;&amp; !limit) 
+		return f[pos][cnt];
+	
+	int len=limit?num[pos]:1;
+	int ans=0;
+	for(int i=0;i&lt;=min(len,1);i++)
+		if(i) ans+=dfs(pos-1,cnt+1,limit&amp;&amp;i==len);
+		else ans+=dfs(pos-1,cnt,limit&amp;&amp;i==len);
+
+	if(!limit) f[pos][cnt]=ans;
+	return ans;
+}
+
+int dp(int n)
+{
+	int pos=0;
+	while(n) num[++pos]=n%b,n/=b;
+	
+	return dfs(pos,0,1);
+}
+
+int main()
+{
+	int l,r;
+	memset(f,-1,sizeof f);
+	scanf(&quot;%d%d%d%d&quot;,&amp;l,&amp;r,&amp;k,&amp;b);
+	
+	printf(&quot;%d\n&quot;,dp(r)-dp(l-1));
+	return 0;
+}
+</code></pre>
+<p><a href="https://www.acwing.com/problem/content/1084/">acwing1082</a><br>
+统计区间内不下降数的个数</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+const int N=15;
+int f[N][10];
+int num[N];
+
+int dfs(int pos,int last,bool limit)
+{
+	if(pos ==0) return 1;
+	if(f[pos][last] != -1 &amp;&amp; !limit)
+		return f[pos][last];
+
+	int ans=0;
+	int len=limit?num[pos]:9;
+	for(int i=0;i&lt;=len;i++)
+	{
+		if(i&lt;last) continue;
+		ans+=dfs(pos-1,i,limit&amp;&amp;i==len);
+	}
+	
+	if(!limit) f[pos][last]=ans;
+	return ans;
+	
+}
+
+int dp(int n)
+{
+	int pos=0;
+	while(n)
+	{
+		num[++pos]=n%10;
+		n/=10;
+	}
+	
+	return dfs(pos,0,1);
+}
+
+int main()
+{
+	int a,b;
+	memset(f,-1,sizeof f);
+	while(~scanf(&quot;%d%d&quot;,&amp;a,&amp;b))
+		printf(&quot;%d\n&quot;,dp(b)-dp(a-1));
+	
+	return 0;
+}
+</code></pre>
+<p><a href="https://www.luogu.com.cn/problem/P4127">P4127</a><br>
+询问 [L,R] 中各位数字之和能整除原数的个数。1 ≤ L ≤ R ≤ 1e18</p>
+<h4 id="思路">思路</h4>
+<p>可以发现各位数之和最大只能是 9 * 18 = 162<br>
+我们可以枚举这个和 sum<br>
+然后去统计可以被 sum 整除，且数位和是 sum 的数。<br>
+我们把状态定义为 f[dep][cur][mod]<br>
+表示当前枚举第 dep 位，目前这个数的数位和是 cur，对<br>
+sum 取模是 mod.<br>
+cur = sum 且 mod = 0 的个数要统计进答案</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstdio&gt;
+using namespace std;
+typedef long long LL;
+const int N=20,M=170;
+LL f[N][M][M];
+int num[N];
+LL a,b;
+LL sum;
+
+LL dfs(int pos,int val,int mod,bool limit)//val为当前各位数字之和 
+{
+	if(pos == 0) return val==sum &amp;&amp; mod==0;
+	if(val &gt; sum) return 0;
+	
+	if(!limit &amp;&amp; f[pos][val][mod] != -1)
+		return f[pos][val][mod];
+	
+	int len=limit?num[pos]:9;
+	LL ans=0;
+	for(int i=0;i&lt;=len;i++)
+		ans+=dfs(pos-1,val+i,(mod*10+i)%sum,limit&amp;&amp;i==len);
+	
+	if(!limit) f[pos][val][mod]=ans;
+	return ans;
+}
+
+LL dp(LL n)
+{
+	int pos=0;
+	while(n)
+	{
+		num[++pos]=n%10;
+		n/=10;
+	}
+	
+	LL res=0;
+	for(int i=1;i&lt;=pos*9;i++)//枚举各位之和
+	{
+		memset(f,-1,sizeof f);
+		sum=i;
+		res+=dfs(pos,0,0,1);
+	}
+	
+	return res;
+}
+
+int main()
+{
+	cin&gt;&gt;a&gt;&gt;b;
+	cout&lt;&lt;dp(b)-dp(a-1)&lt;&lt;endl;
+	
+	return 0;
+}
+</code></pre>
+<p><a href="https://www.acwing.com/problem/content/1085/">acwing1083</a><br>
+求区间内任意相邻位上的数字之差的绝对值大于等于二的数的个数</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+const int N=11;
+int f[N][10];
+int num[N];
+
+int dfs(int pos,int val,bool lead,bool limit)
+{
+	if(pos == 0) return 1;
+	if(!limit &amp;&amp; !lead &amp;&amp; f[pos][val] != -1)
+		return f[pos][val];
+	
+	int len=limit?num[pos]:9;
+	int ans=0;
+	for(int i=0;i&lt;=len;i++)
+	{
+		if(lead || abs(i-val) &gt;= 2)//如果包含前导零不能让i与之做差，直接让i成为下一位即可
+			ans+=dfs(pos-1,i,lead&amp;&amp;i==0,limit&amp;&amp;i==len);
+	}
+	
+	if(!limit &amp;&amp; !lead) f[pos][val]=ans;
+	return ans;
+}
+
+int dp(int n)
+{
+	int pos=0;
+	while(n)
+	{
+		num[++pos]=n%10;
+		n/=10;
+	}
+	
+	return dfs(pos,-2,1,1);
+}
+
+int main()
+{
+	memset(f,-1,sizeof f);
+	int a,b;
+	cin&gt;&gt;a&gt;&gt;b;
+	cout&lt;&lt;dp(b)-dp(a-1)&lt;&lt;endl;
+	return 0;
+}
+</code></pre>
+<p><a href="https://www.acwing.com/problem/content/description/1086/">acwing1084</a><br>
+求区间内各位数字之和mod N为0的数的个数</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+const int N=11,M=110;
+int f[N][M];
+int num[N];
+int a,b,mod;
+
+int dfs(int pos,int val,bool limit)
+{
+	if(pos == 0) return val == 0;
+	if(!limit &amp;&amp; f[pos][val] != -1)
+		return f[pos][val];
+	
+	int len=limit?num[pos]:9;
+	int ans=0;
+	for(int i=0;i&lt;=len;i++)
+		ans+=dfs(pos-1,(val+i)%mod,limit&amp;&amp;i==len);
+	
+	if(!limit) f[pos][val]=ans;
+	return ans;
+}
+
+int dp(int n)
+{
+	int pos=0;
+	while(n)
+	{
+		num[++pos]=n%10;
+		n/=10;
+	}
+	
+	return dfs(pos,0,1);
+}
+
+int main()
+{
+	while(~scanf(&quot;%d%d%d&quot;,&amp;a,&amp;b,&amp;mod))
+	{
+		memset(f,-1,sizeof f);
+		printf(&quot;%d\n&quot;,dp(b)-dp(a-1));
+	}
+	return 0;
+}
+</code></pre>
+<p><a href="https://vjudge.net/problem/HDU-3709">hdu3709</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/29/9969_a954c17971-46.PNG" alt="46.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/29/9969_aca5ab8071-47.PNG" alt="47.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/29/9969_aeca18ec71-48.PNG" alt="48.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/29/9969_b0c16ca471-49.PNG" alt="49.PNG" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+typedef long long LL;
+using namespace std;
+const int N=20,M=2000;
+LL f[N][N][M];
+int num[N];
+
+LL dfs(int pos,int val,int sum,bool limit)
+{
+	if(pos == 0) return sum==0;
+	if(sum&lt;0) return 0;
+	if(!limit &amp;&amp; f[pos][val][sum] != -1)
+		return f[pos][val][sum];
+	
+	int len=limit?num[pos]:9;
+	LL ans=0;
+	for(int i=0;i&lt;=len;i++)
+		ans+=dfs(pos-1,val,sum+(pos-val)*i,limit&amp;&amp;i==len);
+	
+	if(!limit) f[pos][val][sum]=ans;
+	return ans;
+}
+
+LL dp(LL n)
+{
+	if(n&lt;0) return 0;
+	int pos=0;
+	while(n)
+	{
+		num[++pos]=n%10;
+		n/=10;
+	}
+	
+	LL ans=0;
+	for(int i=1;i&lt;=pos;i++)
+		ans+=dfs(pos,i,0,1);
+	return ans-pos+1;//pos次循环统计了pos次0，应减去多算的pos-1个0的出现次数
+}
+
+int main()
+{
+	int T;
+	cin&gt;&gt;T;
+	memset(f,-1,sizeof f);
+	while(T--)
+	{
+		LL a,b;
+		scanf(&quot;%lld%lld&quot;,&amp;a,&amp;b);
+		printf(&quot;%lld\n&quot;,dp(b)-dp(a-1));
+	}
+	return 0;
+}
+</code></pre>
+<p><a href="https://www.acwing.com/problem/content/1088/">hdu4507</a><br>
+如果一个整数符合下面3个条件之一，那么我们说这个整数和7有关：<br>
+整数中某一位是7<br>
+整数的每一位加起来的和是7的整数倍<br>
+这个整数是7的整数倍<br>
+询问[L,R]中与7无关的数字的平方和，模1e9+7.1≤L≤R≤1e18</p>
+<p>为了转移需要维护三个值：<br>
+cnt 和 7 有关的数的个数<br>
+sum 和 7 有关的数的和<br>
+sqr 和 7 有关的数的平方和</p>
+<p><img src="https://cdn.acwing.com/media/article/image/2020/03/29/9969_69658fe271-50.PNG" alt="50.PNG" loading="lazy"><br>
+因此对于所有回溯上来的数x1,x2,x3..xn，你得知道与7无关的数的个数（对应n个<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>d</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">d^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>的和），<br>
+与7有关的数之和（对应2d(x1+x2+...+xn），与7有关的数的平方和（对应<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msubsup><mi>x</mi><mn>1</mn><mn>2</mn></msubsup><mo>+</mo><msubsup><mi>x</mi><mn>2</mn><mn>2</mn></msubsup><mo>+</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mo>+</mo><msubsup><mi>x</mi><mi>n</mi><mn>2</mn></msubsup></mrow><annotation encoding="application/x-tex">x_1^2+x_2^2+...+x_n^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0622159999999998em;vertical-align:-0.24810799999999997em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-2.4518920000000004em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.24810799999999997em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.0622159999999998em;vertical-align:-0.24810799999999997em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-2.4518920000000004em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.24810799999999997em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.061108em;vertical-align:-0.247em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-2.4530000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span></span></span></span>）<br>
+假设当前状态是 f，从 g 状态转移过来（dfs回溯上来）<br>
+f.cnt += g.cnt<br>
+f.sum += g.sum + d * g.cnt<br>
+f.sqr += d * d * g.cnt + 2 * d * g.sum + g.sqr</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+typedef long long LL;
+using namespace std;
+const int N=20,mod=1e9+7;
+struct Node
+{
+	LL cnt;
+	LL sum;
+	LL sqr;
+}f[N][7][7];//分别表示数位，各位和%7，数本身%7 
+int num[N];
+LL ten[N];
+
+Node dfs(int pos,int val,int sum,bool limit)
+{
+	if(pos == 0)
+	{
+		Node t;
+		t.cnt= val&gt;0 &amp;&amp; sum&gt;0;
+		t.sum=0;
+		t.sqr=0;
+		return t;
+	}
+	if(!limit &amp;&amp; f[pos][val][sum].cnt != -1)
+		return f[pos][val][sum];
+	
+	int len=limit?num[pos]:9;
+	Node ans;
+	ans.cnt=ans.sum=ans.sqr=0;
+	for(int i=0;i&lt;=len;i++)
+	{
+		if(i == 7) continue;
+		LL d=i*ten[pos-1]%mod;
+		Node t=dfs(pos-1,(val+i)%7,(sum*10+i)%7,limit&amp;&amp;i==len);
+		ans.cnt=(ans.cnt+t.cnt)%mod;
+		ans.sum=(ans.sum+t.sum+d*t.cnt%mod)%mod;
+		ans.sqr=(ans.sqr+t.sqr+d*d%mod*t.cnt%mod+2*d%mod*t.sum%mod)%mod;
+	}
+	
+	if(!limit) f[pos][val][sum]=ans;
+	return ans;
+}
+
+int dp(LL n)
+{
+	int pos=0;
+	while(n)
+	{
+		num[++pos]=n%10;
+		n/=10;
+	}
+	
+	return dfs(pos,0,0,1).sqr;
+}
+
+int main()
+{
+	int T;
+	cin&gt;&gt;T;
+	memset(f,-1,sizeof f);
+	ten[0]=1;
+	for(int i=1;i&lt;N;i++)
+		ten[i]=ten[i-1]*10%mod;
+
+	while(T--)
+	{
+		LL a,b;
+		scanf(&quot;%lld%lld&quot;,&amp;a,&amp;b);
+		printf(&quot;%d\n&quot;,((dp(b)-dp(a-1))%mod+mod)%mod);
+	}
+	return 0;
+}
+</code></pre>
 
                                 </div>
                     </article>
@@ -295,6 +1024,10 @@ int main()
 <li>
 <ul>
 <li><a href="#%E8%AE%B0%E5%BF%86%E5%8C%96%E9%80%92%E5%BD%92">记忆化递归</a></li>
+<li><a href="#%E4%BE%8B%E9%A2%98">例题</a></li>
+<li><a href="#%E6%AD%A3%E5%90%91%E5%81%9A%E6%B3%95">正向做法</a></li>
+<li><a href="#%E5%8F%8D%E5%90%91%E5%81%9A%E6%B3%95">反向做法</a></li>
+<li><a href="#%E6%80%9D%E8%B7%AF">思路</a></li>
 </ul>
 </li>
 </ul>

@@ -7,7 +7,7 @@
 <title>
     fxh
 </title>
-<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1585326654289">
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1585724161677">
 <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
 <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
@@ -27,7 +27,7 @@
     <div class="nav">
         <div class="logo">
             <a href="https://caifxh.github.io">
-                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1585326654289" alt="">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1585724161677" alt="">
             </a>
             <div class="site-title">
                 <h1>
@@ -99,6 +99,1978 @@
         
             <article class="post i-card">
                 <h2 class="post-title">
+                    <a href="https://caifxh.github.io/post/wu-xiang-tu-you-xiang-tu-de-lian-tong-xing-fu-xi/">
+                        无向图/有向图的连通性复习
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2020-04-01</time>
+                    
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            相关概念
+1.无向图
+
+
+2.有向图
+
+
+3.割点和桥
+
+
+
+
+
+
+
+
+
+
+4.tarjan算法
+
+
+4.1无向图的桥
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int maxn=1000+5;
+int n,m;
+int head[maxn],cnt;
+struct Edge
+{
+	int to,next;
+}e[maxn&amp;lt;&amp;lt;1];
+
+int low[maxn],dfn[maxn],num;
+void add(int u,int v)
+{
+	e[++cnt].next=head[u];
+	e[cnt].to=v;
+	head[u]=cnt;	
+}
+void tarjan(int u,int fa)
+{
+	dfn[u]=low[u]=++num;
+	for(int i=head[u];i;i=e[i].next)
+	{
+		int v=e[i].to;
+		if(v==fa)
+			continue;
+		if(!dfn[v])
+		{
+			tarjan(v,u);
+			low[u]=min(low[u],low[v]);
+			if(low[v]&amp;gt;dfn[u])
+				cout&amp;lt;&amp;lt;u&amp;lt;&amp;lt;&amp;quot;—&amp;quot;&amp;lt;&amp;lt;v&amp;lt;&amp;lt;&amp;quot;是桥&amp;quot;&amp;lt;&amp;lt;endl; 
+		}
+		else
+			low[u]=min(low[u],dfn[v]);
+	}
+}
+
+void init()
+{
+	memset(head,0,sizeof(head));
+	memset(low,0,sizeof(low));
+	memset(dfn,0,sizeof(dfn));
+	cnt=num=0;
+}
+
+int main()
+{
+	while(cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m)
+	{
+		init();
+		int u,v;
+		while(m--)
+		{
+			cin&amp;gt;&amp;gt;u&amp;gt;&amp;gt;v;
+			add(u,v);
+			add(v,u);
+		}
+		for(int i=1;i&amp;lt;=n;i++)
+			if(!dfn[i])
+				tarjan(1,0);
+	}
+	return 0;
+}
+
+4.2无向图的割点
+
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int maxn=1000+5;
+int n,m;
+int head[maxn],cnt,root;
+struct Edge
+{
+	int to,next;
+}e[maxn&amp;lt;&amp;lt;1];
+
+int low[maxn],dfn[maxn],num;
+void add(int u,int v)
+{
+	e[++cnt].next=head[u];
+	e[cnt].to=v;
+	head[u]=cnt;	
+}
+void tarjan(int u,int fa)
+{
+	dfn[u]=low[u]=++num;
+	int count=0;
+	for(int i=head[u];i;i=e[i].next)
+	{
+		int v=e[i].to;
+		if(v==fa)
+			continue;
+		if(!dfn[v])
+		{
+			tarjan(v,u);
+			low[u]=min(low[u],low[v]);
+			if(low[v]&amp;gt;=dfn[u])
+			{
+				count++;
+				if(u!=root||count&amp;gt;1)
+					cout&amp;lt;&amp;lt;u&amp;lt;&amp;lt;&amp;quot;是割点&amp;quot;&amp;lt;&amp;lt;endl; 
+			}	
+		}
+		else
+			low[u]=min(low[u],dfn[v]);
+	}
+}
+
+void init()
+{
+	memset(head,0,sizeof(head));
+	memset(low,0,sizeof(low));
+	memset(dfn,0,sizeof(dfn));
+	cnt=num=0;
+}
+
+int main()
+{
+	while(cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m)
+	{
+		init();
+		int u,v;
+		while(m--)
+		{
+			cin&amp;gt;&amp;gt;u&amp;gt;&amp;gt;v;
+			add(u,v);
+			add(v,u);
+		}
+		for(int i=1;i&amp;lt;=n;i++)
+			if(!dfn[i])
+			{
+				root=i;
+				tarjan(i,0);
+			 } 
+	}
+	return 0;
+}
+
+有向图的强连通分量（SCC）
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;stack&amp;gt;
+using namespace std;
+const int maxn=1000+5;
+int n,m;
+int head[maxn],cnt;
+stack&amp;lt;int&amp;gt;s;
+bool ins[maxn];
+struct Edge
+{
+	int to,next;
+}e[maxn&amp;lt;&amp;lt;1];
+
+int low[maxn],dfn[maxn],num;
+void add(int u,int v)
+{
+	e[++cnt].next=head[u];
+	e[cnt].to=v;
+	head[u]=cnt;	
+}
+void tarjan(int u)
+{
+	low[u]=dfn[u]=++num;
+	ins[u]=true;
+	s.push(u);
+	for(int i=head[u];i;i=e[i].next)
+	{
+		int v=e[i].to;
+		if(!dfn[v])
+		{
+			tarjan(v);
+			low[u]=min(low[u],low[v]);
+		}
+		else if(ins[v])
+			low[u]=min(low[u],dfn[v]);
+	}
+	if(low[u]==dfn[u])
+	{
+		int v;
+		cout&amp;lt;&amp;lt;&amp;quot;连通分量：&amp;quot;;
+		do
+		{
+			v=s.top();
+			s.pop();
+			cout&amp;lt;&amp;lt;v&amp;lt;&amp;lt;&amp;quot; &amp;quot;;
+			ins[v]=false;
+		}while(v!=u);
+		cout&amp;lt;&amp;lt;endl;
+	}
+}
+
+void init()
+{
+	memset(head,0,sizeof(head));
+	memset(low,0,sizeof(low));
+	memset(dfn,0,sizeof(dfn));
+	memset(ins,0,sizeof(ins));
+	cnt=num=0;
+}
+
+int main()
+{
+	while(cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m)
+	{
+		init();
+		int u,v;
+		while(m--)
+		{
+			cin&amp;gt;&amp;gt;u&amp;gt;&amp;gt;v;
+			add(u,v);
+		}
+		for(int i=1;i&amp;lt;=n;i++)
+			if(!dfn[i])
+				tarjan(i);
+	}
+	return 0;
+}
+
+例题
+poj1144
+求割点数
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int maxn=105;
+int n,root;
+int head[maxn],cnt;
+struct Edge
+{
+	int to,next;
+}e[maxn*maxn];
+
+int low[maxn],dfn[maxn],num;
+bool cut[maxn];
+void add(int u,int v)
+{
+	e[++cnt].next=head[u];
+	e[cnt].to=v;
+	head[u]=cnt;	
+}
+void tarjan(int u)
+{
+	dfn[u]=low[u]=++num;
+	int flag=0;
+	for(int i=head[u];i;i=e[i].next)
+	{
+		int v=e[i].to;
+		if(!dfn[v])
+		{
+			tarjan(v);
+			low[u]=min(low[u],low[v]);
+			if(low[v]&amp;gt;=dfn[u])
+			{
+				flag++;
+				if(u!=root||flag&amp;gt;1)//u不是根或者u是根但至少有两个子结点
+					cut[u]=true; 			
+			}
+		}
+		else
+			low[u]=min(low[u],dfn[v]);
+	}
+}
+
+void init()
+{
+	memset(head,0,sizeof(head));
+	memset(low,0,sizeof(low));
+	memset(dfn,0,sizeof(dfn));
+	memset(cut,false,sizeof(cut));
+	cnt=num=0;
+}
+
+int main()
+{ 
+	while(cin&amp;gt;&amp;gt;n&amp;amp;&amp;amp;n)
+	{
+		init(); 
+		int u,v;
+		while(cin&amp;gt;&amp;gt;u&amp;amp;&amp;amp;u)
+		{
+			while(1)
+			{
+				char c=getchar();
+				if(c==&#39;\n&#39;)
+					break;
+				cin&amp;gt;&amp;gt;v;
+				add(u,v);
+				add(v,u);
+			}
+		}
+		for(int i=1;i&amp;lt;=n;i++)
+			if(!dfn[i])
+			{
+				root=i;
+				tarjan(i);
+			}
+		int ans=0;
+		for(int i=1;i&amp;lt;=n;i++)
+			if(cut[i])
+				ans++;
+		cout&amp;lt;&amp;lt;ans&amp;lt;&amp;lt;endl;
+	}
+	return 0;
+}
+
+poj3352
+最少加几条边，才能使无向图变成边双连通图。
+
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int maxn=1000+5;
+int n,m;
+int head[maxn],cnt;
+struct Edge
+{
+	int to,next;
+}e[maxn&amp;lt;&amp;lt;1];
+
+int low[maxn],dfn[maxn],degree[maxn],num;
+void add(int u,int v)
+{
+	e[++cnt].next=head[u];
+	e[cnt].to=v;
+	head[u]=cnt;	
+}
+void tarjan(int u,int fa)
+{
+	dfn[u]=low[u]=++num;
+	for(int i=head[u];i;i=e[i].next)
+	{
+		int v=e[i].to;
+		if(v==fa)
+			continue;
+		if(!dfn[v])
+		{
+			tarjan(v,u);
+			low[u]=min(low[u],low[v]);
+		}
+		else
+			low[u]=min(low[u],dfn[v]);
+	}
+}
+
+void init()
+{
+	memset(head,0,sizeof(head));
+	memset(low,0,sizeof(low));
+	memset(dfn,0,sizeof(dfn));
+	memset(degree,0,sizeof(degree));
+	cnt=num=0;
+}
+
+int main()
+{
+	while(cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m)
+	{
+		init();
+		int u,v;
+		while(m--)
+		{
+			cin&amp;gt;&amp;gt;u&amp;gt;&amp;gt;v;
+			add(u,v);
+			add(v,u);
+		}
+		tarjan(1,-1);
+		for(int u=1;u&amp;lt;=n;u++)
+			for(int i=head[u];i;i=e[i].next)
+			{
+				int v=e[i].to;
+				if(low[u]!=low[v])
+					degree[low[u]]++;
+			}
+		int leaf=0;
+		for(int i=1;i&amp;lt;=n;i++)
+			if(degree[i]==1)
+				leaf++;
+		cout&amp;lt;&amp;lt;(leaf+1)/2&amp;lt;&amp;lt;endl;
+	}
+	return 0;
+}
+
+换种写法：(可求得所有点双连通分量)
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int N=5010,M=200010;
+int h[N],e[M],ne[M],idx;
+int n,m;
+int dfn[N],low[N],timestamp;
+int stk[N],top;
+int dcc_cnt;
+int d[N];
+bool is_bridge[M];
+int id[N];
+
+void add(int a,int b)
+{
+    e[idx]=b;
+    ne[idx]=h[a];
+    h[a]=idx++;
+}
+
+void tarjan(int u,int fa)
+{
+    dfn[u]=low[u]=++timestamp;
+    stk[++top]=u;
+    for(int i=h[u];~i;i=ne[i])
+    {
+        int j=e[i];
+        if(j == fa)
+            continue;
+        if(!dfn[j])
+        {
+            tarjan(j,u);
+            low[u]=min(low[u],low[j]);
+            if(dfn[u] &amp;lt; low[j])
+                is_bridge[i]=is_bridge[i^1]=true;
+        }
+        else
+            low[u]=min(low[u],dfn[j]);
+    }
+    
+    if(dfn[u] == low[u])
+    {
+        ++dcc_cnt;
+        int y;
+        do{
+            y=stk[top--];
+            id[y]=dcc_cnt;
+        }while(y != u);
+    }
+}
+
+int main()
+{
+    cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m;
+    memset(h,-1,sizeof h);
+    while(m--)
+    {
+        int a,b;
+        scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;a,&amp;amp;b);
+        add(a,b);
+        add(b,a);
+    }
+    
+    tarjan(1,-1);
+    
+    for(int i=0;i&amp;lt;idx;i++)
+        if(is_bridge[i])
+            d[id[e[i]]]++;
+            
+    int cnt=0;
+    for(int i=1;i&amp;lt;=dcc_cnt;i++)
+        if(d[i] == 1)
+            cnt++;
+    cout&amp;lt;&amp;lt;(cnt+1)/2&amp;lt;&amp;lt;endl;
+    return 0;
+}
+
+
+
+poj2553
+
+求解强连通分量，缩点，计算缩点的出度，统计出度为0的顶点。
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;stack&amp;gt;
+using namespace std;
+const int maxn=5050;
+int n,m;
+bool ins[maxn];//标记是否在栈内 
+int head[maxn],id[maxn],dout[maxn];
+int low[maxn],dfn[maxn];
+stack&amp;lt;int&amp;gt; s;
+int cnt,num,scc_cnt;
+struct Egde
+{
+	int to,next;
+}e[maxn*maxn];
+void add(int u,int v)
+{
+	e[++cnt].to=v;
+	e[cnt].next=head[u];
+	head[u]=cnt;
+}
+void init()
+{
+	memset(head,0,sizeof(head));
+	memset(dfn,0,sizeof(dfn));
+	memset(low,0,sizeof(low));
+	memset(ins,false,sizeof(ins));
+	memset(dout,0,sizeof(dout));
+	memset(id,0,sizeof(id));
+	cnt=num=0;
+	scc_cnt=0;
+}
+void tarjan(int u)
+{
+	low[u]=dfn[u]=++num;
+	ins[u]=true;
+	s.push(u);
+	for(int i=head[u];i;i=e[i].next)
+	{
+		int v=e[i].to;
+		if(!dfn[v])
+		{
+			tarjan(v);
+			low[u]=min(low[u],low[v]);
+		}
+		else if(ins[v])
+			low[u]=min(low[u],dfn[v]);
+	}
+	if(low[u]==dfn[u])
+	{
+		int v;
+		++scc_cnt;
+		do
+		{
+			v=s.top();
+			s.pop();
+			id[v]=scc_cnt;
+			ins[v]=false;
+		}while(v!=u);
+	}
+}
+
+int main()
+{
+	while((cin&amp;gt;&amp;gt;n)&amp;amp;&amp;amp;n)
+	{
+		cin&amp;gt;&amp;gt;m;
+		init();
+		while(m--)
+		{
+			int u,v;
+			cin&amp;gt;&amp;gt;u&amp;gt;&amp;gt;v;
+			add(u,v);
+		}
+		for(int i=1;i&amp;lt;=n;i++)
+			if(!dfn[i])
+				tarjan(i);
+		for(int u=1;u&amp;lt;=n;u++)
+			for(int i=head[u];i;i=e[i].next)
+			{
+				int v=e[i].to;
+				if(id[u]!=id[v])
+					dout[id[u]]++; 
+			}
+		int flag=1;
+		for(int i=1;i&amp;lt;=n;i++)
+		{
+			if(!dout[id[i]])
+			{
+				if(flag)
+					flag=0;
+				else
+					cout&amp;lt;&amp;lt;&amp;quot; &amp;quot;;
+				cout&amp;lt;&amp;lt;i;
+			}		
+		}
+		cout&amp;lt;&amp;lt;endl;
+	}
+	return 0;
+}
+
+poj1236/acwing367
+至少添加几条边，使得有向图为强连通图
+
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int N=110,M=N*N;
+int n;
+int h[N],e[M],ne[M],idx;
+int dfn[N],low[N];
+int stk[N],top;
+bool in_stk[N];
+int scc_cnt,timestamp;
+int id[N];
+int dout[N],din[N];
+
+void add(int a,int b)
+{
+    e[idx]=b;
+    ne[idx]=h[a];
+    h[a]=idx++;
+}
+
+void tarjan(int u)
+{
+    dfn[u]=low[u]=++timestamp;
+    stk[++top]=u;
+    in_stk[u]=true;
+    for(int i=h[u];~i;i=ne[i])
+    {
+        int j=e[i];
+        if(!dfn[j])
+        {
+            tarjan(j);
+            low[u]=min(low[u],low[j]);
+        }
+        else if(in_stk[j])
+            low[u]=min(low[u],dfn[j]);
+    }   
+    
+    if(dfn[u] == low[u])
+    {
+        ++scc_cnt;
+        int y;
+        do{
+            y=stk[top--];
+            //cout&amp;lt;&amp;lt;y&amp;lt;&amp;lt;&#39; &#39;;
+            in_stk[y]=false;
+            id[y]=scc_cnt;
+        }while(y != u);
+        //cout&amp;lt;&amp;lt;endl;
+    }
+}
+
+int main()
+{
+    cin&amp;gt;&amp;gt;n;
+    memset(h,-1,sizeof h);
+    for(int i=1;i&amp;lt;=n;i++)
+    {
+        int x;
+        while(cin&amp;gt;&amp;gt; x &amp;amp;&amp;amp; x)
+            add(i,x);
+    }
+        
+    
+    for(int i=1;i&amp;lt;=n;i++)
+        if(!dfn[i])
+            tarjan(i);
+    
+    // for(int i=1;i&amp;lt;=n;i++)
+    // {
+    //     cout&amp;lt;&amp;lt;i&amp;lt;&amp;lt;&amp;quot; &amp;quot;&amp;lt;&amp;lt;id[i]&amp;lt;&amp;lt;endl;
+    // }
+    for(int i=1;i&amp;lt;=n;i++)
+        for(int j=h[i];~j;j=ne[j])
+        {
+            int k=e[j];
+            int a=id[i],b=id[k];
+            if(a != b)
+            {
+                dout[a]++;
+                din[b]++;
+            }
+        }
+     
+    int a=0,b=0;  
+    for(int i=1;i&amp;lt;=scc_cnt;i++)
+    {
+        if(!din[i])
+            a++;
+        if(!dout[i])
+            b++;
+    }
+    
+    cout&amp;lt;&amp;lt;a&amp;lt;&amp;lt;endl;
+    if(scc_cnt == 1)
+        cout&amp;lt;&amp;lt;0&amp;lt;&amp;lt;endl;
+    else
+        cout&amp;lt;&amp;lt;max(a,b)&amp;lt;&amp;lt;endl;
+    return 0;
+}
+
+acwing1174
+（1）若采用暴力求解，先建反图，判断从每个点出发能否到达所有点。时间复杂度：$O(n(n+m))
+（2）若为拓扑图，则只需判断出度为0的点，若出度为0的点大于1个，则答案为0，若出度为0的点为1，则答案为1.
+先求出所有强连通分量，然后缩点，判断出度为0的分量，答案为该分量里的点的数目。
+#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;cstring&amp;gt;
+#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;algorithm&amp;gt;
+
+using namespace std;
+
+const int N = 10010, M = 50010;
+
+int n, m;
+int h[N], e[M], ne[M], idx;
+int dfn[N], low[N], timestamp;
+int stk[N], top;
+bool in_stk[N];
+int id[N], scc_cnt, cnt[N];//强连通分量编号，每个分量里点的数目
+int dout[N];
+
+void add(int a, int b)
+{
+    e[idx] = b, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+void tarjan(int u)
+{
+    dfn[u] = low[u] = ++ timestamp;
+    stk[ ++ top] = u, in_stk[u] = true;
+    for (int i = h[u]; i != -1; i = ne[i])
+    {
+        int j = e[i];
+        if (!dfn[j])
+        {
+            tarjan(j);
+            low[u] = min(low[u], low[j]);
+        }
+        else if (in_stk[j]) low[u] = min(low[u], dfn[j]);
+    }
+
+    if (dfn[u] == low[u])
+    {
+        ++ scc_cnt;
+        int y;
+        do {
+            y = stk[top -- ];
+            in_stk[y] = false;
+            id[y] = scc_cnt;
+            cnt[scc_cnt] ++ ;
+        } while (y != u);
+    }
+}
+
+int main()
+{
+    scanf(&amp;quot;%d%d&amp;quot;, &amp;amp;n, &amp;amp;m);
+    memset(h, -1, sizeof h);
+    while (m -- )
+    {
+        int a, b;
+        scanf(&amp;quot;%d%d&amp;quot;, &amp;amp;a, &amp;amp;b);
+        add(a, b);
+    }
+
+    for (int i = 1; i &amp;lt;= n; i ++ )
+        if (!dfn[i])
+            tarjan(i);
+
+    for (int i = 1; i &amp;lt;= n; i ++ )
+        for (int j = h[i]; ~j; j = ne[j])
+        {
+            int k = e[j];
+            int a = id[i], b = id[k];
+            if (a != b) dout[a] ++ ;
+        }
+
+    int zeros = 0, sum = 0;
+    for (int i = 1; i &amp;lt;= scc_cnt; i ++ )
+        if (!dout[i])
+        {
+            zeros ++ ;
+            sum += cnt[i];
+            if (zeros &amp;gt; 1)
+            {
+                sum = 0;
+                break;
+            }
+        }
+
+    printf(&amp;quot;%d\n&amp;quot;, sum);
+
+    return 0;
+}
+
+acwing1175
+求最大半连通子图的结点数和最大半连通子图数。
+(1)对于任何一个强连通分量（tarjan），一定是半连通分量。
+(2)缩点，建图得到一个有向无环图（拓扑图），求拓扑图上的最长链（最长链包含的结点数即为最大半连通子图的结点数）。缩完点之后的图中出现了重边怎么办,那就会使方案数莫名增多.所以对于缩完点后的图还要判重边
+(3)最长链的条数即为最大半连通子图数。
+求最长链采用dp，跑最长路,我们只需要找出一条点权最大的路径就行了，不限制点的个数。
+所以首先对这个图进行tarjan缩点，并记录下每个连通块的大小，和每个点所在的连通块。
+缩点之后，会发现这个图变成了一个dag（有向无环图），我们要对这个dag求出最长链的大小和个数。
+因为这个图是无环的，所以我们可以按照拓扑序进行DP
+Tarjan缩点后的点的标号顺序是逆拓扑序，所以不需要对新图进行拓扑排序
+状态表示: f[i]表示到第i个连通块的最长链大小，g[i]表示个数。
+很容易就想到了转移的方法：
+1.{g[i]=g[i]+g[j]}(条件：f[j]+number[i]==f[i])
+2.{g[i]=g[j],f[i]=f[j]+number[i]}(条件：f[j]+number[i]&amp;gt;f[i])。
+按照这个转移状态就可以啦。
+总结：强连通分量+缩点+去重+DAGdp
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;unordered_set&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int N=100010,M=2000010;
+int h[N],hs[N],e[M],ne[M],idx;
+int n,m,mod;
+int dfn[N],low[N],timestamp;
+int id[N],scc_cnt,Size[N];
+int f[N],g[N];
+typedef pair&amp;lt;int,int&amp;gt; PII;
+int stk[N],top;
+bool ins[N];
+typedef long long LL;
+
+void add(int h[], int a, int b)
+{
+    e[idx] = b, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+void tarjan(int u)
+{
+    dfn[u]=low[u]=++timestamp;
+    stk[++top]=u,ins[u]=true;
+    
+    for(int i=h[u];~i;i=ne[i])
+    {
+        int j=e[i];
+        if(!dfn[j])
+        {
+            tarjan(j);
+            low[u]=min(low[u],low[j]);
+        }
+        else if(ins[j])
+            low[u]=min(low[u],dfn[j]);
+    }
+    
+    if(dfn[u] == low[u])
+    {
+        ++scc_cnt;
+        int y;
+        do{
+            y=stk[top--];
+            ins[y]=false;
+            id[y]=scc_cnt;
+            Size[scc_cnt]++;
+        }while(y != u);
+    }
+}
+
+int main()
+{
+    cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m&amp;gt;&amp;gt;mod;
+    memset(h,-1,sizeof h);
+    memset(hs,-1,sizeof hs);
+    while(m--)
+    {
+        int a,b;
+        scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;a,&amp;amp;b);
+        add(h,a,b);
+    }
+    
+    for(int i=1;i&amp;lt;=n;i++)
+        if(!dfn[i])
+            tarjan(i);
+        
+    unordered_set&amp;lt;LL&amp;gt; S;//(u,v)-&amp;gt;u*1000000+v
+    for(int i=1;i&amp;lt;=n;i++)
+        for(int j=h[i];~j;j=ne[j])
+        {
+            int k=e[j];
+            int a=id[i],b=id[k];
+            LL hash=a*1000000ll+b;
+            if(a != b &amp;amp;&amp;amp; !S.count(hash))
+            {
+                add(hs,a,b);
+                S.insert(hash);
+            }
+        }
+    
+    for(int i=scc_cnt;i;i--)//缩点后的顺序为逆拓扑序 
+    {
+        if (!f[i])//代表它是入度为0的点 
+        {
+            f[i] = Size[i];
+            g[i] = 1;
+        }
+        for(int j=hs[i];~j;j=ne[j])
+        {
+            int k=e[j];
+            if(f[k]&amp;lt;f[i]+Size[k])
+            {
+                f[k]=f[i]+Size[k];
+                g[k]=g[i];
+            }
+            else if(f[k] == f[i] + Size[k])
+                g[k]=(g[k]+g[i])%mod;
+        }
+    }
+    
+    int maxf=0,sum=0;
+    for(int i=1;i&amp;lt;=scc_cnt;i++)
+        if(f[i]&amp;gt;maxf)
+        {
+            maxf=f[i];
+            sum=g[i];
+        }
+        else if(f[i] == maxf)
+            sum=(sum+g[i])%mod;
+    
+    cout&amp;lt;&amp;lt;maxf&amp;lt;&amp;lt;endl;
+    cout&amp;lt;&amp;lt;sum&amp;lt;&amp;lt;endl;
+    return 0;
+    
+}
+
+补一个缩点的模板缩点`
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+const int N=10010,M=200010;
+int h[N],hs[N],e[M],ne[M],idx;
+int n,m;
+int dfn[N],low[N],timestamp;
+int id[N],scc_cnt,Size[N];
+int f[N];
+int stk[N],top;
+bool ins[N];
+int p[N];//点权 
+
+void add(int h[], int a, int b)
+{
+    e[idx] = b, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+void tarjan(int u)
+{
+    dfn[u]=low[u]=++timestamp;
+    stk[++top]=u,ins[u]=true;
+    
+    for(int i=h[u];~i;i=ne[i])
+    {
+        int j=e[i];
+        if(!dfn[j])
+        {
+            tarjan(j);
+            low[u]=min(low[u],low[j]);
+        }
+        else if(ins[j])
+            low[u]=min(low[u],dfn[j]);
+    }
+    
+    if(dfn[u] == low[u])
+    {
+        ++scc_cnt;
+        int y;
+        do{
+            y=stk[top--];
+            ins[y]=false;
+            id[y]=scc_cnt;
+            Size[scc_cnt]+=p[y];
+        }while(y != u);
+    }
+}
+
+int main()
+{
+    cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m;
+    for(int i=1;i&amp;lt;=n;i++)
+    	cin&amp;gt;&amp;gt;p[i];
+    memset(h,-1,sizeof h);
+    memset(hs,-1,sizeof hs);
+    while(m--)
+    {
+        int a,b;
+        scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;a,&amp;amp;b);
+        add(h,a,b);
+    }
+    
+    for(int i=1;i&amp;lt;=n;i++)
+        if(!dfn[i])
+            tarjan(i);
+        
+    for(int i=1;i&amp;lt;=n;i++)
+        for(int j=h[i];~j;j=ne[j])
+        {
+            int k=e[j];
+            int a=id[i],b=id[k];
+            if(a != b)
+            {
+                add(hs,a,b);
+            }
+        }
+    
+    for(int i=scc_cnt;i;i--)//缩点后的顺序为逆拓扑序 
+    {
+    	if(!f[i])
+    	{
+    		f[i]=Size[i];
+		}
+        for(int j=hs[i];~j;j=ne[j])
+        {
+            int k=e[j];
+            if(f[k]&amp;lt;f[i]+Size[k])
+            {
+                f[k]=f[i]+Size[k];
+            }
+        }
+    }
+    
+    int maxf=0;
+    for(int i=1;i&amp;lt;=scc_cnt;i++)
+  		maxf=max(maxf,f[i]);
+    cout&amp;lt;&amp;lt;maxf&amp;lt;&amp;lt;endl;
+    return 0;
+    
+}
+
+再补一个DAGdp的简单题P1137
+#include&amp;lt;bits/stdc++.h&amp;gt;
+using namespace std;
+
+const int maxn=100000+15;
+int n,m,idx;
+int head[maxn],din[maxn],dp[maxn];
+struct EDGE
+{
+    int to;
+	int next;
+}edge[maxn&amp;lt;&amp;lt;2];
+int q[maxn],hh,tt=-1;
+
+void add(int x,int y)
+{
+    edge[++idx].next=head[x];
+    edge[idx].to=y;
+    head[x]=idx;
+}
+
+void topsort()
+{
+    
+    for (int i=1;i&amp;lt;=n;i++)
+	    if (din[i]==0) 
+			q[++tt]=i;
+			
+    while (hh&amp;lt;=tt)
+    {
+        int t=q[hh++];
+        for (int i=head[t];i;i=edge[i].next)
+        {
+            int v=edge[i].to;
+            din[v]--;
+            if (din[v]==0)
+            	q[++tt]=v;
+        }
+    }
+}
+
+int main()
+{
+    scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;m);
+    for (int i=1;i&amp;lt;=m;i++)
+    {
+        int u,v;
+        scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;u,&amp;amp;v);
+        add(u,v);
+        din[v]++;
+    }
+    
+    topsort();
+    
+    for (int i=1;i&amp;lt;=n;i++)
+    {
+        int u=q[i-1];
+        if(!dp[u])
+        	dp[u]=1;
+        for (int j=head[u];j;j=edge[j].next)
+        {
+            int v=edge[j].to;
+            dp[v]=max(dp[v],dp[u]+1);
+        }
+    }
+    for (int i=1;i&amp;lt;=n;i++)
+    	printf(&amp;quot;%d\n&amp;quot;,dp[i]);
+    return 0;
+}
+
+acwing1183
+题意：求删除一个点后，图中最多有多少个连通块。
+/*
+1.统计连通块数量
+2.枚举每一个连通块删除割点后所得的最大连通块数ans
+3.ans+cnt-1即为答案
+*/
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=10010,M=30010;
+int n,m;
+int h[N],e[M],ne[M],idx;
+int dfn[N],low[N],timestamp;
+int ans;
+int root;
+
+void add(int a, int b)
+{
+    e[idx] = b, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+void tarjan(int u)
+{
+    dfn[u]=low[u]=++timestamp;
+    int cnt=0;
+    for(int i=h[u];~i;i=ne[i])
+    {
+        int j=e[i];
+        if(!dfn[j])
+        {
+            tarjan(j);
+            low[u]=min(low[u],low[j]);
+            if(low[j] &amp;gt;= dfn[u])
+            {
+                cnt++;
+            }
+        }
+        else 
+            low[u]=min(low[u],dfn[j]);
+    }
+
+    if(u != root &amp;amp;&amp;amp; cnt)//不是根节点，还要加上父节点的那一块连通分量
+        cnt++;
+    ans=max(ans,cnt);//每一个连通块删除割点后所得的最大连通块数ans
+}
+
+int main()
+{
+    while(cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m &amp;amp;&amp;amp; n)
+    {
+        memset(h,-1,sizeof h);
+        memset(dfn,0,sizeof dfn);
+        memset(low,0,sizeof low);
+        idx=timestamp=0;
+        ans=0;
+
+        while(m--)
+        {
+            int a,b;
+            cin&amp;gt;&amp;gt;a&amp;gt;&amp;gt;b;
+            add(a,b);
+            add(b,a);
+        }
+
+        int cnt=0;
+        for(root=0;root&amp;lt;n;root++)
+            if(!dfn[root])
+            {
+                cnt++;//连通块数
+                tarjan(root);
+            }
+        
+        cout&amp;lt;&amp;lt;ans+cnt-1&amp;lt;&amp;lt;endl;
+    }
+    return 0;
+}
+
+acwing396
+题意：
+就是有很多个点，在某个时候一个点将会塌陷，你要建造一些点，使任意一点塌陷时其他点都能成功逃脱
+情况一：当前连通块内没有一个割点
+那么此时至少要建立两个点，使得在任意一点坍塌时能顺利逃脱，那么此时要建立的点的个数就是2，
+而方案数则是Cn2=n(n−1)2C_n^2 = \frac{n(n−1)}{2}Cn2​=2n(n−1)​,n为点数
+
+情况二：当前连通块中有一个割点
+此时在当前点双连通分量中非割点位置任意选取一个顶点建立1个出口即可，方案数为；cnt-1（cnt为当前连通分量中点数）
+
+情况三：当前连通块中中有一个割点以上，无需设置出口（一个割点时已设置出口，且各个v-dcc连通，无论删去任意一个出口or割点or普通点，都可保证剩下点可成功逃离）
+#include &amp;lt;cstring&amp;gt;
+#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;algorithm&amp;gt;
+#include &amp;lt;vector&amp;gt;
+using namespace std;
+typedef unsigned long long ULL;
+const int N = 1010, M = 1010;
+int n,m;
+int h[N],e[M],ne[M],idx;
+int dfn[N],low[N],timestamp;
+int stk[N],top;
+int dcc_cnt;
+vector&amp;lt;int&amp;gt; dcc[N];
+bool cut[N];
+int root;
+
+void add(int a, int b)
+{
+    e[idx] = b, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+void tarjan(int u)
+{
+    dfn[u]=low[u]=++timestamp;
+    stk[++top]=u;
+    if(u == root &amp;amp;&amp;amp; h[u] == -1)
+    {
+        dcc_cnt++;
+        dcc[dcc_cnt].push_back(u);
+        return;
+    }
+    
+    int cnt=0;
+    for(int i=h[u];~i;i=ne[i])
+    {
+        int j=e[i];
+        if(!dfn[j])
+        {
+            tarjan(j);
+            low[u]=min(low[u],low[j]);
+            if(low[j] &amp;gt;= dfn[u])
+            {
+                cnt++;
+                if(u != root || cnt &amp;gt;1)
+                    cut[u]=true;
+                ++dcc_cnt;
+                int y;
+                do{
+                    y=stk[top--];
+                    dcc[dcc_cnt].push_back(y);
+                }while(y != j);
+                dcc[dcc_cnt].push_back(u);
+            }
+        }
+        else 
+            low[u]=min(low[u],dfn[j]);
+    }
+}
+
+int main()
+{
+    int kase=1;
+    while(cin&amp;gt;&amp;gt;m &amp;amp;&amp;amp; m)
+    {
+        for(int i=1;i&amp;lt;=dcc_cnt;i++)
+            dcc[i].clear();
+        idx=n=timestamp=top=dcc_cnt=0;
+        memset(h,-1,sizeof h);
+        memset(dfn,0,sizeof dfn);
+        memset(cut,0,sizeof cut);
+        
+        while(m--)
+        {
+            int a,b;
+            cin&amp;gt;&amp;gt;a&amp;gt;&amp;gt;b;
+            n=max(n,a),n=max(n,b);
+            add(a,b);
+            add(b,a);
+        }
+        
+        for(root = 1; root &amp;lt;= n; root ++)
+        {
+            if(!dfn[root])
+                tarjan(root);
+        }
+        
+        int res=0;
+        ULL num=1;
+        for(int i=1;i&amp;lt;=dcc_cnt;i++)
+        {
+            int cnt=0;//统计当前v-dcc中割点的数量
+            for(int j=0;j&amp;lt;dcc[i].size();j++)
+                if(cut[dcc[i][j]])
+                    cnt++;
+            
+            if(cnt == 0)
+            {
+                if(dcc[i].size()&amp;gt;1)
+                    res+=2,num*=dcc[i].size()*(dcc[i].size()-1)/2;
+                else 
+                    res++;//孤立点
+            }
+            else if (cnt == 1)
+            {
+                res++,num*=dcc[i].size()-1;
+            }
+        }
+         printf(&amp;quot;Case %d: %d %llu\n&amp;quot;, kase++, res, num);
+    }
+    return 0;
+}
+
+acwing368
+图片转自@xxh的题解
+
+
+#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;cstring&amp;gt;
+#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;algorithm&amp;gt;
+
+using namespace std;
+
+typedef long long LL;
+
+const int N = 100010, M = 600010;
+
+int n, m;
+int h[N], hs[N], e[M], ne[M], w[M], idx;
+int dfn[N], low[N], timestamp;
+int stk[N], top;
+bool in_stk[N];
+int id[N], scc_cnt, size[N];
+int dist[N];
+
+void add(int h[], int a, int b, int c)
+{
+    e[idx] = b, w[idx] = c, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+void tarjan(int u)
+{
+    dfn[u] = low[u] = ++ timestamp;
+    stk[ ++ top] = u, in_stk[u] = true;
+
+    for (int i = h[u]; ~i; i = ne[i])
+    {
+        int j = e[i];
+        if (!dfn[j])
+        {
+            tarjan(j);
+            low[u] = min(low[u], low[j]);
+        }
+        else if (in_stk[j]) low[u] = min(low[u], dfn[j]);
+    }
+
+    if (dfn[u] == low[u])
+    {
+        ++ scc_cnt;
+        int y;
+        do {
+            y = stk[top -- ];
+            in_stk[y] = false;
+            id[y] = scc_cnt;
+            size[scc_cnt] ++ ;
+        } while (y != u);
+    }
+}
+
+int main()
+{
+    scanf(&amp;quot;%d%d&amp;quot;, &amp;amp;n, &amp;amp;m);
+    memset(h, -1, sizeof h);
+    memset(hs, -1, sizeof hs);
+
+    for (int i = 1; i &amp;lt;= n; i ++ ) add(h, 0, i, 1);
+
+    while (m -- )
+    {
+        int t, a, b;
+        scanf(&amp;quot;%d%d%d&amp;quot;, &amp;amp;t, &amp;amp;a, &amp;amp;b);
+        if (t == 1) add(h, b, a, 0), add(h, a, b, 0);
+        else if (t == 2) add(h, a, b, 1);
+        else if (t == 3) add(h, b, a, 0);
+        else if (t == 4) add(h, b, a, 1);
+        else add(h, a, b, 0);
+    }
+
+    tarjan(0);//从超级源点可到所有点
+
+    bool success = true;
+    for (int i = 0; i &amp;lt;= n; i ++ )
+    {
+        for (int j = h[i]; ~j; j = ne[j])
+        {
+            int k = e[j];
+            int a = id[i], b = id[k];
+            if (a == b)
+            {
+                if (w[j] &amp;gt; 0)//只要任意一个SCc里有边权大于0的边，则存在正环
+                {
+                    success = false;
+                    break;
+                }
+            }
+            else 
+                add(hs, a, b, w[j]);
+        }
+        if (!success) 
+            break;
+    }
+
+    if (!success) puts(&amp;quot;-1&amp;quot;);
+    else
+    {
+        for (int i = scc_cnt; i; i -- )
+        {
+            //入度为0的点dist为0
+            for (int j = hs[i]; ~j; j = ne[j])
+            {
+                int k = e[j];
+                dist[k] = max(dist[k], dist[i] + w[j]);
+            }
+        }
+
+        LL res = 0;
+        for (int i = 1; i &amp;lt;= scc_cnt; i ++ ) 
+            res += (LL)dist[i] * size[i];
+
+        printf(&amp;quot;%lld\n&amp;quot;, res);
+    }
+
+    return 0;
+}
+
+P3627
+题意：
+在有向图中找一条路径，使得经过的点的点权和最大（每个点可以经过多次，但只有一次对答案的贡献
+思路：
+首先看见可以重复走路径，那么就想到其实这些路口可以构成一个个强连通分量（因为只要我们能到达一个强连通分量其中某一个点，那么我们就能到达这个强连通分量的其余所有点，根据贪心策略，这样得到的答案保证更优）。那就很容易想到缩点加最长路。
+缩点+spfa最长路code
+推荐博客：
+https://blog.csdn.net/acmmmm/article/details/16361033
+https://blog.csdn.net/sentimental_dog/article/details/53790582
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://caifxh.github.io/post/wu-xiang-tu-you-xiang-tu-de-lian-tong-xing-fu-xi/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+            <article class="post i-card">
+                <h2 class="post-title">
+                    <a href="https://caifxh.github.io/post/qiu-zu-he-shu/">
+                        求组合数
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2020-03-28</time>
+                    
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            组合数的计算
+求组合数 I（杨辉三角递推法）
+给定 n, m，计算CnmC_n^mCnm​对 109+7 取模的结果。
+当 n，m 都比较小的时候且需要频繁地调用组合数的时候,采用 Pascal 公式预处理出所有对a，b对应的CabC_a^bCab​
+若只要求一个组合数的话，也可以滚动一下这个数组，节约空间，但同时m这一维要倒着枚举，就像01背包一样。程序如下：
+#include&amp;lt;iostream&amp;gt;
+using namespace std;
+const int N=2010,mod=1e9+7;
+int c[N][N];
+
+int main()
+{
+    for(int i=0;i&amp;lt;N;i++)
+        for(int j=0;j&amp;lt;=i;j++)
+            if(!j)
+                c[i][j]=1;
+            else
+                c[i][j]=(c[i-1][j]+c[i-1][j-1])%mod;
+    
+    int n;
+    cin&amp;gt;&amp;gt;n;
+    while(n--)
+    {
+        int a,b;
+        scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;a,&amp;amp;b);
+        printf(&amp;quot;%d\n&amp;quot;,c[a][b]);
+    }
+    return 0;
+}
+
+滚动数组优化:
+#include&amp;lt;iostream&amp;gt;
+using namespace std;
+int n,m;
+long long c[10005];
+int main()
+{
+    cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m;
+    m=min(m,n-m);
+    c[0]=1;
+    for (int i=1;i&amp;lt;=n;i++)
+    {
+        for (int j=m;j&amp;gt;=1;j--)
+        {
+            c[j]=c[j]+c[j-1];
+        }
+    }
+    cout&amp;lt;&amp;lt;c[m];
+}
+
+因为 Cnm=Cnn−mC_n^m=C_n^{n−m}Cnm​=Cnn−m​，所以m可以取m和n-m中小的那一个，以节省时间。但复杂度还是过高，约为O(n2)O(n^2)O(n2)。
+求组合数 II（乘法逆元）
+这种方法只适用于对答案模一个大质数的情况。
+当 n, m &amp;gt; 10000的时候，就不能再使用 O(n^2) 的做法了。需要使用公式：
+第一种做法：（费马小定理）
+令 fact[n]=n!
+fact[0] = 1;
+for (int i = 1;i &amp;lt;= n;i ++)
+    fact[i] =(LL) fact[i - 1] * i % p;
+
+令分母 k =(LL)fact[m] * fact[n - m] % p
+计算 k 模 p 的逆元，即 kp−2k^{p-2}kp−2 MOD p
+答案就是(LL)fact[n] *  kp−2k^{p-2}kp−2 MOD p
+这样需要一次快速幂，时间复杂度 O(nlog n)
+#include&amp;lt;iostream&amp;gt;
+using namespace std;
+const int N=100010,mod=1e9+7;
+int fact[N],infact[N];
+typedef long long LL;
+
+int qmi(int a,int k,int p)
+{
+    int res=1;
+    while(k)
+    {
+        if(k&amp;amp;1)
+            res=(LL)res*a%p;
+        a=(LL)a*a%p;
+        k&amp;gt;&amp;gt;=1;
+    }
+    return res;
+}
+
+void init()
+{
+    fact[0]=infact[0]=1;
+    for(int i=1;i&amp;lt;N;i++)
+    {
+        fact[i]=(LL)fact[i-1]*i%mod;
+        infact[i]=qmi(fact[i],mod-2,mod);
+    }
+}
+
+int main()
+{
+    init();
+    
+    int n;
+    cin&amp;gt;&amp;gt;n;
+    while(n--)
+    {
+        int a,b;
+        scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;a,&amp;amp;b);
+        printf(&amp;quot;%d\n&amp;quot;,(LL)fact[a]*infact[b]%mod*infact[a-b]%mod);
+    }
+    return 0;
+}
+
+第二种做法：(递推)
+我们先处理每个数关于 p 的逆元 inv[n]。
+inv[1] = 1
+现在假设我们要求 inv[i]，首先拿 p 除以 i，得到 k，余数是 r。
+那么 p = ki + r (r &amp;lt; i, 1 &amp;lt; i &amp;lt; p)
+两边都 MOD p，得到 ki + r = 0 (mod p)
+ki + r = 0 (mod p)
+两边同时乘上 i{-1}r{-1}
+得到 kr^{-1} + i^{-1} = 0 (mod p)
+i^{-1} = -kr^{-1} (mod p)
+k = p / i, r = p % i
+由于 r &amp;lt; i，所以算inv[i]的时候，inv[r]显然已经算好了
+因此 inv[i] = (-p / i) * inv[p % i]
+在处理出了每个数关于 p 的逆元。
+for (int i = 2;i &amp;lt;= n;i ++)
+    inv[i] = (LL)inv[i - 1] * inv[i] % p;
+
+就可以得到 i! 关于 p 的逆元
+此时答案就是
+(LL)fact[n] * inv[m] % p * inv[n - m] % p
+p一定要是大质数!，起码得大于m。为什么呢？若要求a在模p下的乘法逆元，必须要保证a与p互质。在此题中，要求m!的乘法逆元，那么p必须与m!互质，那么p就要大于m，且是个质数。
+求组合数 III（Lucas定理）：
+适用于对答案模一个质数的情况。
+和上面的乘法逆元求组合数的条件对比一下，只相差了一个大字。也就是说这个质数不用很大，非常小也行。
+给定 n, m，计算CnmC_n^mCnm​对 1000003 取模的结果。n, m &amp;lt;= 1e18
+
+code
+
+求组合数 IV（分解质因数）
+乘法逆元只能处理模数为大质数的情况，卢卡斯定理只能处理模数为质数的情况，那有没有一种方法能处理模数不是质数的情况呢？显然是有的。而且不取模也是可以的。
+我们可以把组合数中要乘或除的每一个数分解质因数，再把分母的质因数减掉，最后把剩下的质因数乘起来，边乘边模p就行了。 （如果需要取模的话）
+对于n!包含质因子x个数：fac[x]=n/x+n/x2+……+n/xk(直到n/xk=0结束)。
+code
+总结
+每种算法都有其优点与局限性。递推写起来快，思维简单，但时间复杂度高。乘法逆元用得比较普遍，因为一般都是模一个大质数，复杂度也几乎是线性的。卢卡斯定理只会在特定的题目里做到，但其实编程复杂度并不高，就是在乘法逆元的基础上加几句话。质因数分解的适用性最广，编程复杂度也最高，这就是完美的代价吧。
+
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://caifxh.github.io/post/qiu-zu-he-shu/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+            <article class="post i-card">
+                <h2 class="post-title">
+                    <a href="https://caifxh.github.io/post/bei-zeng-st-biao-rmq/">
+                        倍增 ST表 RMQ
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2020-03-28</time>
+                    
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            倍增
+
+
+
+
+
+ST表
+
+
+ST表创建
+
+
+
+ST表查询
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cmath&amp;gt;//使用log函数
+/*log():以e为底的对数，exp(5)=e^5,log(exp(5))=5
+  log10():以10为底的对数
+  log2():以2为底的对数 
+  任何一个其它的对数logm(n)=log(n)/log(m)*/
+using namespace std;
+const int maxn=105;
+int n,a[maxn],F[maxn][maxn];//F(i,j)表示区间[i，i+2^j-1]的最值，区间长度为2^j
+
+void ST_create()
+{
+	for(int i=1;i&amp;lt;=n;i++)//初始化 
+		F[i][0]=a[i];
+	int k=log2(n);//log(n)/log(2);
+	for(int j=1;j&amp;lt;=k;j++)
+		for(int i=1;i&amp;lt;=n-(1&amp;lt;&amp;lt;j)+1;i++)//n-2^j+1
+			F[i][j]=max(F[i][j-1],F[i+(1&amp;lt;&amp;lt;(j-1))][j-1]);
+}
+
+int ST_query(int l,int r)//求区间[l..r]的最值 
+{
+	int k=log2(r-l+1);
+	return max(F[l][k],F[r-(1&amp;lt;&amp;lt;k)+1][k]);//取两个区间最值 
+}
+
+int ST_print()
+{
+	int k=log2(n);
+	for(int j=0;j&amp;lt;=k;j++)
+	{	
+		for(int i=1;i&amp;lt;=n-(1&amp;lt;&amp;lt;j)+1;i++)//n-2^j+1,打印第一列 
+			cout&amp;lt;&amp;lt;F[i][j]&amp;lt;&amp;lt;&amp;quot; &amp;quot;;
+		cout&amp;lt;&amp;lt;endl;
+	}
+}
+
+int ST_print2()//按列打印 
+{
+	int k=log2(n);
+	for(int i=1;i&amp;lt;=n;i++)
+	{
+		for(int j=0;j&amp;lt;=k;j++)
+			cout&amp;lt;&amp;lt;F[i][j]&amp;lt;&amp;lt;&#39; &#39;;
+		cout&amp;lt;&amp;lt;endl;
+	}
+}
+
+int main()
+{
+	int l,r;
+	int i,v;
+	cin&amp;gt;&amp;gt;n;
+	for(i=1;i&amp;lt;=n;i++)
+		cin&amp;gt;&amp;gt;a[i];//5 3 7 2 12 1 6 4 8 15
+	ST_create();//创建ST表
+	ST_print();
+	cout&amp;lt;&amp;lt;&amp;quot;输入查询最值的区间l r:&amp;quot;&amp;lt;&amp;lt;endl;
+	cin&amp;gt;&amp;gt;l&amp;gt;&amp;gt;r;
+	cout&amp;lt;&amp;lt;ST_query(l,r)&amp;lt;&amp;lt;endl;//求区间[l..r]的最值
+	return 0;
+}
+
+例题
+poj3264
+
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;//min,max
+#include&amp;lt;cmath&amp;gt;//log
+using namespace std;
+const int maxn=50010;
+int h[maxn];
+int Fmax[maxn][20];//F(i,j)表示区间[i，i+2^j-1]的最值，区间长度为2^j
+int Fmin[maxn][20];
+int N,Q;
+
+void ST_create()
+{
+	for(int i=1;i&amp;lt;=N;i++)//初始化 
+		Fmax[i][0]=Fmin[i][0]=h[i];
+	int k=log2(N);//log(N)/log(2.0);
+	for(int j=1;j&amp;lt;=k;j++)
+		for(int i=1;i&amp;lt;=N-(1&amp;lt;&amp;lt;j)+1;i++)//N-2^j+1
+		{
+			Fmax[i][j]=max(Fmax[i][j-1],Fmax[i+(1&amp;lt;&amp;lt;(j-1))][j-1]);
+			Fmin[i][j]=min(Fmin[i][j-1],Fmin[i+(1&amp;lt;&amp;lt;(j-1))][j-1]);
+		}			
+}
+
+int RMQ(int l,int r)//求区间[l..r]的最值差 
+{
+	int k=log2(r-l+1);
+	int m1=max(Fmax[l][k],Fmax[r-(1&amp;lt;&amp;lt;k)+1][k]);
+	int m2=min(Fmin[l][k],Fmin[r-(1&amp;lt;&amp;lt;k)+1][k]);
+	return m1-m2;//取两个区间最值差 
+}
+
+int main()
+{
+	int a,b;
+	while(~scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;Q))
+	{
+		for(int i=1;i&amp;lt;=N;i++)//下标从1开始 
+			scanf(&amp;quot;%d&amp;quot;,&amp;amp;h[i]);
+		ST_create();
+		for(int j=1;j&amp;lt;=Q;j++)
+		{
+			scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;a,&amp;amp;b);
+			printf(&amp;quot;%d\n&amp;quot;,RMQ(a,b));
+		}
+	}
+	return 0;
+}
+
+poj3368
+
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=100010;
+int lb[N];		
+int f[N][20];//F(i,j)表示区间[i，i+2^j-1]的最值，区间长度为2^j
+
+int n,Q;
+int a[N];
+
+void ST_create()
+{	
+	for(int j=1;j&amp;lt;=lb[n];j++)
+		for(int i=1;i&amp;lt;=n-(1&amp;lt;&amp;lt;j)+1;i++)
+			f[i][j]=max(f[i][j-1],f[i+(1&amp;lt;&amp;lt;(j-1))][j-1]);	
+}
+
+int RMQ(int l,int r)
+{
+	if(l &amp;gt; r)
+		return 0;
+	int k=lb[r-l+1];
+	return max(f[l][k],f[r-(1&amp;lt;&amp;lt;k)+1][k]);
+}
+
+int main()
+{
+	lb[0]=-1;
+	for(int i=1;i&amp;lt;N;i++)//求解所有log值,保存到数组lb[] 
+		lb[i]=lb[i-1]+!(i&amp;amp;(i-1));
+	while(~scanf(&amp;quot;%d%&amp;quot;,&amp;amp;n) &amp;amp;&amp;amp; n)
+	{
+		scanf(&amp;quot;%d&amp;quot;,&amp;amp;Q);
+		for(int i=1;i&amp;lt;=n;i++)
+		{
+			scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]);
+			if(i == 1)
+			{
+				f[i][0]=1;
+				continue;
+			}
+			if(a[i] == a[i-1])
+				f[i][0]=f[i-1][0]+1;
+			else 
+				f[i][0]=1;
+		}
+		ST_create();
+		for(int j=1;j&amp;lt;=Q;j++)
+		{
+			int l,r;
+			scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;l,&amp;amp;r);
+			int t=l;
+			while(t&amp;lt;=r &amp;amp;&amp;amp; a[t] == a[t-1])
+				t++;
+			printf(&amp;quot;%d\n&amp;quot;,max(t-l,RMQ(t,r)));
+		}
+	}
+	return 0;
+}
+
+hdu3468
+
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=200010;
+int a[N];
+int n,k;
+int F[N][20],lb[N];
+
+void Initlog()
+{
+	lb[0]=-1;
+    for(int i=1;i&amp;lt;=N;i++)
+        lb[i]=lb[i-1]+(i&amp;amp;(i-1)?0:1);
+}
+
+void ST()
+{
+    for(int i=1;i&amp;lt;=n;i++)
+		F[i][0]=a[i];
+    for(int j=1;j&amp;lt;=lb[n];j++)
+        for(int i=1;i&amp;lt;=n-(1&amp;lt;&amp;lt;j)+1;i++)
+            F[i][j]=max(F[i][j-1],F[i+(1&amp;lt;&amp;lt;(j-1))][j-1]);
+}
+
+int query(int l,int r)
+{
+    int k=lb[r-l+1];
+    return max(F[l][k],F[r-(1&amp;lt;&amp;lt;k)+1][k]);
+}
+
+bool check(int mid)
+{
+    int t=n/mid,s=0;
+    for(int i=0;i&amp;lt;mid;i++)
+		s+=query(t*i+1,t*i+t);
+    return s&amp;gt;k;
+}
+
+int main()
+{
+    lb[0]=-1;
+	for(int i=1;i&amp;lt;N;i++)//求解所有log值,保存到数组lb[] 
+		lb[i]=lb[i-1]+!(i&amp;amp;(i-1));
+	while(scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;k),n&amp;gt;=0||k&amp;gt;=0)
+    {
+        int sum=0;
+        for(int i=1;i&amp;lt;=n;i++)
+        {
+            scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]);
+            sum+=a[i];
+        }
+        if(sum&amp;lt;=k)
+		{
+			printf(&amp;quot;-1\n&amp;quot;);
+			continue;
+		}
+		ST();
+		int l=1,r=n;
+		while(l&amp;lt;r)//二分找划分数 
+    	{
+	        int mid=(l+r)/2;
+	        if(check(mid)) r=mid;
+	        else l=mid+1;
+    	}
+		printf(&amp;quot;%d\n&amp;quot;,l);
+    }
+    return 0;
+}
+
+poj2019
+
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+const int maxn=260,INF=0x3f3f3f3f;
+using namespace std;
+int a[maxn][maxn],lb[maxn];
+int Fmax[maxn][maxn][8],Fmin[maxn][maxn][8];
+int n,m,k;
+
+void ST()
+{
+	for(int k=1;k&amp;lt;=n;k++)//多一维 
+        for(int i=1;i&amp;lt;=n;i++)
+            Fmax[k][i][0]=Fmin[k][i][0]=a[k][i];	
+	for(int k=1;k&amp;lt;=n;k++)
+		for(int j=1;j&amp;lt;=lb[n];j++)
+			for(int i=1;i+(1&amp;lt;&amp;lt;j)-1&amp;lt;=n;i++)
+			{
+				Fmax[k][i][j]=max(Fmax[k][i][j-1],Fmax[k][i+(1&amp;lt;&amp;lt;(j-1))][j-1]);
+				Fmin[k][i][j]=min(Fmin[k][i][j-1],Fmin[k][i+(1&amp;lt;&amp;lt;(j-1))][j-1]);
+			}
+}
+
+int main()
+{
+	lb[0]=-1;
+	for(int i=1;i&amp;lt;maxn;i++)
+		lb[i]=(i&amp;amp;(i-1))?lb[i-1]:lb[i-1]+1;
+	while(~scanf(&amp;quot;%d%d%d&amp;quot;,&amp;amp;n,&amp;amp;m,&amp;amp;k))
+	{
+		for(int i=1;i&amp;lt;=n;i++)
+			for(int j=1;j&amp;lt;=n;j++)
+				scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i][j]);	
+		ST();
+		for(int i=0;i&amp;lt;k;i++)
+		{
+			int x,y;
+			scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;x,&amp;amp;y);
+			int k=lb[m];
+    		int maxx=-INF;
+			int minx=INF;
+    		int l=y,r=y+m-1;//从坐标为(x,y)的地方开始，右下扩展B长度 
+    		for(int i=x;i&amp;lt;x+m;i++)//查询每一行的最值 
+		    {
+		        maxx=max(maxx,max(Fmax[i][l][k],Fmax[i][r-(1&amp;lt;&amp;lt;k)+1][k]));
+		        minx=min(minx,min(Fmin[i][l][k],Fmin[i][r-(1&amp;lt;&amp;lt;k)+1][k]));
+		    }
+			printf(&amp;quot;%d\n&amp;quot;,maxx-minx);
+		}
+	}
+	return 0;
+}
+
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://caifxh.github.io/post/bei-zeng-st-biao-rmq/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+            <article class="post i-card">
+                <h2 class="post-title">
                     <a href="https://caifxh.github.io/post/shu-wei-dp/">
                         数位dp
                     </a>
@@ -112,7 +2084,16 @@
                             <div class="post-content">
                                 
                                         <div class="post-content-content">
-                                            acwing1085
+                                            问题的一般形式是这样的：
+定义一个条件 A，比如：被 7 整除、数位中含有 3 等等。
+询问区间 [L, R] 中有几个数满足条件 A L 和 R 的范围一般非常大，比如101810^{18}1018
+通过数位 DP，我们会发现这些问题的规模实际上是 log10Rlog_{10} Rlog10​R
+数位 DP 就是考虑数字的每一位。
+问题的规模变为log10Rlog_{10} Rlog10​R
+每一位作为不同的阶段，设计状态。
+我们从高位往低位依次枚举。
+每一位的数选择的范围是不同的，依据前面选的数决定。
+acwing1085
 
 
 
@@ -263,6 +2244,726 @@ int main()
 		printf(&amp;quot;%d\n&amp;quot;,solve(b)-solve(a-1));
     }
     return 0;
+}
+
+例题
+hdu3555
+
+
+
+正向做法
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N=20;
+LL f[N][2];
+LL ten[N];
+int num[N];
+LL n;
+
+LL dfs(int pos,bool sta,bool limit)
+{
+	if(pos == 0) return 0;
+	if(!limit &amp;amp;&amp;amp; f[pos][sta] != -1)
+		return f[pos][sta];
+	
+	int len=limit?num[pos]:9;
+	LL ans=0;
+	for(int i=0;i&amp;lt;=len;i++)
+	{
+		if(sta &amp;amp;&amp;amp; i==9)
+			ans+=limit?n%ten[pos-1]+1:ten[pos-1];
+		else
+			ans+=dfs(pos-1,i==4,limit&amp;amp;&amp;amp;i==len);
+	}
+	if(!limit)
+		f[pos][sta]=ans;
+	return ans;
+}
+
+LL dp(LL n)//求解[1..x]之间满足条件的个数 
+{
+	int pos=0;
+	while(n)
+	{
+		num[++pos]=n%10;
+		n/=10;
+	}
+	
+	return dfs(pos,0,1);
+}
+
+int main()
+{
+	int T;
+	cin&amp;gt;&amp;gt;T;
+	memset(f,-1,sizeof f);
+	ten[0]=1;
+	for(int i=1;i&amp;lt;N;i++)
+		ten[i]=ten[i-1]*10;
+	while(T--)
+	{
+		scanf(&amp;quot;%lld&amp;quot;,&amp;amp;n);
+		printf(&amp;quot;%lld\n&amp;quot;,dp(n));
+	}
+	return 0;
+}
+
+反向做法
+#include&amp;lt;cstdio&amp;gt;//求不包含49的个数ans(不包括0)，然后n-ans
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+typedef long long LL;//注意！！本题数据类型为ll 
+const int N=30;
+int dig[N];
+LL dp[N][2],n;
+//dp[pos][sta]表示当前第pos位，sta状态下满足条件的个数，sta表示前一位是否是4，只有0和1两种状态
+LL dfs(int pos,bool sta,bool limit)//求不包含49的个数
+{
+    if(!pos) return 1;//包括0 
+    if(!limit&amp;amp;&amp;amp;dp[pos][sta]!=-1) return dp[pos][sta];
+    int len=limit?dig[pos]:9;
+    LL ans=0;
+    for(int i=0;i&amp;lt;=len;i++)
+    {
+        if(sta&amp;amp;&amp;amp;i==9)
+        	continue;
+        ans+=dfs(pos-1,i==4,limit&amp;amp;&amp;amp;i==len);
+    }
+    if(!limit) dp[pos][sta]=ans;
+    return ans;
+}
+
+LL solve(LL x)//求解[1..x]之间不包含49的个数 
+{
+    int pos=0;
+    while(x){
+        dig[++pos]=x%10;
+        x/=10;
+    }
+    return dfs(pos,0,1)-1;//除去0 
+}
+
+int main()
+{
+    memset(dp,-1,sizeof(dp));
+	int T;
+	scanf(&amp;quot;%d&amp;quot;,&amp;amp;T);
+	while(T--){
+		scanf(&amp;quot;%I64d&amp;quot;,&amp;amp;n);
+		printf(&amp;quot;%I64d\n&amp;quot;,n-solve(n));
+	}
+    return 0;
+}
+
+acwing338
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=10;
+int f[N][10][N];
+int num[N];
+int ans1[N];
+int ans2[N];
+
+int dfs(int pos,int val,int cnt,bool lead,bool limit)
+{
+    if(pos == 0) return cnt;
+    if(!limit &amp;amp;&amp;amp; !lead &amp;amp;&amp;amp; f[pos][val][cnt] != -1)
+        return f[pos][val][cnt];
+
+    int len=limit?num[pos]:9;
+    int ans=0,t=0;
+    for(int i=0;i&amp;lt;=len;i++)
+    {
+        if(val != i) t=cnt;
+        else 
+        {
+            if(lead &amp;amp;&amp;amp; val==0)
+                t=0;
+            else  
+                t=cnt+1;
+        }
+        ans+=dfs(pos-1,val,t,lead&amp;amp;&amp;amp;i==0,limit&amp;amp;&amp;amp;i==len);
+    }
+    if(!limit &amp;amp;&amp;amp; !lead) f[pos][val][cnt]=ans;
+    return ans;
+}
+
+void dp(int n,int ans[])
+{
+    int pos=0;
+    while(n)
+    {
+        num[++pos]=n%10;
+        n/=10;
+    }
+
+    for(int i=0;i&amp;lt;=9;i++)
+        ans[i]=dfs(pos,i,0,1,1);
+}
+
+int main()
+{
+    memset(f,-1,sizeof f);
+    int a,b;
+    while(~scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;a,&amp;amp;b))
+    {
+        if(!a &amp;amp;&amp;amp; !b) break;
+        if(a&amp;gt;b) swap(a,b);
+        dp(b,ans1);
+        dp(a-1,ans2);
+        for(int i=0;i&amp;lt;10;i++)
+            printf(&amp;quot;%d &amp;quot;,ans1[i]-ans2[i]);
+    }
+    return 0;
+}
+
+poj3252
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=35;
+int f[N][N][N];
+int num[N];
+
+int dfs(int pos,int cnt0,int cnt1,bool lead,bool limit)
+{
+	if(pos == 0) return cnt0&amp;gt;=cnt1;
+	if(!limit &amp;amp;&amp;amp; !lead &amp;amp;&amp;amp; f[pos][cnt0][cnt1] != -1)
+		return f[pos][cnt0][cnt1];
+
+	int len=limit?num[pos]:1;
+	int ans=0;
+	for(int i=0;i&amp;lt;=len;i++)
+	{
+		if(lead &amp;amp;&amp;amp; !i)
+			ans+=dfs(pos-1,0,0,1,limit&amp;amp;&amp;amp;i==len);
+		else 
+			ans+=dfs(pos-1,cnt0+(i==0),cnt1+(i==1),0,limit&amp;amp;&amp;amp;i==len);
+	}
+	if(!limit &amp;amp;&amp;amp; !lead)
+		f[pos][cnt0][cnt1]=ans;
+	return ans;
+}
+
+int dp(int n)
+{
+	int pos=0;
+	while(n)
+	{
+		num[++pos]=n%2;
+		n/=2;
+	}
+	
+	return dfs(pos,0,0,1,1);
+}
+
+int main()
+{
+	int a,b;
+	memset(f,-1,sizeof f);
+	while(~scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;a,&amp;amp;b))
+		printf(&amp;quot;%d\n&amp;quot;,dp(b)-dp(a-1));
+	return 0;
+}
+
+hdu4734
+
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=10,M=4610;
+int f[N][M];
+int num[N];
+int a,b;
+
+int dfs(int pos,int val,bool limit)
+{
+	if(pos == 0) return val&amp;gt;=0;
+	if(val &amp;lt; 0) return 0;
+	if(!limit &amp;amp;&amp;amp; f[pos][val] != -1)
+		return f[pos][val];
+	
+	int ans=0;
+	int len=limit?num[pos]:9;
+	for(int i=0;i&amp;lt;=len;i++)
+		ans+=dfs(pos-1,val-i*(1&amp;lt;&amp;lt;pos-1),limit &amp;amp;&amp;amp; i==len);
+	if(!limit) f[pos][val]=ans;
+	return ans;
+
+}
+
+
+int F(int n)
+{
+	int ans=0,len=0;
+	while(n)
+	{
+		ans+=(n%10)*(1&amp;lt;&amp;lt;len);
+		len++;
+		n/=10;
+	}
+	return ans;
+}
+
+int dp(int n)//求解小于等于f(a)的数的个数 
+{
+	int pos=0;
+	while(n)
+	{
+		num[++pos]=n%10;
+		n/=10;
+	}
+	
+	return dfs(pos,F(a),1);
+}
+
+int main()
+{
+	int T,kas=1;
+	cin&amp;gt;&amp;gt;T;
+	memset(f,-1,sizeof f);
+	while(T--)
+	{
+		scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;a,&amp;amp;b);
+		printf(&amp;quot;Case #%d: %d\n&amp;quot;,kas++,dp(b));
+	}
+	return 0;
+}
+
+acwing1081
+统计区间内一个数的B进制表示下恰好有k位为1的数的个数
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=35;
+int f[N][N];
+int num[N];
+int k,b;
+
+int dfs(int pos,int cnt,bool limit)
+{
+    if(cnt &amp;gt; k) return 0;
+	if(pos == 0) return cnt==k;
+	
+	if(f[pos][cnt] != -1 &amp;amp;&amp;amp; !limit) 
+		return f[pos][cnt];
+	
+	int len=limit?num[pos]:1;
+	int ans=0;
+	for(int i=0;i&amp;lt;=min(len,1);i++)
+		if(i) ans+=dfs(pos-1,cnt+1,limit&amp;amp;&amp;amp;i==len);
+		else ans+=dfs(pos-1,cnt,limit&amp;amp;&amp;amp;i==len);
+
+	if(!limit) f[pos][cnt]=ans;
+	return ans;
+}
+
+int dp(int n)
+{
+	int pos=0;
+	while(n) num[++pos]=n%b,n/=b;
+	
+	return dfs(pos,0,1);
+}
+
+int main()
+{
+	int l,r;
+	memset(f,-1,sizeof f);
+	scanf(&amp;quot;%d%d%d%d&amp;quot;,&amp;amp;l,&amp;amp;r,&amp;amp;k,&amp;amp;b);
+	
+	printf(&amp;quot;%d\n&amp;quot;,dp(r)-dp(l-1));
+	return 0;
+}
+
+acwing1082
+统计区间内不下降数的个数
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=15;
+int f[N][10];
+int num[N];
+
+int dfs(int pos,int last,bool limit)
+{
+	if(pos ==0) return 1;
+	if(f[pos][last] != -1 &amp;amp;&amp;amp; !limit)
+		return f[pos][last];
+
+	int ans=0;
+	int len=limit?num[pos]:9;
+	for(int i=0;i&amp;lt;=len;i++)
+	{
+		if(i&amp;lt;last) continue;
+		ans+=dfs(pos-1,i,limit&amp;amp;&amp;amp;i==len);
+	}
+	
+	if(!limit) f[pos][last]=ans;
+	return ans;
+	
+}
+
+int dp(int n)
+{
+	int pos=0;
+	while(n)
+	{
+		num[++pos]=n%10;
+		n/=10;
+	}
+	
+	return dfs(pos,0,1);
+}
+
+int main()
+{
+	int a,b;
+	memset(f,-1,sizeof f);
+	while(~scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;a,&amp;amp;b))
+		printf(&amp;quot;%d\n&amp;quot;,dp(b)-dp(a-1));
+	
+	return 0;
+}
+
+P4127
+询问 [L,R] 中各位数字之和能整除原数的个数。1 ≤ L ≤ R ≤ 1e18
+思路
+可以发现各位数之和最大只能是 9 * 18 = 162
+我们可以枚举这个和 sum
+然后去统计可以被 sum 整除，且数位和是 sum 的数。
+我们把状态定义为 f[dep][cur][mod]
+表示当前枚举第 dep 位，目前这个数的数位和是 cur，对
+sum 取模是 mod.
+cur = sum 且 mod = 0 的个数要统计进答案
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N=20,M=170;
+LL f[N][M][M];
+int num[N];
+LL a,b;
+LL sum;
+
+LL dfs(int pos,int val,int mod,bool limit)//val为当前各位数字之和 
+{
+	if(pos == 0) return val==sum &amp;amp;&amp;amp; mod==0;
+	if(val &amp;gt; sum) return 0;
+	
+	if(!limit &amp;amp;&amp;amp; f[pos][val][mod] != -1)
+		return f[pos][val][mod];
+	
+	int len=limit?num[pos]:9;
+	LL ans=0;
+	for(int i=0;i&amp;lt;=len;i++)
+		ans+=dfs(pos-1,val+i,(mod*10+i)%sum,limit&amp;amp;&amp;amp;i==len);
+	
+	if(!limit) f[pos][val][mod]=ans;
+	return ans;
+}
+
+LL dp(LL n)
+{
+	int pos=0;
+	while(n)
+	{
+		num[++pos]=n%10;
+		n/=10;
+	}
+	
+	LL res=0;
+	for(int i=1;i&amp;lt;=pos*9;i++)//枚举各位之和
+	{
+		memset(f,-1,sizeof f);
+		sum=i;
+		res+=dfs(pos,0,0,1);
+	}
+	
+	return res;
+}
+
+int main()
+{
+	cin&amp;gt;&amp;gt;a&amp;gt;&amp;gt;b;
+	cout&amp;lt;&amp;lt;dp(b)-dp(a-1)&amp;lt;&amp;lt;endl;
+	
+	return 0;
+}
+
+acwing1083
+求区间内任意相邻位上的数字之差的绝对值大于等于二的数的个数
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=11;
+int f[N][10];
+int num[N];
+
+int dfs(int pos,int val,bool lead,bool limit)
+{
+	if(pos == 0) return 1;
+	if(!limit &amp;amp;&amp;amp; !lead &amp;amp;&amp;amp; f[pos][val] != -1)
+		return f[pos][val];
+	
+	int len=limit?num[pos]:9;
+	int ans=0;
+	for(int i=0;i&amp;lt;=len;i++)
+	{
+		if(lead || abs(i-val) &amp;gt;= 2)//如果包含前导零不能让i与之做差，直接让i成为下一位即可
+			ans+=dfs(pos-1,i,lead&amp;amp;&amp;amp;i==0,limit&amp;amp;&amp;amp;i==len);
+	}
+	
+	if(!limit &amp;amp;&amp;amp; !lead) f[pos][val]=ans;
+	return ans;
+}
+
+int dp(int n)
+{
+	int pos=0;
+	while(n)
+	{
+		num[++pos]=n%10;
+		n/=10;
+	}
+	
+	return dfs(pos,-2,1,1);
+}
+
+int main()
+{
+	memset(f,-1,sizeof f);
+	int a,b;
+	cin&amp;gt;&amp;gt;a&amp;gt;&amp;gt;b;
+	cout&amp;lt;&amp;lt;dp(b)-dp(a-1)&amp;lt;&amp;lt;endl;
+	return 0;
+}
+
+acwing1084
+求区间内各位数字之和mod N为0的数的个数
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=11,M=110;
+int f[N][M];
+int num[N];
+int a,b,mod;
+
+int dfs(int pos,int val,bool limit)
+{
+	if(pos == 0) return val == 0;
+	if(!limit &amp;amp;&amp;amp; f[pos][val] != -1)
+		return f[pos][val];
+	
+	int len=limit?num[pos]:9;
+	int ans=0;
+	for(int i=0;i&amp;lt;=len;i++)
+		ans+=dfs(pos-1,(val+i)%mod,limit&amp;amp;&amp;amp;i==len);
+	
+	if(!limit) f[pos][val]=ans;
+	return ans;
+}
+
+int dp(int n)
+{
+	int pos=0;
+	while(n)
+	{
+		num[++pos]=n%10;
+		n/=10;
+	}
+	
+	return dfs(pos,0,1);
+}
+
+int main()
+{
+	while(~scanf(&amp;quot;%d%d%d&amp;quot;,&amp;amp;a,&amp;amp;b,&amp;amp;mod))
+	{
+		memset(f,-1,sizeof f);
+		printf(&amp;quot;%d\n&amp;quot;,dp(b)-dp(a-1));
+	}
+	return 0;
+}
+
+hdu3709
+
+
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+typedef long long LL;
+using namespace std;
+const int N=20,M=2000;
+LL f[N][N][M];
+int num[N];
+
+LL dfs(int pos,int val,int sum,bool limit)
+{
+	if(pos == 0) return sum==0;
+	if(sum&amp;lt;0) return 0;
+	if(!limit &amp;amp;&amp;amp; f[pos][val][sum] != -1)
+		return f[pos][val][sum];
+	
+	int len=limit?num[pos]:9;
+	LL ans=0;
+	for(int i=0;i&amp;lt;=len;i++)
+		ans+=dfs(pos-1,val,sum+(pos-val)*i,limit&amp;amp;&amp;amp;i==len);
+	
+	if(!limit) f[pos][val][sum]=ans;
+	return ans;
+}
+
+LL dp(LL n)
+{
+	if(n&amp;lt;0) return 0;
+	int pos=0;
+	while(n)
+	{
+		num[++pos]=n%10;
+		n/=10;
+	}
+	
+	LL ans=0;
+	for(int i=1;i&amp;lt;=pos;i++)
+		ans+=dfs(pos,i,0,1);
+	return ans-pos+1;//pos次循环统计了pos次0，应减去多算的pos-1个0的出现次数
+}
+
+int main()
+{
+	int T;
+	cin&amp;gt;&amp;gt;T;
+	memset(f,-1,sizeof f);
+	while(T--)
+	{
+		LL a,b;
+		scanf(&amp;quot;%lld%lld&amp;quot;,&amp;amp;a,&amp;amp;b);
+		printf(&amp;quot;%lld\n&amp;quot;,dp(b)-dp(a-1));
+	}
+	return 0;
+}
+
+hdu4507
+如果一个整数符合下面3个条件之一，那么我们说这个整数和7有关：
+整数中某一位是7
+整数的每一位加起来的和是7的整数倍
+这个整数是7的整数倍
+询问[L,R]中与7无关的数字的平方和，模1e9+7.1≤L≤R≤1e18
+为了转移需要维护三个值：
+cnt 和 7 有关的数的个数
+sum 和 7 有关的数的和
+sqr 和 7 有关的数的平方和
+
+因此对于所有回溯上来的数x1,x2,x3..xn，你得知道与7无关的数的个数（对应n个d2d^2d2的和），
+与7有关的数之和（对应2d(x1+x2+...+xn），与7有关的数的平方和（对应x12+x22+...+xn2x_1^2+x_2^2+...+x_n^2x12​+x22​+...+xn2​）
+假设当前状态是 f，从 g 状态转移过来（dfs回溯上来）
+f.cnt += g.cnt
+f.sum += g.sum + d * g.cnt
+f.sqr += d * d * g.cnt + 2 * d * g.sum + g.sqr
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+typedef long long LL;
+using namespace std;
+const int N=20,mod=1e9+7;
+struct Node
+{
+	LL cnt;
+	LL sum;
+	LL sqr;
+}f[N][7][7];//分别表示数位，各位和%7，数本身%7 
+int num[N];
+LL ten[N];
+
+Node dfs(int pos,int val,int sum,bool limit)
+{
+	if(pos == 0)
+	{
+		Node t;
+		t.cnt= val&amp;gt;0 &amp;amp;&amp;amp; sum&amp;gt;0;
+		t.sum=0;
+		t.sqr=0;
+		return t;
+	}
+	if(!limit &amp;amp;&amp;amp; f[pos][val][sum].cnt != -1)
+		return f[pos][val][sum];
+	
+	int len=limit?num[pos]:9;
+	Node ans;
+	ans.cnt=ans.sum=ans.sqr=0;
+	for(int i=0;i&amp;lt;=len;i++)
+	{
+		if(i == 7) continue;
+		LL d=i*ten[pos-1]%mod;
+		Node t=dfs(pos-1,(val+i)%7,(sum*10+i)%7,limit&amp;amp;&amp;amp;i==len);
+		ans.cnt=(ans.cnt+t.cnt)%mod;
+		ans.sum=(ans.sum+t.sum+d*t.cnt%mod)%mod;
+		ans.sqr=(ans.sqr+t.sqr+d*d%mod*t.cnt%mod+2*d%mod*t.sum%mod)%mod;
+	}
+	
+	if(!limit) f[pos][val][sum]=ans;
+	return ans;
+}
+
+int dp(LL n)
+{
+	int pos=0;
+	while(n)
+	{
+		num[++pos]=n%10;
+		n/=10;
+	}
+	
+	return dfs(pos,0,0,1).sqr;
+}
+
+int main()
+{
+	int T;
+	cin&amp;gt;&amp;gt;T;
+	memset(f,-1,sizeof f);
+	ten[0]=1;
+	for(int i=1;i&amp;lt;N;i++)
+		ten[i]=ten[i-1]*10%mod;
+
+	while(T--)
+	{
+		LL a,b;
+		scanf(&amp;quot;%lld%lld&amp;quot;,&amp;amp;a,&amp;amp;b);
+		printf(&amp;quot;%d\n&amp;quot;,((dp(b)-dp(a-1))%mod+mod)%mod);
+	}
+	return 0;
 }
 
 
@@ -2972,7 +5673,7 @@ int main()
                     <time class="post-time">2020-03-26</time>
                     
                         <a href="https://caifxh.github.io/tag/14SoYNkfD/" class="post-tag i-tag
-                            i-tag-error">
+                            i-tag-success">
             #数学
         </a>
                         
@@ -4510,1326 +7211,15 @@ code
                 </div>
             </article>
             
-            <article class="post i-card">
-                <h2 class="post-title">
-                    <a href="https://caifxh.github.io/post/zi-fu-chuan-fu-xi-yi/">
-                        字符串复习（一）
-                    </a>
-                </h2>
-                <div class="post-info">
-                    <time class="post-time">2020-03-26</time>
-                    
-                </div>
-                <div class="post-article">
-                    
-                            <div class="post-content">
-                                
-                                        <div class="post-content-content">
-                                            哈希表
-如果要储存和使用线性表（1，75，324，43，1353，90，46）一般情况下我们会使用一个数组 A[1..7] 来顺序存储这些数。
-但是这样的存储结构会给查询算法带来 O(n) 的时间开销。
-对 A 排序，使用二分查询法，时间复杂度变为 O(log n)也可以用空间换时间的做法，用数组 A[1..1353] 来表示每个数是否出现，查找的时间复杂度变为 O(1)，但是空间上的开销变得巨大。
-优化上一种做法，建立一个哈希函数 h(key) = key % 23.(1, 75, 324, 43, 1353, 90) -&amp;gt; (1, 6, 2, 20, 19, 21, 0)
-我们只要用一个 A[0..22] 数组就可以快速的查询每个数是否出现。
-这种线性表的结构就称为哈希表（Hash Table）。
-可以看出，哈希表的基本原理是用一个下标范围比较大的数组 A 来存储元素。
-设计一个函数 h，对于要存储的线性表的每个元素 node，取一个关键字 key，算出函数值 h(key) 然后把这个值作为下标，用 A[h(key)] 来存储 node。
-最常见的 h 就是模函数，也就是选定一个 m，令 h(key) =key % m.
-但是有一个问题，可能存在两个 key: k1, k2 使得h(k1)=h(k2)，这时也称产生了“冲突”。
-解决冲突有很多种办法：
-1.开放寻址法
-2.拉链法：可以让 A 的每个元素都存一个链表，对于
-h(k1)=h(k2)，我们可以让这两个 node 都接在 A[h(k1)]
-的链表上
-假设我们使用第二种方法解决冲突。
-对于插入元素(node, key)：
-
-计算 h(key)，把 node 插入 A[h(key)] 链表。
-
-对于查询元素(node, key)：
-
-计算 h(key)，如果 A[h(key)] 为空，说明 node 不存在。
-否则遍历 A[h(key)] 链表，寻找 node。
-
-模板题
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;cstring&amp;gt;
-using namespace std;
-const int N=100003;
-int h[N],e[N],ne[N],idx;
-
-void insert(int x)
-{
-    int k=(x%N+N)%N;
-    e[idx]=x;
-    ne[idx]=h[k];
-    h[k]=idx++;
-}
-
-bool find(int x)
-{
-    int k=(x%N+N)%N;
-    for(int i=h[k];i!=-1;i=ne[i])
-    {
-        if(e[i]==x)
-            return true;
-    }
-    return false;
-}
-
-int main()
-{
-    int n;
-    scanf(&amp;quot;%d&amp;quot;,&amp;amp;n);
-    memset(h,-1,sizeof(h));
-    while(n--)
-    {
-        char op[2];
-        int x;
-        scanf(&amp;quot;%s%d&amp;quot;,op,&amp;amp;x);
-
-        if(*op==&#39;I&#39;)
-            insert(x);
-        else
-        {
-            if(find(x))
-                puts(&amp;quot;Yes&amp;quot;);
-            else
-                puts(&amp;quot;No&amp;quot;);
-        }
-    }
-    return 0;
-}
-
-例题
-已知 X[1..4] 是 [-T, T] 中的整数，求出满足方程AX[1]+BX[2]+CX[3]+DX[4] = P的解有多少组？
-|P|≤1e9，|A|,|B|,|C|,|D|≤1e4，T≤500
-最直观的方法枚举 X[1..4], 时间复杂度 O(n4n^4n4)
-适当优化，枚举了X[1..3] 之后，实际上 X[4] 已经确定了，时间复杂度 O(n3n^3n3)
-继续优化，采用 meet in the middle 策略：
-一边枚举 X[1], X[2]
-一边枚举 X[4], X[3]
-然后看有哪些方案可以组成方程的解
-枚举 X[1], X[2], 然后算出 P-AX[1]-BX[2],把这个值存入一个哈希表，注意要统计次数。
-这一步时间复杂度 O(n2n^2n2)
-然后枚举 X[3], X[4], 算出 CX[3]+DX[4],去哈希表里查找这个值出现了几次。
-把次数加进答案，这一步时间复杂度 O(n2n^2n2)
-因此总的时间复杂度是 O(n2n^2n2)
-字符串哈希
-假设有 n 个长度为 L 的字符串，问其中最多有几个字符串是相等的。
-直接比较两个长度为 L 的字符串是否相等时间复杂度是O(L) 的。
-因此需要枚举 O(n2) 对字符串进行比较，时间复杂度 O(n2Ln^2Ln2L)
-如果我们把每个字符串都用一个哈希函数映射成一个整数。
-问题就变成了查找一个序列的众数。
-时间复杂度变为了 O(nL)
-一个设计良好的字符串哈希函数可以让我们先用 O(L) 的时间复杂度预处理，之后每次获取这个字符串的一个子串的哈希值都只要 O(1) 的时间。
-BKDRHash 的基本思想就是把一个字符串当做一个 k 进制数来处理
-假设字符串 s 的下标从 1 开始，长度为 n
-ha[0] = 0;
-    for (int i = 1;i &amp;lt;= n;i ++)
-        ha[i] = (ha[i - 1] * P + str[i]) % M;
-
-我们知道 ha[i] 就是 s[1..i] 的 BKDRHash
-那么现在询问 s[x..y] 的 BKDRHash ，
-
-因此我们预处理出 ha 数组和 k 的幂次，每次询问 s[x..y]的哈希值，只要 O(1) 的时间。
-经验值，k=131，M=2642^{64}264
-模板题
-#include &amp;lt;iostream&amp;gt;
-#include &amp;lt;algorithm&amp;gt;
-using namespace std;
-typedef unsigned long long ULL;
-const int N = 100010, P = 131;
-int n, m;
-char str[N];
-ULL h[N], p[N];
-
-ULL get(int l, int r)
-{
-    return h[r] - h[l - 1] * p[r - l + 1];
-}
-
-int main()
-{
-    scanf(&amp;quot;%d%d&amp;quot;, &amp;amp;n, &amp;amp;m);
-    scanf(&amp;quot;%s&amp;quot;, str + 1);
-
-    p[0] = 1;
-    for (int i = 1; i &amp;lt;= n; i ++ )
-    {
-        h[i] = h[i - 1] * P + str[i];
-        p[i] = p[i - 1] * P;
-    }
-
-    while (m -- )
-    {
-        int l1, r1, l2, r2;
-        scanf(&amp;quot;%d%d%d%d&amp;quot;, &amp;amp;l1, &amp;amp;r1, &amp;amp;l2, &amp;amp;r2);
-
-        if (get(l1, r1) == get(l2, r2)) puts(&amp;quot;Yes&amp;quot;);
-        else puts(&amp;quot;No&amp;quot;);
-    }
-
-    return 0;
-}
-
-例题
-acwing160
-核心问题就是：
-给定两个字符串 A，B。求出 A 的每个后缀子串和 B 的最长公共前缀。
-标准做法是扩展 KMP，时间复杂度线性。
-我们来用 Hash 试试看
-前面已经提到，我们可以用 O(n)预处理 O(1)处理出一个子串的哈希值。
-求字符串 A[i..n] 与字符串 B[1..m] 的最长公共前缀？
-二分长度 mid
-计算出 A[i..i+mid-1] 和 B[1..mid] 的哈希值，比较是否相等。
-因此时间复杂度是 O(nlog n) 的
-#include &amp;lt;iostream&amp;gt;
-#include &amp;lt;algorithm&amp;gt;
-using namespace std;
-typedef unsigned long long ULL;
-const int N = 200010, P = 131;
-int n, m,q;
-char a[N];
-char b[N];
-ULL ha[N],hb[N],p[N];
-int cnt[N];
-
-ULL get(ULL h[],int l, int r)
-{
-    return h[r] - h[l - 1] * p[r - l + 1];
-}
-
-int main()
-{
-    scanf(&amp;quot;%d%d%d&amp;quot;, &amp;amp;n, &amp;amp;m,&amp;amp;q);
-    scanf(&amp;quot;%s&amp;quot;, a + 1);
-    scanf(&amp;quot;%s&amp;quot;,b+1);
-
-    p[0] = 1;
-    for(int i=1;i&amp;lt;=max(n,m);i++)
-        p[i]=p[i-1]*P;
-    for(int i=1;i&amp;lt;=n;i++)
-        ha[i]=ha[i-1]*P+a[i];
-    for(int i=1;i&amp;lt;=m;i++)
-        hb[i]=hb[i-1]*P+b[i];
-    
-    for(int i=1;i&amp;lt;=n;i++)
-    {
-        int l=0,r=min(m,n-i+1);
-
-        while(l&amp;lt;r)
-        {
-            int mid=l+r+1&amp;gt;&amp;gt;1;
-            if(get(ha,i,i+mid-1) == get(hb,1,mid))
-                l=mid;
-            else
-                r=mid-1;
-        }
-        cnt[l]++;
-    }
-    while(q--)
-    {
-        int x;
-        scanf(&amp;quot;%d&amp;quot;,&amp;amp;x);
-        printf(&amp;quot;%d\n&amp;quot;,cnt[x]);
-    }
-
-    return 0;
-}
-
-poj2774
-给出两个字符串 S 和 T，求它们的最长公共子串。|S|, |T| ≤ 1e5
-思路
-原始的 DP 做法（最长公共子序列），时间复杂度 O(n^2)
-我们可以二分答案 len。然后计算 S 和 T 中所有长度为 len 的子串的哈希值。
-这一步是 O(n) 的。
-然后比较 S 的哈希值集合中和 T 的哈希值集合中有没有相同的元素。
-可以再通过一步哈希找相同的值。这样总共仍然是 O(n)。
-总的时间复杂度就是 O(n log n)
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;algorithm&amp;gt;
-#include&amp;lt;cstring&amp;gt;
-#include&amp;lt;vector&amp;gt;
-#include&amp;lt;cstdio&amp;gt;
-using namespace std;
-const int N=100010,P=131;
-char a[N],b[N];
-typedef unsigned long long ULL;
-ULL ha[N],hb[N],p[N];
-vector&amp;lt;ULL&amp;gt; v;
-int la,lb;
-
-ULL get(ULL h[],int l,int r)
-{
-	return h[r]-h[l-1]*p[r-l+1];
-}
-
-bool check(int mid)
-{
-	v.clear();
-	for(int i=mid;i&amp;lt;=la;i++)
-		v.push_back(get(ha,i-mid+1,i));
-	
-	sort(v.begin(),v.end());
-	for(int i=mid;i&amp;lt;=lb;i++)
-	{
-		ULL t=get(hb,i-mid+1,i);
-		if(binary_search(v.begin(),v.end(),t))
-			return true;
-	}
-	return false;
-}
-
-int main()
-{
-	scanf(&amp;quot;%s%s&amp;quot;,a+1,b+1);
-	la=strlen(a+1);
-	lb=strlen(b+1);
-	
-	p[0]=1;
-	for(int i=1;i&amp;lt;=max(la,lb);i++)
-		p[i]=p[i-1]*P;
-	for(int i=1;i&amp;lt;=la;i++)
-		ha[i]=ha[i-1]*P+a[i];
-	for(int i=1;i&amp;lt;=lb;i++)
-		hb[i]=hb[i-1]*P+b[i];
-		
-	int l=0,r=1e5;
-	while(l&amp;lt;r)
-	{
-		int mid=l+r+1&amp;gt;&amp;gt;1;
-		if(check(mid))
-			l=mid;
-		else
-			r=mid-1;
-	}
-	printf(&amp;quot;%d\n&amp;quot;,l);
-	return 0;
-}
-
-也可手写哈希表：代码
-Codeforces 580E
-给出一个数字串，现在有两种操作：
-1: l r d: 将[l,r] 中的所有数字都改为 d
-2: l r d：询问[l,r]这个子串的周期是否为 d。 1 &amp;lt;= n &amp;lt;= 1e5
-首先思考对于一个字符串 S，如何判断它的周期是不是 d？
-比如串 ababab 的周期是 2 串 abcabc 的周期是 3 串 abcde 的周期是 5
-假设 S 的长度为 n。
-只要判断 S[1..n-d+1] 和 S[d+1..n]是否相等即可。
-
-
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;algorithm&amp;gt;
-#include&amp;lt;cstring&amp;gt;
-using namespace std;
-#define lc u&amp;lt;&amp;lt;1
-#define rc u&amp;lt;&amp;lt;1|1
-int n,m,k;
-const int N=100010,P=131,mod=1e9+7;
-char s[N];
-typedef long long LL;
-struct Node
-{
-	int l,r;
-	int tag;
-	LL key;
-}tr[N&amp;lt;&amp;lt;2];
-LL h[N],p[N];//p[i]表示p的i次方，h[i]表示连续i个1的字符串的hash值
-
-void pushup(int u,int k)
-{
-	tr[u].key=((tr[lc].key*p[k])%mod+tr[rc].key)%mod;
-}
-
-void pushdown(int u)
-{
-	if(tr[u].tag)
-	{
-		int mid=tr[u].l+tr[u].r&amp;gt;&amp;gt;1,l=tr[u].l,r=tr[u].r;
-		tr[lc].key=(tr[u].tag*h[mid-l+1])%mod;
-		tr[lc].tag=tr[u].tag;
-		tr[rc].key=(tr[u].tag*h[r-mid])%mod;
-		tr[rc].tag=tr[u].tag;
-		tr[u].tag=0;
-	}
-}
-
-void build(int u,int l,int r)
-{
-	if(l == r)
-	{
-		tr[u]={l,r,0,s[l]-&#39;0&#39;+1};
-		return;
-	}
-	tr[u]={l,r};
-	int mid=l+r&amp;gt;&amp;gt;1;
-	build(lc,l,mid);
-	build(rc,mid+1,r);
-	pushup(u,r-mid);
-}
-
-void modify(int u,int l,int r,int d)
-{
-	if(l &amp;lt;= tr[u].l &amp;amp;&amp;amp; tr[u].r &amp;lt;= r)
-	{
-		tr[u].key=(d*h[tr[u].r-tr[u].l+1])%mod;
-		//cout&amp;lt;&amp;lt;&amp;quot;-----&amp;quot;&amp;lt;&amp;lt;u&amp;lt;&amp;lt;&#39; &#39;&amp;lt;&amp;lt;tr[u].key&amp;lt;&amp;lt;endl;
-		tr[u].tag=d;
-		return;
-	}
-	pushdown(u);
-	int mid=tr[u].l+tr[u].r&amp;gt;&amp;gt;1;
-	if(l &amp;lt;= mid)
-		modify(lc,l,r,d);
-	if(r &amp;gt; mid)
-		modify(rc,l,r,d);
-	pushup(u,tr[u].r-mid);
-}
-
-int query(int u,int l,int r)
-{
-	if(tr[u].l == l &amp;amp;&amp;amp; tr[u].r == r)
-		return tr[u].key;
-	pushdown(u);
-	int mid=tr[u].l+tr[u].r&amp;gt;&amp;gt;1;
-	if(r&amp;lt;=mid)
-		return query(lc,l,r);
-	else if(l&amp;gt;mid)
-		return query(rc,l,r);
-	else 
-		return (query(lc,l,mid)*p[r-mid]%mod+query(rc,mid+1,r))%mod;
-}
-
-void print(int u)
-{
-	if(tr[u].key)
-	{
-		cout&amp;lt;&amp;lt;&amp;quot;--&amp;quot;&amp;lt;&amp;lt;u&amp;lt;&amp;lt;&#39; &#39;&amp;lt;&amp;lt;tr[u].l&amp;lt;&amp;lt;&#39; &#39;&amp;lt;&amp;lt;tr[u].r&amp;lt;&amp;lt;&#39; &#39;&amp;lt;&amp;lt;tr[u].key&amp;lt;&amp;lt;endl;
-		print(lc);
-		print(rc);
-	}
-}
-
-int main()
-{
-	scanf(&amp;quot;%d%d%d&amp;quot;,&amp;amp;n,&amp;amp;m,&amp;amp;k);
-	scanf(&amp;quot;%s&amp;quot;,s+1);
-	
-	p[0]=1;
-	for(int i=1;i&amp;lt;=n;i++)
-	{
-		h[i]=(h[i-1]*P%mod+1)%mod;
-		p[i]=p[i-1]*P%mod;
-	}
-
-	build(1,1,n);
-	
-	m+=k;
-	while(m--)
-	{
-		int t,l,r,d;
-		scanf(&amp;quot;%d%d%d%d&amp;quot;,&amp;amp;t,&amp;amp;l,&amp;amp;r,&amp;amp;d);
-		if(t == 1)
-			modify(1,l,r,d+1);//加一处理，防止d为0
-		else
-		{
-			if(d == r - l + 1)
-			{
-                printf(&amp;quot;YES\n&amp;quot;);
-                continue;
-            }
-			if(query(1,l,r-d) == query(1,l+d,r))
-				puts(&amp;quot;YES&amp;quot;);
-			else
-				puts(&amp;quot;NO&amp;quot;);
-		}
-		//print(1);
-	}
-	return 0;
-}
-
-坑：第75组数组卡无符号64位自动溢出的hash,防ull溢出的解决方法是取模
-Codeforces 955D
-给出两个字符串 S 和 T。你需要在 S 中选出两个不相交的长度为 k 的子串，使得他们拼起来之后包含 T。
-|T| ≤ 2k ≤ |S| ≤ 5·1e5
-
-样例： （答案：Yes 1 5）
-7 4 3
-baabaab
-aaaa
-KMP
-
-
-我们用形式化的语言来进行描述。
-假设现在 T[s+1..s+k] 和 P[1..k] 匹配上了。
-此时 T[s+k+1] != P[k+1]。
-朴素的做法是：回到 T[s + 2] 和 P[1] 重新开始比较。
-KMP算法：找到一个最大的 x，使得 T[s+1..s+k] 的后 x个字符，和 P 的前 x 个字符相同。
-这部分就是能匹配上的，我们可以不用逐个判断。
-又注意到 T[s+1..s+k] = P[1..k]
-那么我们要求的就是一个最大的 x，满足 P[1..k] 的前 x个字符等于它的后 x 个字符。当然 x 要小于 k。
-这个 x 记为 next[k]
-对于 P = ababaca
-我们可以计算出next数组：
-
-有了 next 数组，现在如何匹配两个字符串呢？
-for (int i = 1, j = 0; i &amp;lt;= m; i ++ )
-{
-    while (j &amp;amp;&amp;amp; s[i] != p[j + 1]) j = ne[j];
-    if (s[i] == p[j + 1]) j ++ ;
-    if (j == n)
-    {
-        printf(&amp;quot;%d &amp;quot;, i - n);
-        j = ne[j];
-    }
-}
-
-
-讲过如何匹配之后，我们还要会高效计算 next 数组。
-计算 next 数组的过程就是拿 P 和 P 自己匹配的过程。
-只不过要在匹配的过程中，记录每个位置下指针指向的位置，作为 next 数组。
-for (int i = 2, j = 0; i &amp;lt;= n; i ++ )
-{
-    while (j &amp;amp;&amp;amp; p[i] != p[j + 1]) j = ne[j];
-    if (p[i] == p[j + 1]) j ++ ;
-    ne[i] = j;
-}
-
-KMP算法复杂度
-时间复杂度：O(n)
-空间复杂度：O(n)
-例题
-poj2406
-给一个字符串 S，求 S 的一个最短的循环节 e，使得 S 可以写成 eee…eee （共|S|/|e|个 e）
-输出 |S|/|e| 的最大值。|S| ≤ 1e6
-
-样例：
-abcd （答案：1）
-aaaa （答案：4）
-ababab （答案：3）
-假设这个字符串的长度为 len
-如果 len 可以被 len-next[len] 整除，那么我们就可以说len-next[len] 是那个循环节的长度。
-因为 next[len] 就表示: S[1..next[len]] = S[next[len] + 1..len]
-可以证明满足这一条性质的字符串具有长度为 len-next[len] 的循环周期
-否则答案就是 1 了。
-因为如果存在一个长度为 d 的循环节，那一定满足：
-S[1..len-d+1] == S[d + 1 .. len]
-但是现在循环节的长度只能是 len-next[len],如果它不是 len 的因子，那就没有可能了。
-时间复杂度 O(n)
-
-定理：假设S的长度为len，则S存在最小循环节，循环节的长度L为len-next[len]，子串为S[0…len-next[len]-1]。
-（1）如果len可以被len - next[len]整除，则表明字符串S可以完全由循环节循环组成，循环周期T=len/L。
-（2）如果不能，说明还需要再添加几个字母才能补全。需要补的个数是循环个数L-len%L=L-(len-L)%L=L-next[len]%L，L=len-next[len]。
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;cstring&amp;gt;
-#include&amp;lt;cstdio&amp;gt;
-using namespace std;
-const int N=1e6+10;
-char s[N];
-int ne[N];
-int n;
-
-int main()
-{
-	while(scanf(&amp;quot;%s&amp;quot;,s+1))
-	{
-		if(s[1] == &#39;.&#39;)
-			break;
-		
-		n=strlen(s+1);
-		for(int i=2,j=0;i&amp;lt;=n;i++)
-		{
-			while(j &amp;amp;&amp;amp; s[i] != s[j+1])
-				j=ne[j];
-			if(s[i] == s[j+1])
-				j++;
-			ne[i]=j;
-		}
-		
-		int t=n-ne[n];
-		if(n%t == 0)
-			cout&amp;lt;&amp;lt;n/t&amp;lt;&amp;lt;endl;
-		else
-			cout&amp;lt;&amp;lt;1&amp;lt;&amp;lt;endl;
-	}
-	return 0;
-}
-
-poj2752
-给定一个字符串 S，求出 S 中所有的既是前缀又是后缀的子串。输出 i 代表 S[1..i]|S| ≤ 400000
-
-样例：
-ababcababababcabab（答案：2 4 9 18）
-aaaaa（答案：1 2 3 4 5）
-求出 next 数组。
-答案就是 len, next[len], next[next[len]], …
-
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;cstring&amp;gt;
-#include&amp;lt;cstdio&amp;gt;
-using namespace std;
-const int N=4e5+10;
-char s[N];
-int ne[N];
-int ans[N];
-
-int main()
-{
-	while(~scanf(&amp;quot;%s&amp;quot;,s+1))
-	{
-		int n=strlen(s+1);
-		for(int i=2,j=0;i&amp;lt;=n;i++)
-		{
-			while(j &amp;amp;&amp;amp; s[i] != s[j+1])
-				j=ne[j];
-			if(s[i] == s[j+1])
-				j++;
-			ne[i]=j;
-		}
-	
-		int t=ne[n],cnt=0;
-		while(t)
-		{
-			ans[cnt++]=t;
-			t=ne[t];
-		}
-		
-		for(int i=cnt-1;i&amp;gt;=0;i--)
-			printf(&amp;quot;%d &amp;quot;,ans[i]);
-		printf(&amp;quot;%d\n&amp;quot;,n);
-
-	}
-	return 0;
-}
-
-hdu2594
-求出最长的既是 s1 的前缀又是 s2 的后缀的子串。
-
-样例：
-riemann
-marjorie
-答案：rie
-只要把两个串拼起来，中间用一个分隔符,s1,s1,s1s2,令len=strlen(s1$s2),则next[len]即为答案
-也可不加分隔符，枚举 len, next[len], next[next[len]] ......找到小于 min(|s1|, |s2|) 的最大值即可。
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;cstring&amp;gt;
-using namespace std;
-const int N=50010*2;//数组开两倍!
-char s1[N],s2[N];
-int ne[N];
-
-int main()
-{
-	while(~scanf(&amp;quot;%s%s&amp;quot;,s1+1,s2+1))
-	{
-		strcat(s1+1,&amp;quot;$&amp;quot;);
-		strcat(s1+1,s2+1);
-		int n=strlen(s1+1);
-		for(int i=2,j=0;i&amp;lt;=n;i++)
-		{
-			while(j &amp;amp;&amp;amp; s1[i] != s1[j+1])
-				j=ne[j];
-			if(s1[i] == s1[j+1])
-				j++;
-			ne[i]=j;
-		}
-		
-		int ans=ne[n];
-		s1[ans+1]=&#39;\0&#39;;
-		if(ans == 0)
-			printf(&amp;quot;0\n&amp;quot;);
-		else 
-			printf(&amp;quot;%s %d\n&amp;quot;,s1+1,ans);
-	}
-}
-
-Codeforces 526D
-给出一个字符串 s，判断其每个前缀是否可以表示成ABAB…ABA 的形式（A 和 B 都可以为空， 但是必须满足 A 有 k+1 个，B 有 k 个）
-|s|, k ≤ 1e6
-
-输入
-7 2
-bcabcab
-输出
-0000011
-长度为 6 的前缀，可以取 A=“”,B=“bca”
-长度为 7 的前缀，可以取 A=“b”, B=“ca”
-对于前缀 P，我们可以把 P 拆成 SSSS…ST，其中 T 是 S的前缀。
-这样就可以用 KMP 来做了。
-首先 i-next[i] 就是S[1..i] 这一段的最小循环节的长度，
-记为 e。
-可以发现 e 的倍数 je 也是循环节。
-
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;cmath&amp;gt;
-#include&amp;lt;cstring&amp;gt;
-using namespace std;
-const int N=1e6+10;
-char s[N];
-int n,k;
-int ne[N];
-
-bool check(int i,int cir)
-{
-	int up=i/k/cir;
-	int down=ceil((i/(k+1)+1)/(1.0*cir));
-	return up&amp;gt;=down || (i % (k+1) == 0 &amp;amp;&amp;amp; (i / (k+1)) % cir == 0);
-}
-
-int main()
-{
-	while(~scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;k))
-	{
-		scanf(&amp;quot;%s&amp;quot;,s+1);
-		
-		int len=strlen(s+1);
-		for(int i=2,j=0;i&amp;lt;=len;i++)
-		{
-			while(j &amp;amp;&amp;amp; s[i] != s[j+1])
-				j=ne[j];
-			
-			if(s[i] == s[j+1])
-				j++;
-			ne[i]=j;
-		}
-		
-		for(int i=1;i&amp;lt;=n;i++)
-		{
-			int cir=i-ne[i];
-			printf(&amp;quot;%d&amp;quot;,check(i,cir));
-		}
-	}
-}
-
-acwing
-首先我们用KMP求出 T 的 next数组。
-利用 next数组在长文本中匹配模板串 T的过程：如果下一个字母不匹配，需要一直沿着next指针找：j = next[j]，直到下一个字符匹配或者next指针指向开头为止。
-然后我们会发现，假设我们已经匹配完长文本的前个字母，则剩下部分的匹配过程，只跟next指针的位置有关，因此我们可以用二维数组来表示当前状态的方案数：
-f[i][j]表示匹配完前 i 个字母时，next指针在 j 时的方案总数。
-状态转移：对于每个状态f[i][j]，我们从&#39;a&#39;-&#39;z&#39;枚举下一个字母，然后求出对应的next指针，假设是，则将f[i][j]的方案总数累加到f[i+1][u]。
-转移过程中需要注意，因为密码中不能存在 T，所以next指针要避免转移到 T的最后一个字母。
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;cstring&amp;gt; 
-using namespace std;
-const int N=55,mod=1e9+7;
-int f[N][N];
-int edge[N][26];
-char p[N];
-int ne[N];
-int n;
-
-
-int main()
-{
-    cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;p+1;
-    int m=strlen(p+1);
-    
-    for(int i=2,j=0;i&amp;lt;=m;i++)
-    {
-        while(j &amp;amp;&amp;amp; p[i] != p[j+1])
-            j=ne[j];
-        if(p[i] == p[j+1])
-            j++;
-        ne[i]=j;
-    }
-    
-    for(int i=0;i&amp;lt;m;i++)
-        for(char k=&#39;a&#39;;k&amp;lt;=&#39;z&#39;;k++)
-        {
-            int j=i;//已匹配了前i个字母
-            while(j &amp;amp;&amp;amp; p[j+1] != k)
-                j=ne[j];
-            if(p[j+1] == k)
-                j++;
-            edge[i][k-&#39;a&#39;]=j;
-        }
-        
-    f[0][0]=1;
-    for(int i=0;i&amp;lt;n;i++)
-        for(int j=0;j&amp;lt;m;j++)
-            for(char k=&#39;a&#39;;k&amp;lt;=&#39;z&#39;;k++)
-            {
-                int u=edge[j][k-&#39;a&#39;];
-                f[i+1][u]=(f[i+1][u]+f[i][j])%mod;
-            }
-            
-    int res = 0;
-    for (int i = 0; i &amp;lt; m; i ++ ) res = (res + f[n][i]) % mod;
-
-    cout &amp;lt;&amp;lt; res &amp;lt;&amp;lt; endl;
-
-    return 0;
-}
-
-luoguP3193
-设f(i,j)表示以准考证号为基准递推，准考证号匹配到第i位，不吉利数字匹配到第j位时（即准考证的后j位等于不吉利数字的前j位），不出现不吉利数字的字符串数量。。
-那怎么转移？
-既然要以考号为基准递推，就要考虑一位考号对下一位的影响。
-而考号是可以随便写的，那我们就要考虑10种数字了。
-对于一个新数字new，有以下几种情况：
-1.new
-与不吉利数字的j+1位匹配，dp(i+1,j+1)的答案数+dp(i,j)
-2.上述两者不匹配。
-不匹配怎么办？这个不匹配的new一定没有贡献了？
-当然不一定。
-怎么讲呢，举个例子吧，不吉利数字是12212112。然后你的准考证号枚举到第9位时，前面8位已经枚举成了11112212。可以发现已经匹配了不吉利数字的前5位，现在要匹配第6位。
-如果第9位枚举1，那它就匹配了，dp(9,6)+=dp(8,5)。如果第9位枚举2，那它就不匹配。但是会发现，存在 与当前已匹配的不吉利数字的后缀相同 的前缀，可以匹配上这个2！
-上一个位置就是不吉利数字的第2位。
-它的下一位，第3位2，刚好可以匹配枚举的第9位！
-所以此时最多能匹配不吉利数字的前3位，有转移dp(9,3)+=dp(8,5)。
-我们只需要沿着不吉利数字的失配指针往前走，找到第一个下一位与new匹配的位置就可以了。
-为什么不用考虑再往前的下一位可以匹配new的位置？
-因为这是递推，从前往后每一种状态都会被考虑，所以在考虑匹配后面的位之前，前面的位已经匹配好更前面的情况了。
-比如不吉利数字1221221211。你目前枚举的准考证号前8位是12212212，现在你要枚举第9
-位。很明显当枚举2时，通过找不吉利数字中 后缀相同的前缀，可知dp(8,8)可以转移到dp(9,6)。
-但是我们发现也可以转移到dp(9,3)诶！
-事实上，在这之前dp(8,5)已经转移到dp(9,3)过了。而dp(8,5)表示什么？它表示准考证号枚举8位，后5位与不吉利数字的前5位匹配上。
-dp(8,8)同理，表示准考证号枚举前8位，后8位与不吉利数字的前8位匹配上。
-这样直观看起来没什么答案关联。但是仔细考虑以下，不吉利数字的第8位的失配指针指向第5位。
-这说明什么？
-不吉利数字的前8位中，前5位等于后5位！
-匹配5位的情况包含匹配8位的情况！（因为你匹配了8位，根据上推论可知也算在匹配了5位的情况中）
-这就是别人博客中此题题解经常提到的计数方案会包含的问题。
-其实按照AC自动机的构造方式，如果一个点没有字符为new的儿子边的话，它会建出一条对应的虚拟儿子边和点，儿子点上存的是沿着失配指针往回走的上一个实际存在这条字符边所指向的儿子。
-当然这题m很小，不吉利数字串自己匹配自己的复杂度很小，可以直接暴力跑失配指针找第一个。
-
-其中g(i,j)表示当前匹配到i个字符，添加一个字符变成匹配为j个字符的方案数。
-不吉利数字已经知道了，g数组可以预处理出来（KMP）。
-然后我们惊奇地发现n≤1e9，不让你循环推，直接就想到矩阵快速幂优化了。
-观察一下转移方程，发现dp[i+1][?]总是由dp[i][?]推来，而且i还是n这个级别的。
-又发现每次实际上都是乘一个固定的矩阵g，也就是说整个dp数组的某一位的值其实都是通过一些g数组乘过来的。
-所以可以把dp数组直接当成g数组自己乘自己。
-比如说，g(4,2)=4。
-表示有4种转移情况可以让 与不吉利数字的前4位匹配的情况 在准考证号增加1位后 与不吉利数字的前2位匹配。
-所以dp(x+1,2)=dp(x,4)∗g(4,2)=dp(x,4)∗4
-而dp(x,4)又是哪来的？
-它是通过∑i=1m\sum_{i=1}^m∑i=1m​dp(x−1,i)∗g(i,4)转移过来的。
-所以一直往前推到x=0，发现dp值的n次转移都只跟转移矩阵g有关，是否与不吉利数字完全匹配等情况可以在弄g数组时就处理掉，即g数组只考虑不吉利数字被匹配0~m−1位的情况，不让它转移到j位都被匹配的情况。
-所以就是对g矩阵做快速幂，求它的n次方。
-时间复杂度O(log(n)∗m^3)
-为什么答案是g(0,i)，for i 0~m-1
-考虑g(i,j)的意义。如果g矩阵自己对自己连续进行k次转移（不进行快速幂而循环推），g(i,j)就表示：在进行k次转移前 准考证号匹配不吉利数字的前i位时，准考证号增加k个字符后，使不吉利数字沿失配指针（自己也可以）找到的最大的匹配位数j（算上新匹配的k位）的方案数。这是矩阵转移的基本概念。
-所以进行n次转移后，g(i,j)就表示一开始准考证号匹配不吉利数字的前i位时，准考证号增加n个字符后，使不吉利数字沿失配指针（自己也可以）找到的最大的匹配位数j（算上新匹配的k位）的方案数。
-我们需要取全局情况的答案，而这是很显然的。开始时准考证号匹配不吉利数字的前0位（准考证号还一位都没枚举），所以i为0；而由于已经定义过g数组只考虑不吉利数字被匹配 0~m−1位的情况，所以j在这个区间取任意值，g(0,j)都是答案的一部分。把它们都算上就是答案。
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;cstdio&amp;gt;
-#include&amp;lt;cstring&amp;gt;
-#include&amp;lt;algorithm&amp;gt;
-using namespace std;
-const int N=25;
-char p[N];
-int n,m,mod;
-struct matrix
-{
-	int m[N][N];
-	matrix()
-	{
-		memset(m,0,sizeof m);
-	}
-};
-int ne[N];
-
-matrix mul(matrix a,matrix b)
-{
-	matrix res;
-	for(int i=0;i&amp;lt;m;i++)
-		for(int j=0;j&amp;lt;m;j++)
-			for(int k=0;k&amp;lt;m;k++)
-				res.m[i][j]=(res.m[i][j]+a.m[i][k]*b.m[k][j])%mod;
-	return res;
-}
-
-int main() 
-{
-	scanf(&amp;quot;%d%d%d&amp;quot;, &amp;amp;n, &amp;amp;m, &amp;amp;mod);
-	scanf(&amp;quot;%s&amp;quot;, p+1);
-	
-	matrix g;
-	for(int i=2,j=0;i&amp;lt;=m;i++)
-	{
-		while(j &amp;amp;&amp;amp; p[i] != p[j+1])
-			j=ne[j];
-		if(p[i] == p[j+1])
-			j++;
-		ne[i]=j;
-	}
-	
-	for(int i=0;i&amp;lt;m;i++)
-		for(int k=0;k&amp;lt;10;k++)
-		{
-			int j=i;
-			while(j &amp;amp;&amp;amp; p[j+1]-&#39;0&#39; != k)
-				j=ne[j];
-			if(p[j+1]-&#39;0&#39; == k)
-				j++;
-			if(j&amp;lt;m)	g.m[i][j]=(g.m[i][j]+1)%mod;
-		}
-	
-	matrix a;
-	for(int i=0;i&amp;lt;m;i++)
-		a.m[i][i]=1;
-	
-	while(n)
-	{
-		if(n &amp;amp; 1) a=mul(a,g);
-		g=mul(g,g);
-		n&amp;gt;&amp;gt;=1;
-	}
-//	
-//	for(int i=0;i&amp;lt;m;i++)
-//	{
-//		for(int j=0;j&amp;lt;m;j++)
-//			cout&amp;lt;&amp;lt;a.m[i][j]&amp;lt;&amp;lt;&#39; &#39;;
-//		cout&amp;lt;&amp;lt;endl;
-//	}
-	
-	int ans = 0;
-	for(int i = 0; i &amp;lt; m; ++i)
-		ans = (ans + a.m[0][i]) % mod;
-	
-	printf(&amp;quot;%d\n&amp;quot;, ans);
-	return 0;
-}
-
-
-
-Z算法
-
-
-
-
-r[5] = 7
-r[6] = 7
-l[5] = 5
-l[6] = 5
-
-对于 Z[2] 我们需要暴力计算。
-也就是暴力计算 S[1..|S|] 和 S[2..|S|] 的最长公共前缀。
-如果 Z[2] &amp;gt; 0, 那么 r = r[2], l = l[2] = 2
-如果 Z[2] = 0, 那么 r = r[2] = 0, l = l[2] = 0
-我们的目标就是用已有的 Z[2], Z[3], ..., Z[k-1]，来推
-出 Z[k].
-假设 k = 121, Z[2..120] 已经知道了
-r[120] = 130, l[120] = 100
-
-划分成[l,i-1],[i,r]
-
-
-
-
-
-蓝色部分一定不相等，否则说明z-box可以右移
-第一步：
-初始化 Z[]，暴力计算 Z[2]
-for(int i = 1;i &amp;lt;= n;i ++) z[i] = 0;
-int l, r;
-while(str[1 + z[2]] == str[2 + z[2]]) z[2] ++; 
-l = 2, r = 2+ z[2]-1;
-
-第二步：
-枚举 i，分三种情况依次计算 Z[i]
-for(int i = 3;i &amp;lt;= n;i ++)
-{
-    if(i &amp;gt; r)
-    {
-        while(str[1 + z[i]] == str[i + z[i]]) z[i] ++;
-        l = i, r = i + z[i] - 1;
-    }
-    else
-    {
-        if(z[i - l + 1] &amp;lt; r - i + 1) z[i] = z[i - l + 1];
-        else
-        {
-            z[i] = r - i;
-            while(str[1 + z[i]] == str[i + z[i]]) z[i] ++; 
-            l = i, r = i + z[i] - 1; 
-        }
-    } 
-}
-
-时间复杂度是 O(n) 的
-扩展KMP
-给定两个字符串 S 和 T（长度分别为 n 和 m）
-定义 extend[i] 为 S[i..n] 与 T 的最长公共前缀的长度。
-求出 extend 数组
-
-如果 S = T，那么 extend 数组就是 Z 数组。
-
-假设现在遍历到了 S[i]，且 S[1], S[2],…, S[i-1]都已经算出
-与 Z 算法类似，设置两个变量 l 和 r，r 表示能和 T 匹
-配到的最右边的位置，l 为 r 对应的起始位置。
-也就是 S[l .. r] = T[1.. r-l+1]
-
-S[i] 对应的是 T[i-l+1]
-现在要计算的是 S[i..n] 与 T 的最长公共前缀
-注意到此时 S[i..r] = T[i-l+1 .. r-l+1]
-所以我们可以先对 T 求一遍 Z 数组，然后考察一下 Z[i-l+1]
-
-
-
-void calc_Z(char *str) 
-{
-	int n = strlen(str + 1);
-	for(int i = 1; i &amp;lt;= n; i ++) z[i] = 0;
-	z[1] = n;
-	int l, r = 0;
-	for(int i = 2; i &amp;lt;= n; i ++) 
-	{
-		if(i &amp;gt; r) 
-		{
-			while(str[1 + z[i]] == str[i + z[i]]) z[i] ++;
-			l = i, r = i + z[i] - 1;
-		} else 
-		{
-			if(z[i - l + 1] &amp;lt; r - i + 1) z[i] = z[i - l + 1];
-			else 
-			{
-				z[i] = r - i + 1;
-				while(str[1 + z[i]] == str[i + z[i]]) z[i] ++;
-				l = i, r = i + z[i] - 1;
-			}
-		}
-	}
-}
-
-void calc_extend(char *S, char *T) 
-{
-	calc_Z(T);
-	int l, r = 0;
-	int n = strlen(S + 1);
-	int m = strlen(T + 1);
-	for (int i = 1; i &amp;lt;= n; i ++) 
-	{
-		if (i &amp;gt; r) 
-		{
-			while (i + ext[i] &amp;lt;= n &amp;amp;&amp;amp; 1 + ext[i] &amp;lt;= m &amp;amp;&amp;amp;
-			        S[i + ext[i]] == T[1 + ext[i]]) ext[i] ++;
-			l = i, r = i + ext[i] - 1;
-		}
-		else 
-		{
-			if (i + z[i - l + 1] - 1 &amp;lt; r) ext[i] = z[i - l + 1];
-			else 
-			{
-				ext[i] = r - i + 1;
-				while (i + ext[i] &amp;lt;= n &amp;amp;&amp;amp; 1 + ext[i] &amp;lt;= m &amp;amp;&amp;amp; S[i +ext[i]] == T[1 + ext[i]]) 
-					ext[i] ++;
-				l = i, r = i + ext[i] - 1;
-			}
-		}
-	}
-}
-
-例题
-题意：给你n个字符串，求这n个字符串的最长公共子串
-hdu4333
-给一个 L 位数的正整数 N，每次可以把这个数的最后一位移到最前面来，得到一个新的数。
-总共最多可以得到 n 个数，重复的只算一次。
-问这些数中，等于 n 的，小于 n的，大于 n 的数分别有几个。
-L ≤ 1e5
-
-样例：
-341 （答案： 1 1 1）
-我们只需要把这个数复制两遍，然后只考虑长度为 n 的子串。这些子串就是移动过程中产生的数。
-如何和原数 N 做比较呢
-假设现在的数是 S[i .. i+L-1], N 是 S[1..L]
-我们只要求出他们的最长公共前缀 x，如果 x = n 说明这两个数相等。
-否则，比较 S[x] 和 S[i+x-1] 的大小，就可以确定他们的大小关系。
-求 x ，就是扩展 KMP 中的 Z 算法。x = min(n, Z[i])
-最后一步去重。对 N 跑一次 KMP
-如果 L-next[L] 是 L 的约数，那么 L-next[L] 是 N 的最小循环节。否则 N 的 最小循环节是 L。
-对循环节内的情况枚举一遍即可,或除以最小循环节个数。
-时间复杂度 O(L)
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;cstring&amp;gt;
-#include&amp;lt;algorithm&amp;gt;
-#include&amp;lt;cstdio&amp;gt;
-using namespace std;
-const int N=200010;
-char str[N];
-int ne[N];
-int z[N];
-
-int main()
-{
-    int T;
-    scanf(&amp;quot;%d&amp;quot;,&amp;amp;T);
-    for(int kas=1;kas&amp;lt;=T;kas++)
-    {
-        scanf(&amp;quot;%s&amp;quot;,str+1);
-        
-        int len=strlen(str+1);
-        for(int i=2,j=0;i&amp;lt;=len;i++)
-        {
-            while(j &amp;amp;&amp;amp; str[i] != str[j+1])
-                j=ne[j];
-            if(str[i] == str[j+1])
-                j++;
-            ne[i]=j;
-        }
-        
-        for(int i=1;i&amp;lt;=len;i++)
-            str[i+len]=str[i];
-        str[len*2+1]=&#39;\0&#39;;
-        memset(z,0,sizeof z);
-        z[1]=len*2;
-        int l,r=0;
-        
-        for(int i=2;i&amp;lt;=len*2;i++)
-        {
-            if(i&amp;gt;r)
-            {
-                while(str[1+z[i]] == str[i+z[i]])
-                    z[i]++;
-                l=i,r=i+z[i]-1;
-            }
-            else 
-            {
-                if(z[i-l+1] &amp;lt; r-i+1)
-                    z[i]=z[i-l+1];
-                else 
-                {
-                    z[i]=r-i;
-                    while(str[1+z[i]] == str[i+z[i]])
-                        z[i]++;
-                    l=i,r=i+z[i]-1;
-                }
-            }
-        }
-        
-        int gre=0,eql=0,les=0;
-        for(int i=1;i&amp;lt;=len;i++)
-        {
-            if(z[i] &amp;gt;= len)
-                eql++;
-            else if(str[1+z[i]] &amp;gt; str[i+z[i]])
-                les++;
-            else gre++;
-        }
-        
-        int t;
-        if(len%(len-ne[len]) == 0)
-            t=len/(len-ne[len]);//循环节个数 
-        else 
-            t=1;
-        printf(&amp;quot;Case %d: %d %d %d\n&amp;quot;,kas,les/t,eql/t,gre/t);
-    }
-}
-
-对循环节内的情况枚举代码
-poj3376
-给你 n 个字符串 m[1], m[2], …, m[n]。 求 S = m[i]m[j] （1 &amp;lt;= i,j &amp;lt;= n）是回文串的数量。
-n 个字符串的长度之和不超过 2·1e6
-
-样例输入：
-3a
-ab
-ba
-答案：5（aa,aba,aba,abba,baab)
-考虑什么情况下 i 和 j 拼起来会是回文串。
-
-
-i的长度小于j，那么i一定是j的反串的前缀，且j的反串剩下的后缀是回文串
-
-
-i的长度等于j，那么i等于j的反串
-
-
-i的长度大于j，那么j的反串一定是i的前缀，且i串剩下的后缀是回文串
-
-
-我们可以将这n个字符串插入trie，每个节点要维护两个值：
-value1. 到当前节点的字符串个数；value2.当前节点后面的回文子串个数
-我们用每个字符串的反串去trie上查找，要构成回文串有以下情况：
-
-
-1.此反串是其他串的前缀，那么组合回文串的数量就要加上value2
-
-
-2.此反串的前缀是某些字符串，且反串剩下的后缀是回文串，那么组合回文串的数量要加上value1
-
-
-3.2的特例：此反串的前缀是某些字符串，且反串剩下的后缀为空，同样要加上value1，这种情况可以和2一起处理
-
-
-留下的问题就是一个字符串的所有后缀中，哪些是回文串。
-对于串 S，我们先求出正串 S 对反串 T 的 extend[i]
-那么对于每个 i，如果 S[i..n] 和 T 的最长公共前缀等于
-S[i..n] 的长度，说明 S[i..n] 是一个回文串。
-因此整道题就在线性的时间复杂度内解决了。
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;cstring&amp;gt;
-#include&amp;lt;algorithm&amp;gt;
-#include&amp;lt;cstdio&amp;gt;
-using namespace std;
-const int N=2e6+10;
-int trie[N][26],tot=1;
-int n;
-char s[N],t[N];
-int len[N];
-int slen;
-int z[N],ext[N];
-bool flag[2][N];
-int bg[N],ed[N];
-typedef long long LL;
-struct Node
-{
-	int v1,v2;
-}cnt[N];
-
-void get_z(char *s)
-{
-	int n=strlen(s+1);
-	for(int i=1;i&amp;lt;=n;i++) z[i]=0;
-	z[1]=n;
-	int l,r=0;
-	for(int i=2;i&amp;lt;=n;i++)
-	{
-		if(i&amp;gt;r)
-		{
-			while(s[1+z[i]] == s[i+z[i]])
-				z[i]++;
-			l=i,r=i+z[i]-1;
-		}
-		else
-		{
-			if(z[i-l+1] &amp;lt; r-i+1)
-				z[i]=z[i-l+1];
-			else
-			{
-				z[i]=r-i;
-				while(s[1+z[i]] == s[i+z[i]])
-					z[i]++;
-				l=i,r=i+z[i]-1;
-			}
-		}
-	}
-}
-
-void exkmp(int type,char *s,char *t)
-{
-	get_z(t);
-	int n=strlen(s+1);
-	int m=strlen(t+1);
-	for(int i=1;i&amp;lt;=n;i++)
-		ext[i]=0;
-	int l,r=0;
-	for(int i=1;i&amp;lt;=n;i++)
-	{
-		if(i&amp;gt;r)
-		{
-			while(i+ext[i] &amp;lt;=n &amp;amp;&amp;amp; 1+ext[i] &amp;lt;=m &amp;amp;&amp;amp;
-			s[i+ext[i]] == t[1+ext[i]])
-				ext[i]++;
-			l=i,r=i+ext[i]-1;
-		}
-		else
-		{
-			if(z[i-l+1] &amp;lt; r-i+1)
-				ext[i]=z[i-l+1];
-			else
-			{
-				ext[i]=r-i+1;
-				while(i + ext[i] &amp;lt;= n &amp;amp;&amp;amp; 1 + ext[i] &amp;lt;= m &amp;amp;&amp;amp; 
-				s[i+ext[i]] == t[1+ext[i]])
-					ext[i]++;
-				l=i,r=i+ext[i]-1;
-			}
-		}
-	}
-
-	for(int i=1;i&amp;lt;=n;i++)
-	{
-		//cout&amp;lt;&amp;lt;&amp;quot;---&amp;quot;&amp;lt;&amp;lt;ext[i]&amp;lt;&amp;lt;endl;
-		if(ext[i] == n-i+1)
-			flag[type][i+slen]=true;//s[i...n]为回文串
-	}
-}
-
-void insert(int k)
-{
-	int p=1;
-	for(int i=bg[k];i&amp;lt;=ed[k];i++)
-	{
-		cnt[p].v2+=flag[0][i];
-		int ch=s[i]-&#39;a&#39;;
-		if(!trie[p][ch])
-			trie[p][ch]=++tot;
-		p=trie[p][ch];
-	}
-	cnt[p].v1++;
-}
-
-void print(int k)
-{
-	int p=1;
-	for(int i=bg[k];i&amp;lt;=ed[k];i++)
-	{
-		int ch=s[i]-&#39;a&#39;;
-		p=trie[p][ch];
-		cout&amp;lt;&amp;lt;&amp;quot;---&amp;quot;&amp;lt;&amp;lt;cnt[p].v2&amp;lt;&amp;lt;&#39; &#39;&amp;lt;&amp;lt;cnt[p].v1&amp;lt;&amp;lt;endl;
-	}
-}
-
-int main()
-{
-	scanf(&amp;quot;%d&amp;quot;,&amp;amp;n);
-	
-	for(int i=1;i&amp;lt;=n;i++)
-	{
-		scanf(&amp;quot;%d&amp;quot;,&amp;amp;len[i]);
-		scanf(&amp;quot;%s&amp;quot;,s+1+slen);
-		for(int j=1;j&amp;lt;=len[i];j++)
-			t[slen+j]=s[slen+len[i]+1-j];
-		t[slen+len[i]+1]=&#39;\0&#39;;
-		exkmp(0,s+slen,t+slen);
-		exkmp(1,t+slen,s+slen);
-
-		bg[i]=slen+1;
-		slen+=len[i];
-		ed[i]=slen;
-
-		insert(i);
-		//print(i);
-	}
-
-	LL ans=0;
-	for(int i=1;i&amp;lt;=n;i++)
-	{
-		int p=1;
-		bool f=true;
-		for(int j=ed[i];j&amp;gt;=bg[i];j--)//用反串去trie上匹配
-		{
-			int k=s[j]-&#39;a&#39;;
-			if(!trie[p][k])
-			{
-				f=false;
-				break;
-			}
-			else
-				p=trie[p][k];
-			if(flag[1][bg[i]+ed[i]-j+1] || j == bg[i])
-				ans+=cnt[p].v1;
-		}
-		if(f)
-			ans+=cnt[p].v2;
-	}
-
-	printf(&amp;quot;%lld\n&amp;quot;,ans);
-	return 0;
-}
-
-
-                                        </div>
-                                        
-                                            <a class="btn btn-text" href="https://caifxh.github.io/post/zi-fu-chuan-fu-xi-yi/">Read More ~</a>
-                            </div>
-                </div>
-            </article>
-            
                 <!-- 翻页 -->
                 
+    <div class="pagination-container">
+        
+                
+                    <a href="https://caifxh.github.io/page/2" class="page-btn btn">下一页</a>
+                    
+    </div>
+    
                 </div>
                 <!--  -->
                 <div class="main-container-middle"></div>
@@ -5839,7 +7229,7 @@ int main()
                     <!-- 个人信息 -->
                     
     <div class="id_card i-card">
-        <div class="id_card-avatar" style="background-image: url(https://caifxh.github.io/images/avatar.png?v=1585326654289)">
+        <div class="id_card-avatar" style="background-image: url(https://caifxh.github.io/images/avatar.png?v=1585724161677)">
         </div>
         <h1 class="id_card-title">
             fxh
