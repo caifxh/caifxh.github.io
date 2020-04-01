@@ -7,7 +7,7 @@
 <title>
     fxh
 </title>
-<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1585724161677">
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1585732375323">
 <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
 <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
@@ -27,7 +27,7 @@
     <div class="nav">
         <div class="logo">
             <a href="https://caifxh.github.io">
-                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1585724161677" alt="">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1585732375323" alt="">
             </a>
             <div class="site-title">
                 <h1>
@@ -97,6 +97,325 @@
                 <div id="content" class="main-container-left">
                     
         
+            <article class="post i-card">
+                <h2 class="post-title">
+                    <a href="https://caifxh.github.io/post/xian-xing-dp/">
+                        线性dp
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2020-03-26</time>
+                    
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            
+多阶段决策问题
+有一类活动的过程，可以分成若干个互相联系的阶段，在它的每一阶段都需要作出决策，从而使整个过程达到最好的活动效。
+当然，各个阶段的决策的选取不是任意确定的，它依赖于当前的状态，又会影响以后的发展。
+当各个阶段决策决定后，就组成一个决策序列，因而也就确定了整个过程的一条活动路线。
+这种把一个问题看做是一个前后关联、具有链状结构的多阶段过程就称为多阶段决策过程，这种问题就称为多阶段决策问题。
+各个阶段采取的决策， 一般来说是与阶段有关的。
+决策依赖于当前的状态，又随即引起状态的转移。
+一个决策序列就是在变化的状态中产生出来的。
+称这种解决多阶段决策最优化的过程为动态规划（DP）。
+动态规划（Dynamic Programming）程序设计是对解最优化问题的一种途径、一种方法，而不是一种特殊算法。
+由于各种问题的性质不同，确定最优解的条件也互不相同，因此不存在一种万能的动态规划算法可以解决各类最优化问题。
+常见的 DP 类型有：
+线性模型
+区间 DP
+背包 DP
+数位 DP
+状态压缩 DP
+树状 DP
+常见的 DP 优化方法有：
+滚动数组优化
+矩阵乘法优化
+斜率优化
+四边形不等式优化
+决策单调性优化
+数据结构优化
+动态规划的基本概念
+1.阶段和阶段变量
+将问题的全过程恰当地分成若干个相互联系的阶段。
+阶段的划分一般根据时间和空间的自然特征去划分。
+阶段的划分要便于把问题转化成多阶段决策问题。
+2.状态和状态变量
+通常一个阶段包含若干状态。
+状态可由变量来描述。
+3.决策、决策变量和决策允许集合。
+在对问题的处理中作出的每种选择性的行动就是决策。
+即从该阶段的每一个状态出发， 通过一次选择性的行动转移至下一阶段的相应状态。
+一个实际问题可能需要有多次决策和多个决策点，在每一个阶段的每一个状态中都需要有一次决策，
+决策也可以用变量来描述，称这种变量为决策变量。
+在实际问题中，决策变量的取值往往限制在某一个范围之内，此范围就称为决策允许集合。
+4.策略和最优策略
+所有阶段一次排列构成问题的全过程。
+全过程中各阶段决策变量所组成的有序总体称为策略。
+在实际问题中，从决策允许集合中找出最优效果的策略称为最优策略。
+5.状态转移方程
+前一阶段的终点就是后一阶段的起点，对前一阶段的状态做出某种决策，产生后一种阶段的状态，这种关系描述了从 i
+阶段到 i+1 阶段状态的演变规律，称为状态转移方程。
+从 n 个数中取出 k 个数，使得他们的和最大。
+f[i][j] 表示现在考虑到了第 i 个数，已经选出了 j 个数。
+阶段：枚举到第i个数
+状态：已经选出了 j 个数。
+决策：第i个数选或不选
+策略：和最大
+状态转移方程：f[i][j]=max(f[i-1][j],f[i-1][j-1]+a[i])
+动态规划的性质
+什么样的“多阶段决策问题”才可以用动态规划的方法来求解呢？
+
+
+对于不能划分阶段的题，不能用动态规划来解。
+不符合最优化原理，不能用动态规划来解。
+不具备无后效性原则的，不能用动态规划来解。
+误用动态规划解决问题会得到错误的结果
+动态规划设计方法
+正推：从初始状态开始，通过对中间阶段的决策的选择，达到结束状态。我们也称递推。
+倒推：从结束状态开始，通过对中间阶段的决策的选择，达到开始状态。我们可以把这种方法看成记忆化搜索。
+动态规划设计方法的一般模式
+
+划分阶段
+确定状态和状态变量
+确定决策并写出状态转移方程
+寻找边界条件
+设计并实现程序
+
+动态规划与记忆化搜索
+实现一个函数，用“搜索”的方法实现 DP 的更新。
+通常用于解决转移顺序不方便人为确定的 DP。
+数字三角形
+5
+7
+3 8
+8 1 0
+2 7 4 4
+4 5 2 6 5
+设 f[i][j] 表示走到了第 i 行第 j 列的最大值。
+正常 DP：
+f[i][j] = max(f[i – 1][j], f[i – 1][j – 1]) + a[i][j]
+搜索：
+int dp(int i, int j)
+{
+if (i == 0) return 0;
+    return a[i][j] + max(dp(i - 1, j), dp(i - 1, j - 1));
+}
+
+这样有很多状态其实会重复计算。
+对于计算过的 dp(i, j)，我们用 f[i][j] 来存。
+f 初始化为 -1
+记忆化搜索：
+int dp(int i, int j){
+    if (i == 0) return 0;
+    if (f[i][j] &amp;gt;= 0) return f[i][j];
+    f[i][j] = a[i][j] + max(dp(i - 1, j), dp(i - 1, j - 1));
+    return f[i][j];
+}
+
+acwing901
+一个人可以从某个点滑向上下左右相邻四个点之一，当且仅当高度减小。
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=310;
+int h[N][N];
+int f[N][N];
+int n,m;
+int dx[4]={-1,0,1,0},dy[4]={0,-1,0,1};
+
+int dp(int x,int y)
+{
+    if(f[x][y]!=-1)
+        return f[x][y];
+    
+    f[x][y]=1;
+    for(int i=0;i&amp;lt;4;i++)
+    {
+        int a=x+dx[i],b=y+dy[i];
+        if(a&amp;gt;=1 &amp;amp;&amp;amp; a&amp;lt;=n &amp;amp;&amp;amp; b&amp;gt;=1 &amp;amp;&amp;amp; b&amp;lt;=m &amp;amp;&amp;amp; h[x][y]&amp;gt;h[a][b])
+            f[x][y]=max(f[x][y],dp(a,b)+1);
+    }
+    return f[x][y];
+}
+
+int main()
+{
+    scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;m);
+    for(int i=1;i&amp;lt;=n;i++)
+        for(int j=1;j&amp;lt;=m;j++)
+            scanf(&amp;quot;%d&amp;quot;,&amp;amp;h[i][j]);
+    memset(f,-1,sizeof f);
+    
+    int res=0;    
+    for(int i=1;i&amp;lt;=n;i++)
+        for(int j=1;j&amp;lt;=m;j++)
+            res=max(res,dp(i,j));
+    printf(&amp;quot;%d\n&amp;quot;,res);
+    return 0;
+}
+
+线性模型
+这里的线性指的是状态的排布是呈线性的。
+
+最长上升子序列问题。
+f[i] 表示以 a[i] 结尾的最长上升子序列问题。
+计算 f[i] 的时候，只需要去考虑 f[1], f[2], …, f[i-1] 看是否能够转移即可。
+f[i] = max{ f[j] + 1 | 1≤j&amp;lt;i, a[j]&amp;lt;a[i] }
+
+贪心思想，数越小形成的最长上升子序列长度可能越大。
+#include&amp;lt;cstdio&amp;gt;//最长上升子序列，优化算法，时间复杂度O(nlogn)
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int maxn=100010;
+int d[maxn];//d[]表示从最长上升序列的元素
+int a[maxn];
+
+int main()
+{
+    int n;
+	scanf(&amp;quot;%d&amp;quot;,&amp;amp;n);
+	for(int i=1;i&amp;lt;=n;i++)
+		scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]);
+    int len=1;
+    d[1]=a[1];
+    for(int i=2;i&amp;lt;=n;i++)
+	{
+		if(a[i] &amp;gt; d[len])
+            d[++len]=a[i];
+        else//a[i]覆盖d[]中第一个大于a[i]的数 
+        	*lower_bound(d+1,d+len+1,a[i])=a[i];
+    }
+    printf(&amp;quot;%d\n&amp;quot;,len);
+    return 0;
+}
+
+如果题目要求严格递增，则必须用lower_bound，因为要替换掉相同的元素而不是增长序列。
+如果题目要求最长不下降子序列，则必须用 upper_bound。
+poj3486
+你想保证 n 年中你都有一台电脑，一开始你有一台。
+如果你在第 y (1≤y≤n) 年购买了一台电脑，那么你需要花费 c的代价。
+如果你这台电脑一直用到了第 z 年，在第 z 年又买了一台新的，您需要在您拥有该计算机的每一年中支付维护成本m（y，z）
+给定 n，c，数组 m。求最小花费
+首先划分阶段。
+每一年可以划分为一个阶段。
+f[i] 表示直到第 i 年f[0], f[1],…,f[i-1]你手里都有一台电脑的最小花费。
+f[i] 需要从 转移过来。
+如何转移？
+枚举上一次买电脑是哪一年
+假设上一次买电脑是第 j 年。
+那么1~j-1年就是一个子问题，我们已经算出了 f[j-1] 是满足
+这个子问题的最优解，后面我们就不用考虑前 j-1年的情况，
+且它也不会影响我们后面的决策。
+第 j 年到第 i 年的维修费用是 m(j, i)，花费是 c
+因此可以用 f[j-1]+m(j,i)+c 来更新 f[i]
+f[i] = min{ f[j-1]+m(j,i) + c | 1≤j≤i }
+边界条件：
+f[0] = 0
+f[1], f[2], …, f[n] 一开始都应该初始化为 +∞
+code
+acwing278
+
+hdu1003
+
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int maxn=100005;
+int a[maxn],dp[maxn];//dp[i]表示从start开始到第i个元素的最大子段和 
+int main()
+{
+	int t,n,cas=0;
+	scanf(&amp;quot;%d&amp;quot;,&amp;amp;t);
+	while(t--)
+	{
+		scanf(&amp;quot;%d&amp;quot;,&amp;amp;n);
+		for(int i=1;i&amp;lt;=n;i++)
+			scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]);//也可以省略原数组，直接用dp[] 
+		int l=1,r=1;//记录区间
+		int start=1;//记录起点
+		dp[1]=a[1];
+		
+		int ans=dp[1];
+		for(int i=2;i&amp;lt;=n;i++)
+		{
+            if(dp[i-1]&amp;gt;=0)//dp[i-1]大于等于0，则累加，否则重新开始 
+                dp[i]=dp[i-1]+a[i];
+            else
+            {
+            	dp[i]=a[i];
+            	start=i;//重新开始
+			}	
+            if(dp[i]&amp;gt;ans)//更新最值
+            {
+            	ans=dp[i];
+				l=start;
+         	    r=i;
+            }
+		}
+		if(cas)
+			printf(&amp;quot;\n&amp;quot;);
+		printf(&amp;quot;Case %d:\n&amp;quot;,++cas);
+		printf(&amp;quot;%d %d %d\n&amp;quot;,ans,l,r);
+	}
+	return 0;
+}
+
+poj2479
+
+
+
+
+因为我们会从左到右枚举每一个lt[i],当然更新一遍lt[i]也没有错。
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int maxn=50010;
+const int inf=0x3f3f3f3f;
+int lt[maxn],rt[maxn];//lt[i]表示从左端开始，以i结尾的子段和最大值 
+int a[maxn];
+ 
+int main()
+{
+	int t,n;
+	scanf(&amp;quot;%d&amp;quot;,&amp;amp;t);
+	while(t--)
+	{
+		scanf(&amp;quot;%d&amp;quot;,&amp;amp;n);
+		for(int i=1;i&amp;lt;=n;i++)
+			scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]);
+		lt[1]=a[1];
+		for(int i=2;i&amp;lt;=n;i++)//从左向右 
+			lt[i]=max(a[i],lt[i-1]+a[i]);
+		rt[n]=a[n];
+		for(int i=n-1;i&amp;gt;=1;i--)//从右向左
+			rt[i]=max(a[i],rt[i+1]+a[i]); 
+		for(int i=n-1;i&amp;gt;=1;i--)//更新为从右端开始n..i个元素之中最大连续子段和 
+			rt[i]=max(rt[i+1],rt[i]);
+		int ans=-inf;
+		for(int i=2;i&amp;lt;=n;i++)
+			ans=max(ans,lt[i-1]+rt[i]);
+		printf(&amp;quot;%d\n&amp;quot;,ans);
+	}
+	return 0;
+}
+
+poj2250
+
+code
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://caifxh.github.io/post/xian-xing-dp/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
             <article class="post i-card">
                 <h2 class="post-title">
                     <a href="https://caifxh.github.io/post/zi-fu-chuan-fu-xi-yi/">
@@ -1433,7 +1752,7 @@ int main()
                     <!-- 个人信息 -->
                     
     <div class="id_card i-card">
-        <div class="id_card-avatar" style="background-image: url(https://caifxh.github.io/images/avatar.png?v=1585724161677)">
+        <div class="id_card-avatar" style="background-image: url(https://caifxh.github.io/images/avatar.png?v=1585732375323)">
         </div>
         <h1 class="id_card-title">
             fxh
