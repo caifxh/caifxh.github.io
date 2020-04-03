@@ -7,7 +7,7 @@
 <title>
     字符串 | fxh
 </title>
-<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1585882659287">
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1585901820726">
 <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
 <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
@@ -27,7 +27,7 @@
     <div class="nav">
         <div class="logo">
             <a href="https://caifxh.github.io">
-                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1585882659287" alt="">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1585901820726" alt="">
             </a>
             <div class="site-title">
                 <h1>
@@ -104,6 +104,460 @@
         
             <article class="post i-card">
                 <h2 class="post-title">
+                    <a href="https://caifxh.github.io/post/kuo-zhan-kmp/">
+                        扩展KMP
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2020-04-03</time>
+                    
+                        <a href="https://caifxh.github.io/tag/yImqvC-Dp/" class="post-tag i-tag
+                            i-tag-">
+            #字符串
+        </a>
+                        
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            Z算法
+
+
+
+
+r[5] = 7
+r[6] = 7
+l[5] = 5
+l[6] = 5
+
+对于 Z[2] 我们需要暴力计算。
+也就是暴力计算 S[1..|S|] 和 S[2..|S|] 的最长公共前缀。
+如果 Z[2] &amp;gt; 0, 那么 r = r[2], l = l[2] = 2
+如果 Z[2] = 0, 那么 r = r[2] = 0, l = l[2] = 0
+我们的目标就是用已有的 Z[2], Z[3], ..., Z[k-1]，来推
+出 Z[k].
+假设 k = 121, Z[2..120] 已经知道了
+r[120] = 130, l[120] = 100
+
+划分成[l,i-1],[i,r]
+
+
+
+
+
+蓝色部分一定不相等，否则说明z-box可以右移
+第一步：
+初始化 Z[]，暴力计算 Z[2]
+for(int i = 1;i &amp;lt;= n;i ++) z[i] = 0;
+int l, r;
+while(str[1 + z[2]] == str[2 + z[2]]) z[2] ++; 
+l = 2, r = 2+ z[2]-1;
+
+第二步：
+枚举 i，分三种情况依次计算 Z[i]
+for(int i = 3;i &amp;lt;= n;i ++)
+{
+    if(i &amp;gt; r)
+    {
+        while(str[1 + z[i]] == str[i + z[i]]) z[i] ++;
+        l = i, r = i + z[i] - 1;
+    }
+    else
+    {
+        if(z[i - l + 1] &amp;lt; r - i + 1) z[i] = z[i - l + 1];
+        else
+        {
+            z[i] = r - i;
+            while(str[1 + z[i]] == str[i + z[i]]) z[i] ++; 
+            l = i, r = i + z[i] - 1; 
+        }
+    } 
+}
+
+时间复杂度是 O(n) 的
+扩展KMP
+给定两个字符串 S 和 T（长度分别为 n 和 m）
+定义 extend[i] 为 S[i..n] 与 T 的最长公共前缀的长度。
+求出 extend 数组
+
+如果 S = T，那么 extend 数组就是 Z 数组。
+
+假设现在遍历到了 S[i]，且 S[1], S[2],…, S[i-1]都已经算出
+与 Z 算法类似，设置两个变量 l 和 r，r 表示能和 T 匹
+配到的最右边的位置，l 为 r 对应的起始位置。
+也就是 S[l .. r] = T[1.. r-l+1]
+
+S[i] 对应的是 T[i-l+1]
+现在要计算的是 S[i..n] 与 T 的最长公共前缀
+注意到此时 S[i..r] = T[i-l+1 .. r-l+1]
+所以我们可以先对 T 求一遍 Z 数组，然后考察一下 Z[i-l+1]
+
+
+
+void calc_Z(char *str) 
+{
+	int n = strlen(str + 1);
+	for(int i = 1; i &amp;lt;= n; i ++) z[i] = 0;
+	z[1] = n;
+	int l, r = 0;
+	for(int i = 2; i &amp;lt;= n; i ++) 
+	{
+		if(i &amp;gt; r) 
+		{
+			while(str[1 + z[i]] == str[i + z[i]]) z[i] ++;
+			l = i, r = i + z[i] - 1;
+		} else 
+		{
+			if(z[i - l + 1] &amp;lt; r - i + 1) z[i] = z[i - l + 1];
+			else 
+			{
+				z[i] = r - i + 1;
+				while(str[1 + z[i]] == str[i + z[i]]) z[i] ++;
+				l = i, r = i + z[i] - 1;
+			}
+		}
+	}
+}
+
+void calc_extend(char *S, char *T) 
+{
+	calc_Z(T);
+	int l, r = 0;
+	int n = strlen(S + 1);
+	int m = strlen(T + 1);
+	for (int i = 1; i &amp;lt;= n; i ++) 
+	{
+		if (i &amp;gt; r) 
+		{
+			while (i + ext[i] &amp;lt;= n &amp;amp;&amp;amp; 1 + ext[i] &amp;lt;= m &amp;amp;&amp;amp;
+			        S[i + ext[i]] == T[1 + ext[i]]) ext[i] ++;
+			l = i, r = i + ext[i] - 1;
+		}
+		else 
+		{
+			if (i + z[i - l + 1] - 1 &amp;lt; r) ext[i] = z[i - l + 1];
+			else 
+			{
+				ext[i] = r - i + 1;
+				while (i + ext[i] &amp;lt;= n &amp;amp;&amp;amp; 1 + ext[i] &amp;lt;= m &amp;amp;&amp;amp; S[i +ext[i]] == T[1 + ext[i]]) 
+					ext[i] ++;
+				l = i, r = i + ext[i] - 1;
+			}
+		}
+	}
+}
+
+例题
+题意：给你n个字符串，求这n个字符串的最长公共子串
+hdu4333
+给一个 L 位数的正整数 N，每次可以把这个数的最后一位移到最前面来，得到一个新的数。
+总共最多可以得到 n 个数，重复的只算一次。
+问这些数中，等于 n 的，小于 n的，大于 n 的数分别有几个。
+L ≤ 1e5
+
+样例：
+341 （答案： 1 1 1）
+我们只需要把这个数复制两遍，然后只考虑长度为 n 的子串。这些子串就是移动过程中产生的数。
+如何和原数 N 做比较呢
+假设现在的数是 S[i .. i+L-1], N 是 S[1..L]
+我们只要求出他们的最长公共前缀 x，如果 x = n 说明这两个数相等。
+否则，比较 S[x] 和 S[i+x-1] 的大小，就可以确定他们的大小关系。
+求 x ，就是扩展 KMP 中的 Z 算法。x = min(n, Z[i])
+最后一步去重。对 N 跑一次 KMP
+如果 L-next[L] 是 L 的约数，那么 L-next[L] 是 N 的最小循环节。否则 N 的 最小循环节是 L。
+对循环节内的情况枚举一遍即可,或除以最小循环节个数。
+时间复杂度 O(L)
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+const int N=200010;
+char str[N];
+int ne[N];
+int z[N];
+
+int main()
+{
+    int T;
+    scanf(&amp;quot;%d&amp;quot;,&amp;amp;T);
+    for(int kas=1;kas&amp;lt;=T;kas++)
+    {
+        scanf(&amp;quot;%s&amp;quot;,str+1);
+        
+        int len=strlen(str+1);
+        for(int i=2,j=0;i&amp;lt;=len;i++)
+        {
+            while(j &amp;amp;&amp;amp; str[i] != str[j+1])
+                j=ne[j];
+            if(str[i] == str[j+1])
+                j++;
+            ne[i]=j;
+        }
+        
+        for(int i=1;i&amp;lt;=len;i++)
+            str[i+len]=str[i];
+        str[len*2+1]=&#39;\0&#39;;
+        memset(z,0,sizeof z);
+        z[1]=len*2;
+        int l,r=0;
+        
+        for(int i=2;i&amp;lt;=len*2;i++)
+        {
+            if(i&amp;gt;r)
+            {
+                while(str[1+z[i]] == str[i+z[i]])
+                    z[i]++;
+                l=i,r=i+z[i]-1;
+            }
+            else 
+            {
+                if(z[i-l+1] &amp;lt; r-i+1)
+                    z[i]=z[i-l+1];
+                else 
+                {
+                    z[i]=r-i;
+                    while(str[1+z[i]] == str[i+z[i]])
+                        z[i]++;
+                    l=i,r=i+z[i]-1;
+                }
+            }
+        }
+        
+        int gre=0,eql=0,les=0;
+        for(int i=1;i&amp;lt;=len;i++)
+        {
+            if(z[i] &amp;gt;= len)
+                eql++;
+            else if(str[1+z[i]] &amp;gt; str[i+z[i]])
+                les++;
+            else gre++;
+        }
+        
+        int t;
+        if(len%(len-ne[len]) == 0)
+            t=len/(len-ne[len]);//循环节个数 
+        else 
+            t=1;
+        printf(&amp;quot;Case %d: %d %d %d\n&amp;quot;,kas,les/t,eql/t,gre/t);
+    }
+}
+
+对循环节内的情况枚举代码
+poj3376
+给你 n 个字符串 m[1], m[2], …, m[n]。 求 S = m[i]m[j] （1 &amp;lt;= i,j &amp;lt;= n）是回文串的数量。
+n 个字符串的长度之和不超过 2·1e6
+
+样例输入：
+3a
+ab
+ba
+答案：5（aa,aba,aba,abba,baab)
+考虑什么情况下 i 和 j 拼起来会是回文串。
+
+
+i的长度小于j，那么i一定是j的反串的前缀，且j的反串剩下的后缀是回文串
+
+
+i的长度等于j，那么i等于j的反串
+
+
+i的长度大于j，那么j的反串一定是i的前缀，且i串剩下的后缀是回文串
+
+
+我们可以将这n个字符串插入trie，每个节点要维护两个值：
+value1. 到当前节点的字符串个数；value2.当前节点后面的回文子串个数
+我们用每个字符串的反串去trie上查找，要构成回文串有以下情况：
+
+
+1.此反串是其他串的前缀，那么组合回文串的数量就要加上value2
+
+
+2.此反串的前缀是某些字符串，且反串剩下的后缀是回文串，那么组合回文串的数量要加上value1
+
+
+3.2的特例：此反串的前缀是某些字符串，且反串剩下的后缀为空，同样要加上value1，这种情况可以和2一起处理
+
+
+留下的问题就是一个字符串的所有后缀中，哪些是回文串。
+对于串 S，我们先求出正串 S 对反串 T 的 extend[i]
+那么对于每个 i，如果 S[i..n] 和 T 的最长公共前缀等于
+S[i..n] 的长度，说明 S[i..n] 是一个回文串。
+因此整道题就在线性的时间复杂度内解决了。
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+const int N=2e6+10;
+int trie[N][26],tot=1;
+int n;
+char s[N],t[N];
+int len[N];
+int slen;
+int z[N],ext[N];
+bool flag[2][N];
+int bg[N],ed[N];
+typedef long long LL;
+struct Node
+{
+	int v1,v2;
+}cnt[N];
+
+void get_z(char *s)
+{
+	int n=strlen(s+1);
+	for(int i=1;i&amp;lt;=n;i++) z[i]=0;
+	z[1]=n;
+	int l,r=0;
+	for(int i=2;i&amp;lt;=n;i++)
+	{
+		if(i&amp;gt;r)
+		{
+			while(s[1+z[i]] == s[i+z[i]])
+				z[i]++;
+			l=i,r=i+z[i]-1;
+		}
+		else
+		{
+			if(z[i-l+1] &amp;lt; r-i+1)
+				z[i]=z[i-l+1];
+			else
+			{
+				z[i]=r-i;
+				while(s[1+z[i]] == s[i+z[i]])
+					z[i]++;
+				l=i,r=i+z[i]-1;
+			}
+		}
+	}
+}
+
+void exkmp(int type,char *s,char *t)
+{
+	get_z(t);
+	int n=strlen(s+1);
+	int m=strlen(t+1);
+	for(int i=1;i&amp;lt;=n;i++)
+		ext[i]=0;
+	int l,r=0;
+	for(int i=1;i&amp;lt;=n;i++)
+	{
+		if(i&amp;gt;r)
+		{
+			while(i+ext[i] &amp;lt;=n &amp;amp;&amp;amp; 1+ext[i] &amp;lt;=m &amp;amp;&amp;amp;
+			s[i+ext[i]] == t[1+ext[i]])
+				ext[i]++;
+			l=i,r=i+ext[i]-1;
+		}
+		else
+		{
+			if(z[i-l+1] &amp;lt; r-i+1)
+				ext[i]=z[i-l+1];
+			else
+			{
+				ext[i]=r-i+1;
+				while(i + ext[i] &amp;lt;= n &amp;amp;&amp;amp; 1 + ext[i] &amp;lt;= m &amp;amp;&amp;amp; 
+				s[i+ext[i]] == t[1+ext[i]])
+					ext[i]++;
+				l=i,r=i+ext[i]-1;
+			}
+		}
+	}
+
+	for(int i=1;i&amp;lt;=n;i++)
+	{
+		//cout&amp;lt;&amp;lt;&amp;quot;---&amp;quot;&amp;lt;&amp;lt;ext[i]&amp;lt;&amp;lt;endl;
+		if(ext[i] == n-i+1)
+			flag[type][i+slen]=true;//s[i...n]为回文串
+	}
+}
+
+void insert(int k)
+{
+	int p=1;
+	for(int i=bg[k];i&amp;lt;=ed[k];i++)
+	{
+		cnt[p].v2+=flag[0][i];
+		int ch=s[i]-&#39;a&#39;;
+		if(!trie[p][ch])
+			trie[p][ch]=++tot;
+		p=trie[p][ch];
+	}
+	cnt[p].v1++;
+}
+
+void print(int k)
+{
+	int p=1;
+	for(int i=bg[k];i&amp;lt;=ed[k];i++)
+	{
+		int ch=s[i]-&#39;a&#39;;
+		p=trie[p][ch];
+		cout&amp;lt;&amp;lt;&amp;quot;---&amp;quot;&amp;lt;&amp;lt;cnt[p].v2&amp;lt;&amp;lt;&#39; &#39;&amp;lt;&amp;lt;cnt[p].v1&amp;lt;&amp;lt;endl;
+	}
+}
+
+int main()
+{
+	scanf(&amp;quot;%d&amp;quot;,&amp;amp;n);
+	
+	for(int i=1;i&amp;lt;=n;i++)
+	{
+		scanf(&amp;quot;%d&amp;quot;,&amp;amp;len[i]);
+		scanf(&amp;quot;%s&amp;quot;,s+1+slen);
+		for(int j=1;j&amp;lt;=len[i];j++)
+			t[slen+j]=s[slen+len[i]+1-j];
+		t[slen+len[i]+1]=&#39;\0&#39;;
+		exkmp(0,s+slen,t+slen);
+		exkmp(1,t+slen,s+slen);
+
+		bg[i]=slen+1;
+		slen+=len[i];
+		ed[i]=slen;
+
+		insert(i);
+		//print(i);
+	}
+
+	LL ans=0;
+	for(int i=1;i&amp;lt;=n;i++)
+	{
+		int p=1;
+		bool f=true;
+		for(int j=ed[i];j&amp;gt;=bg[i];j--)//用反串去trie上匹配
+		{
+			int k=s[j]-&#39;a&#39;;
+			if(!trie[p][k])
+			{
+				f=false;
+				break;
+			}
+			else
+				p=trie[p][k];
+			if(flag[1][bg[i]+ed[i]-j+1] || j == bg[i])
+				ans+=cnt[p].v1;
+		}
+		if(f)
+			ans+=cnt[p].v2;
+	}
+
+	printf(&amp;quot;%lld\n&amp;quot;,ans);
+	return 0;
+}
+
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://caifxh.github.io/post/kuo-zhan-kmp/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+            <article class="post i-card">
+                <h2 class="post-title">
                     <a href="https://caifxh.github.io/post/zi-fu-chuan-fu-xi-er/">
                         字符串复习（二）
                     </a>
@@ -112,7 +566,7 @@
                     <time class="post-time">2020-03-27</time>
                     
                         <a href="https://caifxh.github.io/tag/yImqvC-Dp/" class="post-tag i-tag
-                            i-tag-other_3">
+                            i-tag-banana">
             #字符串
         </a>
                         
@@ -1804,7 +2258,7 @@ Sample Output
                     <time class="post-time">2020-03-26</time>
                     
                         <a href="https://caifxh.github.io/tag/yImqvC-Dp/" class="post-tag i-tag
-                            i-tag-">
+                            i-tag-other_2">
             #字符串
         </a>
                         
@@ -3128,7 +3582,7 @@ int main()
                     <!-- 个人信息 -->
                     
     <div class="id_card i-card">
-        <div class="id_card-avatar" style="background-image: url(https://caifxh.github.io/images/avatar.png?v=1585882659287)">
+        <div class="id_card-avatar" style="background-image: url(https://caifxh.github.io/images/avatar.png?v=1585901820726)">
         </div>
         <h1 class="id_card-title">
             fxh

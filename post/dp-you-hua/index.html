@@ -7,7 +7,7 @@
 <title>
     DP其他优化 | fxh
 </title>
-<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1585882659287">
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1585901820726">
 <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
 <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
@@ -28,7 +28,7 @@
     <div class="nav">
         <div class="logo">
             <a href="https://caifxh.github.io">
-                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1585882659287" alt="">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1585901820726" alt="">
             </a>
             <div class="site-title">
                 <h1>
@@ -105,7 +105,7 @@
                             <time class="post-time">2020-04-02</time>
                             
                                 <a href="https://caifxh.github.io/tag/hLQFdtGuD/" class="post-tag i-tag
-                            i-tag-other_3">
+                            i-tag-banana">
                             #DP
                         </a>
                                 
@@ -339,7 +339,8 @@ int main()
 }
 </code></pre>
 <h4 id="例题">例题</h4>
-<p>首先考虑计算从 x 到 y 的耗费体力最小的路径。<br>
+<p><a href="https://www.acwing.com/problem/content/235/">acwing223</a><br>
+首先考虑计算从 x 到 y 的耗费体力最小的路径。<br>
 显然是最短路问题。<br>
 因为最多只有 300 个点，可以方便的使用 Floyd 算法先用<br>
 O(<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>V</mi><mn>3</mn></msup></mrow><annotation encoding="application/x-tex">V^3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span></span></span></span>) 的时间复杂度预处理出任意两点间的最短路。</p>

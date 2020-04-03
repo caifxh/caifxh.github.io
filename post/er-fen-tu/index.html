@@ -1,0 +1,989 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>
+    二分图 | fxh
+</title>
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1585901820726">
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://caifxh.github.io/styles/main.css">
+<!-- js -->
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://caifxh.github.io/media/js/jquery.sticky-sidebar.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+        
+</head>
+
+<body>
+    <div class="main">
+        <div class="header">
+    <div class="nav">
+        <div class="logo">
+            <a href="https://caifxh.github.io">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1585901820726" alt="">
+            </a>
+            <div class="site-title">
+                <h1>
+                    fxh
+                </h1>
+            </div>
+        </div>
+        <span class="menu-btn fa fa-align-justify"></span>
+        <div class="menu-container">
+            <ul>
+                
+                    
+                            <li>
+                                <a href="/" class="menu">
+                                    首页
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/archives" class="menu">
+                                    归档
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/tags" class="menu">
+                                    标签
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/post/about" class="menu">
+                                    关于
+                                </a>
+                            </li>
+                            
+                                
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $(".menu-btn").click(function() {
+            $(".menu-container").slideToggle();
+        });
+        $(window).resize(function() {
+
+            if (window.matchMedia('(min-width: 960px)').matches) {
+                $(".menu-container").css('display', 'block')
+            } else {
+                $(".menu-container").css('display', 'none')
+            }
+
+        });
+    });
+</script>
+
+            <div id="main-content" class="post-detail main-container">
+                <!-- left -->
+                <div id="content" class="main-container-left">
+                    <article class="post i-card">
+                        <h2 class="post-title">
+                            二分图
+                        </h2>
+                        <div class="post-info">
+                            <time class="post-time">2020-04-03</time>
+                            
+                                <a href="https://caifxh.github.io/tag/Aq1uYaqZQ/" class="post-tag i-tag
+                            i-tag-other_1">
+                            #图论
+                        </a>
+                                
+                        </div>
+                        
+                                <div class="post-content">
+                                    <h4 id="一-定义">一、定义</h4>
+<p>二分图：是图论中的一种特殊模型。若能将无向图G=(V,E)的顶点V划分为两个交集为空的顶点集，并且任意边的两个端点都分属于两个集合，则称图G为一个为二分图。</p>
+<p>二分图判定定理：一张无向图是二分图：当且仅当图中不存在奇环（奇环是指长度为奇数的环）</p>
+<p>匹配：在图论中，一个「匹配」（matching）是一个边的集合，其中任意两条边都没有公共顶点。例如，图 3、图 4 中红色的边就是图 2 的匹配。<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/28/9969_210efb1e59-14.PNG" alt="14.PNG" loading="lazy"><br>
+我们定义匹配点、匹配边、未匹配点、非匹配边，它们的含义非常显然。例如图 3 中 1、4、5、7 为匹配点，其他顶点为未匹配点；1-5、4-7为匹配边，其他边为非匹配边。</p>
+<p>最大匹配：一个图所有匹配中，所含匹配边数最多的匹配，称为这个图的最大匹配。图 4 是一个最大匹配，它包含 4 条匹配边。</p>
+<p>完美匹配：如果一个图的某个匹配中，所有的顶点都是匹配点，那么它就是一个完美匹配。图 4 是一个完美匹配。显然，完美匹配一定是最大匹配（完美匹配的任何一个点都已经匹配，添加一条新的匹配边一定会与已有的匹配边冲突）。但并非每个图都存在完美匹配。</p>
+<p>举例来说：如下图所示，如果在某一对男孩和女孩之间存在相连的边，就意味着他们彼此喜欢。是否可能让所有男孩和女孩两两配对，使得每对儿都互相喜欢呢？图论中，这就是完美匹配问题。如果换一个说法：最多有多少互相喜欢的男孩/女孩可以配对儿？这就是最大匹配问题。<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/28/9969_7a059b4259-15.png" alt="15.png" loading="lazy"></p>
+<p>交替路：从一个未匹配点出发，依次经过非匹配边、匹配边、非匹配边...形成的路径叫交替路。</p>
+<p>增广路：从一个未匹配点出发，走交替路，如果途径另一个未匹配点（出发的点不算），则这条交替路称为增广路（agumenting path）。例如，图 5 中的一条增广路如图 6 所示（图中的匹配点均用红色标出）：<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/28/9969_11e08cd859-16.png" alt="16.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/28/9969_17217a1859-17.png" alt="17.png" loading="lazy"></p>
+<p>增广路有一个重要特点：非匹配边比匹配边多一条。因此，研究增广路的意义是改进匹配。只要把增广路中的匹配边和非匹配边的身份交换即可。由于中间的匹配节点不存在其他相连的匹配边，所以这样做不会破坏匹配的性质。交换后，图中的匹配边数目比原来多了 1 条。</p>
+<h4 id="二-二分图判定">二、二分图判定</h4>
+<p>据定义，可以知道如果对于一个图，我们将它的节点用黑白染色，那么如果它是二分图，它的每一条边的两端，都可以实现一黑一白。</p>
+<p>所以在判定时，只需要根据这样的性质，对于每一个点，把它所有的未遍历的子节点染上和它不一样的颜色，如果最后没有哪一条边两端颜色一样，就说明它是一个二分图，否则就不是。</p>
+<p>在代码实现的时候可以写成对于每一个点，把未遍历的子接点染上与它不同的颜色，如果存在子节点已经染过色了并且与它颜色相同，可以直接判定它不是一个二分图。、<br>
+看一个这样的图<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/27/9969_ece1a49659-11.png" alt="11.png" loading="lazy"><br>
+会有这样的染色过程<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/27/9969_f86474ce59-12.png" alt="12.png" loading="lazy"><br>
+最后4和5都是白色，gg。</p>
+<p>到此我们就得到了整个图的算法：<br>
+1.选取一个未染色的点u进行染色<br>
+2.遍历u的相邻节点v：若v未染色，则染色成与u不同的颜色，并对v重复第2步；若v已经染色，如果 u和v颜色相同，判定不可行退出遍历。<br>
+3,若所有节点均已染色，则判定可行。<br>
+<a href="https://www.acwing.com/problem/content/862/">模板题</a></p>
+<pre><code>#include &lt;cstring&gt;
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+const int N = 100010, M = 200010;
+
+int n, m;
+int h[N], e[M], ne[M], idx;
+int color[N];
+
+void add(int a, int b)
+{
+    e[idx] = b, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+bool dfs(int u, int c)
+{
+    color[u] = c;
+
+    for (int i = h[u]; i != -1; i = ne[i])
+    {
+        int j = e[i];
+        if (!color[j])
+        {
+            if (!dfs(j, 3 - c)) return false;
+        }
+        else if (color[j] == c) return false;
+    }
+
+    return true;
+}
+
+int main()
+{
+    scanf(&quot;%d%d&quot;, &amp;n, &amp;m);
+
+    memset(h, -1, sizeof h);
+
+    while (m -- )
+    {
+        int a, b;
+        scanf(&quot;%d%d&quot;, &amp;a, &amp;b);
+        add(a, b), add(b, a);
+    }
+
+    bool flag = true;
+    for (int i = 1; i &lt;= n; i ++ )
+        if (!color[i])
+        {
+            if (!dfs(i, 1))
+            {
+                flag = false;
+                break;
+            }
+        }
+
+    if (flag) puts(&quot;Yes&quot;);
+    else puts(&quot;No&quot;);
+
+    return 0;
+}
+</code></pre>
+<p>（如果图是不连通的，要枚举起点）</p>
+<p><a href="https://www.acwing.com/problem/content/259/">acwing257</a><br>
+二分+染色法<br>
+为了让监狱内部的怨气值越小，则需要尽量把怨气值大的罪犯分开</p>
+<ul>
+<li>
+<p>check(x)：表示将任意怨气值大于x的两名罪犯放在两个监狱，且两个监狱内部的最大怨气值均不超过x，符合返回true，符合返回false</p>
+</li>
+<li>
+<p>check(x)函数的实现，验证该图中是否为一个二分图，即监狱内部怨气值小于x的边均去掉，用染色法验证</p>
+</li>
+</ul>
+<p>注意：两个罪犯的怨气值最小的情况下是1，若监狱内部发生冲突事件怨气值的最大值一定大于等于1，而本年内监狱中未发生任何冲突事件，输出是0，因此二分的初始范围是l = 0，r = <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><msup><mn>0</mn><mn>9</mn></msup></mrow><annotation encoding="application/x-tex">10^9</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">9</span></span></span></span></span></span></span></span></span></span></span>,</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+using namespace std;
+const int N=20010,M=200010;
+int h[N],e[M],ne[M],w[M],idx;
+int n,m;
+int color[N];
+
+void add(int a, int b, int c)
+{
+    e[idx] = b, w[idx] = c, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+bool dfs(int u,int c,int mid)
+{
+    color[u]=c;
+    for(int i=h[u];~i;i=ne[i])
+    {
+        int j=e[i];
+        if(w[i] &lt;= mid)
+            continue;
+        if(!color[j])
+        {
+            if(!dfs(j,3-c,mid))
+                return false;
+        }
+        else if(color[j] == c)
+            return false;
+    }
+    return true;
+}
+
+bool check(int mid)
+{
+    memset(color,0,sizeof color);
+    
+    for(int i=1;i&lt;=n;i++)
+        if(!color[i])
+            if(!dfs(i,1,mid))
+                return false;
+    
+    return true;
+}
+
+int main()
+{
+    scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+    memset(h,-1,sizeof h);
+    
+    while(m--)
+    {
+        int a,b,c;
+        scanf(&quot;%d%d%d&quot;,&amp;a,&amp;b,&amp;c);
+        add(a,b,c);
+        add(b,a,c);
+    }
+    
+    int l=0,r=1e9;
+    while(l&lt;r)
+    {
+        int mid=l+r&gt;&gt;1;
+        if(check(mid))
+            r=mid;
+        else
+            l=mid+1;
+    }
+    
+    cout&lt;&lt;l&lt;&lt;endl;
+    
+    return 0;
+}
+</code></pre>
+<h4 id="三-二分图最大匹配">三、二分图最大匹配</h4>
+<p>看这么个图<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/28/9969_5c09747059-001.png" alt="001.png" loading="lazy"><br>
+ABCD是四个死宅，而1234是四个可爱的纸片人小姐姐<br>
+图中的连线表示死宅喜欢的小姐姐<br>
+现在我们要给他们配对</p>
+<p>从A开始，A喜欢1<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/28/9969_69a458e859-002.png" alt="002.png" loading="lazy"></p>
+<p>然后，B也喜欢1，那么反正A还可以要3，本着礼让的精神，A就让给了B<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/28/9969_9447feb059-003.png" alt="003.png" loading="lazy"></p>
+<p>然后发现，C也喜欢1，反正B还可以找2，就把1让给C<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/28/9969_aa68dd0e59-004.png" alt="004.png" loading="lazy"></p>
+<p>D也喜欢1，但是C如果没有1，就找不到小姐姐了，那么作为一个死宅他是不会退让的。</p>
+<p>这样我们就模拟了二分图匹配的全过程，这种方法就是匈牙利算法。<br>
+用不太正经的方法来说，匈牙绿算法就是一个绿与被绿协商与退让的过程。<br>
+<a href="https://www.acwing.com/problem/content/863/">模板题</a></p>
+<pre><code>#include &lt;cstring&gt;
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+const int N = 510, M = 100010;
+
+int n1, n2, m;
+int h[N], e[M], ne[M], idx;
+int match[N];
+bool st[N];
+
+void add(int a, int b)
+{
+    e[idx] = b, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+bool find(int x)
+{
+    for (int i = h[x]; i != -1; i = ne[i])
+    {
+        int j = e[i];
+        if (!st[j])
+        {
+            st[j] = true;
+            if (match[j] == 0 || find(match[j]))
+            {
+                match[j] = x;
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+int main()
+{
+    scanf(&quot;%d%d%d&quot;, &amp;n1, &amp;n2, &amp;m);
+
+    memset(h, -1, sizeof h);
+
+    while (m -- )
+    {
+        int a, b;
+        scanf(&quot;%d%d&quot;, &amp;a, &amp;b);
+        add(a, b);
+    }
+
+    int res = 0;
+    for (int i = 1; i &lt;= n1; i ++ )
+    {
+        memset(st, false, sizeof st);
+        if (find(i)) res ++ ;
+    }
+
+    printf(&quot;%d\n&quot;, res);
+
+    return 0;
+}
+</code></pre>
+<p><img src="https://cdn.acwing.com/media/article/image/2020/02/28/9969_b5789d605a-23.PNG" alt="23.PNG" loading="lazy"><br>
+<a href="https://www.acwing.com/problem/content/374/">acwing372</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/28/9969_c6cf51265a-22.png" alt="22.png" loading="lazy"></p>
+<pre><code>#include &lt;cstring&gt;
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+
+#define x first
+#define y second
+
+using namespace std;
+
+typedef pair&lt;int, int&gt; PII;
+
+const int N = 110;
+
+int n, m;
+PII match[N][N];
+bool g[N][N], st[N][N];
+int dx[4] = {-1, 0, 1, 0}, dy[4] = {0, 1, 0, -1};
+
+bool find(int x, int y)
+{
+    for (int i = 0; i &lt; 4; i ++ )
+    {
+        int a = x + dx[i], b = y + dy[i];
+        if (a &amp;&amp; a &lt;= n &amp;&amp; b &amp;&amp; b &lt;= n &amp;&amp; !g[a][b] &amp;&amp; !st[a][b])
+        {
+            st[a][b] = true;
+            PII t=match[a][b];
+            if (t.x == -1 || find(t.x, t.y))
+            {
+                match[a][b] = {x, y};
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+int main()
+{
+    cin &gt;&gt; n &gt;&gt; m;
+
+    while (m -- )
+    {
+        int x, y;
+        cin &gt;&gt; x &gt;&gt; y;
+        g[x][y] = true;
+    }
+
+    memset(match, -1, sizeof match);
+
+    int res = 0;
+    for (int i = 1; i &lt;= n; i ++ )
+        for (int j = 1; j &lt;= n; j ++ )
+            if ((i + j) % 2 &amp;&amp; !g[i][j])
+            {
+                memset(st, 0, sizeof st);
+                if (find(i, j)) res ++ ;
+            }
+
+    cout &lt;&lt; res &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre>
+<p><a href="https://www.acwing.com/problem/content/description/375/">acwing373</a><br>
+将行标号当做二分图的左图，列标号当做二分图的右图，放置一枚車则表示对应的行和对应的列之间有边。</p>
+<pre><code>#include&lt;cstdio&gt;
+#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+using namespace std;
+const int MAXN=210;
+bool g[MAXN][MAXN];
+bool vis[MAXN];
+int m,match[MAXN];
+bool find(int x){
+    for(int i=1;i&lt;=m;i++){
+        if(vis[i] || g[x][i])continue;
+        vis[i]=1;
+        if(!match[i] || find(match[i]))
+        {
+            match[i]=x;
+            return true;
+        }
+    }
+    return false;
+}
+int main()
+{
+    int n,t;
+    scanf(&quot;%d%d%d&quot;,&amp;n,&amp;m,&amp;t);
+    for(int i=1;i&lt;=t;i++){
+        int x,y;
+        scanf(&quot;%d%d&quot;,&amp;x,&amp;y);
+        g[x][y]=true;
+    }
+    int ans=0;
+    for(int i=1;i&lt;=n;i++)//枚举行
+    {
+        memset(vis,0,sizeof(vis));
+        if(find(i)) ans++;
+    }
+    printf(&quot;%d\n&quot;,ans);
+    return 0;
+}
+</code></pre>
+<h4 id="四-最小点覆盖">四、最小点覆盖</h4>
+<p>图G=(V,E),在图G中选取尽可能少的点，使得图中每一条边至少有一个端点被选中。换句话说，假如选了一个点就相当于覆盖了以它为端点的所有边，你需要选择最少的点来覆盖所有的边。<br>
+这个问题在二分图问题中被称为最小点覆盖问题。即用<code>最少的点去覆盖所有的边</code>。</p>
+<h4 id="könig定理二分图最小点覆盖-二分图最大匹配数">König定理，二分图最小点覆盖 = 二分图最大匹配数</h4>
+<p>那么，怎么证明它是正确的呢？又怎么才能求出需要哪些点呢？<br>
+匈牙利算法中 我们从左边一个没有匹配的点，沿着一条满足“一条不被匹配，一条被匹配，下一条又没有被匹配”的路（交错路径）的路走。但是现在，最大匹配已经完成，没有这样的路了。也就是说，我们可以找到很多增广路，但是它们的终点不再是没匹配的。<br>
+我们可以从左边所有没匹配的点出发，按照“交错出现（走一个匹配过的再走一个没匹配的）”的要求走，标记经过的所有点（左右的点要分开标记详见代码）。<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/27/9969_9b4263f059-10.png" alt="10.png" loading="lazy"><br>
+（蓝色细线为最大匹配，粗线为不完整的增广路，红点为最小点覆盖集，对号是标记）</p>
+<h4 id="可以发现最小覆盖点集即左边没标记的和右边标记了的">可以发现，最小覆盖点集即左边没标记的和右边标记了的</h4>
+<ul>
+<li>为什么这样得到的点集点的个数恰好有M个呢？</li>
+</ul>
+<p>因为每个点都是某个匹配边的其中一个端点。如果左边的哪个点是没有匹配过的，那么它就会被当成起点被标记；如果右边的哪个点是没有匹配过的，那就走不到它那里去（否则就找到了一条完整的增广路）。而一个匹配边又不可能右端点是标记了的，同时左端点是没标记的（不然的话左边的点就可以经过这条边到达了）。因此，最后我们圈起来的点与匹配边一一对应。</p>
+<ul>
+<li>为什么这样得到的点集可以覆盖所有的边呢？</li>
+</ul>
+<p>因为不可能存在某一条边，它的右端点是没有标记的，而左端点是有标记的。原因如下：如果这条边不属于我们的匹配边，那么右端点就可以通过这条边到达（从而得到标记）；如果这条边属于我们的匹配边，那么左端点不可能是一条路径的起点，于是它的标记只能是从这条边的右端点过来的，右端点就应该有标记。</p>
+<ul>
+<li>为什么这是最小的点覆盖集呢？</li>
+</ul>
+<p>因为不可能有比M还小的点覆盖集了，因为要覆盖这M条匹配边至少就需要M个点（再次回到匹配的定义）。</p>
+<p><a href="https://www.acwing.com/problem/content/378/">acwing376</a><br>
+题目描述到每台机器每次转换模式都需要启动一次，每个任务要么在A机器的a[i]模式进行，要么在B机器的b[i]模式进行，模式a[i]和模式b[i]连上一条边（这条边就对应于这个任务）。每条边至少选择1个模式点（这个点上可执行所有可在该模式下执行的任务），最少能选多少个模式(点)覆盖所有边，即求最小点覆盖问题<br>
+注意：两台机器一开始的模式是0，因此每个任务如果可以在模式为0的情况下进行，则不需要进行重启，可以舍去。</p>
+<pre><code>#include &lt;cstring&gt;
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+const int N = 110;
+
+int n, m, k;
+int match[N];
+bool g[N][N], st[N];
+
+bool find(int x)
+{
+    for (int i = 0; i &lt; m; i ++ )
+        if (!st[i] &amp;&amp; g[x][i])
+        {
+            st[i] = true;
+            if (match[i] == -1 || find(match[i]))
+            {
+                match[i] = x;
+                return true;
+            }
+        }
+
+    return false;
+}
+
+int main()
+{
+    while (cin &gt;&gt; n, n)
+    {
+        cin &gt;&gt; m &gt;&gt; k;
+        memset(g, 0, sizeof g);
+        memset(match, -1, sizeof match);
+
+        while (k -- )
+        {
+            int t, a, b;
+            cin &gt;&gt; t &gt;&gt; a &gt;&gt; b;
+            if (!a || !b) continue;
+            g[a][b] = true;
+        }
+
+        int res = 0;
+        for (int i = 0; i &lt; n; i ++ )
+        {
+            memset(st, 0, sizeof st);
+            if (find(i)) res ++ ;
+        }
+
+        cout &lt;&lt; res &lt;&lt; endl;
+    }
+
+    return 0;
+}
+</code></pre>
+<p><a href="https://www.luogu.com.cn/problem/UVA11419">uva11419</a><br>
+目大意：给定一个n行m列的网格图,某些网格上有敌人.请你选择一些行和一些列,覆盖所有敌人.并且使得选择的行与列数量之和最小<br>
+X集合表示行号，Y集合表示列号，如果在（i,j）的地方有目标则在X集合的i位置与Y集合的j位置连边，只要一条边有一个端点被选中则说明这个目标被打掉，这道题就转化为二分图的最小点覆盖数量</p>
+<pre><code>#include &lt;cstring&gt;
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+const int N = 1010;
+int n, m, k;
+int match[N];
+bool g[N][N], st[N];
+bool vis[N];
+int pl[N],pr[N];
+
+bool find(int x)
+{
+    for (int i = 1; i &lt;= m; i ++ )
+        if (!st[i] &amp;&amp; g[x][i])
+        {
+            st[i] = true;
+            if (!match[i] || find(match[i]))
+            {
+                match[i] = x;
+                vis[x]=true;//标记左边匹配的点 
+                return true;
+            }
+        }
+
+    return false;
+}
+
+void dfs(int x)
+{
+	pl[x]=true;
+	for(int i=1;i&lt;=m;i++)
+		if(g[x][i])
+		{
+			if(match[i] &amp;&amp; !pr[i] &amp;&amp; !pl[match[i]])//v有一条匹配了的边&amp;&amp;v未被标记&amp;&amp;v的匹配对象未被标记
+			{
+				pr[i]=true;
+				dfs(match[i]);
+			}
+		}
+}
+
+void print()
+{
+	memset(pl,0,sizeof pl);
+	memset(pr,0,sizeof pr);
+	for(int i=1;i&lt;=n;i++)
+		if(!vis[i])
+			dfs(i);//以左侧未匹配点为起点
+	
+	for(int i=1;i&lt;=n;i++)
+		if(!pl[i])
+			printf(&quot;r%d &quot;,i);//左侧的未标记点
+		
+	for(int i=1;i&lt;=m;i++)
+		if(pr[i])
+			printf(&quot;c%d &quot;,i);//右侧的标记点
+	
+	printf(&quot;\n&quot;);
+}
+
+int main()
+{
+    while (cin &gt;&gt; n &gt;&gt; m &gt;&gt; k, n)
+    {
+        memset(g, 0, sizeof g);
+        memset(match, 0, sizeof match);
+		memset(vis,0,sizeof vis);
+        while (k -- )
+        {
+            int a, b;
+            cin &gt;&gt; a &gt;&gt; b;
+            g[a][b] = true;
+        }
+
+        int res = 0;
+        for (int i = 1; i &lt;= n; i ++ )
+        {
+            memset(st, 0, sizeof st);
+            if (find(i)) res ++ ;
+        }
+
+        printf(&quot;%d &quot;,res);
+        print(); 
+    }
+
+    return 0;
+}
+</code></pre>
+<h4 id="五-最大独立集">五、最大独立集</h4>
+<p>图G=(V,E)，在图G中选取尽可能多的点，使得<strong>任意两个点之间没有连边</strong>。找出一个包含顶点数最多的独立集称为最大独立集。<br>
+这个问题在二分图问题中被称为最大独立集问题。</p>
+<h4 id="方法最大独立集所有顶点数-最小顶点覆盖所有顶点数-最大匹配数">方法：最大独立集=所有顶点数-最小顶点覆盖=所有顶点数-最大匹配数</h4>
+<p><img src="https://cdn.acwing.com/media/article/image/2020/02/28/9969_b8a3775459-18.png" alt="18.png" loading="lazy"><br>
+在上面这个图中最小顶点覆盖=3，即2,4,7构成最小顶点覆盖，则其他点6个构成最大独立集。且其他点不可能相连。假设其他点相连则这条边必定没有被2,4,7 覆盖，与2,4,7是最小顶点覆盖矛盾。因此其他点之间必定没有边。而2,4,7是最小顶点覆盖，所谓最小就是不能再小了，因此我们的独立集就是最大了。</p>
+<p>对应地，任意两点之间都有一条边相连的子图被称为无向图的“团”。点数最多的团被称为图的最大团。</p>
+<h4 id="定理无向图g的最大团等于其补图g的最大独立集">定理：无向图G的最大团等于其补图G'的最大独立集。</h4>
+<p>补图的定义是：对于图中点x和点y，若x和y之间有边，那么在补图中没有，否则有。<br>
+<a href="https://www.acwing.com/problem/content/380/">acwing378</a><br>
+两个格子的马若能互相攻击，则这两个格子能连上一条边，与棋盘覆盖 的题目相似，若两只马能够互相攻击则两只马的格子一定是两种类型的格子，如下图所示，选出最多个格子，使得选出的格子之间没有边，即求最大独立集问题<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/28/9969_3582c5f45a-24.png" alt="24.png" loading="lazy"></p>
+<pre><code>#include &lt;cstring&gt;
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+
+#define x first
+#define y second
+
+using namespace std;
+
+typedef pair&lt;int, int&gt; PII;
+
+const int N = 110;
+
+int n, m, k;
+PII match[N][N];
+bool g[N][N], st[N][N];
+
+int dx[8] = {-2, -1, 1, 2, 2, 1, -1, -2};
+int dy[8] = {1, 2, 2, 1, -1, -2, -2, -1};
+
+bool find(int x, int y)
+{
+    for (int i = 0; i &lt; 8; i ++ )
+    {
+        int a = x + dx[i], b = y + dy[i];
+        if (a &lt; 1 || a &gt; n || b &lt; 1 || b &gt; m) continue;
+        if (g[a][b]) continue;
+        if (st[a][b]) continue;
+
+        st[a][b] = true;
+
+        PII t = match[a][b];
+        if (t.x == 0 || find(t.x, t.y))
+        {
+            match[a][b] = {x, y};
+            return true;
+        }
+    }
+
+    return false;
+}
+
+int main()
+{
+    cin &gt;&gt; n &gt;&gt; m &gt;&gt; k;
+
+    for(int i=0;i&lt;k;i++)
+    {
+        int x, y;
+        cin &gt;&gt; x &gt;&gt; y;
+        g[x][y] = true;
+    }
+
+    int res = 0;
+    for (int i = 1; i &lt;= n; i ++ )
+        for (int j = 1; j &lt;= m; j ++ )
+        {
+            if(!g[i][j] &amp;&amp; (i+j)%2)
+            {
+                memset(st, 0, sizeof st);
+                if (find(i, j)) res ++ ;
+            }
+        }
+
+    cout &lt;&lt; n * m - k - res &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre>
+<h4 id="六-dag的最小路径点覆盖">六、DAG的最小路径点覆盖</h4>
+<p>定义：在一个有向图中，找出最少的路径，使得这些路径经过了所有的点。<br>
+最小路径覆盖分为<code>最小不相交路径覆盖</code>和<code>最小可相交路径覆盖</code>。<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/28/9969_7ddcbc8859-21.png" alt="21.png" loading="lazy"><br>
+<strong>最小不相交路径覆盖</strong>：每一条路径经过的顶点各不相同。如图，其最小路径覆盖数为3。即1-&gt;3&gt;4，2，5。<br>
+<strong>最小可相交路径覆盖</strong>：每一条路径经过的顶点可以相同。如果其最小路径覆盖数为2。即1-&gt;3-&gt;4，2-&gt;3&gt;5。</p>
+<p>特别的，每个点自己也可以称为是路径覆盖，只不过路径的长度是0。</p>
+<h4 id="dag的最小不相交路径覆盖">DAG的最小不相交路径覆盖</h4>
+<p>DAG的最小路径覆盖是指找最小数目的互相不相交的有向路径,满足DAG的所有顶点都被覆盖.</p>
+<h4 id="公式dag的最小路径覆盖数dag图中的节点数-相应二分图中的最大匹配数">公式:DAG的最小路径覆盖数=DAG图中的节点数-相应二分图中的最大匹配数.</h4>
+<p>下面我们来解释上面公式为什么成立<br>
+对应一个DAG,如何构造相应的二分图?对于DAG中的一个顶点p,二分图中有两个顶点p和p',对应DAG中的一条有向边p-&gt;q,二分图中有p-q'的一条无向边.二分图中p属于S集合,p'属于T集合.<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/28/9969_6d2d4be259-19.png" alt="19.png" loading="lazy"><br>
+<strong>证明</strong>：上图中,对应左边的DAG建立构造右边的二分图,可以找到二分图的一个最大匹配M:1-3',3-4',那么M中的这两条匹配边怎样对应DAG中的路径的边?<br>
+使二分图中一条边对应DAG中的一条有向边,1-3'对应DAG图中的有向边1-&gt;3,这样DAG中1就会有一个后继顶点(3会是1的唯一后继,因为二分图中一个顶点至多关联一条边!),所以1不会成为DAG中一条路径中的结尾顶点,同样,3-4'对应DAG中3-&gt;4,3也不会成为结尾顶点,那么原图中总共4个顶点,减去2个有后继的顶点,就剩下没有后继的顶点,即DAG路径的结尾顶点,而每个结尾顶点正好对应DAG中的一条路径,二分图中寻找最大匹配M,就是找到了对应DAG中的非路径结尾顶点的最大数目,那么DAG中顶点数-|M|就是DAG中结尾顶点的最小数目,即DAG的最小路径覆盖数.<br>
+因为路径之间不能有公共点，所以加的边之间也不能有公共点，这是匹配的定义。</p>
+<p><a href="http://poj.org/problem?id=1422">poj1422</a><br>
+题目大意：有n个点和m条有向边，现在要在点上放一些伞兵，然后伞兵沿着图走，直到不能走为止,每条边只能是一个伞兵走过，问最少放多少个伞兵</p>
+<p>思路：<br>
+这是一个很明显的最小路径覆盖，用二分图来做,对于这样的一个有向图做最小路径覆盖。<br>
+首先建图，先拆点，将每个点分为两个点，左边是1到n个点，右边是1-n个点，然后每一条有向边对应左边的点指向右边的点，这样建好图之后求最大匹配数。<br>
+最小路径覆盖=点数-最大匹配数</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+using namespace std;
+const int N=130;
+int n,m;				//交叉路口和街道的个数
+int g[N][N];
+int match[N];
+bool st[N];
+ 
+bool find(int x)
+{
+	for(int i=1;i&lt;=n;i++)
+		if(g[x][i] &amp;&amp; !st[i])
+		{		
+			st[i]=true;
+			if (!match[i] || find(match[i]))
+            {
+                match[i] = x;
+                return true;
+            }
+		}
+		
+	return false;
+}
+ 
+int main()
+{
+	int a,b,t;
+	scanf(&quot;%d&quot;,&amp;t);
+	while(t--)
+	{
+		scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+		memset(g,0,sizeof g);
+		memset(match,0,sizeof match);
+		for(int i=0;i&lt;m;i++)
+		{
+			scanf(&quot;%d%d&quot;,&amp;a,&amp;b);
+			g[a][b]=1;
+		}
+		
+		int res=0;
+		for(int i=1;i&lt;=n;i++)
+		{
+			memset(st,0,sizeof st);
+			if(find(i)) res++;
+		}
+		
+		cout&lt;&lt;n-res&lt;&lt;endl;
+	}
+	return 0;
+}
+</code></pre>
+<h4 id="dag的最小可相交路径覆盖">DAG的最小可相交路径覆盖</h4>
+<p>先用floyd求出原图的传递闭包，即如果a到b有路径a-&gt;...-&gt;x-&gt;...b，那么就加边a-&gt;b。然后就转化成了最小不相交路径覆盖问题。<br>
+<strong>证明</strong>：为了连通两个点，某条路径可能经过其它路径的中间点。比如1-&gt;3-&gt;4，2-&gt;4-&gt;5。但是如果两个点a和b是连通的，只不过中间需要经过其它的点，那么可以在这两个点之间加边，那么a就可以直达b，不必经过中点的，那么就转化成了最小不相交路径覆盖。</p>
+<p><a href="http://poj.org/problem?id=2594">poj2594</a></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+using namespace std;
+const int N=510;
+int n,m;				//交叉路口和街道的个数
+bool g[N][N];
+int match[N];
+bool st[N];
+
+void floyd()
+{
+	for(int i=1;i&lt;=n;i++)
+		for(int j=1;j&lt;=n;j++)
+			for(int k=1;k&lt;=n;k++)
+				g[i][j] |= g[i][k] &amp;&amp; g[k][j];
+}
+ 
+bool find(int x)
+{
+	for(int i=1;i&lt;=n;i++)
+		if(g[x][i] &amp;&amp; !st[i])
+		{		
+			st[i]=true;
+			if (!match[i] || find(match[i]))
+            {
+                match[i] = x;
+                return true;
+            }
+		}
+		
+	return false;
+}
+ 
+int main()
+{
+	while(scanf(&quot;%d%d&quot;,&amp;n,&amp;m) &amp;&amp; n)
+	{
+		memset(g,0,sizeof g);
+		memset(match,0,sizeof match);
+		for(int i=0;i&lt;m;i++)
+		{
+			int a,b;
+			scanf(&quot;%d%d&quot;,&amp;a,&amp;b);
+			g[a][b]=1;
+		}
+		floyd();
+		
+		int res=0;
+		for(int i=1;i&lt;=n;i++)
+		{
+			memset(st,0,sizeof st);
+			if(find(i)) res++;
+		}
+		
+		cout&lt;&lt;n-res&lt;&lt;endl;
+	}
+
+	return 0;
+}
+</code></pre>
+<p>其他题：<br>
+https://vjudge.net/contest/249592#overview</p>
+
+                                </div>
+                    </article>
+                    <!--  -->
+                    
+                        <div class="next-post">
+                            <div class="next">下一篇</div>
+                            <a href="https://caifxh.github.io/post/shu-shang-chai-fen/">
+                                <h3 class="post-title">
+                                    树上差分
+                                </h3>
+                            </a>
+                        </div>
+                        
+                            <div id="disqus_thread"></div>
+                            <div id="gitalk-container"></div>
+                </div>
+                <!-- middle -->
+                <div class="main-container-middle"></div>
+                <!-- right -->
+                <div id="sidebar" class="main-container-right">
+                    
+                        <!-- toc -->
+                        
+    <div class="toc-card i-card ">
+        <div class="toc-title i-card-title">目录</div>
+        <div class="toc-content">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E4%B8%80-%E5%AE%9A%E4%B9%89">一、定义</a></li>
+<li><a href="#%E4%BA%8C-%E4%BA%8C%E5%88%86%E5%9B%BE%E5%88%A4%E5%AE%9A">二、二分图判定</a></li>
+<li><a href="#%E4%B8%89-%E4%BA%8C%E5%88%86%E5%9B%BE%E6%9C%80%E5%A4%A7%E5%8C%B9%E9%85%8D">三、二分图最大匹配</a></li>
+<li><a href="#%E5%9B%9B-%E6%9C%80%E5%B0%8F%E7%82%B9%E8%A6%86%E7%9B%96">四、最小点覆盖</a></li>
+<li><a href="#k%C3%B6nig%E5%AE%9A%E7%90%86%E4%BA%8C%E5%88%86%E5%9B%BE%E6%9C%80%E5%B0%8F%E7%82%B9%E8%A6%86%E7%9B%96-%E4%BA%8C%E5%88%86%E5%9B%BE%E6%9C%80%E5%A4%A7%E5%8C%B9%E9%85%8D%E6%95%B0">König定理，二分图最小点覆盖 = 二分图最大匹配数</a></li>
+<li><a href="#%E5%8F%AF%E4%BB%A5%E5%8F%91%E7%8E%B0%E6%9C%80%E5%B0%8F%E8%A6%86%E7%9B%96%E7%82%B9%E9%9B%86%E5%8D%B3%E5%B7%A6%E8%BE%B9%E6%B2%A1%E6%A0%87%E8%AE%B0%E7%9A%84%E5%92%8C%E5%8F%B3%E8%BE%B9%E6%A0%87%E8%AE%B0%E4%BA%86%E7%9A%84">可以发现，最小覆盖点集即左边没标记的和右边标记了的</a></li>
+<li><a href="#%E4%BA%94-%E6%9C%80%E5%A4%A7%E7%8B%AC%E7%AB%8B%E9%9B%86">五、最大独立集</a></li>
+<li><a href="#%E6%96%B9%E6%B3%95%E6%9C%80%E5%A4%A7%E7%8B%AC%E7%AB%8B%E9%9B%86%E6%89%80%E6%9C%89%E9%A1%B6%E7%82%B9%E6%95%B0-%E6%9C%80%E5%B0%8F%E9%A1%B6%E7%82%B9%E8%A6%86%E7%9B%96%E6%89%80%E6%9C%89%E9%A1%B6%E7%82%B9%E6%95%B0-%E6%9C%80%E5%A4%A7%E5%8C%B9%E9%85%8D%E6%95%B0">方法：最大独立集=所有顶点数-最小顶点覆盖=所有顶点数-最大匹配数</a></li>
+<li><a href="#%E5%AE%9A%E7%90%86%E6%97%A0%E5%90%91%E5%9B%BEg%E7%9A%84%E6%9C%80%E5%A4%A7%E5%9B%A2%E7%AD%89%E4%BA%8E%E5%85%B6%E8%A1%A5%E5%9B%BEg%E7%9A%84%E6%9C%80%E5%A4%A7%E7%8B%AC%E7%AB%8B%E9%9B%86">定理：无向图G的最大团等于其补图G'的最大独立集。</a></li>
+<li><a href="#%E5%85%AD-dag%E7%9A%84%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E7%82%B9%E8%A6%86%E7%9B%96">六、DAG的最小路径点覆盖</a></li>
+<li><a href="#dag%E7%9A%84%E6%9C%80%E5%B0%8F%E4%B8%8D%E7%9B%B8%E4%BA%A4%E8%B7%AF%E5%BE%84%E8%A6%86%E7%9B%96">DAG的最小不相交路径覆盖</a></li>
+<li><a href="#%E5%85%AC%E5%BC%8Fdag%E7%9A%84%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E8%A6%86%E7%9B%96%E6%95%B0dag%E5%9B%BE%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9%E6%95%B0-%E7%9B%B8%E5%BA%94%E4%BA%8C%E5%88%86%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E5%8C%B9%E9%85%8D%E6%95%B0">公式:DAG的最小路径覆盖数=DAG图中的节点数-相应二分图中的最大匹配数.</a></li>
+<li><a href="#dag%E7%9A%84%E6%9C%80%E5%B0%8F%E5%8F%AF%E7%9B%B8%E4%BA%A4%E8%B7%AF%E5%BE%84%E8%A6%86%E7%9B%96">DAG的最小可相交路径覆盖</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+        <script>
+            function locateCatelogList() {
+                /*获取文章目录集合,可通过:header过滤器*/
+                var alis = $('.post-content :header');
+                /*获取侧边栏目录列表集合**/
+                var sidebar_alis = $('.markdownIt-TOC a');
+                /*获取滚动条到顶部的距离*/
+                var scroll_height = $(window).scrollTop();
+                for (var i = 0; i < alis.length; i++) {
+                    /*获取锚点集合中的元素分别到顶点的距离*/
+                    var a_height = $(alis[i]).offset().top;
+                    if (a_height < scroll_height) {
+                        /*高亮显示*/
+                        sidebar_alis.removeClass('on');
+                        $(sidebar_alis[i]).addClass('on');
+                    }
+                }
+            }
+            $(function() {
+                /*绑定滚动事件 */
+                $(window).bind('scroll', locateCatelogList);
+            });
+        </script>
+    </div>
+    
+                            
+
+                </div>
+
+
+
+
+            </div>
+
+
+            <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://caifxh.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+
+    </div>
+    <script>
+        $('#sidebar').stickySidebar({
+            topSpacing: 80,
+            // bottomSpacing: 60
+        });
+    </script>
+    
+</body>
+
+</html>

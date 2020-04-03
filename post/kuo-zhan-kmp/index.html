@@ -1,0 +1,643 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>
+    扩展KMP | fxh
+</title>
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1585901820726">
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://caifxh.github.io/styles/main.css">
+<!-- js -->
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://caifxh.github.io/media/js/jquery.sticky-sidebar.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+        
+</head>
+
+<body>
+    <div class="main">
+        <div class="header">
+    <div class="nav">
+        <div class="logo">
+            <a href="https://caifxh.github.io">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1585901820726" alt="">
+            </a>
+            <div class="site-title">
+                <h1>
+                    fxh
+                </h1>
+            </div>
+        </div>
+        <span class="menu-btn fa fa-align-justify"></span>
+        <div class="menu-container">
+            <ul>
+                
+                    
+                            <li>
+                                <a href="/" class="menu">
+                                    首页
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/archives" class="menu">
+                                    归档
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/tags" class="menu">
+                                    标签
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/post/about" class="menu">
+                                    关于
+                                </a>
+                            </li>
+                            
+                                
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $(".menu-btn").click(function() {
+            $(".menu-container").slideToggle();
+        });
+        $(window).resize(function() {
+
+            if (window.matchMedia('(min-width: 960px)').matches) {
+                $(".menu-container").css('display', 'block')
+            } else {
+                $(".menu-container").css('display', 'none')
+            }
+
+        });
+    });
+</script>
+
+            <div id="main-content" class="post-detail main-container">
+                <!-- left -->
+                <div id="content" class="main-container-left">
+                    <article class="post i-card">
+                        <h2 class="post-title">
+                            扩展KMP
+                        </h2>
+                        <div class="post-info">
+                            <time class="post-time">2020-04-03</time>
+                            
+                                <a href="https://caifxh.github.io/tag/yImqvC-Dp/" class="post-tag i-tag
+                            i-tag-warning">
+                            #字符串
+                        </a>
+                                
+                        </div>
+                        
+                                <div class="post-content">
+                                    <h4 id="z算法">Z算法</h4>
+<p><img src="https://cdn.acwing.com/media/article/image/2020/03/08/9969_ca07496a60-1.PNG" alt="1.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/08/9969_f6f54a1c60-2.PNG" alt="2.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/08/9969_33dfcb7e60-3.png" alt="3.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/08/9969_3623ccf060-4.png" alt="4.png" loading="lazy"><br>
+r[5] = 7<br>
+r[6] = 7<br>
+l[5] = 5<br>
+l[6] = 5<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/08/9969_5abceae260-5.png" alt="5.png" loading="lazy"><br>
+对于 Z[2] 我们需要暴力计算。<br>
+也就是暴力计算 S[1..|S|] 和 S[2..|S|] 的最长公共前缀。<br>
+如果 Z[2] &gt; 0, 那么 r = r[2], l = l[2] = 2<br>
+如果 Z[2] = 0, 那么 r = r[2] = 0, l = l[2] = 0</p>
+<p>我们的目标就是用已有的 Z[2], Z[3], ..., Z[k-1]，来推<br>
+出 Z[k].<br>
+假设 k = 121, Z[2..120] 已经知道了<br>
+r[120] = 130, l[120] = 100<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/08/9969_884cb29e60-6.png" alt="6.png" loading="lazy"><br>
+划分成[l,i-1],[i,r]<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/08/9969_cfa5d35a60-7.png" alt="7.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/08/9969_37ddc43260-8.png" alt="8.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/08/9969_61fb79d060-9.PNG" alt="9.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/08/9969_83939b3660-10.PNG" alt="10.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/08/9969_121af6c460-11.png" alt="11.png" loading="lazy"><br>
+蓝色部分一定不相等，否则说明z-box可以右移</p>
+<p>第一步：<br>
+初始化 Z[]，暴力计算 Z[2]</p>
+<pre><code>for(int i = 1;i &lt;= n;i ++) z[i] = 0;
+int l, r;
+while(str[1 + z[2]] == str[2 + z[2]]) z[2] ++; 
+l = 2, r = 2+ z[2]-1;
+</code></pre>
+<p>第二步：<br>
+枚举 i，分三种情况依次计算 Z[i]</p>
+<pre><code>for(int i = 3;i &lt;= n;i ++)
+{
+    if(i &gt; r)
+    {
+        while(str[1 + z[i]] == str[i + z[i]]) z[i] ++;
+        l = i, r = i + z[i] - 1;
+    }
+    else
+    {
+        if(z[i - l + 1] &lt; r - i + 1) z[i] = z[i - l + 1];
+        else
+        {
+            z[i] = r - i;
+            while(str[1 + z[i]] == str[i + z[i]]) z[i] ++; 
+            l = i, r = i + z[i] - 1; 
+        }
+    } 
+}
+</code></pre>
+<h4 id="时间复杂度是-on-的">时间复杂度是 O(n) 的</h4>
+<h4 id="扩展kmp">扩展KMP</h4>
+<p>给定两个字符串 S 和 T（长度分别为 n 和 m）<br>
+定义 extend[i] 为 S[i..n] 与 T 的最长公共前缀的长度。<br>
+求出 extend 数组<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/08/9969_e93cf15860-12.PNG" alt="12.PNG" loading="lazy"><br>
+如果 S = T，那么 extend 数组就是 Z 数组。<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/08/9969_fe0303ca60-13.PNG" alt="13.PNG" loading="lazy"></p>
+<p>假设现在遍历到了 S[i]，且 S[1], S[2],…, S[i-1]都已经算出<br>
+与 Z 算法类似，设置两个变量 l 和 r，r 表示能和 T 匹<br>
+配到的最右边的位置，l 为 r 对应的起始位置。<br>
+也就是 S[l .. r] = T[1.. r-l+1]<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/08/9969_1677f3ac60-14.PNG" alt="14.PNG" loading="lazy"></p>
+<p>S[i] 对应的是 T[i-l+1]<br>
+现在要计算的是 S[i..n] 与 T 的最长公共前缀<br>
+注意到此时 S[i..r] = T[i-l+1 .. r-l+1]<br>
+所以我们可以先对 T 求一遍 Z 数组，然后考察一下 Z[i-l+1]<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/08/9969_7411db9460-15.png" alt="15.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/08/9969_a95260c660-15.png" alt="15.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/08/9969_de7d174760-16.png" alt="16.png" loading="lazy"></p>
+<pre><code>void calc_Z(char *str) 
+{
+	int n = strlen(str + 1);
+	for(int i = 1; i &lt;= n; i ++) z[i] = 0;
+	z[1] = n;
+	int l, r = 0;
+	for(int i = 2; i &lt;= n; i ++) 
+	{
+		if(i &gt; r) 
+		{
+			while(str[1 + z[i]] == str[i + z[i]]) z[i] ++;
+			l = i, r = i + z[i] - 1;
+		} else 
+		{
+			if(z[i - l + 1] &lt; r - i + 1) z[i] = z[i - l + 1];
+			else 
+			{
+				z[i] = r - i + 1;
+				while(str[1 + z[i]] == str[i + z[i]]) z[i] ++;
+				l = i, r = i + z[i] - 1;
+			}
+		}
+	}
+}
+</code></pre>
+<pre><code>void calc_extend(char *S, char *T) 
+{
+	calc_Z(T);
+	int l, r = 0;
+	int n = strlen(S + 1);
+	int m = strlen(T + 1);
+	for (int i = 1; i &lt;= n; i ++) 
+	{
+		if (i &gt; r) 
+		{
+			while (i + ext[i] &lt;= n &amp;&amp; 1 + ext[i] &lt;= m &amp;&amp;
+			        S[i + ext[i]] == T[1 + ext[i]]) ext[i] ++;
+			l = i, r = i + ext[i] - 1;
+		}
+		else 
+		{
+			if (i + z[i - l + 1] - 1 &lt; r) ext[i] = z[i - l + 1];
+			else 
+			{
+				ext[i] = r - i + 1;
+				while (i + ext[i] &lt;= n &amp;&amp; 1 + ext[i] &lt;= m &amp;&amp; S[i +ext[i]] == T[1 + ext[i]]) 
+					ext[i] ++;
+				l = i, r = i + ext[i] - 1;
+			}
+		}
+	}
+}
+</code></pre>
+<h4 id="例题">例题</h4>
+<p>题意：给你n个字符串，求这n个字符串的最长公共子串</p>
+<p><a href="https://vjudge.net/problem/HDU-4333">hdu4333</a><br>
+给一个 L 位数的正整数 N，每次可以把这个数的最后一位移到最前面来，得到一个新的数。<br>
+总共最多可以得到 n 个数，重复的只算一次。<br>
+问这些数中，等于 n 的，小于 n的，大于 n 的数分别有几个。<br>
+L ≤ 1e5</p>
+<blockquote></blockquote>
+<p>样例：<br>
+341 （答案： 1 1 1）</p>
+<p>我们只需要把这个数复制两遍，然后只考虑长度为 n 的子串。这些子串就是移动过程中产生的数。<br>
+如何和原数 N 做比较呢</p>
+<p>假设现在的数是 S[i .. i+L-1], N 是 S[1..L]<br>
+我们只要求出他们的最长公共前缀 x，如果 x = n 说明这两个数相等。<br>
+否则，比较 S[x] 和 S[i+x-1] 的大小，就可以确定他们的大小关系。<br>
+求 x ，就是扩展 KMP 中的 Z 算法。x = min(n, Z[i])</p>
+<p>最后一步去重。对 N 跑一次 KMP<br>
+如果 L-next[L] 是 L 的约数，那么 L-next[L] 是 N 的最小循环节。否则 N 的 最小循环节是 L。<br>
+对循环节内的情况枚举一遍即可,或除以最小循环节个数。<br>
+时间复杂度 O(L)</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstdio&gt;
+using namespace std;
+const int N=200010;
+char str[N];
+int ne[N];
+int z[N];
+
+int main()
+{
+    int T;
+    scanf(&quot;%d&quot;,&amp;T);
+    for(int kas=1;kas&lt;=T;kas++)
+    {
+        scanf(&quot;%s&quot;,str+1);
+        
+        int len=strlen(str+1);
+        for(int i=2,j=0;i&lt;=len;i++)
+        {
+            while(j &amp;&amp; str[i] != str[j+1])
+                j=ne[j];
+            if(str[i] == str[j+1])
+                j++;
+            ne[i]=j;
+        }
+        
+        for(int i=1;i&lt;=len;i++)
+            str[i+len]=str[i];
+        str[len*2+1]='\0';
+        memset(z,0,sizeof z);
+        z[1]=len*2;
+        int l,r=0;
+        
+        for(int i=2;i&lt;=len*2;i++)
+        {
+            if(i&gt;r)
+            {
+                while(str[1+z[i]] == str[i+z[i]])
+                    z[i]++;
+                l=i,r=i+z[i]-1;
+            }
+            else 
+            {
+                if(z[i-l+1] &lt; r-i+1)
+                    z[i]=z[i-l+1];
+                else 
+                {
+                    z[i]=r-i;
+                    while(str[1+z[i]] == str[i+z[i]])
+                        z[i]++;
+                    l=i,r=i+z[i]-1;
+                }
+            }
+        }
+        
+        int gre=0,eql=0,les=0;
+        for(int i=1;i&lt;=len;i++)
+        {
+            if(z[i] &gt;= len)
+                eql++;
+            else if(str[1+z[i]] &gt; str[i+z[i]])
+                les++;
+            else gre++;
+        }
+        
+        int t;
+        if(len%(len-ne[len]) == 0)
+            t=len/(len-ne[len]);//循环节个数 
+        else 
+            t=1;
+        printf(&quot;Case %d: %d %d %d\n&quot;,kas,les/t,eql/t,gre/t);
+    }
+}
+</code></pre>
+<p>对循环节内的情况枚举<a href="https://paste.ubuntu.com/p/HrvmzSySDv/">代码</a></p>
+<p><a href="https://vjudge.net/problem/POJ-3376">poj3376</a><br>
+给你 n 个字符串 m[1], m[2], …, m[n]。 求 S = m[i]m[j] （1 &lt;= i,j &lt;= n）是回文串的数量。<br>
+n 个字符串的长度之和不超过 2·1e6</p>
+<blockquote></blockquote>
+<p>样例输入：<br>
+3a<br>
+ab<br>
+ba<br>
+答案：5（aa,aba,aba,abba,baab)</p>
+<p>考虑什么情况下 i 和 j 拼起来会是回文串。</p>
+<ul>
+<li>
+<p>i的长度小于j，那么i一定是j的反串的前缀，且j的反串剩下的后缀是回文串</p>
+</li>
+<li>
+<p>i的长度等于j，那么i等于j的反串</p>
+</li>
+<li>
+<p>i的长度大于j，那么j的反串一定是i的前缀，且i串剩下的后缀是回文串</p>
+</li>
+</ul>
+<p>我们可以将这n个字符串插入trie，每个节点要维护两个值：<br>
+value1. 到当前节点的字符串个数；value2.当前节点后面的回文子串个数</p>
+<p>我们用每个字符串的反串去trie上查找，要构成回文串有以下情况：</p>
+<ul>
+<li>
+<p>1.此反串是其他串的前缀，那么组合回文串的数量就要加上value2</p>
+</li>
+<li>
+<p>2.此反串的前缀是某些字符串，且反串剩下的后缀是回文串，那么组合回文串的数量要加上value1</p>
+</li>
+<li>
+<p>3.2的特例：此反串的前缀是某些字符串，且反串剩下的后缀为空，同样要加上value1，这种情况可以和2一起处理</p>
+</li>
+</ul>
+<p>留下的问题就是一个字符串的所有后缀中，哪些是回文串。<br>
+对于串 S，我们先求出正串 S 对反串 T 的 extend[i]<br>
+那么对于每个 i，如果 S[i..n] 和 T 的最长公共前缀等于<br>
+S[i..n] 的长度，说明 S[i..n] 是一个回文串。<br>
+因此整道题就在线性的时间复杂度内解决了。</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstdio&gt;
+using namespace std;
+const int N=2e6+10;
+int trie[N][26],tot=1;
+int n;
+char s[N],t[N];
+int len[N];
+int slen;
+int z[N],ext[N];
+bool flag[2][N];
+int bg[N],ed[N];
+typedef long long LL;
+struct Node
+{
+	int v1,v2;
+}cnt[N];
+
+void get_z(char *s)
+{
+	int n=strlen(s+1);
+	for(int i=1;i&lt;=n;i++) z[i]=0;
+	z[1]=n;
+	int l,r=0;
+	for(int i=2;i&lt;=n;i++)
+	{
+		if(i&gt;r)
+		{
+			while(s[1+z[i]] == s[i+z[i]])
+				z[i]++;
+			l=i,r=i+z[i]-1;
+		}
+		else
+		{
+			if(z[i-l+1] &lt; r-i+1)
+				z[i]=z[i-l+1];
+			else
+			{
+				z[i]=r-i;
+				while(s[1+z[i]] == s[i+z[i]])
+					z[i]++;
+				l=i,r=i+z[i]-1;
+			}
+		}
+	}
+}
+
+void exkmp(int type,char *s,char *t)
+{
+	get_z(t);
+	int n=strlen(s+1);
+	int m=strlen(t+1);
+	for(int i=1;i&lt;=n;i++)
+		ext[i]=0;
+	int l,r=0;
+	for(int i=1;i&lt;=n;i++)
+	{
+		if(i&gt;r)
+		{
+			while(i+ext[i] &lt;=n &amp;&amp; 1+ext[i] &lt;=m &amp;&amp;
+			s[i+ext[i]] == t[1+ext[i]])
+				ext[i]++;
+			l=i,r=i+ext[i]-1;
+		}
+		else
+		{
+			if(z[i-l+1] &lt; r-i+1)
+				ext[i]=z[i-l+1];
+			else
+			{
+				ext[i]=r-i+1;
+				while(i + ext[i] &lt;= n &amp;&amp; 1 + ext[i] &lt;= m &amp;&amp; 
+				s[i+ext[i]] == t[1+ext[i]])
+					ext[i]++;
+				l=i,r=i+ext[i]-1;
+			}
+		}
+	}
+
+	for(int i=1;i&lt;=n;i++)
+	{
+		//cout&lt;&lt;&quot;---&quot;&lt;&lt;ext[i]&lt;&lt;endl;
+		if(ext[i] == n-i+1)
+			flag[type][i+slen]=true;//s[i...n]为回文串
+	}
+}
+
+void insert(int k)
+{
+	int p=1;
+	for(int i=bg[k];i&lt;=ed[k];i++)
+	{
+		cnt[p].v2+=flag[0][i];
+		int ch=s[i]-'a';
+		if(!trie[p][ch])
+			trie[p][ch]=++tot;
+		p=trie[p][ch];
+	}
+	cnt[p].v1++;
+}
+
+void print(int k)
+{
+	int p=1;
+	for(int i=bg[k];i&lt;=ed[k];i++)
+	{
+		int ch=s[i]-'a';
+		p=trie[p][ch];
+		cout&lt;&lt;&quot;---&quot;&lt;&lt;cnt[p].v2&lt;&lt;' '&lt;&lt;cnt[p].v1&lt;&lt;endl;
+	}
+}
+
+int main()
+{
+	scanf(&quot;%d&quot;,&amp;n);
+	
+	for(int i=1;i&lt;=n;i++)
+	{
+		scanf(&quot;%d&quot;,&amp;len[i]);
+		scanf(&quot;%s&quot;,s+1+slen);
+		for(int j=1;j&lt;=len[i];j++)
+			t[slen+j]=s[slen+len[i]+1-j];
+		t[slen+len[i]+1]='\0';
+		exkmp(0,s+slen,t+slen);
+		exkmp(1,t+slen,s+slen);
+
+		bg[i]=slen+1;
+		slen+=len[i];
+		ed[i]=slen;
+
+		insert(i);
+		//print(i);
+	}
+
+	LL ans=0;
+	for(int i=1;i&lt;=n;i++)
+	{
+		int p=1;
+		bool f=true;
+		for(int j=ed[i];j&gt;=bg[i];j--)//用反串去trie上匹配
+		{
+			int k=s[j]-'a';
+			if(!trie[p][k])
+			{
+				f=false;
+				break;
+			}
+			else
+				p=trie[p][k];
+			if(flag[1][bg[i]+ed[i]-j+1] || j == bg[i])
+				ans+=cnt[p].v1;
+		}
+		if(f)
+			ans+=cnt[p].v2;
+	}
+
+	printf(&quot;%lld\n&quot;,ans);
+	return 0;
+}
+</code></pre>
+
+                                </div>
+                    </article>
+                    <!--  -->
+                    
+                        <div class="next-post">
+                            <div class="next">下一篇</div>
+                            <a href="https://caifxh.github.io/post/er-fen-tu/">
+                                <h3 class="post-title">
+                                    二分图
+                                </h3>
+                            </a>
+                        </div>
+                        
+                            <div id="disqus_thread"></div>
+                            <div id="gitalk-container"></div>
+                </div>
+                <!-- middle -->
+                <div class="main-container-middle"></div>
+                <!-- right -->
+                <div id="sidebar" class="main-container-right">
+                    
+                        <!-- toc -->
+                        
+    <div class="toc-card i-card ">
+        <div class="toc-title i-card-title">目录</div>
+        <div class="toc-content">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#z%E7%AE%97%E6%B3%95">Z算法</a></li>
+<li><a href="#%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E6%98%AF-on-%E7%9A%84">时间复杂度是 O(n) 的</a></li>
+<li><a href="#%E6%89%A9%E5%B1%95kmp">扩展KMP</a></li>
+<li><a href="#%E4%BE%8B%E9%A2%98">例题</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+        <script>
+            function locateCatelogList() {
+                /*获取文章目录集合,可通过:header过滤器*/
+                var alis = $('.post-content :header');
+                /*获取侧边栏目录列表集合**/
+                var sidebar_alis = $('.markdownIt-TOC a');
+                /*获取滚动条到顶部的距离*/
+                var scroll_height = $(window).scrollTop();
+                for (var i = 0; i < alis.length; i++) {
+                    /*获取锚点集合中的元素分别到顶点的距离*/
+                    var a_height = $(alis[i]).offset().top;
+                    if (a_height < scroll_height) {
+                        /*高亮显示*/
+                        sidebar_alis.removeClass('on');
+                        $(sidebar_alis[i]).addClass('on');
+                    }
+                }
+            }
+            $(function() {
+                /*绑定滚动事件 */
+                $(window).bind('scroll', locateCatelogList);
+            });
+        </script>
+    </div>
+    
+                            
+
+                </div>
+
+
+
+
+            </div>
+
+
+            <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://caifxh.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+
+    </div>
+    <script>
+        $('#sidebar').stickySidebar({
+            topSpacing: 80,
+            // bottomSpacing: 60
+        });
+    </script>
+    
+</body>
+
+</html>

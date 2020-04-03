@@ -7,7 +7,7 @@
 <title>
     图论 | fxh
 </title>
-<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1585882659287">
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1585901820726">
 <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
 <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
@@ -27,7 +27,7 @@
     <div class="nav">
         <div class="logo">
             <a href="https://caifxh.github.io">
-                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1585882659287" alt="">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1585901820726" alt="">
             </a>
             <div class="site-title">
                 <h1>
@@ -104,6 +104,1331 @@
         
             <article class="post i-card">
                 <h2 class="post-title">
+                    <a href="https://caifxh.github.io/post/er-fen-tu/">
+                        二分图
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2020-04-03</time>
+                    
+                        <a href="https://caifxh.github.io/tag/Aq1uYaqZQ/" class="post-tag i-tag
+                            i-tag-primary">
+            #图论
+        </a>
+                        
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            一、定义
+二分图：是图论中的一种特殊模型。若能将无向图G=(V,E)的顶点V划分为两个交集为空的顶点集，并且任意边的两个端点都分属于两个集合，则称图G为一个为二分图。
+二分图判定定理：一张无向图是二分图：当且仅当图中不存在奇环（奇环是指长度为奇数的环）
+匹配：在图论中，一个「匹配」（matching）是一个边的集合，其中任意两条边都没有公共顶点。例如，图 3、图 4 中红色的边就是图 2 的匹配。
+
+我们定义匹配点、匹配边、未匹配点、非匹配边，它们的含义非常显然。例如图 3 中 1、4、5、7 为匹配点，其他顶点为未匹配点；1-5、4-7为匹配边，其他边为非匹配边。
+最大匹配：一个图所有匹配中，所含匹配边数最多的匹配，称为这个图的最大匹配。图 4 是一个最大匹配，它包含 4 条匹配边。
+完美匹配：如果一个图的某个匹配中，所有的顶点都是匹配点，那么它就是一个完美匹配。图 4 是一个完美匹配。显然，完美匹配一定是最大匹配（完美匹配的任何一个点都已经匹配，添加一条新的匹配边一定会与已有的匹配边冲突）。但并非每个图都存在完美匹配。
+举例来说：如下图所示，如果在某一对男孩和女孩之间存在相连的边，就意味着他们彼此喜欢。是否可能让所有男孩和女孩两两配对，使得每对儿都互相喜欢呢？图论中，这就是完美匹配问题。如果换一个说法：最多有多少互相喜欢的男孩/女孩可以配对儿？这就是最大匹配问题。
+
+交替路：从一个未匹配点出发，依次经过非匹配边、匹配边、非匹配边...形成的路径叫交替路。
+增广路：从一个未匹配点出发，走交替路，如果途径另一个未匹配点（出发的点不算），则这条交替路称为增广路（agumenting path）。例如，图 5 中的一条增广路如图 6 所示（图中的匹配点均用红色标出）：
+
+
+增广路有一个重要特点：非匹配边比匹配边多一条。因此，研究增广路的意义是改进匹配。只要把增广路中的匹配边和非匹配边的身份交换即可。由于中间的匹配节点不存在其他相连的匹配边，所以这样做不会破坏匹配的性质。交换后，图中的匹配边数目比原来多了 1 条。
+二、二分图判定
+据定义，可以知道如果对于一个图，我们将它的节点用黑白染色，那么如果它是二分图，它的每一条边的两端，都可以实现一黑一白。
+所以在判定时，只需要根据这样的性质，对于每一个点，把它所有的未遍历的子节点染上和它不一样的颜色，如果最后没有哪一条边两端颜色一样，就说明它是一个二分图，否则就不是。
+在代码实现的时候可以写成对于每一个点，把未遍历的子接点染上与它不同的颜色，如果存在子节点已经染过色了并且与它颜色相同，可以直接判定它不是一个二分图。、
+看一个这样的图
+
+会有这样的染色过程
+
+最后4和5都是白色，gg。
+到此我们就得到了整个图的算法：
+1.选取一个未染色的点u进行染色
+2.遍历u的相邻节点v：若v未染色，则染色成与u不同的颜色，并对v重复第2步；若v已经染色，如果 u和v颜色相同，判定不可行退出遍历。
+3,若所有节点均已染色，则判定可行。
+模板题
+#include &amp;lt;cstring&amp;gt;
+#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;algorithm&amp;gt;
+
+using namespace std;
+
+const int N = 100010, M = 200010;
+
+int n, m;
+int h[N], e[M], ne[M], idx;
+int color[N];
+
+void add(int a, int b)
+{
+    e[idx] = b, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+bool dfs(int u, int c)
+{
+    color[u] = c;
+
+    for (int i = h[u]; i != -1; i = ne[i])
+    {
+        int j = e[i];
+        if (!color[j])
+        {
+            if (!dfs(j, 3 - c)) return false;
+        }
+        else if (color[j] == c) return false;
+    }
+
+    return true;
+}
+
+int main()
+{
+    scanf(&amp;quot;%d%d&amp;quot;, &amp;amp;n, &amp;amp;m);
+
+    memset(h, -1, sizeof h);
+
+    while (m -- )
+    {
+        int a, b;
+        scanf(&amp;quot;%d%d&amp;quot;, &amp;amp;a, &amp;amp;b);
+        add(a, b), add(b, a);
+    }
+
+    bool flag = true;
+    for (int i = 1; i &amp;lt;= n; i ++ )
+        if (!color[i])
+        {
+            if (!dfs(i, 1))
+            {
+                flag = false;
+                break;
+            }
+        }
+
+    if (flag) puts(&amp;quot;Yes&amp;quot;);
+    else puts(&amp;quot;No&amp;quot;);
+
+    return 0;
+}
+
+（如果图是不连通的，要枚举起点）
+acwing257
+二分+染色法
+为了让监狱内部的怨气值越小，则需要尽量把怨气值大的罪犯分开
+
+
+check(x)：表示将任意怨气值大于x的两名罪犯放在两个监狱，且两个监狱内部的最大怨气值均不超过x，符合返回true，符合返回false
+
+
+check(x)函数的实现，验证该图中是否为一个二分图，即监狱内部怨气值小于x的边均去掉，用染色法验证
+
+
+注意：两个罪犯的怨气值最小的情况下是1，若监狱内部发生冲突事件怨气值的最大值一定大于等于1，而本年内监狱中未发生任何冲突事件，输出是0，因此二分的初始范围是l = 0，r = 10910^9109,
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int N=20010,M=200010;
+int h[N],e[M],ne[M],w[M],idx;
+int n,m;
+int color[N];
+
+void add(int a, int b, int c)
+{
+    e[idx] = b, w[idx] = c, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+bool dfs(int u,int c,int mid)
+{
+    color[u]=c;
+    for(int i=h[u];~i;i=ne[i])
+    {
+        int j=e[i];
+        if(w[i] &amp;lt;= mid)
+            continue;
+        if(!color[j])
+        {
+            if(!dfs(j,3-c,mid))
+                return false;
+        }
+        else if(color[j] == c)
+            return false;
+    }
+    return true;
+}
+
+bool check(int mid)
+{
+    memset(color,0,sizeof color);
+    
+    for(int i=1;i&amp;lt;=n;i++)
+        if(!color[i])
+            if(!dfs(i,1,mid))
+                return false;
+    
+    return true;
+}
+
+int main()
+{
+    scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;m);
+    memset(h,-1,sizeof h);
+    
+    while(m--)
+    {
+        int a,b,c;
+        scanf(&amp;quot;%d%d%d&amp;quot;,&amp;amp;a,&amp;amp;b,&amp;amp;c);
+        add(a,b,c);
+        add(b,a,c);
+    }
+    
+    int l=0,r=1e9;
+    while(l&amp;lt;r)
+    {
+        int mid=l+r&amp;gt;&amp;gt;1;
+        if(check(mid))
+            r=mid;
+        else
+            l=mid+1;
+    }
+    
+    cout&amp;lt;&amp;lt;l&amp;lt;&amp;lt;endl;
+    
+    return 0;
+}
+
+三、二分图最大匹配
+看这么个图
+
+ABCD是四个死宅，而1234是四个可爱的纸片人小姐姐
+图中的连线表示死宅喜欢的小姐姐
+现在我们要给他们配对
+从A开始，A喜欢1
+
+然后，B也喜欢1，那么反正A还可以要3，本着礼让的精神，A就让给了B
+
+然后发现，C也喜欢1，反正B还可以找2，就把1让给C
+
+D也喜欢1，但是C如果没有1，就找不到小姐姐了，那么作为一个死宅他是不会退让的。
+这样我们就模拟了二分图匹配的全过程，这种方法就是匈牙利算法。
+用不太正经的方法来说，匈牙绿算法就是一个绿与被绿协商与退让的过程。
+模板题
+#include &amp;lt;cstring&amp;gt;
+#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;algorithm&amp;gt;
+
+using namespace std;
+
+const int N = 510, M = 100010;
+
+int n1, n2, m;
+int h[N], e[M], ne[M], idx;
+int match[N];
+bool st[N];
+
+void add(int a, int b)
+{
+    e[idx] = b, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+bool find(int x)
+{
+    for (int i = h[x]; i != -1; i = ne[i])
+    {
+        int j = e[i];
+        if (!st[j])
+        {
+            st[j] = true;
+            if (match[j] == 0 || find(match[j]))
+            {
+                match[j] = x;
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+int main()
+{
+    scanf(&amp;quot;%d%d%d&amp;quot;, &amp;amp;n1, &amp;amp;n2, &amp;amp;m);
+
+    memset(h, -1, sizeof h);
+
+    while (m -- )
+    {
+        int a, b;
+        scanf(&amp;quot;%d%d&amp;quot;, &amp;amp;a, &amp;amp;b);
+        add(a, b);
+    }
+
+    int res = 0;
+    for (int i = 1; i &amp;lt;= n1; i ++ )
+    {
+        memset(st, false, sizeof st);
+        if (find(i)) res ++ ;
+    }
+
+    printf(&amp;quot;%d\n&amp;quot;, res);
+
+    return 0;
+}
+
+
+acwing372
+
+#include &amp;lt;cstring&amp;gt;
+#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;algorithm&amp;gt;
+
+#define x first
+#define y second
+
+using namespace std;
+
+typedef pair&amp;lt;int, int&amp;gt; PII;
+
+const int N = 110;
+
+int n, m;
+PII match[N][N];
+bool g[N][N], st[N][N];
+int dx[4] = {-1, 0, 1, 0}, dy[4] = {0, 1, 0, -1};
+
+bool find(int x, int y)
+{
+    for (int i = 0; i &amp;lt; 4; i ++ )
+    {
+        int a = x + dx[i], b = y + dy[i];
+        if (a &amp;amp;&amp;amp; a &amp;lt;= n &amp;amp;&amp;amp; b &amp;amp;&amp;amp; b &amp;lt;= n &amp;amp;&amp;amp; !g[a][b] &amp;amp;&amp;amp; !st[a][b])
+        {
+            st[a][b] = true;
+            PII t=match[a][b];
+            if (t.x == -1 || find(t.x, t.y))
+            {
+                match[a][b] = {x, y};
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+int main()
+{
+    cin &amp;gt;&amp;gt; n &amp;gt;&amp;gt; m;
+
+    while (m -- )
+    {
+        int x, y;
+        cin &amp;gt;&amp;gt; x &amp;gt;&amp;gt; y;
+        g[x][y] = true;
+    }
+
+    memset(match, -1, sizeof match);
+
+    int res = 0;
+    for (int i = 1; i &amp;lt;= n; i ++ )
+        for (int j = 1; j &amp;lt;= n; j ++ )
+            if ((i + j) % 2 &amp;amp;&amp;amp; !g[i][j])
+            {
+                memset(st, 0, sizeof st);
+                if (find(i, j)) res ++ ;
+            }
+
+    cout &amp;lt;&amp;lt; res &amp;lt;&amp;lt; endl;
+
+    return 0;
+}
+
+acwing373
+将行标号当做二分图的左图，列标号当做二分图的右图，放置一枚車则表示对应的行和对应的列之间有边。
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int MAXN=210;
+bool g[MAXN][MAXN];
+bool vis[MAXN];
+int m,match[MAXN];
+bool find(int x){
+    for(int i=1;i&amp;lt;=m;i++){
+        if(vis[i] || g[x][i])continue;
+        vis[i]=1;
+        if(!match[i] || find(match[i]))
+        {
+            match[i]=x;
+            return true;
+        }
+    }
+    return false;
+}
+int main()
+{
+    int n,t;
+    scanf(&amp;quot;%d%d%d&amp;quot;,&amp;amp;n,&amp;amp;m,&amp;amp;t);
+    for(int i=1;i&amp;lt;=t;i++){
+        int x,y;
+        scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;x,&amp;amp;y);
+        g[x][y]=true;
+    }
+    int ans=0;
+    for(int i=1;i&amp;lt;=n;i++)//枚举行
+    {
+        memset(vis,0,sizeof(vis));
+        if(find(i)) ans++;
+    }
+    printf(&amp;quot;%d\n&amp;quot;,ans);
+    return 0;
+}
+
+四、最小点覆盖
+图G=(V,E),在图G中选取尽可能少的点，使得图中每一条边至少有一个端点被选中。换句话说，假如选了一个点就相当于覆盖了以它为端点的所有边，你需要选择最少的点来覆盖所有的边。
+这个问题在二分图问题中被称为最小点覆盖问题。即用最少的点去覆盖所有的边。
+König定理，二分图最小点覆盖 = 二分图最大匹配数
+那么，怎么证明它是正确的呢？又怎么才能求出需要哪些点呢？
+匈牙利算法中 我们从左边一个没有匹配的点，沿着一条满足“一条不被匹配，一条被匹配，下一条又没有被匹配”的路（交错路径）的路走。但是现在，最大匹配已经完成，没有这样的路了。也就是说，我们可以找到很多增广路，但是它们的终点不再是没匹配的。
+我们可以从左边所有没匹配的点出发，按照“交错出现（走一个匹配过的再走一个没匹配的）”的要求走，标记经过的所有点（左右的点要分开标记详见代码）。
+
+（蓝色细线为最大匹配，粗线为不完整的增广路，红点为最小点覆盖集，对号是标记）
+可以发现，最小覆盖点集即左边没标记的和右边标记了的
+
+为什么这样得到的点集点的个数恰好有M个呢？
+
+因为每个点都是某个匹配边的其中一个端点。如果左边的哪个点是没有匹配过的，那么它就会被当成起点被标记；如果右边的哪个点是没有匹配过的，那就走不到它那里去（否则就找到了一条完整的增广路）。而一个匹配边又不可能右端点是标记了的，同时左端点是没标记的（不然的话左边的点就可以经过这条边到达了）。因此，最后我们圈起来的点与匹配边一一对应。
+
+为什么这样得到的点集可以覆盖所有的边呢？
+
+因为不可能存在某一条边，它的右端点是没有标记的，而左端点是有标记的。原因如下：如果这条边不属于我们的匹配边，那么右端点就可以通过这条边到达（从而得到标记）；如果这条边属于我们的匹配边，那么左端点不可能是一条路径的起点，于是它的标记只能是从这条边的右端点过来的，右端点就应该有标记。
+
+为什么这是最小的点覆盖集呢？
+
+因为不可能有比M还小的点覆盖集了，因为要覆盖这M条匹配边至少就需要M个点（再次回到匹配的定义）。
+acwing376
+题目描述到每台机器每次转换模式都需要启动一次，每个任务要么在A机器的a[i]模式进行，要么在B机器的b[i]模式进行，模式a[i]和模式b[i]连上一条边（这条边就对应于这个任务）。每条边至少选择1个模式点（这个点上可执行所有可在该模式下执行的任务），最少能选多少个模式(点)覆盖所有边，即求最小点覆盖问题
+注意：两台机器一开始的模式是0，因此每个任务如果可以在模式为0的情况下进行，则不需要进行重启，可以舍去。
+#include &amp;lt;cstring&amp;gt;
+#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;algorithm&amp;gt;
+
+using namespace std;
+
+const int N = 110;
+
+int n, m, k;
+int match[N];
+bool g[N][N], st[N];
+
+bool find(int x)
+{
+    for (int i = 0; i &amp;lt; m; i ++ )
+        if (!st[i] &amp;amp;&amp;amp; g[x][i])
+        {
+            st[i] = true;
+            if (match[i] == -1 || find(match[i]))
+            {
+                match[i] = x;
+                return true;
+            }
+        }
+
+    return false;
+}
+
+int main()
+{
+    while (cin &amp;gt;&amp;gt; n, n)
+    {
+        cin &amp;gt;&amp;gt; m &amp;gt;&amp;gt; k;
+        memset(g, 0, sizeof g);
+        memset(match, -1, sizeof match);
+
+        while (k -- )
+        {
+            int t, a, b;
+            cin &amp;gt;&amp;gt; t &amp;gt;&amp;gt; a &amp;gt;&amp;gt; b;
+            if (!a || !b) continue;
+            g[a][b] = true;
+        }
+
+        int res = 0;
+        for (int i = 0; i &amp;lt; n; i ++ )
+        {
+            memset(st, 0, sizeof st);
+            if (find(i)) res ++ ;
+        }
+
+        cout &amp;lt;&amp;lt; res &amp;lt;&amp;lt; endl;
+    }
+
+    return 0;
+}
+
+uva11419
+目大意：给定一个n行m列的网格图,某些网格上有敌人.请你选择一些行和一些列,覆盖所有敌人.并且使得选择的行与列数量之和最小
+X集合表示行号，Y集合表示列号，如果在（i,j）的地方有目标则在X集合的i位置与Y集合的j位置连边，只要一条边有一个端点被选中则说明这个目标被打掉，这道题就转化为二分图的最小点覆盖数量
+#include &amp;lt;cstring&amp;gt;
+#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;algorithm&amp;gt;
+
+using namespace std;
+const int N = 1010;
+int n, m, k;
+int match[N];
+bool g[N][N], st[N];
+bool vis[N];
+int pl[N],pr[N];
+
+bool find(int x)
+{
+    for (int i = 1; i &amp;lt;= m; i ++ )
+        if (!st[i] &amp;amp;&amp;amp; g[x][i])
+        {
+            st[i] = true;
+            if (!match[i] || find(match[i]))
+            {
+                match[i] = x;
+                vis[x]=true;//标记左边匹配的点 
+                return true;
+            }
+        }
+
+    return false;
+}
+
+void dfs(int x)
+{
+	pl[x]=true;
+	for(int i=1;i&amp;lt;=m;i++)
+		if(g[x][i])
+		{
+			if(match[i] &amp;amp;&amp;amp; !pr[i] &amp;amp;&amp;amp; !pl[match[i]])//v有一条匹配了的边&amp;amp;&amp;amp;v未被标记&amp;amp;&amp;amp;v的匹配对象未被标记
+			{
+				pr[i]=true;
+				dfs(match[i]);
+			}
+		}
+}
+
+void print()
+{
+	memset(pl,0,sizeof pl);
+	memset(pr,0,sizeof pr);
+	for(int i=1;i&amp;lt;=n;i++)
+		if(!vis[i])
+			dfs(i);//以左侧未匹配点为起点
+	
+	for(int i=1;i&amp;lt;=n;i++)
+		if(!pl[i])
+			printf(&amp;quot;r%d &amp;quot;,i);//左侧的未标记点
+		
+	for(int i=1;i&amp;lt;=m;i++)
+		if(pr[i])
+			printf(&amp;quot;c%d &amp;quot;,i);//右侧的标记点
+	
+	printf(&amp;quot;\n&amp;quot;);
+}
+
+int main()
+{
+    while (cin &amp;gt;&amp;gt; n &amp;gt;&amp;gt; m &amp;gt;&amp;gt; k, n)
+    {
+        memset(g, 0, sizeof g);
+        memset(match, 0, sizeof match);
+		memset(vis,0,sizeof vis);
+        while (k -- )
+        {
+            int a, b;
+            cin &amp;gt;&amp;gt; a &amp;gt;&amp;gt; b;
+            g[a][b] = true;
+        }
+
+        int res = 0;
+        for (int i = 1; i &amp;lt;= n; i ++ )
+        {
+            memset(st, 0, sizeof st);
+            if (find(i)) res ++ ;
+        }
+
+        printf(&amp;quot;%d &amp;quot;,res);
+        print(); 
+    }
+
+    return 0;
+}
+
+五、最大独立集
+图G=(V,E)，在图G中选取尽可能多的点，使得任意两个点之间没有连边。找出一个包含顶点数最多的独立集称为最大独立集。
+这个问题在二分图问题中被称为最大独立集问题。
+方法：最大独立集=所有顶点数-最小顶点覆盖=所有顶点数-最大匹配数
+
+在上面这个图中最小顶点覆盖=3，即2,4,7构成最小顶点覆盖，则其他点6个构成最大独立集。且其他点不可能相连。假设其他点相连则这条边必定没有被2,4,7 覆盖，与2,4,7是最小顶点覆盖矛盾。因此其他点之间必定没有边。而2,4,7是最小顶点覆盖，所谓最小就是不能再小了，因此我们的独立集就是最大了。
+对应地，任意两点之间都有一条边相连的子图被称为无向图的“团”。点数最多的团被称为图的最大团。
+定理：无向图G的最大团等于其补图G&#39;的最大独立集。
+补图的定义是：对于图中点x和点y，若x和y之间有边，那么在补图中没有，否则有。
+acwing378
+两个格子的马若能互相攻击，则这两个格子能连上一条边，与棋盘覆盖 的题目相似，若两只马能够互相攻击则两只马的格子一定是两种类型的格子，如下图所示，选出最多个格子，使得选出的格子之间没有边，即求最大独立集问题
+
+#include &amp;lt;cstring&amp;gt;
+#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;algorithm&amp;gt;
+
+#define x first
+#define y second
+
+using namespace std;
+
+typedef pair&amp;lt;int, int&amp;gt; PII;
+
+const int N = 110;
+
+int n, m, k;
+PII match[N][N];
+bool g[N][N], st[N][N];
+
+int dx[8] = {-2, -1, 1, 2, 2, 1, -1, -2};
+int dy[8] = {1, 2, 2, 1, -1, -2, -2, -1};
+
+bool find(int x, int y)
+{
+    for (int i = 0; i &amp;lt; 8; i ++ )
+    {
+        int a = x + dx[i], b = y + dy[i];
+        if (a &amp;lt; 1 || a &amp;gt; n || b &amp;lt; 1 || b &amp;gt; m) continue;
+        if (g[a][b]) continue;
+        if (st[a][b]) continue;
+
+        st[a][b] = true;
+
+        PII t = match[a][b];
+        if (t.x == 0 || find(t.x, t.y))
+        {
+            match[a][b] = {x, y};
+            return true;
+        }
+    }
+
+    return false;
+}
+
+int main()
+{
+    cin &amp;gt;&amp;gt; n &amp;gt;&amp;gt; m &amp;gt;&amp;gt; k;
+
+    for(int i=0;i&amp;lt;k;i++)
+    {
+        int x, y;
+        cin &amp;gt;&amp;gt; x &amp;gt;&amp;gt; y;
+        g[x][y] = true;
+    }
+
+    int res = 0;
+    for (int i = 1; i &amp;lt;= n; i ++ )
+        for (int j = 1; j &amp;lt;= m; j ++ )
+        {
+            if(!g[i][j] &amp;amp;&amp;amp; (i+j)%2)
+            {
+                memset(st, 0, sizeof st);
+                if (find(i, j)) res ++ ;
+            }
+        }
+
+    cout &amp;lt;&amp;lt; n * m - k - res &amp;lt;&amp;lt; endl;
+
+    return 0;
+}
+
+六、DAG的最小路径点覆盖
+定义：在一个有向图中，找出最少的路径，使得这些路径经过了所有的点。
+最小路径覆盖分为最小不相交路径覆盖和最小可相交路径覆盖。
+
+最小不相交路径覆盖：每一条路径经过的顶点各不相同。如图，其最小路径覆盖数为3。即1-&amp;gt;3&amp;gt;4，2，5。
+最小可相交路径覆盖：每一条路径经过的顶点可以相同。如果其最小路径覆盖数为2。即1-&amp;gt;3-&amp;gt;4，2-&amp;gt;3&amp;gt;5。
+特别的，每个点自己也可以称为是路径覆盖，只不过路径的长度是0。
+DAG的最小不相交路径覆盖
+DAG的最小路径覆盖是指找最小数目的互相不相交的有向路径,满足DAG的所有顶点都被覆盖.
+公式:DAG的最小路径覆盖数=DAG图中的节点数-相应二分图中的最大匹配数.
+下面我们来解释上面公式为什么成立
+对应一个DAG,如何构造相应的二分图?对于DAG中的一个顶点p,二分图中有两个顶点p和p&#39;,对应DAG中的一条有向边p-&amp;gt;q,二分图中有p-q&#39;的一条无向边.二分图中p属于S集合,p&#39;属于T集合.
+
+证明：上图中,对应左边的DAG建立构造右边的二分图,可以找到二分图的一个最大匹配M:1-3&#39;,3-4&#39;,那么M中的这两条匹配边怎样对应DAG中的路径的边?
+使二分图中一条边对应DAG中的一条有向边,1-3&#39;对应DAG图中的有向边1-&amp;gt;3,这样DAG中1就会有一个后继顶点(3会是1的唯一后继,因为二分图中一个顶点至多关联一条边!),所以1不会成为DAG中一条路径中的结尾顶点,同样,3-4&#39;对应DAG中3-&amp;gt;4,3也不会成为结尾顶点,那么原图中总共4个顶点,减去2个有后继的顶点,就剩下没有后继的顶点,即DAG路径的结尾顶点,而每个结尾顶点正好对应DAG中的一条路径,二分图中寻找最大匹配M,就是找到了对应DAG中的非路径结尾顶点的最大数目,那么DAG中顶点数-|M|就是DAG中结尾顶点的最小数目,即DAG的最小路径覆盖数.
+因为路径之间不能有公共点，所以加的边之间也不能有公共点，这是匹配的定义。
+poj1422
+题目大意：有n个点和m条有向边，现在要在点上放一些伞兵，然后伞兵沿着图走，直到不能走为止,每条边只能是一个伞兵走过，问最少放多少个伞兵
+思路：
+这是一个很明显的最小路径覆盖，用二分图来做,对于这样的一个有向图做最小路径覆盖。
+首先建图，先拆点，将每个点分为两个点，左边是1到n个点，右边是1-n个点，然后每一条有向边对应左边的点指向右边的点，这样建好图之后求最大匹配数。
+最小路径覆盖=点数-最大匹配数
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+const int N=130;
+int n,m;				//交叉路口和街道的个数
+int g[N][N];
+int match[N];
+bool st[N];
+ 
+bool find(int x)
+{
+	for(int i=1;i&amp;lt;=n;i++)
+		if(g[x][i] &amp;amp;&amp;amp; !st[i])
+		{		
+			st[i]=true;
+			if (!match[i] || find(match[i]))
+            {
+                match[i] = x;
+                return true;
+            }
+		}
+		
+	return false;
+}
+ 
+int main()
+{
+	int a,b,t;
+	scanf(&amp;quot;%d&amp;quot;,&amp;amp;t);
+	while(t--)
+	{
+		scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;m);
+		memset(g,0,sizeof g);
+		memset(match,0,sizeof match);
+		for(int i=0;i&amp;lt;m;i++)
+		{
+			scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;a,&amp;amp;b);
+			g[a][b]=1;
+		}
+		
+		int res=0;
+		for(int i=1;i&amp;lt;=n;i++)
+		{
+			memset(st,0,sizeof st);
+			if(find(i)) res++;
+		}
+		
+		cout&amp;lt;&amp;lt;n-res&amp;lt;&amp;lt;endl;
+	}
+	return 0;
+}
+
+DAG的最小可相交路径覆盖
+先用floyd求出原图的传递闭包，即如果a到b有路径a-&amp;gt;...-&amp;gt;x-&amp;gt;...b，那么就加边a-&amp;gt;b。然后就转化成了最小不相交路径覆盖问题。
+证明：为了连通两个点，某条路径可能经过其它路径的中间点。比如1-&amp;gt;3-&amp;gt;4，2-&amp;gt;4-&amp;gt;5。但是如果两个点a和b是连通的，只不过中间需要经过其它的点，那么可以在这两个点之间加边，那么a就可以直达b，不必经过中点的，那么就转化成了最小不相交路径覆盖。
+poj2594
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+const int N=510;
+int n,m;				//交叉路口和街道的个数
+bool g[N][N];
+int match[N];
+bool st[N];
+
+void floyd()
+{
+	for(int i=1;i&amp;lt;=n;i++)
+		for(int j=1;j&amp;lt;=n;j++)
+			for(int k=1;k&amp;lt;=n;k++)
+				g[i][j] |= g[i][k] &amp;amp;&amp;amp; g[k][j];
+}
+ 
+bool find(int x)
+{
+	for(int i=1;i&amp;lt;=n;i++)
+		if(g[x][i] &amp;amp;&amp;amp; !st[i])
+		{		
+			st[i]=true;
+			if (!match[i] || find(match[i]))
+            {
+                match[i] = x;
+                return true;
+            }
+		}
+		
+	return false;
+}
+ 
+int main()
+{
+	while(scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;m) &amp;amp;&amp;amp; n)
+	{
+		memset(g,0,sizeof g);
+		memset(match,0,sizeof match);
+		for(int i=0;i&amp;lt;m;i++)
+		{
+			int a,b;
+			scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;a,&amp;amp;b);
+			g[a][b]=1;
+		}
+		floyd();
+		
+		int res=0;
+		for(int i=1;i&amp;lt;=n;i++)
+		{
+			memset(st,0,sizeof st);
+			if(find(i)) res++;
+		}
+		
+		cout&amp;lt;&amp;lt;n-res&amp;lt;&amp;lt;endl;
+	}
+
+	return 0;
+}
+
+其他题：
+https://vjudge.net/contest/249592#overview
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://caifxh.github.io/post/er-fen-tu/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+            <article class="post i-card">
+                <h2 class="post-title">
+                    <a href="https://caifxh.github.io/post/shu-shang-chai-fen/">
+                        树上差分
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2020-04-03</time>
+                    
+                        <a href="https://caifxh.github.io/tag/Aq1uYaqZQ/" class="post-tag i-tag
+                            i-tag-">
+            #图论
+        </a>
+                        
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            树上差分
+树上差分有什么作用？举个例子，如果题目要求对树上的一段路径进行操作，并询问某个点或某条边被经过的次数，树上差分就可以派上用场了。这就是树上差分的基本操作。
+树上差分，就是利用差分的性质，对路径上的重要节点进行修改（而不是暴力全改），作为其差分数组的值，最后在求值时，利用dfs遍历求出差分数组的前缀和，就可以达到降低复杂度的目的。
+需要知道的树的性质:
+
+树上任意两个点的路径唯一.
+任何子节点的父亲节点唯一.(可以认为根节点是没有父亲的)
+
+类比于差分数组,树上差分利用的思想也是前缀和思想.(在这里应该是子树和思想.
+当我们记录树上节点被经过的次数,记录某条边被经过的次数的时候.
+如果每次强制dfs去标记的话,时间复杂度将高到爆炸!
+因此我们引入了树上差分!
+与树上差分在一起的使用的是DFS，因为在回溯的时候,我们可以计算出子树的大小.
+定义数组 cnticnt_icnti​为节点i被经过的次数.
+1.点的差分
+例如,我们从 s--&amp;gt;t ,求这条路径上的点被经过的次数.
+很明显的,我们需要找到他们的LCA,(因为这个点是中转点啊
+我们需要让cnt[s]++,让cnt[t]++，而让他们的cnt[lca]--，cnt[faher(lca)]--;
+如图，绿色的数字代表经过次数.
+
+根据刚刚所讲,我们的标记应该是这样的↓
+
+考虑：我们搜索到s,向上回溯.
+下面以u表示当前节点,sonison_isoni​代表i的儿子节点.(如果一些son不给出下标,即代表当前节点u的儿子
+每个u统计它的子树大小,顺着路径标起来.(即cnt[u]+=cnt[son])
+我们会发现第一次从s回溯到它们的LCA时候,cnt[LCA]+=cnt[son[LCA]]
+此时cnt[LCA]=0! &amp;quot;不是LCA会被经过一次嘛,为什么是0!&amp;quot;
+别急,我们继续搜另一边.
+继续：我们搜索到t,向上回溯.
+依旧统计每个u的子树大小cnt[u]+=cnt[son]
+再度回到LCA 依旧 是cnt[LCA]+=cnt[son[LCA]]
+这个时候 cnt[LCA]=1 这就达到了我们要的效果。
+担忧： 万一我们再从LCA向上回溯的时候使得其父亲节点的子树和为1怎么办?
+这样我们不就使得其父亲节点被经过了一次? 因此我们需要在cnt[faher(lca)]--
+这样就达到了标记我们路径上的点的要求!
+模板题：luoguP3128
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cmath&amp;gt;
+using namespace std;
+const int N=50010,M=N*2;
+int h[N],e[M],ne[M],idx;
+int n,m;
+int dep[N];
+int q[N];
+int fa[N][16];
+int p[N];
+
+void add(int a,int b)
+{
+	e[idx]=b,ne[idx]=h[a],h[a]=idx++;
+}
+
+void bfs()
+{
+	memset(dep,0x3f,sizeof dep);
+	dep[0]=0,dep[1]=1;
+	int hh=0,tt=0;
+	q[0]=1;
+	while(hh &amp;lt;= tt)
+	{
+		int t=q[hh++];
+		for(int i=h[t];~i;i=ne[i])
+		{
+			int j=e[i];
+			if(dep[j] &amp;gt; dep[t] +1)
+			{
+				dep[j] = dep[t] + 1;
+				q[++tt]=j;
+				fa[j][0]=t;
+				for(int k=1;k&amp;lt;=15;k++)
+					fa[j][k]=fa[fa[j][k-1]][k-1];
+			}
+		}
+	}
+}
+
+int lca(int a,int b)
+{
+	if(dep[a] &amp;lt; dep[b])
+		swap(a,b);
+	for(int  k=15;k&amp;gt;=0;k--)
+		if(dep[fa[a][k]] &amp;gt;= dep[b])
+			a=fa[a][k];
+		
+	if(a == b)
+		return a;
+	for(int k=15;k&amp;gt;=0;k--)
+		if(fa[a][k] != fa[b][k])
+		{
+			a=fa[a][k];
+			b=fa[b][k];
+		}
+		
+	return fa[a][0]; 
+}
+
+void dfs(int u,int fa)
+{
+	for(int i=h[u];~i;i=ne[i])
+	{
+		int j=e[i];
+		if(j != fa)
+		{
+			dfs(j,u);
+			p[u]+=p[j];
+		}
+	}
+}
+
+int main()
+{
+	//cout&amp;lt;&amp;lt;log2(50000)&amp;lt;&amp;lt;endl;
+	scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;m);
+	memset(h,-1,sizeof h);
+	for(int i=0;i&amp;lt;n-1;i++)
+	{
+		int u,v;
+		scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;u,&amp;amp;v);
+		add(u,v);
+		add(v,u);
+	}
+	
+	bfs();
+	
+	while(m--)
+	{
+		int a,b;
+		scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;a,&amp;amp;b);
+		int anc=lca(a,b);
+		p[a]++,p[b]++,p[anc]--,p[fa[anc][0]]--;
+	}
+	
+	dfs(1,-1);
+	
+	int res=0;
+	for(int i=1;i&amp;lt;=n;i++)	
+		res=max(res,p[i]);
+	printf(&amp;quot;%d\n&amp;quot;,res);
+	return 0;
+}
+
+luoguP3258
+很明显,这是一道点差分.但是不同的是,我们需要在每个位置”中转“一下.
+
+即会重复经过除了起点和终点外的点。
+还要注意的是,当我们到达 ana_nan​ 这一位置的时候,小熊会吃饭 ,即在这里不会有糖果吃. 所以这个位置的经过次数也需要减一
+只放个主函数，其他都是模板。。。
+int main()
+{
+	//cout&amp;lt;&amp;lt;log2(300000)&amp;lt;&amp;lt;endl;
+	scanf(&amp;quot;%d&amp;quot;,&amp;amp;n);
+	memset(h,-1,sizeof h);
+	for(int i=1;i&amp;lt;=n;i++)	
+		scanf(&amp;quot;%d&amp;quot;,&amp;amp;w[i]);
+	for(int i=0;i&amp;lt;n-1;i++)
+	{
+		int u,v;
+		scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;u,&amp;amp;v);
+		add(u,v);
+		add(v,u);
+	}
+	
+	bfs();
+	
+	for(int i=1;i&amp;lt;n;i++)
+	{
+		int a=w[i],b=w[i+1];
+		int anc=lca(a,b);
+		p[a]++,p[b]++,p[anc]--,p[fa[anc][0]]--;
+	}
+	
+	dfs(1,-1);
+	
+	for(int i=2;i&amp;lt;=n;i++)
+		p[w[i]]--;
+
+	for(int i=1;i&amp;lt;=n;i++)	
+		printf(&amp;quot;%d\n&amp;quot;,p[i]);
+	return 0;
+}
+
+2.边的差分
+我们对边进行差分需要把边塞给点,但是,这里的标记并不是同点差分一样.
+把边塞给点的话,是塞给这条边所连的深度较深的节点. (即塞给儿子节点
+红色边为需要经过的边,绿色的数字代表经过次数
+正常的话,我们的图是这样的.↓
+
+但是由于我们把边塞给了点,因此我们的图应该是这样的↓
+
+但是根据我们点差分的标记方式来看的话显然是行不通的,
+这样的话我们会经过father[LCA]--&amp;gt; LCA这一路径.
+因此考虑如何标记我们的点,来达到经过红色边的情况
+聪明的你一定想到了,这样来标记
+cnt[s]+=1， cnt[t]+=1 ，cnt[LCA]-=2
+这样回溯的话,我们即可只经过图中红色边啦!
+acwing352
+“主要边” 构成一棵树，而一条 “附加边” 必然会和其两端的 LCA 形成环，
+
+那么，每一条主要边存在三种情况：
+1、没有被任何环覆盖
+
+2、只被一个环给覆盖
+
+3、被2个及以上的环覆盖
+
+
+
+对于第一种情况，我们切掉一条“主要边”后其实已经将整张图切成了两部分，但根据题意，还要再切掉一条“附加边”，很显然，随便切哪条都可以，因此此时的方案数即为“附加边”的个数 M。
+
+
+对于第二种情况，我们切掉一条“主要边”后，由于它是在一个环中，所以只能切掉它所在环中的唯一一条“附加边”，因此此时的方案数为 1。
+
+
+对于第三种情况，由于“主要边”存在于2个及以上的环中，因此切掉它之后会使覆盖它的其中两个环合并成一个新环，而我们知道要将一个环切开（此时只有把环切断才能将整张图切开）必须要切两刀，但我们只能再切一刀，所以我们无论如何都不能切开整张图了，因此此时的方案数为 0。
+
+
+分类讨论完了，我们该怎么去统计每条边被环覆盖的次数呢？
+我们就可以用树上差分来做。
+与它父亲节点之间的边被环覆盖的次数。
+
+最后，根据加法原理，我们只要依次统计每条主要边能产生的方案贡献，累加起来即可。
+
+#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;cstring&amp;gt;
+#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;algorithm&amp;gt;
+
+using namespace std;
+
+const int N = 100010, M = N * 2;
+int n, m;
+int h[N], e[M], ne[M], idx;
+int depth[N], fa[N][17];
+int p[N];
+int q[N];
+int ans;
+
+void add(int a, int b)
+{
+    e[idx] = b, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+void bfs()
+{
+    memset(depth, 0x3f, sizeof depth);
+    depth[0] = 0, depth[1] = 1;
+    int hh = 0, tt = 0;
+    q[0] = 1;
+
+    while (hh &amp;lt;= tt)
+    {
+        int t = q[hh ++ ];
+        for (int i = h[t]; ~i; i = ne[i])
+        {
+            int j = e[i];
+            if (depth[j] &amp;gt; depth[t] + 1)
+            {
+                depth[j] = depth[t] + 1;
+                q[ ++ tt] = j;
+                fa[j][0] = t;
+                for (int k = 1; k &amp;lt;= 16; k ++ )
+                    fa[j][k] = fa[fa[j][k - 1]][k - 1];
+            }
+        }
+    }
+}
+
+int lca(int a, int b)
+{
+    if (depth[a] &amp;lt; depth[b]) swap(a, b);
+    for (int k = 16; k &amp;gt;= 0; k -- )
+        if (depth[fa[a][k]] &amp;gt;= depth[b])
+            a = fa[a][k];
+    if (a == b) return a;
+    for (int k = 16; k &amp;gt;= 0; k -- )
+        if (fa[a][k] != fa[b][k])
+        {
+            a = fa[a][k];
+            b = fa[b][k];
+        }
+    return fa[a][0];
+}
+
+int dfs(int u, int fa)
+{
+    for (int i = h[u]; ~i; i = ne[i])
+    {
+        int j = e[i];
+        if (j != fa)
+        {
+            dfs(j, u);
+            p[u]+=p[j];
+        }
+            
+    }
+}
+
+int main()
+{
+    scanf(&amp;quot;%d%d&amp;quot;, &amp;amp;n, &amp;amp;m);
+    memset(h, -1, sizeof h);
+    for (int i = 0; i &amp;lt; n - 1; i ++ )//主要边 
+    {
+        int a, b;
+        scanf(&amp;quot;%d%d&amp;quot;, &amp;amp;a, &amp;amp;b);
+        add(a, b), add(b, a);
+    }
+
+    bfs();
+
+    for (int i = 0; i &amp;lt; m; i ++ )//附加边 
+    {
+        int a, b;
+        scanf(&amp;quot;%d%d&amp;quot;, &amp;amp;a, &amp;amp;b);
+        int anc = lca(a, b);
+        p[a] ++, p[b] ++, p[anc] -= 2;
+    }
+    dfs(1, -1);
+    
+    for(int i=2;i&amp;lt;=n;i++)//边的差分特判根结点 
+    {
+    	if(!p[i])
+    		ans+=m;
+    	if(p[i] == 1)
+    		ans++;
+	}
+	cout&amp;lt;&amp;lt;ans&amp;lt;&amp;lt;endl;
+	return 0;
+    	
+
+    return 0;
+}
+
+luoguP
+读完题,我们发现,这是一道边差分的题.
+为了使得最长的路径最短,我们自然地想到二分答案
+简单分析 于是建完边我们先dfs一遍预处理出根节点到每个节点的距离.并把边权塞给点。
+预处理距离的话只需要再在dfs中加入一句即可,然后我们可以计算出每条航道间的距离
+我们需要将被经过次数最多,且边权最大的边删去.
+这样能使我们所用总时间最大值尽可能小
+要求最大值最小? 很明显,我们想到了二分答案.
+那么如何将二分答案转移到树上呢?
+不妨考虑二分最终所有请求的最大树上距离,最后只需判断是否能够通过删掉一条边的边权,最终能否达到这个最大距离即可,样就将一个求解问题转化为了判定问题
+解法
+
+既然想到了二分答案,那我们就二分路径的长度.(即工作时间.
+如果一些路径长度大于当前二分的mid,我们就需要记录这些路径上的边其被经过次数.
+(比mid小的路径一定已经合法,我们可以在mid时间内完成任务.)
+假设路径长度大于mid的有num个
+(我们找到被这些路径共同经过的最大的边权,删去它,使得这些路径长度都小于mid,那么这个mid就是合法的.
+小细节
+我们可以通过排序得到最大的路径长度,如果这条最长的路径减去被经过次数&amp;lt;=mid,那这个mid就是合法的,我们就可以去寻找更优解.
+#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;cstring&amp;gt;
+#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;algorithm&amp;gt;
+#include&amp;lt;cmath&amp;gt;
+using namespace std;
+const int N = 300010, M = N * 2;
+int n, m;
+int h[N], e[M],w[M], ne[M], idx;
+int depth[N], fa[N][19];
+int p[N];
+int q[N];
+int ans;
+int dist[N];
+struct Node
+{
+	int x,y,anc,dis;
+	bool operator&amp;lt; (const Node &amp;amp;W) const 
+	{
+		return dis &amp;gt; W.dis;
+	}
+}query[N];
+int edge[N];
+
+
+void add(int a, int b,int c)
+{
+    e[idx] = b, w[idx]=c, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+void bfs()
+{
+    memset(depth, 0x3f, sizeof depth);
+    depth[0] = 0, depth[1] = 1;
+    int hh = 0, tt = 0;
+    q[0] = 1;
+
+    while (hh &amp;lt;= tt)
+    {
+        int t = q[hh ++ ];
+        for (int i = h[t]; ~i; i = ne[i])
+        {
+            int j = e[i];
+            if (depth[j] &amp;gt; depth[t] + 1)
+            {
+                depth[j] = depth[t] + 1;
+                dist[j]=dist[t]+w[i];
+                edge[j]=w[i];
+                q[ ++ tt] = j;
+                fa[j][0] = t;
+                for (int k = 1; k &amp;lt;= 18; k ++ )
+                    fa[j][k] = fa[fa[j][k - 1]][k - 1];
+            }
+        }
+    }
+}
+
+int lca(int a, int b)
+{
+    if (depth[a] &amp;lt; depth[b]) swap(a, b);
+    for (int k = 18; k &amp;gt;= 0; k -- )
+        if (depth[fa[a][k]] &amp;gt;= depth[b])
+            a = fa[a][k];
+    if (a == b) return a;
+    for (int k = 18; k &amp;gt;= 0; k -- )
+        if (fa[a][k] != fa[b][k])
+        {
+            a = fa[a][k];
+            b = fa[b][k];
+        }
+    return fa[a][0];
+}
+
+int dfs(int u, int fa)
+{
+    for (int i = h[u]; ~i; i = ne[i])
+    {
+        int j = e[i];
+        if (j != fa)
+        {
+            dfs(j, u);
+            p[u]+=p[j];
+        }  
+    }
+}
+
+bool check(int mid)
+{
+	memset(p,0,sizeof p);
+	int num=0,maxd=0;
+	for(int i=0;i&amp;lt;m;i++)
+	{
+		if(query[i].dis &amp;lt;= mid)
+			continue;
+		p[query[i].x]++;
+		p[query[i].y]++;
+		p[query[i].anc]-=2;
+		num++;
+	}
+	
+	dfs(1,-1);
+	
+	for(int i=2;i&amp;lt;=n;i++)
+		if(p[i] == num)
+			maxd=max(maxd,edge[i]);
+	
+	if(query[0].dis - maxd &amp;lt;= mid)
+		return true;
+	return false;
+}
+
+int main()
+{
+	//cout&amp;lt;&amp;lt;log2(300000)&amp;lt;&amp;lt;endl;
+    scanf(&amp;quot;%d%d&amp;quot;, &amp;amp;n, &amp;amp;m);
+    memset(h, -1, sizeof h);
+    for (int i = 0; i &amp;lt; n - 1; i ++ )//主要边 
+    {
+        int a, b,c;
+        scanf(&amp;quot;%d%d%d&amp;quot;, &amp;amp;a, &amp;amp;b,&amp;amp;c);
+        add(a, b,c), add(b, a,c);
+    }
+
+    bfs();
+	
+	int l=0,r=0;
+    for (int i = 0; i &amp;lt; m; i ++ )//附加边 
+    {
+        int a, b;
+        scanf(&amp;quot;%d%d&amp;quot;, &amp;amp;a, &amp;amp;b);
+        int anc = lca(a, b);
+        int d=dist[a]+dist[b]-2*dist[anc];
+        query[i]={a,b,anc,d};
+        r=max(r,d);
+    }
+    
+    sort(query,query+m);
+    
+    while(l&amp;lt;r)
+    {
+    	int mid=l+r&amp;gt;&amp;gt;1;
+    	if(check(mid))
+    		r=mid;
+    	else 
+    		l=mid+1;
+	}
+	
+	cout&amp;lt;&amp;lt;l&amp;lt;&amp;lt;endl;
+	return 0;
+
+}
+
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://caifxh.github.io/post/shu-shang-chai-fen/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+            <article class="post i-card">
+                <h2 class="post-title">
                     <a href="https://caifxh.github.io/post/wu-xiang-tu-you-xiang-tu-de-lian-tong-xing-fu-xi/">
                         无向图/有向图的连通性复习
                     </a>
@@ -112,7 +1437,7 @@
                     <time class="post-time">2020-04-01</time>
                     
                         <a href="https://caifxh.github.io/tag/Aq1uYaqZQ/" class="post-tag i-tag
-                            i-tag-other_4">
+                            i-tag-success">
             #图论
         </a>
                         
@@ -1579,7 +2904,7 @@ https://blog.csdn.net/sentimental_dog/article/details/53790582
                     <!-- 个人信息 -->
                     
     <div class="id_card i-card">
-        <div class="id_card-avatar" style="background-image: url(https://caifxh.github.io/images/avatar.png?v=1585882659287)">
+        <div class="id_card-avatar" style="background-image: url(https://caifxh.github.io/images/avatar.png?v=1585901820726)">
         </div>
         <h1 class="id_card-title">
             fxh
