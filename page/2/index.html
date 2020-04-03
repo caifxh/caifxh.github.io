@@ -7,7 +7,7 @@
 <title>
     fxh
 </title>
-<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1585901820726">
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1585904892869">
 <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
 <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
@@ -27,7 +27,7 @@
     <div class="nav">
         <div class="logo">
             <a href="https://caifxh.github.io">
-                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1585901820726" alt="">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1585904892869" alt="">
             </a>
             <div class="site-title">
                 <h1>
@@ -107,7 +107,7 @@
                     <time class="post-time">2020-03-27</time>
                     
                         <a href="https://caifxh.github.io/tag/yImqvC-Dp/" class="post-tag i-tag
-                            i-tag-other_3">
+                            i-tag-success">
             #字符串
         </a>
                         
@@ -1799,7 +1799,7 @@ Sample Output
                     <time class="post-time">2020-03-27</time>
                     
                         <a href="https://caifxh.github.io/tag/hLQFdtGuD/" class="post-tag i-tag
-                            i-tag-other_2">
+                            i-tag-banana">
             #DP
         </a>
                         
@@ -1809,7 +1809,167 @@ Sample Output
                             <div class="post-content">
                                 
                                         <div class="post-content-content">
-                                            acwing1088
+                                            
+
+
+acwing272
+
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+const int N=3010;
+int f[2][N];
+int a[N],b[N];
+int n;
+int ans;
+
+int main()
+{
+	scanf(&amp;quot;%d&amp;quot;,&amp;amp;n);
+	for(int i=1;i&amp;lt;=n;i++) scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]);
+	for(int i=1;i&amp;lt;=n;i++) scanf(&amp;quot;%d&amp;quot;,&amp;amp;b[i]);
+	
+	for(int i=1;i&amp;lt;=n;i++)
+	{
+		int val=0;//记录决策集合S(i,j)中dp[i-1][k]的最大值
+		for(int j=1;j&amp;lt;=n;j++)
+		{
+			if(a[i] != b[j]) f[i&amp;amp;1][j]=f[i-1&amp;amp;1][j];
+			else f[i&amp;amp;1][j]=val+1;
+			if(b[j] &amp;lt; a[i]) val=max(val,f[i-1&amp;amp;1][j]);//j满足条件，加入决策集合，更新最值 
+		}
+	}
+	
+	for(int i=1;i&amp;lt;=n;i++)
+	    ans=max(ans,f[n&amp;amp;1][i]);
+			
+	printf(&amp;quot;%d\n&amp;quot;,ans);
+	return 0;
+}
+
+poj2373
+在一片草场上:有一条长度为L (1 &amp;lt;= L &amp;lt;= 1,000,000， L为偶数)的线段。 John的N (1 &amp;lt;= N &amp;lt;= 1000)头奶牛都沿着草场上这条线段吃草，每头牛的活动范围是一个开区间(S,E)， S，E都是整数。不同奶牛的活动范围可以有重叠。John要在这条线段上安装喷水头灌溉草场。每个喷水头的喷洒半径可以随意调节，调节范围是 [A B ](1 &amp;lt;= A &amp;lt;= B &amp;lt;= 1000)，A,B都是整数。要求线段上的每个整点恰好位于一个喷水头的喷洒范围内每头奶牛的活动范围要位于一个喷水头的喷洒范围内任何喷水头的喷洒范围不可越过线段的两端(左端是0,右端是L )。
+请问， John 最少需要安装多少个喷水头。
+
+
+
+
+
+状态dp[i] 表示恰好到覆盖到 [0, i]时最少需要的喷水装置数量, 答案自然也就是dp[L], 把长度作为容量,是线性Dp的一种常见方案
+
+
+i一定是偶数, 因为我们的目的是放置合适的喷水装置来覆盖, 2*r(直径)一定是偶数
+
+
+i一定不在奶牛的范围之内, 因为如果i在某奶牛范围之内, 该奶牛范围也就被分割为了两块,不符合题中要求的恰好位于一个喷水器的覆盖范围内
+
+
+i一定大于2*a, 因为最小半径是a
+
+
+对于i &amp;gt; 2 *a时, dp[i]在满足12的情况下, 应该在[i-2b, i-2a]这个区间中找到一个最小的+1.这个地方需要仔细理一下, 就是dp[i]并不表示把喷水器放在了i, 而是放在了[i-2b, i-2a]这个区间中, 依次递推.
+
+
+可得状态转移方程: dp[i] = min{dp[j] | i-2b &amp;lt;= j &amp;lt;= i-2a} +1
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+const int N=1e6+10,INF=0x3f3f3f3f;
+int f[N];
+bool flag[N];
+int n,l,a,b;
+
+int main()
+{
+	cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;l&amp;gt;&amp;gt;a&amp;gt;&amp;gt;b;
+	memset(f,0x3f,sizeof f);
+	
+	for(int i=0;i&amp;lt;n;i++)
+	{
+		int s,e;
+		cin&amp;gt;&amp;gt;s&amp;gt;&amp;gt;e;
+		for(int j=s+1;j&amp;lt;e;j++)
+			flag[j]=1;
+	}
+	
+	if(l &amp;amp; 1) puts(&amp;quot;-1&amp;quot;);
+	else 
+	{
+		f[0]=0;
+		for(int i=2;i&amp;lt;=l;i+=2)
+		{
+			if(!flag[i])
+			{
+				int val=INF;
+				for(int j=a;j&amp;lt;=b;j++)
+				{
+					int k=i-2*j;
+					if(k &amp;lt; 0) break;
+					val=min(val,f[k]);
+				}
+				f[i]=val+1;
+			}
+		}
+		
+		if(f[l] &amp;gt;= INF) puts(&amp;quot;-1&amp;quot;);
+		else cout&amp;lt;&amp;lt;f[l]&amp;lt;&amp;lt;endl;
+	}
+	return 0;
+}
+
+
+
+
+code
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=1e6+10,INF=0x3f3f3f3f;
+int f[N];
+int q[N];
+bool flag[N];
+int n,l,a,b;
+
+int main()
+{
+	cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;l&amp;gt;&amp;gt;a&amp;gt;&amp;gt;b;
+	memset(f,0x3f,sizeof f);
+	
+	for(int i=0;i&amp;lt;n;i++)
+	{
+		int s,e;
+		cin&amp;gt;&amp;gt;s&amp;gt;&amp;gt;e;
+		for(int j=s+1;j&amp;lt;e;j++)
+			flag[j]=1;
+	}
+	
+	f[0]=0;
+	int hh=0,tt=-1;
+	for(int i=a*2;i&amp;lt;=l;i+=2)
+	{
+		if(hh &amp;lt;= tt &amp;amp;&amp;amp; i-2*b &amp;gt; q[hh]) hh++;
+		while(hh&amp;lt;=tt &amp;amp;&amp;amp; f[q[tt]] &amp;gt;= f[i-2*a])
+			tt--;
+		q[++tt]=i-2*a;
+		if(!flag[i]) f[i]=f[q[hh]]+1;
+	}
+	
+	if(f[l] &amp;gt;= INF) puts(&amp;quot;-1&amp;quot;);
+	else cout&amp;lt;&amp;lt;f[l]&amp;lt;&amp;lt;endl;
+
+	return 0;
+}
+
+acwing1088
 
 
 
@@ -1999,6 +2159,7 @@ int main()
 	return 0;
 }
 
+acwing1087
 
 #include&amp;lt;iostream&amp;gt;
 #include&amp;lt;cstring&amp;gt;
@@ -2811,7 +2972,7 @@ int main()
                     <time class="post-time">2020-03-26</time>
                     
                         <a href="https://caifxh.github.io/tag/14SoYNkfD/" class="post-tag i-tag
-                            i-tag-banana">
+                            i-tag-other_2">
             #数学
         </a>
                         
@@ -3629,7 +3790,7 @@ code
                     <time class="post-time">2020-03-26</time>
                     
                         <a href="https://caifxh.github.io/tag/14SoYNkfD/" class="post-tag i-tag
-                            i-tag-banana">
+                            i-tag-primary">
             #数学
         </a>
                         
@@ -4045,7 +4206,7 @@ int main()
                     <time class="post-time">2020-03-26</time>
                     
                         <a href="https://caifxh.github.io/tag/hLQFdtGuD/" class="post-tag i-tag
-                            i-tag-other_2">
+                            i-tag-other_4">
             #DP
         </a>
                         
@@ -4369,7 +4530,7 @@ code
                     <time class="post-time">2020-03-26</time>
                     
                         <a href="https://caifxh.github.io/tag/yImqvC-Dp/" class="post-tag i-tag
-                            i-tag-success">
+                            i-tag-other_3">
             #字符串
         </a>
                         
@@ -5700,7 +5861,7 @@ int main()
                     <!-- 个人信息 -->
                     
     <div class="id_card i-card">
-        <div class="id_card-avatar" style="background-image: url(https://caifxh.github.io/images/avatar.png?v=1585901820726)">
+        <div class="id_card-avatar" style="background-image: url(https://caifxh.github.io/images/avatar.png?v=1585904892869)">
         </div>
         <h1 class="id_card-title">
             fxh
