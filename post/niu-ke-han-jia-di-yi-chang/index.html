@@ -5,7 +5,7 @@
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>
-    关于 | fxh
+    牛客寒假第一场 | fxh
 </title>
 <link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1585882659287">
 <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
@@ -99,26 +99,102 @@
                 <div id="content" class="main-container-left">
                     <article class="post i-card">
                         <h2 class="post-title">
-                            关于
+                            牛客寒假第一场
                         </h2>
                         <div class="post-info">
-                            <time class="post-time">2019-01-25</time>
+                            <time class="post-time">2020-04-02</time>
                             
+                                <a href="https://caifxh.github.io/tag/XNpmSrxzO/" class="post-tag i-tag
+                            i-tag-">
+                            #比赛
+                        </a>
+                                
                         </div>
                         
                                 <div class="post-content">
-                                    <blockquote>
-<p>欢迎来到我的小站呀，很高兴遇见你！🤝</p>
-</blockquote>
-<h2 id="关于本站">🏠 关于本站</h2>
-<h2 id="博主是谁">👨‍💻 博主是谁</h2>
-<h2 id="兴趣爱好">⛹ 兴趣爱好</h2>
-<h2 id="联系我呀">📬 联系我呀</h2>
+                                    <p><a href="https://ac.nowcoder.com/acm/contest/3002/G">G</a><br>
+eli拿到了一个仅由小写字母组成的字符串。<br>
+她想截取一段连续子串，这个子串包含至少k个相同的某个字母。<br>
+她想知道，子串的长度最小值是多少？</p>
+<p>题意<br>
+相当于就是找字符串当中拥有k个相同字母的最小长度。<br>
+直接模拟，通过二维数组，遇到个字母把在字符串的位置它放到对应字母的后面，然后进行判断，不断更新ans的最小值</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;vector&gt;
+using namespace std;
+int n,k;
+const int INF=0x3f3f3f3f;
+int ans=INF;
+vector&lt;int&gt; v[26];
+
+int main()
+{
+    cin&gt;&gt;n&gt;&gt;k;
+	string str;
+	cin&gt;&gt;str;
+	
+	for(int i=0;i&lt;str.size();i++)
+	{
+		int x=str[i]-'a';
+		v[x].push_back(i);
+		int len=v[x].size();
+		if(len &gt;= k)
+			ans=min(ans,i-v[x][len-k]+1);
+	}
+	
+	if(ans == INF)
+		cout&lt;&lt;-1&lt;&lt;endl;
+	else
+		cout&lt;&lt;ans&lt;&lt;endl;
+
+    return 0;
+}
+</code></pre>
+<p><a href="https://ac.nowcoder.com/acm/contest/3002/A">A</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/02/9969_a19ccce474-18.PNG" alt="18.PNG" loading="lazy"></p>
+<p>题解<br>
+可以把面积为 1 的“好三角形”分为两类分开统计：两条边和两个坐标轴平行；只有一条边和某个坐标轴平行。<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/02/9969_e233367674-2.PNG" alt="2.PNG" loading="lazy"><br>
+对于第二种情况，可以分别统计底边为 2 、高为 1 和底边为 1 、高为 2 的情况。要注意底边靠近边界时的特殊讨论。<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/02/9969_451ae75874-3.PNG" alt="3.PNG" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+typedef long long LL;
+const int mod=1e9+7;
+
+int main()
+{
+	LL n,m;
+	cin&gt;&gt;n&gt;&gt;m;
+	
+	LL ans=4*((n-2)*(m-1)%mod + (m-2)*(n-1)%mod)%mod;
+	
+	ans=(ans+2*(n-2)*(n-2)%mod*(m-1)%mod+2*(m-2)*(m-2)%mod*(n-1)%mod)%mod;
+	
+	ans=(ans+2*(n-1)*(n-2)%mod*(m-2)%mod+2*(m-1)*(m-2)%mod*(n-2)%mod)%mod;
+	
+	cout&lt;&lt;ans&lt;&lt;endl;
+	
+	return 0;
+}
+</code></pre>
 
                                 </div>
                     </article>
                     <!--  -->
                     
+                        <div class="next-post">
+                            <div class="next">下一篇</div>
+                            <a href="https://caifxh.github.io/post/dp-you-hua/">
+                                <h3 class="post-title">
+                                    DP其他优化
+                                </h3>
+                            </a>
+                        </div>
+                        
                             <div id="disqus_thread"></div>
                             <div id="gitalk-container"></div>
                 </div>
@@ -127,49 +203,32 @@
                 <!-- right -->
                 <div id="sidebar" class="main-container-right">
                     
-                        <!-- toc -->
-                        
-    <div class="toc-card i-card ">
-        <div class="toc-title i-card-title">目录</div>
-        <div class="toc-content">
-            <ul class="markdownIt-TOC">
-<li>
-<ul>
-<li><a href="#%E5%85%B3%E4%BA%8E%E6%9C%AC%E7%AB%99">🏠 关于本站</a></li>
-<li><a href="#%E5%8D%9A%E4%B8%BB%E6%98%AF%E8%B0%81">👨‍💻 博主是谁</a></li>
-<li><a href="#%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD">⛹ 兴趣爱好</a></li>
-<li><a href="#%E8%81%94%E7%B3%BB%E6%88%91%E5%91%80">📬 联系我呀</a></li>
-</ul>
-</li>
-</ul>
+                                <!-- id-card -->
+                                
+    <div class="id_card i-card">
+        <div class="id_card-avatar" style="background-image: url(https://caifxh.github.io/images/avatar.png?v=1585882659287)">
+        </div>
+        <h1 class="id_card-title">
+            fxh
+        </h1>
+        <h2 class="id_card-description">
+            菜
+        </h2>
+        <!--  -->
+        <div class="id_card-sns">
+            <!-- github -->
+            
+                    <!-- twitter -->
+                    
+                            <!-- weibo -->
+                            
+                                    <!-- facebook -->
+                                    
 
         </div>
-        <script>
-            function locateCatelogList() {
-                /*获取文章目录集合,可通过:header过滤器*/
-                var alis = $('.post-content :header');
-                /*获取侧边栏目录列表集合**/
-                var sidebar_alis = $('.markdownIt-TOC a');
-                /*获取滚动条到顶部的距离*/
-                var scroll_height = $(window).scrollTop();
-                for (var i = 0; i < alis.length; i++) {
-                    /*获取锚点集合中的元素分别到顶点的距离*/
-                    var a_height = $(alis[i]).offset().top;
-                    if (a_height < scroll_height) {
-                        /*高亮显示*/
-                        sidebar_alis.removeClass('on');
-                        $(sidebar_alis[i]).addClass('on');
-                    }
-                }
-            }
-            $(function() {
-                /*绑定滚动事件 */
-                $(window).bind('scroll', locateCatelogList);
-            });
-        </script>
     </div>
     
-                            
+                                    
 
                 </div>
 

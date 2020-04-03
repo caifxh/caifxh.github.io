@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://caifxh.github.io</id>
     <title>fxh</title>
-    <updated>2020-04-01T09:13:04.453Z</updated>
+    <updated>2020-04-03T02:57:42.901Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://caifxh.github.io"/>
     <link rel="self" href="https://caifxh.github.io/atom.xml"/>
@@ -10,6 +10,552 @@
     <logo>https://caifxh.github.io/images/avatar.png</logo>
     <icon>https://caifxh.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, fxh</rights>
+    <entry>
+        <title type="html"><![CDATA[牛客寒假第一场]]></title>
+        <id>https://caifxh.github.io/post/niu-ke-han-jia-di-yi-chang/</id>
+        <link href="https://caifxh.github.io/post/niu-ke-han-jia-di-yi-chang/">
+        </link>
+        <updated>2020-04-02T11:15:50.000Z</updated>
+        <content type="html"><![CDATA[<p><a href="https://ac.nowcoder.com/acm/contest/3002/G">G</a><br>
+eli拿到了一个仅由小写字母组成的字符串。<br>
+她想截取一段连续子串，这个子串包含至少k个相同的某个字母。<br>
+她想知道，子串的长度最小值是多少？</p>
+<p>题意<br>
+相当于就是找字符串当中拥有k个相同字母的最小长度。<br>
+直接模拟，通过二维数组，遇到个字母把在字符串的位置它放到对应字母的后面，然后进行判断，不断更新ans的最小值</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;vector&gt;
+using namespace std;
+int n,k;
+const int INF=0x3f3f3f3f;
+int ans=INF;
+vector&lt;int&gt; v[26];
+
+int main()
+{
+    cin&gt;&gt;n&gt;&gt;k;
+	string str;
+	cin&gt;&gt;str;
+	
+	for(int i=0;i&lt;str.size();i++)
+	{
+		int x=str[i]-'a';
+		v[x].push_back(i);
+		int len=v[x].size();
+		if(len &gt;= k)
+			ans=min(ans,i-v[x][len-k]+1);
+	}
+	
+	if(ans == INF)
+		cout&lt;&lt;-1&lt;&lt;endl;
+	else
+		cout&lt;&lt;ans&lt;&lt;endl;
+
+    return 0;
+}
+</code></pre>
+<p><a href="https://ac.nowcoder.com/acm/contest/3002/A">A</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/02/9969_a19ccce474-18.PNG" alt="18.PNG" loading="lazy"></p>
+<p>题解<br>
+可以把面积为 1 的“好三角形”分为两类分开统计：两条边和两个坐标轴平行；只有一条边和某个坐标轴平行。<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/02/9969_e233367674-2.PNG" alt="2.PNG" loading="lazy"><br>
+对于第二种情况，可以分别统计底边为 2 、高为 1 和底边为 1 、高为 2 的情况。要注意底边靠近边界时的特殊讨论。<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/02/9969_451ae75874-3.PNG" alt="3.PNG" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+typedef long long LL;
+const int mod=1e9+7;
+
+int main()
+{
+	LL n,m;
+	cin&gt;&gt;n&gt;&gt;m;
+	
+	LL ans=4*((n-2)*(m-1)%mod + (m-2)*(n-1)%mod)%mod;
+	
+	ans=(ans+2*(n-2)*(n-2)%mod*(m-1)%mod+2*(m-2)*(m-2)%mod*(n-1)%mod)%mod;
+	
+	ans=(ans+2*(n-1)*(n-2)%mod*(m-2)%mod+2*(m-1)*(m-2)%mod*(n-2)%mod)%mod;
+	
+	cout&lt;&lt;ans&lt;&lt;endl;
+	
+	return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[DP其他优化]]></title>
+        <id>https://caifxh.github.io/post/dp-you-hua/</id>
+        <link href="https://caifxh.github.io/post/dp-you-hua/">
+        </link>
+        <updated>2020-04-02T04:45:38.000Z</updated>
+        <content type="html"><![CDATA[<h4 id="滚动数组优化">滚动数组优化</h4>
+<p><a href="https://www.luogu.com.cn/problem/P2679">P2679</a><br>
+有两个仅包含小写英文字母的字符串 A 和 B。现在要从字符串 A 中取出 k 个互不重叠的非空子串，然后把这 k 个子串按照其在字符串 A中出现的顺序依次连接起来得到一个新的字符串。请问有多少种方案可以使得这个新串与字符串 B 相等？<br>
+注意：子串取出的位置不同也认为是不同的方案。<br>
+1 ≤ |A| ≤ 1000， 1 ≤ k ≤ |B| ≤ 200<br>
+样例输入：（答案：7）<br>
+6 3 2<br>
+aabaab<br>
+aab</p>
+<p>我们令f[i][j][k][0/1]表示A串用了前i个字符，B串已覆盖前j个字符，目前为止已经选了<br>
+k个子串，最后的0/1表示A串的这个字符选了没有(0没选，1选了)。<br>
+为了得出状态转移方程，我们分情况讨论：<br>
+先看f[i][j][k]<a href="%E5%BD%93%E5%89%8D%E4%BD%8D%E9%80%89%E4%BA%86">1</a>，显然当且仅当a[i]=b[j]的时候它才有意义，否则<br>
+f[i][j][k][1]=0。<br>
+到这个状态有三种方法：</p>
+<ol>
+<li>上一位没有选，新开一个子串</li>
+<li>上一位选了，延续这个子串</li>
+<li>上一位选了，但是仍然新开一个子串<br>
+因此，我们有<br>
+f[i][j][k][1]=f[i-1][j-1][k-1][0]+f[i-1][j-1][k][1]+f[i-1][j-1][k-1][1]</li>
+</ol>
+<p>然后讨论另一种情况：这个字符不选。<br>
+这个比较简单，到这个状态有两种方法：</p>
+<ol>
+<li>上一位没有选，现在仍然不选</li>
+<li>上一位选了，结束这个子串<br>
+因此，我们有<br>
+f[i][j][k][0]=f[i-1][j][k][0]+f[i-1][j][k][1]。</li>
+</ol>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstdio&gt;
+using namespace std;
+const int N=210,M=1010,mod=1e9+7;
+int f[2][N][N][2];
+int n,m,k;
+char a[M],b[N];
+
+int main()
+{
+	cin&gt;&gt;n&gt;&gt;m&gt;&gt;k;
+	cin&gt;&gt;a+1&gt;&gt;b+1;
+	
+	f[0][0][0][0]=1;
+	for(int i=1;i&lt;=n;i++)
+	{
+	    f[i&amp;1][0][0][0]=1;
+		for(int j=1;j&lt;=m;j++)
+			for(int t=1;t&lt;=k;t++)
+				if(a[i] == b[j])
+					f[i&amp;1][j][t][1]=((f[i-1&amp;1][j-1][t-1][1]+f[i-1&amp;1][j-1][t][1])%mod+f[i-1&amp;1][j-1][t-1][0])%mod,
+					f[i&amp;1][j][t][0]=(f[i-1&amp;1][j][t][1]+f[i-1&amp;1][j][t][0])%mod;
+				else 
+				 	f[i&amp;1][j][t][0]=(f[i-1&amp;1][j][t][0]+f[i-1&amp;1][j][t][1])%mod,
+				 	f[i&amp;1][j][t][1]=0;
+	}
+	
+	printf(&quot;%d\n&quot;,(f[n&amp;1][m][k][0]+f[n&amp;1][m][k][1])%mod);
+	return 0;
+}
+</code></pre>
+<h4 id="矩阵乘法优化">矩阵乘法优化</h4>
+<p>对于两维以上的 dp，如 f[i][j][k]，如果它的转移全部来自 f[i - 1]，那我们可以使用矩阵来加速。<br>
+也就是把 f[i] 压缩成一维数组，f[i-1] 也压缩成一维数组。<br>
+转移方程 就相当于 f[i-1] 到 f[i] 乘上的转移矩阵。<br>
+<code>比如 f[i][t] += f[i-1][s]，那么转移矩阵中的第 s 行第t 列的元素就要加一。</code><br>
+这样对于转移 n 次的 dp，我们只要计算矩阵的 n 次幂即可。<br>
+时间复杂度可以从 O(n) 减少为 O(log n)</p>
+<p>有 N 个方格排成一列，用红、绿、蓝、黄四种颜色来涂每个方格。<br>
+每个格子都必须涂，且只能涂一次。问使得红色和蓝色的格子的数量为偶数的方案数。N ≤ 1e9</p>
+<p>简单的线性模型。<br>
+我们可以用 f[i][a][b][c][d] 来表示填了前 i 个数字，且4 种颜色的奇偶性分别为 a, b, c, d。（0 表示偶数，1 表<br>
+示奇数）<br>
+方便起见我们把 abcd 看作一个二进制数 s，范围是 0～15,记为 f[i][s]</p>
+<p>思考转移：<br>
+f[i][s] 可以转移到哪些状态呢？<br>
+枚举第 i+1 位的颜色：一共有 0，1，2，3 四种选择。<br>
+假设选择颜色 j，那么颜色 j 的奇偶性会发生改变，也就是<br>
+得到了新的状态 s ^ (1 &lt;&lt; j)<br>
+f[i + 1][s ^ (1 &lt;&lt; j)] += f[i][s]<br>
+可以发现每次都是从 f[i] 转移到 f[i + 1]<br>
+因此我们只要让矩阵的第 s 行第 s ^ (1 &lt;&lt; j) 列 加一即可。<br>
+然后计算矩阵的 n 次幂，乘上 f[0] 就可以得到 f[n] 了。</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+const int N=20,mod=10007;
+struct matrix
+{
+	int m[N][N];
+	matrix()
+	{
+		memset(m,0,sizeof m);
+	}
+};
+int n;
+
+matrix mul(matrix a,matrix b)
+{
+	matrix c;
+	for(int i=0;i&lt;1&lt;&lt;4;i++)
+		for(int j=0;j&lt;1&lt;&lt;4;j++)
+			for(int k=0;k&lt;1&lt;&lt;4;k++)
+				c.m[i][j]=(c.m[i][j]+a.m[i][k]*b.m[k][j])%mod;
+	return c;
+}
+
+matrix qmi(matrix a,int k)
+{
+	matrix c;
+	for(int i=0;i&lt;1&lt;&lt;4;i++)
+		c.m[i][i]=1;
+		
+	while(k)
+	{
+		if(k&amp;1) c=mul(c,a);
+		a=mul(a,a);
+		k&gt;&gt;=1;
+	}
+	return c;
+}
+
+int main()
+{
+	int T;
+	cin&gt;&gt;T;
+	while(T--)
+	{
+		scanf(&quot;%d&quot;,&amp;n);
+		
+		matrix a;
+		for(int s=0;s&lt;1&lt;&lt;4;s++)
+			for(int i=0;i&lt;4;i++)
+				a.m[s][s^(1&lt;&lt;i)]=1;
+		
+		a=qmi(a,n);
+		
+		int ans=0;
+		for(int i=0;i&lt;1&lt;&lt;4;i++)
+			if(!(i&gt;&gt;1 &amp; 1) &amp;&amp; !(i&gt;&gt;2 &amp; 1))
+				ans=(ans+a.m[0][i])%mod;
+		
+		printf(&quot;%d\n&quot;,ans);
+	}
+	return 0;
+}
+</code></pre>
+<h4 id="前缀数组优化">前缀数组优化</h4>
+<p>新的电话线架设在已有的 N(2≤N≤100000) 根电话线杆上，第 i 根电话线杆的高度为h<a href="1%E2%89%A4h%5Bi%5D%E2%89%A4100">i</a>。如果两根电话线杆的高度不同，那么就需要支付 C *电话线杆高度差(1≤C≤100)的费用。你不能移动电话线杆，只能按照原有的顺序在相邻的线杆间架设电话线。当然你也可以加高某些电话线杆，加高 X 米需要付出 X2 的费用。<br>
+请问最少需要花多少钱建设新的电话线。</p>
+<p>基本思路：<br>
+观察发现 h[i] 不大，可以作为状态。<br>
+用 f[i][j] 表示第 i 根电线杆的长度为 j 时的最小代价。<br>
+状态转移：<br>
+f[i][j] = min{f[i-1][k] + c * |j - k| + (j - h[i])2}</p>
+<p>这样的时间复杂度是 O(NK2)<br>
+状态有 NK 个，瓶颈在于计算每个状态需要枚举前一个电线杆的可能的 K 种高度。<br>
+f[i][j] = min{f[i-1][k] + c * |j - k|} + (j - h[i])2<br>
+但是前一部分还是有 j 在，如果我们能把 j 和 k 分离，我们就可以方便的优化。</p>
+<p>我们可以把绝对值拆掉，也就是分类讨论：<br>
+如果 j &gt; k，那么 |j - k| = j - k<br>
+f[i][j] = min{f[i-1][k] - ck} + cj + (j - h[i])2<br>
+如果 j &lt; k，那么 |j - k| = k - j<br>
+f[i][j] = min{f[i-1][k] + ck} - cj + (j - h[i])2</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+const int N=100010,M=110,INF=0x3f3f3f3f;
+int f[2][M];
+int h[N],mx;
+int n,c;
+
+int sqr(int x)
+{
+	return x*x;
+}
+
+int main()
+{
+	scanf(&quot;%d%d&quot;,&amp;n,&amp;c);
+	
+	for(int i=1;i&lt;=n;i++)
+		scanf(&quot;%d&quot;,&amp;h[i]),mx=max(mx,h[i]);
+	
+	for(int i=1;i&lt;=mx;i++)
+	    f[0][i]=f[1][i]=INF;
+	
+	for(int i=h[1];i&lt;=mx;i++)
+		f[1][i]=sqr(i-h[1]);//增高第一个电线杆的高度至i的花费为(i-h[1])(i-h[1]) 
+	
+	for(int i=2;i&lt;=n;i++)
+	{
+        int val=INF;
+		for(int j=1;j&lt;=mx;j++)
+		{
+			val=min(val,f[i-1&amp;1][j]-c*j);
+			if(j &gt;= h[i])
+			    f[i&amp;1][j]=min(f[i&amp;1][j],val+c*j+sqr(j-h[i]));
+                //f[i&amp;1]每轮要初始化为INF，因为比较时用到了f[i&amp;1]
+		}
+		
+		val=INF;
+		for(int j=mx;j&gt;=h[i];j--)
+		{
+			val=min(val,f[i-1&amp;1][j]+c*j);
+			f[i&amp;1][j]=min(f[i&amp;1][j],val-c*j+sqr(j-h[i]));
+		}
+		
+		for(int j=1;j&lt;=mx;j++)1]
+		    f[i+1&amp;1][j]=INF;
+	}
+	
+	int ans=INF;
+	for(int i=h[n];i&lt;=mx;i++)
+		ans=min(ans,f[n&amp;1][i]);
+	
+	printf(&quot;%d\n&quot;,ans);
+	return 0;
+}
+</code></pre>
+<h4 id="例题">例题</h4>
+<p>首先考虑计算从 x 到 y 的耗费体力最小的路径。<br>
+显然是最短路问题。<br>
+因为最多只有 300 个点，可以方便的使用 Floyd 算法先用<br>
+O(<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>V</mi><mn>3</mn></msup></mrow><annotation encoding="application/x-tex">V^3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span></span></span></span>) 的时间复杂度预处理出任意两点间的最短路。</p>
+<p>如何计算耗费体力值的期望值？<br>
+只用对每条边考虑有多少概率会经过这条边。<br>
+设概率为 p，这条边耗费的体力值是 w<br>
+那么这条边对答案的贡献就是 pw。<br>
+最后只要把每条边的贡献加起来就是耗费体力值的总和的期望。(期望的可加性)</p>
+<p>用 f[i][j][p] 来表示前 i 节课中用了 j 次换教室的机会<br>
+的最小体力总和的期望。<br>
+p = 0 或 1，表示第 i 节课是否用了换教室的机会。<br>
+目的是定位此时牛牛在哪个教室。<br>
+p = 0 ➔ 没换，在 c[i] 教室<br>
+p = 1 ➔ 换了，在 d[i] 教室</p>
+<p>对第 i 节课，考虑决策：换 or 不换。<br>
+不换：<br>
+牛牛需要赶到教室 c[i]<br>
+有两种可能<br>
+一种是上一节课换了：</p>
+<ul>
+<li>有k[i-1]的概率从d[i-1]赶来</li>
+<li>有(1-k[i-1])的概率从c[i-1]赶来</li>
+</ul>
+<p>另一种是没换：</p>
+<ul>
+<li>从c[i-1]赶来</li>
+</ul>
+<p>换：<br>
+牛牛有 k[i] 的概率需要赶到教室 d[i]， 有 (1-k[i]) 的概率需要赶到教室 c[i]<br>
+而上一节课也有两种可能：<br>
+上一节课换了：</p>
+<ul>
+<li>有k[i-1]的概率从d[i-1]赶来</li>
+<li>有(1-k[i-1])的概率从c[i-1]赶来</li>
+</ul>
+<p>上一节课没换：</p>
+<ul>
+<li>从c[i-1]赶来</li>
+</ul>
+<p>最后的答案就是 min{f[n][i][0], f[n][i][1] | 0≤i≤m}<br>
+预处理最短路：<br>
+时间复杂度 O(<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>V</mi><mn>3</mn></msup></mrow><annotation encoding="application/x-tex">V^3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span></span></span></span>)<br>
+DP状态数 O(nm)，转移 O(1)，时间复杂度 O(nm)<br>
+由于 f[i] 由 f[i-1] 转移过来，可以使用滚动数组优化空间。空间复杂度 O(m)</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstdio&gt;
+using namespace std;
+const double INF=1e9;
+const int N=2010,M=310;
+int c[N],d[N];
+double k[N];
+int dist[N][N];
+double f[2][N][2];//f[i][j][0/1]表示前i节课用来j次换教室的机会，上节课换/没换 
+int n,m,v,e;
+
+void floyd()
+{
+    for(int k=1;k&lt;=v;k++)
+        for(int i=1;i&lt;=v;i++)
+            for(int j=1;j&lt;=v;j++)
+                dist[i][j]=min(dist[i][j],dist[i][k]+dist[k][j]);
+}
+
+int main()
+{
+    cin&gt;&gt;n&gt;&gt;m&gt;&gt;v&gt;&gt;e;
+    for(int i=1;i&lt;=n;i++)
+        cin&gt;&gt;c[i];
+    for(int i=1;i&lt;=n;i++)
+        cin&gt;&gt;d[i];
+    for(int i=1;i&lt;=n;i++)
+        cin&gt;&gt;k[i];
+
+    memset(dist,0x3f,sizeof dist);
+    for(int i=1;i&lt;=v;i++) dist[i][i]=0;//初始化为0，因为可能通过换教室使得下节课教室不变
+    while(e--)
+    {
+        int a,b,c;
+        cin&gt;&gt;a&gt;&gt;b&gt;&gt;c;
+        dist[a][b]=dist[b][a]=min(dist[a][b],c);
+    }
+
+    floyd();
+
+    for(int j=0;j&lt;=m;j++)
+        f[0][j][0]=f[0][j][1]=f[1][j][0]=f[1][j][1]=INF;
+
+    f[1][0][0]=f[1][1][1]=0;
+    for(int i=2;i&lt;=n;i++)
+        for(int j=0;j&lt;=m;j++)
+        {
+            //这节不换,上节换/不换 
+            f[i&amp;1][j][0]=min(f[i-1&amp;1][j][0]+dist[c[i-1]][c[i]],
+                            f[i-1&amp;1][j][1]+k[i-1]*dist[d[i-1]][c[i]]+
+                            (1-k[i-1])*dist[c[i-1]][c[i]]);
+
+            //这节换，上节换/不换
+            if(j)
+            f[i&amp;1][j][1]=min(f[i-1&amp;1][j-1][0]+dist[c[i-1]][c[i]]*(1-k[i])+
+                            dist[c[i-1]][d[i]]*k[i],
+                            f[i-1&amp;1][j-1][1]+(1-k[i-1])*dist[c[i-1]][c[i]]*(1-k[i])+
+                            (1-k[i-1])*dist[c[i-1]][d[i]]*k[i]+
+                            k[i-1]*dist[d[i-1]][c[i]]*(1-k[i])+
+                            k[i-1]*dist[d[i-1]][d[i]]*k[i]);    
+        }
+
+    double ans=INF;
+    for(int i=0;i&lt;=m;i++)
+        ans=min(ans,min(f[n&amp;1][i][0],f[n&amp;1][i][1]));
+
+    printf(&quot;%.2f\n&quot;,ans);
+
+    return 0;
+
+}
+</code></pre>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=2294">hdu2294</a><br>
+你有 k 种珍珠，想用它们组成一个长度在1～n之间的一条首饰并且满足 k 种珍珠都至少出现一次。<br>
+问有多少种不同的首饰。n ≤ 1e9, k ≤ 30<br>
+样例：<br>
+n = 3, k = 2<br>
+答案：8（ab,ba,aab,aba,abb,baa,bab,bba)</p>
+<p>用 f[i][j] 表示现在拼出了长度为 i 的序列，用了 j 种珍珠。<br>
+决策是第 i 个珍珠是否使用新的种类：<br>
+如果是旧的，那么有 j 种可能： j * f[i-1][j]<br>
+如果是新的，那么有 k-j+1 种可能：(k-j+1)*f[i-1][j-1]<br>
+因此我们得到了：<br>
+f[i][j] = j * f[i - 1][j] + (k - j + 1) * f[i - 1][j - 1];</p>
+<p>答案就是 f[0][k] + f[2][k] + … + f[n][k]<br>
+由于 n 特别大，我们只能考虑矩阵乘法优化。<br>
+显然 f[i] 都是由 f[i - 1] 转移过来的。</p>
+<p>那么我们可以把 f[i] 看作是一个长度为 k + 1 的向量。<br>
+[ f[i][0], f[i][1], …, f[i][k] ]<br>
+然后就可以构造转移矩阵 A。<br>
+这样 f[i] = f[i-1] * A</p>
+<p>f[n] = f[0] * <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>A</mi><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">A^n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">A</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span></span></span></span></span></span></span><br>
+f[n - 1] = f[0] * <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>A</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">A^{n-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">A</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span> …<br>
+f[0]=[ 1, 0, 0,.., 0]<br>
+因此我们需要计算出 f[0] * <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>I</mi><mo>+</mo><mi>A</mi><mo>+</mo><msup><mi>A</mi><mn>2</mn></msup><mo>+</mo><mo>…</mo><mo>+</mo><msup><mi>A</mi><mi>n</mi></msup><mo>)</mo></mrow><annotation encoding="application/x-tex">(I + A + A^2 + … + A^n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">A</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.897438em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord mathdefault">A</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">A</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span><br>
+这是一个经典问题，二分 + 矩阵快速幂即可解决。</p>
+<p>a.data[0][k] 即为答案。(相当于f[0][k] + f[2][k] + … + f[n][k])<br>
+时间复杂度 O(k^3log n)</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+typedef long long LL;
+const int N=35,mod=1234567891;
+struct matrix
+{
+	int m[N][N];
+	matrix()
+	{
+		memset(m,0,sizeof m);
+	}
+};
+int n,k;
+
+matrix add(matrix a,matrix b)
+{
+	matrix c;
+	for(int i=0;i&lt;=k;i++)
+		for(int j=0;j&lt;=k;j++)
+			c.m[i][j]=((LL)a.m[i][j]+b.m[i][j])%mod;
+	return c;
+}
+
+matrix mul(matrix a,matrix b)
+{
+	matrix c;
+	for(int i=0;i&lt;=k;i++)
+		for(int j=0;j&lt;=k;j++)
+			for(int t=0;t&lt;=k;t++)
+				c.m[i][j]=(c.m[i][j]+(LL)a.m[i][t]*b.m[t][j])%mod;
+	
+	return c;
+}
+
+matrix qmi(matrix a,int b)
+{
+	matrix c;
+	for(int i=0;i&lt;=k;i++)
+		c.m[i][i]=1;
+		
+	while(b)
+	{
+		if(b &amp; 1) c=mul(c,a);
+		a=mul(a,a);
+		b&gt;&gt;=1;
+	}
+	
+	return c;
+}
+
+matrix sum(matrix a,int b)
+{
+	if(b == 1) return a;
+	matrix c;
+	for(int i=0;i&lt;=k;i++)
+		c.m[i][i]=1;
+	
+	c=add(c,qmi(a,b&gt;&gt;1));
+	c=mul(c,sum(a,b&gt;&gt;1));
+	if(b &amp; 1) c=add(c,qmi(a,b));
+	
+	return c;
+}
+
+int main()
+{
+	int T;
+	cin&gt;&gt;T;
+	while(T--)
+	{
+		scanf(&quot;%d%d&quot;,&amp;n,&amp;k);
+		
+		matrix a;
+		for(int i=0;i&lt;=k;i++)
+		{
+			a.m[i][i]=i;
+			a.m[i-1][i]=k-i+1;
+		}	
+
+		a=sum(a,n);
+
+		printf(&quot;%d\n&quot;,a.m[0][k]);
+	}
+	return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[状压dp]]></title>
         <id>https://caifxh.github.io/post/zhuang-ya-dp/</id>
@@ -32,7 +578,8 @@
 <img src="https://cdn.acwing.com/media/article/image/2020/02/12/9969_861e7ce04d-101.PNG" alt="101.PNG" loading="lazy"><br>
 根据题意，把每一行的状态用二进制的数表示，0代表不在这块放牛，1表示在这一块放牛。首先很容易看到，每一行的状态要符合牧场的硬件条件，即牛必须放在能放牧的方格上。这样就能排除一些状态。另外，牛与牛之间不能相邻，这样就要求每一行中不能存在两个相邻的1，这样也能排除很多状态。然后就是根据上一行的状态转移到当前行的状态的问题了。必须符合不能有两个1在同一列（两只牛也不能竖着相邻）的条件。这样也能去掉一些状态。然后，上一行的所有符合条件的状态的总的方案数就是当前行该状态的方案数。</p>
 <p>（1）初始化所有合法状态，即找没有相邻1的二进制数。用state[]存储合法状态<br>
-（2）枚举不同合法状态之间的转移关系，只要a&amp;b == 0,状态a就可转到b</p>
+（2）枚举不同合法状态之间的转移关系，只要a&amp;b == 0,状态a就可转到b<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/02/9969_730aad4a74-51.png" alt="51.png" loading="lazy"></p>
 <pre><code>#include&lt;iostream&gt;
 #include&lt;vector&gt;
 #include&lt;bitset&gt;
@@ -88,7 +635,9 @@ int main()
 a表示第i行状态，b表示第i-1行状态，c表示第i-2行状态<br>
 要求：<br>
 （1）每行的意大利炮不能相互攻击到，((a &amp; b) || (a &amp; c) || (a &amp; b))==0<br>
-（2）意大利炮只能放在平地上,(g[i] &amp; a )||(g[i-1] &amp; b),无需判断g[i-2]行，若g[i-2]行意大利炮放到了山地上属于不合法状态，一定为0</p>
+（2）意大利炮只能放在平地上,(g[i] &amp; a )||(g[i-1] &amp; b),无需判断g[i-2]行，若g[i-2]行意大利炮放到了山地上属于不合法状态，一定为0<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/02/9969_8df3199474-52.png" alt="52.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/02/9969_923b747474-53.png" alt="53.png" loading="lazy"></p>
 <pre><code>#include&lt;iostream&gt;
 #include&lt;vector&gt;
 using namespace std;
@@ -6639,1200 +7188,6 @@ int main()
         }
     }
     return 0;
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[数论]]></title>
-        <id>https://caifxh.github.io/post/shu-lun/</id>
-        <link href="https://caifxh.github.io/post/shu-lun/">
-        </link>
-        <updated>2020-03-26T13:38:48.000Z</updated>
-        <content type="html"><![CDATA[<h3 id="数论">数论</h3>
-<h4 id="除法和模运算">除法和模运算</h4>
-<p>计算机中整数和整数的除法是整数除法，即 a ÷ b = ⌊ ab ⌋.<br>
-模运算即是两数相除的余数，在 c++ 的代码中用 a%b 来计算这<br>
-个数字，通过一些小学知识我们容易得到<br>
-a % b = a − ⌊a/b⌋ × b</p>
-<h4 id="整除性和约数">整除性和约数</h4>
-<p>整除是数论中的一个中心概念。<br>
-如果两个数字 a, b, 满足 a % b = 0 , 那么我们就说 a 是 b 的倍数，同时也说 b 是 a 的约数，计做 b | a 。<br>
-在通常情况下，我们考虑一个数字的约数和倍数，都只考虑他的正约数和正倍数。<br>
-• 记号 d | a 意味着对某个整数 k，有 a = kd。<br>
-• 0 可被任何整数整除。0=0*d,d|0<br>
-• 如果 d | a 我们称 a 是 d 的倍数，d 是 a 的约数。<br>
-• 一个整数 a 的约数最小为 1， 最大为 |a|。 • 例如：12 的约数有 1, 2, 3, 4, 6, 12</p>
-<p>求约数<br>
-如何才能求出一个数字 n 的所有约数呢？<br>
-一个非常朴素的方法, 从 1 到 n 枚举，复杂度 O(n)<br>
-注意到约数总是成对出现的，即如果有 a ÷ b = c 就一定会有a ÷ c = b<br>
-我们以 ⌊√n⌋ 作为一个限度，只枚举到 √n(注意 n 是完全平方数的情况)</p>
-<pre><code>vector&lt;int&gt; get_div(int x)
-{
-    vector&lt;int&gt; res;
-    for (int i = 1; i &lt;= x / i; i ++ )
-        if (x % i == 0)
-        {
-            res.push_back(i);
-            if (i != x / i) res.push_back(x / i);
-        }
-    sort(res.begin(), res.end());
-    return res;
-}
-
-int main()
-{
-    int n;
-    cin &gt;&gt; n;
-
-    while (n -- )
-    {
-        int x;
-        cin &gt;&gt; x;
-        auto res = get_div(x);
-
-        for (auto x : res) cout &lt;&lt; x &lt;&lt; ' ';
-        cout &lt;&lt; endl;
-    }
-    return 0;
-}
-</code></pre>
-<h4 id="求倍数">求倍数</h4>
-<p>一个数字的倍数有无穷多个，所以很难求出所有的倍数，我们通常只求出 n 以内 a 的所有倍数。<br>
-和求约数相同，我们同样可以想到一个 O(n) 的简单方法，即枚举<br>
-对于一个数字 a , 他的所有倍数一定是 a, 2a, 3a, 4a, . . . , ⌊n/a⌋a, 每个倍数都比前一个倍数多 a, 所以我们可以从 a 开始每次加 a 枚举他的下一个倍数<br>
-复杂度分析：考虑一种极限情况，a = 1 , 此时枚举相当于从 1枚举到 n , 所以复杂度其实还是 O(n)<br>
-然而我们后面会看到，如果对于每个数字都枚举倍数的话，复杂度会有所下降。</p>
-<h4 id="素数和合数">素数和合数</h4>
-<p>对于某个整数 a &gt; 1，如果它仅有约数 1 和 a，则称 a 为素数（或质数）<br>
-前 10 个素数: 2, 3, 5, 11, 13, 17, 19, 23, 29, 31<br>
-不是素数的整数 a &gt; 1 称为合数。<br>
-例如，因为 2 | 10，所以 10 是合数。<br>
-整数 1 既不是素数也不是合数<br>
-如何判断一个数字是否是质数呢？定义判断即可</p>
-<pre><code>bool is_prime(int x)
-{
-    if(x&lt;2)
-        return false;
-    for(int i=2;i&lt;=x/i;i++)
-    {
-        if(x%i==0)
-            return false;
-    }
-    return true;
-}
-
-int main()
-{
-    int n;
-    cin&gt;&gt;n;
-    while(n--)
-    {
-        int x;
-        scanf(&quot;%d&quot;,&amp;x);
-        if(is_prime(x))
-            puts(&quot;Yes&quot;);
-        else
-            puts(&quot;No&quot;);
-    }
-    return 0;
-}
-</code></pre>
-<h4 id="埃拉托斯特尼筛法">埃拉托斯特尼筛法</h4>
-<p>埃氏筛法的原理是：每个合数都是多个质数的积；那么从最小的质数2开始，用每一个质数去筛比它大的数，就能筛掉合数。埃氏筛法低效的原因是，一个合数会被它的多个质因子重复筛。<br>
-我们考虑这样一个事实，如果一个数字是另外一个数字的倍数，那么这个数字一定不是素数，既然这样我们每枚举到一个数字 i，就可以把他所有的倍数全都设置成不是质数，这样从来没被标记过的数字就是质数了。<br>
-算法思想：每个质数都可以把它的倍数筛掉<br>
-时间复杂度：O(nloglogn)</p>
-<pre><code>int primes[N], cnt;
-bool st[N];
-
-void get_primes(int n)
-{
-    for (int i = 2; i &lt;= n; i ++ )
-    {
-        if (st[i]) continue;
-        primes[cnt ++ ] = i;
-        for (int j = i + i; j &lt;= n; j += i)
-            st[j] = true;
-    }
-}
-</code></pre>
-<h4 id="例题">例题</h4>
-<p><a href="https://www.luogu.com.cn/problem/P2926">bzoj1607</a><br>
-题意：给定 n 个数，对于其中的每一个数字，询问有多少个数是他的约数。<br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/13/9969_96e374aa65-24.PNG" alt="24.PNG" loading="lazy"><br>
-<a href="https://paste.ubuntu.com/p/XdnQz8KSnG/">代码</a></p>
-<h4 id="线性筛欧拉筛">线性筛（欧拉筛）</h4>
-<p>再次把眼光放回如何判断 [1, n]中哪些数字是质数这个问题上来。考虑之前的做法为什么会运行的比较缓慢呢？事实上我们在确认一个数字不是质数的时候，要用很多数字来筛选他才可以，比如数字 6, 我们在枚举 2的倍数的时候筛了他一次，在枚举 3 的倍数的时候筛了他一次，有没有什么办法能够让他只被筛选一次呢？<br>
-考虑这样一种想法，如果每个数字都只被他最小的质约数筛一次，那么复杂度就可以达到 O(n)。可是如何才能实现呢？这是一个类似构造的想法</p>
-<p>$i=p_1^{k_1} * p_2^{k_2} * ... * p_s^{k_s} <span class="katex"><span class="katex-mathml"><math><semantics><mrow></mrow><annotation encoding="application/x-tex">
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"></span></span>i * primes[j]=primes[j] * p_1^{k_1} * p_2^{k_2} * ... * p_s^{k_s}<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">当</mi><mi>i</mi><mi mathvariant="normal">当</mi><mi>i</mi></mrow><annotation encoding="application/x-tex">
-当i%primes[j]不为0时，i*primes[j]的最小质因数为primes[j];
-当i%primes[j]为0之后，i*primes[j]的最小质因数为</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord cjk_fallback">当</span><span class="mord mathdefault">i</span><span class="mord cjk_fallback">当</span><span class="mord mathdefault">i</span></span></span></span>p_1$而不是primes[j],此时不能再用primes[j]筛去，否则违背只用最小质因数筛的方法。<br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/13/9969_f46c7ee064-14.png" alt="14.png" loading="lazy"></p>
-<pre><code>int primes[N], cnt;
-bool st[N];
-
-void get_primes(int n)
-{
-    for (int i = 2; i &lt;= n; i ++ )
-    {
-        if (!st[i]) primes[cnt ++ ] = i;
-        for (int j = 0; primes[j] &lt;= n / i; j ++ )
-        {
-            st[primes[j] * i] = true;
-            if (i % primes[j] == 0) break;
-        }
-    }
-}
-</code></pre>
-<h4 id="线性筛欧拉函数">线性筛欧拉函数</h4>
-<p>回顾一下，我们在求逆元的时候介绍了一个函数，欧拉函数φ(n), 并介绍了一种 √n求一个欧拉函数的方法，现在我们考虑能不能 O(n) 时间内求出 [1, n] 每个数字的欧拉函数函数值呢？<br>
-考虑在线性筛的同时能不能把欧拉函数值也更新一下，注意到线性筛的时候每个数字只会被筛到一次，我们能否在这个时候顺便求出欧拉函数的函数值呢？<br>
-考虑他在被筛的时候函数的取值应该是多少</p>
-<p>i. I是个质数,phi(p)=p-1<br>
-2.如果i % primes[j] = 0, 那么phi(i * primes[j])=primes[j] * phi(i)<br>
-原因：i<em>primes[j]的质因数构成和i相同，但primes[j]的次数多1<br>
-3.如果 i%prime[j] 不为 0，即primes[j]小于i的最小质因子<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>p</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">p_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>,<br>
-phi(i * primes[j]) = phi(i) * primes[j]</em>(1-1/primes[j]) = phi(i)*(primes[j]-1)<br>
-也可根据欧拉函数的积性， i mod primes[j] 不为0且primes[j]为质数,所以i与primes[j]互质,<br>
-phi(i * primes[j])=phi(i) * phi(primes[j]) 其中phi(primes[j])=primes[j]-1即第一条性质</p>
-<pre><code>int primes[N],cnt;
-int eulers[N];
-bool st[N];
-
-void get_eulers(int n)
-{
-    eulers[1]=1;
-    for(int i=2;i&lt;=n;i++)
-    {
-        if(!st[i])
-        {
-            primes[cnt++]=i;
-            eulers[i]=i-1;
-        }
-        for(int j=0;primes[j]&lt;=n/i;j++)
-        {
-            int t=i*primes[j];
-            st[t]=true;
-            if(i%primes[j]==0)
-            {
-                eulers[t]=eulers[i]*primes[j];
-                break;
-            }
-            eulers[t]=eulers[i]*(primes[j]-1);
-        }
-    }
-}
-</code></pre>
-<p>积性函数都可以用欧拉筛来求</p>
-<h4 id="整除分块数论分块">整除分块（数论分块）</h4>
-<p><img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_86fb14d668-10.PNG" alt="10.PNG" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_a913289c68-11.PNG" alt="11.PNG" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_fa92443268-12.PNG" alt="12.PNG" loading="lazy"><br>
-证明细节见：<br>
-https://blog.csdn.net/qq_41021816/article/details/84842956</p>
-<pre><code>#include&lt;bits/stdc++.h&gt;
-using namespace std;
-int main(){
-    long long n,ans=0;
-    cin &gt;&gt; n;
-    for(long long l=1,r;l&lt;=n;l=r+1){
-        r = n/(n/l);            //计算r，让分块右移
-        ans += (r-l+1)*(n/l);   //求和
-        cout &lt;&lt; l &lt;&lt;&quot;&quot;&lt;&lt; r &lt;&lt;&quot;: &quot;&lt;&lt; n/r &lt;&lt; endl;  //打印分块
-    }
-    cout &lt;&lt; ans;               //打印和
-}
-</code></pre>
-<h4 id="积性函数">积性函数</h4>
-<p><img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_8743c9c868-3.PNG" alt="3.PNG" loading="lazy"><br>
-常见的积性函数<br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_ea94e71e68-5.PNG" alt="5.PNG" loading="lazy"><br>
-积性函数性质<br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/13/9969_65c35fe064-17.png" alt="17.png" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/13/9969_b8d1239864-18.png" alt="18.png" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/13/9969_fffea8de65-19.PNG" alt="19.PNG" loading="lazy"><br>
-p为质数</p>
-<h4 id="积性函数的基本问题">积性函数的基本问题</h4>
-<figure data-type="image" tabindex="1"><img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_a550991468-4.PNG" alt="4.PNG" loading="lazy"></figure>
-<h4 id="狄利克雷卷积">狄利克雷卷积</h4>
-<p><img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_b252416668-13.PNG" alt="13.PNG" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_f4f399a268-14.png" alt="14.png" loading="lazy"></p>
-<h4 id="线性筛求莫比乌斯函数">线性筛求莫比乌斯函数</h4>
-<figure data-type="image" tabindex="2"><img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_ec2a1d2c68-17.PNG" alt="17.PNG" loading="lazy"></figure>
-<pre><code>int primes[N],cnt;
-int miu[N];
-bool st[N];
-
-void get_eulers(int n)
-{
-	memset(st,0,sizeof st);
-    miu[1]=1;
-    for(int i=2;i&lt;=n;i++)
-    {
-        if(!st[i])
-        {
-            primes[cnt++]=i;
-            miu[i]=-1;
-        }
-        for(int j=0;i*primes[j]&lt;=n;j++)
-        {
-            int t=i*primes[j];
-            st[t]=true;
-            if(i%primes[j]==0)
-            {
-                miu[t]=0;
-                break;
-            }
-            miu[t]=-miu[i];//积性函数性质，miu[i]*miu[primes[j]]
-        }
-    }
-}
-</code></pre>
-<h5 id="莫比乌斯函数性质">莫比乌斯函数性质</h5>
-<p><img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_174abc2868-18.PNG" alt="18.PNG" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_52dc47a668-19.PNG" alt="19.PNG" loading="lazy"></p>
-<h4 id="莫比乌斯函数的由来">莫比乌斯函数的由来</h4>
-<p><img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_558a917668-15.PNG" alt="15.PNG" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_b130ab1468-16.PNG" alt="16.PNG" loading="lazy"></p>
-<h4 id="杜教筛">杜教筛</h4>
-<p><img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_e027961068-20.png" alt="20.png" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_a04adc4668-50.PNG" alt="50.PNG" loading="lazy"><br>
-经典的杜教筛题目，例如洛谷P4213，求数论函数的前缀和。<br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_c85d9f1668-1.PNG" alt="1.PNG" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_0c2fb4a468-2.png" alt="2.png" loading="lazy"></p>
-<h4 id="杜教筛公式推导">杜教筛公式推导</h4>
-<p><img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_56ae7dbc68-21.PNG" alt="21.PNG" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_5d014d2868-22.PNG" alt="22.PNG" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_5f7f273c68-23.png" alt="23.png" loading="lazy"></p>
-<h4 id="唯一的因子分解">唯一的因子分解</h4>
-<figure data-type="image" tabindex="3"><img src="https://cdn.acwing.com/media/article/image/2020/03/09/9969_27bbfea661-35.PNG" alt="35.PNG" loading="lazy"></figure>
-<h4 id="约数倍数的特征">约数倍数的特征</h4>
-<figure data-type="image" tabindex="4"><img src="https://cdn.acwing.com/media/article/image/2020/03/12/9969_c51b34ec64-28.PNG" alt="28.PNG" loading="lazy"></figure>
-<h4 id="求质约数">求质约数</h4>
-<p>注意到一个数字 n 最多只有一个 &gt; √n 的质约数，所以我们仍然只需要枚举到 √n<br>
-一个非常朴素的方法是枚举每个数字，判断是否是约数并判断是否是素数，但是这个方法的复杂度接近 O(n)，并不是一个非常明智的选择<br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/12/9969_eefac25a64-29.PNG" alt="29.PNG" loading="lazy"></p>
-<pre><code>void divide(int x)
-{
-    for (int i = 2; i &lt;= x / i; i ++ )
-        if (x % i == 0)
-        {
-            int s = 0;
-            while (x % i == 0) x /= i, s ++ ;
-            cout &lt;&lt; i &lt;&lt; ' ' &lt;&lt; s &lt;&lt; endl;
-        }
-    if (x &gt; 1) cout &lt;&lt; x &lt;&lt; ' ' &lt;&lt; 1 &lt;&lt; endl;
-    cout &lt;&lt; endl;
-}
-
-int main()
-{
-    int n;
-    cin &gt;&gt; n;
-    while (n -- )
-    {
-        int x;
-        cin &gt;&gt; x;
-        divide(x);
-    }
-
-    return 0;
-}
-</code></pre>
-<h4 id="快速分解质因数">快速分解质因数</h4>
-<p>我们来考虑求出的 prime 数组的一个应用<br>
-如何能够在线性筛之后快速的分解一个数字的质约数呢？考虑在筛掉一个数字的时候记录一下他是被哪个质数筛掉的也即他的最小的质约数是谁。这样我们只要每次除掉一个最小的质约数就可以了。</p>
-<pre><code>for(int j = 1; prime[j] * i &lt;= Max; ++ j) {
-	from[i*prime[j]] = prime[j];
-	...
-}
-</code></pre>
-<p>查询时只需递归查询from[x],from[x/from[x]]...,一次查询的时间复杂度是O(logn)</p>
-<h4 id="约数个数-约数和">约数个数 约数和</h4>
-<p>对于一个大于1正整数n可以分解质因数：n=p1<sup>a1*p2</sup>a2*p3<sup>a3*…*pk</sup>ak,<br>
-则由约数个数定理可知n的正约数有(a₁+1)(a₂+1)(a₃+1)…(ak+1)个，</p>
-<pre><code>int main()
-{
-    int n;
-    cin &gt;&gt; n;
-
-    unordered_map&lt;int, int&gt; primes;
-
-    while (n -- )
-    {
-        int x;
-        cin &gt;&gt; x;
-
-        for (int i = 2; i &lt;= x / i; i ++ )
-            while (x % i == 0)
-            {
-                x /= i;
-                primes[i] ++ ;
-            }
-
-        if (x &gt; 1) primes[x] ++ ;
-    }
-
-    LL res = 1;
-    for (auto p : primes) res = res * (p.second + 1) % mod;
-
-    cout &lt;&lt; res &lt;&lt; endl;
-
-    return 0;
-}
-</code></pre>
-<p>n的(a₁+1)(a₂+1)(a₃+1)…(ak+1)个正约数的和为<br>
-f(n)=(p1<sup>0+p1</sup>1+p1<sup>2+…p1</sup>a1)(p2<sup>0+p2</sup>1+p2<sup>2+…p2</sup>a2)…(pk<sup>0+pk</sup>1+pk<sup>2+…pk</sup>ak）</p>
-<pre><code>LL res = 1;
-for (auto p : primes)
-{
-    LL a = p.first, b = p.second;
-    LL t = 1;
-    while (b -- ) t = (t * a + 1) % mod;
-    res = res * t % mod;
-}
-cout &lt;&lt; res &lt;&lt; endl;
-</code></pre>
-<h4 id="除法定理">除法定理</h4>
-<p>对任意整数 a 和任意正整数 n， 存在唯一的整数 q 和 r，<br>
-满足 0 &lt;= r &lt; n，并且 a = qn + r.<br>
-值 q = a / n称为除法的商<br>
-值 r = a mod n 称为除法的余数。<br>
-n | a 当且仅当 a mod n = 0。</p>
-<h4 id="模-n-等价类">模 n 等价类</h4>
-<p>包含整数 a 的模 n 等价类为：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mi>𝒂</mi><msub><mo>]</mo><mi>𝒏</mi></msub></mrow><annotation encoding="application/x-tex">[𝒂]_𝒏</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord boldsymbol" style="margin-right:0.09426em;">a</span><span class="mclose"><span class="mclose">]</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.161108em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord boldsymbol mtight" style="margin-right:0.09426em;">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>= {𝒂 + 𝒌𝒏: 𝒌𝝐𝒁}<br>
-例如，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mi>𝟑</mi><msub><mo>]</mo><mi>𝟕</mi></msub></mrow><annotation encoding="application/x-tex">[𝟑]_𝟕</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathbf">3</span><span class="mclose"><span class="mclose">]</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathbf mtight">7</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>= {… , −11, −𝟒, 𝟑, 10, 17, … }<br>
-𝒃𝝐<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mi>𝒂</mi><msub><mo>]</mo><mi>𝒏</mi></msub></mrow><annotation encoding="application/x-tex">[𝒂]_𝒏</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord boldsymbol" style="margin-right:0.09426em;">a</span><span class="mclose"><span class="mclose">]</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.161108em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord boldsymbol mtight" style="margin-right:0.09426em;">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 等同于b = a (mod n)<br>
--1 = n – 1 (mod n)</p>
-<h4 id="公约数与最大公约数">公约数与最大公约数</h4>
-<p>如果 d 是 a 的约数并且也是 b 的约数，则 d 是 a 与 b 的公约数。<br>
-例如，12 的约数是 1, 2, 3, 4, 6, 12，因此 8 与 12 的公约数为 1, 2, 4。 1 是任意两个整数的公约数。<br>
-公约数的重要性质为：<br>
-d | a 且 d | b 蕴含着 d | (a + b) 且 d | (a–b)<br>
-更一般的，对任意整数 x 和 y，有<br>
-d | a 且 d | b 蕴含着 d | (ax + by)</p>
-<p>两个不同时为 0 的整数 a 与 b 的最大公约数表示成gcd(a, b)。<br>
-例如 gcd(12, 8) = 4，gcd(5, 9) = 1, gcd(0, 4) = 4.<br>
-定义 gcd(0, 0) = 0<br>
-gcd 函数的基本性质：<br>
-• gcd(a, b) = gcd(b, a)<br>
-• gcd(a, b) = gcd(-a, b)<br>
-• gcd(a, b) = gcd(|a|, |b|)<br>
-• gcd(a, 0) = |a|<br>
-• gcd(a, ka) = |a|</p>
-<h4 id="gcd-的其他性质">gcd 的其他性质</h4>
-<p>如果 a 和 b 是不都为 0 的任意整数，则 gcd(a, b) 是a 与 b 的线性组合集合 {ax + by: x, y ∈ Z}中的最小正元素。<br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/09/9969_f657763461-34.PNG" alt="34.PNG" loading="lazy"></p>
-<h4 id="裴蜀定理">裴蜀定理</h4>
-<p>对任何整数a、b和它们的最大公约数d，关于未知数x和y的线性不定方程（称为裴蜀等式）：若a,b是整数,且gcd(a,b)=d，那么对于任意的整数x,y,ax+by都一定是d的倍数，特别地，一定存在整数x,y，使ax+by=d成立。<br>
-它的一个重要推论是：a,b互质的充要条件是存在整数x,y使ax+by=1.<br>
-上述裴蜀定理针对的是两个变量。那么我们很自然的就想到这样的定理能否推广到多个变量呢？显然可以，证明方法同上<br>
-<a href="https://www.luogu.com.cn/problem/P4549">模板题</a><br>
-我们只需要对这所有的数字求一个gcd，值得注意的是不要忘记数据中有负数，要将其变为正数再求gcd,因为系数的最终答案没有影响。</p>
-<pre><code>#include&lt;iostream&gt;
-#include&lt;cstdio&gt;
-using namespace std;
-int n;
-
-int gcd(int a,int b)
-{
-	return b?gcd(b,a%b) : a;
-}
-
-int main()
-{
-	scanf(&quot;%d&quot;,&amp;n);
-	int ans=0;
-	for(int i=0;i&lt;n;i++)
-	{
-		int x;
-		scanf(&quot;%d&quot;,&amp;x);
-		if(x&lt;0)	
-			x=-x;
-		ans=gcd(ans,x);
-	}
-	printf(&quot;%d\n&quot;,ans);
-	return 0;
-}
-</code></pre>
-<h4 id="gcd-的其他性质-2">gcd 的其他性质</h4>
-<p>• 对于任意整数 a 和 b，如果 d | a 并且 d | b，则d | gcd(a, b)<br>
-证明：gcd(a,b)|a,gcd(a,b)|b,则gcd为最大的约数，则d | gcd(a, b)</p>
-<p>• 对所有正整数 n, a 和 b，如果 n | ab 且 gcd(a, n)=1，则 n | b</p>
-<h4 id="互质数">互质数</h4>
-<p>如果两个整数 a 和 b 仅有公因数 1，即如果 gcd(a, b) = 1，则 a 与 b 称为互质数。<br>
-例如，5 和 9 是互质数。</p>
-<p>对任意整数 p, a 和 b，如果 gcd(a, p) = gcd(b, p) = 1， 则 gcd(ab, p) = 1<br>
-证明：由线性组合的定理可知，存在整数x,y,x’ ，y’, 满足ax+py=1,bx’+py’=1<br>
-把上面两个等式两边相乘，整理得<br>
-ab(x x’)+p(ybx’+y’ax+pyy’)=1<br>
-因为1是ab与p的一个正线性组合，所以可以证明所需结论</p>
-<h4 id="欧几里得算法">欧几里得算法</h4>
-<p>欧几里得算法求最大公约数<br>
-利用性质：gcd(a, b) = gcd(b, a % b)</p>
-<pre><code>int gcd(int a, int b)
-{
-    return b?gcd(b,a%b):a;
-}
-</code></pre>
-<p>因为每次取模，a 至少会变成原来的二分之一。<br>
-整个算法是 O(log n) 的。<br>
-求出了 gcd，就可以求出 lcm。</p>
-<pre><code>int lcm(int a, int b)
-{
-    return a / gcd(a, b) * b;
-}
-</code></pre>
-<figure data-type="image" tabindex="5"><img src="https://cdn.acwing.com/media/article/image/2020/03/12/9969_80e1553864-30.png" alt="30.png" loading="lazy"></figure>
-<h4 id="例题-2">例题</h4>
-<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=2503">hdu2503</a><br>
-给定 a, b, c, d (0 &lt; a,b,c,d &lt; 1000)。 求 a/b + c/d 的最简形式 e/f。</p>
-<blockquote></blockquote>
-<p>样例输入：<br>
-1 2 1 3<br>
-样例输出：<br>
-5 6</p>
-<p>先通分，求b和d的最小公倍数。<br>
-分子相加后，再约掉分子和分母的最大公约数就是答案。<br>
-<a href="https://paste.ubuntu.com/p/8ScCf2zhgh/">代码</a></p>
-<h4 id="扩展欧几里得算法与二元一次方程的整数解">扩展欧几里得算法与二元一次方程的整数解</h4>
-<p>给出整数a,b,n,问方程ax+by=n什么时候有整数解？如何求出所有的整数解?<br>
-<code>有解的充分必要条件是gcd(a,b)可以整除n</code><br>
-证明：令a=gcd(a,b)a',b=gcd(a,b)b',有ax+by=gcd(a,b)(a'x+b'y)=n;如果x,y,a',b'都是整数，那么n必须是gcd(a,b)的倍数才有解.<br>
-例如，4x+6y=8,2x+3y=4有整数解，4x+6y=7没有整数解。<br>
-如果有解，一种解题方法是先找到一个解（x0,y0）,那么通解公式如下：<br>
-x=x0+bt,y=y0-at,t是任意整数。</p>
-<p>扩展欧几里得算法能计算出满足下列条件的整系数 x 和 y：gcd(a, b) = ax + by<br>
-我们来直接推倒一下：<br>
-ax + by = gcd(a, b)<br>
-注意到由欧几里得算法得：<br>
-gcd(a, b) = gcd(b, a % b)<br>
-因此：<br>
-ax + by = bx' + (a % b)y'<br>
-= bx' + (a - int(a / b)b)y'<br>
-= ay' + b(x - int(a / b)y')<br>
-ax + by = ay' + b(x' - int(a / b)y')<br>
-每次求gcd的递归过程中同时将系数x，y计算出来，令x=y',y=x'-a/b*y'</p>
-<p>例：求 9x + 7y = 1 的一组整数解<br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/12/9969_ad03d25864-31.png" alt="31.png" loading="lazy"></p>
-<pre><code>int exgcd(int a, int b, int &amp;x, int &amp;y) {
-	if (!b) {
-		x = 1, y = 0;
-		return a;
-	}
-	int d = exgcd(b, a % b, x, y);
-	int t = x;
-	x = y;
-	y = t - a / b * y;
-	return d;
-}
-</code></pre>
-<h4 id="拓展欧几里得算法的应用">拓展欧几里得算法的应用</h4>
-<p>更一般的，求解 ax + by = c<br>
-只要 gcd(a, b) | c 就有无数解，否则无解<br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/13/9969_4a0f4a9464-4.PNG" alt="4.PNG" loading="lazy"></p>
-<h4 id="逆元">逆元</h4>
-<p>乘法逆元：对于一个数字 a, 在模 p 意义下如果存在一个数字 b,<br>
-满足 a × b ≡ 1 (mod p), 我们就称 b 是模 p 意义下 a 的乘法逆元，记做 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>a</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">a^{-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span> 。<br>
-容易发现<br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/13/9969_992c32c264-2.PNG" alt="2.PNG" loading="lazy"><br>
-现在我们可以对分子分母取模了！所以进行模运算的重点变成了求逆元。</p>
-<h4 id="欧拉函数">欧拉函数</h4>
-<p>欧拉函数 φ(n), 定义为 1 到 n 中与 n 互质的数字的个数。<br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_154c8e8068-6.PNG" alt="6.PNG" loading="lazy"><br>
-通过定义容易得到欧拉函数的前几项 1, 1, 2, 2, 4, 2, 6, · · ·<br>
-通过定义我们也很容易得到一个质数 p 的欧拉函数 φ(p) = p-1<br>
-我们也很容易写出一个求欧拉函数的简易做法，枚举<br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_08442e5e68-9.png" alt="9.png" loading="lazy"><br>
-注意相同的质约数都是相同的 pi<br>
-有了这个公式我们就可以快速的求出一个数字 n 的欧拉函数φ(n) 了。<br>
-所以，欧拉函数ϕ(n)的求解，归结到了分解质因子这个问题。试除法：求n的质因子时，逐个检查从2到√n的所有质数，如果它能整除n，就是一个因子。试除法的复杂度是O(√n)</p>
-<pre><code>#include&lt;iostream&gt;
-using namespace std;
-
-int phi(int x)
-{
-    int res=x;
-    for(int i=2;i&lt;=x/i;i++)
-    {
-        if(x%i==0)
-            res=res/i*(i-1);
-        while(x%i==0)
-            x/=i;
-    }
-    if(x&gt;1)
-        res=res/x*(x-1);
-    return res;
-}
-
-int main()
-{
-    int n;
-    scanf(&quot;%d&quot;,&amp;n);
-    while(n--)
-    {
-        int x;
-        scanf(&quot;%d&quot;,&amp;x);
-        cout&lt;&lt;phi(x)&lt;&lt;endl;
-    }
-    return 0;
-}
-</code></pre>
-<h4 id="数论中的欧拉定理">数论中的欧拉定理</h4>
-<p>如果 gcd(a, p) = 1 , 即 a, p 互质则有 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>a</mi><mrow><mi>φ</mi><mo>(</mo><mi>p</mi><mo>)</mo></mrow></msup></mrow><annotation encoding="application/x-tex">a^{φ(p)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8879999999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">φ</span><span class="mopen mtight">(</span><span class="mord mathdefault mtight">p</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span></span></span></span> ≡ 1 (mod p)<br>
-注意这个定理的强制性要求是 a, p 互质，如果 a, p 不互质直接用这个做法是做不了的，我们还需要拓展欧拉定理才能处理这个问题<br>
-由此可以得到求 a 模 m 的逆的方法。<br>
-<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>a</mi><mrow><mi>φ</mi><mo>(</mo><mi>m</mi><mo>)</mo></mrow></msup></mrow><annotation encoding="application/x-tex">a^{φ(m)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8879999999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">φ</span><span class="mopen mtight">(</span><span class="mord mathdefault mtight">m</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span></span></span></span>≡ 1 (mod m)<br>
-<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mo>∗</mo><msup><mi>a</mi><mrow><mi>φ</mi><mo>(</mo><mi>m</mi><mo>)</mo><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">a * a^{φ(m)-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.46528em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8879999999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">φ</span><span class="mopen mtight">(</span><span class="mord mathdefault mtight">m</span><span class="mclose mtight">)</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span> ≡ 1 (mod m)<br>
-<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>a</mi><mrow><mi>φ</mi><mo>(</mo><mi>m</mi><mo>)</mo><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">a^{φ(m)-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8879999999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">φ</span><span class="mopen mtight">(</span><span class="mord mathdefault mtight">m</span><span class="mclose mtight">)</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span> 就是 a 模 m 的逆。</p>
-<h4 id="欧拉定理求逆元">欧拉定理求逆元</h4>
-<p>有了这个定理我们要怎么求逆元呢？考虑逆元的定义，对于一个数字 a , 我所要寻找的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>a</mi><mrow><mi mathvariant="normal">−</mi><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">a^{−1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span> 需要满足 a × <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>a</mi><mrow><mi mathvariant="normal">−</mi><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">a^{−1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span> ≡ 1 (mod p), 而 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>a</mi><mrow><mi>φ</mi><mo>(</mo><mi>p</mi><mo>)</mo></mrow></msup></mrow><annotation encoding="application/x-tex">a^{φ(p)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8879999999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">φ</span><span class="mopen mtight">(</span><span class="mord mathdefault mtight">p</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span></span></span></span> ≡ 1 (mod p), 这对于我们是否有一些启示呢？<br>
-我们将 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>a</mi><mrow><mi>φ</mi><mo>(</mo><mi>p</mi><mo>)</mo></mrow></msup></mrow><annotation encoding="application/x-tex">a^{φ(p)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8879999999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">φ</span><span class="mopen mtight">(</span><span class="mord mathdefault mtight">p</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span></span></span></span>写成 a × <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>a</mi><mrow><mi>φ</mi><mo>(</mo><mi>p</mi><mo>)</mo><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">a^{φ(p)-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8879999999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">φ</span><span class="mopen mtight">(</span><span class="mord mathdefault mtight">p</span><span class="mclose mtight">)</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span> 我们惊喜的发现原来 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>a</mi><mrow><mi mathvariant="normal">−</mi><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">a^{−1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span> 启示就是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>a</mi><mrow><mi>φ</mi><mo>(</mo><mi>p</mi><mo>)</mo><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">a^{φ(p)-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8879999999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">φ</span><span class="mopen mtight">(</span><span class="mord mathdefault mtight">p</span><span class="mclose mtight">)</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span> !<br>
-所以在求出欧拉函数之后我们只需要快速幂就能得到一个数字的逆元了。</p>
-<pre><code>int get_inv(int a) {
-    return Pow(a,phi(p)-1);
-}
-</code></pre>
-<p>有很多题目中给定的 p 是个质数，就是费马小定理。<br>
-如果 a, p 不互质怎么求逆元呢？事实上在后面我们会看到，<code>a, p 不互质的情况下是不存在模 p 意义下 a的逆元的</code>。</p>
-<h4 id="欧拉定理求同余方程">欧拉定理求同余方程</h4>
-<p>对于同余方程 ax ≡ b (mod m)<br>
-两边同乘 a 的逆 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>a</mi><mrow><mi>φ</mi><mo>(</mo><mi>m</mi><mo>)</mo><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">a^{φ(m)-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8879999999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">φ</span><span class="mopen mtight">(</span><span class="mord mathdefault mtight">m</span><span class="mclose mtight">)</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span> ax ≡ <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>a</mi><mrow><mi>φ</mi><mo>(</mo><mi>m</mi><mo>)</mo><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">a^{φ(m)-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8879999999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">φ</span><span class="mopen mtight">(</span><span class="mord mathdefault mtight">m</span><span class="mclose mtight">)</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span> b (mod m)<br>
-就可以得到 x ≡ <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>a</mi><mrow><mi>φ</mi><mo>(</mo><mi>m</mi><mo>)</mo><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">a^{φ(m)-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8879999999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">φ</span><span class="mopen mtight">(</span><span class="mord mathdefault mtight">m</span><span class="mclose mtight">)</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span> b (mod m)<br>
-比如：由φ(10) = 4，对于同余方程 3x ≡ 7 (mod 10)<br>
-解为 x ≡ <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>a</mi><mrow><mi>φ</mi><mo>(</mo><mi>m</mi><mo>)</mo><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">a^{φ(m)-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8879999999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">φ</span><span class="mopen mtight">(</span><span class="mord mathdefault mtight">m</span><span class="mclose mtight">)</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span> b ≡ <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>3</mn><mn>3</mn></msup></mrow><annotation encoding="application/x-tex">3^3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">3</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span></span></span></span> * 7 ≡ 9 (mod 10)</p>
-<h4 id="扩展欧拉定理">扩展欧拉定理</h4>
-<p><img src="https://cdn.acwing.com/media/article/image/2020/03/13/9969_453fa94264-3.PNG" alt="3.PNG" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/14/9969_fad90a3c65-25.png" alt="25.png" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/14/9969_e91b801865-%E6%8D%95%E8%8E%B7.PNG" alt="捕获.PNG" loading="lazy"><br>
-<a href="https://www.luogu.com.cn/problem/P5091">模板题</a><br>
-<a href="https://paste.ubuntu.com/p/4gKK4xy8YN/">代码</a></p>
-<h4 id="欧拉函数的性质">欧拉函数的性质</h4>
-<p><img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_4fb5316c68-7.PNG" alt="7.PNG" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/13/9969_e0b6619c64-10.PNG" alt="10.PNG" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/13/9969_02be7b0864-11.PNG" alt="11.PNG" loading="lazy"></p>
-<p>φ(36)=φ(4)φ(9)<br>
-第二行和第四行，每个元素都不和 4 互素。<br>
-剩下的两行，每个元素都和 4 互素，但各有 6 个数和 9 互素<br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/13/9969_823451c864-12.PNG" alt="12.PNG" loading="lazy"></p>
-<figure data-type="image" tabindex="6"><img src="https://cdn.acwing.com/media/article/image/2020/03/18/9969_a838dfd268-8.PNG" alt="8.PNG" loading="lazy"></figure>
-<h4 id="同余">同余</h4>
-<p>一个便于理解的定义：如果对于两个数字 a, b , 对于一个数字 m的余数相等，我们认为他们对于 m 同余<br>
-在数学上的标准定义：设 m 是给定的一个正整数，a, b 是整数，<br>
-若满足 m|(a - b) , 则称 a 与 b 对模 m 同余，记做 a ≡ b (mod m)</p>
-<ol>
-<li>(a + b)%c 是否等于 ((a%c) + (b%c))%c</li>
-<li>a ∗ b%c 是否等于 ((a%c) ∗ (b%c))%c</li>
-<li>a/b%c 是否等于 (a%c)/(b%c)<br>
-对于 1，2 两个式子来说，是正确的，而对于第三个式子来说，是错误的</li>
-</ol>
-<h4 id="线性同余方程">线性同余方程</h4>
-<p>设 x 是未知整数，形如ax ≡ b (mod m)的同余式成为一元线性同余方程<br>
-ax ≡ b (mod m)，即ax除以m,b除以m,两者余数相同，这里a,b,m都是整数，求解x的值。<br>
-方程也可以这样理解，ax-b是m的整数倍。设y是倍数，那么ax-b=my,移项得到ax-my=b.因为y可以是负数，改写为ax+my=b，这就是在扩展欧几里得算法中提到的二元一次不定方程。<br>
-<code>当且仅当gcd(a,m)能整除b时有整数解。</code></p>
-<p>ax ≡ 1 (mod m) 的解称为 a 模 m 的逆。<br>
-如 7x ≡ 1 (mod 31) 的解满足 x ≡ 9 (mod 31)<br>
-设a 模 m 的一个逆为 k，即 ak ≡ 1 (mod m)<br>
-对于 ax ≡ b (mod m)，两边同乘以 k，得到 akx ≡ bk(mod m)<br>
-也即 x ≡ bk (mod m)</p>
-<p>定理：设 p 是素数，正整数 a 是其自身模 p 的逆，当且仅当 a ≡ 1 (mod p) 或 a ≡ -1 (mod p)<br>
-证明：若a ≡ 1 (mod p) 或 a ≡ -1 (mod p),则a² ≡ 1 (mod p) ,所以a其自身模p的逆。反过来，若a是其自身模p<br>
-的逆，则a²=a·a ≡ 1 (mod p) 。因此，p |(a² -1)。又因为a² -1=（a-1）（a+1），所以p |（a-1）或p |（a+1）。<br>
-因此，或者a ≡ 1 (mod p) ，或者a ≡ -1 (mod p)</p>
-<pre><code>#include&lt;iostream&gt;
-using namespace std;
-
-int exgcd(int a,int b,int &amp;x,int &amp;y)
-{
-    if(!b)
-    {
-        x=1,y=0;
-        return a;
-    }
-    
-    int d=exgcd(b,a%b,x,y);
-    int t=x;
-    x=y;
-    y=t-a/b*y;
-    return d;
-}
-
-int main()
-{
-    int n;
-    scanf(&quot;%d&quot;,&amp;n);
-    while(n--)
-    {
-        int a,b,m;
-        scanf(&quot;%d%d%d&quot;,&amp;a,&amp;b,&amp;m);
-        int x,y;
-        int d=exgcd(a,m,x,y);
-        if(b%d)
-            puts(&quot;impossible&quot;);
-        else
-            printf(&quot;%d\n&quot;,((long long)b/d*x%m+m)%m);
-    }
-    return 0;
-}
-</code></pre>
-<h4 id="扩展欧几里得求乘法逆元">扩展欧几里得求乘法逆元</h4>
-<p>ax = 1 (mod m)<br>
-ax + my = 1<br>
-也就是 a, m 是已知数，现在要求出一组 x, y , 使得上面的式子成立。<br>
-这也就印证了上面欧拉定理中的一句话，如果想要存在 a 对 m 的逆元，必须要 gcd(a, m) = 1 (1%gcd(a,m) = 0)才可以<br>
-当然如果 gcd(a, m) != 1，就无解<br>
-注意到 x 的解是 x0 + km （k是任意整数）<br>
-我们只要求出一个 k 使得 x0 + km 是最小的正整数即可。<br>
-另外需要注意的是我们求出的 x 有可能是负数，这时候我们可以让 x 加上若个个 p, 这样显然是不会影响方程的，例如我在 x 上加了一个 p, 那么在 y 上减去 a 就能保证方程依然成立。<br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/12/9969_ab98002464-1.PNG" alt="1.PNG" loading="lazy"></p>
-<h4 id="费马小定理">费马小定理</h4>
-<p>假如 p 是质数，且 (a, p)=1，那么<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>a</mi><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">a^{p-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">p</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span> ≡ 1 (mod p)<br>
-因此可以得到，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mo>∗</mo><msup><mi>a</mi><mrow><mi>p</mi><mo>−</mo><mn>2</mn></mrow></msup></mrow><annotation encoding="application/x-tex">a * a^{p-2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.46528em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">p</span><span class="mbin mtight">−</span><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span> ≡ 1 (mod p)<br>
-所以 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>a</mi><mrow><mi>p</mi><mo>−</mo><mn>2</mn></mrow></msup></mrow><annotation encoding="application/x-tex">a^{p-2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">p</span><span class="mbin mtight">−</span><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span> 是 a 模 p 的一个逆。<br>
-可以用快速幂加速计算。</p>
-<pre><code>#include&lt;iostream&gt;
-using namespace std;
-typedef long long LL;
-int qml(int a,int b,int p)
-{
-    int res=1;
-    while(b)
-    {
-        if(b&amp;1)
-            res=(LL)res*a%p;
-        a=(LL)a*a%p;
-        b&gt;&gt;=1;
-    }
-    return res;
-}
-
-int main()
-{
-    int n;
-    scanf(&quot;%d&quot;,&amp;n);
-    while(n--)
-    {
-        int b,p;
-        scanf(&quot;%d%d&quot;,&amp;b,&amp;p);
-        if(b%p==0)
-            puts(&quot;impossible&quot;);
-        else
-            printf(&quot;%d\n&quot;,qml(b,p-2,p));
-    }
-    return 0;
-}
-</code></pre>
-<h4 id="线性求逆元">线性求逆元</h4>
-<p>给定 n, p 求 [1, n] 中所有整数在模 p 意义下的乘法逆元，n ≤ 2 × 1e6, p ≤ 2 × 1e7。<br>
-我们考虑从 1 到 n 依此求出每个数字的逆元，枚举变量 i, 1 → n,<br>
-默认 [1, i - 1] 每个数字对于 p 的逆元都已经求完,现在我们考虑 i 对 p 的逆元要怎么求。<br>
-不妨把 p 写成 ki + b 的形式也即<br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/13/9969_2c9b0d0664-5.PNG" alt="5.PNG" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/13/9969_3ba6cc0464-6.PNG" alt="6.PNG" loading="lazy"><br>
-<a href="https://www.luogu.com.cn/problem/P3811">模板题</a></p>
-<pre><code>#include&lt;cstdio&gt;
-using namespace std;
-typedef long long LL;
-const int N=3e6+10;
-int inv[N];
-int main()
-{
-    int n,p;
-    scanf(&quot;%d%d&quot;,&amp;n,&amp;p);
-    inv[1]=1;
-    for(int i=2;i&lt;=n;i++)
-        inv[i]=(LL)(p-p/i)*inv[p%i]%p;
-    for(int i=1;i&lt;=n;i++)
-    	printf(&quot;%d\n&quot;,inv[i]);
-    return 0;
-}
-</code></pre>
-<h4 id="阶乘的逆元">阶乘的逆元</h4>
-<p>这里特别列出阶乘的逆元，因为后面有组合数学和组合数取模相关的问题，所以这里特别列出了阶乘如何求逆元。<br>
-有很多同学会认为先求出 [1, n] 每个数字对p的逆元就可以了。这样处理确实可以，但是过于繁琐，我们考虑一共更简单的做法。<br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/13/9969_8a75940664-7.PNG" alt="7.PNG" loading="lazy"></p>
-<pre><code>int ifac[N], fac = 1, mod;
-for(int i = 2; i &lt;= n; ++ i) 
-	fac = (long long) fac * i % mod;
-ifac[n] = get_inv(fac, mod);
-for(int i = n - 1; i &gt;= 0; -- i) 
-	ifac[i] = (long long)ifac[i + 1] * (i + 1) % mod;
-</code></pre>
-<h4 id="线性同余方程组">线性同余方程组</h4>
-<p>第一种：有两个以上的不同模的一元线性同余方程；<br>
-第二种：变元数大于 1，方程数大于 1，但是方程的模相同</p>
-<h4 id="中国剩余定理">中国剩余定理</h4>
-<p>下面取自成书于公元 3 世纪晚期的《孙子算经》的问题。<br>
-求一个数，它被 3 除余 1，被 5 除余 2，被 7 除余 3。<br>
-这也就等价于如下方程组：<br>
-x ≡ 1 (mod 3)<br>
-x ≡ 2 (mod 5)<br>
-x ≡ 3 (mod 7)</p>
-<p><img src="https://cdn.acwing.com/media/article/image/2020/03/13/9969_6222a04265-21.PNG" alt="21.PNG" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/13/9969_82650ca065-22.PNG" alt="22.PNG" loading="lazy"><br>
-正确性显然，代入即可。还需要证明唯一性。<br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/13/9969_b28449d265-23.PNG" alt="23.PNG" loading="lazy"></p>
-<p>x ≡ 1 (mod 3)<br>
-x ≡ 2 (mod 5)<br>
-x ≡ 3 (mod 7)<br>
-现在回到开头的那个方程组，首先有 M = 105<br>
-M1 = 35，M2 = 21，M3 = 15<br>
-y1 = 2, y2 = 1, y3 = 1<br>
-因此 x ≡ 1 * 35 * 2 + 2 * 21 * 1 + 3 * 15 * 1 ≡ 157≡ 52 (mod 105)</p>
-<p>中国剩余定理给出了模数两两互质的线性同余方程组的一个特殊解。方程组的通解可以表示为x+kM（k∈Z）。有些题目要求我们求出最小的非负整数解，只需把x对M取模，并让x落在0~M-1的范围内即可。<br>
-<a href="https://www.luogu.com.cn/problem/P1495">模板题</a></p>
-<pre><code>#include&lt;iostream&gt;
-#include&lt;cstdio&gt;
-using namespace std;
-typedef long long LL;
-const int N=15;
-int n;
-int a[N],b[N];
-
-void exgcd(LL a,LL b,LL &amp;x,LL &amp;y)
-{
-	if(!b)
-	{
-		x=1,y=0;
-		return;
-	}
-	exgcd(b,a%b,x,y);
-	LL t=x;
-	x=y;
-	y=t-a/b*y;
-}
-
-LL crt()
-{
-	LL M=1,res=0;
-	for(int i=1;i&lt;=n;i++)
-		M*=a[i];
-	for(int i=1;i&lt;=n;i++)
-	{
-		LL m,x,y;
-		m=M/a[i];
-		exgcd(m,a[i],x,y);
-		res=(res+m*x*b[i])%M;
-	}
-	return (res%M+M)%M;
-}
-
-int main()
-{
-	scanf(&quot;%d&quot;,&amp;n);
-	for(int i=1;i&lt;=n;i++)
-		scanf(&quot;%d%d&quot;,&amp;a[i],&amp;b[i]);
-	printf(&quot;%lld\n&quot;,crt());
-	return 0;
-}
-</code></pre>
-<h4 id="扩展中国剩余定理">扩展中国剩余定理</h4>
-<p><img src="https://cdn.acwing.com/media/article/image/2020/03/16/9969_7649d6c267-36.PNG" alt="36.PNG" loading="lazy"><br>
-证明：<br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/16/9969_64d72d8667-35.png" alt="35.png" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/16/9969_34150df667-37.png" alt="37.png" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/16/9969_3788205467-38.png" alt="38.png" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/16/9969_7294073067-39.png" alt="39.png" loading="lazy"><br>
-<a href="https://www.acwing.com/problem/content/206/">模板题</a><br>
-<a href="https://www.acwing.com/activity/content/code/content/238790/">code</a></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[快速幂&矩阵快速幂]]></title>
-        <id>https://caifxh.github.io/post/kuai-su-mi-andju-zhen-kuai-su-mi/</id>
-        <link href="https://caifxh.github.io/post/kuai-su-mi-andju-zhen-kuai-su-mi/">
-        </link>
-        <updated>2020-03-26T13:37:23.000Z</updated>
-        <content type="html"><![CDATA[<h4 id="快速幂">快速幂</h4>
-<p>给出 a，b, c，求出 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>a</mi><mi>b</mi></msup></mrow><annotation encoding="application/x-tex">a^b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.849108em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">b</span></span></span></span></span></span></span></span></span></span></span> mod c.a, b, c &lt;= 1e9<br>
-枚举 b，连续乘 b 次 a，每乘一次对 c 取模一次。<br>
-时间复杂度关于 b 线性。<br>
-每次都乘的是 a，重复运算太多，考虑分治</p>
-<p>比如计算出 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mo separator="true">,</mo><msup><mi>a</mi><mn>2</mn></msup><mo separator="true">,</mo><msup><mi>a</mi><mn>4</mn></msup><mo separator="true">,</mo><msup><mi>a</mi><mn>8</mn></msup><mo separator="true">,</mo><msup><mi>a</mi><mn>16</mn></msup></mrow><annotation encoding="application/x-tex">a, a^2, a^4, a^8, a^{16}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.008548em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">4</span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">8</span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">6</span></span></span></span></span></span></span></span></span></span></span></span>, …<br>
-对 b 进行二进制转换，比如 b = 11 = 8 + 2 + 1<br>
-故 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>a</mi><mi>b</mi></msup><mo>=</mo><msup><mi>a</mi><mn>11</mn></msup><mo>=</mo><msup><mi>a</mi><mn>8</mn></msup><mo>∗</mo><msup><mi>a</mi><mn>2</mn></msup><mo>∗</mo><mi>a</mi></mrow><annotation encoding="application/x-tex">a^b = a^{11} = a^8 * a^2 * a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.849108em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">b</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">8</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span></span></span></span><br>
-因此，只要预处理出 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>2</mn></msub><mn>1</mn><msup><mn>0</mn><mn>9</mn></msup></mrow><annotation encoding="application/x-tex">log_2 10^9</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.008548em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">9</span></span></span></span></span></span></span></span></span></span></span> 个 a 的幂次<br>
-计算的时候分解成 log2 b 个乘积即可<br>
-<a href="https://www.acwing.com/problem/content/877/">模板题</a></p>
-<pre><code>int qmi(int a,int b,int p)
-{
-    int res=1%p;
-    while(b)
-    {
-        if(b&amp;1)
-            res=(long long)res*a%p;
-        a=(long long)a*a%p;
-        b&gt;&gt;=1;
-    }
-    return res;
-}
-</code></pre>
-<h4 id="快速乘">快速乘</h4>
-<p>给出 a，b, c，求出 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mo>∗</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a * b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.46528em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span> mod c.a, b, c &lt;= 1e18<br>
-沿用之前的做法，但是注意这里的模数是 1e18。如果两个小于 1e18 的数相乘，long long也存不下。<br>
-考虑到幂次可以转化为连乘，乘法也可以转化为连加。<br>
-同样的我们可以得到一个“快速”乘</p>
-<p>比如计算出 a, 2a, 4a, 8a, 16a, …<br>
-对 b 进行二进制转换，比如 b = 11 = 8 + 2 + 1<br>
-故 ba = 11a = 8a + 2a + a<br>
-因此，只要预处理出 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>2</mn></msub><mn>1</mn><msup><mn>0</mn><mn>18</mn></msup></mrow><annotation encoding="application/x-tex">log_2 10^{18}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.008548em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">8</span></span></span></span></span></span></span></span></span></span></span></span> 个 a 的乘积<br>
-计算的时候分解成 log2 b 个加法即可。<br>
-因为每次两个小于 1e18 的数相加，long long是可以存的。<br>
-<a href="https://www.acwing.com/problem/content/92/">模板题</a></p>
-<pre><code>long long mul(long long a, long long b, long long c)
-{
-    long long ans = 0;
-    while (b) 
-    {
-        if (b &amp; 1) ans = (ans + a) % c;
-        b &gt;&gt;= 1;
-        a = (a + a) % c;
-    }
-    return ans; 
-}
-</code></pre>
-<h4 id="例题">例题</h4>
-<p><a href="https://www.luogu.com.cn/problem/P1965">luoguP1965</a><br>
-答案显然就是 (x + m * 10^k) % n<br>
-根据模运算的的分配率可以得到 (x%n+m%n*10<sup>k%n)%n,只需用快速幂求出10</sup>k就可以了<br>
-<a href="https://paste.ubuntu.com/p/Mh8D5CDD3X/">代码</a></p>
-<h4 id="矩阵乘法">矩阵乘法</h4>
-<p>给定一个大小为 n × m 的矩阵 A[n][m]<br>
-和一个大小为 m × r 的矩阵 B[m][r]</p>
-<pre><code>    for (int i = 1;i &lt;= n;i ++)
-        for (int j = 1;j &lt;= r;j ++)
-            for (int k = 1;k &lt;= m;k ++)
-                C[i][j] += A[i][k] * B[k][j];
-时间复杂度: O(n^3)
-</code></pre>
-<h4 id="矩阵快速幂">矩阵快速幂</h4>
-<p><a href="">poj3233</a><br>
-给定一个 n × n 的矩阵 A，和一个正整数 k。 求 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi><mo>=</mo><mi>A</mi><mo>+</mo><msup><mi>A</mi><mn>2</mn></msup><mo>+</mo><mo>…</mo><mo>+</mo><msup><mi>A</mi><mi>k</mi></msup></mrow><annotation encoding="application/x-tex">S = A + A^2 + … + A^k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">A</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.897438em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord mathdefault">A</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.849108em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">A</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span></span></span></span>，对 m 取模,n ≤ 30，k ≤ 1e9</p>
-<blockquote></blockquote>
-<p>样例输入：<br>
-2 2 4<br>
-0 1<br>
-1 1<br>
-样例输出：<br>
-1 2<br>
-2 3</p>
-<p>注意到，矩阵乘法也是具有结合律和乘法分配律的。<br>
-因此：(I为单位阵)<br>
-<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi><mo>+</mo><msup><mi>A</mi><mn>2</mn></msup><mo>=</mo><mi>A</mi><mo>(</mo><mi>I</mi><mo>+</mo><mi>A</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">A + A^2 = A(I + A)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">A</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">A</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">A</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">A</span><span class="mclose">)</span></span></span></span><br>
-<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi><mo>+</mo><msup><mi>A</mi><mn>2</mn></msup><mo>+</mo><msup><mi>A</mi><mn>3</mn></msup><mo>+</mo><msup><mi>A</mi><mn>4</mn></msup><mo>=</mo><mo>(</mo><mi>A</mi><mo>+</mo><msup><mi>A</mi><mn>2</mn></msup><mo>)</mo><mo>(</mo><mi>I</mi><mo>+</mo><msup><mi>A</mi><mn>2</mn></msup><mo>)</mo></mrow><annotation encoding="application/x-tex">A + A^2 + A^3 + A^4 = (A + A^2)(I + A^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">A</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.897438em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord mathdefault">A</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.897438em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord mathdefault">A</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">A</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">4</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault">A</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">A</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">A</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></p>
-<p>我们记 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mi>u</mi><mi>m</mi><mo>(</mo><mi>n</mi><mo>)</mo><mo>=</mo><mi>A</mi><mo>+</mo><msup><mi>A</mi><mn>2</mn></msup><mo>+</mo><mo>…</mo><mo>+</mo><msup><mi>A</mi><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">sum(n) = A + A^2 + … + A^n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">u</span><span class="mord mathdefault">m</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">A</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.897438em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord mathdefault">A</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">A</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span></span></span></span></span></span></span><br>
-如果 n 是偶数:<br>
-<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mi>u</mi><mi>m</mi><mo>(</mo><mi>n</mi><mo>)</mo><mo>=</mo><mi>s</mi><mi>u</mi><mi>m</mi><mo>(</mo><mi>n</mi><mi mathvariant="normal">/</mi><mn>2</mn><mo>)</mo><mo>(</mo><mi>I</mi><mo>+</mo><msup><mi>A</mi><mrow><mi>n</mi><mi mathvariant="normal">/</mi><mn>2</mn></mrow></msup><mo>)</mo></mrow><annotation encoding="application/x-tex">sum(n) = sum(n / 2)(I + A^{n/2})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">u</span><span class="mord mathdefault">m</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">u</span><span class="mord mathdefault">m</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mord">/</span><span class="mord">2</span><span class="mclose">)</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.138em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">A</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mord mtight">/</span><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span><br>
-如果 n 是奇数：<br>
-<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mi>u</mi><mi>m</mi><mo>(</mo><mi>n</mi><mo>)</mo><mo>=</mo><mi>s</mi><mi>u</mi><mi>m</mi><mo>(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo>)</mo><mo>+</mo><msup><mi>A</mi><mi>n</mi></msup><mo>=</mo><mi>s</mi><mi>u</mi><mi>m</mi><mo>(</mo><mo>(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo>)</mo><mi mathvariant="normal">/</mi><mn>2</mn><mo>)</mo><mo>(</mo><mi>I</mi><mo>+</mo><msup><mi>A</mi><mrow><mo>(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo>)</mo><mi mathvariant="normal">/</mi><mn>2</mn></mrow></msup><mi mathvariant="normal">）</mi><mo>+</mo><msup><mi>A</mi><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">sum(n) = sum(n - 1) + A^n = sum((n - 1) / 2)(I + A^{(n-1)/2}）+ A^n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">u</span><span class="mord mathdefault">m</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">u</span><span class="mord mathdefault">m</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">A</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">u</span><span class="mord mathdefault">m</span><span class="mopen">(</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mord">/</span><span class="mord">2</span><span class="mclose">)</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.9713299999999999em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord mathdefault">A</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathdefault mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">1</span><span class="mclose mtight">)</span><span class="mord mtight">/</span><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mord cjk_fallback">）</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">A</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span></span></span></span></span></span></span><br>
-只需要解决如何快速求 A^n</p>
-<p>对于整数的幂次，我们可以用快速幂来求。<br>
-对于矩阵的幂次，我们也可以用快速幂来求。<br>
-注意的是，初始值要设置为单位矩阵 I。也就是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>A</mi><mn>0</mn></msup></mrow><annotation encoding="application/x-tex">A^0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">A</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span></span></span></span></span></span></span></span>.</p>
-<pre><code>#include&lt;iostream&gt;
-#include&lt;algorithm&gt;
-#include&lt;cstring&gt;
-#include&lt;cstdio&gt;
-using namespace std;
-const int N=35;
-struct matrix
-{
-	int m[N][N];
-	matrix()
-	{
-		memset(m,0,sizeof m);
-	}
-}a;
-int n,k,mod;
-
-matrix add(matrix a,matrix b)
-{
-	matrix res;
-	for(int i=1;i&lt;=n;i++)
-		for(int j=1;j&lt;=n;j++)
-			res.m[i][j]=(a.m[i][j]+b.m[i][j])%mod;
-	return res;
-}
-
-matrix mul(matrix a,matrix b)
-{
-	matrix c;
-	for(int i=1;i&lt;=n;i++)
-		for(int j=1;j&lt;=n;j++)
-			for(int k=1;k&lt;=n;k++)
-				c.m[i][j]=(c.m[i][j]+a.m[i][k]*b.m[k][j])%mod;
-	return c;
-}
-
-matrix qmi(matrix a,int k)
-{
-	matrix c;
-	for(int i=1;i&lt;=n;i++)
-		c.m[i][i]=1;
-	while(k)
-	{
-		if(k &amp; 1)
-			c=mul(c,a);
-		a=mul(a,a);
-		k&gt;&gt;=1;
-	}
-	return c;
-}
-
-matrix get_sum(matrix a,int k)
-{
-	if(k == 1)
-		return a;
-	matrix c;
-	for(int i=1;i&lt;=n;i++)
-		c.m[i][i]=1;
-	
-	c=add(c,qmi(a,k&gt;&gt;1));
-	c=mul(c,get_sum(a,k&gt;&gt;1));
-	if(k &amp; 1)
-		c=add(c,qmi(a,k));
-	return c;
- } 
-
-int main()
-{
-	scanf(&quot;%d%d%d&quot;,&amp;n,&amp;k,&amp;mod);
-	
-	for(int i=1;i&lt;=n;i++)
-		for(int j=1;j&lt;=n;j++)
-			scanf(&quot;%d&quot;,&amp;a.m[i][j]);
-	
-	a=get_sum(a,k);
-	
-	for(int i=1;i&lt;=n;i++)
-	{
-		for(int j=1;j&lt;=n;j++)
-			printf(&quot;%d &quot;,a.m[i][j]);
-		puts(&quot;&quot;);
-	}
-		
-	return 0;
-}
-</code></pre>
-<h4 id="矩阵乘法优化递推">矩阵乘法优化递推</h4>
-<p><a href="https://vjudge.net/problem/POJ-3070">poj3070</a><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/07/9969_2ef3042460-14.PNG" alt="14.PNG" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/07/9969_620b5d9460-15.PNG" alt="15.PNG" loading="lazy"></p>
-<pre><code>#include&lt;iostream&gt;
-#include&lt;algorithm&gt;
-#include&lt;cstring&gt;
-#include&lt;cstdio&gt;
-using namespace std;
-typedef long long LL;
-const int N=2,mod=10000;
-int n;
-struct matrix
-{
-    int m[N][N];
-    matrix()
-    {
-    	memset(m,0,sizeof m);
-	}
-    matrix(int a[][N])
-    {
-        memcpy(m,a,sizeof m);
-    }
-};
-
-matrix mul(matrix a,matrix b)
-{
-	matrix res;
-	for(int i=0;i&lt;2;i++)
-		for(int j=0;j&lt;2;j++)
-			for(int k=0;k&lt;2;k++)
-				res.m[i][j]=(res.m[i][j]+(LL)a.m[i][k]*b.m[k][j])%mod;
-	return res;
-}
-
-matrix qmi(matrix a,int k)
-{
-	matrix res;
-	for(int i=0;i&lt;2;i++)
-		res.m[i][i]=1;
-	
-	while(k)
-	{
-		if(k &amp; 1)
-			res=mul(res,a);
-		a=mul(a,a);
-		k&gt;&gt;=1;
-	}
-	return res;
-}
-
-int main()
-{
-	while(scanf(&quot;%d&quot;,&amp;n) &amp;&amp; ~n)
-	{
-		int f[N][N]={{1,0}};
-		int c[N][N]={{1,1},{1,0}};
-		matrix a=c;
-		matrix b=f;
-		if(n)
-		{
-			a=qmi(a,n-1);
-			b=mul(b,a);
-			printf(&quot;%d\n&quot;,b.m[0][0]);
-		}
-		else 
-			printf(&quot;0\n&quot;);	
-	}
-}
-</code></pre>
-<figure data-type="image" tabindex="1"><img src="https://cdn.acwing.com/media/article/image/2020/03/07/9969_958a265e60-002.PNG" alt="002.PNG" loading="lazy"></figure>
-<p><a href="https://www.acwing.com/problem/content/1305/">acwing1303</a><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/07/9969_346e767260-001.PNG" alt="001.PNG" loading="lazy"><br>
-<a href="https://www.acwing.com/activity/content/code/content/192086/">代码</a><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/07/9969_ed62226260-17.PNG" alt="17.PNG" loading="lazy"></p>
-<p>数列f[n]=f[n-1]+f[n-2]+1,f[1]=f[2]=1的第n项的快速求法（不考虑高精度）<br>
-仿照前例，考虑1×3的矩阵[f[n-2],f[n-1],1]，希望求得某3×3的矩阵A，使得此1×3的矩阵乘以A得到矩阵：<br>
-[f[n-1],f[n],1]<br>
-即：[]f[n-2],f[n-1],1]* A ＝[f[n-1],f[n],1] =[f[n-1],f[n-1]+f[n-2]+1,1]<br>
-容易构造出这个3×3的矩阵A，即：</p>
-<pre><code>０ １ ０
-１ １ ０
-０ １ １
-</code></pre>
-<p>数列f[n]=f[n-1]+f[n-2]+n+1,f[1]=f[2]=1的第n项的快速求法（不考虑高精度）.<br>
-解法：<br>
-仿照前例，考虑1×4的矩阵[f[n-2],f[n-1],n,1]，希望求得某4×4的矩阵A，使得此1×4的矩阵乘以A得到矩阵：[f[n-1],f[n],n+1,1]<br>
-即：[f[n-2],f[n-1],n,1]* A  = [f[n-1],f[n],n+1,1]＝[f[n-1],f[n-1]+f[n-2]+n+1,n+1,1]<br>
-容易构造出这个4×4的矩阵A，即：</p>
-<pre><code>０ １ ０ ０
-１ １ ０ ０
-０ １ １ ０
-０ １ １ １
-</code></pre>
-<h4 id="例题-2">例题</h4>
-<p><a href="">poj3735</a><br>
-有 n 只小猫，要执行一些操作序列。<br>
-g i：给第 i 只小猫一棵花生<br>
-e i：让第 i 只小猫吃掉它的所有花生<br>
-s i j：让第 i 只小猫和第 j 只小猫交换他们手里的花生。<br>
-现在给你一个长度为 k 的序列，让你反复执行这个序列 m<br>
-次。问最后每只小猫手里的花生数。n≤100，k≤100，m≤1e9</p>
-<p>联系矩阵优化递推。<br>
-如果我们也能求出一个序列对应的矩阵。<br>
-只要求矩阵的 m 次幂即可。<br>
-先考虑如何设计状态：<br>
-把刚才那3只猫看做一个矩阵{a,b,c},分别代表他们有的花生个数，显然初始是{0,0,0}<br>
-当进行s操作的时候，我们将初始矩阵乘上一个矩阵，得到的那个矩阵最好也是1行3列的。<br>
-那肯定我们要构造的那个矩阵是3*3的矩阵<br>
-s 1 2交换操作就是{a,b,c}*x={b,a,c}</p>
-<pre><code>x=  0 1 0
-    1 0 0
-    0 0 1
-</code></pre>
-<p>S操作是这样的，首先将X看做一个单位矩阵，要交换哪两个，只需要交换他们的列就可以了<br>
-对于e操作近似于s操作，将e 2举例：{a,b,c}*x={a,0,c}</p>
-<pre><code>x=  1 0 0
-    0 0 0
-    0 0 1
-</code></pre>
-<p>即将某列置于0</p>
-<p>现在问题来了，怎么构造g操作的矩阵。使下面这个等式成立<br>
-g 1操作  {a,b,c}*X={a+1,b,c}<br>
-g 2操作  {a,b,c}*X={a,b+1,c}<br>
-g 3操作  {a,b,c}*X={a,b,c+1}</p>
-<p>我们不妨再{a,b,c}矩阵多加一个1，这样我们就能实现我们的+1操作了<br>
-要使g 1操作实现{a,b,c,1}*x={a+1,b,c,1}<br>
-那么</p>
-<pre><code>x=  1 0 0 0
-    0 1 0 0
-    0 0 1 0
-    1 0 0 1
-</code></pre>
-<p>当然这样构造矩阵，这样并不影响我们前面的s与e操作</p>
-<p>这样一系列操作之后：<br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/07/9969_4bcc69f260-003.jpg" alt="003.jpg" loading="lazy"></p>
-<p>得到这个矩阵后，求它的 m 次幂，然后乘上初始状态对应<br>
-的向量，得到的就是答案。<br>
-时间复杂度: O(n^3log m)<br>
-<a href="https://paste.ubuntu.com/p/THP5WB3nTq/">代码</a></p>
-<p><a href="https://vjudge.net/problem/POJ-3150">poj3150</a><br>
-有 n 个数排成一个环。定义一次变换为：把这个数变成距离它不超过 d 的位置上的数之和对 m 取模的值。<br>
-问这样变换 k 次后，每个位置上的数是多少。<br>
-n &lt;= 500, m &lt;= 109, k &lt;= 1e9</p>
-<p>对于每一次变换，其实可以写成一个矩阵：<br>
-比如题中 d = 2<br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/07/9969_f0d1e4e660-18.PNG" alt="18.PNG" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/08/9969_1d68c92a60-000000.png" alt="000000.png" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/07/9969_95c26eb260-005.png" alt="005.png" loading="lazy"><br>
-因此一个矩阵只要存下第一行就可以得到整个矩阵。<br>
-计算矩阵乘法的时候，只要枚举 n^2 次。<br>
-时间复杂度变成了 O(n^2 log k)</p>
-<pre><code>#include&lt;iostream&gt;
-#include&lt;algorithm&gt;
-#include&lt;cstring&gt;
-#include&lt;cstdio&gt;
-using namespace std;
-typedef long long LL;
-const int N=510;
-int n,mod,d,k;
-struct matrix 
-{
-	int m[N];
-	matrix()
-	{
-		for(int i=0;i&lt;N;i++)
-			m[i]=0;
-	}
-	matrix(int a[])
-	{
-		memcpy(m,a,sizeof m);
-	}
-};
-
-matrix mul(matrix a,matrix b)
-{
-	matrix res;
-	
-	for(int i=0;i&lt;n;i++)//只计算res的第一行 
-		for(int k=0;k&lt;n;k++)
-			res.m[i]=(res.m[i]+(LL)a.m[k]*b.m[(i-k+n)%n])%mod;
-	return res;
-}
-
-matrix qmi(matrix a,int k)
-{
-	matrix res;
-	res.m[0]=1;
-		
-	while(k)
-	{
-		if(k&amp;1) res=mul(res,a);
-		a=mul(a,a);
-		k&gt;&gt;=1;
-	}
-	return res;
-}
-
-int main()
-{
-	scanf(&quot;%d%d%d%d&quot;,&amp;n,&amp;mod,&amp;d,&amp;k);
-	matrix b;
-	for(int i=0;i&lt;n;i++)
-		scanf(&quot;%d&quot;,&amp;b.m[i]);
-	matrix a;
-	for(int i=0;i&lt;n;i++)
-		if(i&lt;=d || (i+d)%n == 0)
-			a.m[i]=1;
-	a=qmi(a,k);	
-//	for(int i=0;i&lt;n;i++)
-//		printf(&quot;%d &quot;,a.m[i]);
-	b=mul(b,a);
-	for(int i=0;i&lt;n;i++)
-		printf(&quot;%d &quot;,b.m[i]);
-	return 0;
 }
 </code></pre>
 ]]></content>

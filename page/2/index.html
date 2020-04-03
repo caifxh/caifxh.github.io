@@ -7,7 +7,7 @@
 <title>
     fxh
 </title>
-<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1585732375323">
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1585882659287">
 <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
 <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
@@ -27,7 +27,7 @@
     <div class="nav">
         <div class="logo">
             <a href="https://caifxh.github.io">
-                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1585732375323" alt="">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1585882659287" alt="">
             </a>
             <div class="site-title">
                 <h1>
@@ -99,6 +99,1240 @@
         
             <article class="post i-card">
                 <h2 class="post-title">
+                    <a href="https://caifxh.github.io/post/shu-lun/">
+                        数论
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2020-03-26</time>
+                    
+                        <a href="https://caifxh.github.io/tag/14SoYNkfD/" class="post-tag i-tag
+                            i-tag-banana">
+            #数学
+        </a>
+                        
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            数论
+除法和模运算
+计算机中整数和整数的除法是整数除法，即 a ÷ b = ⌊ ab ⌋.
+模运算即是两数相除的余数，在 c++ 的代码中用 a%b 来计算这
+个数字，通过一些小学知识我们容易得到
+a % b = a − ⌊a/b⌋ × b
+整除性和约数
+整除是数论中的一个中心概念。
+如果两个数字 a, b, 满足 a % b = 0 , 那么我们就说 a 是 b 的倍数，同时也说 b 是 a 的约数，计做 b | a 。
+在通常情况下，我们考虑一个数字的约数和倍数，都只考虑他的正约数和正倍数。
+• 记号 d | a 意味着对某个整数 k，有 a = kd。
+• 0 可被任何整数整除。0=0*d,d|0
+• 如果 d | a 我们称 a 是 d 的倍数，d 是 a 的约数。
+• 一个整数 a 的约数最小为 1， 最大为 |a|。 • 例如：12 的约数有 1, 2, 3, 4, 6, 12
+求约数
+如何才能求出一个数字 n 的所有约数呢？
+一个非常朴素的方法, 从 1 到 n 枚举，复杂度 O(n)
+注意到约数总是成对出现的，即如果有 a ÷ b = c 就一定会有a ÷ c = b
+我们以 ⌊√n⌋ 作为一个限度，只枚举到 √n(注意 n 是完全平方数的情况)
+vector&amp;lt;int&amp;gt; get_div(int x)
+{
+    vector&amp;lt;int&amp;gt; res;
+    for (int i = 1; i &amp;lt;= x / i; i ++ )
+        if (x % i == 0)
+        {
+            res.push_back(i);
+            if (i != x / i) res.push_back(x / i);
+        }
+    sort(res.begin(), res.end());
+    return res;
+}
+
+int main()
+{
+    int n;
+    cin &amp;gt;&amp;gt; n;
+
+    while (n -- )
+    {
+        int x;
+        cin &amp;gt;&amp;gt; x;
+        auto res = get_div(x);
+
+        for (auto x : res) cout &amp;lt;&amp;lt; x &amp;lt;&amp;lt; &#39; &#39;;
+        cout &amp;lt;&amp;lt; endl;
+    }
+    return 0;
+}
+
+求倍数
+一个数字的倍数有无穷多个，所以很难求出所有的倍数，我们通常只求出 n 以内 a 的所有倍数。
+和求约数相同，我们同样可以想到一个 O(n) 的简单方法，即枚举
+对于一个数字 a , 他的所有倍数一定是 a, 2a, 3a, 4a, . . . , ⌊n/a⌋a, 每个倍数都比前一个倍数多 a, 所以我们可以从 a 开始每次加 a 枚举他的下一个倍数
+复杂度分析：考虑一种极限情况，a = 1 , 此时枚举相当于从 1枚举到 n , 所以复杂度其实还是 O(n)
+然而我们后面会看到，如果对于每个数字都枚举倍数的话，复杂度会有所下降。
+素数和合数
+对于某个整数 a &amp;gt; 1，如果它仅有约数 1 和 a，则称 a 为素数（或质数）
+前 10 个素数: 2, 3, 5, 11, 13, 17, 19, 23, 29, 31
+不是素数的整数 a &amp;gt; 1 称为合数。
+例如，因为 2 | 10，所以 10 是合数。
+整数 1 既不是素数也不是合数
+如何判断一个数字是否是质数呢？定义判断即可
+bool is_prime(int x)
+{
+    if(x&amp;lt;2)
+        return false;
+    for(int i=2;i&amp;lt;=x/i;i++)
+    {
+        if(x%i==0)
+            return false;
+    }
+    return true;
+}
+
+int main()
+{
+    int n;
+    cin&amp;gt;&amp;gt;n;
+    while(n--)
+    {
+        int x;
+        scanf(&amp;quot;%d&amp;quot;,&amp;amp;x);
+        if(is_prime(x))
+            puts(&amp;quot;Yes&amp;quot;);
+        else
+            puts(&amp;quot;No&amp;quot;);
+    }
+    return 0;
+}
+
+埃拉托斯特尼筛法
+埃氏筛法的原理是：每个合数都是多个质数的积；那么从最小的质数2开始，用每一个质数去筛比它大的数，就能筛掉合数。埃氏筛法低效的原因是，一个合数会被它的多个质因子重复筛。
+我们考虑这样一个事实，如果一个数字是另外一个数字的倍数，那么这个数字一定不是素数，既然这样我们每枚举到一个数字 i，就可以把他所有的倍数全都设置成不是质数，这样从来没被标记过的数字就是质数了。
+算法思想：每个质数都可以把它的倍数筛掉
+时间复杂度：O(nloglogn)
+int primes[N], cnt;
+bool st[N];
+
+void get_primes(int n)
+{
+    for (int i = 2; i &amp;lt;= n; i ++ )
+    {
+        if (st[i]) continue;
+        primes[cnt ++ ] = i;
+        for (int j = i + i; j &amp;lt;= n; j += i)
+            st[j] = true;
+    }
+}
+
+例题
+bzoj1607
+题意：给定 n 个数，对于其中的每一个数字，询问有多少个数是他的约数。
+
+代码
+线性筛（欧拉筛）
+再次把眼光放回如何判断 [1, n]中哪些数字是质数这个问题上来。考虑之前的做法为什么会运行的比较缓慢呢？事实上我们在确认一个数字不是质数的时候，要用很多数字来筛选他才可以，比如数字 6, 我们在枚举 2的倍数的时候筛了他一次，在枚举 3 的倍数的时候筛了他一次，有没有什么办法能够让他只被筛选一次呢？
+考虑这样一种想法，如果每个数字都只被他最小的质约数筛一次，那么复杂度就可以达到 O(n)。可是如何才能实现呢？这是一个类似构造的想法
+$i=p_1^{k_1} * p_2^{k_2} * ... * p_s^{k_s} 
+i * primes[j]=primes[j] * p_1^{k_1} * p_2^{k_2} * ... * p_s^{k_s}当i当i
+当i%primes[j]不为0时，i*primes[j]的最小质因数为primes[j];
+当i%primes[j]为0之后，i*primes[j]的最小质因数为当i当ip_1$而不是primes[j],此时不能再用primes[j]筛去，否则违背只用最小质因数筛的方法。
+
+int primes[N], cnt;
+bool st[N];
+
+void get_primes(int n)
+{
+    for (int i = 2; i &amp;lt;= n; i ++ )
+    {
+        if (!st[i]) primes[cnt ++ ] = i;
+        for (int j = 0; primes[j] &amp;lt;= n / i; j ++ )
+        {
+            st[primes[j] * i] = true;
+            if (i % primes[j] == 0) break;
+        }
+    }
+}
+
+线性筛欧拉函数
+回顾一下，我们在求逆元的时候介绍了一个函数，欧拉函数φ(n), 并介绍了一种 √n求一个欧拉函数的方法，现在我们考虑能不能 O(n) 时间内求出 [1, n] 每个数字的欧拉函数函数值呢？
+考虑在线性筛的同时能不能把欧拉函数值也更新一下，注意到线性筛的时候每个数字只会被筛到一次，我们能否在这个时候顺便求出欧拉函数的函数值呢？
+考虑他在被筛的时候函数的取值应该是多少
+i. I是个质数,phi(p)=p-1
+2.如果i % primes[j] = 0, 那么phi(i * primes[j])=primes[j] * phi(i)
+原因：iprimes[j]的质因数构成和i相同，但primes[j]的次数多1
+3.如果 i%prime[j] 不为 0，即primes[j]小于i的最小质因子p1p_1p1​,
+phi(i * primes[j]) = phi(i) * primes[j](1-1/primes[j]) = phi(i)*(primes[j]-1)
+也可根据欧拉函数的积性， i mod primes[j] 不为0且primes[j]为质数,所以i与primes[j]互质,
+phi(i * primes[j])=phi(i) * phi(primes[j]) 其中phi(primes[j])=primes[j]-1即第一条性质
+int primes[N],cnt;
+int eulers[N];
+bool st[N];
+
+void get_eulers(int n)
+{
+    eulers[1]=1;
+    for(int i=2;i&amp;lt;=n;i++)
+    {
+        if(!st[i])
+        {
+            primes[cnt++]=i;
+            eulers[i]=i-1;
+        }
+        for(int j=0;primes[j]&amp;lt;=n/i;j++)
+        {
+            int t=i*primes[j];
+            st[t]=true;
+            if(i%primes[j]==0)
+            {
+                eulers[t]=eulers[i]*primes[j];
+                break;
+            }
+            eulers[t]=eulers[i]*(primes[j]-1);
+        }
+    }
+}
+
+积性函数都可以用欧拉筛来求
+整除分块（数论分块）
+
+
+
+证明细节见：
+https://blog.csdn.net/qq_41021816/article/details/84842956
+#include&amp;lt;bits/stdc++.h&amp;gt;
+using namespace std;
+int main(){
+    long long n,ans=0;
+    cin &amp;gt;&amp;gt; n;
+    for(long long l=1,r;l&amp;lt;=n;l=r+1){
+        r = n/(n/l);            //计算r，让分块右移
+        ans += (r-l+1)*(n/l);   //求和
+        cout &amp;lt;&amp;lt; l &amp;lt;&amp;lt;&amp;quot;&amp;quot;&amp;lt;&amp;lt; r &amp;lt;&amp;lt;&amp;quot;: &amp;quot;&amp;lt;&amp;lt; n/r &amp;lt;&amp;lt; endl;  //打印分块
+    }
+    cout &amp;lt;&amp;lt; ans;               //打印和
+}
+
+积性函数
+
+常见的积性函数
+
+积性函数性质
+
+
+
+p为质数
+积性函数的基本问题
+
+狄利克雷卷积
+
+
+线性筛求莫比乌斯函数
+
+int primes[N],cnt;
+int miu[N];
+bool st[N];
+
+void get_eulers(int n)
+{
+	memset(st,0,sizeof st);
+    miu[1]=1;
+    for(int i=2;i&amp;lt;=n;i++)
+    {
+        if(!st[i])
+        {
+            primes[cnt++]=i;
+            miu[i]=-1;
+        }
+        for(int j=0;i*primes[j]&amp;lt;=n;j++)
+        {
+            int t=i*primes[j];
+            st[t]=true;
+            if(i%primes[j]==0)
+            {
+                miu[t]=0;
+                break;
+            }
+            miu[t]=-miu[i];//积性函数性质，miu[i]*miu[primes[j]]
+        }
+    }
+}
+
+莫比乌斯函数性质
+
+
+莫比乌斯函数的由来
+
+
+杜教筛
+
+
+经典的杜教筛题目，例如洛谷P4213，求数论函数的前缀和。
+
+
+杜教筛公式推导
+
+
+
+唯一的因子分解
+
+约数倍数的特征
+
+求质约数
+注意到一个数字 n 最多只有一个 &amp;gt; √n 的质约数，所以我们仍然只需要枚举到 √n
+一个非常朴素的方法是枚举每个数字，判断是否是约数并判断是否是素数，但是这个方法的复杂度接近 O(n)，并不是一个非常明智的选择
+
+void divide(int x)
+{
+    for (int i = 2; i &amp;lt;= x / i; i ++ )
+        if (x % i == 0)
+        {
+            int s = 0;
+            while (x % i == 0) x /= i, s ++ ;
+            cout &amp;lt;&amp;lt; i &amp;lt;&amp;lt; &#39; &#39; &amp;lt;&amp;lt; s &amp;lt;&amp;lt; endl;
+        }
+    if (x &amp;gt; 1) cout &amp;lt;&amp;lt; x &amp;lt;&amp;lt; &#39; &#39; &amp;lt;&amp;lt; 1 &amp;lt;&amp;lt; endl;
+    cout &amp;lt;&amp;lt; endl;
+}
+
+int main()
+{
+    int n;
+    cin &amp;gt;&amp;gt; n;
+    while (n -- )
+    {
+        int x;
+        cin &amp;gt;&amp;gt; x;
+        divide(x);
+    }
+
+    return 0;
+}
+
+快速分解质因数
+我们来考虑求出的 prime 数组的一个应用
+如何能够在线性筛之后快速的分解一个数字的质约数呢？考虑在筛掉一个数字的时候记录一下他是被哪个质数筛掉的也即他的最小的质约数是谁。这样我们只要每次除掉一个最小的质约数就可以了。
+for(int j = 1; prime[j] * i &amp;lt;= Max; ++ j) {
+	from[i*prime[j]] = prime[j];
+	...
+}
+
+查询时只需递归查询from[x],from[x/from[x]]...,一次查询的时间复杂度是O(logn)
+约数个数 约数和
+对于一个大于1正整数n可以分解质因数：n=p1a1*p2a2*p3a3*…*pkak,
+则由约数个数定理可知n的正约数有(a₁+1)(a₂+1)(a₃+1)…(ak+1)个，
+int main()
+{
+    int n;
+    cin &amp;gt;&amp;gt; n;
+
+    unordered_map&amp;lt;int, int&amp;gt; primes;
+
+    while (n -- )
+    {
+        int x;
+        cin &amp;gt;&amp;gt; x;
+
+        for (int i = 2; i &amp;lt;= x / i; i ++ )
+            while (x % i == 0)
+            {
+                x /= i;
+                primes[i] ++ ;
+            }
+
+        if (x &amp;gt; 1) primes[x] ++ ;
+    }
+
+    LL res = 1;
+    for (auto p : primes) res = res * (p.second + 1) % mod;
+
+    cout &amp;lt;&amp;lt; res &amp;lt;&amp;lt; endl;
+
+    return 0;
+}
+
+n的(a₁+1)(a₂+1)(a₃+1)…(ak+1)个正约数的和为
+f(n)=(p10+p11+p12+…p1a1)(p20+p21+p22+…p2a2)…(pk0+pk1+pk2+…pkak）
+LL res = 1;
+for (auto p : primes)
+{
+    LL a = p.first, b = p.second;
+    LL t = 1;
+    while (b -- ) t = (t * a + 1) % mod;
+    res = res * t % mod;
+}
+cout &amp;lt;&amp;lt; res &amp;lt;&amp;lt; endl;
+
+除法定理
+对任意整数 a 和任意正整数 n， 存在唯一的整数 q 和 r，
+满足 0 &amp;lt;= r &amp;lt; n，并且 a = qn + r.
+值 q = a / n称为除法的商
+值 r = a mod n 称为除法的余数。
+n | a 当且仅当 a mod n = 0。
+模 n 等价类
+包含整数 a 的模 n 等价类为：[𝒂]𝒏[𝒂]_𝒏[a]n​= {𝒂 + 𝒌𝒏: 𝒌𝝐𝒁}
+例如，[𝟑]𝟕[𝟑]_𝟕[3]7​= {… , −11, −𝟒, 𝟑, 10, 17, … }
+𝒃𝝐[𝒂]𝒏[𝒂]_𝒏[a]n​ 等同于b = a (mod n)
+-1 = n – 1 (mod n)
+公约数与最大公约数
+如果 d 是 a 的约数并且也是 b 的约数，则 d 是 a 与 b 的公约数。
+例如，12 的约数是 1, 2, 3, 4, 6, 12，因此 8 与 12 的公约数为 1, 2, 4。 1 是任意两个整数的公约数。
+公约数的重要性质为：
+d | a 且 d | b 蕴含着 d | (a + b) 且 d | (a–b)
+更一般的，对任意整数 x 和 y，有
+d | a 且 d | b 蕴含着 d | (ax + by)
+两个不同时为 0 的整数 a 与 b 的最大公约数表示成gcd(a, b)。
+例如 gcd(12, 8) = 4，gcd(5, 9) = 1, gcd(0, 4) = 4.
+定义 gcd(0, 0) = 0
+gcd 函数的基本性质：
+• gcd(a, b) = gcd(b, a)
+• gcd(a, b) = gcd(-a, b)
+• gcd(a, b) = gcd(|a|, |b|)
+• gcd(a, 0) = |a|
+• gcd(a, ka) = |a|
+gcd 的其他性质
+如果 a 和 b 是不都为 0 的任意整数，则 gcd(a, b) 是a 与 b 的线性组合集合 {ax + by: x, y ∈ Z}中的最小正元素。
+
+裴蜀定理
+对任何整数a、b和它们的最大公约数d，关于未知数x和y的线性不定方程（称为裴蜀等式）：若a,b是整数,且gcd(a,b)=d，那么对于任意的整数x,y,ax+by都一定是d的倍数，特别地，一定存在整数x,y，使ax+by=d成立。
+它的一个重要推论是：a,b互质的充要条件是存在整数x,y使ax+by=1.
+上述裴蜀定理针对的是两个变量。那么我们很自然的就想到这样的定理能否推广到多个变量呢？显然可以，证明方法同上
+模板题
+我们只需要对这所有的数字求一个gcd，值得注意的是不要忘记数据中有负数，要将其变为正数再求gcd,因为系数的最终答案没有影响。
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+int n;
+
+int gcd(int a,int b)
+{
+	return b?gcd(b,a%b) : a;
+}
+
+int main()
+{
+	scanf(&amp;quot;%d&amp;quot;,&amp;amp;n);
+	int ans=0;
+	for(int i=0;i&amp;lt;n;i++)
+	{
+		int x;
+		scanf(&amp;quot;%d&amp;quot;,&amp;amp;x);
+		if(x&amp;lt;0)	
+			x=-x;
+		ans=gcd(ans,x);
+	}
+	printf(&amp;quot;%d\n&amp;quot;,ans);
+	return 0;
+}
+
+gcd 的其他性质
+• 对于任意整数 a 和 b，如果 d | a 并且 d | b，则d | gcd(a, b)
+证明：gcd(a,b)|a,gcd(a,b)|b,则gcd为最大的约数，则d | gcd(a, b)
+• 对所有正整数 n, a 和 b，如果 n | ab 且 gcd(a, n)=1，则 n | b
+互质数
+如果两个整数 a 和 b 仅有公因数 1，即如果 gcd(a, b) = 1，则 a 与 b 称为互质数。
+例如，5 和 9 是互质数。
+对任意整数 p, a 和 b，如果 gcd(a, p) = gcd(b, p) = 1， 则 gcd(ab, p) = 1
+证明：由线性组合的定理可知，存在整数x,y,x’ ，y’, 满足ax+py=1,bx’+py’=1
+把上面两个等式两边相乘，整理得
+ab(x x’)+p(ybx’+y’ax+pyy’)=1
+因为1是ab与p的一个正线性组合，所以可以证明所需结论
+欧几里得算法
+欧几里得算法求最大公约数
+利用性质：gcd(a, b) = gcd(b, a % b)
+int gcd(int a, int b)
+{
+    return b?gcd(b,a%b):a;
+}
+
+因为每次取模，a 至少会变成原来的二分之一。
+整个算法是 O(log n) 的。
+求出了 gcd，就可以求出 lcm。
+int lcm(int a, int b)
+{
+    return a / gcd(a, b) * b;
+}
+
+
+例题
+hdu2503
+给定 a, b, c, d (0 &amp;lt; a,b,c,d &amp;lt; 1000)。 求 a/b + c/d 的最简形式 e/f。
+
+样例输入：
+1 2 1 3
+样例输出：
+5 6
+先通分，求b和d的最小公倍数。
+分子相加后，再约掉分子和分母的最大公约数就是答案。
+代码
+扩展欧几里得算法与二元一次方程的整数解
+给出整数a,b,n,问方程ax+by=n什么时候有整数解？如何求出所有的整数解?
+有解的充分必要条件是gcd(a,b)可以整除n
+证明：令a=gcd(a,b)a&#39;,b=gcd(a,b)b&#39;,有ax+by=gcd(a,b)(a&#39;x+b&#39;y)=n;如果x,y,a&#39;,b&#39;都是整数，那么n必须是gcd(a,b)的倍数才有解.
+例如，4x+6y=8,2x+3y=4有整数解，4x+6y=7没有整数解。
+如果有解，一种解题方法是先找到一个解（x0,y0）,那么通解公式如下：
+x=x0+bt,y=y0-at,t是任意整数。
+扩展欧几里得算法能计算出满足下列条件的整系数 x 和 y：gcd(a, b) = ax + by
+我们来直接推倒一下：
+ax + by = gcd(a, b)
+注意到由欧几里得算法得：
+gcd(a, b) = gcd(b, a % b)
+因此：
+ax + by = bx&#39; + (a % b)y&#39;
+= bx&#39; + (a - int(a / b)b)y&#39;
+= ay&#39; + b(x - int(a / b)y&#39;)
+ax + by = ay&#39; + b(x&#39; - int(a / b)y&#39;)
+每次求gcd的递归过程中同时将系数x，y计算出来，令x=y&#39;,y=x&#39;-a/b*y&#39;
+例：求 9x + 7y = 1 的一组整数解
+
+int exgcd(int a, int b, int &amp;amp;x, int &amp;amp;y) {
+	if (!b) {
+		x = 1, y = 0;
+		return a;
+	}
+	int d = exgcd(b, a % b, x, y);
+	int t = x;
+	x = y;
+	y = t - a / b * y;
+	return d;
+}
+
+拓展欧几里得算法的应用
+更一般的，求解 ax + by = c
+只要 gcd(a, b) | c 就有无数解，否则无解
+
+逆元
+乘法逆元：对于一个数字 a, 在模 p 意义下如果存在一个数字 b,
+满足 a × b ≡ 1 (mod p), 我们就称 b 是模 p 意义下 a 的乘法逆元，记做 a−1a^{-1}a−1 。
+容易发现
+
+现在我们可以对分子分母取模了！所以进行模运算的重点变成了求逆元。
+欧拉函数
+欧拉函数 φ(n), 定义为 1 到 n 中与 n 互质的数字的个数。
+
+通过定义容易得到欧拉函数的前几项 1, 1, 2, 2, 4, 2, 6, · · ·
+通过定义我们也很容易得到一个质数 p 的欧拉函数 φ(p) = p-1
+我们也很容易写出一个求欧拉函数的简易做法，枚举
+
+注意相同的质约数都是相同的 pi
+有了这个公式我们就可以快速的求出一个数字 n 的欧拉函数φ(n) 了。
+所以，欧拉函数ϕ(n)的求解，归结到了分解质因子这个问题。试除法：求n的质因子时，逐个检查从2到√n的所有质数，如果它能整除n，就是一个因子。试除法的复杂度是O(√n)
+#include&amp;lt;iostream&amp;gt;
+using namespace std;
+
+int phi(int x)
+{
+    int res=x;
+    for(int i=2;i&amp;lt;=x/i;i++)
+    {
+        if(x%i==0)
+            res=res/i*(i-1);
+        while(x%i==0)
+            x/=i;
+    }
+    if(x&amp;gt;1)
+        res=res/x*(x-1);
+    return res;
+}
+
+int main()
+{
+    int n;
+    scanf(&amp;quot;%d&amp;quot;,&amp;amp;n);
+    while(n--)
+    {
+        int x;
+        scanf(&amp;quot;%d&amp;quot;,&amp;amp;x);
+        cout&amp;lt;&amp;lt;phi(x)&amp;lt;&amp;lt;endl;
+    }
+    return 0;
+}
+
+数论中的欧拉定理
+如果 gcd(a, p) = 1 , 即 a, p 互质则有 aφ(p)a^{φ(p)}aφ(p) ≡ 1 (mod p)
+注意这个定理的强制性要求是 a, p 互质，如果 a, p 不互质直接用这个做法是做不了的，我们还需要拓展欧拉定理才能处理这个问题
+由此可以得到求 a 模 m 的逆的方法。
+aφ(m)a^{φ(m)}aφ(m)≡ 1 (mod m)
+a∗aφ(m)−1a * a^{φ(m)-1}a∗aφ(m)−1 ≡ 1 (mod m)
+aφ(m)−1a^{φ(m)-1}aφ(m)−1 就是 a 模 m 的逆。
+欧拉定理求逆元
+有了这个定理我们要怎么求逆元呢？考虑逆元的定义，对于一个数字 a , 我所要寻找的 a−1a^{−1}a−1 需要满足 a × a−1a^{−1}a−1 ≡ 1 (mod p), 而 aφ(p)a^{φ(p)}aφ(p) ≡ 1 (mod p), 这对于我们是否有一些启示呢？
+我们将 aφ(p)a^{φ(p)}aφ(p)写成 a × aφ(p)−1a^{φ(p)-1}aφ(p)−1 我们惊喜的发现原来 a−1a^{−1}a−1 启示就是 aφ(p)−1a^{φ(p)-1}aφ(p)−1 !
+所以在求出欧拉函数之后我们只需要快速幂就能得到一个数字的逆元了。
+int get_inv(int a) {
+    return Pow(a,phi(p)-1);
+}
+
+有很多题目中给定的 p 是个质数，就是费马小定理。
+如果 a, p 不互质怎么求逆元呢？事实上在后面我们会看到，a, p 不互质的情况下是不存在模 p 意义下 a的逆元的。
+欧拉定理求同余方程
+对于同余方程 ax ≡ b (mod m)
+两边同乘 a 的逆 aφ(m)−1a^{φ(m)-1}aφ(m)−1 ax ≡ aφ(m)−1a^{φ(m)-1}aφ(m)−1 b (mod m)
+就可以得到 x ≡ aφ(m)−1a^{φ(m)-1}aφ(m)−1 b (mod m)
+比如：由φ(10) = 4，对于同余方程 3x ≡ 7 (mod 10)
+解为 x ≡ aφ(m)−1a^{φ(m)-1}aφ(m)−1 b ≡ 333^333 * 7 ≡ 9 (mod 10)
+扩展欧拉定理
+
+
+
+模板题
+代码
+欧拉函数的性质
+
+
+
+φ(36)=φ(4)φ(9)
+第二行和第四行，每个元素都不和 4 互素。
+剩下的两行，每个元素都和 4 互素，但各有 6 个数和 9 互素
+
+
+同余
+一个便于理解的定义：如果对于两个数字 a, b , 对于一个数字 m的余数相等，我们认为他们对于 m 同余
+在数学上的标准定义：设 m 是给定的一个正整数，a, b 是整数，
+若满足 m|(a - b) , 则称 a 与 b 对模 m 同余，记做 a ≡ b (mod m)
+
+(a + b)%c 是否等于 ((a%c) + (b%c))%c
+a ∗ b%c 是否等于 ((a%c) ∗ (b%c))%c
+a/b%c 是否等于 (a%c)/(b%c)
+对于 1，2 两个式子来说，是正确的，而对于第三个式子来说，是错误的
+
+线性同余方程
+设 x 是未知整数，形如ax ≡ b (mod m)的同余式成为一元线性同余方程
+ax ≡ b (mod m)，即ax除以m,b除以m,两者余数相同，这里a,b,m都是整数，求解x的值。
+方程也可以这样理解，ax-b是m的整数倍。设y是倍数，那么ax-b=my,移项得到ax-my=b.因为y可以是负数，改写为ax+my=b，这就是在扩展欧几里得算法中提到的二元一次不定方程。
+当且仅当gcd(a,m)能整除b时有整数解。
+ax ≡ 1 (mod m) 的解称为 a 模 m 的逆。
+如 7x ≡ 1 (mod 31) 的解满足 x ≡ 9 (mod 31)
+设a 模 m 的一个逆为 k，即 ak ≡ 1 (mod m)
+对于 ax ≡ b (mod m)，两边同乘以 k，得到 akx ≡ bk(mod m)
+也即 x ≡ bk (mod m)
+定理：设 p 是素数，正整数 a 是其自身模 p 的逆，当且仅当 a ≡ 1 (mod p) 或 a ≡ -1 (mod p)
+证明：若a ≡ 1 (mod p) 或 a ≡ -1 (mod p),则a² ≡ 1 (mod p) ,所以a其自身模p的逆。反过来，若a是其自身模p
+的逆，则a²=a·a ≡ 1 (mod p) 。因此，p |(a² -1)。又因为a² -1=（a-1）（a+1），所以p |（a-1）或p |（a+1）。
+因此，或者a ≡ 1 (mod p) ，或者a ≡ -1 (mod p)
+#include&amp;lt;iostream&amp;gt;
+using namespace std;
+
+int exgcd(int a,int b,int &amp;amp;x,int &amp;amp;y)
+{
+    if(!b)
+    {
+        x=1,y=0;
+        return a;
+    }
+    
+    int d=exgcd(b,a%b,x,y);
+    int t=x;
+    x=y;
+    y=t-a/b*y;
+    return d;
+}
+
+int main()
+{
+    int n;
+    scanf(&amp;quot;%d&amp;quot;,&amp;amp;n);
+    while(n--)
+    {
+        int a,b,m;
+        scanf(&amp;quot;%d%d%d&amp;quot;,&amp;amp;a,&amp;amp;b,&amp;amp;m);
+        int x,y;
+        int d=exgcd(a,m,x,y);
+        if(b%d)
+            puts(&amp;quot;impossible&amp;quot;);
+        else
+            printf(&amp;quot;%d\n&amp;quot;,((long long)b/d*x%m+m)%m);
+    }
+    return 0;
+}
+
+扩展欧几里得求乘法逆元
+ax = 1 (mod m)
+ax + my = 1
+也就是 a, m 是已知数，现在要求出一组 x, y , 使得上面的式子成立。
+这也就印证了上面欧拉定理中的一句话，如果想要存在 a 对 m 的逆元，必须要 gcd(a, m) = 1 (1%gcd(a,m) = 0)才可以
+当然如果 gcd(a, m) != 1，就无解
+注意到 x 的解是 x0 + km （k是任意整数）
+我们只要求出一个 k 使得 x0 + km 是最小的正整数即可。
+另外需要注意的是我们求出的 x 有可能是负数，这时候我们可以让 x 加上若个个 p, 这样显然是不会影响方程的，例如我在 x 上加了一个 p, 那么在 y 上减去 a 就能保证方程依然成立。
+
+费马小定理
+假如 p 是质数，且 (a, p)=1，那么ap−1a^{p-1}ap−1 ≡ 1 (mod p)
+因此可以得到，a∗ap−2a * a^{p-2}a∗ap−2 ≡ 1 (mod p)
+所以 ap−2a^{p-2}ap−2 是 a 模 p 的一个逆。
+可以用快速幂加速计算。
+#include&amp;lt;iostream&amp;gt;
+using namespace std;
+typedef long long LL;
+int qml(int a,int b,int p)
+{
+    int res=1;
+    while(b)
+    {
+        if(b&amp;amp;1)
+            res=(LL)res*a%p;
+        a=(LL)a*a%p;
+        b&amp;gt;&amp;gt;=1;
+    }
+    return res;
+}
+
+int main()
+{
+    int n;
+    scanf(&amp;quot;%d&amp;quot;,&amp;amp;n);
+    while(n--)
+    {
+        int b,p;
+        scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;b,&amp;amp;p);
+        if(b%p==0)
+            puts(&amp;quot;impossible&amp;quot;);
+        else
+            printf(&amp;quot;%d\n&amp;quot;,qml(b,p-2,p));
+    }
+    return 0;
+}
+
+线性求逆元
+给定 n, p 求 [1, n] 中所有整数在模 p 意义下的乘法逆元，n ≤ 2 × 1e6, p ≤ 2 × 1e7。
+我们考虑从 1 到 n 依此求出每个数字的逆元，枚举变量 i, 1 → n,
+默认 [1, i - 1] 每个数字对于 p 的逆元都已经求完,现在我们考虑 i 对 p 的逆元要怎么求。
+不妨把 p 写成 ki + b 的形式也即
+
+
+模板题
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N=3e6+10;
+int inv[N];
+int main()
+{
+    int n,p;
+    scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;p);
+    inv[1]=1;
+    for(int i=2;i&amp;lt;=n;i++)
+        inv[i]=(LL)(p-p/i)*inv[p%i]%p;
+    for(int i=1;i&amp;lt;=n;i++)
+    	printf(&amp;quot;%d\n&amp;quot;,inv[i]);
+    return 0;
+}
+
+阶乘的逆元
+这里特别列出阶乘的逆元，因为后面有组合数学和组合数取模相关的问题，所以这里特别列出了阶乘如何求逆元。
+有很多同学会认为先求出 [1, n] 每个数字对p的逆元就可以了。这样处理确实可以，但是过于繁琐，我们考虑一共更简单的做法。
+
+int ifac[N], fac = 1, mod;
+for(int i = 2; i &amp;lt;= n; ++ i) 
+	fac = (long long) fac * i % mod;
+ifac[n] = get_inv(fac, mod);
+for(int i = n - 1; i &amp;gt;= 0; -- i) 
+	ifac[i] = (long long)ifac[i + 1] * (i + 1) % mod;
+
+线性同余方程组
+第一种：有两个以上的不同模的一元线性同余方程；
+第二种：变元数大于 1，方程数大于 1，但是方程的模相同
+中国剩余定理
+下面取自成书于公元 3 世纪晚期的《孙子算经》的问题。
+求一个数，它被 3 除余 1，被 5 除余 2，被 7 除余 3。
+这也就等价于如下方程组：
+x ≡ 1 (mod 3)
+x ≡ 2 (mod 5)
+x ≡ 3 (mod 7)
+
+
+正确性显然，代入即可。还需要证明唯一性。
+
+x ≡ 1 (mod 3)
+x ≡ 2 (mod 5)
+x ≡ 3 (mod 7)
+现在回到开头的那个方程组，首先有 M = 105
+M1 = 35，M2 = 21，M3 = 15
+y1 = 2, y2 = 1, y3 = 1
+因此 x ≡ 1 * 35 * 2 + 2 * 21 * 1 + 3 * 15 * 1 ≡ 157≡ 52 (mod 105)
+中国剩余定理给出了模数两两互质的线性同余方程组的一个特殊解。方程组的通解可以表示为x+kM（k∈Z）。有些题目要求我们求出最小的非负整数解，只需把x对M取模，并让x落在0~M-1的范围内即可。
+模板题
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N=15;
+int n;
+int a[N],b[N];
+
+void exgcd(LL a,LL b,LL &amp;amp;x,LL &amp;amp;y)
+{
+	if(!b)
+	{
+		x=1,y=0;
+		return;
+	}
+	exgcd(b,a%b,x,y);
+	LL t=x;
+	x=y;
+	y=t-a/b*y;
+}
+
+LL crt()
+{
+	LL M=1,res=0;
+	for(int i=1;i&amp;lt;=n;i++)
+		M*=a[i];
+	for(int i=1;i&amp;lt;=n;i++)
+	{
+		LL m,x,y;
+		m=M/a[i];
+		exgcd(m,a[i],x,y);
+		res=(res+m*x*b[i])%M;
+	}
+	return (res%M+M)%M;
+}
+
+int main()
+{
+	scanf(&amp;quot;%d&amp;quot;,&amp;amp;n);
+	for(int i=1;i&amp;lt;=n;i++)
+		scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;a[i],&amp;amp;b[i]);
+	printf(&amp;quot;%lld\n&amp;quot;,crt());
+	return 0;
+}
+
+扩展中国剩余定理
+
+证明：
+
+
+
+
+模板题
+code
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://caifxh.github.io/post/shu-lun/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+            <article class="post i-card">
+                <h2 class="post-title">
+                    <a href="https://caifxh.github.io/post/kuai-su-mi-andju-zhen-kuai-su-mi/">
+                        快速幂&amp;矩阵快速幂
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2020-03-26</time>
+                    
+                        <a href="https://caifxh.github.io/tag/14SoYNkfD/" class="post-tag i-tag
+                            i-tag-other_1">
+            #数学
+        </a>
+                        
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            快速幂
+给出 a，b, c，求出 aba^bab mod c.a, b, c &amp;lt;= 1e9
+枚举 b，连续乘 b 次 a，每乘一次对 c 取模一次。
+时间复杂度关于 b 线性。
+每次都乘的是 a，重复运算太多，考虑分治
+比如计算出 a,a2,a4,a8,a16a, a^2, a^4, a^8, a^{16}a,a2,a4,a8,a16, …
+对 b 进行二进制转换，比如 b = 11 = 8 + 2 + 1
+故 ab=a11=a8∗a2∗aa^b = a^{11} = a^8 * a^2 * aab=a11=a8∗a2∗a
+因此，只要预处理出 log2109log_2 10^9log2​109 个 a 的幂次
+计算的时候分解成 log2 b 个乘积即可
+模板题
+int qmi(int a,int b,int p)
+{
+    int res=1%p;
+    while(b)
+    {
+        if(b&amp;amp;1)
+            res=(long long)res*a%p;
+        a=(long long)a*a%p;
+        b&amp;gt;&amp;gt;=1;
+    }
+    return res;
+}
+
+快速乘
+给出 a，b, c，求出 a∗ba * ba∗b mod c.a, b, c &amp;lt;= 1e18
+沿用之前的做法，但是注意这里的模数是 1e18。如果两个小于 1e18 的数相乘，long long也存不下。
+考虑到幂次可以转化为连乘，乘法也可以转化为连加。
+同样的我们可以得到一个“快速”乘
+比如计算出 a, 2a, 4a, 8a, 16a, …
+对 b 进行二进制转换，比如 b = 11 = 8 + 2 + 1
+故 ba = 11a = 8a + 2a + a
+因此，只要预处理出 log21018log_2 10^{18}log2​1018 个 a 的乘积
+计算的时候分解成 log2 b 个加法即可。
+因为每次两个小于 1e18 的数相加，long long是可以存的。
+模板题
+long long mul(long long a, long long b, long long c)
+{
+    long long ans = 0;
+    while (b) 
+    {
+        if (b &amp;amp; 1) ans = (ans + a) % c;
+        b &amp;gt;&amp;gt;= 1;
+        a = (a + a) % c;
+    }
+    return ans; 
+}
+
+例题
+luoguP1965
+答案显然就是 (x + m * 10^k) % n
+根据模运算的的分配率可以得到 (x%n+m%n*10k%n)%n,只需用快速幂求出10k就可以了
+代码
+矩阵乘法
+给定一个大小为 n × m 的矩阵 A[n][m]
+和一个大小为 m × r 的矩阵 B[m][r]
+    for (int i = 1;i &amp;lt;= n;i ++)
+        for (int j = 1;j &amp;lt;= r;j ++)
+            for (int k = 1;k &amp;lt;= m;k ++)
+                C[i][j] += A[i][k] * B[k][j];
+时间复杂度: O(n^3)
+
+矩阵快速幂
+poj3233
+给定一个 n × n 的矩阵 A，和一个正整数 k。 求 S=A+A2+…+AkS = A + A^2 + … + A^kS=A+A2+…+Ak，对 m 取模,n ≤ 30，k ≤ 1e9
+
+样例输入：
+2 2 4
+0 1
+1 1
+样例输出：
+1 2
+2 3
+注意到，矩阵乘法也是具有结合律和乘法分配律的。
+因此：(I为单位阵)
+A+A2=A(I+A)A + A^2 = A(I + A)A+A2=A(I+A)
+A+A2+A3+A4=(A+A2)(I+A2)A + A^2 + A^3 + A^4 = (A + A^2)(I + A^2)A+A2+A3+A4=(A+A2)(I+A2)
+我们记 sum(n)=A+A2+…+Ansum(n) = A + A^2 + … + A^nsum(n)=A+A2+…+An
+如果 n 是偶数:
+sum(n)=sum(n/2)(I+An/2)sum(n) = sum(n / 2)(I + A^{n/2})sum(n)=sum(n/2)(I+An/2)
+如果 n 是奇数：
+sum(n)=sum(n−1)+An=sum((n−1)/2)(I+A(n−1)/2）+Ansum(n) = sum(n - 1) + A^n = sum((n - 1) / 2)(I + A^{(n-1)/2}）+ A^nsum(n)=sum(n−1)+An=sum((n−1)/2)(I+A(n−1)/2）+An
+只需要解决如何快速求 A^n
+对于整数的幂次，我们可以用快速幂来求。
+对于矩阵的幂次，我们也可以用快速幂来求。
+注意的是，初始值要设置为单位矩阵 I。也就是 A0A^0A0.
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+const int N=35;
+struct matrix
+{
+	int m[N][N];
+	matrix()
+	{
+		memset(m,0,sizeof m);
+	}
+}a;
+int n,k,mod;
+
+matrix add(matrix a,matrix b)
+{
+	matrix res;
+	for(int i=1;i&amp;lt;=n;i++)
+		for(int j=1;j&amp;lt;=n;j++)
+			res.m[i][j]=(a.m[i][j]+b.m[i][j])%mod;
+	return res;
+}
+
+matrix mul(matrix a,matrix b)
+{
+	matrix c;
+	for(int i=1;i&amp;lt;=n;i++)
+		for(int j=1;j&amp;lt;=n;j++)
+			for(int k=1;k&amp;lt;=n;k++)
+				c.m[i][j]=(c.m[i][j]+a.m[i][k]*b.m[k][j])%mod;
+	return c;
+}
+
+matrix qmi(matrix a,int k)
+{
+	matrix c;
+	for(int i=1;i&amp;lt;=n;i++)
+		c.m[i][i]=1;
+	while(k)
+	{
+		if(k &amp;amp; 1)
+			c=mul(c,a);
+		a=mul(a,a);
+		k&amp;gt;&amp;gt;=1;
+	}
+	return c;
+}
+
+matrix get_sum(matrix a,int k)
+{
+	if(k == 1)
+		return a;
+	matrix c;
+	for(int i=1;i&amp;lt;=n;i++)
+		c.m[i][i]=1;
+	
+	c=add(c,qmi(a,k&amp;gt;&amp;gt;1));
+	c=mul(c,get_sum(a,k&amp;gt;&amp;gt;1));
+	if(k &amp;amp; 1)
+		c=add(c,qmi(a,k));
+	return c;
+ } 
+
+int main()
+{
+	scanf(&amp;quot;%d%d%d&amp;quot;,&amp;amp;n,&amp;amp;k,&amp;amp;mod);
+	
+	for(int i=1;i&amp;lt;=n;i++)
+		for(int j=1;j&amp;lt;=n;j++)
+			scanf(&amp;quot;%d&amp;quot;,&amp;amp;a.m[i][j]);
+	
+	a=get_sum(a,k);
+	
+	for(int i=1;i&amp;lt;=n;i++)
+	{
+		for(int j=1;j&amp;lt;=n;j++)
+			printf(&amp;quot;%d &amp;quot;,a.m[i][j]);
+		puts(&amp;quot;&amp;quot;);
+	}
+		
+	return 0;
+}
+
+矩阵乘法优化递推
+poj3070
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N=2,mod=10000;
+int n;
+struct matrix
+{
+    int m[N][N];
+    matrix()
+    {
+    	memset(m,0,sizeof m);
+	}
+    matrix(int a[][N])
+    {
+        memcpy(m,a,sizeof m);
+    }
+};
+
+matrix mul(matrix a,matrix b)
+{
+	matrix res;
+	for(int i=0;i&amp;lt;2;i++)
+		for(int j=0;j&amp;lt;2;j++)
+			for(int k=0;k&amp;lt;2;k++)
+				res.m[i][j]=(res.m[i][j]+(LL)a.m[i][k]*b.m[k][j])%mod;
+	return res;
+}
+
+matrix qmi(matrix a,int k)
+{
+	matrix res;
+	for(int i=0;i&amp;lt;2;i++)
+		res.m[i][i]=1;
+	
+	while(k)
+	{
+		if(k &amp;amp; 1)
+			res=mul(res,a);
+		a=mul(a,a);
+		k&amp;gt;&amp;gt;=1;
+	}
+	return res;
+}
+
+int main()
+{
+	while(scanf(&amp;quot;%d&amp;quot;,&amp;amp;n) &amp;amp;&amp;amp; ~n)
+	{
+		int f[N][N]={{1,0}};
+		int c[N][N]={{1,1},{1,0}};
+		matrix a=c;
+		matrix b=f;
+		if(n)
+		{
+			a=qmi(a,n-1);
+			b=mul(b,a);
+			printf(&amp;quot;%d\n&amp;quot;,b.m[0][0]);
+		}
+		else 
+			printf(&amp;quot;0\n&amp;quot;);	
+	}
+}
+
+
+acwing1303
+
+代码
+
+数列f[n]=f[n-1]+f[n-2]+1,f[1]=f[2]=1的第n项的快速求法（不考虑高精度）
+仿照前例，考虑1×3的矩阵[f[n-2],f[n-1],1]，希望求得某3×3的矩阵A，使得此1×3的矩阵乘以A得到矩阵：
+[f[n-1],f[n],1]
+即：[]f[n-2],f[n-1],1]* A ＝[f[n-1],f[n],1] =[f[n-1],f[n-1]+f[n-2]+1,1]
+容易构造出这个3×3的矩阵A，即：
+０ １ ０
+１ １ ０
+０ １ １
+
+数列f[n]=f[n-1]+f[n-2]+n+1,f[1]=f[2]=1的第n项的快速求法（不考虑高精度）.
+解法：
+仿照前例，考虑1×4的矩阵[f[n-2],f[n-1],n,1]，希望求得某4×4的矩阵A，使得此1×4的矩阵乘以A得到矩阵：[f[n-1],f[n],n+1,1]
+即：[f[n-2],f[n-1],n,1]* A  = [f[n-1],f[n],n+1,1]＝[f[n-1],f[n-1]+f[n-2]+n+1,n+1,1]
+容易构造出这个4×4的矩阵A，即：
+０ １ ０ ０
+１ １ ０ ０
+０ １ １ ０
+０ １ １ １
+
+例题
+poj3735
+有 n 只小猫，要执行一些操作序列。
+g i：给第 i 只小猫一棵花生
+e i：让第 i 只小猫吃掉它的所有花生
+s i j：让第 i 只小猫和第 j 只小猫交换他们手里的花生。
+现在给你一个长度为 k 的序列，让你反复执行这个序列 m
+次。问最后每只小猫手里的花生数。n≤100，k≤100，m≤1e9
+联系矩阵优化递推。
+如果我们也能求出一个序列对应的矩阵。
+只要求矩阵的 m 次幂即可。
+先考虑如何设计状态：
+把刚才那3只猫看做一个矩阵{a,b,c},分别代表他们有的花生个数，显然初始是{0,0,0}
+当进行s操作的时候，我们将初始矩阵乘上一个矩阵，得到的那个矩阵最好也是1行3列的。
+那肯定我们要构造的那个矩阵是3*3的矩阵
+s 1 2交换操作就是{a,b,c}*x={b,a,c}
+x=  0 1 0
+    1 0 0
+    0 0 1
+
+S操作是这样的，首先将X看做一个单位矩阵，要交换哪两个，只需要交换他们的列就可以了
+对于e操作近似于s操作，将e 2举例：{a,b,c}*x={a,0,c}
+x=  1 0 0
+    0 0 0
+    0 0 1
+
+即将某列置于0
+现在问题来了，怎么构造g操作的矩阵。使下面这个等式成立
+g 1操作  {a,b,c}*X={a+1,b,c}
+g 2操作  {a,b,c}*X={a,b+1,c}
+g 3操作  {a,b,c}*X={a,b,c+1}
+我们不妨再{a,b,c}矩阵多加一个1，这样我们就能实现我们的+1操作了
+要使g 1操作实现{a,b,c,1}*x={a+1,b,c,1}
+那么
+x=  1 0 0 0
+    0 1 0 0
+    0 0 1 0
+    1 0 0 1
+
+当然这样构造矩阵，这样并不影响我们前面的s与e操作
+这样一系列操作之后：
+
+得到这个矩阵后，求它的 m 次幂，然后乘上初始状态对应
+的向量，得到的就是答案。
+时间复杂度: O(n^3log m)
+代码
+poj3150
+有 n 个数排成一个环。定义一次变换为：把这个数变成距离它不超过 d 的位置上的数之和对 m 取模的值。
+问这样变换 k 次后，每个位置上的数是多少。
+n &amp;lt;= 500, m &amp;lt;= 109, k &amp;lt;= 1e9
+对于每一次变换，其实可以写成一个矩阵：
+比如题中 d = 2
+
+
+
+因此一个矩阵只要存下第一行就可以得到整个矩阵。
+计算矩阵乘法的时候，只要枚举 n^2 次。
+时间复杂度变成了 O(n^2 log k)
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N=510;
+int n,mod,d,k;
+struct matrix 
+{
+	int m[N];
+	matrix()
+	{
+		for(int i=0;i&amp;lt;N;i++)
+			m[i]=0;
+	}
+	matrix(int a[])
+	{
+		memcpy(m,a,sizeof m);
+	}
+};
+
+matrix mul(matrix a,matrix b)
+{
+	matrix res;
+	
+	for(int i=0;i&amp;lt;n;i++)//只计算res的第一行 
+		for(int k=0;k&amp;lt;n;k++)
+			res.m[i]=(res.m[i]+(LL)a.m[k]*b.m[(i-k+n)%n])%mod;
+	return res;
+}
+
+matrix qmi(matrix a,int k)
+{
+	matrix res;
+	res.m[0]=1;
+		
+	while(k)
+	{
+		if(k&amp;amp;1) res=mul(res,a);
+		a=mul(a,a);
+		k&amp;gt;&amp;gt;=1;
+	}
+	return res;
+}
+
+int main()
+{
+	scanf(&amp;quot;%d%d%d%d&amp;quot;,&amp;amp;n,&amp;amp;mod,&amp;amp;d,&amp;amp;k);
+	matrix b;
+	for(int i=0;i&amp;lt;n;i++)
+		scanf(&amp;quot;%d&amp;quot;,&amp;amp;b.m[i]);
+	matrix a;
+	for(int i=0;i&amp;lt;n;i++)
+		if(i&amp;lt;=d || (i+d)%n == 0)
+			a.m[i]=1;
+	a=qmi(a,k);	
+//	for(int i=0;i&amp;lt;n;i++)
+//		printf(&amp;quot;%d &amp;quot;,a.m[i]);
+	b=mul(b,a);
+	for(int i=0;i&amp;lt;n;i++)
+		printf(&amp;quot;%d &amp;quot;,b.m[i]);
+	return 0;
+}
+
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://caifxh.github.io/post/kuai-su-mi-andju-zhen-kuai-su-mi/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+            <article class="post i-card">
+                <h2 class="post-title">
                     <a href="https://caifxh.github.io/post/xian-xing-dp/">
                         线性dp
                     </a>
@@ -106,6 +1340,11 @@
                 <div class="post-info">
                     <time class="post-time">2020-03-26</time>
                     
+                        <a href="https://caifxh.github.io/tag/hLQFdtGuD/" class="post-tag i-tag
+                            i-tag-">
+            #DP
+        </a>
+                        
                 </div>
                 <div class="post-article">
                     
@@ -425,6 +1664,11 @@ code
                 <div class="post-info">
                     <time class="post-time">2020-03-26</time>
                     
+                        <a href="https://caifxh.github.io/tag/yImqvC-Dp/" class="post-tag i-tag
+                            i-tag-">
+            #字符串
+        </a>
+                        
                 </div>
                 <div class="post-article">
                     
@@ -1752,7 +2996,7 @@ int main()
                     <!-- 个人信息 -->
                     
     <div class="id_card i-card">
-        <div class="id_card-avatar" style="background-image: url(https://caifxh.github.io/images/avatar.png?v=1585732375323)">
+        <div class="id_card-avatar" style="background-image: url(https://caifxh.github.io/images/avatar.png?v=1585882659287)">
         </div>
         <h1 class="id_card-title">
             fxh

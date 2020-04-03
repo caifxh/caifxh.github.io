@@ -1,0 +1,1631 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>
+    图论 | fxh
+</title>
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1585882659287">
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://caifxh.github.io/styles/main.css">
+<!-- js -->
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://caifxh.github.io/media/js/jquery.sticky-sidebar.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+</head>
+
+<body>
+    <div class="main">
+        <div class="header">
+    <div class="nav">
+        <div class="logo">
+            <a href="https://caifxh.github.io">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1585882659287" alt="">
+            </a>
+            <div class="site-title">
+                <h1>
+                    fxh
+                </h1>
+            </div>
+        </div>
+        <span class="menu-btn fa fa-align-justify"></span>
+        <div class="menu-container">
+            <ul>
+                
+                    
+                            <li>
+                                <a href="/" class="menu">
+                                    首页
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/archives" class="menu">
+                                    归档
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/tags" class="menu">
+                                    标签
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/post/about" class="menu">
+                                    关于
+                                </a>
+                            </li>
+                            
+                                
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $(".menu-btn").click(function() {
+            $(".menu-container").slideToggle();
+        });
+        $(window).resize(function() {
+
+            if (window.matchMedia('(min-width: 960px)').matches) {
+                $(".menu-container").css('display', 'block')
+            } else {
+                $(".menu-container").css('display', 'none')
+            }
+
+        });
+    });
+</script>
+
+            <div id="main-content" class="post-container main-container">
+                <div id="content" class="main-container-left">
+                    
+    <div class="i-card">
+        <b>标签：#
+        图论</b>
+    </div>
+    
+        
+            <article class="post i-card">
+                <h2 class="post-title">
+                    <a href="https://caifxh.github.io/post/wu-xiang-tu-you-xiang-tu-de-lian-tong-xing-fu-xi/">
+                        无向图/有向图的连通性复习
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2020-04-01</time>
+                    
+                        <a href="https://caifxh.github.io/tag/Aq1uYaqZQ/" class="post-tag i-tag
+                            i-tag-other_4">
+            #图论
+        </a>
+                        
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            相关概念
+1.无向图
+
+
+2.有向图
+
+
+3.割点和桥
+
+
+
+
+
+
+
+
+
+
+4.tarjan算法
+
+
+4.1无向图的桥
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int maxn=1000+5;
+int n,m;
+int head[maxn],cnt;
+struct Edge
+{
+	int to,next;
+}e[maxn&amp;lt;&amp;lt;1];
+
+int low[maxn],dfn[maxn],num;
+void add(int u,int v)
+{
+	e[++cnt].next=head[u];
+	e[cnt].to=v;
+	head[u]=cnt;	
+}
+void tarjan(int u,int fa)
+{
+	dfn[u]=low[u]=++num;
+	for(int i=head[u];i;i=e[i].next)
+	{
+		int v=e[i].to;
+		if(v==fa)
+			continue;
+		if(!dfn[v])
+		{
+			tarjan(v,u);
+			low[u]=min(low[u],low[v]);
+			if(low[v]&amp;gt;dfn[u])
+				cout&amp;lt;&amp;lt;u&amp;lt;&amp;lt;&amp;quot;—&amp;quot;&amp;lt;&amp;lt;v&amp;lt;&amp;lt;&amp;quot;是桥&amp;quot;&amp;lt;&amp;lt;endl; 
+		}
+		else
+			low[u]=min(low[u],dfn[v]);
+	}
+}
+
+void init()
+{
+	memset(head,0,sizeof(head));
+	memset(low,0,sizeof(low));
+	memset(dfn,0,sizeof(dfn));
+	cnt=num=0;
+}
+
+int main()
+{
+	while(cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m)
+	{
+		init();
+		int u,v;
+		while(m--)
+		{
+			cin&amp;gt;&amp;gt;u&amp;gt;&amp;gt;v;
+			add(u,v);
+			add(v,u);
+		}
+		for(int i=1;i&amp;lt;=n;i++)
+			if(!dfn[i])
+				tarjan(1,0);
+	}
+	return 0;
+}
+
+4.2无向图的割点
+
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int maxn=1000+5;
+int n,m;
+int head[maxn],cnt,root;
+struct Edge
+{
+	int to,next;
+}e[maxn&amp;lt;&amp;lt;1];
+
+int low[maxn],dfn[maxn],num;
+void add(int u,int v)
+{
+	e[++cnt].next=head[u];
+	e[cnt].to=v;
+	head[u]=cnt;	
+}
+void tarjan(int u,int fa)
+{
+	dfn[u]=low[u]=++num;
+	int count=0;
+	for(int i=head[u];i;i=e[i].next)
+	{
+		int v=e[i].to;
+		if(v==fa)
+			continue;
+		if(!dfn[v])
+		{
+			tarjan(v,u);
+			low[u]=min(low[u],low[v]);
+			if(low[v]&amp;gt;=dfn[u])
+			{
+				count++;
+				if(u!=root||count&amp;gt;1)
+					cout&amp;lt;&amp;lt;u&amp;lt;&amp;lt;&amp;quot;是割点&amp;quot;&amp;lt;&amp;lt;endl; 
+			}	
+		}
+		else
+			low[u]=min(low[u],dfn[v]);
+	}
+}
+
+void init()
+{
+	memset(head,0,sizeof(head));
+	memset(low,0,sizeof(low));
+	memset(dfn,0,sizeof(dfn));
+	cnt=num=0;
+}
+
+int main()
+{
+	while(cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m)
+	{
+		init();
+		int u,v;
+		while(m--)
+		{
+			cin&amp;gt;&amp;gt;u&amp;gt;&amp;gt;v;
+			add(u,v);
+			add(v,u);
+		}
+		for(int i=1;i&amp;lt;=n;i++)
+			if(!dfn[i])
+			{
+				root=i;
+				tarjan(i,0);
+			 } 
+	}
+	return 0;
+}
+
+有向图的强连通分量（SCC）
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;stack&amp;gt;
+using namespace std;
+const int maxn=1000+5;
+int n,m;
+int head[maxn],cnt;
+stack&amp;lt;int&amp;gt;s;
+bool ins[maxn];
+struct Edge
+{
+	int to,next;
+}e[maxn&amp;lt;&amp;lt;1];
+
+int low[maxn],dfn[maxn],num;
+void add(int u,int v)
+{
+	e[++cnt].next=head[u];
+	e[cnt].to=v;
+	head[u]=cnt;	
+}
+void tarjan(int u)
+{
+	low[u]=dfn[u]=++num;
+	ins[u]=true;
+	s.push(u);
+	for(int i=head[u];i;i=e[i].next)
+	{
+		int v=e[i].to;
+		if(!dfn[v])
+		{
+			tarjan(v);
+			low[u]=min(low[u],low[v]);
+		}
+		else if(ins[v])
+			low[u]=min(low[u],dfn[v]);
+	}
+	if(low[u]==dfn[u])
+	{
+		int v;
+		cout&amp;lt;&amp;lt;&amp;quot;连通分量：&amp;quot;;
+		do
+		{
+			v=s.top();
+			s.pop();
+			cout&amp;lt;&amp;lt;v&amp;lt;&amp;lt;&amp;quot; &amp;quot;;
+			ins[v]=false;
+		}while(v!=u);
+		cout&amp;lt;&amp;lt;endl;
+	}
+}
+
+void init()
+{
+	memset(head,0,sizeof(head));
+	memset(low,0,sizeof(low));
+	memset(dfn,0,sizeof(dfn));
+	memset(ins,0,sizeof(ins));
+	cnt=num=0;
+}
+
+int main()
+{
+	while(cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m)
+	{
+		init();
+		int u,v;
+		while(m--)
+		{
+			cin&amp;gt;&amp;gt;u&amp;gt;&amp;gt;v;
+			add(u,v);
+		}
+		for(int i=1;i&amp;lt;=n;i++)
+			if(!dfn[i])
+				tarjan(i);
+	}
+	return 0;
+}
+
+例题
+poj1144
+求割点数
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int maxn=105;
+int n,root;
+int head[maxn],cnt;
+struct Edge
+{
+	int to,next;
+}e[maxn*maxn];
+
+int low[maxn],dfn[maxn],num;
+bool cut[maxn];
+void add(int u,int v)
+{
+	e[++cnt].next=head[u];
+	e[cnt].to=v;
+	head[u]=cnt;	
+}
+void tarjan(int u)
+{
+	dfn[u]=low[u]=++num;
+	int flag=0;
+	for(int i=head[u];i;i=e[i].next)
+	{
+		int v=e[i].to;
+		if(!dfn[v])
+		{
+			tarjan(v);
+			low[u]=min(low[u],low[v]);
+			if(low[v]&amp;gt;=dfn[u])
+			{
+				flag++;
+				if(u!=root||flag&amp;gt;1)//u不是根或者u是根但至少有两个子结点
+					cut[u]=true; 			
+			}
+		}
+		else
+			low[u]=min(low[u],dfn[v]);
+	}
+}
+
+void init()
+{
+	memset(head,0,sizeof(head));
+	memset(low,0,sizeof(low));
+	memset(dfn,0,sizeof(dfn));
+	memset(cut,false,sizeof(cut));
+	cnt=num=0;
+}
+
+int main()
+{ 
+	while(cin&amp;gt;&amp;gt;n&amp;amp;&amp;amp;n)
+	{
+		init(); 
+		int u,v;
+		while(cin&amp;gt;&amp;gt;u&amp;amp;&amp;amp;u)
+		{
+			while(1)
+			{
+				char c=getchar();
+				if(c==&#39;\n&#39;)
+					break;
+				cin&amp;gt;&amp;gt;v;
+				add(u,v);
+				add(v,u);
+			}
+		}
+		for(int i=1;i&amp;lt;=n;i++)
+			if(!dfn[i])
+			{
+				root=i;
+				tarjan(i);
+			}
+		int ans=0;
+		for(int i=1;i&amp;lt;=n;i++)
+			if(cut[i])
+				ans++;
+		cout&amp;lt;&amp;lt;ans&amp;lt;&amp;lt;endl;
+	}
+	return 0;
+}
+
+poj3352
+最少加几条边，才能使无向图变成边双连通图。
+
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int maxn=1000+5;
+int n,m;
+int head[maxn],cnt;
+struct Edge
+{
+	int to,next;
+}e[maxn&amp;lt;&amp;lt;1];
+
+int low[maxn],dfn[maxn],degree[maxn],num;
+void add(int u,int v)
+{
+	e[++cnt].next=head[u];
+	e[cnt].to=v;
+	head[u]=cnt;	
+}
+void tarjan(int u,int fa)
+{
+	dfn[u]=low[u]=++num;
+	for(int i=head[u];i;i=e[i].next)
+	{
+		int v=e[i].to;
+		if(v==fa)
+			continue;
+		if(!dfn[v])
+		{
+			tarjan(v,u);
+			low[u]=min(low[u],low[v]);
+		}
+		else
+			low[u]=min(low[u],dfn[v]);
+	}
+}
+
+void init()
+{
+	memset(head,0,sizeof(head));
+	memset(low,0,sizeof(low));
+	memset(dfn,0,sizeof(dfn));
+	memset(degree,0,sizeof(degree));
+	cnt=num=0;
+}
+
+int main()
+{
+	while(cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m)
+	{
+		init();
+		int u,v;
+		while(m--)
+		{
+			cin&amp;gt;&amp;gt;u&amp;gt;&amp;gt;v;
+			add(u,v);
+			add(v,u);
+		}
+		tarjan(1,-1);
+		for(int u=1;u&amp;lt;=n;u++)
+			for(int i=head[u];i;i=e[i].next)
+			{
+				int v=e[i].to;
+				if(low[u]!=low[v])
+					degree[low[u]]++;
+			}
+		int leaf=0;
+		for(int i=1;i&amp;lt;=n;i++)
+			if(degree[i]==1)
+				leaf++;
+		cout&amp;lt;&amp;lt;(leaf+1)/2&amp;lt;&amp;lt;endl;
+	}
+	return 0;
+}
+
+换种写法：(可求得所有点双连通分量)
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int N=5010,M=200010;
+int h[N],e[M],ne[M],idx;
+int n,m;
+int dfn[N],low[N],timestamp;
+int stk[N],top;
+int dcc_cnt;
+int d[N];
+bool is_bridge[M];
+int id[N];
+
+void add(int a,int b)
+{
+    e[idx]=b;
+    ne[idx]=h[a];
+    h[a]=idx++;
+}
+
+void tarjan(int u,int fa)
+{
+    dfn[u]=low[u]=++timestamp;
+    stk[++top]=u;
+    for(int i=h[u];~i;i=ne[i])
+    {
+        int j=e[i];
+        if(j == fa)
+            continue;
+        if(!dfn[j])
+        {
+            tarjan(j,u);
+            low[u]=min(low[u],low[j]);
+            if(dfn[u] &amp;lt; low[j])
+                is_bridge[i]=is_bridge[i^1]=true;
+        }
+        else
+            low[u]=min(low[u],dfn[j]);
+    }
+    
+    if(dfn[u] == low[u])
+    {
+        ++dcc_cnt;
+        int y;
+        do{
+            y=stk[top--];
+            id[y]=dcc_cnt;
+        }while(y != u);
+    }
+}
+
+int main()
+{
+    cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m;
+    memset(h,-1,sizeof h);
+    while(m--)
+    {
+        int a,b;
+        scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;a,&amp;amp;b);
+        add(a,b);
+        add(b,a);
+    }
+    
+    tarjan(1,-1);
+    
+    for(int i=0;i&amp;lt;idx;i++)
+        if(is_bridge[i])
+            d[id[e[i]]]++;
+            
+    int cnt=0;
+    for(int i=1;i&amp;lt;=dcc_cnt;i++)
+        if(d[i] == 1)
+            cnt++;
+    cout&amp;lt;&amp;lt;(cnt+1)/2&amp;lt;&amp;lt;endl;
+    return 0;
+}
+
+
+
+poj2553
+
+求解强连通分量，缩点，计算缩点的出度，统计出度为0的顶点。
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;stack&amp;gt;
+using namespace std;
+const int maxn=5050;
+int n,m;
+bool ins[maxn];//标记是否在栈内 
+int head[maxn],id[maxn],dout[maxn];
+int low[maxn],dfn[maxn];
+stack&amp;lt;int&amp;gt; s;
+int cnt,num,scc_cnt;
+struct Egde
+{
+	int to,next;
+}e[maxn*maxn];
+void add(int u,int v)
+{
+	e[++cnt].to=v;
+	e[cnt].next=head[u];
+	head[u]=cnt;
+}
+void init()
+{
+	memset(head,0,sizeof(head));
+	memset(dfn,0,sizeof(dfn));
+	memset(low,0,sizeof(low));
+	memset(ins,false,sizeof(ins));
+	memset(dout,0,sizeof(dout));
+	memset(id,0,sizeof(id));
+	cnt=num=0;
+	scc_cnt=0;
+}
+void tarjan(int u)
+{
+	low[u]=dfn[u]=++num;
+	ins[u]=true;
+	s.push(u);
+	for(int i=head[u];i;i=e[i].next)
+	{
+		int v=e[i].to;
+		if(!dfn[v])
+		{
+			tarjan(v);
+			low[u]=min(low[u],low[v]);
+		}
+		else if(ins[v])
+			low[u]=min(low[u],dfn[v]);
+	}
+	if(low[u]==dfn[u])
+	{
+		int v;
+		++scc_cnt;
+		do
+		{
+			v=s.top();
+			s.pop();
+			id[v]=scc_cnt;
+			ins[v]=false;
+		}while(v!=u);
+	}
+}
+
+int main()
+{
+	while((cin&amp;gt;&amp;gt;n)&amp;amp;&amp;amp;n)
+	{
+		cin&amp;gt;&amp;gt;m;
+		init();
+		while(m--)
+		{
+			int u,v;
+			cin&amp;gt;&amp;gt;u&amp;gt;&amp;gt;v;
+			add(u,v);
+		}
+		for(int i=1;i&amp;lt;=n;i++)
+			if(!dfn[i])
+				tarjan(i);
+		for(int u=1;u&amp;lt;=n;u++)
+			for(int i=head[u];i;i=e[i].next)
+			{
+				int v=e[i].to;
+				if(id[u]!=id[v])
+					dout[id[u]]++; 
+			}
+		int flag=1;
+		for(int i=1;i&amp;lt;=n;i++)
+		{
+			if(!dout[id[i]])
+			{
+				if(flag)
+					flag=0;
+				else
+					cout&amp;lt;&amp;lt;&amp;quot; &amp;quot;;
+				cout&amp;lt;&amp;lt;i;
+			}		
+		}
+		cout&amp;lt;&amp;lt;endl;
+	}
+	return 0;
+}
+
+poj1236/acwing367
+至少添加几条边，使得有向图为强连通图
+
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int N=110,M=N*N;
+int n;
+int h[N],e[M],ne[M],idx;
+int dfn[N],low[N];
+int stk[N],top;
+bool in_stk[N];
+int scc_cnt,timestamp;
+int id[N];
+int dout[N],din[N];
+
+void add(int a,int b)
+{
+    e[idx]=b;
+    ne[idx]=h[a];
+    h[a]=idx++;
+}
+
+void tarjan(int u)
+{
+    dfn[u]=low[u]=++timestamp;
+    stk[++top]=u;
+    in_stk[u]=true;
+    for(int i=h[u];~i;i=ne[i])
+    {
+        int j=e[i];
+        if(!dfn[j])
+        {
+            tarjan(j);
+            low[u]=min(low[u],low[j]);
+        }
+        else if(in_stk[j])
+            low[u]=min(low[u],dfn[j]);
+    }   
+    
+    if(dfn[u] == low[u])
+    {
+        ++scc_cnt;
+        int y;
+        do{
+            y=stk[top--];
+            //cout&amp;lt;&amp;lt;y&amp;lt;&amp;lt;&#39; &#39;;
+            in_stk[y]=false;
+            id[y]=scc_cnt;
+        }while(y != u);
+        //cout&amp;lt;&amp;lt;endl;
+    }
+}
+
+int main()
+{
+    cin&amp;gt;&amp;gt;n;
+    memset(h,-1,sizeof h);
+    for(int i=1;i&amp;lt;=n;i++)
+    {
+        int x;
+        while(cin&amp;gt;&amp;gt; x &amp;amp;&amp;amp; x)
+            add(i,x);
+    }
+        
+    
+    for(int i=1;i&amp;lt;=n;i++)
+        if(!dfn[i])
+            tarjan(i);
+    
+    // for(int i=1;i&amp;lt;=n;i++)
+    // {
+    //     cout&amp;lt;&amp;lt;i&amp;lt;&amp;lt;&amp;quot; &amp;quot;&amp;lt;&amp;lt;id[i]&amp;lt;&amp;lt;endl;
+    // }
+    for(int i=1;i&amp;lt;=n;i++)
+        for(int j=h[i];~j;j=ne[j])
+        {
+            int k=e[j];
+            int a=id[i],b=id[k];
+            if(a != b)
+            {
+                dout[a]++;
+                din[b]++;
+            }
+        }
+     
+    int a=0,b=0;  
+    for(int i=1;i&amp;lt;=scc_cnt;i++)
+    {
+        if(!din[i])
+            a++;
+        if(!dout[i])
+            b++;
+    }
+    
+    cout&amp;lt;&amp;lt;a&amp;lt;&amp;lt;endl;
+    if(scc_cnt == 1)
+        cout&amp;lt;&amp;lt;0&amp;lt;&amp;lt;endl;
+    else
+        cout&amp;lt;&amp;lt;max(a,b)&amp;lt;&amp;lt;endl;
+    return 0;
+}
+
+acwing1174
+（1）若采用暴力求解，先建反图，判断从每个点出发能否到达所有点。时间复杂度：$O(n(n+m))
+（2）若为拓扑图，则只需判断出度为0的点，若出度为0的点大于1个，则答案为0，若出度为0的点为1，则答案为1.
+先求出所有强连通分量，然后缩点，判断出度为0的分量，答案为该分量里的点的数目。
+#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;cstring&amp;gt;
+#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;algorithm&amp;gt;
+
+using namespace std;
+
+const int N = 10010, M = 50010;
+
+int n, m;
+int h[N], e[M], ne[M], idx;
+int dfn[N], low[N], timestamp;
+int stk[N], top;
+bool in_stk[N];
+int id[N], scc_cnt, cnt[N];//强连通分量编号，每个分量里点的数目
+int dout[N];
+
+void add(int a, int b)
+{
+    e[idx] = b, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+void tarjan(int u)
+{
+    dfn[u] = low[u] = ++ timestamp;
+    stk[ ++ top] = u, in_stk[u] = true;
+    for (int i = h[u]; i != -1; i = ne[i])
+    {
+        int j = e[i];
+        if (!dfn[j])
+        {
+            tarjan(j);
+            low[u] = min(low[u], low[j]);
+        }
+        else if (in_stk[j]) low[u] = min(low[u], dfn[j]);
+    }
+
+    if (dfn[u] == low[u])
+    {
+        ++ scc_cnt;
+        int y;
+        do {
+            y = stk[top -- ];
+            in_stk[y] = false;
+            id[y] = scc_cnt;
+            cnt[scc_cnt] ++ ;
+        } while (y != u);
+    }
+}
+
+int main()
+{
+    scanf(&amp;quot;%d%d&amp;quot;, &amp;amp;n, &amp;amp;m);
+    memset(h, -1, sizeof h);
+    while (m -- )
+    {
+        int a, b;
+        scanf(&amp;quot;%d%d&amp;quot;, &amp;amp;a, &amp;amp;b);
+        add(a, b);
+    }
+
+    for (int i = 1; i &amp;lt;= n; i ++ )
+        if (!dfn[i])
+            tarjan(i);
+
+    for (int i = 1; i &amp;lt;= n; i ++ )
+        for (int j = h[i]; ~j; j = ne[j])
+        {
+            int k = e[j];
+            int a = id[i], b = id[k];
+            if (a != b) dout[a] ++ ;
+        }
+
+    int zeros = 0, sum = 0;
+    for (int i = 1; i &amp;lt;= scc_cnt; i ++ )
+        if (!dout[i])
+        {
+            zeros ++ ;
+            sum += cnt[i];
+            if (zeros &amp;gt; 1)
+            {
+                sum = 0;
+                break;
+            }
+        }
+
+    printf(&amp;quot;%d\n&amp;quot;, sum);
+
+    return 0;
+}
+
+acwing1175
+求最大半连通子图的结点数和最大半连通子图数。
+(1)对于任何一个强连通分量（tarjan），一定是半连通分量。
+(2)缩点，建图得到一个有向无环图（拓扑图），求拓扑图上的最长链（最长链包含的结点数即为最大半连通子图的结点数）。缩完点之后的图中出现了重边怎么办,那就会使方案数莫名增多.所以对于缩完点后的图还要判重边
+(3)最长链的条数即为最大半连通子图数。
+求最长链采用dp，跑最长路,我们只需要找出一条点权最大的路径就行了，不限制点的个数。
+所以首先对这个图进行tarjan缩点，并记录下每个连通块的大小，和每个点所在的连通块。
+缩点之后，会发现这个图变成了一个dag（有向无环图），我们要对这个dag求出最长链的大小和个数。
+因为这个图是无环的，所以我们可以按照拓扑序进行DP
+Tarjan缩点后的点的标号顺序是逆拓扑序，所以不需要对新图进行拓扑排序
+状态表示: f[i]表示到第i个连通块的最长链大小，g[i]表示个数。
+很容易就想到了转移的方法：
+1.{g[i]=g[i]+g[j]}(条件：f[j]+number[i]==f[i])
+2.{g[i]=g[j],f[i]=f[j]+number[i]}(条件：f[j]+number[i]&amp;gt;f[i])。
+按照这个转移状态就可以啦。
+总结：强连通分量+缩点+去重+DAGdp
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;unordered_set&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int N=100010,M=2000010;
+int h[N],hs[N],e[M],ne[M],idx;
+int n,m,mod;
+int dfn[N],low[N],timestamp;
+int id[N],scc_cnt,Size[N];
+int f[N],g[N];
+typedef pair&amp;lt;int,int&amp;gt; PII;
+int stk[N],top;
+bool ins[N];
+typedef long long LL;
+
+void add(int h[], int a, int b)
+{
+    e[idx] = b, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+void tarjan(int u)
+{
+    dfn[u]=low[u]=++timestamp;
+    stk[++top]=u,ins[u]=true;
+    
+    for(int i=h[u];~i;i=ne[i])
+    {
+        int j=e[i];
+        if(!dfn[j])
+        {
+            tarjan(j);
+            low[u]=min(low[u],low[j]);
+        }
+        else if(ins[j])
+            low[u]=min(low[u],dfn[j]);
+    }
+    
+    if(dfn[u] == low[u])
+    {
+        ++scc_cnt;
+        int y;
+        do{
+            y=stk[top--];
+            ins[y]=false;
+            id[y]=scc_cnt;
+            Size[scc_cnt]++;
+        }while(y != u);
+    }
+}
+
+int main()
+{
+    cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m&amp;gt;&amp;gt;mod;
+    memset(h,-1,sizeof h);
+    memset(hs,-1,sizeof hs);
+    while(m--)
+    {
+        int a,b;
+        scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;a,&amp;amp;b);
+        add(h,a,b);
+    }
+    
+    for(int i=1;i&amp;lt;=n;i++)
+        if(!dfn[i])
+            tarjan(i);
+        
+    unordered_set&amp;lt;LL&amp;gt; S;//(u,v)-&amp;gt;u*1000000+v
+    for(int i=1;i&amp;lt;=n;i++)
+        for(int j=h[i];~j;j=ne[j])
+        {
+            int k=e[j];
+            int a=id[i],b=id[k];
+            LL hash=a*1000000ll+b;
+            if(a != b &amp;amp;&amp;amp; !S.count(hash))
+            {
+                add(hs,a,b);
+                S.insert(hash);
+            }
+        }
+    
+    for(int i=scc_cnt;i;i--)//缩点后的顺序为逆拓扑序 
+    {
+        if (!f[i])//代表它是入度为0的点 
+        {
+            f[i] = Size[i];
+            g[i] = 1;
+        }
+        for(int j=hs[i];~j;j=ne[j])
+        {
+            int k=e[j];
+            if(f[k]&amp;lt;f[i]+Size[k])
+            {
+                f[k]=f[i]+Size[k];
+                g[k]=g[i];
+            }
+            else if(f[k] == f[i] + Size[k])
+                g[k]=(g[k]+g[i])%mod;
+        }
+    }
+    
+    int maxf=0,sum=0;
+    for(int i=1;i&amp;lt;=scc_cnt;i++)
+        if(f[i]&amp;gt;maxf)
+        {
+            maxf=f[i];
+            sum=g[i];
+        }
+        else if(f[i] == maxf)
+            sum=(sum+g[i])%mod;
+    
+    cout&amp;lt;&amp;lt;maxf&amp;lt;&amp;lt;endl;
+    cout&amp;lt;&amp;lt;sum&amp;lt;&amp;lt;endl;
+    return 0;
+    
+}
+
+补一个缩点的模板缩点`
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+const int N=10010,M=200010;
+int h[N],hs[N],e[M],ne[M],idx;
+int n,m;
+int dfn[N],low[N],timestamp;
+int id[N],scc_cnt,Size[N];
+int f[N];
+int stk[N],top;
+bool ins[N];
+int p[N];//点权 
+
+void add(int h[], int a, int b)
+{
+    e[idx] = b, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+void tarjan(int u)
+{
+    dfn[u]=low[u]=++timestamp;
+    stk[++top]=u,ins[u]=true;
+    
+    for(int i=h[u];~i;i=ne[i])
+    {
+        int j=e[i];
+        if(!dfn[j])
+        {
+            tarjan(j);
+            low[u]=min(low[u],low[j]);
+        }
+        else if(ins[j])
+            low[u]=min(low[u],dfn[j]);
+    }
+    
+    if(dfn[u] == low[u])
+    {
+        ++scc_cnt;
+        int y;
+        do{
+            y=stk[top--];
+            ins[y]=false;
+            id[y]=scc_cnt;
+            Size[scc_cnt]+=p[y];
+        }while(y != u);
+    }
+}
+
+int main()
+{
+    cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m;
+    for(int i=1;i&amp;lt;=n;i++)
+    	cin&amp;gt;&amp;gt;p[i];
+    memset(h,-1,sizeof h);
+    memset(hs,-1,sizeof hs);
+    while(m--)
+    {
+        int a,b;
+        scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;a,&amp;amp;b);
+        add(h,a,b);
+    }
+    
+    for(int i=1;i&amp;lt;=n;i++)
+        if(!dfn[i])
+            tarjan(i);
+        
+    for(int i=1;i&amp;lt;=n;i++)
+        for(int j=h[i];~j;j=ne[j])
+        {
+            int k=e[j];
+            int a=id[i],b=id[k];
+            if(a != b)
+            {
+                add(hs,a,b);
+            }
+        }
+    
+    for(int i=scc_cnt;i;i--)//缩点后的顺序为逆拓扑序 
+    {
+    	if(!f[i])
+    	{
+    		f[i]=Size[i];
+		}
+        for(int j=hs[i];~j;j=ne[j])
+        {
+            int k=e[j];
+            if(f[k]&amp;lt;f[i]+Size[k])
+            {
+                f[k]=f[i]+Size[k];
+            }
+        }
+    }
+    
+    int maxf=0;
+    for(int i=1;i&amp;lt;=scc_cnt;i++)
+  		maxf=max(maxf,f[i]);
+    cout&amp;lt;&amp;lt;maxf&amp;lt;&amp;lt;endl;
+    return 0;
+    
+}
+
+再补一个DAGdp的简单题P1137
+#include&amp;lt;bits/stdc++.h&amp;gt;
+using namespace std;
+
+const int maxn=100000+15;
+int n,m,idx;
+int head[maxn],din[maxn],dp[maxn];
+struct EDGE
+{
+    int to;
+	int next;
+}edge[maxn&amp;lt;&amp;lt;2];
+int q[maxn],hh,tt=-1;
+
+void add(int x,int y)
+{
+    edge[++idx].next=head[x];
+    edge[idx].to=y;
+    head[x]=idx;
+}
+
+void topsort()
+{
+    
+    for (int i=1;i&amp;lt;=n;i++)
+	    if (din[i]==0) 
+			q[++tt]=i;
+			
+    while (hh&amp;lt;=tt)
+    {
+        int t=q[hh++];
+        for (int i=head[t];i;i=edge[i].next)
+        {
+            int v=edge[i].to;
+            din[v]--;
+            if (din[v]==0)
+            	q[++tt]=v;
+        }
+    }
+}
+
+int main()
+{
+    scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;m);
+    for (int i=1;i&amp;lt;=m;i++)
+    {
+        int u,v;
+        scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;u,&amp;amp;v);
+        add(u,v);
+        din[v]++;
+    }
+    
+    topsort();
+    
+    for (int i=1;i&amp;lt;=n;i++)
+    {
+        int u=q[i-1];
+        if(!dp[u])
+        	dp[u]=1;
+        for (int j=head[u];j;j=edge[j].next)
+        {
+            int v=edge[j].to;
+            dp[v]=max(dp[v],dp[u]+1);
+        }
+    }
+    for (int i=1;i&amp;lt;=n;i++)
+    	printf(&amp;quot;%d\n&amp;quot;,dp[i]);
+    return 0;
+}
+
+acwing1183
+题意：求删除一个点后，图中最多有多少个连通块。
+/*
+1.统计连通块数量
+2.枚举每一个连通块删除割点后所得的最大连通块数ans
+3.ans+cnt-1即为答案
+*/
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=10010,M=30010;
+int n,m;
+int h[N],e[M],ne[M],idx;
+int dfn[N],low[N],timestamp;
+int ans;
+int root;
+
+void add(int a, int b)
+{
+    e[idx] = b, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+void tarjan(int u)
+{
+    dfn[u]=low[u]=++timestamp;
+    int cnt=0;
+    for(int i=h[u];~i;i=ne[i])
+    {
+        int j=e[i];
+        if(!dfn[j])
+        {
+            tarjan(j);
+            low[u]=min(low[u],low[j]);
+            if(low[j] &amp;gt;= dfn[u])
+            {
+                cnt++;
+            }
+        }
+        else 
+            low[u]=min(low[u],dfn[j]);
+    }
+
+    if(u != root &amp;amp;&amp;amp; cnt)//不是根节点，还要加上父节点的那一块连通分量
+        cnt++;
+    ans=max(ans,cnt);//每一个连通块删除割点后所得的最大连通块数ans
+}
+
+int main()
+{
+    while(cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m &amp;amp;&amp;amp; n)
+    {
+        memset(h,-1,sizeof h);
+        memset(dfn,0,sizeof dfn);
+        memset(low,0,sizeof low);
+        idx=timestamp=0;
+        ans=0;
+
+        while(m--)
+        {
+            int a,b;
+            cin&amp;gt;&amp;gt;a&amp;gt;&amp;gt;b;
+            add(a,b);
+            add(b,a);
+        }
+
+        int cnt=0;
+        for(root=0;root&amp;lt;n;root++)
+            if(!dfn[root])
+            {
+                cnt++;//连通块数
+                tarjan(root);
+            }
+        
+        cout&amp;lt;&amp;lt;ans+cnt-1&amp;lt;&amp;lt;endl;
+    }
+    return 0;
+}
+
+acwing396
+题意：
+就是有很多个点，在某个时候一个点将会塌陷，你要建造一些点，使任意一点塌陷时其他点都能成功逃脱
+情况一：当前连通块内没有一个割点
+那么此时至少要建立两个点，使得在任意一点坍塌时能顺利逃脱，那么此时要建立的点的个数就是2，
+而方案数则是Cn2=n(n−1)2C_n^2 = \frac{n(n−1)}{2}Cn2​=2n(n−1)​,n为点数
+
+情况二：当前连通块中有一个割点
+此时在当前点双连通分量中非割点位置任意选取一个顶点建立1个出口即可，方案数为；cnt-1（cnt为当前连通分量中点数）
+
+情况三：当前连通块中中有一个割点以上，无需设置出口（一个割点时已设置出口，且各个v-dcc连通，无论删去任意一个出口or割点or普通点，都可保证剩下点可成功逃离）
+#include &amp;lt;cstring&amp;gt;
+#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;algorithm&amp;gt;
+#include &amp;lt;vector&amp;gt;
+using namespace std;
+typedef unsigned long long ULL;
+const int N = 1010, M = 1010;
+int n,m;
+int h[N],e[M],ne[M],idx;
+int dfn[N],low[N],timestamp;
+int stk[N],top;
+int dcc_cnt;
+vector&amp;lt;int&amp;gt; dcc[N];
+bool cut[N];
+int root;
+
+void add(int a, int b)
+{
+    e[idx] = b, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+void tarjan(int u)
+{
+    dfn[u]=low[u]=++timestamp;
+    stk[++top]=u;
+    if(u == root &amp;amp;&amp;amp; h[u] == -1)
+    {
+        dcc_cnt++;
+        dcc[dcc_cnt].push_back(u);
+        return;
+    }
+    
+    int cnt=0;
+    for(int i=h[u];~i;i=ne[i])
+    {
+        int j=e[i];
+        if(!dfn[j])
+        {
+            tarjan(j);
+            low[u]=min(low[u],low[j]);
+            if(low[j] &amp;gt;= dfn[u])
+            {
+                cnt++;
+                if(u != root || cnt &amp;gt;1)
+                    cut[u]=true;
+                ++dcc_cnt;
+                int y;
+                do{
+                    y=stk[top--];
+                    dcc[dcc_cnt].push_back(y);
+                }while(y != j);
+                dcc[dcc_cnt].push_back(u);
+            }
+        }
+        else 
+            low[u]=min(low[u],dfn[j]);
+    }
+}
+
+int main()
+{
+    int kase=1;
+    while(cin&amp;gt;&amp;gt;m &amp;amp;&amp;amp; m)
+    {
+        for(int i=1;i&amp;lt;=dcc_cnt;i++)
+            dcc[i].clear();
+        idx=n=timestamp=top=dcc_cnt=0;
+        memset(h,-1,sizeof h);
+        memset(dfn,0,sizeof dfn);
+        memset(cut,0,sizeof cut);
+        
+        while(m--)
+        {
+            int a,b;
+            cin&amp;gt;&amp;gt;a&amp;gt;&amp;gt;b;
+            n=max(n,a),n=max(n,b);
+            add(a,b);
+            add(b,a);
+        }
+        
+        for(root = 1; root &amp;lt;= n; root ++)
+        {
+            if(!dfn[root])
+                tarjan(root);
+        }
+        
+        int res=0;
+        ULL num=1;
+        for(int i=1;i&amp;lt;=dcc_cnt;i++)
+        {
+            int cnt=0;//统计当前v-dcc中割点的数量
+            for(int j=0;j&amp;lt;dcc[i].size();j++)
+                if(cut[dcc[i][j]])
+                    cnt++;
+            
+            if(cnt == 0)
+            {
+                if(dcc[i].size()&amp;gt;1)
+                    res+=2,num*=dcc[i].size()*(dcc[i].size()-1)/2;
+                else 
+                    res++;//孤立点
+            }
+            else if (cnt == 1)
+            {
+                res++,num*=dcc[i].size()-1;
+            }
+        }
+         printf(&amp;quot;Case %d: %d %llu\n&amp;quot;, kase++, res, num);
+    }
+    return 0;
+}
+
+acwing368
+图片转自@xxh的题解
+
+
+#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;cstring&amp;gt;
+#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;algorithm&amp;gt;
+
+using namespace std;
+
+typedef long long LL;
+
+const int N = 100010, M = 600010;
+
+int n, m;
+int h[N], hs[N], e[M], ne[M], w[M], idx;
+int dfn[N], low[N], timestamp;
+int stk[N], top;
+bool in_stk[N];
+int id[N], scc_cnt, size[N];
+int dist[N];
+
+void add(int h[], int a, int b, int c)
+{
+    e[idx] = b, w[idx] = c, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+void tarjan(int u)
+{
+    dfn[u] = low[u] = ++ timestamp;
+    stk[ ++ top] = u, in_stk[u] = true;
+
+    for (int i = h[u]; ~i; i = ne[i])
+    {
+        int j = e[i];
+        if (!dfn[j])
+        {
+            tarjan(j);
+            low[u] = min(low[u], low[j]);
+        }
+        else if (in_stk[j]) low[u] = min(low[u], dfn[j]);
+    }
+
+    if (dfn[u] == low[u])
+    {
+        ++ scc_cnt;
+        int y;
+        do {
+            y = stk[top -- ];
+            in_stk[y] = false;
+            id[y] = scc_cnt;
+            size[scc_cnt] ++ ;
+        } while (y != u);
+    }
+}
+
+int main()
+{
+    scanf(&amp;quot;%d%d&amp;quot;, &amp;amp;n, &amp;amp;m);
+    memset(h, -1, sizeof h);
+    memset(hs, -1, sizeof hs);
+
+    for (int i = 1; i &amp;lt;= n; i ++ ) add(h, 0, i, 1);
+
+    while (m -- )
+    {
+        int t, a, b;
+        scanf(&amp;quot;%d%d%d&amp;quot;, &amp;amp;t, &amp;amp;a, &amp;amp;b);
+        if (t == 1) add(h, b, a, 0), add(h, a, b, 0);
+        else if (t == 2) add(h, a, b, 1);
+        else if (t == 3) add(h, b, a, 0);
+        else if (t == 4) add(h, b, a, 1);
+        else add(h, a, b, 0);
+    }
+
+    tarjan(0);//从超级源点可到所有点
+
+    bool success = true;
+    for (int i = 0; i &amp;lt;= n; i ++ )
+    {
+        for (int j = h[i]; ~j; j = ne[j])
+        {
+            int k = e[j];
+            int a = id[i], b = id[k];
+            if (a == b)
+            {
+                if (w[j] &amp;gt; 0)//只要任意一个SCc里有边权大于0的边，则存在正环
+                {
+                    success = false;
+                    break;
+                }
+            }
+            else 
+                add(hs, a, b, w[j]);
+        }
+        if (!success) 
+            break;
+    }
+
+    if (!success) puts(&amp;quot;-1&amp;quot;);
+    else
+    {
+        for (int i = scc_cnt; i; i -- )
+        {
+            //入度为0的点dist为0
+            for (int j = hs[i]; ~j; j = ne[j])
+            {
+                int k = e[j];
+                dist[k] = max(dist[k], dist[i] + w[j]);
+            }
+        }
+
+        LL res = 0;
+        for (int i = 1; i &amp;lt;= scc_cnt; i ++ ) 
+            res += (LL)dist[i] * size[i];
+
+        printf(&amp;quot;%lld\n&amp;quot;, res);
+    }
+
+    return 0;
+}
+
+P3627
+题意：
+在有向图中找一条路径，使得经过的点的点权和最大（每个点可以经过多次，但只有一次对答案的贡献
+思路：
+首先看见可以重复走路径，那么就想到其实这些路口可以构成一个个强连通分量（因为只要我们能到达一个强连通分量其中某一个点，那么我们就能到达这个强连通分量的其余所有点，根据贪心策略，这样得到的答案保证更优）。那就很容易想到缩点加最长路。
+缩点+spfa最长路code
+推荐博客：
+https://blog.csdn.net/acmmmm/article/details/16361033
+https://blog.csdn.net/sentimental_dog/article/details/53790582
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://caifxh.github.io/post/wu-xiang-tu-you-xiang-tu-de-lian-tong-xing-fu-xi/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+                <!-- 翻页 -->
+                
+                </div>
+                <!--  -->
+                <div class="main-container-middle"></div>
+                <!--  -->
+                <div id="sidebar" class="main-container-right">
+
+                    <!-- 个人信息 -->
+                    
+    <div class="id_card i-card">
+        <div class="id_card-avatar" style="background-image: url(https://caifxh.github.io/images/avatar.png?v=1585882659287)">
+        </div>
+        <h1 class="id_card-title">
+            fxh
+        </h1>
+        <h2 class="id_card-description">
+            菜
+        </h2>
+        <!--  -->
+        <div class="id_card-sns">
+            <!-- github -->
+            
+                    <!-- twitter -->
+                    
+                            <!-- weibo -->
+                            
+                                    <!-- facebook -->
+                                    
+
+        </div>
+    </div>
+    
+
+                        <!-- 公告栏 -->
+                        
+
+                </div>
+            </div>
+
+
+
+            <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://caifxh.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+    <script>
+        $('#sidebar').stickySidebar({
+            topSpacing: 80,
+            // bottomSpacing: 60
+        });
+    </script>
+</body>
+
+</html>

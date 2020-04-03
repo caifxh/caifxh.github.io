@@ -7,7 +7,7 @@
 <title>
     状压dp | fxh
 </title>
-<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1585732375323">
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1585882659287">
 <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
 <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
@@ -28,7 +28,7 @@
     <div class="nav">
         <div class="logo">
             <a href="https://caifxh.github.io">
-                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1585732375323" alt="">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1585882659287" alt="">
             </a>
             <div class="site-title">
                 <h1>
@@ -104,6 +104,11 @@
                         <div class="post-info">
                             <time class="post-time">2020-04-01</time>
                             
+                                <a href="https://caifxh.github.io/tag/hLQFdtGuD/" class="post-tag i-tag
+                            i-tag-other_2">
+                            #DP
+                        </a>
+                                
                         </div>
                         
                                 <div class="post-content">
@@ -123,7 +128,8 @@
 <img src="https://cdn.acwing.com/media/article/image/2020/02/12/9969_861e7ce04d-101.PNG" alt="101.PNG" loading="lazy"><br>
 根据题意，把每一行的状态用二进制的数表示，0代表不在这块放牛，1表示在这一块放牛。首先很容易看到，每一行的状态要符合牧场的硬件条件，即牛必须放在能放牧的方格上。这样就能排除一些状态。另外，牛与牛之间不能相邻，这样就要求每一行中不能存在两个相邻的1，这样也能排除很多状态。然后就是根据上一行的状态转移到当前行的状态的问题了。必须符合不能有两个1在同一列（两只牛也不能竖着相邻）的条件。这样也能去掉一些状态。然后，上一行的所有符合条件的状态的总的方案数就是当前行该状态的方案数。</p>
 <p>（1）初始化所有合法状态，即找没有相邻1的二进制数。用state[]存储合法状态<br>
-（2）枚举不同合法状态之间的转移关系，只要a&amp;b == 0,状态a就可转到b</p>
+（2）枚举不同合法状态之间的转移关系，只要a&amp;b == 0,状态a就可转到b<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/02/9969_730aad4a74-51.png" alt="51.png" loading="lazy"></p>
 <pre><code>#include&lt;iostream&gt;
 #include&lt;vector&gt;
 #include&lt;bitset&gt;
@@ -179,7 +185,9 @@ int main()
 a表示第i行状态，b表示第i-1行状态，c表示第i-2行状态<br>
 要求：<br>
 （1）每行的意大利炮不能相互攻击到，((a &amp; b) || (a &amp; c) || (a &amp; b))==0<br>
-（2）意大利炮只能放在平地上,(g[i] &amp; a )||(g[i-1] &amp; b),无需判断g[i-2]行，若g[i-2]行意大利炮放到了山地上属于不合法状态，一定为0</p>
+（2）意大利炮只能放在平地上,(g[i] &amp; a )||(g[i-1] &amp; b),无需判断g[i-2]行，若g[i-2]行意大利炮放到了山地上属于不合法状态，一定为0<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/02/9969_8df3199474-52.png" alt="52.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/02/9969_923b747474-53.png" alt="53.png" loading="lazy"></p>
 <pre><code>#include&lt;iostream&gt;
 #include&lt;vector&gt;
 using namespace std;

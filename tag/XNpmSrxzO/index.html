@@ -1,0 +1,262 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>
+    比赛 | fxh
+</title>
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1585882659287">
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://caifxh.github.io/styles/main.css">
+<!-- js -->
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://caifxh.github.io/media/js/jquery.sticky-sidebar.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+</head>
+
+<body>
+    <div class="main">
+        <div class="header">
+    <div class="nav">
+        <div class="logo">
+            <a href="https://caifxh.github.io">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1585882659287" alt="">
+            </a>
+            <div class="site-title">
+                <h1>
+                    fxh
+                </h1>
+            </div>
+        </div>
+        <span class="menu-btn fa fa-align-justify"></span>
+        <div class="menu-container">
+            <ul>
+                
+                    
+                            <li>
+                                <a href="/" class="menu">
+                                    首页
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/archives" class="menu">
+                                    归档
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/tags" class="menu">
+                                    标签
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/post/about" class="menu">
+                                    关于
+                                </a>
+                            </li>
+                            
+                                
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $(".menu-btn").click(function() {
+            $(".menu-container").slideToggle();
+        });
+        $(window).resize(function() {
+
+            if (window.matchMedia('(min-width: 960px)').matches) {
+                $(".menu-container").css('display', 'block')
+            } else {
+                $(".menu-container").css('display', 'none')
+            }
+
+        });
+    });
+</script>
+
+            <div id="main-content" class="post-container main-container">
+                <div id="content" class="main-container-left">
+                    
+    <div class="i-card">
+        <b>标签：#
+        比赛</b>
+    </div>
+    
+        
+            <article class="post i-card">
+                <h2 class="post-title">
+                    <a href="https://caifxh.github.io/post/niu-ke-han-jia-di-yi-chang/">
+                        牛客寒假第一场
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2020-04-02</time>
+                    
+                        <a href="https://caifxh.github.io/tag/XNpmSrxzO/" class="post-tag i-tag
+                            i-tag-other_2">
+            #比赛
+        </a>
+                        
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            G
+eli拿到了一个仅由小写字母组成的字符串。
+她想截取一段连续子串，这个子串包含至少k个相同的某个字母。
+她想知道，子串的长度最小值是多少？
+题意
+相当于就是找字符串当中拥有k个相同字母的最小长度。
+直接模拟，通过二维数组，遇到个字母把在字符串的位置它放到对应字母的后面，然后进行判断，不断更新ans的最小值
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;vector&amp;gt;
+using namespace std;
+int n,k;
+const int INF=0x3f3f3f3f;
+int ans=INF;
+vector&amp;lt;int&amp;gt; v[26];
+
+int main()
+{
+    cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;k;
+	string str;
+	cin&amp;gt;&amp;gt;str;
+	
+	for(int i=0;i&amp;lt;str.size();i++)
+	{
+		int x=str[i]-&#39;a&#39;;
+		v[x].push_back(i);
+		int len=v[x].size();
+		if(len &amp;gt;= k)
+			ans=min(ans,i-v[x][len-k]+1);
+	}
+	
+	if(ans == INF)
+		cout&amp;lt;&amp;lt;-1&amp;lt;&amp;lt;endl;
+	else
+		cout&amp;lt;&amp;lt;ans&amp;lt;&amp;lt;endl;
+
+    return 0;
+}
+
+A
+
+题解
+可以把面积为 1 的“好三角形”分为两类分开统计：两条边和两个坐标轴平行；只有一条边和某个坐标轴平行。
+
+对于第二种情况，可以分别统计底边为 2 、高为 1 和底边为 1 、高为 2 的情况。要注意底边靠近边界时的特殊讨论。
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+typedef long long LL;
+const int mod=1e9+7;
+
+int main()
+{
+	LL n,m;
+	cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m;
+	
+	LL ans=4*((n-2)*(m-1)%mod + (m-2)*(n-1)%mod)%mod;
+	
+	ans=(ans+2*(n-2)*(n-2)%mod*(m-1)%mod+2*(m-2)*(m-2)%mod*(n-1)%mod)%mod;
+	
+	ans=(ans+2*(n-1)*(n-2)%mod*(m-2)%mod+2*(m-1)*(m-2)%mod*(n-2)%mod)%mod;
+	
+	cout&amp;lt;&amp;lt;ans&amp;lt;&amp;lt;endl;
+	
+	return 0;
+}
+
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://caifxh.github.io/post/niu-ke-han-jia-di-yi-chang/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+                <!-- 翻页 -->
+                
+                </div>
+                <!--  -->
+                <div class="main-container-middle"></div>
+                <!--  -->
+                <div id="sidebar" class="main-container-right">
+
+                    <!-- 个人信息 -->
+                    
+    <div class="id_card i-card">
+        <div class="id_card-avatar" style="background-image: url(https://caifxh.github.io/images/avatar.png?v=1585882659287)">
+        </div>
+        <h1 class="id_card-title">
+            fxh
+        </h1>
+        <h2 class="id_card-description">
+            菜
+        </h2>
+        <!--  -->
+        <div class="id_card-sns">
+            <!-- github -->
+            
+                    <!-- twitter -->
+                    
+                            <!-- weibo -->
+                            
+                                    <!-- facebook -->
+                                    
+
+        </div>
+    </div>
+    
+
+                        <!-- 公告栏 -->
+                        
+
+                </div>
+            </div>
+
+
+
+            <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://caifxh.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+    <script>
+        $('#sidebar').stickySidebar({
+            topSpacing: 80,
+            // bottomSpacing: 60
+        });
+    </script>
+</body>
+
+</html>
