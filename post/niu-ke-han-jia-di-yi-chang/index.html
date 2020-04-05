@@ -7,7 +7,7 @@
 <title>
     牛客寒假第一场 | fxh
 </title>
-<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1585904892869">
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1586059488314">
 <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
 <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
@@ -28,7 +28,7 @@
     <div class="nav">
         <div class="logo">
             <a href="https://caifxh.github.io">
-                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1585904892869" alt="">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1586059488314" alt="">
             </a>
             <div class="site-title">
                 <h1>
@@ -181,6 +181,129 @@ int main()
 	return 0;
 }
 </code></pre>
+<p><a href="https://ac.nowcoder.com/acm/contest/3002/F">F</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/03/9969_5281369675-21.PNG" alt="21.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/03/9969_60826a8075-22.PNG" alt="22.PNG" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+const int N=1e5+10;
+typedef long long LL;
+vector&lt;int&gt; g[N];
+int p[N],cnt[N];
+int son[N];//子节点所处连通块中白点数目 
+LL sum[N];
+char s[N];
+int n;
+LL ans;
+
+int find(int x)
+{
+	if(x != p[x])
+		p[x]=find(p[x]);
+	return p[x];
+}
+
+void merge(int a,int b)
+{
+	int pa=find(a);
+	int pb=find(b);
+	if(pa != pb)
+	{
+		p[pa]=pb;
+		cnt[pb]+=cnt[pa];
+	}
+}
+
+int main()
+{
+	cin&gt;&gt;n&gt;&gt;s+1;
+	
+	for(int i=1;i&lt;=n;i++)
+		p[i]=i,cnt[i]=1;
+		
+	for(int i=1;i&lt;n;i++)
+	{
+		int a,b;
+		cin&gt;&gt;a&gt;&gt;b;
+		g[a].push_back(b);
+		g[b].push_back(a);
+		if(s[a] == 'W' &amp;&amp; s[b] =='W')
+			merge(a,b);	
+	}	
+	
+	for(int i=1;i&lt;=n;i++)
+		if(s[i] == 'B')
+		{
+			int tot=0;
+			for(int j=0;j&lt;g[i].size();j++)
+				if(s[g[i][j]] == 'W')
+					son[++tot]=cnt[find(g[i][j])];
+			
+			for(int j=1;j&lt;=tot;j++)
+				sum[j]=sum[j-1]+son[j];
+			
+			ans+=sum[tot];//黑点为端点 
+			for(int j=1;j&lt;=tot;j++)
+				ans+=son[j]*sum[j-1];//黑点为中间点 
+		}
+		
+	printf(&quot;%lld\n&quot;,ans);
+	
+	return 0;
+}
+</code></pre>
+<h4 id="树形dp解法">树形dp解法</h4>
+<p>dp[i][0]表示i的子孙节点到i路径上无黑点的个数，dp[i][1]表示i的子孙节点到i路径上有一个黑点的个数。</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+typedef long long LL;
+const int N=1e5+10;
+LL f[N][2];
+LL ans;
+vector&lt;int&gt; g[N];
+char s[N];
+int n;
+
+void dfs(int u,int fa)
+{
+	if(s[u] == 'W') f[u][0]=1,f[u][1]=0;
+	else f[u][0]=0,f[u][1]=1;
+	
+	for(int i=0;i&lt;g[u].size();i++)
+	{
+		int j=g[u][i];
+		if(j == fa) continue;
+		dfs(j,u);
+		ans+=f[u][0]*f[j][1]+f[u][1]*f[j][0];
+		if(s[u] == 'W') f[u][0]+=f[j][0],f[u][1]+=f[j][1];
+		else f[u][0]=0,f[u][1]+=f[j][0];
+	}
+}
+
+int main()
+{
+	cin&gt;&gt;n&gt;&gt;s+1;
+	for(int i=1;i&lt;n;i++)
+	{
+		int x,y;
+		cin&gt;&gt;x&gt;&gt;y;
+		g[x].push_back(y);
+		g[y].push_back(x);
+	}
+	
+	dfs(1,-1);
+	
+	printf(&quot;%lld\n&quot;,ans);
+	
+	return 0;
+}
+</code></pre>
 
                                 </div>
                     </article>
@@ -203,32 +326,54 @@ int main()
                 <!-- right -->
                 <div id="sidebar" class="main-container-right">
                     
-                                <!-- id-card -->
-                                
-    <div class="id_card i-card">
-        <div class="id_card-avatar" style="background-image: url(https://caifxh.github.io/images/avatar.png?v=1585904892869)">
-        </div>
-        <h1 class="id_card-title">
-            fxh
-        </h1>
-        <h2 class="id_card-description">
-            菜
-        </h2>
-        <!--  -->
-        <div class="id_card-sns">
-            <!-- github -->
-            
-                    <!-- twitter -->
-                    
-                            <!-- weibo -->
-                            
-                                    <!-- facebook -->
-                                    
+                        <!-- toc -->
+                        
+    <div class="toc-card i-card ">
+        <div class="toc-title i-card-title">目录</div>
+        <div class="toc-content">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E6%A0%91%E5%BD%A2dp%E8%A7%A3%E6%B3%95">树形dp解法</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
         </div>
+        <script>
+            function locateCatelogList() {
+                /*获取文章目录集合,可通过:header过滤器*/
+                var alis = $('.post-content :header');
+                /*获取侧边栏目录列表集合**/
+                var sidebar_alis = $('.markdownIt-TOC a');
+                /*获取滚动条到顶部的距离*/
+                var scroll_height = $(window).scrollTop();
+                for (var i = 0; i < alis.length; i++) {
+                    /*获取锚点集合中的元素分别到顶点的距离*/
+                    var a_height = $(alis[i]).offset().top;
+                    if (a_height < scroll_height) {
+                        /*高亮显示*/
+                        sidebar_alis.removeClass('on');
+                        $(sidebar_alis[i]).addClass('on');
+                    }
+                }
+            }
+            $(function() {
+                /*绑定滚动事件 */
+                $(window).bind('scroll', locateCatelogList);
+            });
+        </script>
     </div>
     
-                                    
+                            
 
                 </div>
 

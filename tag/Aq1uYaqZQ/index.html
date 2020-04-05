@@ -7,7 +7,7 @@
 <title>
     图论 | fxh
 </title>
-<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1585904892869">
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1586059488314">
 <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
 <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
@@ -27,7 +27,7 @@
     <div class="nav">
         <div class="logo">
             <a href="https://caifxh.github.io">
-                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1585904892869" alt="">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1586059488314" alt="">
             </a>
             <div class="site-title">
                 <h1>
@@ -104,6 +104,305 @@
         
             <article class="post i-card">
                 <h2 class="post-title">
+                    <a href="https://caifxh.github.io/post/ou-la-lu-jing/">
+                        欧拉路径
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2020-04-04</time>
+                    
+                        <a href="https://caifxh.github.io/tag/Aq1uYaqZQ/" class="post-tag i-tag
+                            i-tag-other_3">
+            #图论
+        </a>
+                        
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            欧拉路
+通过图（无向图或有向图）中所有边一次且仅一次行遍图中所有顶点的通路称为欧拉通路，通过图中所有边一次且仅一次行遍所有顶点的回路称为欧拉回路。具有欧拉回路的图称为欧拉图（Euler Graph），具有欧拉通路而无欧拉回路的图称为半欧拉图。
+
+
+
+
+(注意：这里说有向图连通，说的是有向图是弱连通图。即把有向图中的边变成无向边，只要该图连通，那么原有向图即是弱连通图。实际中可用并查集判断是否弱连通)
+
+
+
+• 欧拉回路的求解方法主要有两种：
+
+DFS搜索
+Fleury算法
+
+用 DFS 搜索思想求解欧拉回路的思路为：
+
+利用欧拉定理判断出一个图存在欧拉通路或欧拉回路。
+选择一个正确的起始顶点，用 DFS 算法遍历所有的边（每条边
+只遍历一次），遇到走不通就回退。 • 在搜索前进方向上将遍历过的边按顺序记录下来。
+这组边的排列就组成了一条欧拉通路或欧拉回路。
+
+例题
+给定 n 张骨牌，每张骨牌有左右两个点数（从 1 到 6）。问能不能
+通过交换骨牌的顺序和交换左右两个点数，使得任意两个相邻骨牌的
+相邻段为相等的数字。
+原始： (1 2)(2 4)(2 4)(6 4)(2 1)
+重排后： (4 2)(2 1)(1 2)(2 4)(4 6)
+本题可以转化成欧拉回路或欧拉通路的求解问题。
+
+首先要构造一个图？
+每张骨牌当一个点？
+如何解决交换骨牌内部两个点数？
+
+图建好之后，先判断是否存在欧拉通路或欧拉回路。
+总结：存在 ➔ 选择正确的起点 ➔ 6 ➔ 开始 DFS
+acwing1123
+我们将这个图看成有向图，对于每输入一组数据加两条有向边，需要每条边都至少走一遍
+我们先回想一下存在有向图的欧拉路径的充分必要条件
+
+所有点的入度都等于出度
+除了两个点以外的点入度等于出度，
+
+这两个点一个 入度 = 出度 + 1，另一个 入度 = 出度 - 1
+因此，我们考虑每加一条边，每个点的入度和出度都加1
+所以，每个点的入度都一定等于出度,符合上述的第一条
+故这个图存在欧拉路径，并且可以选任意点为起点
+所以我们只需统计所有的边的长度总和，跟据20km/h 算出时间即可
+#include &amp;lt;cstring&amp;gt;
+#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;algorithm&amp;gt;
+#include &amp;lt;cmath&amp;gt;
+
+using namespace std;
+
+int main()
+{
+    double x1, y1, x2, y2;
+    cin &amp;gt;&amp;gt; x1 &amp;gt;&amp;gt; y1;
+
+    double sum = 0;
+    while (cin &amp;gt;&amp;gt; x1 &amp;gt;&amp;gt; y1 &amp;gt;&amp;gt; x2 &amp;gt;&amp;gt; y2)
+    {
+        double dx = x1 - x2;
+        double dy = y1 - y2;
+        sum += sqrt(dx * dx + dy * dy) * 2;
+    }
+
+    int minutes = round(sum / 1000 / 20 * 60);
+    int hours = minutes / 60;
+    minutes %= 60;
+
+    printf(&amp;quot;%d:%02d\n&amp;quot;, hours, minutes);
+
+    return 0;
+}
+
+acwing1124
+无向图的欧拉路径&amp;amp;欧拉回路裸题
+#include&amp;lt;iostream&amp;gt;
+using namespace std;
+const int N=510;
+int n=500,m;
+int g[N][N];
+int ans[1100];
+int cnt;
+int d[N];
+
+void dfs(int u)
+{
+    for(int i=1;i&amp;lt;=n;i++)//从小到大枚举，字典序最小
+    {
+        if(g[u][i])
+        {
+            g[u][i]--,g[i][u]--;
+            dfs(i);
+        }
+    }
+    
+    ans[cnt++]=u;
+}
+
+int main()
+{
+    cin&amp;gt;&amp;gt;m;
+    
+    int l=500,r=1;
+    while(m--)
+    {
+        int a,b;
+        cin&amp;gt;&amp;gt;a&amp;gt;&amp;gt;b;
+        l=min(l,min(a,b));
+        r=max(r,max(a,b));
+        g[a][b]++,g[b][a]++;
+        d[a]++,d[b]++;
+    }
+    
+    int start=l;
+    for(int i=l;i&amp;lt;=r;i++)
+    {
+        if(d[i] % 2)
+        {
+            start=i;
+            break;
+        }
+    }
+    
+    dfs(start);//欧拉回路从哪开始都可以搜，欧拉路要从奇点开始
+    
+    for(int i=cnt-1;i&amp;gt;=0;i--)//逆序输出
+        printf(&amp;quot;%d\n&amp;quot;,ans[i]);
+    return 0;
+}
+
+acwing1185
+有向图，首尾连单词，可用DFS和并查集判断连通性
+#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;cstring&amp;gt;
+using namespace std;
+const int N = 26, L = 1005;
+int n, cnt, g[N][N], in[N], out[N];
+char s[L];
+
+void dfs(int u) {
+    for (int i = 0; i &amp;lt; 26; i++) {
+        if(g[u][i]) {
+            cnt++;
+            g[u][i] --;
+            dfs(i);
+        }
+    }
+}
+int main() {
+    int T; scanf(&amp;quot;%d&amp;quot;, &amp;amp;T);
+    while(T--) {
+        cnt = 0;
+        memset(g, 0, sizeof g);
+        memset(in, 0, sizeof in);
+        memset(out, 0, sizeof out);
+        scanf(&amp;quot;%d&amp;quot;, &amp;amp;n);
+        for (int i = 0; i &amp;lt; n; i++) {
+            scanf(&amp;quot;%s&amp;quot;, s);
+            int u = s[0] - &#39;a&#39;, v = s[strlen(s) - 1] - &#39;a&#39;;
+            g[u][v]++;
+            out[u]++, in[v]++;
+        }
+
+        bool ok = true;
+        int s = 0, t = 0;
+        for (int i = 0; i &amp;lt; 26; i++) {
+            if(in[i] != out[i]) {
+                if(in[i] == out[i] + 1) t ++;
+                else if(in[i] + 1 == out[i]) s++;
+                else { ok = false; break; }
+            }
+        }
+
+
+        if(!(!s &amp;amp;&amp;amp; !t || (s == 1 &amp;amp;&amp;amp; t == 1))) ok = false;
+
+        s = 0;
+        while(!out[s]) s++;
+        for (int i = 0; i &amp;lt; 26; i++)
+            if(in[i] + 1 == out[i]) { s = i; break; }
+
+        dfs(s);
+
+        if(cnt &amp;lt; n) ok = false;
+        puts(ok ? &amp;quot;Ordering is possible.&amp;quot; : &amp;quot;The door cannot be opened.&amp;quot;);
+    }
+    return 0;
+}
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int N=30;
+int n;
+int din[N], dout[N], p[N];
+bool st[N];
+
+
+int find(int x)
+{
+    if (p[x] != x) p[x] = find(p[x]);
+    return p[x];
+}
+
+int main()
+{
+    int t;
+    scanf(&amp;quot;%d&amp;quot;,&amp;amp;t);
+    while(t--)
+    {
+        scanf(&amp;quot;%d&amp;quot;,&amp;amp;n);
+        memset(din,0,sizeof din);
+        memset(dout,0,sizeof dout);
+        memset(st,0,sizeof st);
+        for(int i=0;i&amp;lt;26;i++)
+            p[i]=i;
+        
+        for(int i=0;i&amp;lt;n;i++)
+        {
+            char str[1010];
+            scanf(&amp;quot;%s&amp;quot;,str);
+            int len=strlen(str);
+            int a=str[0]-&#39;a&#39;,b=str[len-1]-&#39;a&#39;;
+            st[a]=st[b]=true;
+            dout[a]++,din[b]++;
+            p[find(a)]=find(b);
+        }
+        
+        int start=0,end=0;
+        bool success=true;
+        for(int i=0;i&amp;lt;26;i++)
+            if(din[i] != dout[i])
+            {
+                if(din[i] == dout[i] + 1)
+                    end++;
+                else if(din[i] + 1 == dout[i])
+                    start++;
+                else
+                {
+                    success=false;
+                    break;
+                }
+            }
+            
+        if(!(!start &amp;amp;&amp;amp; !end ||start == 1 &amp;amp;&amp;amp; end == 1))
+            success=false;
+        int rep = -1;
+        for (int i = 0; i &amp;lt; 26; i ++ )
+            if (st[i])
+            {
+                if (rep == -1) rep = find(i);
+                else if (rep != find(i))
+                {
+                    success = false;
+                    break;
+                }
+            }
+
+        if (success) puts(&amp;quot;Ordering is possible.&amp;quot;);
+        else puts(&amp;quot;The door cannot be opened.&amp;quot;);
+
+    }
+    return 0;
+}
+
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://caifxh.github.io/post/ou-la-lu-jing/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+            <article class="post i-card">
+                <h2 class="post-title">
                     <a href="https://caifxh.github.io/post/er-fen-tu/">
                         二分图
                     </a>
@@ -112,7 +411,7 @@
                     <time class="post-time">2020-04-03</time>
                     
                         <a href="https://caifxh.github.io/tag/Aq1uYaqZQ/" class="post-tag i-tag
-                            i-tag-other_1">
+                            i-tag-primary">
             #图论
         </a>
                         
@@ -903,7 +1202,7 @@ https://vjudge.net/contest/249592#overview
                     <time class="post-time">2020-04-03</time>
                     
                         <a href="https://caifxh.github.io/tag/Aq1uYaqZQ/" class="post-tag i-tag
-                            i-tag-">
+                            i-tag-success">
             #图论
         </a>
                         
@@ -1437,7 +1736,7 @@ int main()
                     <time class="post-time">2020-04-01</time>
                     
                         <a href="https://caifxh.github.io/tag/Aq1uYaqZQ/" class="post-tag i-tag
-                            i-tag-other_1">
+                            i-tag-other_4">
             #图论
         </a>
                         
@@ -2904,7 +3203,7 @@ https://blog.csdn.net/sentimental_dog/article/details/53790582
                     <!-- 个人信息 -->
                     
     <div class="id_card i-card">
-        <div class="id_card-avatar" style="background-image: url(https://caifxh.github.io/images/avatar.png?v=1585904892869)">
+        <div class="id_card-avatar" style="background-image: url(https://caifxh.github.io/images/avatar.png?v=1586059488314)">
         </div>
         <h1 class="id_card-title">
             fxh

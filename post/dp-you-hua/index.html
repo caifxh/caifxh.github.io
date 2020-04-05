@@ -7,7 +7,7 @@
 <title>
     DP其他优化 | fxh
 </title>
-<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1585904892869">
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1586059488314">
 <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
 <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
@@ -28,7 +28,7 @@
     <div class="nav">
         <div class="logo">
             <a href="https://caifxh.github.io">
-                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1585904892869" alt="">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1586059488314" alt="">
             </a>
             <div class="site-title">
                 <h1>
@@ -105,7 +105,7 @@
                             <time class="post-time">2020-04-02</time>
                             
                                 <a href="https://caifxh.github.io/tag/hLQFdtGuD/" class="post-tag i-tag
-                            i-tag-other_3">
+                            i-tag-success">
                             #DP
                         </a>
                                 
@@ -574,6 +574,150 @@ int main()
 	return 0;
 }
 </code></pre>
+<h4 id="数据结构优化">数据结构优化</h4>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=4991">hdu4991</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/04/9969_6d75c96076-25.png" alt="25.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/03/9969_b283c99675-23.PNG" alt="23.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/03/9969_b4bed10675-24.PNG" alt="24.PNG" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+const int N=10010,M=110,mod=123456789;
+int a[N],b[N];
+int f[N][M];
+int n,m,len;
+
+int lowbit(int x)
+{
+	return x&amp;-x;
+}
+
+void add(int x,int j,int val)
+{
+	for(int i=x;i&lt;=len;i+=lowbit(i))
+		f[i][j]=(f[i][j]+val)%mod;	
+}
+
+int query(int x,int j)
+{
+	int res=0;
+	for(int i=x;i;i-=lowbit(i))
+		res=(res+f[i][j])%mod;
+	return res;
+}
+
+int main()
+{
+	while(~scanf(&quot;%d%d&quot;,&amp;n,&amp;m))
+	{
+		for(int i=1;i&lt;=n;i++)
+			scanf(&quot;%d&quot;,&amp;a[i]),b[i]=a[i];
+		
+		memset(f,0,sizeof f);
+		sort(b+1,b+n+1);
+		len=unique(b+1,b+n+1)-b-1;
+		for(int i=1;i&lt;=n;i++)
+		{
+			int pos=lower_bound(b+1,b+len+1,a[i])-b;
+			add(pos,1,1);
+			for(int j=2;j&lt;=m;j++)
+			{
+				int sum=query(pos-1,j-1);
+				add(pos,j,sum);
+			}
+		}
+		
+		printf(&quot;%d\n&quot;,query(len,m));
+	}
+	return 0;
+}
+</code></pre>
+<p><a href="https://vjudge.net/problem/POJ-1769">poj1769</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/04/9969_2cdfb3ba76-26.PNG" alt="26.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/04/9969_252e951e76-27.png" alt="27.png" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+#define lc u&lt;&lt;1
+#define rc u&lt;&lt;1|1
+const int N=50010,M=500010,INF=0x3f3f3f3f;
+struct Node
+{
+	int l,r;
+	int val;
+}tr[4*M];
+int a[M],b[M];
+int n,m;
+
+void pushup(int u)
+{
+	tr[u].val=min(tr[lc].val,tr[rc].val);
+}
+
+void build(int u,int l,int r)
+{
+	tr[u].l=l,tr[u].r=r;
+	if(l == r)
+	{
+		if(l == 1) tr[u].val=0;
+		else tr[u].val=INF;
+		return;
+	}
+	int mid=l+r&gt;&gt;1;
+	build(lc,l,mid);
+	build(rc,mid+1,r);
+	pushup(u);
+}
+
+void modify(int u,int x,int v)
+{
+	if(tr[u].l == tr[u].r)
+	{
+		tr[u].val=v;
+		return;
+	}
+	
+	int mid=tr[u].l+tr[u].r&gt;&gt;1;
+	if(x&lt;=mid) modify(lc,x,v);
+	else modify(rc,x,v);
+	pushup(u);
+}
+
+int query(int u,int l,int r)
+{
+	if(l &lt;= tr[u].l &amp;&amp; tr[u].r &lt;= r)
+		return tr[u].val;
+	int mid=tr[u].l+tr[u].r&gt;&gt;1;
+	int res=INF;
+	if(l&lt;=mid) res=min(res,query(lc,l,r));
+	if(r&gt;mid) res=min(res,query(rc,l,r));
+	return res;
+}
+
+int main()
+{
+	cin&gt;&gt;n&gt;&gt;m;
+	for(int i=0;i&lt;m;i++)
+		scanf(&quot;%d%d&quot;,&amp;a[i],&amp;b[i]);
+	
+	build(1,1,n);
+	
+	for(int i=0;i&lt;m;i++)
+	{
+		int v1=query(1,a[i],b[i])+1;
+		int v2=query(1,b[i],b[i]);
+		modify(1,b[i],min(v1,v2));
+	}
+	
+	printf(&quot;%d\n&quot;,query(1,n,n));
+	
+	return 0;
+}
+</code></pre>
 
                                 </div>
                     </article>
@@ -612,6 +756,7 @@ int main()
 <li><a href="#%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95%E4%BC%98%E5%8C%96">矩阵乘法优化</a></li>
 <li><a href="#%E5%89%8D%E7%BC%80%E6%95%B0%E7%BB%84%E4%BC%98%E5%8C%96">前缀数组优化</a></li>
 <li><a href="#%E4%BE%8B%E9%A2%98">例题</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%BC%98%E5%8C%96">数据结构优化</a></li>
 </ul>
 </li>
 </ul>

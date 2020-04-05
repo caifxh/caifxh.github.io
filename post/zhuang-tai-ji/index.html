@@ -1,0 +1,368 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>
+    状态机 | fxh
+</title>
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1586059488314">
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://caifxh.github.io/styles/main.css">
+<!-- js -->
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://caifxh.github.io/media/js/jquery.sticky-sidebar.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+        
+</head>
+
+<body>
+    <div class="main">
+        <div class="header">
+    <div class="nav">
+        <div class="logo">
+            <a href="https://caifxh.github.io">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1586059488314" alt="">
+            </a>
+            <div class="site-title">
+                <h1>
+                    fxh
+                </h1>
+            </div>
+        </div>
+        <span class="menu-btn fa fa-align-justify"></span>
+        <div class="menu-container">
+            <ul>
+                
+                    
+                            <li>
+                                <a href="/" class="menu">
+                                    首页
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/archives" class="menu">
+                                    归档
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/tags" class="menu">
+                                    标签
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/post/about" class="menu">
+                                    关于
+                                </a>
+                            </li>
+                            
+                                
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $(".menu-btn").click(function() {
+            $(".menu-container").slideToggle();
+        });
+        $(window).resize(function() {
+
+            if (window.matchMedia('(min-width: 960px)').matches) {
+                $(".menu-container").css('display', 'block')
+            } else {
+                $(".menu-container").css('display', 'none')
+            }
+
+        });
+    });
+</script>
+
+            <div id="main-content" class="post-detail main-container">
+                <!-- left -->
+                <div id="content" class="main-container-left">
+                    <article class="post i-card">
+                        <h2 class="post-title">
+                            状态机
+                        </h2>
+                        <div class="post-info">
+                            <time class="post-time">2020-04-05</time>
+                            
+                                <a href="https://caifxh.github.io/tag/hLQFdtGuD/" class="post-tag i-tag
+                            i-tag-banana">
+                            #DP
+                        </a>
+                                
+                        </div>
+                        
+                                <div class="post-content">
+                                    <p><a href="https://www.acwing.com/problem/content/1051/">acwing1049</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/05/9969_6f0c7d4276-33.PNG" alt="33.PNG" loading="lazy"><br>
+不合法状态按照问题的性质初始化为INF(求最小值)/-(求最大值)</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+using namespace std;
+const int N=100010,INF=0x3f3f3f3f;
+int w[N];
+int f[N][2];
+
+int main()
+{
+    int t;
+    cin&gt;&gt;t;
+    while(t--)
+    {
+        int n;
+        scanf(&quot;%d&quot;,&amp;n);
+        for(int i=1;i&lt;=n;i++)
+            scanf(&quot;%d&quot;,&amp;w[i]);
+        
+        f[0][0]=0,f[0][1]=-INF;
+        for(int i=1;i&lt;=n;i++)
+        {
+            f[i][0]=max(f[i-1][0],f[i-1][1]);
+            f[i][1]=f[i-1][0]+w[i];
+        }
+        printf(&quot;%d\n&quot;,max(f[n][0],f[n][1]));
+    }
+    return 0;
+}
+</code></pre>
+<p><a href="https://www.acwing.com/problem/content/description/1059/">acwing1057</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/04/9969_1479fc8076-29.PNG" alt="29.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/05/9969_f409bd6e76-31.PNG" alt="31.PNG" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+using namespace std;
+const int N=100010,M=110;
+int w[N];
+int f[N][M][2];
+
+int main()
+{
+    int n,k;
+    cin&gt;&gt;n&gt;&gt;k;
+    
+    for(int i=1;i&lt;=n;i++)
+        cin&gt;&gt;w[i];
+    memset(f,-0x3f,sizeof f);
+    for(int i=0;i&lt;=n;i++) f[i][0][0]=0;
+    for(int i=1;i&lt;=n;i++)
+        for(int j=1;j&lt;=k;j++)
+        {
+            f[i][j][0]=max(f[i-1][j][0],f[i-1][j][1]+w[i]);
+            f[i][j][1]=max(f[i-1][j][1],f[i-1][j-1][0]-w[i]);
+        }
+    int res=0;
+    for(int i=0;i&lt;=k;i++)
+        res=max(res,f[n][i][0]);
+    cout&lt;&lt;res&lt;&lt;endl;
+    return 0;
+}
+</code></pre>
+<p><a href="https://www.acwing.com/problem/content/description/1060/">acwing1058</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/05/9969_0cd946fa76-32.PNG" alt="32.PNG" loading="lazy"></p>
+<pre><code>#include &lt;cstring&gt;
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+const int N = 100010, INF = 0x3f3f3f3f;
+
+int n;
+int w[N];
+int f[N][3];
+
+int main()
+{
+    scanf(&quot;%d&quot;, &amp;n);
+
+    for (int i = 1; i &lt;= n; i ++ ) scanf(&quot;%d&quot;, &amp;w[i]);
+
+    f[0][0] = f[0][1] = -INF, f[0][2] = 0;
+    for (int i = 1; i &lt;= n; i ++ )
+    {
+        f[i][0] = max(f[i - 1][0], f[i - 1][2] - w[i]);
+        f[i][1] = f[i - 1][0] + w[i];
+        f[i][2] = max(f[i - 1][2], f[i - 1][1]);
+    }
+
+    printf(&quot;%d\n&quot;, max(f[n][1], f[n][2]));
+
+    return 0;
+}
+</code></pre>
+<p><a href="https://vjudge.net/problem/POJ-3401">poj3401</a><br>
+最近，lxhgww沉迷于股票，经过几天的研究，他发现了一些规律的模式。<br>
+他预测未来T天的股票市场。 在第i天，您可以以APi的价格购买一只股票或卖出一只股票以获得BPi。<br>
+还有其他一些限制，即在第一天就可以购买最多ASi股票，最多可以卖出BSi股票。两个交易日的间隔应大于W天。 也就是说，假设您在第i天进行了交易（<strong>任何买卖股票都被视为一项交易</strong>），那么下一个交易日必须在第（i + W + 1）天或更晚的时间进行。而且，任何时候最多只能拥有MaxP股票。<br>
+在第一天之前，lxhgww已经拥有无限的资金，但是没有股票，当然，他希望从股市中赚到尽可能多的钱。 所以问题来了，他最多只能赚多少钱？<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/05/9969_d66ad1ba76-34.png" alt="34.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/05/9969_f1520dcc76-35.PNG" alt="35.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/05/9969_4584aa0276-36.png" alt="36.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/05/9969_79e2bd3476-37.png" alt="37.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/05/9969_7d04775a76-38.PNG" alt="38.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/05/9969_d9bc776276-40.PNG" alt="40.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/05/9969_dd41f1f076-39.png" alt="39.png" loading="lazy"><br>
+动态规划方程：<br>
+1.不买不卖。dp[i][j]=max(dp[i-1][j],dp[i][j]);<br>
+2.买一些股票。dp[i][j]=max(dp[i-1][k]-(j-k)*ap[i]);(0&lt;=k&lt;=j&lt;=Maxp)<br>
+3.卖一些股票。dp[i][j]=max(dp[i-1][k]+(k-j)*bp[i]);(0&lt;=j&lt;=k&lt;=Maxp)<br>
+注意：<br>
+1.把所有未定义的状态都设置为-INF，1~w+1天得初始化，因为这些天不能有前面的状态推出来，初始化为对应购买多少股票所减去的钱数，因为一开始只有买，不能卖。<br>
+2.循环的递减还是递增问题，跟当前要访问的状态有关。</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstring&gt;
+using namespace std;
+const int N=2010;
+int f[N][N];
+int ap[N],bp[N];//买入价格，卖出价格 
+int as[N],bs[N];//买入限制，卖出限制
+int q[N];
+int n,m,w;
+
+int main()
+{
+    int T;
+    cin&gt;&gt;T;
+    while(T--)
+    {
+        scanf(&quot;%d%d%d&quot;,&amp;n,&amp;m,&amp;w);
+        for(int i=1;i&lt;=n;i++)
+            scanf(&quot;%d%d%d%d&quot;,&amp;ap[i],&amp;bp[i],&amp;as[i],&amp;bs[i]);
+    
+        memset(f,-0x3f,sizeof f);
+        f[0][0]=0;
+        for(int i=1;i&lt;=w+1;i++)
+            for(int j=0;j&lt;=as[i];j++)
+                f[i][j]=-j*ap[i];
+        
+        for(int i=1;i&lt;=n;i++)
+        {
+            for(int j=0;j&lt;=m;j++)
+                f[i][j]=max(f[i][j],f[i-1][j]);//没有交易
+            if(i &lt;= w+1) continue;
+            int hh=0,tt=-1;
+            for(int j=0;j&lt;=m;j++)
+            {
+                if(hh &lt;= tt &amp;&amp; j-as[i] &gt; q[hh]) 
+                    hh++;
+                
+                while(hh&lt;=tt &amp;&amp; f[i-w-1][j]+j*ap[i] &gt;= f[i-w-1][q[tt]]+q[tt]*ap[i])
+                    tt--;
+                q[++tt]=j;
+                f[i][j]=max(f[i][j],f[i-w-1][q[hh]]+q[hh]*ap[i]-j*ap[i]);//买入 
+             } 
+             
+            hh=0,tt=-1;
+            for(int j=m;j&gt;=0;j--)
+            {
+                if(hh &lt;= tt &amp;&amp; j+bs[i] &lt; q[hh]) 
+                    hh++;
+                
+                while(hh&lt;=tt &amp;&amp; f[i-w-1][j]+j*bp[i] &gt;= f[i-w-1][q[tt]]+q[tt]*bp[i])
+                    tt--;
+                q[++tt]=j;
+                f[i][j]=max(f[i][j],f[i-w-1][q[hh]]+q[hh]*bp[i]-j*bp[i]);//卖出 
+             } 
+        }
+        printf(&quot;%d\n&quot;,f[n][0]);
+    }
+    return 0;
+ } 
+</code></pre>
+
+                                </div>
+                    </article>
+                    <!--  -->
+                    
+                        <div class="next-post">
+                            <div class="next">下一篇</div>
+                            <a href="https://caifxh.github.io/post/ou-la-lu-jing/">
+                                <h3 class="post-title">
+                                    欧拉路径
+                                </h3>
+                            </a>
+                        </div>
+                        
+                            <div id="disqus_thread"></div>
+                            <div id="gitalk-container"></div>
+                </div>
+                <!-- middle -->
+                <div class="main-container-middle"></div>
+                <!-- right -->
+                <div id="sidebar" class="main-container-right">
+                    
+                                <!-- id-card -->
+                                
+    <div class="id_card i-card">
+        <div class="id_card-avatar" style="background-image: url(https://caifxh.github.io/images/avatar.png?v=1586059488314)">
+        </div>
+        <h1 class="id_card-title">
+            fxh
+        </h1>
+        <h2 class="id_card-description">
+            菜
+        </h2>
+        <!--  -->
+        <div class="id_card-sns">
+            <!-- github -->
+            
+                    <!-- twitter -->
+                    
+                            <!-- weibo -->
+                            
+                                    <!-- facebook -->
+                                    
+
+        </div>
+    </div>
+    
+                                    
+
+                </div>
+
+
+
+
+            </div>
+
+
+            <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://caifxh.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+
+    </div>
+    <script>
+        $('#sidebar').stickySidebar({
+            topSpacing: 80,
+            // bottomSpacing: 60
+        });
+    </script>
+    
+</body>
+
+</html>

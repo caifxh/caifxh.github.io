@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://caifxh.github.io</id>
     <title>fxh</title>
-    <updated>2020-04-03T09:08:15.625Z</updated>
+    <updated>2020-04-05T04:05:34.496Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://caifxh.github.io"/>
     <link rel="self" href="https://caifxh.github.io/atom.xml"/>
@@ -10,6 +10,469 @@
     <logo>https://caifxh.github.io/images/avatar.png</logo>
     <icon>https://caifxh.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, fxh</rights>
+    <entry>
+        <title type="html"><![CDATA[状态机]]></title>
+        <id>https://caifxh.github.io/post/zhuang-tai-ji/</id>
+        <link href="https://caifxh.github.io/post/zhuang-tai-ji/">
+        </link>
+        <updated>2020-04-05T04:04:31.000Z</updated>
+        <content type="html"><![CDATA[<p><a href="https://www.acwing.com/problem/content/1051/">acwing1049</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/05/9969_6f0c7d4276-33.PNG" alt="33.PNG" loading="lazy"><br>
+不合法状态按照问题的性质初始化为INF(求最小值)/-(求最大值)</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+using namespace std;
+const int N=100010,INF=0x3f3f3f3f;
+int w[N];
+int f[N][2];
+
+int main()
+{
+    int t;
+    cin&gt;&gt;t;
+    while(t--)
+    {
+        int n;
+        scanf(&quot;%d&quot;,&amp;n);
+        for(int i=1;i&lt;=n;i++)
+            scanf(&quot;%d&quot;,&amp;w[i]);
+        
+        f[0][0]=0,f[0][1]=-INF;
+        for(int i=1;i&lt;=n;i++)
+        {
+            f[i][0]=max(f[i-1][0],f[i-1][1]);
+            f[i][1]=f[i-1][0]+w[i];
+        }
+        printf(&quot;%d\n&quot;,max(f[n][0],f[n][1]));
+    }
+    return 0;
+}
+</code></pre>
+<p><a href="https://www.acwing.com/problem/content/description/1059/">acwing1057</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/04/9969_1479fc8076-29.PNG" alt="29.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/05/9969_f409bd6e76-31.PNG" alt="31.PNG" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+using namespace std;
+const int N=100010,M=110;
+int w[N];
+int f[N][M][2];
+
+int main()
+{
+    int n,k;
+    cin&gt;&gt;n&gt;&gt;k;
+    
+    for(int i=1;i&lt;=n;i++)
+        cin&gt;&gt;w[i];
+    memset(f,-0x3f,sizeof f);
+    for(int i=0;i&lt;=n;i++) f[i][0][0]=0;
+    for(int i=1;i&lt;=n;i++)
+        for(int j=1;j&lt;=k;j++)
+        {
+            f[i][j][0]=max(f[i-1][j][0],f[i-1][j][1]+w[i]);
+            f[i][j][1]=max(f[i-1][j][1],f[i-1][j-1][0]-w[i]);
+        }
+    int res=0;
+    for(int i=0;i&lt;=k;i++)
+        res=max(res,f[n][i][0]);
+    cout&lt;&lt;res&lt;&lt;endl;
+    return 0;
+}
+</code></pre>
+<p><a href="https://www.acwing.com/problem/content/description/1060/">acwing1058</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/05/9969_0cd946fa76-32.PNG" alt="32.PNG" loading="lazy"></p>
+<pre><code>#include &lt;cstring&gt;
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+const int N = 100010, INF = 0x3f3f3f3f;
+
+int n;
+int w[N];
+int f[N][3];
+
+int main()
+{
+    scanf(&quot;%d&quot;, &amp;n);
+
+    for (int i = 1; i &lt;= n; i ++ ) scanf(&quot;%d&quot;, &amp;w[i]);
+
+    f[0][0] = f[0][1] = -INF, f[0][2] = 0;
+    for (int i = 1; i &lt;= n; i ++ )
+    {
+        f[i][0] = max(f[i - 1][0], f[i - 1][2] - w[i]);
+        f[i][1] = f[i - 1][0] + w[i];
+        f[i][2] = max(f[i - 1][2], f[i - 1][1]);
+    }
+
+    printf(&quot;%d\n&quot;, max(f[n][1], f[n][2]));
+
+    return 0;
+}
+</code></pre>
+<p><a href="https://vjudge.net/problem/POJ-3401">poj3401</a><br>
+最近，lxhgww沉迷于股票，经过几天的研究，他发现了一些规律的模式。<br>
+他预测未来T天的股票市场。 在第i天，您可以以APi的价格购买一只股票或卖出一只股票以获得BPi。<br>
+还有其他一些限制，即在第一天就可以购买最多ASi股票，最多可以卖出BSi股票。两个交易日的间隔应大于W天。 也就是说，假设您在第i天进行了交易（<strong>任何买卖股票都被视为一项交易</strong>），那么下一个交易日必须在第（i + W + 1）天或更晚的时间进行。而且，任何时候最多只能拥有MaxP股票。<br>
+在第一天之前，lxhgww已经拥有无限的资金，但是没有股票，当然，他希望从股市中赚到尽可能多的钱。 所以问题来了，他最多只能赚多少钱？<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/05/9969_d66ad1ba76-34.png" alt="34.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/05/9969_f1520dcc76-35.PNG" alt="35.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/05/9969_4584aa0276-36.png" alt="36.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/05/9969_79e2bd3476-37.png" alt="37.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/05/9969_7d04775a76-38.PNG" alt="38.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/05/9969_d9bc776276-40.PNG" alt="40.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/05/9969_dd41f1f076-39.png" alt="39.png" loading="lazy"><br>
+动态规划方程：<br>
+1.不买不卖。dp[i][j]=max(dp[i-1][j],dp[i][j]);<br>
+2.买一些股票。dp[i][j]=max(dp[i-1][k]-(j-k)*ap[i]);(0&lt;=k&lt;=j&lt;=Maxp)<br>
+3.卖一些股票。dp[i][j]=max(dp[i-1][k]+(k-j)*bp[i]);(0&lt;=j&lt;=k&lt;=Maxp)<br>
+注意：<br>
+1.把所有未定义的状态都设置为-INF，1~w+1天得初始化，因为这些天不能有前面的状态推出来，初始化为对应购买多少股票所减去的钱数，因为一开始只有买，不能卖。<br>
+2.循环的递减还是递增问题，跟当前要访问的状态有关。</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstring&gt;
+using namespace std;
+const int N=2010;
+int f[N][N];
+int ap[N],bp[N];//买入价格，卖出价格 
+int as[N],bs[N];//买入限制，卖出限制
+int q[N];
+int n,m,w;
+
+int main()
+{
+    int T;
+    cin&gt;&gt;T;
+    while(T--)
+    {
+        scanf(&quot;%d%d%d&quot;,&amp;n,&amp;m,&amp;w);
+        for(int i=1;i&lt;=n;i++)
+            scanf(&quot;%d%d%d%d&quot;,&amp;ap[i],&amp;bp[i],&amp;as[i],&amp;bs[i]);
+    
+        memset(f,-0x3f,sizeof f);
+        f[0][0]=0;
+        for(int i=1;i&lt;=w+1;i++)
+            for(int j=0;j&lt;=as[i];j++)
+                f[i][j]=-j*ap[i];
+        
+        for(int i=1;i&lt;=n;i++)
+        {
+            for(int j=0;j&lt;=m;j++)
+                f[i][j]=max(f[i][j],f[i-1][j]);//没有交易
+            if(i &lt;= w+1) continue;
+            int hh=0,tt=-1;
+            for(int j=0;j&lt;=m;j++)
+            {
+                if(hh &lt;= tt &amp;&amp; j-as[i] &gt; q[hh]) 
+                    hh++;
+                
+                while(hh&lt;=tt &amp;&amp; f[i-w-1][j]+j*ap[i] &gt;= f[i-w-1][q[tt]]+q[tt]*ap[i])
+                    tt--;
+                q[++tt]=j;
+                f[i][j]=max(f[i][j],f[i-w-1][q[hh]]+q[hh]*ap[i]-j*ap[i]);//买入 
+             } 
+             
+            hh=0,tt=-1;
+            for(int j=m;j&gt;=0;j--)
+            {
+                if(hh &lt;= tt &amp;&amp; j+bs[i] &lt; q[hh]) 
+                    hh++;
+                
+                while(hh&lt;=tt &amp;&amp; f[i-w-1][j]+j*bp[i] &gt;= f[i-w-1][q[tt]]+q[tt]*bp[i])
+                    tt--;
+                q[++tt]=j;
+                f[i][j]=max(f[i][j],f[i-w-1][q[hh]]+q[hh]*bp[i]-j*bp[i]);//卖出 
+             } 
+        }
+        printf(&quot;%d\n&quot;,f[n][0]);
+    }
+    return 0;
+ } 
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[欧拉路径]]></title>
+        <id>https://caifxh.github.io/post/ou-la-lu-jing/</id>
+        <link href="https://caifxh.github.io/post/ou-la-lu-jing/">
+        </link>
+        <updated>2020-04-04T15:37:39.000Z</updated>
+        <content type="html"><![CDATA[<h4 id="欧拉路">欧拉路</h4>
+<p>通过图（无向图或有向图）中所有边一次且仅一次行遍图中所有顶点的通路称为欧拉通路，通过图中所有边一次且仅一次行遍所有顶点的回路称为欧拉回路。具有欧拉回路的图称为欧拉图（Euler Graph），具有欧拉通路而无欧拉回路的图称为半欧拉图。<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/29/9969_eebc2c825a-1.PNG" alt="1.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/29/9969_025de6545a-3.PNG" alt="3.PNG" loading="lazy"></p>
+<p><img src="https://cdn.acwing.com/media/article/image/2020/02/29/9969_06e3a60e5a-2.PNG" alt="2.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/29/9969_0436e9d05a-5.PNG" alt="5.PNG" loading="lazy"><br>
+(注意：这里说有向图连通，说的是有向图是弱连通图。即把有向图中的边变成无向边，只要该图连通，那么原有向图即是弱连通图。实际中可用并查集判断是否弱连通)<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/29/9969_bfab780c5a-6.PNG" alt="6.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/29/9969_0be375da5a-7.PNG" alt="7.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/29/9969_c5661c205a-8.PNG" alt="8.PNG" loading="lazy"></p>
+<p>• 欧拉回路的求解方法主要有两种：</p>
+<ul>
+<li>DFS搜索</li>
+<li>Fleury算法</li>
+</ul>
+<p>用 DFS 搜索思想求解欧拉回路的思路为：</p>
+<ul>
+<li>利用欧拉定理判断出一个图存在欧拉通路或欧拉回路。</li>
+<li>选择一个正确的起始顶点，用 DFS 算法遍历所有的边（每条边<br>
+只遍历一次），遇到走不通就回退。 • 在搜索前进方向上将遍历过的边按顺序记录下来。</li>
+<li>这组边的排列就组成了一条欧拉通路或欧拉回路。</li>
+</ul>
+<h4 id="例题">例题</h4>
+<p>给定 n 张骨牌，每张骨牌有左右两个点数（从 1 到 6）。问能不能<br>
+通过交换骨牌的顺序和交换左右两个点数，使得任意两个相邻骨牌的<br>
+相邻段为相等的数字。<br>
+原始： (1 2)(2 4)(2 4)(6 4)(2 1)<br>
+重排后： (4 2)(2 1)(1 2)(2 4)(4 6)</p>
+<p>本题可以转化成欧拉回路或欧拉通路的求解问题。</p>
+<ul>
+<li>首先要构造一个图？</li>
+<li>每张骨牌当一个点？</li>
+<li>如何解决交换骨牌内部两个点数？</li>
+</ul>
+<p>图建好之后，先判断是否存在欧拉通路或欧拉回路。<br>
+总结：存在 ➔ 选择正确的起点 ➔ 6 ➔ 开始 DFS</p>
+<p><a href="https://www.acwing.com/problem/content/1125/">acwing1123</a><br>
+我们将这个图看成有向图，对于每输入一组数据加两条有向边，需要每条边都至少走一遍<br>
+我们先回想一下存在有向图的欧拉路径的充分必要条件</p>
+<ul>
+<li>所有点的入度都等于出度</li>
+<li>除了两个点以外的点入度等于出度，</li>
+</ul>
+<p>这两个点一个 入度 = 出度 + 1，另一个 入度 = 出度 - 1<br>
+因此，我们考虑每加一条边，每个点的入度和出度都加1<br>
+所以，每个点的入度都一定等于出度,符合上述的第一条<br>
+故这个图存在欧拉路径，并且可以选任意点为起点<br>
+所以我们只需统计所有的边的长度总和，跟据20km/h 算出时间即可</p>
+<pre><code>#include &lt;cstring&gt;
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+#include &lt;cmath&gt;
+
+using namespace std;
+
+int main()
+{
+    double x1, y1, x2, y2;
+    cin &gt;&gt; x1 &gt;&gt; y1;
+
+    double sum = 0;
+    while (cin &gt;&gt; x1 &gt;&gt; y1 &gt;&gt; x2 &gt;&gt; y2)
+    {
+        double dx = x1 - x2;
+        double dy = y1 - y2;
+        sum += sqrt(dx * dx + dy * dy) * 2;
+    }
+
+    int minutes = round(sum / 1000 / 20 * 60);
+    int hours = minutes / 60;
+    minutes %= 60;
+
+    printf(&quot;%d:%02d\n&quot;, hours, minutes);
+
+    return 0;
+}
+</code></pre>
+<p><a href="https://www.acwing.com/problem/content/description/1126/">acwing1124</a></p>
+<p>无向图的欧拉路径&amp;欧拉回路裸题</p>
+<pre><code>#include&lt;iostream&gt;
+using namespace std;
+const int N=510;
+int n=500,m;
+int g[N][N];
+int ans[1100];
+int cnt;
+int d[N];
+
+void dfs(int u)
+{
+    for(int i=1;i&lt;=n;i++)//从小到大枚举，字典序最小
+    {
+        if(g[u][i])
+        {
+            g[u][i]--,g[i][u]--;
+            dfs(i);
+        }
+    }
+    
+    ans[cnt++]=u;
+}
+
+int main()
+{
+    cin&gt;&gt;m;
+    
+    int l=500,r=1;
+    while(m--)
+    {
+        int a,b;
+        cin&gt;&gt;a&gt;&gt;b;
+        l=min(l,min(a,b));
+        r=max(r,max(a,b));
+        g[a][b]++,g[b][a]++;
+        d[a]++,d[b]++;
+    }
+    
+    int start=l;
+    for(int i=l;i&lt;=r;i++)
+    {
+        if(d[i] % 2)
+        {
+            start=i;
+            break;
+        }
+    }
+    
+    dfs(start);//欧拉回路从哪开始都可以搜，欧拉路要从奇点开始
+    
+    for(int i=cnt-1;i&gt;=0;i--)//逆序输出
+        printf(&quot;%d\n&quot;,ans[i]);
+    return 0;
+}
+</code></pre>
+<p><a href="https://www.acwing.com/problem/content/1187/">acwing1185</a><br>
+有向图，首尾连单词，可用DFS和并查集判断连通性</p>
+<pre><code>#include &lt;cstdio&gt;
+#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+using namespace std;
+const int N = 26, L = 1005;
+int n, cnt, g[N][N], in[N], out[N];
+char s[L];
+
+void dfs(int u) {
+    for (int i = 0; i &lt; 26; i++) {
+        if(g[u][i]) {
+            cnt++;
+            g[u][i] --;
+            dfs(i);
+        }
+    }
+}
+int main() {
+    int T; scanf(&quot;%d&quot;, &amp;T);
+    while(T--) {
+        cnt = 0;
+        memset(g, 0, sizeof g);
+        memset(in, 0, sizeof in);
+        memset(out, 0, sizeof out);
+        scanf(&quot;%d&quot;, &amp;n);
+        for (int i = 0; i &lt; n; i++) {
+            scanf(&quot;%s&quot;, s);
+            int u = s[0] - 'a', v = s[strlen(s) - 1] - 'a';
+            g[u][v]++;
+            out[u]++, in[v]++;
+        }
+
+        bool ok = true;
+        int s = 0, t = 0;
+        for (int i = 0; i &lt; 26; i++) {
+            if(in[i] != out[i]) {
+                if(in[i] == out[i] + 1) t ++;
+                else if(in[i] + 1 == out[i]) s++;
+                else { ok = false; break; }
+            }
+        }
+
+
+        if(!(!s &amp;&amp; !t || (s == 1 &amp;&amp; t == 1))) ok = false;
+
+        s = 0;
+        while(!out[s]) s++;
+        for (int i = 0; i &lt; 26; i++)
+            if(in[i] + 1 == out[i]) { s = i; break; }
+
+        dfs(s);
+
+        if(cnt &lt; n) ok = false;
+        puts(ok ? &quot;Ordering is possible.&quot; : &quot;The door cannot be opened.&quot;);
+    }
+    return 0;
+}
+</code></pre>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+using namespace std;
+const int N=30;
+int n;
+int din[N], dout[N], p[N];
+bool st[N];
+
+
+int find(int x)
+{
+    if (p[x] != x) p[x] = find(p[x]);
+    return p[x];
+}
+
+int main()
+{
+    int t;
+    scanf(&quot;%d&quot;,&amp;t);
+    while(t--)
+    {
+        scanf(&quot;%d&quot;,&amp;n);
+        memset(din,0,sizeof din);
+        memset(dout,0,sizeof dout);
+        memset(st,0,sizeof st);
+        for(int i=0;i&lt;26;i++)
+            p[i]=i;
+        
+        for(int i=0;i&lt;n;i++)
+        {
+            char str[1010];
+            scanf(&quot;%s&quot;,str);
+            int len=strlen(str);
+            int a=str[0]-'a',b=str[len-1]-'a';
+            st[a]=st[b]=true;
+            dout[a]++,din[b]++;
+            p[find(a)]=find(b);
+        }
+        
+        int start=0,end=0;
+        bool success=true;
+        for(int i=0;i&lt;26;i++)
+            if(din[i] != dout[i])
+            {
+                if(din[i] == dout[i] + 1)
+                    end++;
+                else if(din[i] + 1 == dout[i])
+                    start++;
+                else
+                {
+                    success=false;
+                    break;
+                }
+            }
+            
+        if(!(!start &amp;&amp; !end ||start == 1 &amp;&amp; end == 1))
+            success=false;
+        int rep = -1;
+        for (int i = 0; i &lt; 26; i ++ )
+            if (st[i])
+            {
+                if (rep == -1) rep = find(i);
+                else if (rep != find(i))
+                {
+                    success = false;
+                    break;
+                }
+            }
+
+        if (success) puts(&quot;Ordering is possible.&quot;);
+        else puts(&quot;The door cannot be opened.&quot;);
+
+    }
+    return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[扩展KMP]]></title>
         <id>https://caifxh.github.io/post/kuo-zhan-kmp/</id>
@@ -1804,6 +2267,129 @@ int main()
 	return 0;
 }
 </code></pre>
+<p><a href="https://ac.nowcoder.com/acm/contest/3002/F">F</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/03/9969_5281369675-21.PNG" alt="21.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/03/9969_60826a8075-22.PNG" alt="22.PNG" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+const int N=1e5+10;
+typedef long long LL;
+vector&lt;int&gt; g[N];
+int p[N],cnt[N];
+int son[N];//子节点所处连通块中白点数目 
+LL sum[N];
+char s[N];
+int n;
+LL ans;
+
+int find(int x)
+{
+	if(x != p[x])
+		p[x]=find(p[x]);
+	return p[x];
+}
+
+void merge(int a,int b)
+{
+	int pa=find(a);
+	int pb=find(b);
+	if(pa != pb)
+	{
+		p[pa]=pb;
+		cnt[pb]+=cnt[pa];
+	}
+}
+
+int main()
+{
+	cin&gt;&gt;n&gt;&gt;s+1;
+	
+	for(int i=1;i&lt;=n;i++)
+		p[i]=i,cnt[i]=1;
+		
+	for(int i=1;i&lt;n;i++)
+	{
+		int a,b;
+		cin&gt;&gt;a&gt;&gt;b;
+		g[a].push_back(b);
+		g[b].push_back(a);
+		if(s[a] == 'W' &amp;&amp; s[b] =='W')
+			merge(a,b);	
+	}	
+	
+	for(int i=1;i&lt;=n;i++)
+		if(s[i] == 'B')
+		{
+			int tot=0;
+			for(int j=0;j&lt;g[i].size();j++)
+				if(s[g[i][j]] == 'W')
+					son[++tot]=cnt[find(g[i][j])];
+			
+			for(int j=1;j&lt;=tot;j++)
+				sum[j]=sum[j-1]+son[j];
+			
+			ans+=sum[tot];//黑点为端点 
+			for(int j=1;j&lt;=tot;j++)
+				ans+=son[j]*sum[j-1];//黑点为中间点 
+		}
+		
+	printf(&quot;%lld\n&quot;,ans);
+	
+	return 0;
+}
+</code></pre>
+<h4 id="树形dp解法">树形dp解法</h4>
+<p>dp[i][0]表示i的子孙节点到i路径上无黑点的个数，dp[i][1]表示i的子孙节点到i路径上有一个黑点的个数。</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+typedef long long LL;
+const int N=1e5+10;
+LL f[N][2];
+LL ans;
+vector&lt;int&gt; g[N];
+char s[N];
+int n;
+
+void dfs(int u,int fa)
+{
+	if(s[u] == 'W') f[u][0]=1,f[u][1]=0;
+	else f[u][0]=0,f[u][1]=1;
+	
+	for(int i=0;i&lt;g[u].size();i++)
+	{
+		int j=g[u][i];
+		if(j == fa) continue;
+		dfs(j,u);
+		ans+=f[u][0]*f[j][1]+f[u][1]*f[j][0];
+		if(s[u] == 'W') f[u][0]+=f[j][0],f[u][1]+=f[j][1];
+		else f[u][0]=0,f[u][1]+=f[j][0];
+	}
+}
+
+int main()
+{
+	cin&gt;&gt;n&gt;&gt;s+1;
+	for(int i=1;i&lt;n;i++)
+	{
+		int x,y;
+		cin&gt;&gt;x&gt;&gt;y;
+		g[x].push_back(y);
+		g[y].push_back(x);
+	}
+	
+	dfs(1,-1);
+	
+	printf(&quot;%lld\n&quot;,ans);
+	
+	return 0;
+}
+</code></pre>
 ]]></content>
     </entry>
     <entry>
@@ -2271,6 +2857,150 @@ int main()
 
 		printf(&quot;%d\n&quot;,a.m[0][k]);
 	}
+	return 0;
+}
+</code></pre>
+<h4 id="数据结构优化">数据结构优化</h4>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=4991">hdu4991</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/04/9969_6d75c96076-25.png" alt="25.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/03/9969_b283c99675-23.PNG" alt="23.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/03/9969_b4bed10675-24.PNG" alt="24.PNG" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+const int N=10010,M=110,mod=123456789;
+int a[N],b[N];
+int f[N][M];
+int n,m,len;
+
+int lowbit(int x)
+{
+	return x&amp;-x;
+}
+
+void add(int x,int j,int val)
+{
+	for(int i=x;i&lt;=len;i+=lowbit(i))
+		f[i][j]=(f[i][j]+val)%mod;	
+}
+
+int query(int x,int j)
+{
+	int res=0;
+	for(int i=x;i;i-=lowbit(i))
+		res=(res+f[i][j])%mod;
+	return res;
+}
+
+int main()
+{
+	while(~scanf(&quot;%d%d&quot;,&amp;n,&amp;m))
+	{
+		for(int i=1;i&lt;=n;i++)
+			scanf(&quot;%d&quot;,&amp;a[i]),b[i]=a[i];
+		
+		memset(f,0,sizeof f);
+		sort(b+1,b+n+1);
+		len=unique(b+1,b+n+1)-b-1;
+		for(int i=1;i&lt;=n;i++)
+		{
+			int pos=lower_bound(b+1,b+len+1,a[i])-b;
+			add(pos,1,1);
+			for(int j=2;j&lt;=m;j++)
+			{
+				int sum=query(pos-1,j-1);
+				add(pos,j,sum);
+			}
+		}
+		
+		printf(&quot;%d\n&quot;,query(len,m));
+	}
+	return 0;
+}
+</code></pre>
+<p><a href="https://vjudge.net/problem/POJ-1769">poj1769</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/04/9969_2cdfb3ba76-26.PNG" alt="26.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/04/9969_252e951e76-27.png" alt="27.png" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+#define lc u&lt;&lt;1
+#define rc u&lt;&lt;1|1
+const int N=50010,M=500010,INF=0x3f3f3f3f;
+struct Node
+{
+	int l,r;
+	int val;
+}tr[4*M];
+int a[M],b[M];
+int n,m;
+
+void pushup(int u)
+{
+	tr[u].val=min(tr[lc].val,tr[rc].val);
+}
+
+void build(int u,int l,int r)
+{
+	tr[u].l=l,tr[u].r=r;
+	if(l == r)
+	{
+		if(l == 1) tr[u].val=0;
+		else tr[u].val=INF;
+		return;
+	}
+	int mid=l+r&gt;&gt;1;
+	build(lc,l,mid);
+	build(rc,mid+1,r);
+	pushup(u);
+}
+
+void modify(int u,int x,int v)
+{
+	if(tr[u].l == tr[u].r)
+	{
+		tr[u].val=v;
+		return;
+	}
+	
+	int mid=tr[u].l+tr[u].r&gt;&gt;1;
+	if(x&lt;=mid) modify(lc,x,v);
+	else modify(rc,x,v);
+	pushup(u);
+}
+
+int query(int u,int l,int r)
+{
+	if(l &lt;= tr[u].l &amp;&amp; tr[u].r &lt;= r)
+		return tr[u].val;
+	int mid=tr[u].l+tr[u].r&gt;&gt;1;
+	int res=INF;
+	if(l&lt;=mid) res=min(res,query(lc,l,r));
+	if(r&gt;mid) res=min(res,query(rc,l,r));
+	return res;
+}
+
+int main()
+{
+	cin&gt;&gt;n&gt;&gt;m;
+	for(int i=0;i&lt;m;i++)
+		scanf(&quot;%d%d&quot;,&amp;a[i],&amp;b[i]);
+	
+	build(1,1,n);
+	
+	for(int i=0;i&lt;m;i++)
+	{
+		int v1=query(1,a[i],b[i])+1;
+		int v2=query(1,b[i],b[i]);
+		modify(1,b[i],min(v1,v2));
+	}
+	
+	printf(&quot;%d\n&quot;,query(1,n,n));
+	
 	return 0;
 }
 </code></pre>
@@ -5047,1225 +5777,6 @@ k = p / i, r = p % i<br>
 <h4 id="总结">总结</h4>
 <p>每种算法都有其优点与局限性。递推写起来快，思维简单，但时间复杂度高。乘法逆元用得比较普遍，因为一般都是模一个大质数，复杂度也几乎是线性的。卢卡斯定理只会在特定的题目里做到，但其实编程复杂度并不高，就是在乘法逆元的基础上加几句话。质因数分解的适用性最广，编程复杂度也最高，这就是完美的代价吧。<br>
 <img src="https://cdn.acwing.com/media/article/image/2020/03/20/9969_d1e87a9c6a-15.png" alt="15.png" loading="lazy"></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[倍增 ST表 RMQ]]></title>
-        <id>https://caifxh.github.io/post/bei-zeng-st-biao-rmq/</id>
-        <link href="https://caifxh.github.io/post/bei-zeng-st-biao-rmq/">
-        </link>
-        <updated>2020-03-28T02:12:15.000Z</updated>
-        <content type="html"><![CDATA[<h4 id="倍增">倍增</h4>
-<p><img src="https://cdn.acwing.com/media/article/image/2020/02/22/9969_63a9254055-100.png" alt="100.png" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/02/22/9969_7a1c78cc55-101.png" alt="101.png" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/02/22/9969_7e531b9e55-102.png" alt="102.png" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/02/22/9969_8ae2291855-103.png" alt="103.png" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/02/22/9969_949b394055-104.png" alt="104.png" loading="lazy"></p>
-<h4 id="st表">ST表</h4>
-<p><img src="https://cdn.acwing.com/media/article/image/2020/02/22/9969_cc79cf4855-105.png" alt="105.png" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/02/22/9969_d06c8c3055-106.png" alt="106.png" loading="lazy"></p>
-<h4 id="st表创建">ST表创建</h4>
-<p><img src="https://cdn.acwing.com/media/article/image/2020/02/22/9969_dfa53a7655-107.png" alt="107.png" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/02/22/9969_104f583c55-110.png" alt="110.png" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/02/22/9969_ca30b97a55-121.PNG" alt="121.PNG" loading="lazy"></p>
-<h4 id="st表查询">ST表查询</h4>
-<p><img src="https://cdn.acwing.com/media/article/image/2020/02/22/9969_dea27ee855-122.png" alt="122.png" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/02/22/9969_f3b6ffac55-123.png" alt="123.png" loading="lazy"></p>
-<pre><code>#include&lt;iostream&gt;
-#include&lt;algorithm&gt;
-#include&lt;cmath&gt;//使用log函数
-/*log():以e为底的对数，exp(5)=e^5,log(exp(5))=5
-  log10():以10为底的对数
-  log2():以2为底的对数 
-  任何一个其它的对数logm(n)=log(n)/log(m)*/
-using namespace std;
-const int maxn=105;
-int n,a[maxn],F[maxn][maxn];//F(i,j)表示区间[i，i+2^j-1]的最值，区间长度为2^j
-
-void ST_create()
-{
-	for(int i=1;i&lt;=n;i++)//初始化 
-		F[i][0]=a[i];
-	int k=log2(n);//log(n)/log(2);
-	for(int j=1;j&lt;=k;j++)
-		for(int i=1;i&lt;=n-(1&lt;&lt;j)+1;i++)//n-2^j+1
-			F[i][j]=max(F[i][j-1],F[i+(1&lt;&lt;(j-1))][j-1]);
-}
-
-int ST_query(int l,int r)//求区间[l..r]的最值 
-{
-	int k=log2(r-l+1);
-	return max(F[l][k],F[r-(1&lt;&lt;k)+1][k]);//取两个区间最值 
-}
-
-int ST_print()
-{
-	int k=log2(n);
-	for(int j=0;j&lt;=k;j++)
-	{	
-		for(int i=1;i&lt;=n-(1&lt;&lt;j)+1;i++)//n-2^j+1,打印第一列 
-			cout&lt;&lt;F[i][j]&lt;&lt;&quot; &quot;;
-		cout&lt;&lt;endl;
-	}
-}
-
-int ST_print2()//按列打印 
-{
-	int k=log2(n);
-	for(int i=1;i&lt;=n;i++)
-	{
-		for(int j=0;j&lt;=k;j++)
-			cout&lt;&lt;F[i][j]&lt;&lt;' ';
-		cout&lt;&lt;endl;
-	}
-}
-
-int main()
-{
-	int l,r;
-	int i,v;
-	cin&gt;&gt;n;
-	for(i=1;i&lt;=n;i++)
-		cin&gt;&gt;a[i];//5 3 7 2 12 1 6 4 8 15
-	ST_create();//创建ST表
-	ST_print();
-	cout&lt;&lt;&quot;输入查询最值的区间l r:&quot;&lt;&lt;endl;
-	cin&gt;&gt;l&gt;&gt;r;
-	cout&lt;&lt;ST_query(l,r)&lt;&lt;endl;//求区间[l..r]的最值
-	return 0;
-}
-</code></pre>
-<h4 id="例题">例题</h4>
-<p><a href="http://poj.org/problem?id=3264">poj3264</a><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/02/22/9969_96072edc55-130.png" alt="130.png" loading="lazy"></p>
-<pre><code>#include&lt;cstdio&gt;
-#include&lt;algorithm&gt;//min,max
-#include&lt;cmath&gt;//log
-using namespace std;
-const int maxn=50010;
-int h[maxn];
-int Fmax[maxn][20];//F(i,j)表示区间[i，i+2^j-1]的最值，区间长度为2^j
-int Fmin[maxn][20];
-int N,Q;
-
-void ST_create()
-{
-	for(int i=1;i&lt;=N;i++)//初始化 
-		Fmax[i][0]=Fmin[i][0]=h[i];
-	int k=log2(N);//log(N)/log(2.0);
-	for(int j=1;j&lt;=k;j++)
-		for(int i=1;i&lt;=N-(1&lt;&lt;j)+1;i++)//N-2^j+1
-		{
-			Fmax[i][j]=max(Fmax[i][j-1],Fmax[i+(1&lt;&lt;(j-1))][j-1]);
-			Fmin[i][j]=min(Fmin[i][j-1],Fmin[i+(1&lt;&lt;(j-1))][j-1]);
-		}			
-}
-
-int RMQ(int l,int r)//求区间[l..r]的最值差 
-{
-	int k=log2(r-l+1);
-	int m1=max(Fmax[l][k],Fmax[r-(1&lt;&lt;k)+1][k]);
-	int m2=min(Fmin[l][k],Fmin[r-(1&lt;&lt;k)+1][k]);
-	return m1-m2;//取两个区间最值差 
-}
-
-int main()
-{
-	int a,b;
-	while(~scanf(&quot;%d%d&quot;,&amp;n,&amp;Q))
-	{
-		for(int i=1;i&lt;=N;i++)//下标从1开始 
-			scanf(&quot;%d&quot;,&amp;h[i]);
-		ST_create();
-		for(int j=1;j&lt;=Q;j++)
-		{
-			scanf(&quot;%d%d&quot;,&amp;a,&amp;b);
-			printf(&quot;%d\n&quot;,RMQ(a,b));
-		}
-	}
-	return 0;
-}
-</code></pre>
-<p><a href="http://poj.org/problem?id=3368">poj3368</a><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/02/24/9969_1fce3d8456-001.png" alt="001.png" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/02/24/9969_2d5faac856-002.png" alt="002.png" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/02/24/9969_395ba96d56-003.png" alt="003.png" loading="lazy"></p>
-<pre><code>#include&lt;iostream&gt;
-#include&lt;cstdio&gt;
-#include&lt;algorithm&gt;
-using namespace std;
-const int N=100010;
-int lb[N];		
-int f[N][20];//F(i,j)表示区间[i，i+2^j-1]的最值，区间长度为2^j
-
-int n,Q;
-int a[N];
-
-void ST_create()
-{	
-	for(int j=1;j&lt;=lb[n];j++)
-		for(int i=1;i&lt;=n-(1&lt;&lt;j)+1;i++)
-			f[i][j]=max(f[i][j-1],f[i+(1&lt;&lt;(j-1))][j-1]);	
-}
-
-int RMQ(int l,int r)
-{
-	if(l &gt; r)
-		return 0;
-	int k=lb[r-l+1];
-	return max(f[l][k],f[r-(1&lt;&lt;k)+1][k]);
-}
-
-int main()
-{
-	lb[0]=-1;
-	for(int i=1;i&lt;N;i++)//求解所有log值,保存到数组lb[] 
-		lb[i]=lb[i-1]+!(i&amp;(i-1));
-	while(~scanf(&quot;%d%&quot;,&amp;n) &amp;&amp; n)
-	{
-		scanf(&quot;%d&quot;,&amp;Q);
-		for(int i=1;i&lt;=n;i++)
-		{
-			scanf(&quot;%d&quot;,&amp;a[i]);
-			if(i == 1)
-			{
-				f[i][0]=1;
-				continue;
-			}
-			if(a[i] == a[i-1])
-				f[i][0]=f[i-1][0]+1;
-			else 
-				f[i][0]=1;
-		}
-		ST_create();
-		for(int j=1;j&lt;=Q;j++)
-		{
-			int l,r;
-			scanf(&quot;%d%d&quot;,&amp;l,&amp;r);
-			int t=l;
-			while(t&lt;=r &amp;&amp; a[t] == a[t-1])
-				t++;
-			printf(&quot;%d\n&quot;,max(t-l,RMQ(t,r)));
-		}
-	}
-	return 0;
-}
-</code></pre>
-<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=3486">hdu3468</a><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/02/24/9969_dc1676a656-005.png" alt="005.png" loading="lazy"></p>
-<pre><code>#include&lt;cstdio&gt;
-#include&lt;algorithm&gt;
-using namespace std;
-const int N=200010;
-int a[N];
-int n,k;
-int F[N][20],lb[N];
-
-void Initlog()
-{
-	lb[0]=-1;
-    for(int i=1;i&lt;=N;i++)
-        lb[i]=lb[i-1]+(i&amp;(i-1)?0:1);
-}
-
-void ST()
-{
-    for(int i=1;i&lt;=n;i++)
-		F[i][0]=a[i];
-    for(int j=1;j&lt;=lb[n];j++)
-        for(int i=1;i&lt;=n-(1&lt;&lt;j)+1;i++)
-            F[i][j]=max(F[i][j-1],F[i+(1&lt;&lt;(j-1))][j-1]);
-}
-
-int query(int l,int r)
-{
-    int k=lb[r-l+1];
-    return max(F[l][k],F[r-(1&lt;&lt;k)+1][k]);
-}
-
-bool check(int mid)
-{
-    int t=n/mid,s=0;
-    for(int i=0;i&lt;mid;i++)
-		s+=query(t*i+1,t*i+t);
-    return s&gt;k;
-}
-
-int main()
-{
-    lb[0]=-1;
-	for(int i=1;i&lt;N;i++)//求解所有log值,保存到数组lb[] 
-		lb[i]=lb[i-1]+!(i&amp;(i-1));
-	while(scanf(&quot;%d%d&quot;,&amp;n,&amp;k),n&gt;=0||k&gt;=0)
-    {
-        int sum=0;
-        for(int i=1;i&lt;=n;i++)
-        {
-            scanf(&quot;%d&quot;,&amp;a[i]);
-            sum+=a[i];
-        }
-        if(sum&lt;=k)
-		{
-			printf(&quot;-1\n&quot;);
-			continue;
-		}
-		ST();
-		int l=1,r=n;
-		while(l&lt;r)//二分找划分数 
-    	{
-	        int mid=(l+r)/2;
-	        if(check(mid)) r=mid;
-	        else l=mid+1;
-    	}
-		printf(&quot;%d\n&quot;,l);
-    }
-    return 0;
-}
-</code></pre>
-<p><a href="http://poj.org/problem?id=2019">poj2019</a><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/02/24/9969_3d701b9256-007.png" alt="007.png" loading="lazy"></p>
-<pre><code>#include&lt;cstdio&gt;
-#include&lt;algorithm&gt;
-const int maxn=260,INF=0x3f3f3f3f;
-using namespace std;
-int a[maxn][maxn],lb[maxn];
-int Fmax[maxn][maxn][8],Fmin[maxn][maxn][8];
-int n,m,k;
-
-void ST()
-{
-	for(int k=1;k&lt;=n;k++)//多一维 
-        for(int i=1;i&lt;=n;i++)
-            Fmax[k][i][0]=Fmin[k][i][0]=a[k][i];	
-	for(int k=1;k&lt;=n;k++)
-		for(int j=1;j&lt;=lb[n];j++)
-			for(int i=1;i+(1&lt;&lt;j)-1&lt;=n;i++)
-			{
-				Fmax[k][i][j]=max(Fmax[k][i][j-1],Fmax[k][i+(1&lt;&lt;(j-1))][j-1]);
-				Fmin[k][i][j]=min(Fmin[k][i][j-1],Fmin[k][i+(1&lt;&lt;(j-1))][j-1]);
-			}
-}
-
-int main()
-{
-	lb[0]=-1;
-	for(int i=1;i&lt;maxn;i++)
-		lb[i]=(i&amp;(i-1))?lb[i-1]:lb[i-1]+1;
-	while(~scanf(&quot;%d%d%d&quot;,&amp;n,&amp;m,&amp;k))
-	{
-		for(int i=1;i&lt;=n;i++)
-			for(int j=1;j&lt;=n;j++)
-				scanf(&quot;%d&quot;,&amp;a[i][j]);	
-		ST();
-		for(int i=0;i&lt;k;i++)
-		{
-			int x,y;
-			scanf(&quot;%d%d&quot;,&amp;x,&amp;y);
-			int k=lb[m];
-    		int maxx=-INF;
-			int minx=INF;
-    		int l=y,r=y+m-1;//从坐标为(x,y)的地方开始，右下扩展B长度 
-    		for(int i=x;i&lt;x+m;i++)//查询每一行的最值 
-		    {
-		        maxx=max(maxx,max(Fmax[i][l][k],Fmax[i][r-(1&lt;&lt;k)+1][k]));
-		        minx=min(minx,min(Fmin[i][l][k],Fmin[i][r-(1&lt;&lt;k)+1][k]));
-		    }
-			printf(&quot;%d\n&quot;,maxx-minx);
-		}
-	}
-	return 0;
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[数位dp]]></title>
-        <id>https://caifxh.github.io/post/shu-wei-dp/</id>
-        <link href="https://caifxh.github.io/post/shu-wei-dp/">
-        </link>
-        <updated>2020-03-27T16:26:14.000Z</updated>
-        <content type="html"><![CDATA[<p>问题的一般形式是这样的：<br>
-定义一个条件 A，比如：被 7 整除、数位中含有 3 等等。<br>
-询问区间 [L, R] 中有几个数满足条件 A L 和 R 的范围一般非常大，比如<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><msup><mn>0</mn><mn>18</mn></msup></mrow><annotation encoding="application/x-tex">10^{18}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">8</span></span></span></span></span></span></span></span></span></span></span></span><br>
-通过数位 DP，我们会发现这些问题的规模实际上是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>10</mn></msub><mi>R</mi></mrow><annotation encoding="application/x-tex">log_{10} R</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">0</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span></span></span></span></p>
-<p>数位 DP 就是考虑数字的每一位。<br>
-问题的规模变为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>10</mn></msub><mi>R</mi></mrow><annotation encoding="application/x-tex">log_{10} R</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">0</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span></span></span></span><br>
-每一位作为不同的阶段，设计状态。<br>
-我们从高位往低位依次枚举。<br>
-每一位的数选择的范围是不同的，依据前面选的数决定。</p>
-<p><a href="https://www.acwing.com/problem/content/1087/">acwing1085</a><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_5b537e9670-1.png" alt="1.png" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_a726651870-3.PNG" alt="3.PNG" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_55592c3c70-16.PNG" alt="16.PNG" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_1cf88f0a70-6.PNG" alt="6.PNG" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_2cd3e1cc70-7.PNG" alt="7.PNG" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_46b4d2ae70-8.PNG" alt="8.PNG" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_5d38098870-9.PNG" alt="9.PNG" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_8bf3feda70-10.PNG" alt="10.PNG" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_a49f78ce70-11.PNG" alt="11.PNG" loading="lazy"></p>
-<pre><code>#include&lt;cstdio&gt;
-#include&lt;cstring&gt;
-using namespace std;
-int dp[15][15];
-int num[15];
-
-void init(){//预处理 
-    dp[0][0]=1;
-    for(int i=1;i&lt;=9;i++)
-        for(int j=0;j&lt;=9;j++){
-            if(j==4)
-                dp[i][j]=0;
-            else
-                for(int k=0;k&lt;=9;k++){
-                    if(j==6&amp;&amp;k==2)
-                        continue;
-                    dp[i][j]+=dp[i-1][k];
-                }
-        }
-}
-
-int solve(int x)//求解[1..x]之间满足条件的个数 
-{
-    int ans=0,cnt=0;
-    while(x)
-        num[++cnt]=x%10,x/=10;
-    num[cnt+1]=0;
-    for(int i=cnt;i&gt;=1;i--){//高位向低位计算 
-        for(int j=0;j&lt;num[i];j++)
-            if(j==4||(j==2&amp;&amp;num[i+1]==6))
-            	continue;
-            else
-				ans+=dp[i][j];
-        if(num[i]==4||(num[i]==2&amp;&amp;num[i+1]==6)){
-			ans--;//减1，例如4，统计0，1 ，2，3共4个其实只有3个满足（不包括0） 
-				 //例如3，统计0，1 ，2共3个满足，0相当于统计了3本身 
-            break;
-    	}
-    }
-    return ans;
-}
-
-void print(){//输出初始化处理后的dp数组 
-	printf(&quot;  j=\t&quot;);
-	for(int j=0;j&lt;=9;j++)
-		printf(&quot;%-10d&quot;,j);
-	printf(&quot;\n&quot;);
-	for(int i=1;i&lt;=9;i++){
-    	printf(&quot;i=%d\t&quot;,i);
-		for(int j=0;j&lt;=9;j++)
-			printf(&quot;%-10d&quot;,dp[i][j]);	
-		printf(&quot;\n&quot;);
-	}
-}
-
-int main()
-{
-    int n,m;
-    memset(dp,0,sizeof dp);
-    init();//初始化处理 
-    //print();//输出dp数组 
-    while(~scanf(&quot;%d%d&quot;,&amp;m,&amp;n),n+m){//测试 1 24  62 386
-    	//printf(&quot;%d\n&quot;,solve(n));
-    	//printf(&quot;%d\n&quot;,solve(m));
-        printf(&quot;%d\n&quot;,solve(n)-solve(m-1));
-	}
-    return 0;
-}
-</code></pre>
-<h4 id="记忆化递归">记忆化递归</h4>
-<p><img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_e2f83cfa70-12.PNG" alt="12.PNG" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_ef66924870-13.PNG" alt="13.PNG" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_038a069c70-14.PNG" alt="14.PNG" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_17c8b8e270-15.PNG" alt="15.PNG" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_752403fc70-17.PNG" alt="17.PNG" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_b902736a70-18.PNG" alt="18.PNG" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_de4ca76c70-19.PNG" alt="19.PNG" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_89782eea70-25.PNG" alt="25.PNG" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_2799b6c670-21.PNG" alt="21.PNG" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_4679d09470-22.PNG" alt="22.PNG" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_6c99dc9c70-23.PNG" alt="23.PNG" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_6f0abf1470-24.PNG" alt="24.PNG" loading="lazy"></p>
-<pre><code>#include&lt;iostream&gt;
-#include&lt;cstdio&gt;
-#include&lt;cstring&gt;
-using namespace std;
-int a[20];
-int dp[20][2];
-//dp[pos][sta]表示当前第pos位，sta状态下满足条件的个数，sta表示前一位是否是6，只有0和1两种状态
-int dfs(int pos,bool sta,bool limit)
-{
-    if(pos==0) return 1;
-    if(!limit&amp;&amp;dp[pos][sta]!=-1) return dp[pos][sta];
-    int len=limit?a[pos]:9;
-    int ans=0;
-    for(int i=0;i&lt;=len;i++)
-    {
-        if(sta&amp;&amp;i==2)continue;
-        if(i==4) continue;//都是保证枚举合法性
-        ans+=dfs(pos-1,i==6,limit&amp;&amp;i==len);
-    }
-    if(!limit) dp[pos][sta]=ans;
-    return ans;
-}
-
-int solve(int x)//求解[0..x]之间满足条件的个数 
-{
-    int pos=0;
-    while(x){
-        a[++pos]=x%10;
-        x/=10;
-    }
-    return dfs(pos,0,1);//如果不包括0，此处减1即可
-}
-
-void print(){//输出dp数组 
-	printf(&quot;  j=\t&quot;);
-	for(int j=0;j&lt;=1;j++)
-		printf(&quot;%-10d&quot;,j);
-	printf(&quot;\n&quot;);
-	for(int i=1;i&lt;=9;i++){
-    	printf(&quot;i=%d\t&quot;,i);
-		for(int j=0;j&lt;=1;j++)
-			printf(&quot;%-10d&quot;,dp[i][j]);	
-		printf(&quot;\n&quot;);
-	}
-}
-
-int main()
-{
-    int a,b;
-    memset(dp,-1,sizeof dp);
-    while(~scanf(&quot;%d%d&quot;,&amp;a,&amp;b),a+b)//测试24 386 
-    {
-		//printf(&quot;%d\n&quot;,solve(a));
-		//print();
-    	//printf(&quot;%d\n&quot;,solve(b));
-    	//print();
-		printf(&quot;%d\n&quot;,solve(b)-solve(a-1));
-    }
-    return 0;
-}
-</code></pre>
-<h4 id="例题">例题</h4>
-<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=3555">hdu3555</a><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_0523299470-26.png" alt="26.png" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_00483fe070-27.png" alt="27.png" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_11b93f5470-28.png" alt="28.png" loading="lazy"></p>
-<h4 id="正向做法">正向做法</h4>
-<pre><code>#include&lt;iostream&gt;
-#include&lt;cstring&gt;
-#include&lt;cstdio&gt;
-#include&lt;algorithm&gt;
-using namespace std;
-typedef long long LL;
-const int N=20;
-LL f[N][2];
-LL ten[N];
-int num[N];
-LL n;
-
-LL dfs(int pos,bool sta,bool limit)
-{
-	if(pos == 0) return 0;
-	if(!limit &amp;&amp; f[pos][sta] != -1)
-		return f[pos][sta];
-	
-	int len=limit?num[pos]:9;
-	LL ans=0;
-	for(int i=0;i&lt;=len;i++)
-	{
-		if(sta &amp;&amp; i==9)
-			ans+=limit?n%ten[pos-1]+1:ten[pos-1];
-		else
-			ans+=dfs(pos-1,i==4,limit&amp;&amp;i==len);
-	}
-	if(!limit)
-		f[pos][sta]=ans;
-	return ans;
-}
-
-LL dp(LL n)//求解[1..x]之间满足条件的个数 
-{
-	int pos=0;
-	while(n)
-	{
-		num[++pos]=n%10;
-		n/=10;
-	}
-	
-	return dfs(pos,0,1);
-}
-
-int main()
-{
-	int T;
-	cin&gt;&gt;T;
-	memset(f,-1,sizeof f);
-	ten[0]=1;
-	for(int i=1;i&lt;N;i++)
-		ten[i]=ten[i-1]*10;
-	while(T--)
-	{
-		scanf(&quot;%lld&quot;,&amp;n);
-		printf(&quot;%lld\n&quot;,dp(n));
-	}
-	return 0;
-}
-</code></pre>
-<h4 id="反向做法">反向做法</h4>
-<pre><code>#include&lt;cstdio&gt;//求不包含49的个数ans(不包括0)，然后n-ans
-#include&lt;cstring&gt;
-using namespace std;
-typedef long long LL;//注意！！本题数据类型为ll 
-const int N=30;
-int dig[N];
-LL dp[N][2],n;
-//dp[pos][sta]表示当前第pos位，sta状态下满足条件的个数，sta表示前一位是否是4，只有0和1两种状态
-LL dfs(int pos,bool sta,bool limit)//求不包含49的个数
-{
-    if(!pos) return 1;//包括0 
-    if(!limit&amp;&amp;dp[pos][sta]!=-1) return dp[pos][sta];
-    int len=limit?dig[pos]:9;
-    LL ans=0;
-    for(int i=0;i&lt;=len;i++)
-    {
-        if(sta&amp;&amp;i==9)
-        	continue;
-        ans+=dfs(pos-1,i==4,limit&amp;&amp;i==len);
-    }
-    if(!limit) dp[pos][sta]=ans;
-    return ans;
-}
-
-LL solve(LL x)//求解[1..x]之间不包含49的个数 
-{
-    int pos=0;
-    while(x){
-        dig[++pos]=x%10;
-        x/=10;
-    }
-    return dfs(pos,0,1)-1;//除去0 
-}
-
-int main()
-{
-    memset(dp,-1,sizeof(dp));
-	int T;
-	scanf(&quot;%d&quot;,&amp;T);
-	while(T--){
-		scanf(&quot;%I64d&quot;,&amp;n);
-		printf(&quot;%I64d\n&quot;,n-solve(n));
-	}
-    return 0;
-}
-</code></pre>
-<p><a href="https://www.acwing.com/problem/content/340/">acwing338</a><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_79719d0070-29.png" alt="29.png" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_7c8b84ec70-30.png" alt="30.png" loading="lazy"></p>
-<pre><code>#include&lt;iostream&gt;
-#include&lt;cstring&gt;
-#include&lt;cstdio&gt;
-#include&lt;algorithm&gt;
-using namespace std;
-const int N=10;
-int f[N][10][N];
-int num[N];
-int ans1[N];
-int ans2[N];
-
-int dfs(int pos,int val,int cnt,bool lead,bool limit)
-{
-    if(pos == 0) return cnt;
-    if(!limit &amp;&amp; !lead &amp;&amp; f[pos][val][cnt] != -1)
-        return f[pos][val][cnt];
-
-    int len=limit?num[pos]:9;
-    int ans=0,t=0;
-    for(int i=0;i&lt;=len;i++)
-    {
-        if(val != i) t=cnt;
-        else 
-        {
-            if(lead &amp;&amp; val==0)
-                t=0;
-            else  
-                t=cnt+1;
-        }
-        ans+=dfs(pos-1,val,t,lead&amp;&amp;i==0,limit&amp;&amp;i==len);
-    }
-    if(!limit &amp;&amp; !lead) f[pos][val][cnt]=ans;
-    return ans;
-}
-
-void dp(int n,int ans[])
-{
-    int pos=0;
-    while(n)
-    {
-        num[++pos]=n%10;
-        n/=10;
-    }
-
-    for(int i=0;i&lt;=9;i++)
-        ans[i]=dfs(pos,i,0,1,1);
-}
-
-int main()
-{
-    memset(f,-1,sizeof f);
-    int a,b;
-    while(~scanf(&quot;%d%d&quot;,&amp;a,&amp;b))
-    {
-        if(!a &amp;&amp; !b) break;
-        if(a&gt;b) swap(a,b);
-        dp(b,ans1);
-        dp(a-1,ans2);
-        for(int i=0;i&lt;10;i++)
-            printf(&quot;%d &quot;,ans1[i]-ans2[i]);
-    }
-    return 0;
-}
-</code></pre>
-<p><a href="https://vjudge.net/problem/POJ-3252">poj3252</a><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_5712eaa670-32.png" alt="32.png" loading="lazy"></p>
-<pre><code>#include&lt;iostream&gt;
-#include&lt;cstring&gt;
-#include&lt;cstdio&gt;
-#include&lt;algorithm&gt;
-using namespace std;
-const int N=35;
-int f[N][N][N];
-int num[N];
-
-int dfs(int pos,int cnt0,int cnt1,bool lead,bool limit)
-{
-	if(pos == 0) return cnt0&gt;=cnt1;
-	if(!limit &amp;&amp; !lead &amp;&amp; f[pos][cnt0][cnt1] != -1)
-		return f[pos][cnt0][cnt1];
-
-	int len=limit?num[pos]:1;
-	int ans=0;
-	for(int i=0;i&lt;=len;i++)
-	{
-		if(lead &amp;&amp; !i)
-			ans+=dfs(pos-1,0,0,1,limit&amp;&amp;i==len);
-		else 
-			ans+=dfs(pos-1,cnt0+(i==0),cnt1+(i==1),0,limit&amp;&amp;i==len);
-	}
-	if(!limit &amp;&amp; !lead)
-		f[pos][cnt0][cnt1]=ans;
-	return ans;
-}
-
-int dp(int n)
-{
-	int pos=0;
-	while(n)
-	{
-		num[++pos]=n%2;
-		n/=2;
-	}
-	
-	return dfs(pos,0,0,1,1);
-}
-
-int main()
-{
-	int a,b;
-	memset(f,-1,sizeof f);
-	while(~scanf(&quot;%d%d&quot;,&amp;a,&amp;b))
-		printf(&quot;%d\n&quot;,dp(b)-dp(a-1));
-	return 0;
-}
-</code></pre>
-<p><a href="https://vjudge.net/problem/HDU-4734">hdu4734</a><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_3d9a111a70-43.png" alt="43.png" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_50fd7d5070-44.png" alt="44.png" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/28/9969_5440e4d470-45.png" alt="45.png" loading="lazy"></p>
-<pre><code>#include&lt;iostream&gt;
-#include&lt;cstring&gt;
-#include&lt;cstdio&gt;
-#include&lt;algorithm&gt;
-using namespace std;
-const int N=10,M=4610;
-int f[N][M];
-int num[N];
-int a,b;
-
-int dfs(int pos,int val,bool limit)
-{
-	if(pos == 0) return val&gt;=0;
-	if(val &lt; 0) return 0;
-	if(!limit &amp;&amp; f[pos][val] != -1)
-		return f[pos][val];
-	
-	int ans=0;
-	int len=limit?num[pos]:9;
-	for(int i=0;i&lt;=len;i++)
-		ans+=dfs(pos-1,val-i*(1&lt;&lt;pos-1),limit &amp;&amp; i==len);
-	if(!limit) f[pos][val]=ans;
-	return ans;
-
-}
-
-
-int F(int n)
-{
-	int ans=0,len=0;
-	while(n)
-	{
-		ans+=(n%10)*(1&lt;&lt;len);
-		len++;
-		n/=10;
-	}
-	return ans;
-}
-
-int dp(int n)//求解小于等于f(a)的数的个数 
-{
-	int pos=0;
-	while(n)
-	{
-		num[++pos]=n%10;
-		n/=10;
-	}
-	
-	return dfs(pos,F(a),1);
-}
-
-int main()
-{
-	int T,kas=1;
-	cin&gt;&gt;T;
-	memset(f,-1,sizeof f);
-	while(T--)
-	{
-		scanf(&quot;%d%d&quot;,&amp;a,&amp;b);
-		printf(&quot;Case #%d: %d\n&quot;,kas++,dp(b));
-	}
-	return 0;
-}
-</code></pre>
-<p><a href="https://www.acwing.com/problem/content/1083/">acwing1081</a><br>
-统计区间内一个数的B进制表示下恰好有k位为1的数的个数</p>
-<pre><code>#include&lt;iostream&gt;
-#include&lt;cstring&gt;
-#include&lt;cstdio&gt;
-#include&lt;algorithm&gt;
-using namespace std;
-const int N=35;
-int f[N][N];
-int num[N];
-int k,b;
-
-int dfs(int pos,int cnt,bool limit)
-{
-    if(cnt &gt; k) return 0;
-	if(pos == 0) return cnt==k;
-	
-	if(f[pos][cnt] != -1 &amp;&amp; !limit) 
-		return f[pos][cnt];
-	
-	int len=limit?num[pos]:1;
-	int ans=0;
-	for(int i=0;i&lt;=min(len,1);i++)
-		if(i) ans+=dfs(pos-1,cnt+1,limit&amp;&amp;i==len);
-		else ans+=dfs(pos-1,cnt,limit&amp;&amp;i==len);
-
-	if(!limit) f[pos][cnt]=ans;
-	return ans;
-}
-
-int dp(int n)
-{
-	int pos=0;
-	while(n) num[++pos]=n%b,n/=b;
-	
-	return dfs(pos,0,1);
-}
-
-int main()
-{
-	int l,r;
-	memset(f,-1,sizeof f);
-	scanf(&quot;%d%d%d%d&quot;,&amp;l,&amp;r,&amp;k,&amp;b);
-	
-	printf(&quot;%d\n&quot;,dp(r)-dp(l-1));
-	return 0;
-}
-</code></pre>
-<p><a href="https://www.acwing.com/problem/content/1084/">acwing1082</a><br>
-统计区间内不下降数的个数</p>
-<pre><code>#include&lt;iostream&gt;
-#include&lt;cstring&gt;
-#include&lt;cstdio&gt;
-#include&lt;algorithm&gt;
-using namespace std;
-const int N=15;
-int f[N][10];
-int num[N];
-
-int dfs(int pos,int last,bool limit)
-{
-	if(pos ==0) return 1;
-	if(f[pos][last] != -1 &amp;&amp; !limit)
-		return f[pos][last];
-
-	int ans=0;
-	int len=limit?num[pos]:9;
-	for(int i=0;i&lt;=len;i++)
-	{
-		if(i&lt;last) continue;
-		ans+=dfs(pos-1,i,limit&amp;&amp;i==len);
-	}
-	
-	if(!limit) f[pos][last]=ans;
-	return ans;
-	
-}
-
-int dp(int n)
-{
-	int pos=0;
-	while(n)
-	{
-		num[++pos]=n%10;
-		n/=10;
-	}
-	
-	return dfs(pos,0,1);
-}
-
-int main()
-{
-	int a,b;
-	memset(f,-1,sizeof f);
-	while(~scanf(&quot;%d%d&quot;,&amp;a,&amp;b))
-		printf(&quot;%d\n&quot;,dp(b)-dp(a-1));
-	
-	return 0;
-}
-</code></pre>
-<p><a href="https://www.luogu.com.cn/problem/P4127">P4127</a><br>
-询问 [L,R] 中各位数字之和能整除原数的个数。1 ≤ L ≤ R ≤ 1e18</p>
-<h4 id="思路">思路</h4>
-<p>可以发现各位数之和最大只能是 9 * 18 = 162<br>
-我们可以枚举这个和 sum<br>
-然后去统计可以被 sum 整除，且数位和是 sum 的数。<br>
-我们把状态定义为 f[dep][cur][mod]<br>
-表示当前枚举第 dep 位，目前这个数的数位和是 cur，对<br>
-sum 取模是 mod.<br>
-cur = sum 且 mod = 0 的个数要统计进答案</p>
-<pre><code>#include&lt;iostream&gt;
-#include&lt;cstring&gt;
-#include&lt;algorithm&gt;
-#include&lt;cstdio&gt;
-using namespace std;
-typedef long long LL;
-const int N=20,M=170;
-LL f[N][M][M];
-int num[N];
-LL a,b;
-LL sum;
-
-LL dfs(int pos,int val,int mod,bool limit)//val为当前各位数字之和 
-{
-	if(pos == 0) return val==sum &amp;&amp; mod==0;
-	if(val &gt; sum) return 0;
-	
-	if(!limit &amp;&amp; f[pos][val][mod] != -1)
-		return f[pos][val][mod];
-	
-	int len=limit?num[pos]:9;
-	LL ans=0;
-	for(int i=0;i&lt;=len;i++)
-		ans+=dfs(pos-1,val+i,(mod*10+i)%sum,limit&amp;&amp;i==len);
-	
-	if(!limit) f[pos][val][mod]=ans;
-	return ans;
-}
-
-LL dp(LL n)
-{
-	int pos=0;
-	while(n)
-	{
-		num[++pos]=n%10;
-		n/=10;
-	}
-	
-	LL res=0;
-	for(int i=1;i&lt;=pos*9;i++)//枚举各位之和
-	{
-		memset(f,-1,sizeof f);
-		sum=i;
-		res+=dfs(pos,0,0,1);
-	}
-	
-	return res;
-}
-
-int main()
-{
-	cin&gt;&gt;a&gt;&gt;b;
-	cout&lt;&lt;dp(b)-dp(a-1)&lt;&lt;endl;
-	
-	return 0;
-}
-</code></pre>
-<p><a href="https://www.acwing.com/problem/content/1085/">acwing1083</a><br>
-求区间内任意相邻位上的数字之差的绝对值大于等于二的数的个数</p>
-<pre><code>#include&lt;iostream&gt;
-#include&lt;cstring&gt;
-#include&lt;cstdio&gt;
-#include&lt;algorithm&gt;
-using namespace std;
-const int N=11;
-int f[N][10];
-int num[N];
-
-int dfs(int pos,int val,bool lead,bool limit)
-{
-	if(pos == 0) return 1;
-	if(!limit &amp;&amp; !lead &amp;&amp; f[pos][val] != -1)
-		return f[pos][val];
-	
-	int len=limit?num[pos]:9;
-	int ans=0;
-	for(int i=0;i&lt;=len;i++)
-	{
-		if(lead || abs(i-val) &gt;= 2)//如果包含前导零不能让i与之做差，直接让i成为下一位即可
-			ans+=dfs(pos-1,i,lead&amp;&amp;i==0,limit&amp;&amp;i==len);
-	}
-	
-	if(!limit &amp;&amp; !lead) f[pos][val]=ans;
-	return ans;
-}
-
-int dp(int n)
-{
-	int pos=0;
-	while(n)
-	{
-		num[++pos]=n%10;
-		n/=10;
-	}
-	
-	return dfs(pos,-2,1,1);
-}
-
-int main()
-{
-	memset(f,-1,sizeof f);
-	int a,b;
-	cin&gt;&gt;a&gt;&gt;b;
-	cout&lt;&lt;dp(b)-dp(a-1)&lt;&lt;endl;
-	return 0;
-}
-</code></pre>
-<p><a href="https://www.acwing.com/problem/content/description/1086/">acwing1084</a><br>
-求区间内各位数字之和mod N为0的数的个数</p>
-<pre><code>#include&lt;iostream&gt;
-#include&lt;cstring&gt;
-#include&lt;cstdio&gt;
-#include&lt;algorithm&gt;
-using namespace std;
-const int N=11,M=110;
-int f[N][M];
-int num[N];
-int a,b,mod;
-
-int dfs(int pos,int val,bool limit)
-{
-	if(pos == 0) return val == 0;
-	if(!limit &amp;&amp; f[pos][val] != -1)
-		return f[pos][val];
-	
-	int len=limit?num[pos]:9;
-	int ans=0;
-	for(int i=0;i&lt;=len;i++)
-		ans+=dfs(pos-1,(val+i)%mod,limit&amp;&amp;i==len);
-	
-	if(!limit) f[pos][val]=ans;
-	return ans;
-}
-
-int dp(int n)
-{
-	int pos=0;
-	while(n)
-	{
-		num[++pos]=n%10;
-		n/=10;
-	}
-	
-	return dfs(pos,0,1);
-}
-
-int main()
-{
-	while(~scanf(&quot;%d%d%d&quot;,&amp;a,&amp;b,&amp;mod))
-	{
-		memset(f,-1,sizeof f);
-		printf(&quot;%d\n&quot;,dp(b)-dp(a-1));
-	}
-	return 0;
-}
-</code></pre>
-<p><a href="https://vjudge.net/problem/HDU-3709">hdu3709</a><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/29/9969_a954c17971-46.PNG" alt="46.PNG" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/29/9969_aca5ab8071-47.PNG" alt="47.PNG" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/29/9969_aeca18ec71-48.PNG" alt="48.PNG" loading="lazy"><br>
-<img src="https://cdn.acwing.com/media/article/image/2020/03/29/9969_b0c16ca471-49.PNG" alt="49.PNG" loading="lazy"></p>
-<pre><code>#include&lt;iostream&gt;
-#include&lt;cstring&gt;
-#include&lt;cstdio&gt;
-#include&lt;algorithm&gt;
-typedef long long LL;
-using namespace std;
-const int N=20,M=2000;
-LL f[N][N][M];
-int num[N];
-
-LL dfs(int pos,int val,int sum,bool limit)
-{
-	if(pos == 0) return sum==0;
-	if(sum&lt;0) return 0;
-	if(!limit &amp;&amp; f[pos][val][sum] != -1)
-		return f[pos][val][sum];
-	
-	int len=limit?num[pos]:9;
-	LL ans=0;
-	for(int i=0;i&lt;=len;i++)
-		ans+=dfs(pos-1,val,sum+(pos-val)*i,limit&amp;&amp;i==len);
-	
-	if(!limit) f[pos][val][sum]=ans;
-	return ans;
-}
-
-LL dp(LL n)
-{
-	if(n&lt;0) return 0;
-	int pos=0;
-	while(n)
-	{
-		num[++pos]=n%10;
-		n/=10;
-	}
-	
-	LL ans=0;
-	for(int i=1;i&lt;=pos;i++)
-		ans+=dfs(pos,i,0,1);
-	return ans-pos+1;//pos次循环统计了pos次0，应减去多算的pos-1个0的出现次数
-}
-
-int main()
-{
-	int T;
-	cin&gt;&gt;T;
-	memset(f,-1,sizeof f);
-	while(T--)
-	{
-		LL a,b;
-		scanf(&quot;%lld%lld&quot;,&amp;a,&amp;b);
-		printf(&quot;%lld\n&quot;,dp(b)-dp(a-1));
-	}
-	return 0;
-}
-</code></pre>
-<p><a href="https://www.acwing.com/problem/content/1088/">hdu4507</a><br>
-如果一个整数符合下面3个条件之一，那么我们说这个整数和7有关：<br>
-整数中某一位是7<br>
-整数的每一位加起来的和是7的整数倍<br>
-这个整数是7的整数倍<br>
-询问[L,R]中与7无关的数字的平方和，模1e9+7.1≤L≤R≤1e18</p>
-<p>为了转移需要维护三个值：<br>
-cnt 和 7 有关的数的个数<br>
-sum 和 7 有关的数的和<br>
-sqr 和 7 有关的数的平方和</p>
-<p><img src="https://cdn.acwing.com/media/article/image/2020/03/29/9969_69658fe271-50.PNG" alt="50.PNG" loading="lazy"><br>
-因此对于所有回溯上来的数x1,x2,x3..xn，你得知道与7无关的数的个数（对应n个<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>d</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">d^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>的和），<br>
-与7有关的数之和（对应2d(x1+x2+...+xn），与7有关的数的平方和（对应<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msubsup><mi>x</mi><mn>1</mn><mn>2</mn></msubsup><mo>+</mo><msubsup><mi>x</mi><mn>2</mn><mn>2</mn></msubsup><mo>+</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mo>+</mo><msubsup><mi>x</mi><mi>n</mi><mn>2</mn></msubsup></mrow><annotation encoding="application/x-tex">x_1^2+x_2^2+...+x_n^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0622159999999998em;vertical-align:-0.24810799999999997em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-2.4518920000000004em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.24810799999999997em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.0622159999999998em;vertical-align:-0.24810799999999997em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-2.4518920000000004em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.24810799999999997em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.061108em;vertical-align:-0.247em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-2.4530000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span></span></span></span>）<br>
-假设当前状态是 f，从 g 状态转移过来（dfs回溯上来）<br>
-f.cnt += g.cnt<br>
-f.sum += g.sum + d * g.cnt<br>
-f.sqr += d * d * g.cnt + 2 * d * g.sum + g.sqr</p>
-<pre><code>#include&lt;iostream&gt;
-#include&lt;cstring&gt;
-#include&lt;cstdio&gt;
-#include&lt;algorithm&gt;
-typedef long long LL;
-using namespace std;
-const int N=20,mod=1e9+7;
-struct Node
-{
-	LL cnt;
-	LL sum;
-	LL sqr;
-}f[N][7][7];//分别表示数位，各位和%7，数本身%7 
-int num[N];
-LL ten[N];
-
-Node dfs(int pos,int val,int sum,bool limit)
-{
-	if(pos == 0)
-	{
-		Node t;
-		t.cnt= val&gt;0 &amp;&amp; sum&gt;0;
-		t.sum=0;
-		t.sqr=0;
-		return t;
-	}
-	if(!limit &amp;&amp; f[pos][val][sum].cnt != -1)
-		return f[pos][val][sum];
-	
-	int len=limit?num[pos]:9;
-	Node ans;
-	ans.cnt=ans.sum=ans.sqr=0;
-	for(int i=0;i&lt;=len;i++)
-	{
-		if(i == 7) continue;
-		LL d=i*ten[pos-1]%mod;
-		Node t=dfs(pos-1,(val+i)%7,(sum*10+i)%7,limit&amp;&amp;i==len);
-		ans.cnt=(ans.cnt+t.cnt)%mod;
-		ans.sum=(ans.sum+t.sum+d*t.cnt%mod)%mod;
-		ans.sqr=(ans.sqr+t.sqr+d*d%mod*t.cnt%mod+2*d%mod*t.sum%mod)%mod;
-	}
-	
-	if(!limit) f[pos][val][sum]=ans;
-	return ans;
-}
-
-int dp(LL n)
-{
-	int pos=0;
-	while(n)
-	{
-		num[++pos]=n%10;
-		n/=10;
-	}
-	
-	return dfs(pos,0,0,1).sqr;
-}
-
-int main()
-{
-	int T;
-	cin&gt;&gt;T;
-	memset(f,-1,sizeof f);
-	ten[0]=1;
-	for(int i=1;i&lt;N;i++)
-		ten[i]=ten[i-1]*10%mod;
-
-	while(T--)
-	{
-		LL a,b;
-		scanf(&quot;%lld%lld&quot;,&amp;a,&amp;b);
-		printf(&quot;%d\n&quot;,((dp(b)-dp(a-1))%mod+mod)%mod);
-	}
-	return 0;
-}
-</code></pre>
 ]]></content>
     </entry>
 </feed>

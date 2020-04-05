@@ -7,7 +7,7 @@
 <title>
     DP | fxh
 </title>
-<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1585904892869">
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1586059488314">
 <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
 <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
@@ -27,7 +27,7 @@
     <div class="nav">
         <div class="logo">
             <a href="https://caifxh.github.io">
-                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1585904892869" alt="">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1586059488314" alt="">
             </a>
             <div class="site-title">
                 <h1>
@@ -104,6 +104,210 @@
         
             <article class="post i-card">
                 <h2 class="post-title">
+                    <a href="https://caifxh.github.io/post/zhuang-tai-ji/">
+                        状态机
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2020-04-05</time>
+                    
+                        <a href="https://caifxh.github.io/tag/hLQFdtGuD/" class="post-tag i-tag
+                            i-tag-warning">
+            #DP
+        </a>
+                        
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            acwing1049
+
+不合法状态按照问题的性质初始化为INF(求最小值)/-(求最大值)
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int N=100010,INF=0x3f3f3f3f;
+int w[N];
+int f[N][2];
+
+int main()
+{
+    int t;
+    cin&amp;gt;&amp;gt;t;
+    while(t--)
+    {
+        int n;
+        scanf(&amp;quot;%d&amp;quot;,&amp;amp;n);
+        for(int i=1;i&amp;lt;=n;i++)
+            scanf(&amp;quot;%d&amp;quot;,&amp;amp;w[i]);
+        
+        f[0][0]=0,f[0][1]=-INF;
+        for(int i=1;i&amp;lt;=n;i++)
+        {
+            f[i][0]=max(f[i-1][0],f[i-1][1]);
+            f[i][1]=f[i-1][0]+w[i];
+        }
+        printf(&amp;quot;%d\n&amp;quot;,max(f[n][0],f[n][1]));
+    }
+    return 0;
+}
+
+acwing1057
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int N=100010,M=110;
+int w[N];
+int f[N][M][2];
+
+int main()
+{
+    int n,k;
+    cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;k;
+    
+    for(int i=1;i&amp;lt;=n;i++)
+        cin&amp;gt;&amp;gt;w[i];
+    memset(f,-0x3f,sizeof f);
+    for(int i=0;i&amp;lt;=n;i++) f[i][0][0]=0;
+    for(int i=1;i&amp;lt;=n;i++)
+        for(int j=1;j&amp;lt;=k;j++)
+        {
+            f[i][j][0]=max(f[i-1][j][0],f[i-1][j][1]+w[i]);
+            f[i][j][1]=max(f[i-1][j][1],f[i-1][j-1][0]-w[i]);
+        }
+    int res=0;
+    for(int i=0;i&amp;lt;=k;i++)
+        res=max(res,f[n][i][0]);
+    cout&amp;lt;&amp;lt;res&amp;lt;&amp;lt;endl;
+    return 0;
+}
+
+acwing1058
+
+#include &amp;lt;cstring&amp;gt;
+#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N = 100010, INF = 0x3f3f3f3f;
+
+int n;
+int w[N];
+int f[N][3];
+
+int main()
+{
+    scanf(&amp;quot;%d&amp;quot;, &amp;amp;n);
+
+    for (int i = 1; i &amp;lt;= n; i ++ ) scanf(&amp;quot;%d&amp;quot;, &amp;amp;w[i]);
+
+    f[0][0] = f[0][1] = -INF, f[0][2] = 0;
+    for (int i = 1; i &amp;lt;= n; i ++ )
+    {
+        f[i][0] = max(f[i - 1][0], f[i - 1][2] - w[i]);
+        f[i][1] = f[i - 1][0] + w[i];
+        f[i][2] = max(f[i - 1][2], f[i - 1][1]);
+    }
+
+    printf(&amp;quot;%d\n&amp;quot;, max(f[n][1], f[n][2]));
+
+    return 0;
+}
+
+poj3401
+最近，lxhgww沉迷于股票，经过几天的研究，他发现了一些规律的模式。
+他预测未来T天的股票市场。 在第i天，您可以以APi的价格购买一只股票或卖出一只股票以获得BPi。
+还有其他一些限制，即在第一天就可以购买最多ASi股票，最多可以卖出BSi股票。两个交易日的间隔应大于W天。 也就是说，假设您在第i天进行了交易（任何买卖股票都被视为一项交易），那么下一个交易日必须在第（i + W + 1）天或更晚的时间进行。而且，任何时候最多只能拥有MaxP股票。
+在第一天之前，lxhgww已经拥有无限的资金，但是没有股票，当然，他希望从股市中赚到尽可能多的钱。 所以问题来了，他最多只能赚多少钱？
+
+
+
+
+
+
+
+动态规划方程：
+1.不买不卖。dp[i][j]=max(dp[i-1][j],dp[i][j]);
+2.买一些股票。dp[i][j]=max(dp[i-1][k]-(j-k)*ap[i]);(0&amp;lt;=k&amp;lt;=j&amp;lt;=Maxp)
+3.卖一些股票。dp[i][j]=max(dp[i-1][k]+(k-j)*bp[i]);(0&amp;lt;=j&amp;lt;=k&amp;lt;=Maxp)
+注意：
+1.把所有未定义的状态都设置为-INF，1~w+1天得初始化，因为这些天不能有前面的状态推出来，初始化为对应购买多少股票所减去的钱数，因为一开始只有买，不能卖。
+2.循环的递减还是递增问题，跟当前要访问的状态有关。
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int N=2010;
+int f[N][N];
+int ap[N],bp[N];//买入价格，卖出价格 
+int as[N],bs[N];//买入限制，卖出限制
+int q[N];
+int n,m,w;
+
+int main()
+{
+    int T;
+    cin&amp;gt;&amp;gt;T;
+    while(T--)
+    {
+        scanf(&amp;quot;%d%d%d&amp;quot;,&amp;amp;n,&amp;amp;m,&amp;amp;w);
+        for(int i=1;i&amp;lt;=n;i++)
+            scanf(&amp;quot;%d%d%d%d&amp;quot;,&amp;amp;ap[i],&amp;amp;bp[i],&amp;amp;as[i],&amp;amp;bs[i]);
+    
+        memset(f,-0x3f,sizeof f);
+        f[0][0]=0;
+        for(int i=1;i&amp;lt;=w+1;i++)
+            for(int j=0;j&amp;lt;=as[i];j++)
+                f[i][j]=-j*ap[i];
+        
+        for(int i=1;i&amp;lt;=n;i++)
+        {
+            for(int j=0;j&amp;lt;=m;j++)
+                f[i][j]=max(f[i][j],f[i-1][j]);//没有交易
+            if(i &amp;lt;= w+1) continue;
+            int hh=0,tt=-1;
+            for(int j=0;j&amp;lt;=m;j++)
+            {
+                if(hh &amp;lt;= tt &amp;amp;&amp;amp; j-as[i] &amp;gt; q[hh]) 
+                    hh++;
+                
+                while(hh&amp;lt;=tt &amp;amp;&amp;amp; f[i-w-1][j]+j*ap[i] &amp;gt;= f[i-w-1][q[tt]]+q[tt]*ap[i])
+                    tt--;
+                q[++tt]=j;
+                f[i][j]=max(f[i][j],f[i-w-1][q[hh]]+q[hh]*ap[i]-j*ap[i]);//买入 
+             } 
+             
+            hh=0,tt=-1;
+            for(int j=m;j&amp;gt;=0;j--)
+            {
+                if(hh &amp;lt;= tt &amp;amp;&amp;amp; j+bs[i] &amp;lt; q[hh]) 
+                    hh++;
+                
+                while(hh&amp;lt;=tt &amp;amp;&amp;amp; f[i-w-1][j]+j*bp[i] &amp;gt;= f[i-w-1][q[tt]]+q[tt]*bp[i])
+                    tt--;
+                q[++tt]=j;
+                f[i][j]=max(f[i][j],f[i-w-1][q[hh]]+q[hh]*bp[i]-j*bp[i]);//卖出 
+             } 
+        }
+        printf(&amp;quot;%d\n&amp;quot;,f[n][0]);
+    }
+    return 0;
+ } 
+
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://caifxh.github.io/post/zhuang-tai-ji/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+            <article class="post i-card">
+                <h2 class="post-title">
                     <a href="https://caifxh.github.io/post/dp-you-hua/">
                         DP其他优化
                     </a>
@@ -112,7 +316,7 @@
                     <time class="post-time">2020-04-02</time>
                     
                         <a href="https://caifxh.github.io/tag/hLQFdtGuD/" class="post-tag i-tag
-                            i-tag-primary">
+                            i-tag-other_2">
             #DP
         </a>
                         
@@ -584,6 +788,150 @@ int main()
 	return 0;
 }
 
+数据结构优化
+hdu4991
+
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=10010,M=110,mod=123456789;
+int a[N],b[N];
+int f[N][M];
+int n,m,len;
+
+int lowbit(int x)
+{
+	return x&amp;amp;-x;
+}
+
+void add(int x,int j,int val)
+{
+	for(int i=x;i&amp;lt;=len;i+=lowbit(i))
+		f[i][j]=(f[i][j]+val)%mod;	
+}
+
+int query(int x,int j)
+{
+	int res=0;
+	for(int i=x;i;i-=lowbit(i))
+		res=(res+f[i][j])%mod;
+	return res;
+}
+
+int main()
+{
+	while(~scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;m))
+	{
+		for(int i=1;i&amp;lt;=n;i++)
+			scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]),b[i]=a[i];
+		
+		memset(f,0,sizeof f);
+		sort(b+1,b+n+1);
+		len=unique(b+1,b+n+1)-b-1;
+		for(int i=1;i&amp;lt;=n;i++)
+		{
+			int pos=lower_bound(b+1,b+len+1,a[i])-b;
+			add(pos,1,1);
+			for(int j=2;j&amp;lt;=m;j++)
+			{
+				int sum=query(pos-1,j-1);
+				add(pos,j,sum);
+			}
+		}
+		
+		printf(&amp;quot;%d\n&amp;quot;,query(len,m));
+	}
+	return 0;
+}
+
+poj1769
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+#define lc u&amp;lt;&amp;lt;1
+#define rc u&amp;lt;&amp;lt;1|1
+const int N=50010,M=500010,INF=0x3f3f3f3f;
+struct Node
+{
+	int l,r;
+	int val;
+}tr[4*M];
+int a[M],b[M];
+int n,m;
+
+void pushup(int u)
+{
+	tr[u].val=min(tr[lc].val,tr[rc].val);
+}
+
+void build(int u,int l,int r)
+{
+	tr[u].l=l,tr[u].r=r;
+	if(l == r)
+	{
+		if(l == 1) tr[u].val=0;
+		else tr[u].val=INF;
+		return;
+	}
+	int mid=l+r&amp;gt;&amp;gt;1;
+	build(lc,l,mid);
+	build(rc,mid+1,r);
+	pushup(u);
+}
+
+void modify(int u,int x,int v)
+{
+	if(tr[u].l == tr[u].r)
+	{
+		tr[u].val=v;
+		return;
+	}
+	
+	int mid=tr[u].l+tr[u].r&amp;gt;&amp;gt;1;
+	if(x&amp;lt;=mid) modify(lc,x,v);
+	else modify(rc,x,v);
+	pushup(u);
+}
+
+int query(int u,int l,int r)
+{
+	if(l &amp;lt;= tr[u].l &amp;amp;&amp;amp; tr[u].r &amp;lt;= r)
+		return tr[u].val;
+	int mid=tr[u].l+tr[u].r&amp;gt;&amp;gt;1;
+	int res=INF;
+	if(l&amp;lt;=mid) res=min(res,query(lc,l,r));
+	if(r&amp;gt;mid) res=min(res,query(rc,l,r));
+	return res;
+}
+
+int main()
+{
+	cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m;
+	for(int i=0;i&amp;lt;m;i++)
+		scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;a[i],&amp;amp;b[i]);
+	
+	build(1,1,n);
+	
+	for(int i=0;i&amp;lt;m;i++)
+	{
+		int v1=query(1,a[i],b[i])+1;
+		int v2=query(1,b[i],b[i]);
+		modify(1,b[i],min(v1,v2));
+	}
+	
+	printf(&amp;quot;%d\n&amp;quot;,query(1,n,n));
+	
+	return 0;
+}
+
 
                                         </div>
                                         
@@ -602,7 +950,7 @@ int main()
                     <time class="post-time">2020-04-01</time>
                     
                         <a href="https://caifxh.github.io/tag/hLQFdtGuD/" class="post-tag i-tag
-                            i-tag-">
+                            i-tag-warning">
             #DP
         </a>
                         
@@ -1797,7 +2145,7 @@ int main()
                     <time class="post-time">2020-03-28</time>
                     
                         <a href="https://caifxh.github.io/tag/hLQFdtGuD/" class="post-tag i-tag
-                            i-tag-error">
+                            i-tag-other_3">
             #DP
         </a>
                         
@@ -2707,7 +3055,7 @@ int main()
                     <time class="post-time">2020-03-27</time>
                     
                         <a href="https://caifxh.github.io/tag/hLQFdtGuD/" class="post-tag i-tag
-                            i-tag-warning">
+                            i-tag-info">
             #DP
         </a>
                         
@@ -3192,7 +3540,7 @@ int main()
                     <time class="post-time">2020-03-26</time>
                     
                         <a href="https://caifxh.github.io/tag/hLQFdtGuD/" class="post-tag i-tag
-                            i-tag-other_4">
+                            i-tag-">
             #DP
         </a>
                         
@@ -3517,7 +3865,7 @@ code
                     <!-- 个人信息 -->
                     
     <div class="id_card i-card">
-        <div class="id_card-avatar" style="background-image: url(https://caifxh.github.io/images/avatar.png?v=1585904892869)">
+        <div class="id_card-avatar" style="background-image: url(https://caifxh.github.io/images/avatar.png?v=1586059488314)">
         </div>
         <h1 class="id_card-title">
             fxh

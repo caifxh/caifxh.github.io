@@ -1,0 +1,486 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>
+    欧拉路径 | fxh
+</title>
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1586059488314">
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://caifxh.github.io/styles/main.css">
+<!-- js -->
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://caifxh.github.io/media/js/jquery.sticky-sidebar.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+        
+</head>
+
+<body>
+    <div class="main">
+        <div class="header">
+    <div class="nav">
+        <div class="logo">
+            <a href="https://caifxh.github.io">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1586059488314" alt="">
+            </a>
+            <div class="site-title">
+                <h1>
+                    fxh
+                </h1>
+            </div>
+        </div>
+        <span class="menu-btn fa fa-align-justify"></span>
+        <div class="menu-container">
+            <ul>
+                
+                    
+                            <li>
+                                <a href="/" class="menu">
+                                    首页
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/archives" class="menu">
+                                    归档
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/tags" class="menu">
+                                    标签
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/post/about" class="menu">
+                                    关于
+                                </a>
+                            </li>
+                            
+                                
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $(".menu-btn").click(function() {
+            $(".menu-container").slideToggle();
+        });
+        $(window).resize(function() {
+
+            if (window.matchMedia('(min-width: 960px)').matches) {
+                $(".menu-container").css('display', 'block')
+            } else {
+                $(".menu-container").css('display', 'none')
+            }
+
+        });
+    });
+</script>
+
+            <div id="main-content" class="post-detail main-container">
+                <!-- left -->
+                <div id="content" class="main-container-left">
+                    <article class="post i-card">
+                        <h2 class="post-title">
+                            欧拉路径
+                        </h2>
+                        <div class="post-info">
+                            <time class="post-time">2020-04-04</time>
+                            
+                                <a href="https://caifxh.github.io/tag/Aq1uYaqZQ/" class="post-tag i-tag
+                            i-tag-other_3">
+                            #图论
+                        </a>
+                                
+                        </div>
+                        
+                                <div class="post-content">
+                                    <h4 id="欧拉路">欧拉路</h4>
+<p>通过图（无向图或有向图）中所有边一次且仅一次行遍图中所有顶点的通路称为欧拉通路，通过图中所有边一次且仅一次行遍所有顶点的回路称为欧拉回路。具有欧拉回路的图称为欧拉图（Euler Graph），具有欧拉通路而无欧拉回路的图称为半欧拉图。<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/29/9969_eebc2c825a-1.PNG" alt="1.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/29/9969_025de6545a-3.PNG" alt="3.PNG" loading="lazy"></p>
+<p><img src="https://cdn.acwing.com/media/article/image/2020/02/29/9969_06e3a60e5a-2.PNG" alt="2.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/29/9969_0436e9d05a-5.PNG" alt="5.PNG" loading="lazy"><br>
+(注意：这里说有向图连通，说的是有向图是弱连通图。即把有向图中的边变成无向边，只要该图连通，那么原有向图即是弱连通图。实际中可用并查集判断是否弱连通)<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/29/9969_bfab780c5a-6.PNG" alt="6.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/29/9969_0be375da5a-7.PNG" alt="7.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/29/9969_c5661c205a-8.PNG" alt="8.PNG" loading="lazy"></p>
+<p>• 欧拉回路的求解方法主要有两种：</p>
+<ul>
+<li>DFS搜索</li>
+<li>Fleury算法</li>
+</ul>
+<p>用 DFS 搜索思想求解欧拉回路的思路为：</p>
+<ul>
+<li>利用欧拉定理判断出一个图存在欧拉通路或欧拉回路。</li>
+<li>选择一个正确的起始顶点，用 DFS 算法遍历所有的边（每条边<br>
+只遍历一次），遇到走不通就回退。 • 在搜索前进方向上将遍历过的边按顺序记录下来。</li>
+<li>这组边的排列就组成了一条欧拉通路或欧拉回路。</li>
+</ul>
+<h4 id="例题">例题</h4>
+<p>给定 n 张骨牌，每张骨牌有左右两个点数（从 1 到 6）。问能不能<br>
+通过交换骨牌的顺序和交换左右两个点数，使得任意两个相邻骨牌的<br>
+相邻段为相等的数字。<br>
+原始： (1 2)(2 4)(2 4)(6 4)(2 1)<br>
+重排后： (4 2)(2 1)(1 2)(2 4)(4 6)</p>
+<p>本题可以转化成欧拉回路或欧拉通路的求解问题。</p>
+<ul>
+<li>首先要构造一个图？</li>
+<li>每张骨牌当一个点？</li>
+<li>如何解决交换骨牌内部两个点数？</li>
+</ul>
+<p>图建好之后，先判断是否存在欧拉通路或欧拉回路。<br>
+总结：存在 ➔ 选择正确的起点 ➔ 6 ➔ 开始 DFS</p>
+<p><a href="https://www.acwing.com/problem/content/1125/">acwing1123</a><br>
+我们将这个图看成有向图，对于每输入一组数据加两条有向边，需要每条边都至少走一遍<br>
+我们先回想一下存在有向图的欧拉路径的充分必要条件</p>
+<ul>
+<li>所有点的入度都等于出度</li>
+<li>除了两个点以外的点入度等于出度，</li>
+</ul>
+<p>这两个点一个 入度 = 出度 + 1，另一个 入度 = 出度 - 1<br>
+因此，我们考虑每加一条边，每个点的入度和出度都加1<br>
+所以，每个点的入度都一定等于出度,符合上述的第一条<br>
+故这个图存在欧拉路径，并且可以选任意点为起点<br>
+所以我们只需统计所有的边的长度总和，跟据20km/h 算出时间即可</p>
+<pre><code>#include &lt;cstring&gt;
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+#include &lt;cmath&gt;
+
+using namespace std;
+
+int main()
+{
+    double x1, y1, x2, y2;
+    cin &gt;&gt; x1 &gt;&gt; y1;
+
+    double sum = 0;
+    while (cin &gt;&gt; x1 &gt;&gt; y1 &gt;&gt; x2 &gt;&gt; y2)
+    {
+        double dx = x1 - x2;
+        double dy = y1 - y2;
+        sum += sqrt(dx * dx + dy * dy) * 2;
+    }
+
+    int minutes = round(sum / 1000 / 20 * 60);
+    int hours = minutes / 60;
+    minutes %= 60;
+
+    printf(&quot;%d:%02d\n&quot;, hours, minutes);
+
+    return 0;
+}
+</code></pre>
+<p><a href="https://www.acwing.com/problem/content/description/1126/">acwing1124</a></p>
+<p>无向图的欧拉路径&amp;欧拉回路裸题</p>
+<pre><code>#include&lt;iostream&gt;
+using namespace std;
+const int N=510;
+int n=500,m;
+int g[N][N];
+int ans[1100];
+int cnt;
+int d[N];
+
+void dfs(int u)
+{
+    for(int i=1;i&lt;=n;i++)//从小到大枚举，字典序最小
+    {
+        if(g[u][i])
+        {
+            g[u][i]--,g[i][u]--;
+            dfs(i);
+        }
+    }
+    
+    ans[cnt++]=u;
+}
+
+int main()
+{
+    cin&gt;&gt;m;
+    
+    int l=500,r=1;
+    while(m--)
+    {
+        int a,b;
+        cin&gt;&gt;a&gt;&gt;b;
+        l=min(l,min(a,b));
+        r=max(r,max(a,b));
+        g[a][b]++,g[b][a]++;
+        d[a]++,d[b]++;
+    }
+    
+    int start=l;
+    for(int i=l;i&lt;=r;i++)
+    {
+        if(d[i] % 2)
+        {
+            start=i;
+            break;
+        }
+    }
+    
+    dfs(start);//欧拉回路从哪开始都可以搜，欧拉路要从奇点开始
+    
+    for(int i=cnt-1;i&gt;=0;i--)//逆序输出
+        printf(&quot;%d\n&quot;,ans[i]);
+    return 0;
+}
+</code></pre>
+<p><a href="https://www.acwing.com/problem/content/1187/">acwing1185</a><br>
+有向图，首尾连单词，可用DFS和并查集判断连通性</p>
+<pre><code>#include &lt;cstdio&gt;
+#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+using namespace std;
+const int N = 26, L = 1005;
+int n, cnt, g[N][N], in[N], out[N];
+char s[L];
+
+void dfs(int u) {
+    for (int i = 0; i &lt; 26; i++) {
+        if(g[u][i]) {
+            cnt++;
+            g[u][i] --;
+            dfs(i);
+        }
+    }
+}
+int main() {
+    int T; scanf(&quot;%d&quot;, &amp;T);
+    while(T--) {
+        cnt = 0;
+        memset(g, 0, sizeof g);
+        memset(in, 0, sizeof in);
+        memset(out, 0, sizeof out);
+        scanf(&quot;%d&quot;, &amp;n);
+        for (int i = 0; i &lt; n; i++) {
+            scanf(&quot;%s&quot;, s);
+            int u = s[0] - 'a', v = s[strlen(s) - 1] - 'a';
+            g[u][v]++;
+            out[u]++, in[v]++;
+        }
+
+        bool ok = true;
+        int s = 0, t = 0;
+        for (int i = 0; i &lt; 26; i++) {
+            if(in[i] != out[i]) {
+                if(in[i] == out[i] + 1) t ++;
+                else if(in[i] + 1 == out[i]) s++;
+                else { ok = false; break; }
+            }
+        }
+
+
+        if(!(!s &amp;&amp; !t || (s == 1 &amp;&amp; t == 1))) ok = false;
+
+        s = 0;
+        while(!out[s]) s++;
+        for (int i = 0; i &lt; 26; i++)
+            if(in[i] + 1 == out[i]) { s = i; break; }
+
+        dfs(s);
+
+        if(cnt &lt; n) ok = false;
+        puts(ok ? &quot;Ordering is possible.&quot; : &quot;The door cannot be opened.&quot;);
+    }
+    return 0;
+}
+</code></pre>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+using namespace std;
+const int N=30;
+int n;
+int din[N], dout[N], p[N];
+bool st[N];
+
+
+int find(int x)
+{
+    if (p[x] != x) p[x] = find(p[x]);
+    return p[x];
+}
+
+int main()
+{
+    int t;
+    scanf(&quot;%d&quot;,&amp;t);
+    while(t--)
+    {
+        scanf(&quot;%d&quot;,&amp;n);
+        memset(din,0,sizeof din);
+        memset(dout,0,sizeof dout);
+        memset(st,0,sizeof st);
+        for(int i=0;i&lt;26;i++)
+            p[i]=i;
+        
+        for(int i=0;i&lt;n;i++)
+        {
+            char str[1010];
+            scanf(&quot;%s&quot;,str);
+            int len=strlen(str);
+            int a=str[0]-'a',b=str[len-1]-'a';
+            st[a]=st[b]=true;
+            dout[a]++,din[b]++;
+            p[find(a)]=find(b);
+        }
+        
+        int start=0,end=0;
+        bool success=true;
+        for(int i=0;i&lt;26;i++)
+            if(din[i] != dout[i])
+            {
+                if(din[i] == dout[i] + 1)
+                    end++;
+                else if(din[i] + 1 == dout[i])
+                    start++;
+                else
+                {
+                    success=false;
+                    break;
+                }
+            }
+            
+        if(!(!start &amp;&amp; !end ||start == 1 &amp;&amp; end == 1))
+            success=false;
+        int rep = -1;
+        for (int i = 0; i &lt; 26; i ++ )
+            if (st[i])
+            {
+                if (rep == -1) rep = find(i);
+                else if (rep != find(i))
+                {
+                    success = false;
+                    break;
+                }
+            }
+
+        if (success) puts(&quot;Ordering is possible.&quot;);
+        else puts(&quot;The door cannot be opened.&quot;);
+
+    }
+    return 0;
+}
+</code></pre>
+
+                                </div>
+                    </article>
+                    <!--  -->
+                    
+                        <div class="next-post">
+                            <div class="next">下一篇</div>
+                            <a href="https://caifxh.github.io/post/kuo-zhan-kmp/">
+                                <h3 class="post-title">
+                                    扩展KMP
+                                </h3>
+                            </a>
+                        </div>
+                        
+                            <div id="disqus_thread"></div>
+                            <div id="gitalk-container"></div>
+                </div>
+                <!-- middle -->
+                <div class="main-container-middle"></div>
+                <!-- right -->
+                <div id="sidebar" class="main-container-right">
+                    
+                        <!-- toc -->
+                        
+    <div class="toc-card i-card ">
+        <div class="toc-title i-card-title">目录</div>
+        <div class="toc-content">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E6%AC%A7%E6%8B%89%E8%B7%AF">欧拉路</a></li>
+<li><a href="#%E4%BE%8B%E9%A2%98">例题</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+        <script>
+            function locateCatelogList() {
+                /*获取文章目录集合,可通过:header过滤器*/
+                var alis = $('.post-content :header');
+                /*获取侧边栏目录列表集合**/
+                var sidebar_alis = $('.markdownIt-TOC a');
+                /*获取滚动条到顶部的距离*/
+                var scroll_height = $(window).scrollTop();
+                for (var i = 0; i < alis.length; i++) {
+                    /*获取锚点集合中的元素分别到顶点的距离*/
+                    var a_height = $(alis[i]).offset().top;
+                    if (a_height < scroll_height) {
+                        /*高亮显示*/
+                        sidebar_alis.removeClass('on');
+                        $(sidebar_alis[i]).addClass('on');
+                    }
+                }
+            }
+            $(function() {
+                /*绑定滚动事件 */
+                $(window).bind('scroll', locateCatelogList);
+            });
+        </script>
+    </div>
+    
+                            
+
+                </div>
+
+
+
+
+            </div>
+
+
+            <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://caifxh.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+
+    </div>
+    <script>
+        $('#sidebar').stickySidebar({
+            topSpacing: 80,
+            // bottomSpacing: 60
+        });
+    </script>
+    
+</body>
+
+</html>

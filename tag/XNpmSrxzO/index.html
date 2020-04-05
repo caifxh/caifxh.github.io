@@ -7,7 +7,7 @@
 <title>
     比赛 | fxh
 </title>
-<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1585904892869">
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1586059488314">
 <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
 <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
@@ -27,7 +27,7 @@
     <div class="nav">
         <div class="logo">
             <a href="https://caifxh.github.io">
-                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1585904892869" alt="">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1586059488314" alt="">
             </a>
             <div class="site-title">
                 <h1>
@@ -112,7 +112,7 @@
                     <time class="post-time">2020-04-02</time>
                     
                         <a href="https://caifxh.github.io/tag/XNpmSrxzO/" class="post-tag i-tag
-                            i-tag-success">
+                            i-tag-error">
             #比赛
         </a>
                         
@@ -191,6 +191,129 @@ int main()
 	return 0;
 }
 
+F
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=1e5+10;
+typedef long long LL;
+vector&amp;lt;int&amp;gt; g[N];
+int p[N],cnt[N];
+int son[N];//子节点所处连通块中白点数目 
+LL sum[N];
+char s[N];
+int n;
+LL ans;
+
+int find(int x)
+{
+	if(x != p[x])
+		p[x]=find(p[x]);
+	return p[x];
+}
+
+void merge(int a,int b)
+{
+	int pa=find(a);
+	int pb=find(b);
+	if(pa != pb)
+	{
+		p[pa]=pb;
+		cnt[pb]+=cnt[pa];
+	}
+}
+
+int main()
+{
+	cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;s+1;
+	
+	for(int i=1;i&amp;lt;=n;i++)
+		p[i]=i,cnt[i]=1;
+		
+	for(int i=1;i&amp;lt;n;i++)
+	{
+		int a,b;
+		cin&amp;gt;&amp;gt;a&amp;gt;&amp;gt;b;
+		g[a].push_back(b);
+		g[b].push_back(a);
+		if(s[a] == &#39;W&#39; &amp;amp;&amp;amp; s[b] ==&#39;W&#39;)
+			merge(a,b);	
+	}	
+	
+	for(int i=1;i&amp;lt;=n;i++)
+		if(s[i] == &#39;B&#39;)
+		{
+			int tot=0;
+			for(int j=0;j&amp;lt;g[i].size();j++)
+				if(s[g[i][j]] == &#39;W&#39;)
+					son[++tot]=cnt[find(g[i][j])];
+			
+			for(int j=1;j&amp;lt;=tot;j++)
+				sum[j]=sum[j-1]+son[j];
+			
+			ans+=sum[tot];//黑点为端点 
+			for(int j=1;j&amp;lt;=tot;j++)
+				ans+=son[j]*sum[j-1];//黑点为中间点 
+		}
+		
+	printf(&amp;quot;%lld\n&amp;quot;,ans);
+	
+	return 0;
+}
+
+树形dp解法
+dp[i][0]表示i的子孙节点到i路径上无黑点的个数，dp[i][1]表示i的子孙节点到i路径上有一个黑点的个数。
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N=1e5+10;
+LL f[N][2];
+LL ans;
+vector&amp;lt;int&amp;gt; g[N];
+char s[N];
+int n;
+
+void dfs(int u,int fa)
+{
+	if(s[u] == &#39;W&#39;) f[u][0]=1,f[u][1]=0;
+	else f[u][0]=0,f[u][1]=1;
+	
+	for(int i=0;i&amp;lt;g[u].size();i++)
+	{
+		int j=g[u][i];
+		if(j == fa) continue;
+		dfs(j,u);
+		ans+=f[u][0]*f[j][1]+f[u][1]*f[j][0];
+		if(s[u] == &#39;W&#39;) f[u][0]+=f[j][0],f[u][1]+=f[j][1];
+		else f[u][0]=0,f[u][1]+=f[j][0];
+	}
+}
+
+int main()
+{
+	cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;s+1;
+	for(int i=1;i&amp;lt;n;i++)
+	{
+		int x,y;
+		cin&amp;gt;&amp;gt;x&amp;gt;&amp;gt;y;
+		g[x].push_back(y);
+		g[y].push_back(x);
+	}
+	
+	dfs(1,-1);
+	
+	printf(&amp;quot;%lld\n&amp;quot;,ans);
+	
+	return 0;
+}
+
 
                                         </div>
                                         
@@ -210,7 +333,7 @@ int main()
                     <!-- 个人信息 -->
                     
     <div class="id_card i-card">
-        <div class="id_card-avatar" style="background-image: url(https://caifxh.github.io/images/avatar.png?v=1585904892869)">
+        <div class="id_card-avatar" style="background-image: url(https://caifxh.github.io/images/avatar.png?v=1586059488314)">
         </div>
         <h1 class="id_card-title">
             fxh
