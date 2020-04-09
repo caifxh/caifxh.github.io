@@ -1,0 +1,548 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>
+    四边形不等式 | fxh
+</title>
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1586405129501">
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://caifxh.github.io/styles/main.css">
+<!-- js -->
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://caifxh.github.io/media/js/jquery.sticky-sidebar.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+        
+</head>
+
+<body>
+    <div class="main">
+        <div class="header">
+    <div class="nav">
+        <div class="logo">
+            <a href="https://caifxh.github.io">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1586405129501" alt="">
+            </a>
+            <div class="site-title">
+                <h1>
+                    fxh
+                </h1>
+            </div>
+        </div>
+        <span class="menu-btn fa fa-align-justify"></span>
+        <div class="menu-container">
+            <ul>
+                
+                    
+                            <li>
+                                <a href="/" class="menu">
+                                    首页
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/archives" class="menu">
+                                    归档
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/tags" class="menu">
+                                    标签
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/post/about" class="menu">
+                                    关于
+                                </a>
+                            </li>
+                            
+                                
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $(".menu-btn").click(function() {
+            $(".menu-container").slideToggle();
+        });
+        $(window).resize(function() {
+
+            if (window.matchMedia('(min-width: 960px)').matches) {
+                $(".menu-container").css('display', 'block')
+            } else {
+                $(".menu-container").css('display', 'none')
+            }
+
+        });
+    });
+</script>
+
+            <div id="main-content" class="post-detail main-container">
+                <!-- left -->
+                <div id="content" class="main-container-left">
+                    <article class="post i-card">
+                        <h2 class="post-title">
+                            四边形不等式
+                        </h2>
+                        <div class="post-info">
+                            <time class="post-time">2020-04-09</time>
+                            
+                                <a href="https://caifxh.github.io/tag/hLQFdtGuD/" class="post-tag i-tag
+                            i-tag-error">
+                            #DP
+                        </a>
+                                
+                        </div>
+                        
+                                <div class="post-content">
+                                    <p>四边形不等式优化主要针对区间DP模型。<br>
+转移方程形如：<br>
+f[i][j] = min(f[i][k] + f[k + 1][j] + w(i, j))<br>
+对于每个区间都要枚举 k<br>
+时间复杂度 O(<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>n</mi><mn>3</mn></msup></mrow><annotation encoding="application/x-tex">n^3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span></span></span></span>)<br>
+状态数已经定好了是 O(<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>n</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">n^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>)，我们能想办法优化的部分就是把 O(n) 的转移优化到 O(1)<br>
+这里就要用到四边形不等式优化。</p>
+<p>对于 a &lt; b &lt; c &lt; d：<br>
+如果有 f(a, c) + f(b, d) &lt;= f(b, c) + f(a, d) <strong>交叉 &lt;= 包含</strong><br>
+我们就称 f 满足四边形不等式。</p>
+<p>如果代价函数 w(i,j) 满足单调性和四边形不等式，那么 dp 函数 f(i,j) 也满足四边形不等式。<br>
+定义 s(i,j) 为 f(i,j) 取得最优值对应的转移（即 k）<br>
+如果 f(i,j) 满足四边形不等式，那么 s(i,j) 单调<br>
+即s(i,j)≤s(i,j+1)≤s(i+1,j+1)</p>
+<h4 id="应用背景">应用背景</h4>
+<figure data-type="image" tabindex="1"><img src="https://cdn.acwing.com/media/article/image/2020/04/08/9969_a72071bc79-20.PNG" alt="20.PNG" loading="lazy"></figure>
+<p><img src="https://cdn.acwing.com/media/article/image/2020/04/08/9969_9d82d0e079-21.PNG" alt="21.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/08/9969_c982acc479-22.PNG" alt="22.PNG" loading="lazy"></p>
+<h4 id="四边形不等式定义和单调性定义">四边形不等式定义和单调性定义</h4>
+<p><img src="https://cdn.acwing.com/media/article/image/2020/04/08/9969_22f1d33479-23.PNG" alt="23.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/08/9969_70a44cae79-24.png" alt="24.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/08/9969_9708b8d079-25.PNG" alt="25.PNG" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+using namespace std;
+const int N=310,INF=0x3f3f3f3f;
+int f[N][N];
+int sum[N];
+int s[N][N];
+int n;
+
+int main()
+{
+    cin&gt;&gt;n;
+
+    for(int i=1;i&lt;=n;i++)
+    {
+        cin&gt;&gt;sum[i];
+        sum[i]+=sum[i-1];
+        s[i][i]=i;
+    }
+
+    for(int len=2;len&lt;=n;len++)
+    {
+        for(int i=1;i+len-1&lt;=n;i++)
+        {
+            int j=i+len-1;
+            f[i][j]=INF;
+            for(int k=s[i][j-1];k&lt;=s[i+1][j];k++)
+                if(f[i][j] &gt; f[i][k]+f[k+1][j]+sum[j]-sum[i-1])
+                {
+                    f[i][j] = f[i][k]+f[k+1][j]+sum[j]-sum[i-1];
+                    s[i][j]=k;
+                }
+        }
+    }
+
+    cout&lt;&lt;f[1][n]&lt;&lt;endl;
+
+    return 0;
+}
+
+</code></pre>
+<p><a href="https://www.acwing.com/problem/content/1070/">acwing1068</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/08/9969_1733cf0c79-29.png" alt="29.png" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+const int N=210,INF=0x3f3f3f3f;
+int f[N][N];
+int g[N][N];
+int w[N];
+int sum[N];
+int s[N][N];
+int n;
+
+int main()
+{
+    cin&gt;&gt;n;
+    
+    for(int i=1;i&lt;=n;i++)
+    {
+        cin&gt;&gt;w[i];
+        w[n+i]=w[i];
+    }
+    
+    for(int i=1;i&lt;=n*2;i++)
+    {
+        sum[i]=sum[i-1]+w[i];
+        s[i][i]=i;
+    }
+    
+    for(int len=2;len&lt;=n*2;len++)
+    {
+        for(int i=1;i+len-1&lt;=n*2;i++)
+        {
+            int j=i+len-1;
+            f[i][j]=INF;
+            for(int k=s[i][j-1];k&lt;=s[i+1][j];k++)
+                if(f[i][j] &gt; f[i][k]+f[k+1][j]+sum[j]-sum[i-1])
+                {
+                    f[i][j] = f[i][k]+f[k+1][j]+sum[j]-sum[i-1];
+                    s[i][j]=k;
+                }
+                
+            g[i][j]=max(g[i+1][j],g[i][j-1])+sum[j]-sum[i-1];
+        }
+    }
+    
+    int maxv=0;
+    int minv=INF;
+    for(int i=1;i&lt;=n;i++)
+    {
+        maxv=max(maxv,g[i][n+i-1]);
+        minv=min(minv,f[i][n+i-1]);
+    }
+    
+    cout&lt;&lt;minv&lt;&lt;endl&lt;&lt;maxv&lt;&lt;endl;
+    
+    return 0;
+}
+</code></pre>
+<h4 id="四边形不等式定理">四边形不等式定理</h4>
+<figure data-type="image" tabindex="2"><img src="https://cdn.acwing.com/media/article/image/2020/04/08/9969_ffe53f3c79-27.PNG" alt="27.PNG" loading="lazy"></figure>
+<h4 id="一维线性dp的四边形不等式优化">一维线性DP的四边形不等式优化</h4>
+<figure data-type="image" tabindex="3"><img src="https://cdn.acwing.com/media/article/image/2020/04/08/9969_0a2e13bc79-28.PNG" alt="28.PNG" loading="lazy"></figure>
+<p>比赛时，我们只要先写出暴力的 DP 然后打出 cost、dp、和决策数组，验证 cost、dp函数是否满足四边形不等式，<br>
+以及决策是否具有单调性。</p>
+<ul>
+<li>拿到题目后，先判断w是否单调、是否满足四边形不等式，再使用四边形不等式优化DP。</li>
+</ul>
+<h4 id="最优二叉搜索树">最优二叉搜索树</h4>
+<p><img src="https://cdn.acwing.com/media/article/image/2020/04/08/9969_f95a567879-31.PNG" alt="31.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/08/9969_e9d4e4fc79-30.PNG" alt="30.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/08/9969_13099f6679-32.PNG" alt="32.PNG" loading="lazy"><br>
+题目给出的数列(val)是有序的，假设我们以i为根，1<sub>i-1就是左子树，i+1</sub>n就是右子树</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+const int N=260;
+int w[N];
+int sum[N];
+int s[N][N];
+int f[N][N];
+int n;
+
+int main()
+{
+	while(~scanf(&quot;%d&quot;,&amp;n))
+	{
+		for(int i=1;i&lt;=n;i++)
+		{
+			cin&gt;&gt;w[i];
+			sum[i]=sum[i-1]+w[i];
+			s[i][i]=i;
+		}
+		
+		for(int len=1;len&lt;=n;len++)
+		{
+			for(int i=1;i+len-1&lt;=n;i++)
+			{
+				int j=i+len-1;
+				f[i][j]=1e9;
+				if(len == 1) f[i][j]=0;
+				
+				for(int k=s[i][j-1];k&lt;=s[i+1][j];k++)
+					if(f[i][j] &gt; f[i][k-1]+f[k+1][j]+sum[j]-sum[i-1]-w[k])
+					{
+						f[i][j] = f[i][k-1]+f[k+1][j]+sum[j]-sum[i-1]-w[k];
+						s[i][j]=k;
+					}
+			}
+		}
+		
+		cout&lt;&lt;f[1][n]&lt;&lt;endl;
+	}
+	return 0;
+}
+</code></pre>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=2829">hdu2829</a><br>
+有 n 个火车站，第 i 个火车站有一个重要度 a[i]。<br>
+你现在可以炸掉 m 条铁轨。这样铁轨就断成了 m + 1 段，每一段都有一个战略值，它等于这一段铁轨上的火车站两两的重要度乘积之和。请你最小化总的战略值之和。<br>
+0 ≤ m &lt; n ≤ 1000</p>
+<p>斜率优化：<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/08/9969_e9dadca879-33.PNG" alt="33.PNG" loading="lazy"><br>
+那么，就有：dp[i][j] = min( dp[k][j-1] + w[k+1][i] )，j≤k&lt;i；<br>
+方程的意义是：炸毁仓库k和仓库k+1之间的那段铁路（即第k段铁路），算出总价值，枚举k找到最小的。</p>
+<p>那么如何计算w[k+1][i]呢？假设sum[i]=<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msubsup><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mi>i</mi></msubsup><mi>v</mi><mo>[</mo><mi>k</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">\sum_{k=1}^{i}v[k]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.264274em;vertical-align:-0.29971000000000003em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.964564em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.29971000000000003em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mclose">]</span></span></span></span> ，那么就有：w[1][i] = w[1][k] + w[k+1][i] + (v[1]+v[2]+…+v[k]) × (v[k+1]+v[k+2]+…+v[i])= w[1][k] + w[k+1][i] + sum[k] × (sum[i]-sum[k])<br>
+即w[k+1][i] = w[1][i] - w[1][k] - sum[k] × (sum[i]-sum[k])</p>
+<p>我们把w[k+1][i]的计算式带入状态转移方程得到：<br>
+dp[i][j] = min{ dp[k][j-1] + w[1][i] - w[1][k] - sum[k] × (sum[i]-sum[k]) }</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+typedef long long LL;
+const int N=1010;
+int f[N][N];
+int s[N],w[N];
+int q[N];
+int n,m;
+
+int getY(int i,int j,int k)
+{
+	return f[i-1][j]-w[j]+s[j]*s[j]-f[i-1][k]+w[k]-s[k]*s[k];
+}
+
+int getX(int i,int j)
+{
+	return s[i]-s[j];
+}
+
+int main()
+{
+	while(~scanf(&quot;%d%d&quot;,&amp;n,&amp;m))
+	{
+		if(!n &amp;&amp; !m) break;
+		
+		for(int i=1;i&lt;=n;i++)
+		{
+			int x;
+			scanf(&quot;%d&quot;,&amp;x);
+			s[i]=s[i-1]+x;
+			w[i]=w[i-1]+s[i-1]*x;
+			f[0][i]=w[i];
+		}
+		
+		for(int i=1;i&lt;=m;i++)
+		{
+			int hh=0,tt=-1;
+			q[++tt]=0;
+			for(int j=1;j&lt;=n;j++)
+			{
+				while(hh &lt; tt &amp;&amp; getY(i,q[hh+1],q[hh]) &lt;= s[j]*getX(q[hh+1],q[hh]))
+					hh++;
+				int k=q[hh];
+				f[i][j]=f[i-1][k]+w[j]-w[k]-s[k]*(s[j]-s[k]);
+				
+				while(hh &lt; tt &amp;&amp; getY(i,q[tt],q[tt-1])*getX(j,q[tt]) &gt;= getY(i,j,q[tt])*getX(q[tt],q[tt-1]))
+					tt--;
+				q[++tt]=j;
+			}			
+		}
+		
+		printf(&quot;%d\n&quot;,f[m][n]);
+	}
+	return 0;
+}
+</code></pre>
+<p>四边形不等式：<br>
+用 f[i][j] 来表示在前 j 个火车站中用了 i 个炸弹得到的最小的战略值总和。<br>
+枚举上一次使用炸弹的位置 k，得到<br>
+f[i][j] = min(f[i - 1][k] + w[k + 1][j])(i-1 &lt; k &lt; j)</p>
+<p>w[i][j] = [i, j] 中两两乘积之和= [(a[i] + a[i + 1] + … + a[j])2 - (a[i]2 + a[i + 1]2 + … + a[j]2)] / 2<br>
+可以验证它是满足单调性和四边形不等式的。<br>
+因此这题可以用四边形不等式来优化。<br>
+f[i][j] = min(f[i - 1][k] + w[k + 1][j])<br>
+(s[i-1][j] &lt; k &lt; s[i+1][j])</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+typedef long long LL;
+const int N=1010;
+int f[N][N];
+int a[N];
+int w[N][N];
+int p[N][N];
+int n,m;
+
+int main()
+{
+	while(~scanf(&quot;%d%d&quot;,&amp;n,&amp;m))
+	{
+		if(!n &amp;&amp; !m) break;
+		
+		for(int i=1;i&lt;=n;i++) scanf(&quot;%d&quot;,&amp;a[i]);
+		
+		for(int i=1;i&lt;=n;i++)
+		{
+			int sum=0;
+			w[i][i]=0;
+			for(int j=i+1;j&lt;=n;j++)
+			{
+				sum+=a[j-1];
+				w[i][j]=w[i][j-1]+sum*a[j];
+			}
+		}
+		
+		//      打表
+// 		for(int i=1;i&lt;=n;i++) 
+// 		{
+// 		    for(int j=1;j&lt;=n;j++)
+// 		        cout&lt;&lt;w[i][j]&lt;&lt;' ';
+// 		    cout&lt;&lt;endl;
+// 		}
+		
+		for(int i=0;i&lt;=n;i++)
+		{
+			f[0][i]=w[1][i];
+			p[0][i]=0;
+			p[i][n+1]=n;
+		}
+	
+		
+		for(int i=1;i&lt;=m;i++)
+			for(int j=n;j&gt;=1;j--)
+			{
+				f[i][j]=1e9;
+				for(int k=p[i-1][j];k&lt;=p[i][j+1];k++)
+					if(f[i][j] &gt; f[i-1][k] + w[k+1][j])
+					{
+						f[i][j] = f[i-1][k] + w[k+1][j];
+						p[i][j]=k;
+					}
+			}
+		
+		printf(&quot;%d\n&quot;,f[m][n]);
+	}
+	return 0;
+}
+</code></pre>
+
+                                </div>
+                    </article>
+                    <!--  -->
+                    
+                        <div class="next-post">
+                            <div class="next">下一篇</div>
+                            <a href="https://caifxh.github.io/post/xie-lu-you-hua/">
+                                <h3 class="post-title">
+                                    斜率优化
+                                </h3>
+                            </a>
+                        </div>
+                        
+                            <div id="disqus_thread"></div>
+                            <div id="gitalk-container"></div>
+                </div>
+                <!-- middle -->
+                <div class="main-container-middle"></div>
+                <!-- right -->
+                <div id="sidebar" class="main-container-right">
+                    
+                        <!-- toc -->
+                        
+    <div class="toc-card i-card ">
+        <div class="toc-title i-card-title">目录</div>
+        <div class="toc-content">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E5%BA%94%E7%94%A8%E8%83%8C%E6%99%AF">应用背景</a></li>
+<li><a href="#%E5%9B%9B%E8%BE%B9%E5%BD%A2%E4%B8%8D%E7%AD%89%E5%BC%8F%E5%AE%9A%E4%B9%89%E5%92%8C%E5%8D%95%E8%B0%83%E6%80%A7%E5%AE%9A%E4%B9%89">四边形不等式定义和单调性定义</a></li>
+<li><a href="#%E5%9B%9B%E8%BE%B9%E5%BD%A2%E4%B8%8D%E7%AD%89%E5%BC%8F%E5%AE%9A%E7%90%86">四边形不等式定理</a></li>
+<li><a href="#%E4%B8%80%E7%BB%B4%E7%BA%BF%E6%80%A7dp%E7%9A%84%E5%9B%9B%E8%BE%B9%E5%BD%A2%E4%B8%8D%E7%AD%89%E5%BC%8F%E4%BC%98%E5%8C%96">一维线性DP的四边形不等式优化</a></li>
+<li><a href="#%E6%9C%80%E4%BC%98%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91">最优二叉搜索树</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+        <script>
+            function locateCatelogList() {
+                /*获取文章目录集合,可通过:header过滤器*/
+                var alis = $('.post-content :header');
+                /*获取侧边栏目录列表集合**/
+                var sidebar_alis = $('.markdownIt-TOC a');
+                /*获取滚动条到顶部的距离*/
+                var scroll_height = $(window).scrollTop();
+                for (var i = 0; i < alis.length; i++) {
+                    /*获取锚点集合中的元素分别到顶点的距离*/
+                    var a_height = $(alis[i]).offset().top;
+                    if (a_height < scroll_height) {
+                        /*高亮显示*/
+                        sidebar_alis.removeClass('on');
+                        $(sidebar_alis[i]).addClass('on');
+                    }
+                }
+            }
+            $(function() {
+                /*绑定滚动事件 */
+                $(window).bind('scroll', locateCatelogList);
+            });
+        </script>
+    </div>
+    
+                            
+
+                </div>
+
+
+
+
+            </div>
+
+
+            <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://caifxh.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+
+    </div>
+    <script>
+        $('#sidebar').stickySidebar({
+            topSpacing: 80,
+            // bottomSpacing: 60
+        });
+    </script>
+    
+</body>
+
+</html>

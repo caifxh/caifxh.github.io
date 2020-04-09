@@ -7,7 +7,7 @@
 <title>
     DP | fxh
 </title>
-<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1586059488314">
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1586405129501">
 <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
 <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
@@ -27,7 +27,7 @@
     <div class="nav">
         <div class="logo">
             <a href="https://caifxh.github.io">
-                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1586059488314" alt="">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1586405129501" alt="">
             </a>
             <div class="site-title">
                 <h1>
@@ -104,6 +104,1527 @@
         
             <article class="post i-card">
                 <h2 class="post-title">
+                    <a href="https://caifxh.github.io/post/si-bian-xing-bu-deng-shi/">
+                        四边形不等式
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2020-04-09</time>
+                    
+                        <a href="https://caifxh.github.io/tag/hLQFdtGuD/" class="post-tag i-tag
+                            i-tag-other_3">
+            #DP
+        </a>
+                        
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            四边形不等式优化主要针对区间DP模型。
+转移方程形如：
+f[i][j] = min(f[i][k] + f[k + 1][j] + w(i, j))
+对于每个区间都要枚举 k
+时间复杂度 O(n3n^3n3)
+状态数已经定好了是 O(n2n^2n2)，我们能想办法优化的部分就是把 O(n) 的转移优化到 O(1)
+这里就要用到四边形不等式优化。
+对于 a &amp;lt; b &amp;lt; c &amp;lt; d：
+如果有 f(a, c) + f(b, d) &amp;lt;= f(b, c) + f(a, d) 交叉 &amp;lt;= 包含
+我们就称 f 满足四边形不等式。
+如果代价函数 w(i,j) 满足单调性和四边形不等式，那么 dp 函数 f(i,j) 也满足四边形不等式。
+定义 s(i,j) 为 f(i,j) 取得最优值对应的转移（即 k）
+如果 f(i,j) 满足四边形不等式，那么 s(i,j) 单调
+即s(i,j)≤s(i,j+1)≤s(i+1,j+1)
+应用背景
+
+
+
+四边形不等式定义和单调性定义
+
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int N=310,INF=0x3f3f3f3f;
+int f[N][N];
+int sum[N];
+int s[N][N];
+int n;
+
+int main()
+{
+    cin&amp;gt;&amp;gt;n;
+
+    for(int i=1;i&amp;lt;=n;i++)
+    {
+        cin&amp;gt;&amp;gt;sum[i];
+        sum[i]+=sum[i-1];
+        s[i][i]=i;
+    }
+
+    for(int len=2;len&amp;lt;=n;len++)
+    {
+        for(int i=1;i+len-1&amp;lt;=n;i++)
+        {
+            int j=i+len-1;
+            f[i][j]=INF;
+            for(int k=s[i][j-1];k&amp;lt;=s[i+1][j];k++)
+                if(f[i][j] &amp;gt; f[i][k]+f[k+1][j]+sum[j]-sum[i-1])
+                {
+                    f[i][j] = f[i][k]+f[k+1][j]+sum[j]-sum[i-1];
+                    s[i][j]=k;
+                }
+        }
+    }
+
+    cout&amp;lt;&amp;lt;f[1][n]&amp;lt;&amp;lt;endl;
+
+    return 0;
+}
+
+
+acwing1068
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=210,INF=0x3f3f3f3f;
+int f[N][N];
+int g[N][N];
+int w[N];
+int sum[N];
+int s[N][N];
+int n;
+
+int main()
+{
+    cin&amp;gt;&amp;gt;n;
+    
+    for(int i=1;i&amp;lt;=n;i++)
+    {
+        cin&amp;gt;&amp;gt;w[i];
+        w[n+i]=w[i];
+    }
+    
+    for(int i=1;i&amp;lt;=n*2;i++)
+    {
+        sum[i]=sum[i-1]+w[i];
+        s[i][i]=i;
+    }
+    
+    for(int len=2;len&amp;lt;=n*2;len++)
+    {
+        for(int i=1;i+len-1&amp;lt;=n*2;i++)
+        {
+            int j=i+len-1;
+            f[i][j]=INF;
+            for(int k=s[i][j-1];k&amp;lt;=s[i+1][j];k++)
+                if(f[i][j] &amp;gt; f[i][k]+f[k+1][j]+sum[j]-sum[i-1])
+                {
+                    f[i][j] = f[i][k]+f[k+1][j]+sum[j]-sum[i-1];
+                    s[i][j]=k;
+                }
+                
+            g[i][j]=max(g[i+1][j],g[i][j-1])+sum[j]-sum[i-1];
+        }
+    }
+    
+    int maxv=0;
+    int minv=INF;
+    for(int i=1;i&amp;lt;=n;i++)
+    {
+        maxv=max(maxv,g[i][n+i-1]);
+        minv=min(minv,f[i][n+i-1]);
+    }
+    
+    cout&amp;lt;&amp;lt;minv&amp;lt;&amp;lt;endl&amp;lt;&amp;lt;maxv&amp;lt;&amp;lt;endl;
+    
+    return 0;
+}
+
+四边形不等式定理
+
+一维线性DP的四边形不等式优化
+
+比赛时，我们只要先写出暴力的 DP 然后打出 cost、dp、和决策数组，验证 cost、dp函数是否满足四边形不等式，
+以及决策是否具有单调性。
+
+拿到题目后，先判断w是否单调、是否满足四边形不等式，再使用四边形不等式优化DP。
+
+最优二叉搜索树
+
+
+
+题目给出的数列(val)是有序的，假设我们以i为根，1i-1就是左子树，i+1n就是右子树
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=260;
+int w[N];
+int sum[N];
+int s[N][N];
+int f[N][N];
+int n;
+
+int main()
+{
+	while(~scanf(&amp;quot;%d&amp;quot;,&amp;amp;n))
+	{
+		for(int i=1;i&amp;lt;=n;i++)
+		{
+			cin&amp;gt;&amp;gt;w[i];
+			sum[i]=sum[i-1]+w[i];
+			s[i][i]=i;
+		}
+		
+		for(int len=1;len&amp;lt;=n;len++)
+		{
+			for(int i=1;i+len-1&amp;lt;=n;i++)
+			{
+				int j=i+len-1;
+				f[i][j]=1e9;
+				if(len == 1) f[i][j]=0;
+				
+				for(int k=s[i][j-1];k&amp;lt;=s[i+1][j];k++)
+					if(f[i][j] &amp;gt; f[i][k-1]+f[k+1][j]+sum[j]-sum[i-1]-w[k])
+					{
+						f[i][j] = f[i][k-1]+f[k+1][j]+sum[j]-sum[i-1]-w[k];
+						s[i][j]=k;
+					}
+			}
+		}
+		
+		cout&amp;lt;&amp;lt;f[1][n]&amp;lt;&amp;lt;endl;
+	}
+	return 0;
+}
+
+hdu2829
+有 n 个火车站，第 i 个火车站有一个重要度 a[i]。
+你现在可以炸掉 m 条铁轨。这样铁轨就断成了 m + 1 段，每一段都有一个战略值，它等于这一段铁轨上的火车站两两的重要度乘积之和。请你最小化总的战略值之和。
+0 ≤ m &amp;lt; n ≤ 1000
+斜率优化：
+
+那么，就有：dp[i][j] = min( dp[k][j-1] + w[k+1][i] )，j≤k&amp;lt;i；
+方程的意义是：炸毁仓库k和仓库k+1之间的那段铁路（即第k段铁路），算出总价值，枚举k找到最小的。
+那么如何计算w[k+1][i]呢？假设sum[i]=∑k=1iv[k]\sum_{k=1}^{i}v[k]∑k=1i​v[k] ，那么就有：w[1][i] = w[1][k] + w[k+1][i] + (v[1]+v[2]+…+v[k]) × (v[k+1]+v[k+2]+…+v[i])= w[1][k] + w[k+1][i] + sum[k] × (sum[i]-sum[k])
+即w[k+1][i] = w[1][i] - w[1][k] - sum[k] × (sum[i]-sum[k])
+我们把w[k+1][i]的计算式带入状态转移方程得到：
+dp[i][j] = min{ dp[k][j-1] + w[1][i] - w[1][k] - sum[k] × (sum[i]-sum[k]) }
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N=1010;
+int f[N][N];
+int s[N],w[N];
+int q[N];
+int n,m;
+
+int getY(int i,int j,int k)
+{
+	return f[i-1][j]-w[j]+s[j]*s[j]-f[i-1][k]+w[k]-s[k]*s[k];
+}
+
+int getX(int i,int j)
+{
+	return s[i]-s[j];
+}
+
+int main()
+{
+	while(~scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;m))
+	{
+		if(!n &amp;amp;&amp;amp; !m) break;
+		
+		for(int i=1;i&amp;lt;=n;i++)
+		{
+			int x;
+			scanf(&amp;quot;%d&amp;quot;,&amp;amp;x);
+			s[i]=s[i-1]+x;
+			w[i]=w[i-1]+s[i-1]*x;
+			f[0][i]=w[i];
+		}
+		
+		for(int i=1;i&amp;lt;=m;i++)
+		{
+			int hh=0,tt=-1;
+			q[++tt]=0;
+			for(int j=1;j&amp;lt;=n;j++)
+			{
+				while(hh &amp;lt; tt &amp;amp;&amp;amp; getY(i,q[hh+1],q[hh]) &amp;lt;= s[j]*getX(q[hh+1],q[hh]))
+					hh++;
+				int k=q[hh];
+				f[i][j]=f[i-1][k]+w[j]-w[k]-s[k]*(s[j]-s[k]);
+				
+				while(hh &amp;lt; tt &amp;amp;&amp;amp; getY(i,q[tt],q[tt-1])*getX(j,q[tt]) &amp;gt;= getY(i,j,q[tt])*getX(q[tt],q[tt-1]))
+					tt--;
+				q[++tt]=j;
+			}			
+		}
+		
+		printf(&amp;quot;%d\n&amp;quot;,f[m][n]);
+	}
+	return 0;
+}
+
+四边形不等式：
+用 f[i][j] 来表示在前 j 个火车站中用了 i 个炸弹得到的最小的战略值总和。
+枚举上一次使用炸弹的位置 k，得到
+f[i][j] = min(f[i - 1][k] + w[k + 1][j])(i-1 &amp;lt; k &amp;lt; j)
+w[i][j] = [i, j] 中两两乘积之和= [(a[i] + a[i + 1] + … + a[j])2 - (a[i]2 + a[i + 1]2 + … + a[j]2)] / 2
+可以验证它是满足单调性和四边形不等式的。
+因此这题可以用四边形不等式来优化。
+f[i][j] = min(f[i - 1][k] + w[k + 1][j])
+(s[i-1][j] &amp;lt; k &amp;lt; s[i+1][j])
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N=1010;
+int f[N][N];
+int a[N];
+int w[N][N];
+int p[N][N];
+int n,m;
+
+int main()
+{
+	while(~scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;m))
+	{
+		if(!n &amp;amp;&amp;amp; !m) break;
+		
+		for(int i=1;i&amp;lt;=n;i++) scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]);
+		
+		for(int i=1;i&amp;lt;=n;i++)
+		{
+			int sum=0;
+			w[i][i]=0;
+			for(int j=i+1;j&amp;lt;=n;j++)
+			{
+				sum+=a[j-1];
+				w[i][j]=w[i][j-1]+sum*a[j];
+			}
+		}
+		
+		//      打表
+// 		for(int i=1;i&amp;lt;=n;i++) 
+// 		{
+// 		    for(int j=1;j&amp;lt;=n;j++)
+// 		        cout&amp;lt;&amp;lt;w[i][j]&amp;lt;&amp;lt;&#39; &#39;;
+// 		    cout&amp;lt;&amp;lt;endl;
+// 		}
+		
+		for(int i=0;i&amp;lt;=n;i++)
+		{
+			f[0][i]=w[1][i];
+			p[0][i]=0;
+			p[i][n+1]=n;
+		}
+	
+		
+		for(int i=1;i&amp;lt;=m;i++)
+			for(int j=n;j&amp;gt;=1;j--)
+			{
+				f[i][j]=1e9;
+				for(int k=p[i-1][j];k&amp;lt;=p[i][j+1];k++)
+					if(f[i][j] &amp;gt; f[i-1][k] + w[k+1][j])
+					{
+						f[i][j] = f[i-1][k] + w[k+1][j];
+						p[i][j]=k;
+					}
+			}
+		
+		printf(&amp;quot;%d\n&amp;quot;,f[m][n]);
+	}
+	return 0;
+}
+
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://caifxh.github.io/post/si-bian-xing-bu-deng-shi/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+            <article class="post i-card">
+                <h2 class="post-title">
+                    <a href="https://caifxh.github.io/post/xie-lu-you-hua/">
+                        斜率优化
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2020-04-08</time>
+                    
+                        <a href="https://caifxh.github.io/tag/hLQFdtGuD/" class="post-tag i-tag
+                            i-tag-banana">
+            #DP
+        </a>
+                        
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            
+
+hdu3507
+
+
+
+
+
+
+
+
+
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int N=500010;
+int f[N];
+int s[N];
+int q[N];
+int n,m;
+
+int getY(int i,int j)
+{
+	return f[i]+s[i]*s[i]-f[j]-s[j]*s[j];
+}
+
+int getX(int i,int j)
+{
+	return s[i]-s[j];
+}
+
+int main()
+{
+	while(~scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;m))
+	{
+		for(int i=1;i&amp;lt;=n;i++)
+		{
+			scanf(&amp;quot;%d&amp;quot;,&amp;amp;s[i]);
+			s[i]+=s[i-1];
+		}
+		
+		int hh=0,tt=-1;
+		q[++tt]=0;
+		
+		for(int i=1;i&amp;lt;=n;i++)
+		{
+			while(hh&amp;lt;tt &amp;amp;&amp;amp; getY(q[hh+1],q[hh]) &amp;lt;= 2*s[i]*getX(q[hh+1],q[hh]))
+				hh++;
+			int j=q[hh];
+			f[i]=f[j]+(s[i]-s[j])*(s[i]-s[j])+m;
+			while(hh&amp;lt;tt &amp;amp;&amp;amp; getY(q[tt],q[tt-1])*getX(i,q[tt]) &amp;gt;= getY(i,q[tt])*getX(q[tt],q[tt-1]))
+				tt--;
+			q[++tt]=i;
+		}
+		
+		printf(&amp;quot;%d\n&amp;quot;,f[n]);
+	}
+	return 0;
+}
+
+
+acwing302
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N=300010;
+LL st[N],sc[N];
+LL f[N];
+int q[N];
+int n,s;
+
+LL getY(int i,int j)
+{
+    return f[i]-f[j];
+}
+
+LL getX(int i,int j)
+{
+    return sc[i]-sc[j];
+}
+
+int main()
+{
+    cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;s;
+    
+    for(int i=1;i&amp;lt;=n;i++)
+    {
+        scanf(&amp;quot;%lld%lld&amp;quot;,&amp;amp;st[i],&amp;amp;sc[i]);
+        st[i]+=st[i-1];
+        sc[i]+=sc[i-1];
+    }
+    
+    int hh=0,tt=-1;
+    q[++tt]=0;
+    for(int i=1;i&amp;lt;=n;i++)
+    {
+        int l=hh,r=tt;
+        while(l&amp;lt;r)
+        {
+            int mid=l+r&amp;gt;&amp;gt;1;
+            if(getY(q[mid+1],q[mid]) &amp;gt;= (s+st[i])*getX(q[mid+1],q[mid])) r=mid;
+            else l=mid+1;
+        }
+        
+        int j=q[l];
+        f[i]=f[j]-(s+st[i])*sc[j]+s*sc[n]+st[i]*sc[i];
+        while(hh&amp;lt;tt &amp;amp;&amp;amp; getY(q[tt],q[tt-1])*getX(i,q[tt]) &amp;gt;= getY(i,q[tt])*getX(q[tt],q[tt-1]))
+            tt--;
+        q[++tt]=i;
+    }
+    
+    cout&amp;lt;&amp;lt;f[n]&amp;lt;&amp;lt;endl;
+    
+    return 0;
+}
+
+acwing303
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N=100010,M=100010,P=110;
+LL f[P][M];
+LL d[N];
+int t[M],a[M];
+LL s[M];
+int q[M];
+int n,m,p;
+
+LL getY(int i,int j,int k)
+{
+    return f[i-1][j]+s[j]-f[i-1][k]-s[k];
+}
+
+int getX(int i,int j)
+{
+    return i-j;
+}
+
+int main()
+{
+    cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m&amp;gt;&amp;gt;p;
+    
+    for(int i=2;i&amp;lt;=n;i++)
+        cin&amp;gt;&amp;gt;d[i],d[i]+=d[i-1];
+        
+    for(int i=1;i&amp;lt;=m;i++)
+    {
+        int h;
+        cin&amp;gt;&amp;gt;h&amp;gt;&amp;gt;t[i];
+        a[i]=t[i]-d[h];
+    }
+    
+    sort(a+1,a+m+1);
+    
+    
+    for(int i=1;i&amp;lt;=m;i++) s[i]=s[i-1]+a[i];
+    
+    memset(f,0x3f,sizeof f);
+    for(int i=0;i&amp;lt;=p;i++) f[i][0]=0;
+    
+    for(int i=1;i&amp;lt;=p;i++)
+    {
+        
+        int hh=0,tt=-1;
+        q[++tt]=0;
+        
+        for(int j=1;j&amp;lt;=m;j++)
+        {
+            while(hh &amp;lt; tt &amp;amp;&amp;amp; getY(i,q[hh+1],q[hh]) &amp;lt;= (LL)a[j]*getX(q[hh+1],q[hh]))
+                hh++;
+            int k=q[hh];
+            f[i][j]=f[i-1][k]+(LL)a[j]*(j-k)-(s[j]-s[k]);
+            while(hh &amp;lt; tt &amp;amp;&amp;amp; getY(i,q[tt],q[tt-1])*getX(j,q[tt]) &amp;gt;= getY(i,j,q[tt])*getX(q[tt],q[tt-1]))
+                tt--;
+            q[++tt]=j;
+        }
+    }
+
+    cout&amp;lt;&amp;lt;f[p][m]&amp;lt;&amp;lt;endl;
+    
+    return 0;
+}
+
+P2120
+
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N=1000010;
+LL f[N];
+LL x[N],c[N],p[N];
+LL sp[N],sxp[N];
+int q[N];
+int n;
+
+LL getY(int i,int j)
+{
+	return f[i]+sxp[i]-f[j]-sxp[j];
+}
+
+LL getX(int i,int j)
+{
+	return sp[i]-sp[j];
+}
+
+int main()
+{
+	cin&amp;gt;&amp;gt;n;
+	
+	for(int i=1;i&amp;lt;=n;i++)
+	{
+		scanf(&amp;quot;%lld%lld%lld&amp;quot;,&amp;amp;x[i],&amp;amp;p[i],&amp;amp;c[i]);
+		sp[i]=sp[i-1]+p[i];
+		sxp[i]=sxp[i-1]+x[i]*p[i];
+	}
+	
+	int hh=0,tt=-1;
+	q[++tt]=0;
+	
+	for(int i=1;i&amp;lt;=n;i++)
+	{
+		while(hh &amp;lt; tt &amp;amp;&amp;amp; getY(q[hh+1],q[hh]) &amp;lt;= x[i]*getX(q[hh+1],q[hh]))
+			hh++;
+		int j=q[hh];
+		f[i]=f[j]+x[i]*(sp[i]-sp[j])-(sxp[i]-sxp[j])+c[i];
+		while(hh &amp;lt; tt &amp;amp;&amp;amp; getY(q[tt],q[tt-1])*getX(i,q[tt]) &amp;gt;= getY(i,q[tt])*getX(q[tt],q[tt-1]))
+			tt--;
+		q[++tt]=i;
+	}
+	
+	printf(&amp;quot;%lld\n&amp;quot;,f[n]);
+	
+	return 0;
+}
+
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://caifxh.github.io/post/xie-lu-you-hua/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+            <article class="post i-card">
+                <h2 class="post-title">
+                    <a href="https://caifxh.github.io/post/shu-xing-dp/">
+                        树形dp
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2020-04-06</time>
+                    
+                        <a href="https://caifxh.github.io/tag/hLQFdtGuD/" class="post-tag i-tag
+                            i-tag-">
+            #DP
+        </a>
+                        
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            树的重心
+对于一棵 n 个节点的无根树，找到一个点 A，使得把树变成以
+该点为根的有根树时，最大子树的结点树最小。A 叫做重心。
+给定一棵树，找重心。
+求一下每个点子树的点数，然后对于每个点考虑一下他作为重心
+时候最大子树的大小是多少，和当前的重心进行比对就可以了。
+代码非常简单易懂。
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace  std;
+const int N=100010,M=N*2;
+int h[N],e[M],ne[M],idx;
+int ans=N;
+bool st[N];
+int cnt[N];
+int n;
+int poi;
+
+void add(int a,int b)
+{
+    e[idx]=b;
+    ne[idx]=h[a];
+    h[a]=idx++;
+}
+
+void dfs(int u,int fa)
+{
+    cnt[u]=1;
+    int res=0;
+    for(int i=h[u];i!=-1;i=ne[i])
+    {
+        int j=e[i];
+        if(j == fa)
+            continue;
+        dfs(j,u);
+        cnt[u]+=cnt[j];
+        res=max(res,cnt[j]);
+    }
+    res=max(res,n-cnt[u]);
+
+    if(res &amp;lt; ans)
+    {
+        ans=res;
+        poi=u;
+    }
+}
+
+int main()
+{
+    
+    memset(h,-1,sizeof h);
+    cin&amp;gt;&amp;gt;n;
+    for(int i=0;i&amp;lt;n-1;i++)
+    {
+        int a,b;
+        cin&amp;gt;&amp;gt;a&amp;gt;&amp;gt;b;
+        add(a,b);
+        add(b,a);
+    }
+    
+    dfs(1,-1);
+    
+    cout&amp;lt;&amp;lt;ans&amp;lt;&amp;lt;endl;
+    //cout&amp;lt;&amp;lt;poi&amp;lt;&amp;lt;endl;重心
+    return 0;
+}
+
+树的最长路径
+妨枚举直径在树上转弯的点。所以我们维护出到一个节点
+时向下的最长链和次长链，然后用二者加和来更新答案，同时更
+新父亲节点的最长链和次长链。
+f[i][0]表示根节点为i，向下所能到达的最长路径长度
+f[i][1]表示根节点为i，向下所能到达的次长路径长度
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int N=10010,M=N*2;
+int h[N],e[M],ne[M],w[M],idx;
+int n,m;
+int ans;
+int f[N][2];//0表示最长路径， 1表示次长路径
+
+void add(int a, int b, int c)
+{
+    e[idx] = b, w[idx] = c, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+void dfs(int u,int fa)
+{
+    for(int i=h[u];~i;i=ne[i])
+    {
+        int v=e[i];
+        if(v == fa)
+            continue;
+        dfs(v,u);
+        if(f[v][0] + w[i] &amp;gt; f[u][0])
+        {
+            f[u][1]=f[u][0];
+            f[u][0]=f[v][0]+w[i];
+        }
+        else if(f[v][0] + w[i] &amp;gt; f[u][1])
+            f[u][1]=f[v][0]+w[i];
+    }
+    
+    ans=max(ans,f[u][0]+f[u][1]);
+}
+
+int main()
+{
+    cin&amp;gt;&amp;gt;n;
+    memset(h,-1,sizeof h);
+    for(int i=0;i&amp;lt;n-1;i++)
+    {
+        int a,b,c;
+        cin&amp;gt;&amp;gt;a&amp;gt;&amp;gt;b&amp;gt;&amp;gt;c;
+        add(a,b,c);
+        add(b,a,c);
+    }
+
+    dfs(1,-1);
+
+    cout&amp;lt;&amp;lt;ans&amp;lt;&amp;lt;endl;
+
+    return 0;
+}
+
+hdu2196
+    
+f[i][0]表示根节点为i，向下所能到达的最长路径长度
+f[i][1]表示根节点为i，向下所能到达的次长路径长度
+f[i][2]表示根节点为i，向上所能到达的最长路径长度
+（1）f[i][0]，f[i][1]的求法同树的直径
+（2）f[i][2]的求法分两种情况：
+①从父结点向上走的最长路径长度
+②从父节点向下走其他子树的最长路径长度（若父节点向下走的最长路径经过当前点，则向下走其他子树的最长路径长度为父节点向下走的次长路径长度；若不经过，则取父节点向下走的最长路径）
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int N=10010,M=N*2;
+int h[N],e[M],ne[M],w[M],idx;
+int n;
+int f[N][3]; // 0表示向下走的最大长度，1表示次大长度，2表示向上走的最大长度
+
+void add(int a, int b, int c)
+{
+    e[idx] = b, w[idx] = c, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+void dfs_d(int u,int fa)
+{
+    int one=0,two=0;
+    for(int i=h[u];~i;i=ne[i])
+    {
+        int j=e[i];
+        if(j == fa)
+            continue;
+        dfs_d(j,u);
+        //cout&amp;lt;&amp;lt;u&amp;lt;&amp;lt;&amp;quot;:&amp;quot;&amp;lt;&amp;lt;j&amp;lt;&amp;lt;&amp;quot; &amp;quot;&amp;lt;&amp;lt;d&amp;lt;&amp;lt;endl;
+        int d=f[j][0]+w[i];
+        if(d &amp;gt; one) 
+            two=one,one=d;
+        else if(d &amp;gt; two)
+            two=d;
+    }
+    f[u][0]=one;
+    f[u][1]=two;
+}
+
+void dfs_u(int u,int fa)//先更新后递归
+{
+    for(int i=h[u];~i;i=ne[i])
+    {
+        int j=e[i];
+        if(j == fa) 
+            continue;
+        if(f[j][0] + w[i] == f[u][0])//父节点向下走的最长路径经过当前点
+            f[j][2]=max(f[u][2],f[u][1])+w[i];
+        else 
+            f[j][2]=max(f[u][2],f[u][0])+w[i];//父节点向下走的最长路径不经过当前点
+        dfs_u(j,u);
+    }
+}
+
+int main()
+{
+    while(~scanf(&amp;quot;%d&amp;quot;,&amp;amp;n))
+    {
+        memset(h,-1,sizeof h);
+        memset(f,0,sizeof f);
+        idx=0;
+        
+        for(int i=2;i&amp;lt;=n;i++)
+        {
+            int a,b;
+            cin&amp;gt;&amp;gt;a&amp;gt;&amp;gt;b;
+            add(i,a,b);
+            add(a,i,b);
+        }
+        
+        dfs_d(1,-1);//子节点更新父节点
+        
+        dfs_u(1,-1);//父节点更新子节点
+        
+        for(int i=1;i&amp;lt;=n;i++)
+            cout&amp;lt;&amp;lt;max(f[i][0],f[i][2])&amp;lt;&amp;lt;endl;
+    }
+    
+    return 0;
+}
+
+
+我们通常认为，树形DP的写法有两种：
+a.根到叶子: 不过这种动态规划在实际的问题中运用的不多。
+b.叶子到根: 既根的子节点传递有用的信息给根，完后根得出最优解的过程。这类的习题比较的多。
+
+hdu1520
+最大独立集
+
+
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;vector&amp;gt;
+using namespace std;
+const int N=6000+10;
+int val[N],dp[N][2],fa[N],n;
+vector&amp;lt;int&amp;gt;E[N];
+
+void dfs(int u){
+	dp[u][0]=0;
+	dp[u][1]=val[u];
+	for(int i=0;i&amp;lt;E[u].size();i++){
+		int v=E[u][i];
+		dfs(v);
+		dp[u][0]+=max(dp[v][1],dp[v][0]);
+		dp[u][1]+=dp[v][0];
+	}
+}
+
+int main(){
+	while(~scanf(&amp;quot;%d&amp;quot;,&amp;amp;n)){
+		for(int i=1;i&amp;lt;=n;i++){
+			scanf(&amp;quot;%d&amp;quot;,&amp;amp;val[i]);
+			E[i].clear();
+			fa[i]=-1;
+		}
+		while(1){
+			int a,b;
+			scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;a,&amp;amp;b);
+	        if(a==0&amp;amp;&amp;amp;b==0) break;
+	        E[b].push_back(a);
+	        fa[a]=b;
+		}
+	    int rt=1;
+	    while(fa[rt]!=-1) rt=fa[rt];
+	    dfs(rt);
+	    printf(&amp;quot;%d\n&amp;quot;,max(dp[rt][1],dp[rt][0]));
+    }
+    return 0;
+}
+
+poj3398
+最小支配集
+   
+#include&amp;lt;cstdio&amp;gt; 
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;vector&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int maxn=10010;
+int n;
+vector&amp;lt;int&amp;gt; E[maxn];
+int dp[maxn][3];
+
+void dfs(int u,int fa)
+{
+    dp[u][0]=1; //加上自身为服务器,选择当前结点 
+    dp[u][1]=0;//不选当前结点，选其父节点 
+    dp[u][2]=maxn;//选一个子节点 
+    int k=E[u].size();
+    for(int i=0;i&amp;lt;k;i++)
+    {
+        int v=E[u][i];
+        if(v==fa) continue;
+        dfs(v,u);
+        dp[u][0]+=min(dp[v][0],dp[v][1]);
+        dp[u][1]+=dp[v][2];
+    }
+    for(int i=0;i&amp;lt;k;i++)
+    {
+        int v=E[u][i];
+        if(v==fa)  continue;
+        dp[u][2]=min(dp[u][2],dp[u][1]-dp[v][2]+dp[v][0]);
+    }
+}
+
+int main()
+{
+    int u,v;
+    while(scanf(&amp;quot;%d&amp;quot;,&amp;amp;n))
+    {
+        for(int i=1;i&amp;lt;=n;i++)
+            E[i].clear();
+        for(int i=1;i&amp;lt;n;i++)
+        {
+            scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;u,&amp;amp;v);
+            E[u].push_back(v);
+            E[v].push_back(u);
+        }
+        dfs(1,0);
+		printf(&amp;quot;%d\n&amp;quot;,min(dp[1][0],dp[1][2])); 
+		int t;
+		scanf(&amp;quot;%d&amp;quot;,&amp;amp;t);
+		if(t == -1)
+			break;
+    }
+    return 0;
+}
+
+acwing1077
+题目说的很清楚，用最少的点覆盖所有的点。题目给出的是个树,所以可以用动态规划来解决。
+给出如下定义：
+f[u][0]表示 u不放看守 ,且u点被父节点监视,
+易得在这类情况下子节点可以自己放守卫或者在子节点上放守卫。
+由于有多个子节点，为使得所有子节点都被看守，
+所以每个节点的最小值累加求和
+f[u][0] = ∑(min(f[j][1] , f[j][2]))
+f[u][2]表示u放看守,
+既然u已经放上了看守，说明子节点必然已经被看到，
+因此对于所有子节点可自己放守卫，可被父节点监视，可被子节点监视
+f[u][2] = ∑min(min(f[j][0],f[j][1]),f[j][2])+w[u]
+f[u][1]表示 u不放看守 ,且u点被一个儿子监视,
+首先我们可以枚举当前哪一颗子结点监视u，其余节点可自己放守卫或在子节点放守卫，
+f[u][1]=min(f[u][1],f[j][2]+∑min(f[k][2],f[k][1])),j为当前监视u的结点，k为除了j之外u其他的子节点
+而f[u][0]=∑(min(f[j][1] , f[j][2]))
+则f[u][1]=min(f[u][1],f[j][2]+f[u][0] - min(f[j][2],f[j][1]))
+#include &amp;lt;cstring&amp;gt;
+#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;algorithm&amp;gt;
+
+using namespace std;
+
+const int N = 1510;
+
+int n;
+int h[N], w[N], e[N], ne[N], idx;
+int f[N][3];
+int fa[N];
+
+void add(int a, int b)
+{
+    e[idx] = b, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+void dfs(int u)
+{
+    f[u][2] = w[u];
+
+    for (int i = h[u]; ~i; i = ne[i])
+    {
+        int j = e[i];
+        dfs(j);
+        f[u][0] += min(f[j][1], f[j][2]);
+        f[u][2] += min(min(f[j][0], f[j][1]), f[j][2]);
+    }
+
+    f[u][1] = 1e9;
+    for (int i = h[u]; ~i; i = ne[i])
+    {
+        int j = e[i];
+        f[u][1] = min(f[u][1], f[u][0] + f[j][2] - min(f[j][1], f[j][2]));
+    }
+}
+
+int main()
+{
+    cin &amp;gt;&amp;gt; n;
+
+    memset(h, -1, sizeof h);
+    memset(fa,-1,sizeof fa);
+    for (int i = 1; i &amp;lt;= n; i ++ )
+    {
+        int id, cost, cnt;
+        cin &amp;gt;&amp;gt; id &amp;gt;&amp;gt; cost &amp;gt;&amp;gt; cnt;
+        w[id] = cost;
+        while (cnt -- )
+        {
+            int ver;
+            cin &amp;gt;&amp;gt; ver;
+            add(id, ver);
+            fa[ver]=id;
+        }
+    }
+
+    int root = 1;
+    while (fa[root] != -1) root =fa[root] ;
+
+    dfs(root);
+
+    cout &amp;lt;&amp;lt; min(f[root][1], f[root][2]) &amp;lt;&amp;lt; endl;
+
+    return 0;
+}
+
+hdu2412
+最大独立集+唯一性判断
+
+
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;string&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;map&amp;gt;
+#include&amp;lt;vector&amp;gt;
+using namespace std;
+const int N=200+10;
+int dp[N][2],f[N][2],n;
+vector&amp;lt;int&amp;gt;E[N];
+
+void dfs(int u){
+   	dp[u][0]=0;
+	dp[u][1]=1;
+	for(int i=0;i&amp;lt;E[u].size();i++){
+		int v=E[u][i];
+		dfs(v);
+		if(dp[v][0]==dp[v][1]){
+			dp[u][0]+=dp[v][0];
+			f[u][0]=0;
+		}else if(dp[v][0]&amp;gt;dp[v][1]){
+			dp[u][0]+=dp[v][0];
+			if(!f[v][0]) f[u][0]=0;
+		}
+		else{
+			dp[u][0]+=dp[v][1];
+			if(!f[v][1]) f[u][0]=0;
+		}
+		dp[u][1]+=dp[v][0];
+		if(!f[v][0]) f[u][1]=0;
+	}
+}
+
+int main(){
+	int n,k;
+	string s1,s2;
+	map&amp;lt;string,int&amp;gt;mp;
+	while(cin&amp;gt;&amp;gt;n&amp;amp;&amp;amp;n){//n为0时结束 
+		mp.clear();
+		for(int i=0;i&amp;lt;=n;i++)//尽量不要使用memset清0的办法，尽管也可以用 
+			E[i].clear();
+		memset(f,1,sizeof(f));
+		k=1;
+		cin&amp;gt;&amp;gt;s1;
+		mp[s1]=k++;
+		E[0].push_back(mp[s1]);//增加超根 
+		for(int i=1;i&amp;lt;=n-1;i++){
+			cin&amp;gt;&amp;gt;s1&amp;gt;&amp;gt;s2;
+			if(mp[s1]==0)
+				mp[s1]=k++;
+			if(mp[s2]==0)
+				mp[s2]=k++;
+			E[mp[s2]].push_back(mp[s1]);
+		}
+	    dfs(0);
+	    printf(&amp;quot;%d &amp;quot;,dp[0][0]);
+	    if(f[0][0])
+	    	printf(&amp;quot;Yes\n&amp;quot;);
+		else
+			printf(&amp;quot;No\n&amp;quot;);	
+    }
+    return 0;
+}
+
+poj1463
+
+
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;vector&amp;gt;
+using namespace std;
+const int N=1500+10;
+int val[N],dp[N][2],fa[N],n;
+vector&amp;lt;int&amp;gt;E[N];
+
+void dfs(int u){
+	dp[u][0]=0;
+	dp[u][1]=1;
+	for(int i=0;i&amp;lt;E[u].size();i++){
+		int v=E[u][i];
+		dfs(v);
+		dp[u][1]+=min(dp[v][1],dp[v][0]);
+		dp[u][0]+=dp[v][1];
+	}
+}
+
+int main(){
+	while(~scanf(&amp;quot;%d&amp;quot;,&amp;amp;n)){
+		for(int i=0;i&amp;lt;n;i++)//编号从0开始 
+			E[i].clear();
+		memset(fa,-1,sizeof(fa));
+		memset(dp,0,sizeof(dp));
+		for(int i=0;i&amp;lt;n;i++){
+			int a,b,m;
+			scanf(&amp;quot;%d:(%d)&amp;quot;,&amp;amp;a,&amp;amp;m);//注意读入 
+	        while(m--)
+	        {
+	        	scanf(&amp;quot;%d&amp;quot;,&amp;amp;b);
+	        	E[a].push_back(b);
+	        	fa[b]=a;
+			}
+		}
+	    int rt=0;//编号从0开始
+	    while(fa[rt]!=-1) rt=fa[rt];
+	    dfs(rt);
+	    printf(&amp;quot;%d\n&amp;quot;,min(dp[rt][1],dp[rt][0]));
+    }
+    return 0;
+}
+
+背包类树形dp
+hdu1561
+
+
+
+加上虚根一共m+1个结点
+#include &amp;lt;cstring&amp;gt;
+#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;algorithm&amp;gt;
+
+using namespace std;
+
+const int N = 210,M=N*2;
+int n, m;
+int w[N];
+int h[N], e[M], ne[M], idx;
+int f[N][N];
+
+void add(int a, int b)
+{
+    e[idx] = b, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+void dfs(int u)
+{
+    for (int i = h[u]; ~i; i = ne[i])
+    {
+        int son=e[i];
+        dfs(son);
+        for (int j = m ; j &amp;gt;= 0; j -- )
+            for (int k = 0; k &amp;lt;= j; k ++ )
+                f[u][j] = max(f[u][j], f[u][j - k] + f[son][k]);
+    }
+
+    for (int j = m+1; j &amp;gt;= 1; j -- ) f[u][j] = f[u][j - 1] + w[u];
+    for (int j = 0; j &amp;lt; 1; j ++ ) f[u][j] = 0;
+}
+
+int main()
+{
+    while(cin &amp;gt;&amp;gt; n &amp;gt;&amp;gt; m &amp;amp;&amp;amp; n)
+    {
+    	memset(h, -1, sizeof h);
+    	memset(f,0,sizeof f);
+    	idx=0;
+	    for (int i = 1; i &amp;lt;= n; i ++ )
+	    {
+	    	int a,b;
+	    	cin&amp;gt;&amp;gt;a&amp;gt;&amp;gt;b;
+	    	if(!a)
+	    		add(0,i);
+	    	else 
+	    		add(a,i);
+	    	w[i]=b;
+	    }
+	
+	    dfs(0);
+	
+	    cout &amp;lt;&amp;lt; f[0][m+1]&amp;lt;&amp;lt; endl;
+	}
+
+    return 0;
+}
+
+acwing286
+同背包类树形dp
+#include &amp;lt;cstring&amp;gt;
+#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;algorithm&amp;gt;
+
+using namespace std;
+
+const int N = 310;
+
+int n, m;
+int h[N], e[N], ne[N], idx;
+int w[N];
+int f[N][N];
+
+void add(int a, int b)
+{
+    e[idx] = b, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+void dfs(int u)
+{
+    for (int i = h[u]; ~i; i = ne[i])
+    {
+        int son = e[i];
+        dfs(son);
+
+        for (int j = m - 1; j &amp;gt;= 0; j -- )
+            for (int k = 0; k &amp;lt;= j; k ++ )
+                f[u][j] = max(f[u][j], f[u][j - k] + f[son][k]);
+    }
+
+    for (int i = m; i&amp;gt;=1; i -- ) f[u][i] = f[u][i - 1] + w[u];
+    for(int i=0;i&amp;lt;1;i++) f[u][i]=0;
+}
+
+int main()
+{
+    cin &amp;gt;&amp;gt; n &amp;gt;&amp;gt; m;
+
+    memset(h, -1, sizeof h);
+    for (int i = 1; i &amp;lt;= n; i ++ )
+    {
+        int p;
+        cin &amp;gt;&amp;gt; p &amp;gt;&amp;gt; w[i];
+        add(p, i);
+    }
+
+    m ++ ;
+    dfs(0);
+
+    cout &amp;lt;&amp;lt; f[0][m] &amp;lt;&amp;lt; endl;
+
+    return 0;
+}
+
+acwing1075
+如果x和y可以互相转化，就连接一条无向边，最后得到的图其实是一个森林，每棵树都是无根树，其实就是要求，整个森林中两个连通的点的最远距离（这里边权都是1），和在无根树中求两点最远距离是一样的，不过这题的特殊性，可以更方便点
+对于任意一条边，必有x&amp;lt;y，在树中，x就应该为y的双亲（因为y的约数和是唯一的，但x可能是很多个数的约数和，这正好对应树的关系，双亲唯一，孩子不定）。而dp思想照样是找出每个节点到叶子的最大值m1和次大值m2，再两者相加的dp[rt]，而整个树中的最大值，就是扫描全部节点，找到最大的dp[rt]
+由于这题，每个节点的双亲是可以记录下来的，所以dp的时候不用递归，而写成递推式，直接从叶往上递推，
+还有一个重要的时候就是怎么找出约数和，数据比较大，应该尽量避免多余的判断，用筛法求约数和则是一个不错的方法
+#include&amp;lt;bits/stdc++.h&amp;gt;
+using namespace std;
+int n;
+const int N=50010;
+int f[N][2];
+int sum[N];
+ 
+int main()
+{
+   cin&amp;gt;&amp;gt;n;
+   
+   for(int i=1;i&amp;lt;=n;i++)
+		for(int j=2*i;j&amp;lt;=n;j+=i)//求约数和 
+			sum[j]+=i;
+	
+	for(int i=n;i&amp;gt;=1;i--)
+	{
+		if(sum[i]&amp;lt;i)//判断是否符合条件，注意审题。
+		{
+			if(f[i][0]+1&amp;gt;f[sum[i]][0])
+			{
+				f[sum[i]][1]=f[sum[i]][0];
+				f[sum[i]][0]=f[i][0]+1;
+			}
+			else if(f[i][0]+1&amp;gt;f[sum[i]][1])
+				f[sum[i]][1]=f[i][0]+1;
+		} 
+	}
+	int ans=0;
+	for(int i=1;i&amp;lt;=n;i++)
+		ans=max(f[i][0]+f[i][1],ans);
+	cout&amp;lt;&amp;lt;ans&amp;lt;&amp;lt;endl;
+	
+   return 0;
+}
+
+acwing1074
+
+
+#include &amp;lt;cstring&amp;gt;
+#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;algorithm&amp;gt;
+
+using namespace std;
+
+const int N = 110, M = N * 2;
+
+int n, m;
+int h[N], e[M], w[M], ne[M], idx;
+int f[N][N];
+
+void add(int a, int b, int c)
+{
+    e[idx] = b, w[idx] = c, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+void dfs(int u, int father)
+{
+    for (int i = h[u]; ~i; i = ne[i])
+    {
+        if (e[i] == father) continue;
+        dfs(e[i], u);
+        for (int j = m; j&amp;gt;=0; j -- )
+            for (int k = 0; k &amp;lt; j; k ++ )
+                f[u][j] = max(f[u][j], f[u][j - k - 1] + f[e[i]][k] + w[i]);
+    }
+}
+
+int main()
+{
+    cin &amp;gt;&amp;gt; n &amp;gt;&amp;gt; m;
+    memset(h, -1, sizeof h);
+    for (int i = 0; i &amp;lt; n - 1; i ++ )
+    {
+        int a, b, c;
+        scanf(&amp;quot;%d%d%d&amp;quot;, &amp;amp;a, &amp;amp;b, &amp;amp;c);
+        add(a, b, c), add(b, a, c);
+    }
+
+    dfs(1, -1);
+
+    printf(&amp;quot;%d\n&amp;quot;, f[1][m]);
+
+    return 0;
+}
+
+左儿子右兄弟
+POJ2486
+题目大意：一个叫Wshxzt的可爱的女孩子被HX大叔带到了一棵苹果树边。众所周知，苹
+果树是一个树形的结构，在节点处长有苹果）。现在我们知道Wshxzt是个苹果控，她只要访问到一个节点，就一定会吃光这个节点所有的苹果。当然一个节点的苹果只能吃一次。HX大叔为了防止Wshxzt长胖，限制她只能走K（1 ≤ K ≤ 200）步，从一个节点走到另
+一个相邻的节点是所谓走一步。Wshxzt从节点1开始。树上的节点有N（1 ≤ N ≤ 100）
+个，你需要计算Wshxzt最多能吃到多少苹果。
+
+
+
+
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=110,M=N*2;
+int n,m,cnt;
+//dp[u][j][0]表示以u为根的树经过j步没有回到点u得到的最值
+//dp[u][j][1]表示以u为根的树经过j步回到点u得到的最值 
+int dp[N][M][2],val[N],head[N];
+ 
+struct edge{
+	int v,next;
+}e[M];
+ 
+void init(){
+	memset(head,-1,sizeof(head));
+	memset(dp,0,sizeof(dp));
+	cnt=0;
+}
+ 
+void add(int u,int v){
+	e[cnt].v=v;
+	e[cnt].next=head[u];
+	head[u]=cnt++;
+}
+ 
+void dfs(int u,int fa){
+	for(int i=0;i&amp;lt;=m;i++)//不论走多少步，均初始化为 
+		dp[u][i][0]=dp[u][i][1]=val[u];
+	for(int i=head[u];~i;i=e[i].next){
+		int v=e[i].v;
+		if(v==fa) continue;
+		dfs(v,u);
+		for(int j=m;j&amp;gt;=1;j--){//树形背包 
+			for(int k=1;k&amp;lt;=j;k++){
+				dp[u][j][0]=max(dp[u][j][0],dp[u][j-k][1]+dp[v][k-1][0]);
+				if(k&amp;gt;=2) dp[u][j][0]=max(dp[u][j][0],dp[u][j-k][0]+dp[v][k-2][1]);
+				if(k&amp;gt;=2) dp[u][j][1]=max(dp[u][j][1],dp[u][j-k][1]+dp[v][k-2][1]);
+			}
+		}
+	}
+}
+ 
+int main(){
+	int u,v;
+	while(~scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;m)){
+		init();
+		for(int i=1;i&amp;lt;=n;++i)
+			scanf(&amp;quot;%d&amp;quot;,&amp;amp;val[i]);
+		for(int i=1;i&amp;lt;n;++i){
+			scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;u,&amp;amp;v);
+			add(u,v);
+			add(v,u);
+		}
+		dfs(1,-1);
+		printf(&amp;quot;%d\n&amp;quot;,max(dp[1][m][0],dp[1][m][1]));
+	}
+	return 0;
+}
+
+uva12186
+一个老板和n个员工组成树状结构，每个员工都有自己的唯一上司，老板的编号为0，员工1~n，工人们打算签署一个志愿书给老板，但无法跨级，当一个中级员工（非是工人的员工）的直属下属中不小于T%的人签字时，他也会签字并且递给他的直属上司，问：要让老板收到请愿书至少需要多少个工人签字。
+注意：这里要求的是最底层工人（即叶子结点）的最少个数。
+
+
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;vector&amp;gt;
+#include&amp;lt;iostream&amp;gt;
+
+using namespace std;
+const int N=100010;
+vector&amp;lt;int&amp;gt; E[N];
+int n,T;
+
+int dfs(int u)
+{
+	if(E[u].size() == 0)
+		return 1;
+	vector&amp;lt;int&amp;gt; res;
+    for(int i=0;i&amp;lt;E[u].size();i++)
+    {
+    	int j=E[u][i];
+    	int t=dfs(j);
+    	res.push_back(t);
+	}
+	
+	sort(res.begin(),res.end());
+	int k=E[u].size();
+	int c=(k*T-1)/100+1;
+	int ans=0;
+	for(int i=0;i&amp;lt;c;i++)
+		ans+=res[i];
+
+	return ans;
+}
+
+int main()
+{
+    while(~scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;T)&amp;amp;&amp;amp;n){
+        for(int i=0;i&amp;lt;=n;i++)
+			E[i].clear();
+        for(int i=1;i&amp;lt;=n;i++)
+        {
+            int u;
+            scanf(&amp;quot;%d&amp;quot;,&amp;amp;u);
+            E[u].push_back(i);
+        }
+        printf(&amp;quot;%d\n&amp;quot;,dfs(0));
+    }
+    return 0;
+}
+
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://caifxh.github.io/post/shu-xing-dp/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+            <article class="post i-card">
+                <h2 class="post-title">
                     <a href="https://caifxh.github.io/post/zhuang-tai-ji/">
                         状态机
                     </a>
@@ -112,7 +1633,7 @@
                     <time class="post-time">2020-04-05</time>
                     
                         <a href="https://caifxh.github.io/tag/hLQFdtGuD/" class="post-tag i-tag
-                            i-tag-warning">
+                            i-tag-primary">
             #DP
         </a>
                         
@@ -316,7 +1837,7 @@ int main()
                     <time class="post-time">2020-04-02</time>
                     
                         <a href="https://caifxh.github.io/tag/hLQFdtGuD/" class="post-tag i-tag
-                            i-tag-other_2">
+                            i-tag-error">
             #DP
         </a>
                         
@@ -950,7 +2471,7 @@ int main()
                     <time class="post-time">2020-04-01</time>
                     
                         <a href="https://caifxh.github.io/tag/hLQFdtGuD/" class="post-tag i-tag
-                            i-tag-warning">
+                            i-tag-other_1">
             #DP
         </a>
                         
@@ -2145,7 +3666,7 @@ int main()
                     <time class="post-time">2020-03-28</time>
                     
                         <a href="https://caifxh.github.io/tag/hLQFdtGuD/" class="post-tag i-tag
-                            i-tag-other_3">
+                            i-tag-other_1">
             #DP
         </a>
                         
@@ -3055,7 +4576,7 @@ int main()
                     <time class="post-time">2020-03-27</time>
                     
                         <a href="https://caifxh.github.io/tag/hLQFdtGuD/" class="post-tag i-tag
-                            i-tag-info">
+                            i-tag-error">
             #DP
         </a>
                         
@@ -3865,7 +5386,7 @@ code
                     <!-- 个人信息 -->
                     
     <div class="id_card i-card">
-        <div class="id_card-avatar" style="background-image: url(https://caifxh.github.io/images/avatar.png?v=1586059488314)">
+        <div class="id_card-avatar" style="background-image: url(https://caifxh.github.io/images/avatar.png?v=1586405129501)">
         </div>
         <h1 class="id_card-title">
             fxh

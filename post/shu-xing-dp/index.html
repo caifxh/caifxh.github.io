@@ -1,0 +1,1080 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>
+    树形dp | fxh
+</title>
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1586405129501">
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://caifxh.github.io/styles/main.css">
+<!-- js -->
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://caifxh.github.io/media/js/jquery.sticky-sidebar.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+        
+</head>
+
+<body>
+    <div class="main">
+        <div class="header">
+    <div class="nav">
+        <div class="logo">
+            <a href="https://caifxh.github.io">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1586405129501" alt="">
+            </a>
+            <div class="site-title">
+                <h1>
+                    fxh
+                </h1>
+            </div>
+        </div>
+        <span class="menu-btn fa fa-align-justify"></span>
+        <div class="menu-container">
+            <ul>
+                
+                    
+                            <li>
+                                <a href="/" class="menu">
+                                    首页
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/archives" class="menu">
+                                    归档
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/tags" class="menu">
+                                    标签
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/post/about" class="menu">
+                                    关于
+                                </a>
+                            </li>
+                            
+                                
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $(".menu-btn").click(function() {
+            $(".menu-container").slideToggle();
+        });
+        $(window).resize(function() {
+
+            if (window.matchMedia('(min-width: 960px)').matches) {
+                $(".menu-container").css('display', 'block')
+            } else {
+                $(".menu-container").css('display', 'none')
+            }
+
+        });
+    });
+</script>
+
+            <div id="main-content" class="post-detail main-container">
+                <!-- left -->
+                <div id="content" class="main-container-left">
+                    <article class="post i-card">
+                        <h2 class="post-title">
+                            树形dp
+                        </h2>
+                        <div class="post-info">
+                            <time class="post-time">2020-04-06</time>
+                            
+                                <a href="https://caifxh.github.io/tag/hLQFdtGuD/" class="post-tag i-tag
+                            i-tag-other_1">
+                            #DP
+                        </a>
+                                
+                        </div>
+                        
+                                <div class="post-content">
+                                    <h4 id="树的重心">树的重心</h4>
+<p>对于一棵 n 个节点的无根树，找到一个点 A，使得把树变成以<br>
+该点为根的有根树时，最大子树的结点树最小。A 叫做重心。<br>
+给定一棵树，找重心。<br>
+求一下每个点子树的点数，然后对于每个点考虑一下他作为重心<br>
+时候最大子树的大小是多少，和当前的重心进行比对就可以了。<br>
+代码非常简单易懂。</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+using namespace  std;
+const int N=100010,M=N*2;
+int h[N],e[M],ne[M],idx;
+int ans=N;
+bool st[N];
+int cnt[N];
+int n;
+int poi;
+
+void add(int a,int b)
+{
+    e[idx]=b;
+    ne[idx]=h[a];
+    h[a]=idx++;
+}
+
+void dfs(int u,int fa)
+{
+    cnt[u]=1;
+    int res=0;
+    for(int i=h[u];i!=-1;i=ne[i])
+    {
+        int j=e[i];
+        if(j == fa)
+            continue;
+        dfs(j,u);
+        cnt[u]+=cnt[j];
+        res=max(res,cnt[j]);
+    }
+    res=max(res,n-cnt[u]);
+
+    if(res &lt; ans)
+    {
+        ans=res;
+        poi=u;
+    }
+}
+
+int main()
+{
+    
+    memset(h,-1,sizeof h);
+    cin&gt;&gt;n;
+    for(int i=0;i&lt;n-1;i++)
+    {
+        int a,b;
+        cin&gt;&gt;a&gt;&gt;b;
+        add(a,b);
+        add(b,a);
+    }
+    
+    dfs(1,-1);
+    
+    cout&lt;&lt;ans&lt;&lt;endl;
+    //cout&lt;&lt;poi&lt;&lt;endl;重心
+    return 0;
+}
+</code></pre>
+<h3 id="树的最长路径"><a href="https://www.acwing.com/problem/content/description/1074/">树的最长路径</a></h3>
+<p>妨枚举直径在树上转弯的点。所以我们维护出到一个节点<br>
+时向下的最长链和次长链，然后用二者加和来更新答案，同时更<br>
+新父亲节点的最长链和次长链。<br>
+f[i][0]表示根节点为i，向下所能到达的最长路径长度<br>
+f[i][1]表示根节点为i，向下所能到达的次长路径长度</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+using namespace std;
+const int N=10010,M=N*2;
+int h[N],e[M],ne[M],w[M],idx;
+int n,m;
+int ans;
+int f[N][2];//0表示最长路径， 1表示次长路径
+
+void add(int a, int b, int c)
+{
+    e[idx] = b, w[idx] = c, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+void dfs(int u,int fa)
+{
+    for(int i=h[u];~i;i=ne[i])
+    {
+        int v=e[i];
+        if(v == fa)
+            continue;
+        dfs(v,u);
+        if(f[v][0] + w[i] &gt; f[u][0])
+        {
+            f[u][1]=f[u][0];
+            f[u][0]=f[v][0]+w[i];
+        }
+        else if(f[v][0] + w[i] &gt; f[u][1])
+            f[u][1]=f[v][0]+w[i];
+    }
+    
+    ans=max(ans,f[u][0]+f[u][1]);
+}
+
+int main()
+{
+    cin&gt;&gt;n;
+    memset(h,-1,sizeof h);
+    for(int i=0;i&lt;n-1;i++)
+    {
+        int a,b,c;
+        cin&gt;&gt;a&gt;&gt;b&gt;&gt;c;
+        add(a,b,c);
+        add(b,a,c);
+    }
+
+    dfs(1,-1);
+
+    cout&lt;&lt;ans&lt;&lt;endl;
+
+    return 0;
+}
+</code></pre>
+<h3 id="hdu2196"><a href="http://acm.hdu.edu.cn/showproblem.php?pid=2196">hdu2196</a></h3>
+<p><img src="https://cdn.acwing.com/media/article/image/2020/02/27/9969_8fd00bd859-5.png" alt="5.png" loading="lazy"> <img src="https://cdn.acwing.com/media/article/image/2020/02/27/9969_97f5be6659-6.png" alt="6.png" loading="lazy"> <img src="https://cdn.acwing.com/media/article/image/2020/02/27/9969_9a64697c59-7.png" alt="7.png" loading="lazy"> <img src="https://cdn.acwing.com/media/article/image/2020/02/27/9969_9cf7fd0c59-8.png" alt="8.png" loading="lazy"> <img src="https://cdn.acwing.com/media/article/image/2020/02/27/9969_a95f556859-9.png" alt="9.png" loading="lazy"><br>
+f[i][0]表示根节点为i，向下所能到达的最长路径长度<br>
+f[i][1]表示根节点为i，向下所能到达的次长路径长度<br>
+f[i][2]表示根节点为i，向上所能到达的最长路径长度</p>
+<p>（1）f[i][0]，f[i][1]的求法同树的直径<br>
+（2）f[i][2]的求法分两种情况：<br>
+①从父结点向上走的最长路径长度<br>
+②从父节点向下走其他子树的最长路径长度（若父节点向下走的最长路径经过当前点，则向下走其他子树的最长路径长度为父节点向下走的次长路径长度；若不经过，则取父节点向下走的最长路径）</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+using namespace std;
+const int N=10010,M=N*2;
+int h[N],e[M],ne[M],w[M],idx;
+int n;
+int f[N][3]; // 0表示向下走的最大长度，1表示次大长度，2表示向上走的最大长度
+
+void add(int a, int b, int c)
+{
+    e[idx] = b, w[idx] = c, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+void dfs_d(int u,int fa)
+{
+    int one=0,two=0;
+    for(int i=h[u];~i;i=ne[i])
+    {
+        int j=e[i];
+        if(j == fa)
+            continue;
+        dfs_d(j,u);
+        //cout&lt;&lt;u&lt;&lt;&quot;:&quot;&lt;&lt;j&lt;&lt;&quot; &quot;&lt;&lt;d&lt;&lt;endl;
+        int d=f[j][0]+w[i];
+        if(d &gt; one) 
+            two=one,one=d;
+        else if(d &gt; two)
+            two=d;
+    }
+    f[u][0]=one;
+    f[u][1]=two;
+}
+
+void dfs_u(int u,int fa)//先更新后递归
+{
+    for(int i=h[u];~i;i=ne[i])
+    {
+        int j=e[i];
+        if(j == fa) 
+            continue;
+        if(f[j][0] + w[i] == f[u][0])//父节点向下走的最长路径经过当前点
+            f[j][2]=max(f[u][2],f[u][1])+w[i];
+        else 
+            f[j][2]=max(f[u][2],f[u][0])+w[i];//父节点向下走的最长路径不经过当前点
+        dfs_u(j,u);
+    }
+}
+
+int main()
+{
+    while(~scanf(&quot;%d&quot;,&amp;n))
+    {
+        memset(h,-1,sizeof h);
+        memset(f,0,sizeof f);
+        idx=0;
+        
+        for(int i=2;i&lt;=n;i++)
+        {
+            int a,b;
+            cin&gt;&gt;a&gt;&gt;b;
+            add(i,a,b);
+            add(a,i,b);
+        }
+        
+        dfs_d(1,-1);//子节点更新父节点
+        
+        dfs_u(1,-1);//父节点更新子节点
+        
+        for(int i=1;i&lt;=n;i++)
+            cout&lt;&lt;max(f[i][0],f[i][2])&lt;&lt;endl;
+    }
+    
+    return 0;
+}
+</code></pre>
+<p><img src="https://cdn.acwing.com/media/article/image/2020/02/22/9969_87cfb6ac54-azdp.png" alt="azdp.png" loading="lazy"><br>
+我们通常认为，树形DP的写法有两种：<br>
+a.根到叶子: 不过这种动态规划在实际的问题中运用的不多。<br>
+b.叶子到根: 既根的子节点传递有用的信息给根，完后根得出最优解的过程。这类的习题比较的多。<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/22/9969_9c10e58c54-1.png" alt="1.png" loading="lazy"><br>
+<a href="http://acm.hdu.edu.cn/showproblem.php?pid=1520">hdu1520</a></p>
+<h4 id="最大独立集">最大独立集</h4>
+<p><img src="https://cdn.acwing.com/media/article/image/2020/02/22/9969_cc54b78254-2.png" alt="2.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/22/9969_d8be803454-3.png" alt="3.png" loading="lazy"></p>
+<pre><code>#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+#include&lt;vector&gt;
+using namespace std;
+const int N=6000+10;
+int val[N],dp[N][2],fa[N],n;
+vector&lt;int&gt;E[N];
+
+void dfs(int u){
+	dp[u][0]=0;
+	dp[u][1]=val[u];
+	for(int i=0;i&lt;E[u].size();i++){
+		int v=E[u][i];
+		dfs(v);
+		dp[u][0]+=max(dp[v][1],dp[v][0]);
+		dp[u][1]+=dp[v][0];
+	}
+}
+
+int main(){
+	while(~scanf(&quot;%d&quot;,&amp;n)){
+		for(int i=1;i&lt;=n;i++){
+			scanf(&quot;%d&quot;,&amp;val[i]);
+			E[i].clear();
+			fa[i]=-1;
+		}
+		while(1){
+			int a,b;
+			scanf(&quot;%d%d&quot;,&amp;a,&amp;b);
+	        if(a==0&amp;&amp;b==0) break;
+	        E[b].push_back(a);
+	        fa[a]=b;
+		}
+	    int rt=1;
+	    while(fa[rt]!=-1) rt=fa[rt];
+	    dfs(rt);
+	    printf(&quot;%d\n&quot;,max(dp[rt][1],dp[rt][0]));
+    }
+    return 0;
+}
+</code></pre>
+<p><a href="http://poj.org/problem?id=3398">poj3398</a></p>
+<h4 id="最小支配集">最小支配集</h4>
+<p><img src="https://cdn.acwing.com/media/article/image/2020/02/27/9969_0583dd4659-1.png" alt="1.png" loading="lazy"> <img src="https://cdn.acwing.com/media/article/image/2020/02/27/9969_9030541459-2.png" alt="2.png" loading="lazy"> <img src="https://cdn.acwing.com/media/article/image/2020/02/27/9969_a03cff4259-3.png" alt="3.png" loading="lazy"> <img src="https://cdn.acwing.com/media/article/image/2020/02/27/9969_b3418f3659-4.png" alt="4.png" loading="lazy"></p>
+<pre><code>#include&lt;cstdio&gt; 
+#include&lt;cstring&gt;
+#include&lt;vector&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+const int maxn=10010;
+int n;
+vector&lt;int&gt; E[maxn];
+int dp[maxn][3];
+
+void dfs(int u,int fa)
+{
+    dp[u][0]=1; //加上自身为服务器,选择当前结点 
+    dp[u][1]=0;//不选当前结点，选其父节点 
+    dp[u][2]=maxn;//选一个子节点 
+    int k=E[u].size();
+    for(int i=0;i&lt;k;i++)
+    {
+        int v=E[u][i];
+        if(v==fa) continue;
+        dfs(v,u);
+        dp[u][0]+=min(dp[v][0],dp[v][1]);
+        dp[u][1]+=dp[v][2];
+    }
+    for(int i=0;i&lt;k;i++)
+    {
+        int v=E[u][i];
+        if(v==fa)  continue;
+        dp[u][2]=min(dp[u][2],dp[u][1]-dp[v][2]+dp[v][0]);
+    }
+}
+
+int main()
+{
+    int u,v;
+    while(scanf(&quot;%d&quot;,&amp;n))
+    {
+        for(int i=1;i&lt;=n;i++)
+            E[i].clear();
+        for(int i=1;i&lt;n;i++)
+        {
+            scanf(&quot;%d%d&quot;,&amp;u,&amp;v);
+            E[u].push_back(v);
+            E[v].push_back(u);
+        }
+        dfs(1,0);
+		printf(&quot;%d\n&quot;,min(dp[1][0],dp[1][2])); 
+		int t;
+		scanf(&quot;%d&quot;,&amp;t);
+		if(t == -1)
+			break;
+    }
+    return 0;
+}
+</code></pre>
+<p><a href="https://www.acwing.com/problem/content/1079/#">acwing1077</a><br>
+题目说的很清楚，用最少的点覆盖所有的点。题目给出的是个树,所以可以用动态规划来解决。<br>
+给出如下定义：<br>
+f[u][0]表示 u不放看守 ,且u点被父节点监视,<br>
+易得在这类情况下子节点可以自己放守卫或者在子节点上放守卫。<br>
+由于有多个子节点，为使得所有子节点都被看守，<br>
+所以每个节点的最小值累加求和<br>
+f[u][0] = ∑(min(f[j][1] , f[j][2]))</p>
+<p>f[u][2]表示u放看守,<br>
+既然u已经放上了看守，说明子节点必然已经被看到，<br>
+因此对于所有子节点可自己放守卫，可被父节点监视，可被子节点监视<br>
+f[u][2] = ∑min(min(f[j][0],f[j][1]),f[j][2])+w[u]</p>
+<p>f[u][1]表示 u不放看守 ,且u点被一个儿子监视,<br>
+首先我们可以枚举当前哪一颗子结点监视u，其余节点可自己放守卫或在子节点放守卫，<br>
+f[u][1]=min(f[u][1],f[j][2]+∑min(f[k][2],f[k][1])),j为当前监视u的结点，k为除了j之外u其他的子节点<br>
+而f[u][0]=∑(min(f[j][1] , f[j][2]))<br>
+则f[u][1]=min(f[u][1],f[j][2]+f[u][0] - min(f[j][2],f[j][1]))</p>
+<pre><code>#include &lt;cstring&gt;
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+const int N = 1510;
+
+int n;
+int h[N], w[N], e[N], ne[N], idx;
+int f[N][3];
+int fa[N];
+
+void add(int a, int b)
+{
+    e[idx] = b, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+void dfs(int u)
+{
+    f[u][2] = w[u];
+
+    for (int i = h[u]; ~i; i = ne[i])
+    {
+        int j = e[i];
+        dfs(j);
+        f[u][0] += min(f[j][1], f[j][2]);
+        f[u][2] += min(min(f[j][0], f[j][1]), f[j][2]);
+    }
+
+    f[u][1] = 1e9;
+    for (int i = h[u]; ~i; i = ne[i])
+    {
+        int j = e[i];
+        f[u][1] = min(f[u][1], f[u][0] + f[j][2] - min(f[j][1], f[j][2]));
+    }
+}
+
+int main()
+{
+    cin &gt;&gt; n;
+
+    memset(h, -1, sizeof h);
+    memset(fa,-1,sizeof fa);
+    for (int i = 1; i &lt;= n; i ++ )
+    {
+        int id, cost, cnt;
+        cin &gt;&gt; id &gt;&gt; cost &gt;&gt; cnt;
+        w[id] = cost;
+        while (cnt -- )
+        {
+            int ver;
+            cin &gt;&gt; ver;
+            add(id, ver);
+            fa[ver]=id;
+        }
+    }
+
+    int root = 1;
+    while (fa[root] != -1) root =fa[root] ;
+
+    dfs(root);
+
+    cout &lt;&lt; min(f[root][1], f[root][2]) &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=2412">hdu2412</a></p>
+<h4 id="最大独立集唯一性判断">最大独立集+唯一性判断</h4>
+<p><img src="https://cdn.acwing.com/media/article/image/2020/02/22/9969_2ff74c5054-4.png" alt="4.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/22/9969_3ad95a6454-5.png" alt="5.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/22/9969_5315ab5054-6.png" alt="6.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/22/9969_6272ec5c54-7.png" alt="7.png" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+#include&lt;string&gt;
+#include&lt;cstring&gt;
+#include&lt;map&gt;
+#include&lt;vector&gt;
+using namespace std;
+const int N=200+10;
+int dp[N][2],f[N][2],n;
+vector&lt;int&gt;E[N];
+
+void dfs(int u){
+   	dp[u][0]=0;
+	dp[u][1]=1;
+	for(int i=0;i&lt;E[u].size();i++){
+		int v=E[u][i];
+		dfs(v);
+		if(dp[v][0]==dp[v][1]){
+			dp[u][0]+=dp[v][0];
+			f[u][0]=0;
+		}else if(dp[v][0]&gt;dp[v][1]){
+			dp[u][0]+=dp[v][0];
+			if(!f[v][0]) f[u][0]=0;
+		}
+		else{
+			dp[u][0]+=dp[v][1];
+			if(!f[v][1]) f[u][0]=0;
+		}
+		dp[u][1]+=dp[v][0];
+		if(!f[v][0]) f[u][1]=0;
+	}
+}
+
+int main(){
+	int n,k;
+	string s1,s2;
+	map&lt;string,int&gt;mp;
+	while(cin&gt;&gt;n&amp;&amp;n){//n为0时结束 
+		mp.clear();
+		for(int i=0;i&lt;=n;i++)//尽量不要使用memset清0的办法，尽管也可以用 
+			E[i].clear();
+		memset(f,1,sizeof(f));
+		k=1;
+		cin&gt;&gt;s1;
+		mp[s1]=k++;
+		E[0].push_back(mp[s1]);//增加超根 
+		for(int i=1;i&lt;=n-1;i++){
+			cin&gt;&gt;s1&gt;&gt;s2;
+			if(mp[s1]==0)
+				mp[s1]=k++;
+			if(mp[s2]==0)
+				mp[s2]=k++;
+			E[mp[s2]].push_back(mp[s1]);
+		}
+	    dfs(0);
+	    printf(&quot;%d &quot;,dp[0][0]);
+	    if(f[0][0])
+	    	printf(&quot;Yes\n&quot;);
+		else
+			printf(&quot;No\n&quot;);	
+    }
+    return 0;
+}
+</code></pre>
+<p><a href="http://poj.org/problem?id=1463">poj1463</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/22/9969_06bf19b654-8.png" alt="8.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/22/9969_2d62973254-9.png" alt="9.png" loading="lazy"></p>
+<pre><code>#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+#include&lt;vector&gt;
+using namespace std;
+const int N=1500+10;
+int val[N],dp[N][2],fa[N],n;
+vector&lt;int&gt;E[N];
+
+void dfs(int u){
+	dp[u][0]=0;
+	dp[u][1]=1;
+	for(int i=0;i&lt;E[u].size();i++){
+		int v=E[u][i];
+		dfs(v);
+		dp[u][1]+=min(dp[v][1],dp[v][0]);
+		dp[u][0]+=dp[v][1];
+	}
+}
+
+int main(){
+	while(~scanf(&quot;%d&quot;,&amp;n)){
+		for(int i=0;i&lt;n;i++)//编号从0开始 
+			E[i].clear();
+		memset(fa,-1,sizeof(fa));
+		memset(dp,0,sizeof(dp));
+		for(int i=0;i&lt;n;i++){
+			int a,b,m;
+			scanf(&quot;%d:(%d)&quot;,&amp;a,&amp;m);//注意读入 
+	        while(m--)
+	        {
+	        	scanf(&quot;%d&quot;,&amp;b);
+	        	E[a].push_back(b);
+	        	fa[b]=a;
+			}
+		}
+	    int rt=0;//编号从0开始
+	    while(fa[rt]!=-1) rt=fa[rt];
+	    dfs(rt);
+	    printf(&quot;%d\n&quot;,min(dp[rt][1],dp[rt][0]));
+    }
+    return 0;
+}
+</code></pre>
+<h4 id="背包类树形dp">背包类树形dp</h4>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1561">hdu1561</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/22/9969_e427e85a54-11.png" alt="11.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/22/9969_e76dea7854-12.png" alt="12.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/26/9969_8e4c463458-19.PNG" alt="19.PNG" loading="lazy"><br>
+加上虚根一共m+1个结点</p>
+<pre><code>#include &lt;cstring&gt;
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+const int N = 210,M=N*2;
+int n, m;
+int w[N];
+int h[N], e[M], ne[M], idx;
+int f[N][N];
+
+void add(int a, int b)
+{
+    e[idx] = b, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+void dfs(int u)
+{
+    for (int i = h[u]; ~i; i = ne[i])
+    {
+        int son=e[i];
+        dfs(son);
+        for (int j = m ; j &gt;= 0; j -- )
+            for (int k = 0; k &lt;= j; k ++ )
+                f[u][j] = max(f[u][j], f[u][j - k] + f[son][k]);
+    }
+
+    for (int j = m+1; j &gt;= 1; j -- ) f[u][j] = f[u][j - 1] + w[u];
+    for (int j = 0; j &lt; 1; j ++ ) f[u][j] = 0;
+}
+
+int main()
+{
+    while(cin &gt;&gt; n &gt;&gt; m &amp;&amp; n)
+    {
+    	memset(h, -1, sizeof h);
+    	memset(f,0,sizeof f);
+    	idx=0;
+	    for (int i = 1; i &lt;= n; i ++ )
+	    {
+	    	int a,b;
+	    	cin&gt;&gt;a&gt;&gt;b;
+	    	if(!a)
+	    		add(0,i);
+	    	else 
+	    		add(a,i);
+	    	w[i]=b;
+	    }
+	
+	    dfs(0);
+	
+	    cout &lt;&lt; f[0][m+1]&lt;&lt; endl;
+	}
+
+    return 0;
+}
+</code></pre>
+<p><a href="https://www.acwing.com/problem/content/288/">acwing286</a><br>
+同背包类树形dp</p>
+<pre><code>#include &lt;cstring&gt;
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+const int N = 310;
+
+int n, m;
+int h[N], e[N], ne[N], idx;
+int w[N];
+int f[N][N];
+
+void add(int a, int b)
+{
+    e[idx] = b, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+void dfs(int u)
+{
+    for (int i = h[u]; ~i; i = ne[i])
+    {
+        int son = e[i];
+        dfs(son);
+
+        for (int j = m - 1; j &gt;= 0; j -- )
+            for (int k = 0; k &lt;= j; k ++ )
+                f[u][j] = max(f[u][j], f[u][j - k] + f[son][k]);
+    }
+
+    for (int i = m; i&gt;=1; i -- ) f[u][i] = f[u][i - 1] + w[u];
+    for(int i=0;i&lt;1;i++) f[u][i]=0;
+}
+
+int main()
+{
+    cin &gt;&gt; n &gt;&gt; m;
+
+    memset(h, -1, sizeof h);
+    for (int i = 1; i &lt;= n; i ++ )
+    {
+        int p;
+        cin &gt;&gt; p &gt;&gt; w[i];
+        add(p, i);
+    }
+
+    m ++ ;
+    dfs(0);
+
+    cout &lt;&lt; f[0][m] &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre>
+<p><a href="https://www.acwing.com/problem/content/1077/">acwing1075</a><br>
+如果x和y可以互相转化，就连接一条无向边，最后得到的图其实是一个森林，每棵树都是无根树，其实就是要求，整个森林中两个连通的点的最远距离（这里边权都是1），和在无根树中求两点最远距离是一样的，不过这题的特殊性，可以更方便点<br>
+对于任意一条边，必有x&lt;y，在树中，x就应该为y的双亲（因为y的约数和是唯一的，但x可能是很多个数的约数和，这正好对应树的关系，双亲唯一，孩子不定）。而dp思想照样是找出每个节点到叶子的最大值m1和次大值m2，再两者相加的dp[rt]，而整个树中的最大值，就是扫描全部节点，找到最大的dp[rt]<br>
+由于这题，每个节点的双亲是可以记录下来的，所以dp的时候不用递归，而写成递推式，直接从叶往上递推，<br>
+还有一个重要的时候就是怎么找出约数和，数据比较大，应该尽量避免多余的判断，用筛法求约数和则是一个不错的方法</p>
+<pre><code>#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int n;
+const int N=50010;
+int f[N][2];
+int sum[N];
+ 
+int main()
+{
+   cin&gt;&gt;n;
+   
+   for(int i=1;i&lt;=n;i++)
+		for(int j=2*i;j&lt;=n;j+=i)//求约数和 
+			sum[j]+=i;
+	
+	for(int i=n;i&gt;=1;i--)
+	{
+		if(sum[i]&lt;i)//判断是否符合条件，注意审题。
+		{
+			if(f[i][0]+1&gt;f[sum[i]][0])
+			{
+				f[sum[i]][1]=f[sum[i]][0];
+				f[sum[i]][0]=f[i][0]+1;
+			}
+			else if(f[i][0]+1&gt;f[sum[i]][1])
+				f[sum[i]][1]=f[i][0]+1;
+		} 
+	}
+	int ans=0;
+	for(int i=1;i&lt;=n;i++)
+		ans=max(f[i][0]+f[i][1],ans);
+	cout&lt;&lt;ans&lt;&lt;endl;
+	
+   return 0;
+}
+</code></pre>
+<p><a href="https://www.acwing.com/problem/content/description/1076/">acwing1074</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/26/9969_ab1a78b058-20.png" alt="20.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/26/9969_b31a9ed258-21.PNG" alt="21.PNG" loading="lazy"></p>
+<pre><code>#include &lt;cstring&gt;
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+const int N = 110, M = N * 2;
+
+int n, m;
+int h[N], e[M], w[M], ne[M], idx;
+int f[N][N];
+
+void add(int a, int b, int c)
+{
+    e[idx] = b, w[idx] = c, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+void dfs(int u, int father)
+{
+    for (int i = h[u]; ~i; i = ne[i])
+    {
+        if (e[i] == father) continue;
+        dfs(e[i], u);
+        for (int j = m; j&gt;=0; j -- )
+            for (int k = 0; k &lt; j; k ++ )
+                f[u][j] = max(f[u][j], f[u][j - k - 1] + f[e[i]][k] + w[i]);
+    }
+}
+
+int main()
+{
+    cin &gt;&gt; n &gt;&gt; m;
+    memset(h, -1, sizeof h);
+    for (int i = 0; i &lt; n - 1; i ++ )
+    {
+        int a, b, c;
+        scanf(&quot;%d%d%d&quot;, &amp;a, &amp;b, &amp;c);
+        add(a, b, c), add(b, a, c);
+    }
+
+    dfs(1, -1);
+
+    printf(&quot;%d\n&quot;, f[1][m]);
+
+    return 0;
+}
+</code></pre>
+<h4 id="左儿子右兄弟">左儿子右兄弟</h4>
+<p><a href="http://poj.org/problem?id=2486">POJ2486</a><br>
+题目大意：一个叫Wshxzt的可爱的女孩子被HX大叔带到了一棵苹果树边。众所周知，苹<br>
+果树是一个树形的结构，在节点处长有苹果）。现在我们知道Wshxzt是个苹果控，她只要访问到一个节点，就一定会吃光这个节点所有的苹果。当然一个节点的苹果只能吃一次。HX大叔为了防止Wshxzt长胖，限制她只能走K（1 ≤ K ≤ 200）步，从一个节点走到另<br>
+一个相邻的节点是所谓走一步。Wshxzt从节点1开始。树上的节点有N（1 ≤ N ≤ 100）<br>
+个，你需要计算Wshxzt最多能吃到多少苹果。<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/27/9969_166db48459-001.png" alt="001.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/27/9969_2201b2aa59-002.png" alt="002.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/27/9969_367c7b2059-003.png" alt="003.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/27/9969_3952b18e59-004.png" alt="004.png" loading="lazy"></p>
+<pre><code>#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+const int N=110,M=N*2;
+int n,m,cnt;
+//dp[u][j][0]表示以u为根的树经过j步没有回到点u得到的最值
+//dp[u][j][1]表示以u为根的树经过j步回到点u得到的最值 
+int dp[N][M][2],val[N],head[N];
+ 
+struct edge{
+	int v,next;
+}e[M];
+ 
+void init(){
+	memset(head,-1,sizeof(head));
+	memset(dp,0,sizeof(dp));
+	cnt=0;
+}
+ 
+void add(int u,int v){
+	e[cnt].v=v;
+	e[cnt].next=head[u];
+	head[u]=cnt++;
+}
+ 
+void dfs(int u,int fa){
+	for(int i=0;i&lt;=m;i++)//不论走多少步，均初始化为 
+		dp[u][i][0]=dp[u][i][1]=val[u];
+	for(int i=head[u];~i;i=e[i].next){
+		int v=e[i].v;
+		if(v==fa) continue;
+		dfs(v,u);
+		for(int j=m;j&gt;=1;j--){//树形背包 
+			for(int k=1;k&lt;=j;k++){
+				dp[u][j][0]=max(dp[u][j][0],dp[u][j-k][1]+dp[v][k-1][0]);
+				if(k&gt;=2) dp[u][j][0]=max(dp[u][j][0],dp[u][j-k][0]+dp[v][k-2][1]);
+				if(k&gt;=2) dp[u][j][1]=max(dp[u][j][1],dp[u][j-k][1]+dp[v][k-2][1]);
+			}
+		}
+	}
+}
+ 
+int main(){
+	int u,v;
+	while(~scanf(&quot;%d%d&quot;,&amp;n,&amp;m)){
+		init();
+		for(int i=1;i&lt;=n;++i)
+			scanf(&quot;%d&quot;,&amp;val[i]);
+		for(int i=1;i&lt;n;++i){
+			scanf(&quot;%d%d&quot;,&amp;u,&amp;v);
+			add(u,v);
+			add(v,u);
+		}
+		dfs(1,-1);
+		printf(&quot;%d\n&quot;,max(dp[1][m][0],dp[1][m][1]));
+	}
+	return 0;
+}
+</code></pre>
+<p><a href="https://www.luogu.com.cn/problem/UVA12186">uva12186</a><br>
+一个老板和n个员工组成树状结构，每个员工都有自己的唯一上司，老板的编号为0，员工1~n，工人们打算签署一个志愿书给老板，但无法跨级，当一个中级员工（非是工人的员工）的直属下属中不小于T%的人签字时，他也会签字并且递给他的直属上司，问：要让老板收到请愿书至少需要多少个工人签字。<br>
+注意：这里要求的是最底层工人（即叶子结点）的最少个数。<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/27/9969_9266e0c059-0001.png" alt="0001.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/27/9969_73948b9259-0002.png" alt="0002.png" loading="lazy"></p>
+<pre><code>#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+#include&lt;vector&gt;
+#include&lt;iostream&gt;
+
+using namespace std;
+const int N=100010;
+vector&lt;int&gt; E[N];
+int n,T;
+
+int dfs(int u)
+{
+	if(E[u].size() == 0)
+		return 1;
+	vector&lt;int&gt; res;
+    for(int i=0;i&lt;E[u].size();i++)
+    {
+    	int j=E[u][i];
+    	int t=dfs(j);
+    	res.push_back(t);
+	}
+	
+	sort(res.begin(),res.end());
+	int k=E[u].size();
+	int c=(k*T-1)/100+1;
+	int ans=0;
+	for(int i=0;i&lt;c;i++)
+		ans+=res[i];
+
+	return ans;
+}
+
+int main()
+{
+    while(~scanf(&quot;%d%d&quot;,&amp;n,&amp;T)&amp;&amp;n){
+        for(int i=0;i&lt;=n;i++)
+			E[i].clear();
+        for(int i=1;i&lt;=n;i++)
+        {
+            int u;
+            scanf(&quot;%d&quot;,&amp;u);
+            E[u].push_back(i);
+        }
+        printf(&quot;%d\n&quot;,dfs(0));
+    }
+    return 0;
+}
+</code></pre>
+
+                                </div>
+                    </article>
+                    <!--  -->
+                    
+                        <div class="next-post">
+                            <div class="next">下一篇</div>
+                            <a href="https://caifxh.github.io/post/lca/">
+                                <h3 class="post-title">
+                                    LCA
+                                </h3>
+                            </a>
+                        </div>
+                        
+                            <div id="disqus_thread"></div>
+                            <div id="gitalk-container"></div>
+                </div>
+                <!-- middle -->
+                <div class="main-container-middle"></div>
+                <!-- right -->
+                <div id="sidebar" class="main-container-right">
+                    
+                        <!-- toc -->
+                        
+    <div class="toc-card i-card ">
+        <div class="toc-title i-card-title">目录</div>
+        <div class="toc-content">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E6%A0%91%E7%9A%84%E9%87%8D%E5%BF%83">树的重心</a></li>
+</ul>
+</li>
+<li><a href="#%E6%A0%91%E7%9A%84%E6%9C%80%E9%95%BF%E8%B7%AF%E5%BE%84">树的最长路径</a></li>
+<li><a href="#hdu2196">hdu2196</a>
+<ul>
+<li><a href="#%E6%9C%80%E5%A4%A7%E7%8B%AC%E7%AB%8B%E9%9B%86">最大独立集</a></li>
+<li><a href="#%E6%9C%80%E5%B0%8F%E6%94%AF%E9%85%8D%E9%9B%86">最小支配集</a></li>
+<li><a href="#%E6%9C%80%E5%A4%A7%E7%8B%AC%E7%AB%8B%E9%9B%86%E5%94%AF%E4%B8%80%E6%80%A7%E5%88%A4%E6%96%AD">最大独立集+唯一性判断</a></li>
+<li><a href="#%E8%83%8C%E5%8C%85%E7%B1%BB%E6%A0%91%E5%BD%A2dp">背包类树形dp</a></li>
+<li><a href="#%E5%B7%A6%E5%84%BF%E5%AD%90%E5%8F%B3%E5%85%84%E5%BC%9F">左儿子右兄弟</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+        <script>
+            function locateCatelogList() {
+                /*获取文章目录集合,可通过:header过滤器*/
+                var alis = $('.post-content :header');
+                /*获取侧边栏目录列表集合**/
+                var sidebar_alis = $('.markdownIt-TOC a');
+                /*获取滚动条到顶部的距离*/
+                var scroll_height = $(window).scrollTop();
+                for (var i = 0; i < alis.length; i++) {
+                    /*获取锚点集合中的元素分别到顶点的距离*/
+                    var a_height = $(alis[i]).offset().top;
+                    if (a_height < scroll_height) {
+                        /*高亮显示*/
+                        sidebar_alis.removeClass('on');
+                        $(sidebar_alis[i]).addClass('on');
+                    }
+                }
+            }
+            $(function() {
+                /*绑定滚动事件 */
+                $(window).bind('scroll', locateCatelogList);
+            });
+        </script>
+    </div>
+    
+                            
+
+                </div>
+
+
+
+
+            </div>
+
+
+            <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://caifxh.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+
+    </div>
+    <script>
+        $('#sidebar').stickySidebar({
+            topSpacing: 80,
+            // bottomSpacing: 60
+        });
+    </script>
+    
+</body>
+
+</html>

@@ -1,0 +1,548 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>
+    单调数据结构 | fxh
+</title>
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1586405129501">
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://caifxh.github.io/styles/main.css">
+<!-- js -->
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://caifxh.github.io/media/js/jquery.sticky-sidebar.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+        
+</head>
+
+<body>
+    <div class="main">
+        <div class="header">
+    <div class="nav">
+        <div class="logo">
+            <a href="https://caifxh.github.io">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1586405129501" alt="">
+            </a>
+            <div class="site-title">
+                <h1>
+                    fxh
+                </h1>
+            </div>
+        </div>
+        <span class="menu-btn fa fa-align-justify"></span>
+        <div class="menu-container">
+            <ul>
+                
+                    
+                            <li>
+                                <a href="/" class="menu">
+                                    首页
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/archives" class="menu">
+                                    归档
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/tags" class="menu">
+                                    标签
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/post/about" class="menu">
+                                    关于
+                                </a>
+                            </li>
+                            
+                                
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $(".menu-btn").click(function() {
+            $(".menu-container").slideToggle();
+        });
+        $(window).resize(function() {
+
+            if (window.matchMedia('(min-width: 960px)').matches) {
+                $(".menu-container").css('display', 'block')
+            } else {
+                $(".menu-container").css('display', 'none')
+            }
+
+        });
+    });
+</script>
+
+            <div id="main-content" class="post-detail main-container">
+                <!-- left -->
+                <div id="content" class="main-container-left">
+                    <article class="post i-card">
+                        <h2 class="post-title">
+                            单调数据结构
+                        </h2>
+                        <div class="post-info">
+                            <time class="post-time">2020-04-08</time>
+                            
+                                <a href="https://caifxh.github.io/tag/TZ7cITYtt/" class="post-tag i-tag
+                            i-tag-warning">
+                            #其他算法
+                        </a>
+                                
+                        </div>
+                        
+                                <div class="post-content">
+                                    <h4 id="单调栈">单调栈</h4>
+<p><img src="https://cdn.acwing.com/media/article/image/2020/03/25/9969_93bac9686e-28.PNG" alt="28.PNG" loading="lazy"><br>
+给定一个序列。对序列中的每个元素，求出它左侧的第一个小于它 的元素的位置。若没有这样的元素，输出0。</p>
+<blockquote></blockquote>
+<p>样例输入：<br>
+4<br>
+5 3 7 4<br>
+样例输出：<br>
+0 0 2 2</p>
+<p><img src="https://cdn.acwing.com/media/article/image/2020/03/25/9969_d560c46c6e-29.PNG" alt="29.PNG" loading="lazy"><br>
+<a href="https://www.acwing.com/problem/content/832/">模板题1</a></p>
+<pre><code>#include&lt;iostream&gt;
+using namespace std;
+const int N=100010;
+int stk[N],top;
+
+int main()
+{
+    int n;
+    cin&gt;&gt;n;
+    while(n--)
+    {
+        int x;
+        cin&gt;&gt;x;
+        while(top&amp;&amp;stk[top]&gt;=x)
+            top--;
+        if(top)  
+            cout&lt;&lt;stk[top]&lt;&lt;&quot; &quot;;
+        else 
+            cout&lt;&lt;-1&lt;&lt;&quot; &quot;;
+        stk[++top]=x;
+    }
+    return 0;
+}
+</code></pre>
+<p><a href="https://www.luogu.com.cn/problem/P5788">模板题2</a><br>
+找出第 i 个元素之后第一个大于 ai的元素的下标<br>
+分析：<br>
+从后往前枚举，对于i&lt;j,若a[i]&gt;=a[j],则j不可能成为下标小于i的元素的答案。</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+using namespace std;
+const int N=3e6+10;
+int stk[N],top;
+int n;
+int a[N];
+int ans[N];
+
+int main()
+{
+	cin&gt;&gt;n;
+	for(int i=1;i&lt;=n;i++) scanf(&quot;%d&quot;,&amp;a[i]);
+	
+	for(int i=n;i&gt;=1;i--)
+	{
+		while(top &amp;&amp; a[stk[top]] &lt;= a[i]) top--;
+		
+		if(top) ans[i]=stk[top];
+		else ans[i]=0;
+		
+		stk[++top]=i;
+		
+	}
+	
+	for(int i=1;i&lt;=n;i++) printf(&quot;%d &quot;,ans[i]);
+	return 0;
+}
+</code></pre>
+<h4 id="例题">例题</h4>
+<p><a href="https://vjudge.net/problem/POJ-2559">poj2559</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/25/9969_b64b4e746e-30.PNG" alt="30.PNG" loading="lazy"><br>
+首先考虑最大面积的矩形X的左右边界的性质：</p>
+<p>设其左边界为L，右边界为R，则其高H = min{h[i] | L &lt;= i &lt;= R}</p>
+<p>此时最大面积为 (R - L + 1) * H</p>
+<p>若此时左边界的左边那个矩形的高度 h[L-1] &gt;= H<br>
+则左边界可以向左拓展，则新的面积为：</p>
+<p>(R - (L-1) + 1) * H &gt; 原面积</p>
+<p>则与原假设条件冲突</p>
+<p>故左边界左边的那个矩形的高度 :h[L-1] &lt; H<br>
+同理右边界右边的那个矩形的高度： h[R+1] &lt; H</p>
+<p>设H = h[i]</p>
+<p>所以左边界L是满足h[j-1] &lt; h[i]的最大的j，即从i点向左遍历的第一个高度比i小的点的右边一个点</p>
+<p>而右边界R是满足 h[j+1] &lt; h[i]的最小的j，即从i点向右遍历第一个高度比i小的点的左边一个点</p>
+<p>所以我们可以利用单调栈的性质得到每个确定点，即确定高度的最大面积矩形的左右边界，然后枚举取最大即可。</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+typedef long long LL;
+const int N=100010;
+int h[N];
+int l[N],r[N];
+int stk[N],top;
+int n;
+
+int main()
+{
+	while(~scanf(&quot;%d&quot;,&amp;n) &amp;&amp; n)
+	{
+		top=0;
+		for(int i=1;i&lt;=n;i++)
+			scanf(&quot;%d&quot;,&amp;h[i]);
+		
+		for(int i=1;i&lt;=n;i++)//找出h[i]左边第一个小于h[i]的位置 
+		{
+			while(top &amp;&amp; h[stk[top]] &gt;= h[i]) 
+				top--;
+			
+			if(top) l[i]=stk[top]+1;
+			else l[i]=1;//表示左边没有比h[i]小的位置 
+			
+			stk[++top]=i;
+		}
+		
+		top=0;
+		for(int i=n;i&gt;=1;i--)//找出h[i]右边第一个小于h[i]的位置 
+		{
+			while(top &amp;&amp; h[stk[top]] &gt;= h[i])
+				top--;
+			if(top) r[i]=stk[top]-1;
+			else r[i]=n;//表示右边没有比h[i]大的位置 
+				
+			stk[++top]=i; 
+		}
+		
+		LL ans=0;
+		for(int i=1;i&lt;=n;i++)
+			ans=max(ans,(LL)h[i]*(r[i]-l[i]+1));
+	
+		printf(&quot;%lld\n&quot;,ans);
+	}
+	return 0;
+}
+</code></pre>
+<p><a href="https://www.luogu.com.cn/problem/P1901">P1901</a><br>
+对于一个新的信号塔:</p>
+<ul>
+<li>当他加入栈中时,会挡住之前比它低的塔的传播,同时 , 也会接受到比它低的塔的信号</li>
+<li>所以将栈顶所有比它低的塔删除,(因为他们已经不能再传播给其他塔信号了),同时 , 新的塔接收到的能量加上 删掉的塔传播的能量</li>
+<li>对于原有的高度比它高的信号塔,离此新的信号塔最近的(当前栈顶元素),会接受到新的塔的信号</li>
+<li>再将此新的信号塔加入栈中,最后O(n)扫一遍后,输出最大值即可</li>
+</ul>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+const int N=1e6+10;
+int stk[N],top;
+int sum[N];
+int h[N],w[N];
+int n;
+
+int main()
+{
+	cin&gt;&gt;n;
+	for(int i=1;i&lt;=n;i++)
+	{
+		cin&gt;&gt;h[i]&gt;&gt;w[i];
+		
+		while(top &amp;&amp; h[stk[top]] &lt;= h[i])
+			sum[i]+=w[stk[top--]];
+		sum[stk[top]]+=w[i];
+		
+		stk[++top]=i;
+	}
+	
+	int ans=0;
+	for(int i=1;i&lt;=n;i++)
+		ans=max(ans,sum[i]);
+	
+	printf(&quot;%d\n&quot;,ans);
+	return 0;
+}
+</code></pre>
+<p><a href="">P1823</a><br>
+先假设每个人身高不同，脑补一下走过整个队列。</p>
+<ul>
+<li>观察队伍中的一个人A。如果我们他后面找到了一个比他不知道高到哪里去了的B，A就不能与B后面的人谈笑风生了。</li>
+<li>因此我们可以维护一个单调栈，记录我们已经找到过的高人，显然栈上的高人们按高度的降序排列，栈顶的人最矮。</li>
+<li>当我们找到一个新的高人时，他可以向栈里比他矮的人传授人生经验，并让他们出栈。如果出栈之后栈非空，他还可以与栈顶的高人谈笑风生。然后我们再另请这位高明进栈。</li>
+<li>我们还要考虑两个人身高相同的情况。我们可以在栈里存pair&lt;身高，人数&gt;并维护它。</li>
+</ul>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+typedef pair&lt;int,int&gt; PII;
+#define x first
+#define y second
+typedef long long LL;
+const int N=500010;
+int h[N];
+PII stk[N];
+int top;
+int n;
+
+int main()
+{
+	cin&gt;&gt;n;
+	LL ans=0;
+	for(int i=1;i&lt;=n;i++)
+	{
+		scanf(&quot;%d&quot;,&amp;h[i]);
+		
+		PII p=make_pair(h[i],1);
+		while(top &amp;&amp; stk[top].x &lt;= h[i])
+		{
+			if(stk[top].x == h[i]) 
+				p.y+=stk[top].y;
+			ans+=stk[top].y;
+			top--;
+		}
+		
+		if(top) ans++;
+		stk[++top]=p;
+	}
+	printf(&quot;%lld\n&quot;,ans);
+	return 0;
+}
+</code></pre>
+<h4 id="单调队列">单调队列</h4>
+<figure data-type="image" tabindex="1"><img src="https://cdn.acwing.com/media/article/image/2020/03/25/9969_5111bd346e-31.PNG" alt="31.PNG" loading="lazy"></figure>
+<p><a href="https://www.luogu.com.cn/problem/P1886">模板题</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/25/9969_55f2d4966e-32.PNG" alt="32.PNG" loading="lazy"><br>
+单调队列与普通队列不一样的地方就在于单调队列既可以从队首出队，也可以从队尾出队。<br>
+那么我们应该怎样实现单调队列呢?<br>
+就拿样例来谈谈，设以最小的为标准。</p>
+<blockquote></blockquote>
+<p>8 3<br>
+1 3 -1 -3 5 3 6 7</p>
+<p>下文中我们用q来表示单调队列，p来表示其所对应的在原列表里的序号。</p>
+<ul>
+<li>
+<p>由于此时队中没有一个元素，我们直接令1进队。此时，q={1},p={1}。</p>
+</li>
+<li>
+<p>现在3面临着抉择。下面基于这样一个思想:假如把3放进去，如果后面2个数都比它大，那么3在其有生之年就有可能成为最小的。此时，q={1,3},p={1,2}</p>
+</li>
+<li>
+<p>下面出现了-1。队尾元素3比-1大，那么意味着只要-1进队，那么3在其有生之年必定成为不了最小值，原因很明显:因为当下面3被框起来，那么-1也一定被框起来，所以3永远不能当最小值。所以，3从队尾出队。同理，1从队尾出队。最后-1进队，此时q={-1},p={3}</p>
+</li>
+<li>
+<p>出现-3，同上面分析，-1&gt;-3，-1从队尾出队,-3从队尾进队。q={-3}，p={4}。</p>
+</li>
+<li>
+<p>出现5，因为5&gt;-3，同第二条分析，5在有生之年还是有希望的，所以5进队。此时，q={-3,5},p={4,5}</p>
+</li>
+<li>
+<p>出现3。3先与队尾的5比较，3&lt;5，按照第3条的分析，5从队尾出队。3再与-3比较，同第二条分析，3进队。此时，q={-3,3},p={4,6}</p>
+</li>
+<li>
+<p>出现6。6与3比较，因为3&lt;6，所以3不必出队。由于3以前元素都＜3，所以不必再比较，6进队。因为-3此时已经在滑动窗口之外，所以-3从队首出队。此时，q={3,6},p={6,7}</p>
+</li>
+<li>
+<p>出现7。队尾元素6小于7，7进队。此时，q={3,6,7},p={6,7,8}。</p>
+</li>
+</ul>
+<p>那么，我们对单调队列的基本操作已经分析完毕。因为单调队列中元素大小单调递(增/减/自定义比较)，因此，队首元素必定是最值。按题意输出即可。</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+const int N=1000010;
+int a[N];
+int q[N];
+int n,k;
+
+int main()
+{
+	scanf(&quot;%d%d&quot;,&amp;n,&amp;k);
+	
+	int hh=0,tt=-1;
+	
+	for(int i=1;i&lt;=n;i++)
+		scanf(&quot;%d&quot;,&amp;a[i]);
+		
+	for(int i=1;i&lt;=n;i++)//求滑动窗口最小值 
+	{
+		if(hh &lt;= tt &amp;&amp; i-k&gt;= q[hh]) hh++;
+		while(hh &lt;= tt &amp;&amp; a[q[tt]] &gt;= a[i])
+			tt--;
+		q[++tt]=i;
+		if(i &gt;= k)
+			printf(&quot;%d &quot;,a[q[hh]]);
+	}
+	puts(&quot;&quot;);
+	
+	hh=0,tt=-1;
+	for(int i=1;i&lt;=n;i++)
+	{
+		if(hh &lt;= tt &amp;&amp; i-k&gt;=q[hh]) hh++;
+		while(hh &lt;= tt &amp;&amp; a[q[tt]] &lt;= a[i])
+			tt--;
+		q[++tt]=i;
+		if(i &gt;= k)
+			printf(&quot;%d &quot;,a[q[hh]]);
+	}
+	return 0;
+}
+</code></pre>
+<p><a href="https://www.acwing.com/problem/content/137/">acwing135</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/25/9969_1ff2c8586e-33.PNG" alt="33.PNG" loading="lazy"></p>
+<pre><code>#include &lt;cstring&gt;
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+const int N = 300010, INF = 0x3f3f3f3f;
+int n, m;
+int s[N];
+int q[N];
+
+int main()
+{
+    scanf(&quot;%d%d&quot;, &amp;n, &amp;m);
+    for (int i = 1; i &lt;= n; i ++ ) scanf(&quot;%d&quot;, &amp;s[i]), s[i] += s[i - 1];
+
+    int res = -INF;
+    int hh = 0, tt = -1;
+    q[++tt]=0;//将s[0]入队
+    for (int i = 1; i &lt;= n; i ++ )
+    {
+        if(hh&lt;=tt &amp;&amp; i-m &gt; q[hh]) hh++;
+        res=max(res,s[i]-s[q[hh]]);
+        while (hh &lt;= tt &amp;&amp; s[q[tt]] &gt;= s[i]) tt -- ;
+        q[ ++ tt] = i;
+    }
+
+    printf(&quot;%d\n&quot;, res);
+
+    return 0;
+}
+</code></pre>
+
+                                </div>
+                    </article>
+                    <!--  -->
+                    
+                        <div class="next-post">
+                            <div class="next">下一篇</div>
+                            <a href="https://caifxh.github.io/post/gao-jing-du/">
+                                <h3 class="post-title">
+                                    高精度
+                                </h3>
+                            </a>
+                        </div>
+                        
+                            <div id="disqus_thread"></div>
+                            <div id="gitalk-container"></div>
+                </div>
+                <!-- middle -->
+                <div class="main-container-middle"></div>
+                <!-- right -->
+                <div id="sidebar" class="main-container-right">
+                    
+                        <!-- toc -->
+                        
+    <div class="toc-card i-card ">
+        <div class="toc-title i-card-title">目录</div>
+        <div class="toc-content">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E5%8D%95%E8%B0%83%E6%A0%88">单调栈</a></li>
+<li><a href="#%E4%BE%8B%E9%A2%98">例题</a></li>
+<li><a href="#%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97">单调队列</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+        <script>
+            function locateCatelogList() {
+                /*获取文章目录集合,可通过:header过滤器*/
+                var alis = $('.post-content :header');
+                /*获取侧边栏目录列表集合**/
+                var sidebar_alis = $('.markdownIt-TOC a');
+                /*获取滚动条到顶部的距离*/
+                var scroll_height = $(window).scrollTop();
+                for (var i = 0; i < alis.length; i++) {
+                    /*获取锚点集合中的元素分别到顶点的距离*/
+                    var a_height = $(alis[i]).offset().top;
+                    if (a_height < scroll_height) {
+                        /*高亮显示*/
+                        sidebar_alis.removeClass('on');
+                        $(sidebar_alis[i]).addClass('on');
+                    }
+                }
+            }
+            $(function() {
+                /*绑定滚动事件 */
+                $(window).bind('scroll', locateCatelogList);
+            });
+        </script>
+    </div>
+    
+                            
+
+                </div>
+
+
+
+
+            </div>
+
+
+            <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://caifxh.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+
+    </div>
+    <script>
+        $('#sidebar').stickySidebar({
+            topSpacing: 80,
+            // bottomSpacing: 60
+        });
+    </script>
+    
+</body>
+
+</html>

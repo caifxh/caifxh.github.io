@@ -1,0 +1,443 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>
+    斜率优化 | fxh
+</title>
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1586405129501">
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://caifxh.github.io/styles/main.css">
+<!-- js -->
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://caifxh.github.io/media/js/jquery.sticky-sidebar.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+        
+</head>
+
+<body>
+    <div class="main">
+        <div class="header">
+    <div class="nav">
+        <div class="logo">
+            <a href="https://caifxh.github.io">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1586405129501" alt="">
+            </a>
+            <div class="site-title">
+                <h1>
+                    fxh
+                </h1>
+            </div>
+        </div>
+        <span class="menu-btn fa fa-align-justify"></span>
+        <div class="menu-container">
+            <ul>
+                
+                    
+                            <li>
+                                <a href="/" class="menu">
+                                    首页
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/archives" class="menu">
+                                    归档
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/tags" class="menu">
+                                    标签
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/post/about" class="menu">
+                                    关于
+                                </a>
+                            </li>
+                            
+                                
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $(".menu-btn").click(function() {
+            $(".menu-container").slideToggle();
+        });
+        $(window).resize(function() {
+
+            if (window.matchMedia('(min-width: 960px)').matches) {
+                $(".menu-container").css('display', 'block')
+            } else {
+                $(".menu-container").css('display', 'none')
+            }
+
+        });
+    });
+</script>
+
+            <div id="main-content" class="post-detail main-container">
+                <!-- left -->
+                <div id="content" class="main-container-left">
+                    <article class="post i-card">
+                        <h2 class="post-title">
+                            斜率优化
+                        </h2>
+                        <div class="post-info">
+                            <time class="post-time">2020-04-08</time>
+                            
+                                <a href="https://caifxh.github.io/tag/hLQFdtGuD/" class="post-tag i-tag
+                            i-tag-">
+                            #DP
+                        </a>
+                                
+                        </div>
+                        
+                                <div class="post-content">
+                                    <p><img src="https://cdn.acwing.com/media/article/image/2020/04/07/9969_52e5180078-1.png" alt="1.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/07/9969_55ff749078-2.png" alt="2.png" loading="lazy"></p>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=3507">hdu3507</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/07/9969_98db0db078-3.png" alt="3.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/07/9969_3be50fce78-4.PNG" alt="4.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/07/9969_3db0a1a678-5.PNG" alt="5.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/07/9969_6b0c654078-6.png" alt="6.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/07/9969_80a51b8678-7.PNG" alt="7.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/07/9969_afd9578278-8.PNG" alt="8.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/07/9969_d2b42cb478-9.PNG" alt="9.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/07/9969_e1bc29be78-10.PNG" alt="10.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/07/9969_e3da236678-11.PNG" alt="11.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/07/9969_e70434fa78-12.PNG" alt="12.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/07/9969_e8f70a9e78-13.PNG" alt="13.PNG" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstring&gt;
+using namespace std;
+const int N=500010;
+int f[N];
+int s[N];
+int q[N];
+int n,m;
+
+int getY(int i,int j)
+{
+	return f[i]+s[i]*s[i]-f[j]-s[j]*s[j];
+}
+
+int getX(int i,int j)
+{
+	return s[i]-s[j];
+}
+
+int main()
+{
+	while(~scanf(&quot;%d%d&quot;,&amp;n,&amp;m))
+	{
+		for(int i=1;i&lt;=n;i++)
+		{
+			scanf(&quot;%d&quot;,&amp;s[i]);
+			s[i]+=s[i-1];
+		}
+		
+		int hh=0,tt=-1;
+		q[++tt]=0;
+		
+		for(int i=1;i&lt;=n;i++)
+		{
+			while(hh&lt;tt &amp;&amp; getY(q[hh+1],q[hh]) &lt;= 2*s[i]*getX(q[hh+1],q[hh]))
+				hh++;
+			int j=q[hh];
+			f[i]=f[j]+(s[i]-s[j])*(s[i]-s[j])+m;
+			while(hh&lt;tt &amp;&amp; getY(q[tt],q[tt-1])*getX(i,q[tt]) &gt;= getY(i,q[tt])*getX(q[tt],q[tt-1]))
+				tt--;
+			q[++tt]=i;
+		}
+		
+		printf(&quot;%d\n&quot;,f[n]);
+	}
+	return 0;
+}
+</code></pre>
+<p><img src="https://cdn.acwing.com/media/article/image/2020/04/07/9969_b435e00678-14.png" alt="14.png" loading="lazy"><br>
+<a href="https://www.acwing.com/problem/content/description/304/">acwing302</a></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstring&gt;
+using namespace std;
+typedef long long LL;
+const int N=300010;
+LL st[N],sc[N];
+LL f[N];
+int q[N];
+int n,s;
+
+LL getY(int i,int j)
+{
+    return f[i]-f[j];
+}
+
+LL getX(int i,int j)
+{
+    return sc[i]-sc[j];
+}
+
+int main()
+{
+    cin&gt;&gt;n&gt;&gt;s;
+    
+    for(int i=1;i&lt;=n;i++)
+    {
+        scanf(&quot;%lld%lld&quot;,&amp;st[i],&amp;sc[i]);
+        st[i]+=st[i-1];
+        sc[i]+=sc[i-1];
+    }
+    
+    int hh=0,tt=-1;
+    q[++tt]=0;
+    for(int i=1;i&lt;=n;i++)
+    {
+        int l=hh,r=tt;
+        while(l&lt;r)
+        {
+            int mid=l+r&gt;&gt;1;
+            if(getY(q[mid+1],q[mid]) &gt;= (s+st[i])*getX(q[mid+1],q[mid])) r=mid;
+            else l=mid+1;
+        }
+        
+        int j=q[l];
+        f[i]=f[j]-(s+st[i])*sc[j]+s*sc[n]+st[i]*sc[i];
+        while(hh&lt;tt &amp;&amp; getY(q[tt],q[tt-1])*getX(i,q[tt]) &gt;= getY(i,q[tt])*getX(q[tt],q[tt-1]))
+            tt--;
+        q[++tt]=i;
+    }
+    
+    cout&lt;&lt;f[n]&lt;&lt;endl;
+    
+    return 0;
+}
+</code></pre>
+<p><a href="https://www.acwing.com/problem/content/description/305/">acwing303</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/08/9969_1bbe8e4e78-15.png" alt="15.png" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+typedef long long LL;
+const int N=100010,M=100010,P=110;
+LL f[P][M];
+LL d[N];
+int t[M],a[M];
+LL s[M];
+int q[M];
+int n,m,p;
+
+LL getY(int i,int j,int k)
+{
+    return f[i-1][j]+s[j]-f[i-1][k]-s[k];
+}
+
+int getX(int i,int j)
+{
+    return i-j;
+}
+
+int main()
+{
+    cin&gt;&gt;n&gt;&gt;m&gt;&gt;p;
+    
+    for(int i=2;i&lt;=n;i++)
+        cin&gt;&gt;d[i],d[i]+=d[i-1];
+        
+    for(int i=1;i&lt;=m;i++)
+    {
+        int h;
+        cin&gt;&gt;h&gt;&gt;t[i];
+        a[i]=t[i]-d[h];
+    }
+    
+    sort(a+1,a+m+1);
+    
+    
+    for(int i=1;i&lt;=m;i++) s[i]=s[i-1]+a[i];
+    
+    memset(f,0x3f,sizeof f);
+    for(int i=0;i&lt;=p;i++) f[i][0]=0;
+    
+    for(int i=1;i&lt;=p;i++)
+    {
+        
+        int hh=0,tt=-1;
+        q[++tt]=0;
+        
+        for(int j=1;j&lt;=m;j++)
+        {
+            while(hh &lt; tt &amp;&amp; getY(i,q[hh+1],q[hh]) &lt;= (LL)a[j]*getX(q[hh+1],q[hh]))
+                hh++;
+            int k=q[hh];
+            f[i][j]=f[i-1][k]+(LL)a[j]*(j-k)-(s[j]-s[k]);
+            while(hh &lt; tt &amp;&amp; getY(i,q[tt],q[tt-1])*getX(j,q[tt]) &gt;= getY(i,j,q[tt])*getX(q[tt],q[tt-1]))
+                tt--;
+            q[++tt]=j;
+        }
+    }
+
+    cout&lt;&lt;f[p][m]&lt;&lt;endl;
+    
+    return 0;
+}
+</code></pre>
+<p><a href="https://www.luogu.com.cn/problem/P2120">P2120</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/08/9969_cc43d24e79-17.PNG" alt="17.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/08/9969_e7b6cfb879-18.PNG" alt="18.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/08/9969_ea64c32879-19.PNG" alt="19.PNG" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+typedef long long LL;
+const int N=1000010;
+LL f[N];
+LL x[N],c[N],p[N];
+LL sp[N],sxp[N];
+int q[N];
+int n;
+
+LL getY(int i,int j)
+{
+	return f[i]+sxp[i]-f[j]-sxp[j];
+}
+
+LL getX(int i,int j)
+{
+	return sp[i]-sp[j];
+}
+
+int main()
+{
+	cin&gt;&gt;n;
+	
+	for(int i=1;i&lt;=n;i++)
+	{
+		scanf(&quot;%lld%lld%lld&quot;,&amp;x[i],&amp;p[i],&amp;c[i]);
+		sp[i]=sp[i-1]+p[i];
+		sxp[i]=sxp[i-1]+x[i]*p[i];
+	}
+	
+	int hh=0,tt=-1;
+	q[++tt]=0;
+	
+	for(int i=1;i&lt;=n;i++)
+	{
+		while(hh &lt; tt &amp;&amp; getY(q[hh+1],q[hh]) &lt;= x[i]*getX(q[hh+1],q[hh]))
+			hh++;
+		int j=q[hh];
+		f[i]=f[j]+x[i]*(sp[i]-sp[j])-(sxp[i]-sxp[j])+c[i];
+		while(hh &lt; tt &amp;&amp; getY(q[tt],q[tt-1])*getX(i,q[tt]) &gt;= getY(i,q[tt])*getX(q[tt],q[tt-1]))
+			tt--;
+		q[++tt]=i;
+	}
+	
+	printf(&quot;%lld\n&quot;,f[n]);
+	
+	return 0;
+}
+</code></pre>
+
+                                </div>
+                    </article>
+                    <!--  -->
+                    
+                        <div class="next-post">
+                            <div class="next">下一篇</div>
+                            <a href="https://caifxh.github.io/post/qian-zhui-he-chai-fen/">
+                                <h3 class="post-title">
+                                    前缀和 差分
+                                </h3>
+                            </a>
+                        </div>
+                        
+                            <div id="disqus_thread"></div>
+                            <div id="gitalk-container"></div>
+                </div>
+                <!-- middle -->
+                <div class="main-container-middle"></div>
+                <!-- right -->
+                <div id="sidebar" class="main-container-right">
+                    
+                                <!-- id-card -->
+                                
+    <div class="id_card i-card">
+        <div class="id_card-avatar" style="background-image: url(https://caifxh.github.io/images/avatar.png?v=1586405129501)">
+        </div>
+        <h1 class="id_card-title">
+            fxh
+        </h1>
+        <h2 class="id_card-description">
+            菜
+        </h2>
+        <!--  -->
+        <div class="id_card-sns">
+            <!-- github -->
+            
+                    <!-- twitter -->
+                    
+                            <!-- weibo -->
+                            
+                                    <!-- facebook -->
+                                    
+
+        </div>
+    </div>
+    
+                                    
+
+                </div>
+
+
+
+
+            </div>
+
+
+            <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://caifxh.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+
+    </div>
+    <script>
+        $('#sidebar').stickySidebar({
+            topSpacing: 80,
+            // bottomSpacing: 60
+        });
+    </script>
+    
+</body>
+
+</html>

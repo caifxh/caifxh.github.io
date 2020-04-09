@@ -1,0 +1,670 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>
+    LCA | fxh
+</title>
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1586405129501">
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://caifxh.github.io/styles/main.css">
+<!-- js -->
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://caifxh.github.io/media/js/jquery.sticky-sidebar.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+        
+</head>
+
+<body>
+    <div class="main">
+        <div class="header">
+    <div class="nav">
+        <div class="logo">
+            <a href="https://caifxh.github.io">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1586405129501" alt="">
+            </a>
+            <div class="site-title">
+                <h1>
+                    fxh
+                </h1>
+            </div>
+        </div>
+        <span class="menu-btn fa fa-align-justify"></span>
+        <div class="menu-container">
+            <ul>
+                
+                    
+                            <li>
+                                <a href="/" class="menu">
+                                    首页
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/archives" class="menu">
+                                    归档
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/tags" class="menu">
+                                    标签
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/post/about" class="menu">
+                                    关于
+                                </a>
+                            </li>
+                            
+                                
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $(".menu-btn").click(function() {
+            $(".menu-container").slideToggle();
+        });
+        $(window).resize(function() {
+
+            if (window.matchMedia('(min-width: 960px)').matches) {
+                $(".menu-container").css('display', 'block')
+            } else {
+                $(".menu-container").css('display', 'none')
+            }
+
+        });
+    });
+</script>
+
+            <div id="main-content" class="post-detail main-container">
+                <!-- left -->
+                <div id="content" class="main-container-left">
+                    <article class="post i-card">
+                        <h2 class="post-title">
+                            LCA
+                        </h2>
+                        <div class="post-info">
+                            <time class="post-time">2020-04-06</time>
+                            
+                                <a href="https://caifxh.github.io/tag/Aq1uYaqZQ/" class="post-tag i-tag
+                            i-tag-info">
+                            #图论
+                        </a>
+                                
+                        </div>
+                        
+                                <div class="post-content">
+                                    <p><img src="https://cdn.acwing.com/media/article/image/2020/02/24/9969_ebac8e3a56-0001.png" alt="0001.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/24/9969_f3642cbe56-0002.png" alt="0002.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/24/9969_01286f7256-0003.png" alt="0003.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/24/9969_0e8b262856-0004.png" alt="0004.png" loading="lazy"></p>
+<h4 id="暴力">暴力</h4>
+<p><img src="https://cdn.acwing.com/media/article/image/2020/02/24/9969_25639d9456-0005.png" alt="0005.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/24/9969_285eb8e456-0006.png" alt="0006.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/24/9969_3b0b44da56-0007.png" alt="0007.png" loading="lazy"><br>
+<a href="http://poj.org/problem?id=1330">poj1330</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/24/9969_634786a256-01.png" alt="01.png" loading="lazy"></p>
+<pre><code>#include&lt;cstdio&gt;
+using namespace std;
+const int maxn=10010;
+int fa[maxn];
+bool flag[maxn];
+
+int LCA(int u,int v)
+{
+    if(u==v)
+    	return u;
+	flag[u]=1;
+	while(fa[u]!=u)//u向上走到根 
+	{
+		u=fa[u];
+		flag[u]=1;
+	}
+	if(flag[v]) 
+		return v;
+	while(fa[v]!=v)//v向上走
+	{
+		v=fa[v];
+		if(flag[v])
+			return v;
+	}
+	return 0;   	
+}
+
+int main()
+{
+	int n,u,v,T;
+	scanf(&quot;%d&quot;,&amp;T);
+	while(T--)
+	{
+		scanf(&quot;%d&quot;,&amp;n);
+		for(int i=1;i&lt;=n;i++)
+		{
+			fa[i]=i;
+			flag[i]=0;
+		} 
+		for(int i=1;i&lt;n;i++)
+		{
+			scanf(&quot;%d%d&quot;,&amp;u,&amp;v);
+			fa[v]=u;
+		}
+		scanf(&quot;%d%d&quot;,&amp;u,&amp;v);
+		printf(&quot;%d\n&quot;,LCA(u,v));
+	}
+	return 0;
+}
+</code></pre>
+<h4 id="树上倍增">树上倍增</h4>
+<p>用树上倍增法求LCA的时间复杂度为O((n+m)logn)。<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/24/9969_e1ee9b0856-02.png" alt="02.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/24/9969_040ed6bc56-04.png" alt="04.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/24/9969_073739f656-05.png" alt="05.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/24/9969_0c3d228a56-06.png" alt="06.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/24/9969_21a1fd3a56-07.png" alt="07.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/24/9969_2e88049056-08.png" alt="08.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/24/9969_3e3f101856-09.png" alt="09.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/24/9969_4e5cc82856-10.png" alt="10.png" loading="lazy"></p>
+<h4 id="步骤">步骤</h4>
+<p>1.建立一个空队列，并将根节点入队，同时存储根节点的深度<br>
+2.取出队头，遍历其所有出边。由于存储的时候是按照无向图存储，因此要进行深度判定，对于连接到它父亲节点的边，直接continue即可。记当前路径的另一端节点为y，处理出y的d、f两个数组的值，然后将y入队。<br>
+3.重复第2步，直到队列为空<br>
+以上部分是树上倍增法的预处理，也是比较通用的对于树上倍增的预处理，时间复杂度O(nlogn)<br>
+。接下来是求LCA的核心部分。<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/24/9969_182d302457-00000.PNG" alt="00000.PNG" loading="lazy"><br>
+<a href="https://www.acwing.com/problem/content/1174/">acwing1172</a></p>
+<pre><code>#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+const int N = 40010, M = N * 2;
+
+int n, m;
+int h[N], e[M], ne[M], idx;
+int depth[N], fa[N][16];
+int q[N];
+
+void add(int a, int b)
+{
+    e[idx] = b, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+void bfs(int root)
+{
+    memset(depth, 0x3f, sizeof depth);
+    depth[0] = 0, depth[root] = 1;
+    int hh = 0, tt = 0;
+    q[0] = root;
+    while (hh &lt;= tt)
+    {
+        int t = q[hh ++ ];
+        for (int i = h[t]; ~i; i = ne[i])
+        {
+            int j = e[i];
+            if (depth[j] &gt; depth[t] + 1)
+            {
+                depth[j] = depth[t] + 1;
+                q[ ++ tt] = j;
+                fa[j][0] = t;
+                for (int k = 1; k &lt;= 15; k ++ )
+                    fa[j][k] = fa[fa[j][k - 1]][k - 1];
+            }
+        }
+    }
+}
+
+int lca(int a, int b)
+{
+    if (depth[a] &lt; depth[b]) swap(a, b);
+    for (int k = 15; k &gt;= 0; k -- )
+        if (depth[fa[a][k]] &gt;= depth[b])
+            a = fa[a][k];
+    if (a == b) return a;
+    for (int k = 15; k &gt;= 0; k -- )
+        if (fa[a][k] != fa[b][k])
+        {
+            a = fa[a][k];
+            b = fa[b][k];
+        }
+    return fa[a][0];
+}
+
+int main()
+{
+    scanf(&quot;%d&quot;, &amp;n);
+    int root = 0;
+    memset(h, -1, sizeof h);
+
+    for (int i = 0; i &lt; n; i ++ )
+    {
+        int a, b;
+        scanf(&quot;%d%d&quot;, &amp;a, &amp;b);
+        if (b == -1) root = a;
+        else add(a, b), add(b, a);
+    }
+
+    bfs(root);
+
+    scanf(&quot;%d&quot;, &amp;m);
+    while (m -- )
+    {
+        int a, b;
+        scanf(&quot;%d%d&quot;, &amp;a, &amp;b);
+        int p = lca(a, b);
+        if (p == a) puts(&quot;1&quot;);
+        else if (p == b) puts(&quot;2&quot;);
+        else puts(&quot;0&quot;);
+    }
+
+    return 0;
+}
+</code></pre>
+<h4 id="离线tarjan">离线tarjan</h4>
+<p>Tarjan算法求LCA的本质是用并查集对向上标记法进行优化，是一种离线算法，时间复杂度O(n+m)。<br>
+在深度优先遍历的任意时刻，树中结点分为三类：<br>
+1.已经访问完毕并且回溯的结点，在这些结点上标记一个整数2.<br>
+2，已经开始递归，但尚未回溯的点。这些结点就是当前正在访问的结点，x以及x的祖先。在这些结点上标记一个整数1.<br>
+3.尚未访问的绩点。这些结点没有标记。<br>
+对于正在访问的结点x，它到根节点的路劲已经标记为1.若y是已经访问完毕并且回溯的节点，则LCA（x，y）就是从y向上走到根，第一个遇到的标记为1的节点。<br>
+可以利用并查集进行优化，当一个结点获得整数2的标记时，把它所在的集合合并到它的父节点所在的集合中（合并时它的父节点标记一定为1，且单独构成一个集合）。<br>
+此时扫描与x相关的所有询问，若询问的另一个点y的标记为2，就知道l该孙文的回答应该是y所在并查集中的代表元素。<br>
+这样，Tarjan算法求LCA的步骤就很明了了：</p>
+<p>1.从根节点开始进行dfs<br>
+2.将当前节点标记为1<br>
+3.遍历当前节点的所有出边；若当前边的终点还没有访问过，则访问它，访问过后将该节点合并到当前节点的集合中；<br>
+4.遍历与当前节点相关的所有询问；若当前询问的另一个节点的标记为2，则该询问的答案即为另一个节点所在集合的代表元素<br>
+5.将当前节点标记为2</p>
+<p><a href="https://www.acwing.com/problem/content/1173/">acwing1171</a></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;vector&gt;
+using namespace std;
+const int N=10010,M=N*2;
+int h[N],e[M],ne[M],w[M],idx;
+int n,m;
+typedef pair&lt;int,int&gt; PII;
+#define x firsst
+#define y second
+vector&lt;PII&gt; query[N];//first存储查询的另外一个点，second存查询编号
+int res[M];
+int st[N];
+int p[N];
+int dist[N];
+
+void add(int a, int b, int c)
+{
+    e[idx] = b, w[idx] = c, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+int find(int x)
+{
+    if (p[x] != x) p[x] = find(p[x]);
+    return p[x];
+}
+
+
+void dfs(int u,int fa)
+{
+    for(int i=h[u];~i;i=ne[i])
+    {
+        int j=e[i];
+        if(j == fa)
+            continue;
+        dist[j]=dist[u]+w[i];
+        dfs(j,u);
+    }
+}
+
+void tarjan(int u)
+{
+    st[u]=1;
+    for(int i=h[u];~i;i=ne[i])
+    {
+        int j=e[i];
+        if(!st[j])
+        {
+            tarjan(j);
+            p[j]=u;
+        }
+    }
+    
+    for(int i=0;i&lt;query[u].size();i++)
+    {
+        int y=query[u][i].first,id=query[u][i].second;
+        if(st[y] == 2)
+        {
+            int anc=find(y);
+            res[id]=dist[u]+dist[y]-dist[anc]*2;
+        }
+    }
+    st[u]=2;
+}
+
+int main()
+{
+    cin&gt;&gt;n&gt;&gt;m;
+    memset(h,-1,sizeof h);
+    
+    for(int i=0;i&lt;n-1;i++)
+    {
+        int a,b,c;
+        cin&gt;&gt;a&gt;&gt;b&gt;&gt;c;
+        add(a,b,c);
+        add(b,a,c);
+    }
+    
+    for(int i=0;i&lt;m;i++)
+    {
+        int a,b;
+        cin&gt;&gt;a&gt;&gt;b;
+        if(a != b)
+        {
+            query[a].push_back({b,i});
+            query[b].push_back({a,i});
+        }
+    }
+    
+    for(int i=1;i&lt;=n;i++)
+        p[i]=i;
+    
+    dfs(1,-1);
+    
+    tarjan(1);
+    
+    for(int i=0;i&lt;m;i++)
+        cout&lt;&lt;res[i]&lt;&lt;endl;
+    return 0;
+}
+</code></pre>
+<h4 id="lca求次小生成树">lca求次小生成树</h4>
+<p><img src="https://cdn.acwing.com/media/article/image/2020/02/24/9969_ee11055656-13.PNG" alt="13.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/24/9969_0fa2ff0856-2.png" alt="2.png" loading="lazy"><br>
+我们假设一条路径是由三段构造而成.是三段,不是就三个点.a-&gt;c,c-&gt;b,b-&gt;a(转自秦同学题解)<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/24/9969_a07e83ee56-14.PNG" alt="14.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/24/9969_a8d7c74856-15.png" alt="15.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/24/9969_cb3cbf6e56-16.PNG" alt="16.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/02/24/9969_ceafad0056-17.PNG" alt="17.PNG" loading="lazy"></p>
+<pre><code>#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+typedef long long LL;
+
+const int N = 100010, M = 300010, INF = 0x3f3f3f3f;
+
+int n, m;
+struct Edge
+{
+    int a, b, w;
+    bool used;
+    bool operator&lt; (const Edge &amp;t) const
+    {
+        return w &lt; t.w;
+    }
+}edge[M];
+int p[N];
+int h[N], e[M], w[M], ne[M], idx;
+int depth[N], fa[N][17], d1[N][17], d2[N][17];
+int q[N];
+
+void add(int a, int b, int c)
+{
+    e[idx] = b, w[idx] = c, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+int find(int x)
+{
+    if (p[x] != x) p[x] = find(p[x]);
+    return p[x];
+}
+
+LL kruskal()
+{
+    for (int i = 1; i &lt;= n; i ++ ) p[i] = i;
+    sort(edge, edge + m);
+    LL res = 0;
+    for (int i = 0; i &lt; m; i ++ )
+    {
+        int a = find(edge[i].a), b = find(edge[i].b), w = edge[i].w;
+        if (a != b)
+        {
+            p[a] = b;
+            res += w;
+            add(edge[i].a, edge[i].b, w), add(edge[i].b, edge[i].a, w);
+            edge[i].used=true;
+        }
+    }
+
+    return res;
+}
+
+void bfs()
+{
+    memset(depth, 0x3f, sizeof depth);
+    depth[0] = 0, depth[1] = 1;
+    q[0] = 1;
+    int hh = 0, tt = 0;
+    while (hh &lt;= tt)
+    {
+        int t = q[hh ++ ];
+        for (int i = h[t]; ~i; i = ne[i])
+        {
+            int j = e[i];
+            if (depth[j] &gt; depth[t] + 1)
+            {
+                depth[j] = depth[t] + 1;
+                q[ ++ tt] = j;
+                fa[j][0] = t;
+                d1[j][0] = w[i], d2[j][0] = -INF;
+                for (int k = 1; k &lt;= 16; k ++ )
+                {
+                    int anc = fa[j][k - 1];
+                    fa[j][k] = fa[anc][k - 1];
+                    int distance[4] = {d1[j][k - 1], d2[j][k - 1], d1[anc][k - 1], d2[anc][k - 1]};
+                    d1[j][k] = d2[j][k] = -INF;
+                    for (int u = 0; u &lt; 4; u ++ )
+                    {
+                        int d = distance[u];
+                        if (d &gt; d1[j][k]) d2[j][k] = d1[j][k], d1[j][k] = d;
+                        else if (d &lt; d1[j][k] &amp;&amp; d &gt; d2[j][k]) d2[j][k] = d;
+                    }
+                }
+            }
+        }
+    }
+}
+
+int lca(int a, int b, int w)
+{
+    static int distance[N * 2];
+    int cnt = 0;
+    if (depth[a] &lt; depth[b]) swap(a, b);
+    for (int k = 16; k &gt;= 0; k -- )
+        if (depth[fa[a][k]] &gt;= depth[b])
+        {
+            distance[cnt ++ ] = d1[a][k];
+            distance[cnt ++ ] = d2[a][k];
+            a = fa[a][k];
+        }
+    if (a != b)
+    {
+        for (int k = 16; k &gt;= 0; k -- )
+            if (fa[a][k] != fa[b][k])
+            {
+                distance[cnt ++ ] = d1[a][k];
+                distance[cnt ++ ] = d2[a][k];
+                distance[cnt ++ ] = d1[b][k];
+                distance[cnt ++ ] = d2[b][k];
+                a = fa[a][k], b = fa[b][k];
+            }
+        distance[cnt ++ ] = d1[a][0];
+        distance[cnt ++ ] = d1[b][0];
+    }
+
+    int dist1 = -INF, dist2 = -INF;
+    for (int i = 0; i &lt; cnt; i ++ )
+    {
+        int d = distance[i];
+        if (d &gt; dist1) dist2 = dist1, dist1 = d;
+        else if (d &lt; dist1 &amp;&amp; d &gt; dist2) dist2 = d;
+    }
+
+    if (w != dist1) 
+        return w - dist1;
+    return w - dist2;
+}
+
+int main()
+{
+    scanf(&quot;%d%d&quot;, &amp;n, &amp;m);
+    memset(h, -1, sizeof h);
+    for (int i = 0; i &lt; m; i ++ )
+    {
+        int a, b, c;
+        scanf(&quot;%d%d%d&quot;, &amp;a, &amp;b, &amp;c);
+        edge[i] = {a, b, c};
+    }
+
+    LL sum = kruskal();
+    
+    bfs();
+
+    LL res = 1e18;
+    for (int i = 0; i &lt; m; i ++ )
+        if (!edge[i].used)
+        {
+            int a = edge[i].a, b = edge[i].b, w = edge[i].w;
+            res = min(res, sum + lca(a, b, w));
+        }
+    printf(&quot;%lld\n&quot;, res);
+
+    return 0;
+}
+</code></pre>
+
+                                </div>
+                    </article>
+                    <!--  -->
+                    
+                        <div class="next-post">
+                            <div class="next">下一篇</div>
+                            <a href="https://caifxh.github.io/post/zhuang-tai-ji/">
+                                <h3 class="post-title">
+                                    状态机
+                                </h3>
+                            </a>
+                        </div>
+                        
+                            <div id="disqus_thread"></div>
+                            <div id="gitalk-container"></div>
+                </div>
+                <!-- middle -->
+                <div class="main-container-middle"></div>
+                <!-- right -->
+                <div id="sidebar" class="main-container-right">
+                    
+                        <!-- toc -->
+                        
+    <div class="toc-card i-card ">
+        <div class="toc-title i-card-title">目录</div>
+        <div class="toc-content">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E6%9A%B4%E5%8A%9B">暴力</a></li>
+<li><a href="#%E6%A0%91%E4%B8%8A%E5%80%8D%E5%A2%9E">树上倍增</a></li>
+<li><a href="#%E6%AD%A5%E9%AA%A4">步骤</a></li>
+<li><a href="#%E7%A6%BB%E7%BA%BFtarjan">离线tarjan</a></li>
+<li><a href="#lca%E6%B1%82%E6%AC%A1%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91">lca求次小生成树</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+        <script>
+            function locateCatelogList() {
+                /*获取文章目录集合,可通过:header过滤器*/
+                var alis = $('.post-content :header');
+                /*获取侧边栏目录列表集合**/
+                var sidebar_alis = $('.markdownIt-TOC a');
+                /*获取滚动条到顶部的距离*/
+                var scroll_height = $(window).scrollTop();
+                for (var i = 0; i < alis.length; i++) {
+                    /*获取锚点集合中的元素分别到顶点的距离*/
+                    var a_height = $(alis[i]).offset().top;
+                    if (a_height < scroll_height) {
+                        /*高亮显示*/
+                        sidebar_alis.removeClass('on');
+                        $(sidebar_alis[i]).addClass('on');
+                    }
+                }
+            }
+            $(function() {
+                /*绑定滚动事件 */
+                $(window).bind('scroll', locateCatelogList);
+            });
+        </script>
+    </div>
+    
+                            
+
+                </div>
+
+
+
+
+            </div>
+
+
+            <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://caifxh.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+
+    </div>
+    <script>
+        $('#sidebar').stickySidebar({
+            topSpacing: 80,
+            // bottomSpacing: 60
+        });
+    </script>
+    
+</body>
+
+</html>

@@ -1,0 +1,543 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>
+    高精度 | fxh
+</title>
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1586405129501">
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://caifxh.github.io/styles/main.css">
+<!-- js -->
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://caifxh.github.io/media/js/jquery.sticky-sidebar.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+        
+</head>
+
+<body>
+    <div class="main">
+        <div class="header">
+    <div class="nav">
+        <div class="logo">
+            <a href="https://caifxh.github.io">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1586405129501" alt="">
+            </a>
+            <div class="site-title">
+                <h1>
+                    fxh
+                </h1>
+            </div>
+        </div>
+        <span class="menu-btn fa fa-align-justify"></span>
+        <div class="menu-container">
+            <ul>
+                
+                    
+                            <li>
+                                <a href="/" class="menu">
+                                    首页
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/archives" class="menu">
+                                    归档
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/tags" class="menu">
+                                    标签
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/post/about" class="menu">
+                                    关于
+                                </a>
+                            </li>
+                            
+                                
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $(".menu-btn").click(function() {
+            $(".menu-container").slideToggle();
+        });
+        $(window).resize(function() {
+
+            if (window.matchMedia('(min-width: 960px)').matches) {
+                $(".menu-container").css('display', 'block')
+            } else {
+                $(".menu-container").css('display', 'none')
+            }
+
+        });
+    });
+</script>
+
+            <div id="main-content" class="post-detail main-container">
+                <!-- left -->
+                <div id="content" class="main-container-left">
+                    <article class="post i-card">
+                        <h2 class="post-title">
+                            高精度
+                        </h2>
+                        <div class="post-info">
+                            <time class="post-time">2020-04-08</time>
+                            
+                                <a href="https://caifxh.github.io/tag/TZ7cITYtt/" class="post-tag i-tag
+                            i-tag-error">
+                            #其他算法
+                        </a>
+                                
+                        </div>
+                        
+                                <div class="post-content">
+                                    <h4 id="高精度加法">高精度加法</h4>
+<p>当进行加法运算的数字较大时，受存储范围限制，无法使用int或longlong型变量进行存储。<br>
+考虑到加法运算的本质，不妨将数字拆开来存储。<br>
+对于一个超过变量存储数据范围的数字，可以将这个数字拆开，拆成一位一位的，或者是几位几位的存储到一个数组中， 用一个数组去表示一个数字</p>
+<p>采用用顺序存储数据方式，会有一个问题：最高位进位变得很困难。<br>
+最高位在num[0]，所以一旦有进位，需要将num[]数组中每一位都往后移，时间复杂度O(len)<br>
+·倒序存储·：num[]数组从0到len-1依次存储整数个位到最高位。则最高位进位时，只需要num[len++]=t，t为最高位数字</p>
+<p>进位：<br>
+方法一：设一个变量t，记录当前进位<br>
+边计算边进位和逐位相加不进位最后再统一进位效果是一样的如下，先进行一遍逐位相加。<br>
+然后，从0开始遍历一遍ans.num[]，将本位大于9的部分进位给更高位。<br>
+最后判断是否最高位有进位，有则ans.len++</p>
+<p><a href="https://www.luogu.com.cn/problem/P1601">模板题</a></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstdio&gt;
+using namespace std;
+const int N=510;
+char s[N];
+struct bignum
+{
+	int m[N],len;
+	bignum()
+	{
+		memset(m,0,sizeof m);
+		len=0;
+	}
+};
+
+bignum add(bignum a,bignum b)
+{
+	bignum c;
+	c.len=max(a.len , b.len);
+	for(int i=0;i&lt;c.len;i++) c.m[i]=a.m[i]+b.m[i];
+	for(int i=0;i&lt;c.len;i++)
+		if(c.m[i] &gt; 9)
+		{
+			c.m[i+1]+=1;
+			c.m[i]-=10;
+		}
+	if(c.m[c.len]) c.len++;
+	return c;
+}
+
+int main()
+{
+	scanf(&quot;%s&quot;,s);
+	bignum a,b;
+	int len=strlen(s);
+	a.len=len;
+	for(int i=0;i&lt;len;i++)
+		a.m[len-i-1]=s[i]-'0';
+	
+	scanf(&quot;%s&quot;,s);
+	len=strlen(s);
+	b.len=len;
+	for(int i=0;i&lt;len;i++)
+		b.m[len-i-1]=s[i]-'0';
+	bignum c=add(a,b);
+	for(int i=c.len-1;i&gt;=0;i--)
+		printf(&quot;%d&quot;,c.m[i]);
+	puts(&quot;&quot;);
+	return 0;
+}
+</code></pre>
+<h4 id="高精度减法">高精度减法</h4>
+<ul>
+<li>判断正负</li>
+<li>基本和加法一模一样，只不过从进位变成退位</li>
+<li>退位后更新结果长度<br>
+<a href="https://www.luogu.com.cn/problem/P2142">模板题</a></li>
+</ul>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstdio&gt;
+using namespace std;
+const int N=10100;
+char s[N];
+struct bignum
+{
+	int m[N],len;
+	bignum()
+	{
+		memset(m,0,sizeof m);
+		len=0;
+	}
+};
+
+int judge(bignum a,bignum b)
+{
+	if(a.len &gt; b.len) return 1;
+	if(a.len &lt; b.len) return -1;
+	for(int i=a.len-1;i&gt;=0;i--)
+	{
+		if(a.m[i] &gt; b.m[i]) return 1;
+		if(a.m[i] &lt; b.m[i]) return -1;
+	}
+	return 0;
+}
+
+bignum Minus(bignum a,bignum b)
+{
+	if(judge(a,b) == -1)
+	{
+		printf(&quot;-&quot;);
+		return Minus(b,a);
+	}
+
+	bignum c;
+	c.len=a.len;
+	for(int i=0;i&lt;c.len;i++) c.m[i]=a.m[i]-b.m[i];
+	for(int i=0;i&lt;c.len;i++)
+		if(c.m[i] &lt; 0)
+		{
+			c.m[i+1]-=1;
+			c.m[i]+=10;
+		}
+	while(c.len &gt; 1 &amp;&amp; !c.m[c.len-1]) c.len--;
+	return c;
+}
+
+int main()
+{
+	scanf(&quot;%s&quot;,s);
+	bignum a,b;
+	int len=strlen(s);
+	a.len=len;
+	for(int i=0;i&lt;len;i++)
+		a.m[len-i-1]=s[i]-'0';
+	
+	scanf(&quot;%s&quot;,s);
+	len=strlen(s);
+	b.len=len;
+	for(int i=0;i&lt;len;i++)
+		b.m[len-i-1]=s[i]-'0';
+	bignum c=Minus(a,b);
+	for(int i=c.len-1;i&gt;=0;i--)
+		printf(&quot;%d&quot;,c.m[i]);
+	puts(&quot;&quot;);
+	return 0;
+}
+</code></pre>
+<h4 id="高精度乘法">高精度乘法</h4>
+<h4 id="1高精低精">1.高精*低精</h4>
+<p>将加法运算改为乘法运算即可。<br>
+注意：</p>
+<ul>
+<li>进位的运算</li>
+<li>最高位进位的处理，可能不止进一位<br>
+<a href="https://www.acwing.com/problem/content/description/795/">模板题</a></li>
+</ul>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstdio&gt;
+using namespace std;
+const int N=100010;
+char s[N];
+struct bignum
+{
+	int m[N],len;
+	bignum()
+	{
+		memset(m,0,sizeof m);
+		len=0;
+	}
+};
+
+bignum mul(bignum a,int b)
+{
+	bignum c;
+	c.len=a.len;
+	for(int i=0;i&lt;c.len;i++) c.m[i]=a.m[i]*b;
+	for(int i=0;i&lt;c.len;i++)
+	{
+		c.m[i+1]+=c.m[i]/10;
+		c.m[i]%=10;
+		if(i == c.len-1 &amp;&amp; c.m[i+1]) c.len++;
+	}
+
+	return c;
+}
+
+int main()
+{
+	scanf(&quot;%s&quot;,s);
+	bignum a;
+	int len=strlen(s);
+	a.len=len;
+	for(int i=0;i&lt;len;i++)
+		a.m[len-i-1]=s[i]-'0';
+	
+	int b;
+	scanf(&quot;%d&quot;,&amp;b);
+
+	bignum c=mul(a,b);
+	for(int i=c.len-1;i&gt;=0;i--)
+		printf(&quot;%d&quot;,c.m[i]);
+	puts(&quot;&quot;);
+	return 0;
+}
+</code></pre>
+<h4 id="2高精高精">2.高精*高精</h4>
+<p>乘法竖式中，a.num[i]和b.num[j]相乘的结果，放在了ans.num[i+j]的位置。<br>
+a,b都为正整数时，长度为a.len和b.len的数字相乘得到ans，则<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/17/9969_ff4d713467-43.PNG" alt="43.PNG" loading="lazy"><br>
+模拟上例竖式运算过程即可<br>
+{模板题](https://www.luogu.com.cn/problem/P1303}</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstdio&gt;
+using namespace std;
+const int N=4010;
+char s[N];
+struct bignum
+{
+	int m[N],len;
+	bignum()
+	{
+		memset(m,0,sizeof m);
+		len=0;
+	}
+};
+
+bignum mul(bignum a,bignum b)
+{
+	bignum c;
+	c.len=a.len+b.len;
+	for(int i=0;i&lt;a.len;i++)
+		for(int j=0;j&lt;b.len;j++)
+			c.m[i+j]+=a.m[i]*b.m[j];
+	for(int i=0;i&lt;c.len;i++)
+	{
+		c.m[i+1]+=c.m[i]/10;
+		c.m[i]%=10;
+	}
+	while(c.len &gt; 1 &amp;&amp; !c.m[c.len-1]) c.len--;
+	return c;
+}
+
+int main()
+{
+	scanf(&quot;%s&quot;,s);
+	bignum a,b;
+	int len=strlen(s);
+	a.len=len;
+	for(int i=0;i&lt;len;i++)
+		a.m[len-i-1]=s[i]-'0';
+	
+	scanf(&quot;%s&quot;,s);
+	b.len=len=strlen(s);
+	for(int i=0;i&lt;len;i++)
+		b.m[len-i-1]=s[i]-'0';
+	bignum c=mul(a,b);
+	for(int i=c.len-1;i&gt;=0;i--)
+		printf(&quot;%d&quot;,c.m[i]);
+	puts(&quot;&quot;);
+	return 0;
+}
+</code></pre>
+<h4 id="高精度除法">高精度除法</h4>
+<h4 id="1高精低精-2">1.高精/低精</h4>
+<p>除法是从高位到低位进行运算的。使用一个临时变量来记录余数，注意细节<br>
+<a href="https://www.acwing.com/problem/content/description/796/">模板题</a></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstdio&gt;
+using namespace std;
+const int N=100010;
+char s[N];
+struct bignum
+{
+	int m[N],len;
+	bignum()
+	{
+		memset(m,0,sizeof m);
+		len=0;
+	}
+};
+int t;
+
+bignum Div(bignum a,int b)
+{
+	bignum c;
+	c.len=a.len;
+	t=0;
+	for(int i=c.len-1;i&gt;=0;i--)
+	{
+		t=t*10+a.m[i];
+		c.m[i]=t/b;
+		t%=b;
+	}
+	while(c.len &gt; 1 &amp;&amp; !c.m[c.len-1]) c.len--;
+	return c;
+}
+
+int main()
+{
+	scanf(&quot;%s&quot;,s);
+	bignum a;
+	int len=strlen(s);
+	a.len=len;
+	for(int i=0;i&lt;len;i++)
+		a.m[len-i-1]=s[i]-'0';
+	
+	int b;
+	scanf(&quot;%d&quot;,&amp;b);
+	bignum c=Div(a,b);
+	for(int i=c.len-1;i&gt;=0;i--)
+		printf(&quot;%d&quot;,c.m[i]);
+	puts(&quot;&quot;);
+	printf(&quot;%d\n&quot;,t);
+
+	return 0;
+}
+</code></pre>
+<p><a href="https://www.luogu.com.cn/problem/P1255">数楼梯</a><br>
+斐波那契递推<br>
+<a href="https://paste.ubuntu.com/p/JKWpDTPXrj/">code</a></p>
+
+                                </div>
+                    </article>
+                    <!--  -->
+                    
+                        <div class="next-post">
+                            <div class="next">下一篇</div>
+                            <a href="https://caifxh.github.io/post/shu-xing-dp/">
+                                <h3 class="post-title">
+                                    树形dp
+                                </h3>
+                            </a>
+                        </div>
+                        
+                            <div id="disqus_thread"></div>
+                            <div id="gitalk-container"></div>
+                </div>
+                <!-- middle -->
+                <div class="main-container-middle"></div>
+                <!-- right -->
+                <div id="sidebar" class="main-container-right">
+                    
+                        <!-- toc -->
+                        
+    <div class="toc-card i-card ">
+        <div class="toc-title i-card-title">目录</div>
+        <div class="toc-content">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E9%AB%98%E7%B2%BE%E5%BA%A6%E5%8A%A0%E6%B3%95">高精度加法</a></li>
+<li><a href="#%E9%AB%98%E7%B2%BE%E5%BA%A6%E5%87%8F%E6%B3%95">高精度减法</a></li>
+<li><a href="#%E9%AB%98%E7%B2%BE%E5%BA%A6%E4%B9%98%E6%B3%95">高精度乘法</a></li>
+<li><a href="#1%E9%AB%98%E7%B2%BE%E4%BD%8E%E7%B2%BE">1.高精*低精</a></li>
+<li><a href="#2%E9%AB%98%E7%B2%BE%E9%AB%98%E7%B2%BE">2.高精*高精</a></li>
+<li><a href="#%E9%AB%98%E7%B2%BE%E5%BA%A6%E9%99%A4%E6%B3%95">高精度除法</a></li>
+<li><a href="#1%E9%AB%98%E7%B2%BE%E4%BD%8E%E7%B2%BE-2">1.高精/低精</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+        <script>
+            function locateCatelogList() {
+                /*获取文章目录集合,可通过:header过滤器*/
+                var alis = $('.post-content :header');
+                /*获取侧边栏目录列表集合**/
+                var sidebar_alis = $('.markdownIt-TOC a');
+                /*获取滚动条到顶部的距离*/
+                var scroll_height = $(window).scrollTop();
+                for (var i = 0; i < alis.length; i++) {
+                    /*获取锚点集合中的元素分别到顶点的距离*/
+                    var a_height = $(alis[i]).offset().top;
+                    if (a_height < scroll_height) {
+                        /*高亮显示*/
+                        sidebar_alis.removeClass('on');
+                        $(sidebar_alis[i]).addClass('on');
+                    }
+                }
+            }
+            $(function() {
+                /*绑定滚动事件 */
+                $(window).bind('scroll', locateCatelogList);
+            });
+        </script>
+    </div>
+    
+                            
+
+                </div>
+
+
+
+
+            </div>
+
+
+            <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://caifxh.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+
+    </div>
+    <script>
+        $('#sidebar').stickySidebar({
+            topSpacing: 80,
+            // bottomSpacing: 60
+        });
+    </script>
+    
+</body>
+
+</html>

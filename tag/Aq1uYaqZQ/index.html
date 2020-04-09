@@ -7,7 +7,7 @@
 <title>
     图论 | fxh
 </title>
-<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1586059488314">
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1586405129501">
 <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
 <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
@@ -27,7 +27,7 @@
     <div class="nav">
         <div class="logo">
             <a href="https://caifxh.github.io">
-                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1586059488314" alt="">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1586405129501" alt="">
             </a>
             <div class="site-title">
                 <h1>
@@ -104,6 +104,486 @@
         
             <article class="post i-card">
                 <h2 class="post-title">
+                    <a href="https://caifxh.github.io/post/lca/">
+                        LCA
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2020-04-06</time>
+                    
+                        <a href="https://caifxh.github.io/tag/Aq1uYaqZQ/" class="post-tag i-tag
+                            i-tag-info">
+            #图论
+        </a>
+                        
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            
+
+
+
+暴力
+
+
+
+poj1330
+
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+const int maxn=10010;
+int fa[maxn];
+bool flag[maxn];
+
+int LCA(int u,int v)
+{
+    if(u==v)
+    	return u;
+	flag[u]=1;
+	while(fa[u]!=u)//u向上走到根 
+	{
+		u=fa[u];
+		flag[u]=1;
+	}
+	if(flag[v]) 
+		return v;
+	while(fa[v]!=v)//v向上走
+	{
+		v=fa[v];
+		if(flag[v])
+			return v;
+	}
+	return 0;   	
+}
+
+int main()
+{
+	int n,u,v,T;
+	scanf(&amp;quot;%d&amp;quot;,&amp;amp;T);
+	while(T--)
+	{
+		scanf(&amp;quot;%d&amp;quot;,&amp;amp;n);
+		for(int i=1;i&amp;lt;=n;i++)
+		{
+			fa[i]=i;
+			flag[i]=0;
+		} 
+		for(int i=1;i&amp;lt;n;i++)
+		{
+			scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;u,&amp;amp;v);
+			fa[v]=u;
+		}
+		scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;u,&amp;amp;v);
+		printf(&amp;quot;%d\n&amp;quot;,LCA(u,v));
+	}
+	return 0;
+}
+
+树上倍增
+用树上倍增法求LCA的时间复杂度为O((n+m)logn)。
+
+
+
+
+
+
+
+
+步骤
+1.建立一个空队列，并将根节点入队，同时存储根节点的深度
+2.取出队头，遍历其所有出边。由于存储的时候是按照无向图存储，因此要进行深度判定，对于连接到它父亲节点的边，直接continue即可。记当前路径的另一端节点为y，处理出y的d、f两个数组的值，然后将y入队。
+3.重复第2步，直到队列为空
+以上部分是树上倍增法的预处理，也是比较通用的对于树上倍增的预处理，时间复杂度O(nlogn)
+。接下来是求LCA的核心部分。
+
+acwing1172
+#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;cstring&amp;gt;
+#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;algorithm&amp;gt;
+
+using namespace std;
+
+const int N = 40010, M = N * 2;
+
+int n, m;
+int h[N], e[M], ne[M], idx;
+int depth[N], fa[N][16];
+int q[N];
+
+void add(int a, int b)
+{
+    e[idx] = b, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+void bfs(int root)
+{
+    memset(depth, 0x3f, sizeof depth);
+    depth[0] = 0, depth[root] = 1;
+    int hh = 0, tt = 0;
+    q[0] = root;
+    while (hh &amp;lt;= tt)
+    {
+        int t = q[hh ++ ];
+        for (int i = h[t]; ~i; i = ne[i])
+        {
+            int j = e[i];
+            if (depth[j] &amp;gt; depth[t] + 1)
+            {
+                depth[j] = depth[t] + 1;
+                q[ ++ tt] = j;
+                fa[j][0] = t;
+                for (int k = 1; k &amp;lt;= 15; k ++ )
+                    fa[j][k] = fa[fa[j][k - 1]][k - 1];
+            }
+        }
+    }
+}
+
+int lca(int a, int b)
+{
+    if (depth[a] &amp;lt; depth[b]) swap(a, b);
+    for (int k = 15; k &amp;gt;= 0; k -- )
+        if (depth[fa[a][k]] &amp;gt;= depth[b])
+            a = fa[a][k];
+    if (a == b) return a;
+    for (int k = 15; k &amp;gt;= 0; k -- )
+        if (fa[a][k] != fa[b][k])
+        {
+            a = fa[a][k];
+            b = fa[b][k];
+        }
+    return fa[a][0];
+}
+
+int main()
+{
+    scanf(&amp;quot;%d&amp;quot;, &amp;amp;n);
+    int root = 0;
+    memset(h, -1, sizeof h);
+
+    for (int i = 0; i &amp;lt; n; i ++ )
+    {
+        int a, b;
+        scanf(&amp;quot;%d%d&amp;quot;, &amp;amp;a, &amp;amp;b);
+        if (b == -1) root = a;
+        else add(a, b), add(b, a);
+    }
+
+    bfs(root);
+
+    scanf(&amp;quot;%d&amp;quot;, &amp;amp;m);
+    while (m -- )
+    {
+        int a, b;
+        scanf(&amp;quot;%d%d&amp;quot;, &amp;amp;a, &amp;amp;b);
+        int p = lca(a, b);
+        if (p == a) puts(&amp;quot;1&amp;quot;);
+        else if (p == b) puts(&amp;quot;2&amp;quot;);
+        else puts(&amp;quot;0&amp;quot;);
+    }
+
+    return 0;
+}
+
+离线tarjan
+Tarjan算法求LCA的本质是用并查集对向上标记法进行优化，是一种离线算法，时间复杂度O(n+m)。
+在深度优先遍历的任意时刻，树中结点分为三类：
+1.已经访问完毕并且回溯的结点，在这些结点上标记一个整数2.
+2，已经开始递归，但尚未回溯的点。这些结点就是当前正在访问的结点，x以及x的祖先。在这些结点上标记一个整数1.
+3.尚未访问的绩点。这些结点没有标记。
+对于正在访问的结点x，它到根节点的路劲已经标记为1.若y是已经访问完毕并且回溯的节点，则LCA（x，y）就是从y向上走到根，第一个遇到的标记为1的节点。
+可以利用并查集进行优化，当一个结点获得整数2的标记时，把它所在的集合合并到它的父节点所在的集合中（合并时它的父节点标记一定为1，且单独构成一个集合）。
+此时扫描与x相关的所有询问，若询问的另一个点y的标记为2，就知道l该孙文的回答应该是y所在并查集中的代表元素。
+这样，Tarjan算法求LCA的步骤就很明了了：
+1.从根节点开始进行dfs
+2.将当前节点标记为1
+3.遍历当前节点的所有出边；若当前边的终点还没有访问过，则访问它，访问过后将该节点合并到当前节点的集合中；
+4.遍历与当前节点相关的所有询问；若当前询问的另一个节点的标记为2，则该询问的答案即为另一个节点所在集合的代表元素
+5.将当前节点标记为2
+acwing1171
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;vector&amp;gt;
+using namespace std;
+const int N=10010,M=N*2;
+int h[N],e[M],ne[M],w[M],idx;
+int n,m;
+typedef pair&amp;lt;int,int&amp;gt; PII;
+#define x firsst
+#define y second
+vector&amp;lt;PII&amp;gt; query[N];//first存储查询的另外一个点，second存查询编号
+int res[M];
+int st[N];
+int p[N];
+int dist[N];
+
+void add(int a, int b, int c)
+{
+    e[idx] = b, w[idx] = c, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+int find(int x)
+{
+    if (p[x] != x) p[x] = find(p[x]);
+    return p[x];
+}
+
+
+void dfs(int u,int fa)
+{
+    for(int i=h[u];~i;i=ne[i])
+    {
+        int j=e[i];
+        if(j == fa)
+            continue;
+        dist[j]=dist[u]+w[i];
+        dfs(j,u);
+    }
+}
+
+void tarjan(int u)
+{
+    st[u]=1;
+    for(int i=h[u];~i;i=ne[i])
+    {
+        int j=e[i];
+        if(!st[j])
+        {
+            tarjan(j);
+            p[j]=u;
+        }
+    }
+    
+    for(int i=0;i&amp;lt;query[u].size();i++)
+    {
+        int y=query[u][i].first,id=query[u][i].second;
+        if(st[y] == 2)
+        {
+            int anc=find(y);
+            res[id]=dist[u]+dist[y]-dist[anc]*2;
+        }
+    }
+    st[u]=2;
+}
+
+int main()
+{
+    cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m;
+    memset(h,-1,sizeof h);
+    
+    for(int i=0;i&amp;lt;n-1;i++)
+    {
+        int a,b,c;
+        cin&amp;gt;&amp;gt;a&amp;gt;&amp;gt;b&amp;gt;&amp;gt;c;
+        add(a,b,c);
+        add(b,a,c);
+    }
+    
+    for(int i=0;i&amp;lt;m;i++)
+    {
+        int a,b;
+        cin&amp;gt;&amp;gt;a&amp;gt;&amp;gt;b;
+        if(a != b)
+        {
+            query[a].push_back({b,i});
+            query[b].push_back({a,i});
+        }
+    }
+    
+    for(int i=1;i&amp;lt;=n;i++)
+        p[i]=i;
+    
+    dfs(1,-1);
+    
+    tarjan(1);
+    
+    for(int i=0;i&amp;lt;m;i++)
+        cout&amp;lt;&amp;lt;res[i]&amp;lt;&amp;lt;endl;
+    return 0;
+}
+
+lca求次小生成树
+
+
+我们假设一条路径是由三段构造而成.是三段,不是就三个点.a-&amp;gt;c,c-&amp;gt;b,b-&amp;gt;a(转自秦同学题解)
+
+
+
+
+#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;cstring&amp;gt;
+#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;algorithm&amp;gt;
+
+using namespace std;
+
+typedef long long LL;
+
+const int N = 100010, M = 300010, INF = 0x3f3f3f3f;
+
+int n, m;
+struct Edge
+{
+    int a, b, w;
+    bool used;
+    bool operator&amp;lt; (const Edge &amp;amp;t) const
+    {
+        return w &amp;lt; t.w;
+    }
+}edge[M];
+int p[N];
+int h[N], e[M], w[M], ne[M], idx;
+int depth[N], fa[N][17], d1[N][17], d2[N][17];
+int q[N];
+
+void add(int a, int b, int c)
+{
+    e[idx] = b, w[idx] = c, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+int find(int x)
+{
+    if (p[x] != x) p[x] = find(p[x]);
+    return p[x];
+}
+
+LL kruskal()
+{
+    for (int i = 1; i &amp;lt;= n; i ++ ) p[i] = i;
+    sort(edge, edge + m);
+    LL res = 0;
+    for (int i = 0; i &amp;lt; m; i ++ )
+    {
+        int a = find(edge[i].a), b = find(edge[i].b), w = edge[i].w;
+        if (a != b)
+        {
+            p[a] = b;
+            res += w;
+            add(edge[i].a, edge[i].b, w), add(edge[i].b, edge[i].a, w);
+            edge[i].used=true;
+        }
+    }
+
+    return res;
+}
+
+void bfs()
+{
+    memset(depth, 0x3f, sizeof depth);
+    depth[0] = 0, depth[1] = 1;
+    q[0] = 1;
+    int hh = 0, tt = 0;
+    while (hh &amp;lt;= tt)
+    {
+        int t = q[hh ++ ];
+        for (int i = h[t]; ~i; i = ne[i])
+        {
+            int j = e[i];
+            if (depth[j] &amp;gt; depth[t] + 1)
+            {
+                depth[j] = depth[t] + 1;
+                q[ ++ tt] = j;
+                fa[j][0] = t;
+                d1[j][0] = w[i], d2[j][0] = -INF;
+                for (int k = 1; k &amp;lt;= 16; k ++ )
+                {
+                    int anc = fa[j][k - 1];
+                    fa[j][k] = fa[anc][k - 1];
+                    int distance[4] = {d1[j][k - 1], d2[j][k - 1], d1[anc][k - 1], d2[anc][k - 1]};
+                    d1[j][k] = d2[j][k] = -INF;
+                    for (int u = 0; u &amp;lt; 4; u ++ )
+                    {
+                        int d = distance[u];
+                        if (d &amp;gt; d1[j][k]) d2[j][k] = d1[j][k], d1[j][k] = d;
+                        else if (d &amp;lt; d1[j][k] &amp;amp;&amp;amp; d &amp;gt; d2[j][k]) d2[j][k] = d;
+                    }
+                }
+            }
+        }
+    }
+}
+
+int lca(int a, int b, int w)
+{
+    static int distance[N * 2];
+    int cnt = 0;
+    if (depth[a] &amp;lt; depth[b]) swap(a, b);
+    for (int k = 16; k &amp;gt;= 0; k -- )
+        if (depth[fa[a][k]] &amp;gt;= depth[b])
+        {
+            distance[cnt ++ ] = d1[a][k];
+            distance[cnt ++ ] = d2[a][k];
+            a = fa[a][k];
+        }
+    if (a != b)
+    {
+        for (int k = 16; k &amp;gt;= 0; k -- )
+            if (fa[a][k] != fa[b][k])
+            {
+                distance[cnt ++ ] = d1[a][k];
+                distance[cnt ++ ] = d2[a][k];
+                distance[cnt ++ ] = d1[b][k];
+                distance[cnt ++ ] = d2[b][k];
+                a = fa[a][k], b = fa[b][k];
+            }
+        distance[cnt ++ ] = d1[a][0];
+        distance[cnt ++ ] = d1[b][0];
+    }
+
+    int dist1 = -INF, dist2 = -INF;
+    for (int i = 0; i &amp;lt; cnt; i ++ )
+    {
+        int d = distance[i];
+        if (d &amp;gt; dist1) dist2 = dist1, dist1 = d;
+        else if (d &amp;lt; dist1 &amp;amp;&amp;amp; d &amp;gt; dist2) dist2 = d;
+    }
+
+    if (w != dist1) 
+        return w - dist1;
+    return w - dist2;
+}
+
+int main()
+{
+    scanf(&amp;quot;%d%d&amp;quot;, &amp;amp;n, &amp;amp;m);
+    memset(h, -1, sizeof h);
+    for (int i = 0; i &amp;lt; m; i ++ )
+    {
+        int a, b, c;
+        scanf(&amp;quot;%d%d%d&amp;quot;, &amp;amp;a, &amp;amp;b, &amp;amp;c);
+        edge[i] = {a, b, c};
+    }
+
+    LL sum = kruskal();
+    
+    bfs();
+
+    LL res = 1e18;
+    for (int i = 0; i &amp;lt; m; i ++ )
+        if (!edge[i].used)
+        {
+            int a = edge[i].a, b = edge[i].b, w = edge[i].w;
+            res = min(res, sum + lca(a, b, w));
+        }
+    printf(&amp;quot;%lld\n&amp;quot;, res);
+
+    return 0;
+}
+
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://caifxh.github.io/post/lca/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+            <article class="post i-card">
+                <h2 class="post-title">
                     <a href="https://caifxh.github.io/post/ou-la-lu-jing/">
                         欧拉路径
                     </a>
@@ -112,7 +592,7 @@
                     <time class="post-time">2020-04-04</time>
                     
                         <a href="https://caifxh.github.io/tag/Aq1uYaqZQ/" class="post-tag i-tag
-                            i-tag-other_3">
+                            i-tag-other_1">
             #图论
         </a>
                         
@@ -411,7 +891,7 @@ int main()
                     <time class="post-time">2020-04-03</time>
                     
                         <a href="https://caifxh.github.io/tag/Aq1uYaqZQ/" class="post-tag i-tag
-                            i-tag-primary">
+                            i-tag-error">
             #图论
         </a>
                         
@@ -1202,7 +1682,7 @@ https://vjudge.net/contest/249592#overview
                     <time class="post-time">2020-04-03</time>
                     
                         <a href="https://caifxh.github.io/tag/Aq1uYaqZQ/" class="post-tag i-tag
-                            i-tag-success">
+                            i-tag-">
             #图论
         </a>
                         
@@ -1736,7 +2216,7 @@ int main()
                     <time class="post-time">2020-04-01</time>
                     
                         <a href="https://caifxh.github.io/tag/Aq1uYaqZQ/" class="post-tag i-tag
-                            i-tag-other_4">
+                            i-tag-">
             #图论
         </a>
                         
@@ -3203,7 +3683,7 @@ https://blog.csdn.net/sentimental_dog/article/details/53790582
                     <!-- 个人信息 -->
                     
     <div class="id_card i-card">
-        <div class="id_card-avatar" style="background-image: url(https://caifxh.github.io/images/avatar.png?v=1586059488314)">
+        <div class="id_card-avatar" style="background-image: url(https://caifxh.github.io/images/avatar.png?v=1586405129501)">
         </div>
         <h1 class="id_card-title">
             fxh
