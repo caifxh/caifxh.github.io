@@ -1,0 +1,1028 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>
+    尺取法 | fxh
+</title>
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1586491016728">
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://caifxh.github.io/styles/main.css">
+<!-- js -->
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://caifxh.github.io/media/js/jquery.sticky-sidebar.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+        
+</head>
+
+<body>
+    <div class="main">
+        <div class="header">
+    <div class="nav">
+        <div class="logo">
+            <a href="https://caifxh.github.io">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1586491016728" alt="">
+            </a>
+            <div class="site-title">
+                <h1>
+                    fxh
+                </h1>
+            </div>
+        </div>
+        <span class="menu-btn fa fa-align-justify"></span>
+        <div class="menu-container">
+            <ul>
+                
+                    
+                            <li>
+                                <a href="/" class="menu">
+                                    首页
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/archives" class="menu">
+                                    归档
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/tags" class="menu">
+                                    标签
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/post/about" class="menu">
+                                    关于
+                                </a>
+                            </li>
+                            
+                                
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $(".menu-btn").click(function() {
+            $(".menu-container").slideToggle();
+        });
+        $(window).resize(function() {
+
+            if (window.matchMedia('(min-width: 960px)').matches) {
+                $(".menu-container").css('display', 'block')
+            } else {
+                $(".menu-container").css('display', 'none')
+            }
+
+        });
+    });
+</script>
+
+            <div id="main-content" class="post-detail main-container">
+                <!-- left -->
+                <div id="content" class="main-container-left">
+                    <article class="post i-card">
+                        <h2 class="post-title">
+                            尺取法
+                        </h2>
+                        <div class="post-info">
+                            <time class="post-time">2020-04-10</time>
+                            
+                                <a href="https://caifxh.github.io/tag/TZ7cITYtt/" class="post-tag i-tag
+                            i-tag-other_1">
+                            #其他算法
+                        </a>
+                                
+                        </div>
+                        
+                                <div class="post-content">
+                                    <h4 id="尺取法">尺取法</h4>
+<p>尺取法（又称为：双指针、twopointers），是算法竞赛中一个常用的优化技巧，用来解决序列的区间问题，操作简单、容易编程。</p>
+<p>如果区间是单调的，也常常用二分法来求解，所以很多问题用尺取法和二分法都行。</p>
+<p>尺取法：顾名思义，像尺子一样取一段，借用挑战书上面的话说，尺取法通常是对数组保存一对下标，即所选取的区间的左右端点，然后根据实际情况不断地推进区间左右端点以得出答案。之所以需要掌握这个技巧，是因为尺取法比直接暴力枚举区间效率高很多，尤其是数据量大的时候，所以尺取法是一种高效的枚举区间的方法，一般用于求取有一定限制的区间个数或最短的区间等等。当然任何技巧都存在其不足的地方，有些情况下尺取法不可行，无法得出正确答案。</p>
+<p>使用尺取法时应清楚以下四点：</p>
+<p>1、  什么情况下能使用尺取法?<br>
+2、何时推进区间的端点？<br>
+3、如何推进区间的端点？<br>
+4、何时结束区间的枚举？</p>
+<p>尺取法通常适用于选取区间有一定规律，或者说所选取的区间有一定的变化趋势的情况，通俗地说，在对所选取区间进行判断之后，我们可以明确如何进一步有方向地推进区间端点以求解满足条件的区间，如果已经判断了目前所选取的区间，但却无法确定所要求解的区间如何进一步得到根据其端点得到，那么尺取法便是不可行的。首先，明确题目所需要求解的量之后，区间左右端点一般从最整个数组的起点开始，之后判断区间是否符合条件在根据实际情况变化区间的端点求解答案。</p>
+<h4 id="尺取法的概念">尺取法的概念</h4>
+<p>什么是尺取法？为什么尺取法能优化呢？<br>
+考虑下面的应用背景：<br>
+（1）给定一个序列。有时候需要它是有序的，先排序。<br>
+（2）问题和序列的区间有关，且需要操作2个变量，可以用两个下标（指针）i、j扫描区间。<br>
+对于上面的应用，一般的做法，是用i、j分别扫描区间，有两重循环，复杂度O(n2)。以反向扫描（即i、j方向相反，后文有解释）为例，代码是：</p>
+<pre><code>for(int i = 0; i &lt; n; i++)           //i从头扫到尾
+	for(int j = n-1; j &gt;= 0; j--){   //j从尾扫到头
+        ......
+    }
+</code></pre>
+<p>下面用尺取法来优化上面的算法。<br>
+实际上，尺取法就是把两重循环变成了一个循环，在这个循环中一起处理i和j。复杂度也就从O(<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>n</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">n^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>)变成了O(n)。仍以上面的反向扫描为例，代码是：</p>
+<pre><code>//用while实现：
+int i = 0, j = n - 1;
+while (i &lt; j) {      //i和j在中间相遇。这样做还能防止i、j越界
+        ......       //满足题意的操作
+        i++;         //i从头扫到尾
+        j--;         //j从尾扫到头
+}
+//用for实现：
+for (int i = 0, j = n - 1; i &lt; j; i++, j--) {
+    ......
+}
+</code></pre>
+<p>在尺取法中，这两个指针i、j，有两种扫描方向：<br>
+（a）反向扫描。i、j方向相反，i从头到尾，j从尾到头，在中间相会。<br>
+（b）同向扫描。i、j方向相同，都从头到尾，可以让j跑在i前面。<br>
+把同向扫描的i、j指针称为“快慢指针”，把反向扫描的i、j指针称为“左右指针”，更加形象。快慢指针在序列上产生了一个大小可变的“滑动窗口”，有灵活的应用</p>
+<h4 id="反向扫描">反向扫描</h4>
+<p>1.找指定和的整数对<br>
+这个问题是尺取法最经典，也最简单直接的应用。</p>
+<p>输入n ( n≤100,000)个整数，放在数组a[]中。找出其中的两个数，它们之和等于整数m(假定肯定有解)。题中所有整数都是int型。<br>
+样例输入：<br>
+21 4 5 6 13 65 32 9 23<br>
+28<br>
+样例输出：<br>
+5 23<br>
+说明：样例输入的第一行是数组a[]，第2行是m = 28。样例输出5和23，相加得28。</p>
+<p>为了说明尺取法的优势，下面给出四种方法：<br>
+（1）用两重循环暴力搜，枚举所有的取数方法，复杂度O(n2)，超时。暴力法不需要排序。<br>
+（2）二分法。首先对数组从小到大排序，复杂度O(nlogn)；然后，从头到尾处理数组中的每个元素a[i]，在大于a[i]的数中二分查找是否存在一个等于 m - a[i]的数，复杂度也是O(nlogn)。两部分相加，总复杂度仍然是O(nlogn)。<br>
+（3）Hash。分配一个hash空间s，把n个数放进去。逐个检查a[]中的n个数，例如a[i]，检查m - a[i]在s中是否有值，如果有，那么存在一个答案。复杂度是O(n)。<br>
+hash方法很快，但是需要一个额外的、可能很大的hash空间。<br>
+（4）尺取法。这是标准解法。首先对数组从小到大排序；然后，设置两个变量i和j，分别指向头和尾，i初值是0，j初值是n-1，然后让i和j逐渐向中间移动，检查a[i]+a[j]，如果大于m，就让j减1，如果小于m，就让i加1，直至a[i]+a[j] = m。排序复杂度O(nlogn)，检查的复杂度O(n)，合起来总复杂度O(nlogn)。</p>
+<pre><code>void find_sum(int a[], int n, int m){ 
+     sort(a, a + n - 1);      //先排序，复杂度O(nlogn)
+     int i = 0, j = n - 1;    //i指向头，j指向尾
+     while (i &lt; j){           //复杂度O(n)
+		    int sum = a[i] + a[j];
+		    if (sum &gt; m)   j--;
+		    if (sum &lt; m)   i++;
+		    if (sum == m){     
+			    cout &lt;&lt; a[i] &lt;&lt; &quot; &quot; &lt;&lt; a[j] &lt;&lt; endl;  //打印一种情况
+                i++;          //可能有多个答案，继续
+		    }
+	  }
+}
+</code></pre>
+<h4 id="判断回文串">判断回文串</h4>
+<p>2.给一个字符串，判断它是不是回文串。</p>
+<p>“回文串”是一个正读和反读都一样的字符串，比如“level”或者“noon”就是回文串。写一个程序判断读入的字符串是否是“回文”。如果是，输出“yes”，否则输出“no”。</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+int main(){
+    int n;
+    cin &gt;&gt; n;                         //n是测试用例个数
+    while(n--){
+        string s;  cin &gt;&gt; s;          //读一个字符串
+        bool ans = true;
+        int i = 0, j = s.size() - 1;  //双指针
+        while(i &lt; j){ 
+            if(s[i] != s[j]){
+                ans = false;
+                break;
+            }
+            i++;   j--;               //移动双指针
+        }
+        if(ans)   cout &lt;&lt; &quot;yes&quot; &lt;&lt; endl;
+        else      cout &lt;&lt; &quot;no&quot;  &lt;&lt; endl;
+    }
+    return 0;
+}
+</code></pre>
+<p>允许删除（或插入，本题只考虑删除）最多1个字符，判断是否能构成回文字符串。</p>
+<p>设反向扫描双指针为i、j。如果 s[i]和s[j]相同，i++、j–；如果s[i]和s[j]不同，那么，或者删除s[i]，或者删除s[j]，看剩下的字符串是否是回文串即可。</p>
+<h4 id="同向扫描">同向扫描</h4>
+<p>1.寻找区间和<br>
+这是用尺取法产生“滑动窗口”的典型例子。</p>
+<p>给定一个长度为n的数组a[]和一个数s，在这个数组中找一个区间，使得这个区间之和等于s。输出区间的起点和终点位置。<br>
+样例输入：<br>
+15<br>
+6 1 2 3 4 6 4 2 8 9 10 11 12 13 14<br>
+6<br>
+样例输出：<br>
+0 0<br>
+1 3<br>
+5 5<br>
+6 7<br>
+说明：样例输入的第1行是n=15，第2行是数组a[]，第3行是区间和s=6。样例输出，共有4个情况。</p>
+<p>题解<br>
+指针i和j，i&lt;=j，都从头向尾扫描，判断区间[i,j]的和是否等于s。<br>
+如何寻找区间和等于s的区间？如果简单地对i和j做二重循环，复杂度是O(<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>n</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">n^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>)。用尺取法，复杂度O(n)，操作步骤是：<br>
+（1）初始值i=0、j=0，即开始都指向第一个元素a[0]。定义sum是区间[i, j]的和，初始值sum = a[0]。<br>
+（2）如果sum等于s，输出一个解。继续，把sum减掉元素a[i]，并把i往后移动一位。<br>
+（3）如果sum大于s，让sum减掉元素a[i]，并把i往后移动一位。<br>
+（4）如果sum小于s，把j往后挪一位，并把sum的值加上这个新元素。<br>
+在上面的步骤中，有2个关键技巧：<br>
+（1）滑动窗口的实现。窗口就是区间[i,j]，随着i和j从头到尾移动，窗口就“滑动”扫描了整个序列，检索了所有的数据。i和j并不是同步增加的，窗口像一只蚯蚓伸缩前进，它的长度是变化的，这个变化，正对应了对区间和的计算。<br>
+（2）sum的使用。如何计算区间和？暴力的方法是从a[i]到a[j]累加，但是，这个累加的复杂度是O(n)的，会超时。如果利用sum，每次移动i或j的时候，只需要把sum加或减一次，就得到了区间和，复杂度是O(1)。这是“前缀和”递推思想的应用。</p>
+<p>以下是几个经典的使用尺取法的例题，都是从挑战书上引用的。（尺取法通常会需要对某些量进行预处理，以便能在使用时快速地判断。</p>
+<p><a href="https://vjudge.net/problem/POJ-3061">poj3061</a><br>
+题意：给定一个序列，找出最短的子序列长度，使得其和大于或等于S。<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/09/9969_60ea20507a-37.PNG" alt="37.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/09/9969_7e2f255c7a-38.PNG" alt="38.PNG" loading="lazy"></p>
+<p>分析：首先，序列都是正数，如果一个区间其和大于等于S了，那么不需要在向后推进右端点了，因为其和也肯定大于等于S但长度更长，<strong>所以，当区间和小于S时右端点向右移动，和大于等于S时，左端点向右移动以进一步找到最短的区间，如果右端点移动到区间末尾其和还不大于等于S，结束区间的枚举。</strong></p>
+<p>Input：<br>
+10 15<br>
+5 1 3 5 10 7 4 9 2 8<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/08/9969_7ec42c2e79-16.png" alt="16.png" loading="lazy"><br>
+二分+前缀和：</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+const int N=100010;
+int s[N];
+int n,m;
+
+bool check(int mid)
+{
+	for(int i=1;i&lt;=n-mid+1;i++)
+		if(s[i+mid-1]-s[i-1] &gt;= m)
+			return 1;
+	return 0;
+}
+
+int main()
+{
+	int T;
+	cin&gt;&gt;T;
+	while(T--)
+	{
+		scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+		
+		for(int i=1;i&lt;=n;i++)
+			scanf(&quot;%d&quot;,&amp;s[i]),s[i]+=s[i-1];
+			
+		if(s[n] &lt; m) 
+		{
+			cout&lt;&lt;0&lt;&lt;endl;
+			continue;
+		}
+		
+		int l=1,r=n;
+		while(l&lt;r)
+		{
+			int mid=l+r&gt;&gt;1;
+			if(check(mid))
+				r=mid;
+			else 
+				l=mid+1;
+		}
+		
+		printf(&quot;%d\n&quot;,l);
+	}
+	return 0;
+}
+</code></pre>
+<p>尺取法：</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+const int N=100010;
+int a[N];
+int n,m;
+
+int main()
+{
+	int T;
+	cin&gt;&gt;T;
+	while(T--)
+	{
+		scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+		for(int i=0;i&lt;n;i++)
+			scanf(&quot;%d&quot;,&amp;a[i]);
+		int ans=n+1;
+		int sum=0;
+		int l=0,r=0;
+		while(1)
+		{
+			while(r&lt;n &amp;&amp; sum&lt;m)
+				sum+=a[r],r++;
+			
+			if(sum &lt; m) break;
+			
+			ans=min(ans,r-l);
+			sum-=a[l++];//左端点向右移动以进一步找到最短的区间
+		}
+		
+		if(ans == n+1) ans=0;
+		printf(&quot;%d\n&quot;,ans);
+	}
+	return 0;
+}
+</code></pre>
+<p><a href="https://vjudge.net/problem/POJ-3320">poj3320</a><br>
+题意：一本书有P页，每一页都一个知识点，求去最少的连续页数覆盖所有的知识点。</p>
+<p>和上面的题一样的思路，如果一个区间的子区间满足条件，那么在区间推进到该处时，右端点会固定，左端点会向右移动到其子区间，且其子区间会是更短的，只是需要存储所选取的区间的知识点的数量，那么使用map进行映射以快速判断是否所选取的页数是否覆盖了所有的知识点。</p>
+<ul>
+<li>当前区间若可行，则需在保证可行的前提下，缩小区间范围，将l指针右移</li>
+<li>当前区间若不可行，则需要扩大区间范围，将r指针右移</li>
+<li>当r已到末尾且l已经最优时，结束枚举</li>
+</ul>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+#include&lt;map&gt;
+using namespace std;
+const int N=1000010;
+int a[N],cnt[N];
+map&lt;int,int&gt; m;
+int tot;
+int n;
+
+int main()
+{
+	scanf(&quot;%d&quot;,&amp;n);
+	
+	for(int i=1;i&lt;=n;i++)
+	{
+		scanf(&quot;%d&quot;,&amp;a[i]);
+		if(!m[a[i]]) m[a[i]]=++tot;
+		a[i]=m[a[i]];
+	}
+	
+	int ans=n;
+	int l=1,r=1;
+	int sum=0;
+	
+	while(1)
+	{
+		while(r&lt;=n &amp;&amp; sum&lt;tot)
+			if(cnt[a[r++]]++ == 0)
+				sum++;
+			
+		if(sum &lt; tot) break;
+		ans=min(ans,r-l);
+		if(--cnt[a[l++]] == 0) sum--;
+	}
+	
+	printf(&quot;%d\n&quot;,ans);
+	
+	return 0;
+}
+</code></pre>
+<p><a href="">poj2566</a><br>
+题意：给你n个数字，这些数字可正可负，再给你个数字t,求在这个数列中一个连续的子序列，和的绝对值与t相差最小</p>
+<p>一般来说，我们必须要保证数列单调性，才能使用尺取法。<br>
+预处理出前i个数的前缀和，和编号i一起放入pair中，然而根据前缀和大小进行排序。由于<br>
+abs(sum[i]-sum[j]) =  abs(sum[j]-sum[i])<br>
+可以忽视数列前缀和的前后关系。此时，sum[r]-sum[l]有单调性。</p>
+<p>因此我们可以先比较当前sum[r]-sum[l]与t的差，并更新答案。</p>
+<p>如果当前sum[r]-sum[l]&lt;t,说明和还可以更大，r++。</p>
+<p>同理，如果sum[r]-sum[l]&gt;t，说明和还可以更小，l++。</p>
+<p>如果sum[r]-sum[l]=t，必定是最小答案。</p>
+<ul>
+<li>尺取的前提是一个有序的，可判定的序列，由于题目说的是连续序列和的绝对值，也就是说我们只需要知道两个端点</li>
+<li>利用前缀和来进行判定，我们来枚举前缀和的两个端点，从而可以找到一个最接近询问值的数，</li>
+<li>我们在存前缀和的同时还得把相应的坐标给存上，</li>
+</ul>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstring&gt;
+using namespace std;
+#define x first
+#define y second
+typedef pair&lt;int,int&gt; PII;
+const int N=100010,INF=0x3f3f3f3f;
+PII s[N];
+int n,m;
+int ans,st,ed;
+
+int main()
+{
+	while(~scanf(&quot;%d%d&quot;,&amp;n,&amp;m))
+	{
+		if(!n &amp;&amp; !m) break;
+		s[0]=make_pair(0,0);
+		for(int i=1;i&lt;=n;i++)
+		{
+			scanf(&quot;%d&quot;,&amp;s[i].x);
+			s[i].y=i;
+			s[i].x+=s[i-1].x;
+		}
+		
+		sort(s,s+n+1);
+		
+		while(m--)
+		{
+			int t;
+			scanf(&quot;%d&quot;,&amp;t);
+			int l=0,r=1;
+			int mi=INF;
+			while(r&lt;=n)                                            
+			{
+				int val=s[r].x-s[l].x;
+				if(abs(val-t) &lt; mi)
+				{                              
+					mi=abs(val-t);
+					ans=val;
+					st=s[l].y;
+					ed=s[r].y;
+				}
+				
+				if(val &lt; t) r++;
+				else if(val &gt; t) l++;
+				else break;
+				
+				if(l == r) r++;
+			}
+			
+			if(st &gt; ed) swap(st,ed);
+			
+			printf(&quot;%d %d %d\n&quot;,ans,st+1,ed);
+		}
+	}
+	return 0;
+}
+</code></pre>
+<ul>
+<li>由于序列不能为空，如果l==r,则r++。</li>
+<li>我们更新答案的时候左右区间端点为乱序，输出的时候调整一下。</li>
+</ul>
+<p><a href="https://vjudge.net/problem/POJ-2739">poj2739</a><br>
+题意：找到某一个区间使得区间内的数的和等于某一给定值k。</p>
+<p>设输入为x，只要判断x是否可以表示为x=y(i)+y(i+1)+y(i+2)+...+y(i+m)，即可，其中y为某一个素数。只要设置两个变量i，j，分别指向这个连续素数串的头和尾，不停的移动寻找解即可。不过首先需要得到10000以内的所有素数，如果每次输入都计算这些素数，没有必要而且可能会超时，所以先把所有素数计算出来并存储在一个数组中。</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+const int N=10010;
+int primes[N],cnt;
+int n;
+
+bool isprime(int x)
+{
+	for(int i=2;i*i&lt;=x;i++)
+		if(x%i == 0) 
+			return false;
+	return true;
+}
+
+void init(int n)
+{
+	for(int i=2;i&lt;=n;i++)
+		if(isprime(i))
+			primes[cnt++]=i;
+}
+
+int main()
+{
+	init(N-1);
+
+	while(~scanf(&quot;%d&quot;,&amp;n))
+	{
+	    if(!n) break;
+	    int l=0,r=0;
+    	int ans=0;
+    	int sum=0;
+    	
+    	while(1)
+	    {
+    		while(r&lt;cnt &amp;&amp; sum&lt;n)
+    			sum+=primes[r++];
+    		if(sum &lt;n) break;
+    		
+    		if(sum == n)
+    			ans++;
+    		sum-=primes[l++];
+	    }
+	    
+	    printf(&quot;%d\n&quot;,ans);
+	}
+
+	return 0;
+}
+</code></pre>
+<p><a href="https://vjudge.net/problem/POJ-2100">poj2100</a><br>
+题意:给你一个数，询问有多少种连续自然数的平方和等于这个数，输出所有可能</p>
+<p>题解:尺取法遍历所有符合条件的区间，满足的话记录左边界以及右边界，计数器+1。<br>
+尺取法过程:</p>
+<ul>
+<li>
+<p>1.初始化左右端点</p>
+</li>
+<li>
+<p>2.不断扩大右端点，直到满足条件</p>
+</li>
+<li>
+<p>3.如果第二步中无法满足条件，则终止，否则更新结果</p>
+</li>
+<li>
+<p>4.将左端点扩大1，然后回到第二步</p>
+</li>
+</ul>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+#include&lt;vector&gt;
+using namespace std;
+#define x first 
+#define y second
+typedef long long LL;
+typedef pair&lt;int,int&gt; PII;
+const int N=1e7+10;
+vector&lt;PII&gt; ans;
+LL n;
+
+int main()
+{
+	while(~scanf(&quot;%lld&quot;,&amp;n))
+	{
+		ans.clear();
+		
+		LL l=1,r=1;
+		LL sum=0;
+		
+		while(1)
+		{
+			while(r*r &lt;= n &amp;&amp; sum &lt; n)
+				sum+=r*r,r++;
+			
+			if(sum &lt; n) break;
+			
+			if(sum == n) ans.push_back(make_pair(l,r-1));
+			
+			sum-=l*l,l++;
+		}
+		
+		printf(&quot;%d\n&quot;,ans.size());
+		for(int i=0;i&lt;ans.size();i++)
+		{
+			printf(&quot;%d &quot;,ans[i].y-ans[i].x+1);
+			for(int j=ans[i].x;j&lt;ans[i].y;j++)
+				printf(&quot;%d &quot;,j);
+			printf(&quot;%d\n&quot;,ans[i].y);
+		}	
+	}
+	
+	return 0;
+}
+</code></pre>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=5672">hdu5672</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/09/9969_81340f2e7a-34.PNG" alt="34.PNG" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+typedef long long LL;
+const int N=1e6+10;
+char s[N];
+int cnt[30];
+int k;
+
+int main()
+{
+	int T;
+	cin&gt;&gt;T;
+	while(T--)
+	{
+		memset(cnt,0,sizeof cnt);
+		scanf(&quot;%s&quot;,s);
+		scanf(&quot;%d&quot;,&amp;k);
+		int n=strlen(s);
+		int l=0,r=0;
+		LL ans=0;
+		int sum=0;
+		
+		while(1)
+		{
+			while(r&lt;n &amp;&amp; sum&lt;k)
+				if(cnt[s[r++]-'a']++ == 0)
+					sum++;
+			
+			if(sum &lt; k) break;
+			
+			ans+=n-r+1;
+			
+			if(--cnt[s[l++]-'a'] == 0) sum--;
+		}
+		
+		printf(&quot;%lld\n&quot;,ans);
+	}
+	return 0;
+}
+</code></pre>
+<p><a href="https://www.luogu.com.cn/problem/P1638">P1638</a><br>
+博览馆正在展出由世上最佳的 M 位画家所画的图画。<br>
+wangjy想到博览馆去看这几位大师的作品。<br>
+可是，那里的博览馆有一个很奇怪的规定，就是在购买门票时必须说明两个数字，a和b，代表他要看展览中的第 a 幅至第 b 幅画(包含 a 和 b)之间的所有图画，而门票的价钱就是一张图画一元。<br>
+为了看到更多名师的画，wangjy希望入场后可以看到所有名师的图画(至少各一张)。<br>
+可是他又想节省金钱。。。<br>
+作为wangjy的朋友，他请你写一个程序决定他购买门票时的 a 值和 b 值。</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+const int N=1e6+10,M=2010;
+int a[N],cnt[M];
+int n,m;
+
+int main()
+{
+	scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+	
+	for(int i=1;i&lt;=n;i++)
+		scanf(&quot;%d&quot;,&amp;a[i]);
+		
+	int l=1,r=1;
+	int sum=0;
+	int ans=n;
+	int al=1,ar=n;//初始化
+	
+	while(1)
+	{
+		while(r&lt;=n &amp;&amp; sum&lt;m)
+			if(cnt[a[r++]]++ == 0)
+				sum++;
+		
+		if(sum &lt; m) break;
+		
+		if(ans &gt; r-l) ans=r-l,al=l,ar=r-1;
+		
+		if(--cnt[a[l++]] == 0) sum--;
+	}
+	
+	printf(&quot;%d %d\n&quot;,al,ar);
+	
+	return 0;
+}
+</code></pre>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=5056">hdu5056</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/09/9969_cb35afd87a-35.PNG" alt="35.PNG" loading="lazy"><br>
+如果有一段字符刚刚好满足条件，那么后面的包含这个串的子串全部满足，我们可以尺取l和r，对于一个r满足的话，后面len  -  r + 1个子串也满足，然后更新l就可以了，因为l和r是分开更新的，所以复杂度是O(n)。</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+typedef long long LL;
+const int N=100010;
+char s[N];
+int cnt[30];
+int k;
+
+int main()
+{
+    int T;
+    cin&gt;&gt;T;
+    while(T--)
+    {
+        memset(cnt,0,sizeof cnt);
+        scanf(&quot;%s&quot;,s);
+        scanf(&quot;%d&quot;,&amp;k);
+        int n=strlen(s);
+        int l=0,r=0;
+        LL ans=0;
+        
+        while(l&lt;n)
+        {
+            while(r&lt;n)
+            {
+                cnt[s[r]-'a']++;
+                if(cnt[s[r]-'a'] &lt;= k)
+                    ans+=r-l+1,r++;
+                else 
+                {
+                    cnt[s[r]-'a']--;
+                    break;
+                }
+            }
+                
+            cnt[s[l]-'a']--,l++;
+        }
+        printf(&quot;%lld\n&quot;,ans);
+    }
+    return 0;
+}
+</code></pre>
+<p><a href="">hdu5358</a><br>
+log2(f(i,j))表示f(i,j)转换为2进制的长度，然后我们经过分析log2(f(i,j))+1的值域为[1,34]然后我们枚举log2(f(i,j))+1的值，例如我们枚举其值为k，对于一个k我们找到所有满足条件的区间(i,j),这个条件的代数表达为<br>
+<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>2</mn><mrow><mi>k</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>+</mo><mn>1</mn><mo>&lt;</mo><mo>=</mo><mi>f</mi><mo>(</mo><mi>i</mi><mo separator="true">,</mo><mi>j</mi><mo>)</mo><mo>+</mo><mn>1</mn><mo>&lt;</mo><mo>=</mo><msup><mn>2</mn><mi>k</mi></msup></mrow><annotation encoding="application/x-tex">2^{k-1}+1&lt;= f(i,j)+1 &lt;=2^k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9324379999999999em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68354em;vertical-align:-0.0391em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span></span><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault">i</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68354em;vertical-align:-0.0391em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span></span><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.849108em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span></span></span></span>;</p>
+<p>因此我们需要再枚举一个区间的左端点，对于一个给定的左端点，因为f(i,j)在给定i的情况下单调，我们可以用尺取法求得一个区间[l,r]，使得区间内的j (l&lt;=j&lt;=r)都瞒住<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>2</mn></msub><mi>s</mi><mi>u</mi><mi>m</mi><mo>(</mo><mi>i</mi><mo separator="true">,</mo><mi>j</mi><mo>)</mo><mo>+</mo><mn>1</mn><mo>=</mo><mi>k</mi></mrow><annotation encoding="application/x-tex">log_2sum(i,j)+1=k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathdefault">s</span><span class="mord mathdefault">u</span><span class="mord mathdefault">m</span><span class="mopen">(</span><span class="mord mathdefault">i</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span></span></span></span>;</p>
+<p>区间(i+j)的和可以表示为 i*(r-l+1) + (r+l)*(r-l+1)/2</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+#include&lt;cmath&gt;
+using namespace std;
+typedef long long LL;
+const int N=100010;
+LL s[N];
+int n;
+
+int main()
+{
+	//cout&lt;&lt;log2(1e10)&lt;&lt;endl;
+	int T;
+	cin&gt;&gt;T;
+	while(T--)
+	{
+		scanf(&quot;%d&quot;,&amp;n);
+		
+		for(int i=1;i&lt;=n;i++)
+		{
+			scanf(&quot;%lld&quot;,&amp;s[i]);
+			s[i]+=s[i-1];
+		}
+		
+		LL ans=0;
+		for(LL k=1;k&lt;=34;k++)
+		{
+			LL l=1,r=1;
+			LL lmax=1ll&lt;&lt;(k-1),rmax=1ll&lt;&lt;k;
+			if(k == 1) lmax=0;
+			for(LL i=1;i&lt;=n;i++)
+			{
+				l=max(l,i),r=max(r,i);
+				while(l&lt;=n &amp;&amp; s[l]-s[i-1] &lt; lmax)
+					l++;
+				while(r&lt;=n &amp;&amp; s[r]-s[i-1] &lt; rmax)
+					r++;
+				r--;
+				ans+=k*(i*(r-l+1)+(l+r)*(r-l+1)/2);
+			}
+		}
+		printf(&quot;%lld\n&quot;,ans);
+	}
+	
+	return 0;
+}
+</code></pre>
+<p><a href="https://www.luogu.com.cn/problem/P1102">P1102</a><br>
+我们考虑题目要求求出所有A-B=C的数对，我们可以先将原数组排序，然后就会发现每个数A，对应的数B一定是一段连续的区间。<br>
+然后我们再考虑如何去找到这个区间。<br>
+我们显然是要找到这个连续区间的左端点和右端点。</p>
+<p>考虑到排序之后序列的有序性，我们枚举每个数，他们的左端点和右端点都是单调不降的，因此我们可以用双指针来维护这个东西。</p>
+<p>具体的实现就是，我们维护两个右端点r1 , r2，每次r1右移到a[r1] - a[l] &lt;c的最后位置的下一位，r2右移到满足a[r2] - a[l] &lt;= c最后一位.</p>
+<p>也就是说， 此时如果a[r2-1] - a[l] == c &amp;&amp; a[r1] - a[l] == c，中间的那一段一定都是满足条件的，我们让ans += r2 - r1即可。</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+typedef long long LL;
+const int N=200010;
+int a[N];
+
+int main()
+{
+	int n,c;
+	cin&gt;&gt;n&gt;&gt;c;
+	for(int i=0;i&lt;n;i++) cin&gt;&gt;a[i];
+	
+	sort(a,a+n);
+	
+	int l=0,r1=0,r2=0;
+	LL ans=0;
+	
+	while(l&lt;n)
+	{
+		while(r1&lt;n &amp;&amp; a[r1]-a[l] &lt; c) r1++;
+		while(r2&lt;n &amp;&amp; a[r2]-a[l] &lt;= c) r2++;
+		if(a[r2-1] - a[l] == c &amp;&amp; a[r1]-a[l] == c)
+			ans+=r2-r1;
+		l++;
+	}
+	printf(&quot;%lld\n&quot;,ans);
+	
+	return 0;
+}
+</code></pre>
+<p><a href="https://www.luogu.com.cn/problem/UVA11572">uva11572</a><br>
+给出 n个数，找尽量长的一个子序列，使得该子序列中没有重复的元素。</p>
+<p>右指针往右跳到不重复的最远位置,更新答案,然后左指针往右跳一位,左右指针都只跳了n次,所以查询的复杂度是O(n)</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstdio&gt;
+#include&lt;map&gt;
+using namespace std;
+const int N=1e6+10;
+int a[N],b[N],cnt[N];
+int n;
+
+int main()
+{
+	int T;
+	cin&gt;&gt;T;
+	while(T--)
+	{
+		
+		scanf(&quot;%d&quot;,&amp;n);
+		for(int i=0;i&lt;n;i++)
+			scanf(&quot;%d&quot;,&amp;a[i]),b[i]=a[i];
+			
+		sort(b,b+n);
+		
+		int tot=unique(b,b+n)-b;
+		
+		for(int i=0;i&lt;n;i++)
+			a[i]=lower_bound(b,b+tot,a[i])-b;
+
+		int l=0,r=0;
+		int ans=0;
+		
+		for(int i=0;i&lt;tot;i++) cnt[i]=0;
+		
+		while(r&lt;n)
+		{
+			while(r&lt;n &amp;&amp; cnt[a[r]] == 0)
+				cnt[a[r++]]++;
+			
+			ans=max(ans,r-l);
+			
+			cnt[a[l++]]--;
+		}
+		
+		printf(&quot;%d\n&quot;,ans);
+	}
+	return 0;
+}
+</code></pre>
+<p><a href="https://codeforces.com/contest/660/problem/C">cf660C</a><br>
+大意：给定一个包含nn个元素的数组aa。数组a的每个元素不是00就是11。<br>
+现在，让我们用f(a)表示a中连续元素序列中最长子段的长度，它只包含数字1。并且你最多可以将k个0更改为1来得到最大的f(a)。</p>
+<p>贪心：对于一个含0的区间，我们让区间中的0都填满是最优的<br>
+于是维护一段区间，保证区间中的0的个数≤k就可以<br>
+于是就可以对于0的个数≤k时右移右端点，增添新的位置，扩大区间；<br>
+当[l,r]中0的个数＞k时右移l，到[l,r]中0的个数≤k时为止</p>
+<p>注意边界和初始化</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+const int N=3e5+10;
+int a[N];
+int n,k;
+
+int main()
+{
+	scanf(&quot;%d%d&quot;,&amp;n,&amp;k);
+	for(int i=1;i&lt;=n;i++)	
+		scanf(&quot;%d&quot;,&amp;a[i]);
+		
+	int l=1,r=1;
+	int ans=0;
+	int sum=0;
+	int al=0,ar=0;
+	
+	while(r&lt;=n)
+	{
+		while(r&lt;=n &amp;&amp; sum&lt;=k)
+		{
+			if(!a[r])
+			{
+				if(sum == k) break;//注意点！
+				else sum++;
+			}
+			r++;
+		}
+		
+		if(ans &lt; r-l) ans=r-l,al=l,ar=r-1;
+		
+		if(!a[l++]) sum--;
+	}
+	
+	printf(&quot;%d\n&quot;,ans);
+	for(int i=1;i&lt;=n;i++)
+		if(i&gt;=al &amp;&amp; i&lt;=ar)
+			printf(&quot;1 &quot;);
+		else 
+			printf(&quot;%d &quot;,a[i]);
+		
+	return 0;
+}
+</code></pre>
+<p>尺取法的模型便是这样：根据区间的特征交替推进左右端点求解问题，其高效的原因在于避免了大量的无效枚举，其区间枚举都是根据区间特征有方向的枚举。</p>
+
+                                </div>
+                    </article>
+                    <!--  -->
+                    
+                        <div class="next-post">
+                            <div class="next">下一篇</div>
+                            <a href="https://caifxh.github.io/post/si-bian-xing-bu-deng-shi/">
+                                <h3 class="post-title">
+                                    四边形不等式
+                                </h3>
+                            </a>
+                        </div>
+                        
+                            <div id="disqus_thread"></div>
+                            <div id="gitalk-container"></div>
+                </div>
+                <!-- middle -->
+                <div class="main-container-middle"></div>
+                <!-- right -->
+                <div id="sidebar" class="main-container-right">
+                    
+                        <!-- toc -->
+                        
+    <div class="toc-card i-card ">
+        <div class="toc-title i-card-title">目录</div>
+        <div class="toc-content">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E5%B0%BA%E5%8F%96%E6%B3%95">尺取法</a></li>
+<li><a href="#%E5%B0%BA%E5%8F%96%E6%B3%95%E7%9A%84%E6%A6%82%E5%BF%B5">尺取法的概念</a></li>
+<li><a href="#%E5%8F%8D%E5%90%91%E6%89%AB%E6%8F%8F">反向扫描</a></li>
+<li><a href="#%E5%88%A4%E6%96%AD%E5%9B%9E%E6%96%87%E4%B8%B2">判断回文串</a></li>
+<li><a href="#%E5%90%8C%E5%90%91%E6%89%AB%E6%8F%8F">同向扫描</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+        <script>
+            function locateCatelogList() {
+                /*获取文章目录集合,可通过:header过滤器*/
+                var alis = $('.post-content :header');
+                /*获取侧边栏目录列表集合**/
+                var sidebar_alis = $('.markdownIt-TOC a');
+                /*获取滚动条到顶部的距离*/
+                var scroll_height = $(window).scrollTop();
+                for (var i = 0; i < alis.length; i++) {
+                    /*获取锚点集合中的元素分别到顶点的距离*/
+                    var a_height = $(alis[i]).offset().top;
+                    if (a_height < scroll_height) {
+                        /*高亮显示*/
+                        sidebar_alis.removeClass('on');
+                        $(sidebar_alis[i]).addClass('on');
+                    }
+                }
+            }
+            $(function() {
+                /*绑定滚动事件 */
+                $(window).bind('scroll', locateCatelogList);
+            });
+        </script>
+    </div>
+    
+                            
+
+                </div>
+
+
+
+
+            </div>
+
+
+            <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://caifxh.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+
+    </div>
+    <script>
+        $('#sidebar').stickySidebar({
+            topSpacing: 80,
+            // bottomSpacing: 60
+        });
+    </script>
+    
+</body>
+
+</html>

@@ -7,7 +7,7 @@
 <title>
     fxh
 </title>
-<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1586405129501">
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1586491016728">
 <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
 <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
@@ -27,7 +27,7 @@
     <div class="nav">
         <div class="logo">
             <a href="https://caifxh.github.io">
-                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1586405129501" alt="">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1586491016728" alt="">
             </a>
             <div class="site-title">
                 <h1>
@@ -99,6 +99,844 @@
         
             <article class="post i-card">
                 <h2 class="post-title">
+                    <a href="https://caifxh.github.io/post/chi-qu-fa/">
+                        尺取法
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2020-04-10</time>
+                    
+                        <a href="https://caifxh.github.io/tag/TZ7cITYtt/" class="post-tag i-tag
+                            i-tag-other_4">
+            #其他算法
+        </a>
+                        
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            尺取法
+尺取法（又称为：双指针、twopointers），是算法竞赛中一个常用的优化技巧，用来解决序列的区间问题，操作简单、容易编程。
+如果区间是单调的，也常常用二分法来求解，所以很多问题用尺取法和二分法都行。
+尺取法：顾名思义，像尺子一样取一段，借用挑战书上面的话说，尺取法通常是对数组保存一对下标，即所选取的区间的左右端点，然后根据实际情况不断地推进区间左右端点以得出答案。之所以需要掌握这个技巧，是因为尺取法比直接暴力枚举区间效率高很多，尤其是数据量大的时候，所以尺取法是一种高效的枚举区间的方法，一般用于求取有一定限制的区间个数或最短的区间等等。当然任何技巧都存在其不足的地方，有些情况下尺取法不可行，无法得出正确答案。
+使用尺取法时应清楚以下四点：
+1、  什么情况下能使用尺取法?
+2、何时推进区间的端点？
+3、如何推进区间的端点？
+4、何时结束区间的枚举？
+尺取法通常适用于选取区间有一定规律，或者说所选取的区间有一定的变化趋势的情况，通俗地说，在对所选取区间进行判断之后，我们可以明确如何进一步有方向地推进区间端点以求解满足条件的区间，如果已经判断了目前所选取的区间，但却无法确定所要求解的区间如何进一步得到根据其端点得到，那么尺取法便是不可行的。首先，明确题目所需要求解的量之后，区间左右端点一般从最整个数组的起点开始，之后判断区间是否符合条件在根据实际情况变化区间的端点求解答案。
+尺取法的概念
+什么是尺取法？为什么尺取法能优化呢？
+考虑下面的应用背景：
+（1）给定一个序列。有时候需要它是有序的，先排序。
+（2）问题和序列的区间有关，且需要操作2个变量，可以用两个下标（指针）i、j扫描区间。
+对于上面的应用，一般的做法，是用i、j分别扫描区间，有两重循环，复杂度O(n2)。以反向扫描（即i、j方向相反，后文有解释）为例，代码是：
+for(int i = 0; i &amp;lt; n; i++)           //i从头扫到尾
+	for(int j = n-1; j &amp;gt;= 0; j--){   //j从尾扫到头
+        ......
+    }
+
+下面用尺取法来优化上面的算法。
+实际上，尺取法就是把两重循环变成了一个循环，在这个循环中一起处理i和j。复杂度也就从O(n2n^2n2)变成了O(n)。仍以上面的反向扫描为例，代码是：
+//用while实现：
+int i = 0, j = n - 1;
+while (i &amp;lt; j) {      //i和j在中间相遇。这样做还能防止i、j越界
+        ......       //满足题意的操作
+        i++;         //i从头扫到尾
+        j--;         //j从尾扫到头
+}
+//用for实现：
+for (int i = 0, j = n - 1; i &amp;lt; j; i++, j--) {
+    ......
+}
+
+在尺取法中，这两个指针i、j，有两种扫描方向：
+（a）反向扫描。i、j方向相反，i从头到尾，j从尾到头，在中间相会。
+（b）同向扫描。i、j方向相同，都从头到尾，可以让j跑在i前面。
+把同向扫描的i、j指针称为“快慢指针”，把反向扫描的i、j指针称为“左右指针”，更加形象。快慢指针在序列上产生了一个大小可变的“滑动窗口”，有灵活的应用
+反向扫描
+1.找指定和的整数对
+这个问题是尺取法最经典，也最简单直接的应用。
+输入n ( n≤100,000)个整数，放在数组a[]中。找出其中的两个数，它们之和等于整数m(假定肯定有解)。题中所有整数都是int型。
+样例输入：
+21 4 5 6 13 65 32 9 23
+28
+样例输出：
+5 23
+说明：样例输入的第一行是数组a[]，第2行是m = 28。样例输出5和23，相加得28。
+为了说明尺取法的优势，下面给出四种方法：
+（1）用两重循环暴力搜，枚举所有的取数方法，复杂度O(n2)，超时。暴力法不需要排序。
+（2）二分法。首先对数组从小到大排序，复杂度O(nlogn)；然后，从头到尾处理数组中的每个元素a[i]，在大于a[i]的数中二分查找是否存在一个等于 m - a[i]的数，复杂度也是O(nlogn)。两部分相加，总复杂度仍然是O(nlogn)。
+（3）Hash。分配一个hash空间s，把n个数放进去。逐个检查a[]中的n个数，例如a[i]，检查m - a[i]在s中是否有值，如果有，那么存在一个答案。复杂度是O(n)。
+hash方法很快，但是需要一个额外的、可能很大的hash空间。
+（4）尺取法。这是标准解法。首先对数组从小到大排序；然后，设置两个变量i和j，分别指向头和尾，i初值是0，j初值是n-1，然后让i和j逐渐向中间移动，检查a[i]+a[j]，如果大于m，就让j减1，如果小于m，就让i加1，直至a[i]+a[j] = m。排序复杂度O(nlogn)，检查的复杂度O(n)，合起来总复杂度O(nlogn)。
+void find_sum(int a[], int n, int m){ 
+     sort(a, a + n - 1);      //先排序，复杂度O(nlogn)
+     int i = 0, j = n - 1;    //i指向头，j指向尾
+     while (i &amp;lt; j){           //复杂度O(n)
+		    int sum = a[i] + a[j];
+		    if (sum &amp;gt; m)   j--;
+		    if (sum &amp;lt; m)   i++;
+		    if (sum == m){     
+			    cout &amp;lt;&amp;lt; a[i] &amp;lt;&amp;lt; &amp;quot; &amp;quot; &amp;lt;&amp;lt; a[j] &amp;lt;&amp;lt; endl;  //打印一种情况
+                i++;          //可能有多个答案，继续
+		    }
+	  }
+}
+
+判断回文串
+2.给一个字符串，判断它是不是回文串。
+“回文串”是一个正读和反读都一样的字符串，比如“level”或者“noon”就是回文串。写一个程序判断读入的字符串是否是“回文”。如果是，输出“yes”，否则输出“no”。
+#include &amp;lt;bits/stdc++.h&amp;gt;
+using namespace std;
+int main(){
+    int n;
+    cin &amp;gt;&amp;gt; n;                         //n是测试用例个数
+    while(n--){
+        string s;  cin &amp;gt;&amp;gt; s;          //读一个字符串
+        bool ans = true;
+        int i = 0, j = s.size() - 1;  //双指针
+        while(i &amp;lt; j){ 
+            if(s[i] != s[j]){
+                ans = false;
+                break;
+            }
+            i++;   j--;               //移动双指针
+        }
+        if(ans)   cout &amp;lt;&amp;lt; &amp;quot;yes&amp;quot; &amp;lt;&amp;lt; endl;
+        else      cout &amp;lt;&amp;lt; &amp;quot;no&amp;quot;  &amp;lt;&amp;lt; endl;
+    }
+    return 0;
+}
+
+允许删除（或插入，本题只考虑删除）最多1个字符，判断是否能构成回文字符串。
+设反向扫描双指针为i、j。如果 s[i]和s[j]相同，i++、j–；如果s[i]和s[j]不同，那么，或者删除s[i]，或者删除s[j]，看剩下的字符串是否是回文串即可。
+同向扫描
+1.寻找区间和
+这是用尺取法产生“滑动窗口”的典型例子。
+给定一个长度为n的数组a[]和一个数s，在这个数组中找一个区间，使得这个区间之和等于s。输出区间的起点和终点位置。
+样例输入：
+15
+6 1 2 3 4 6 4 2 8 9 10 11 12 13 14
+6
+样例输出：
+0 0
+1 3
+5 5
+6 7
+说明：样例输入的第1行是n=15，第2行是数组a[]，第3行是区间和s=6。样例输出，共有4个情况。
+题解
+指针i和j，i&amp;lt;=j，都从头向尾扫描，判断区间[i,j]的和是否等于s。
+如何寻找区间和等于s的区间？如果简单地对i和j做二重循环，复杂度是O(n2n^2n2)。用尺取法，复杂度O(n)，操作步骤是：
+（1）初始值i=0、j=0，即开始都指向第一个元素a[0]。定义sum是区间[i, j]的和，初始值sum = a[0]。
+（2）如果sum等于s，输出一个解。继续，把sum减掉元素a[i]，并把i往后移动一位。
+（3）如果sum大于s，让sum减掉元素a[i]，并把i往后移动一位。
+（4）如果sum小于s，把j往后挪一位，并把sum的值加上这个新元素。
+在上面的步骤中，有2个关键技巧：
+（1）滑动窗口的实现。窗口就是区间[i,j]，随着i和j从头到尾移动，窗口就“滑动”扫描了整个序列，检索了所有的数据。i和j并不是同步增加的，窗口像一只蚯蚓伸缩前进，它的长度是变化的，这个变化，正对应了对区间和的计算。
+（2）sum的使用。如何计算区间和？暴力的方法是从a[i]到a[j]累加，但是，这个累加的复杂度是O(n)的，会超时。如果利用sum，每次移动i或j的时候，只需要把sum加或减一次，就得到了区间和，复杂度是O(1)。这是“前缀和”递推思想的应用。
+以下是几个经典的使用尺取法的例题，都是从挑战书上引用的。（尺取法通常会需要对某些量进行预处理，以便能在使用时快速地判断。
+poj3061
+题意：给定一个序列，找出最短的子序列长度，使得其和大于或等于S。
+
+
+分析：首先，序列都是正数，如果一个区间其和大于等于S了，那么不需要在向后推进右端点了，因为其和也肯定大于等于S但长度更长，所以，当区间和小于S时右端点向右移动，和大于等于S时，左端点向右移动以进一步找到最短的区间，如果右端点移动到区间末尾其和还不大于等于S，结束区间的枚举。
+Input：
+10 15
+5 1 3 5 10 7 4 9 2 8
+
+二分+前缀和：
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=100010;
+int s[N];
+int n,m;
+
+bool check(int mid)
+{
+	for(int i=1;i&amp;lt;=n-mid+1;i++)
+		if(s[i+mid-1]-s[i-1] &amp;gt;= m)
+			return 1;
+	return 0;
+}
+
+int main()
+{
+	int T;
+	cin&amp;gt;&amp;gt;T;
+	while(T--)
+	{
+		scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;m);
+		
+		for(int i=1;i&amp;lt;=n;i++)
+			scanf(&amp;quot;%d&amp;quot;,&amp;amp;s[i]),s[i]+=s[i-1];
+			
+		if(s[n] &amp;lt; m) 
+		{
+			cout&amp;lt;&amp;lt;0&amp;lt;&amp;lt;endl;
+			continue;
+		}
+		
+		int l=1,r=n;
+		while(l&amp;lt;r)
+		{
+			int mid=l+r&amp;gt;&amp;gt;1;
+			if(check(mid))
+				r=mid;
+			else 
+				l=mid+1;
+		}
+		
+		printf(&amp;quot;%d\n&amp;quot;,l);
+	}
+	return 0;
+}
+
+尺取法：
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=100010;
+int a[N];
+int n,m;
+
+int main()
+{
+	int T;
+	cin&amp;gt;&amp;gt;T;
+	while(T--)
+	{
+		scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;m);
+		for(int i=0;i&amp;lt;n;i++)
+			scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]);
+		int ans=n+1;
+		int sum=0;
+		int l=0,r=0;
+		while(1)
+		{
+			while(r&amp;lt;n &amp;amp;&amp;amp; sum&amp;lt;m)
+				sum+=a[r],r++;
+			
+			if(sum &amp;lt; m) break;
+			
+			ans=min(ans,r-l);
+			sum-=a[l++];//左端点向右移动以进一步找到最短的区间
+		}
+		
+		if(ans == n+1) ans=0;
+		printf(&amp;quot;%d\n&amp;quot;,ans);
+	}
+	return 0;
+}
+
+poj3320
+题意：一本书有P页，每一页都一个知识点，求去最少的连续页数覆盖所有的知识点。
+和上面的题一样的思路，如果一个区间的子区间满足条件，那么在区间推进到该处时，右端点会固定，左端点会向右移动到其子区间，且其子区间会是更短的，只是需要存储所选取的区间的知识点的数量，那么使用map进行映射以快速判断是否所选取的页数是否覆盖了所有的知识点。
+
+当前区间若可行，则需在保证可行的前提下，缩小区间范围，将l指针右移
+当前区间若不可行，则需要扩大区间范围，将r指针右移
+当r已到末尾且l已经最优时，结束枚举
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;map&amp;gt;
+using namespace std;
+const int N=1000010;
+int a[N],cnt[N];
+map&amp;lt;int,int&amp;gt; m;
+int tot;
+int n;
+
+int main()
+{
+	scanf(&amp;quot;%d&amp;quot;,&amp;amp;n);
+	
+	for(int i=1;i&amp;lt;=n;i++)
+	{
+		scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]);
+		if(!m[a[i]]) m[a[i]]=++tot;
+		a[i]=m[a[i]];
+	}
+	
+	int ans=n;
+	int l=1,r=1;
+	int sum=0;
+	
+	while(1)
+	{
+		while(r&amp;lt;=n &amp;amp;&amp;amp; sum&amp;lt;tot)
+			if(cnt[a[r++]]++ == 0)
+				sum++;
+			
+		if(sum &amp;lt; tot) break;
+		ans=min(ans,r-l);
+		if(--cnt[a[l++]] == 0) sum--;
+	}
+	
+	printf(&amp;quot;%d\n&amp;quot;,ans);
+	
+	return 0;
+}
+
+poj2566
+题意：给你n个数字，这些数字可正可负，再给你个数字t,求在这个数列中一个连续的子序列，和的绝对值与t相差最小
+一般来说，我们必须要保证数列单调性，才能使用尺取法。
+预处理出前i个数的前缀和，和编号i一起放入pair中，然而根据前缀和大小进行排序。由于
+abs(sum[i]-sum[j]) =  abs(sum[j]-sum[i])
+可以忽视数列前缀和的前后关系。此时，sum[r]-sum[l]有单调性。
+因此我们可以先比较当前sum[r]-sum[l]与t的差，并更新答案。
+如果当前sum[r]-sum[l]&amp;lt;t,说明和还可以更大，r++。
+同理，如果sum[r]-sum[l]&amp;gt;t，说明和还可以更小，l++。
+如果sum[r]-sum[l]=t，必定是最小答案。
+
+尺取的前提是一个有序的，可判定的序列，由于题目说的是连续序列和的绝对值，也就是说我们只需要知道两个端点
+利用前缀和来进行判定，我们来枚举前缀和的两个端点，从而可以找到一个最接近询问值的数，
+我们在存前缀和的同时还得把相应的坐标给存上，
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+#define x first
+#define y second
+typedef pair&amp;lt;int,int&amp;gt; PII;
+const int N=100010,INF=0x3f3f3f3f;
+PII s[N];
+int n,m;
+int ans,st,ed;
+
+int main()
+{
+	while(~scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;m))
+	{
+		if(!n &amp;amp;&amp;amp; !m) break;
+		s[0]=make_pair(0,0);
+		for(int i=1;i&amp;lt;=n;i++)
+		{
+			scanf(&amp;quot;%d&amp;quot;,&amp;amp;s[i].x);
+			s[i].y=i;
+			s[i].x+=s[i-1].x;
+		}
+		
+		sort(s,s+n+1);
+		
+		while(m--)
+		{
+			int t;
+			scanf(&amp;quot;%d&amp;quot;,&amp;amp;t);
+			int l=0,r=1;
+			int mi=INF;
+			while(r&amp;lt;=n)                                            
+			{
+				int val=s[r].x-s[l].x;
+				if(abs(val-t) &amp;lt; mi)
+				{                              
+					mi=abs(val-t);
+					ans=val;
+					st=s[l].y;
+					ed=s[r].y;
+				}
+				
+				if(val &amp;lt; t) r++;
+				else if(val &amp;gt; t) l++;
+				else break;
+				
+				if(l == r) r++;
+			}
+			
+			if(st &amp;gt; ed) swap(st,ed);
+			
+			printf(&amp;quot;%d %d %d\n&amp;quot;,ans,st+1,ed);
+		}
+	}
+	return 0;
+}
+
+
+由于序列不能为空，如果l==r,则r++。
+我们更新答案的时候左右区间端点为乱序，输出的时候调整一下。
+
+poj2739
+题意：找到某一个区间使得区间内的数的和等于某一给定值k。
+设输入为x，只要判断x是否可以表示为x=y(i)+y(i+1)+y(i+2)+...+y(i+m)，即可，其中y为某一个素数。只要设置两个变量i，j，分别指向这个连续素数串的头和尾，不停的移动寻找解即可。不过首先需要得到10000以内的所有素数，如果每次输入都计算这些素数，没有必要而且可能会超时，所以先把所有素数计算出来并存储在一个数组中。
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=10010;
+int primes[N],cnt;
+int n;
+
+bool isprime(int x)
+{
+	for(int i=2;i*i&amp;lt;=x;i++)
+		if(x%i == 0) 
+			return false;
+	return true;
+}
+
+void init(int n)
+{
+	for(int i=2;i&amp;lt;=n;i++)
+		if(isprime(i))
+			primes[cnt++]=i;
+}
+
+int main()
+{
+	init(N-1);
+
+	while(~scanf(&amp;quot;%d&amp;quot;,&amp;amp;n))
+	{
+	    if(!n) break;
+	    int l=0,r=0;
+    	int ans=0;
+    	int sum=0;
+    	
+    	while(1)
+	    {
+    		while(r&amp;lt;cnt &amp;amp;&amp;amp; sum&amp;lt;n)
+    			sum+=primes[r++];
+    		if(sum &amp;lt;n) break;
+    		
+    		if(sum == n)
+    			ans++;
+    		sum-=primes[l++];
+	    }
+	    
+	    printf(&amp;quot;%d\n&amp;quot;,ans);
+	}
+
+	return 0;
+}
+
+poj2100
+题意:给你一个数，询问有多少种连续自然数的平方和等于这个数，输出所有可能
+题解:尺取法遍历所有符合条件的区间，满足的话记录左边界以及右边界，计数器+1。
+尺取法过程:
+
+
+1.初始化左右端点
+
+
+2.不断扩大右端点，直到满足条件
+
+
+3.如果第二步中无法满足条件，则终止，否则更新结果
+
+
+4.将左端点扩大1，然后回到第二步
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;vector&amp;gt;
+using namespace std;
+#define x first 
+#define y second
+typedef long long LL;
+typedef pair&amp;lt;int,int&amp;gt; PII;
+const int N=1e7+10;
+vector&amp;lt;PII&amp;gt; ans;
+LL n;
+
+int main()
+{
+	while(~scanf(&amp;quot;%lld&amp;quot;,&amp;amp;n))
+	{
+		ans.clear();
+		
+		LL l=1,r=1;
+		LL sum=0;
+		
+		while(1)
+		{
+			while(r*r &amp;lt;= n &amp;amp;&amp;amp; sum &amp;lt; n)
+				sum+=r*r,r++;
+			
+			if(sum &amp;lt; n) break;
+			
+			if(sum == n) ans.push_back(make_pair(l,r-1));
+			
+			sum-=l*l,l++;
+		}
+		
+		printf(&amp;quot;%d\n&amp;quot;,ans.size());
+		for(int i=0;i&amp;lt;ans.size();i++)
+		{
+			printf(&amp;quot;%d &amp;quot;,ans[i].y-ans[i].x+1);
+			for(int j=ans[i].x;j&amp;lt;ans[i].y;j++)
+				printf(&amp;quot;%d &amp;quot;,j);
+			printf(&amp;quot;%d\n&amp;quot;,ans[i].y);
+		}	
+	}
+	
+	return 0;
+}
+
+hdu5672
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N=1e6+10;
+char s[N];
+int cnt[30];
+int k;
+
+int main()
+{
+	int T;
+	cin&amp;gt;&amp;gt;T;
+	while(T--)
+	{
+		memset(cnt,0,sizeof cnt);
+		scanf(&amp;quot;%s&amp;quot;,s);
+		scanf(&amp;quot;%d&amp;quot;,&amp;amp;k);
+		int n=strlen(s);
+		int l=0,r=0;
+		LL ans=0;
+		int sum=0;
+		
+		while(1)
+		{
+			while(r&amp;lt;n &amp;amp;&amp;amp; sum&amp;lt;k)
+				if(cnt[s[r++]-&#39;a&#39;]++ == 0)
+					sum++;
+			
+			if(sum &amp;lt; k) break;
+			
+			ans+=n-r+1;
+			
+			if(--cnt[s[l++]-&#39;a&#39;] == 0) sum--;
+		}
+		
+		printf(&amp;quot;%lld\n&amp;quot;,ans);
+	}
+	return 0;
+}
+
+P1638
+博览馆正在展出由世上最佳的 M 位画家所画的图画。
+wangjy想到博览馆去看这几位大师的作品。
+可是，那里的博览馆有一个很奇怪的规定，就是在购买门票时必须说明两个数字，a和b，代表他要看展览中的第 a 幅至第 b 幅画(包含 a 和 b)之间的所有图画，而门票的价钱就是一张图画一元。
+为了看到更多名师的画，wangjy希望入场后可以看到所有名师的图画(至少各一张)。
+可是他又想节省金钱。。。
+作为wangjy的朋友，他请你写一个程序决定他购买门票时的 a 值和 b 值。
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=1e6+10,M=2010;
+int a[N],cnt[M];
+int n,m;
+
+int main()
+{
+	scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;m);
+	
+	for(int i=1;i&amp;lt;=n;i++)
+		scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]);
+		
+	int l=1,r=1;
+	int sum=0;
+	int ans=n;
+	int al=1,ar=n;//初始化
+	
+	while(1)
+	{
+		while(r&amp;lt;=n &amp;amp;&amp;amp; sum&amp;lt;m)
+			if(cnt[a[r++]]++ == 0)
+				sum++;
+		
+		if(sum &amp;lt; m) break;
+		
+		if(ans &amp;gt; r-l) ans=r-l,al=l,ar=r-1;
+		
+		if(--cnt[a[l++]] == 0) sum--;
+	}
+	
+	printf(&amp;quot;%d %d\n&amp;quot;,al,ar);
+	
+	return 0;
+}
+
+hdu5056
+
+如果有一段字符刚刚好满足条件，那么后面的包含这个串的子串全部满足，我们可以尺取l和r，对于一个r满足的话，后面len  -  r + 1个子串也满足，然后更新l就可以了，因为l和r是分开更新的，所以复杂度是O(n)。
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N=100010;
+char s[N];
+int cnt[30];
+int k;
+
+int main()
+{
+    int T;
+    cin&amp;gt;&amp;gt;T;
+    while(T--)
+    {
+        memset(cnt,0,sizeof cnt);
+        scanf(&amp;quot;%s&amp;quot;,s);
+        scanf(&amp;quot;%d&amp;quot;,&amp;amp;k);
+        int n=strlen(s);
+        int l=0,r=0;
+        LL ans=0;
+        
+        while(l&amp;lt;n)
+        {
+            while(r&amp;lt;n)
+            {
+                cnt[s[r]-&#39;a&#39;]++;
+                if(cnt[s[r]-&#39;a&#39;] &amp;lt;= k)
+                    ans+=r-l+1,r++;
+                else 
+                {
+                    cnt[s[r]-&#39;a&#39;]--;
+                    break;
+                }
+            }
+                
+            cnt[s[l]-&#39;a&#39;]--,l++;
+        }
+        printf(&amp;quot;%lld\n&amp;quot;,ans);
+    }
+    return 0;
+}
+
+hdu5358
+log2(f(i,j))表示f(i,j)转换为2进制的长度，然后我们经过分析log2(f(i,j))+1的值域为[1,34]然后我们枚举log2(f(i,j))+1的值，例如我们枚举其值为k，对于一个k我们找到所有满足条件的区间(i,j),这个条件的代数表达为
+2k−1+1&amp;lt;=f(i,j)+1&amp;lt;=2k2^{k-1}+1&amp;lt;= f(i,j)+1 &amp;lt;=2^k2k−1+1&amp;lt;=f(i,j)+1&amp;lt;=2k;
+因此我们需要再枚举一个区间的左端点，对于一个给定的左端点，因为f(i,j)在给定i的情况下单调，我们可以用尺取法求得一个区间[l,r]，使得区间内的j (l&amp;lt;=j&amp;lt;=r)都瞒住log2sum(i,j)+1=klog_2sum(i,j)+1=klog2​sum(i,j)+1=k;
+区间(i+j)的和可以表示为 i*(r-l+1) + (r+l)*(r-l+1)/2
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cmath&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N=100010;
+LL s[N];
+int n;
+
+int main()
+{
+	//cout&amp;lt;&amp;lt;log2(1e10)&amp;lt;&amp;lt;endl;
+	int T;
+	cin&amp;gt;&amp;gt;T;
+	while(T--)
+	{
+		scanf(&amp;quot;%d&amp;quot;,&amp;amp;n);
+		
+		for(int i=1;i&amp;lt;=n;i++)
+		{
+			scanf(&amp;quot;%lld&amp;quot;,&amp;amp;s[i]);
+			s[i]+=s[i-1];
+		}
+		
+		LL ans=0;
+		for(LL k=1;k&amp;lt;=34;k++)
+		{
+			LL l=1,r=1;
+			LL lmax=1ll&amp;lt;&amp;lt;(k-1),rmax=1ll&amp;lt;&amp;lt;k;
+			if(k == 1) lmax=0;
+			for(LL i=1;i&amp;lt;=n;i++)
+			{
+				l=max(l,i),r=max(r,i);
+				while(l&amp;lt;=n &amp;amp;&amp;amp; s[l]-s[i-1] &amp;lt; lmax)
+					l++;
+				while(r&amp;lt;=n &amp;amp;&amp;amp; s[r]-s[i-1] &amp;lt; rmax)
+					r++;
+				r--;
+				ans+=k*(i*(r-l+1)+(l+r)*(r-l+1)/2);
+			}
+		}
+		printf(&amp;quot;%lld\n&amp;quot;,ans);
+	}
+	
+	return 0;
+}
+
+P1102
+我们考虑题目要求求出所有A-B=C的数对，我们可以先将原数组排序，然后就会发现每个数A，对应的数B一定是一段连续的区间。
+然后我们再考虑如何去找到这个区间。
+我们显然是要找到这个连续区间的左端点和右端点。
+考虑到排序之后序列的有序性，我们枚举每个数，他们的左端点和右端点都是单调不降的，因此我们可以用双指针来维护这个东西。
+具体的实现就是，我们维护两个右端点r1 , r2，每次r1右移到a[r1] - a[l] &amp;lt;c的最后位置的下一位，r2右移到满足a[r2] - a[l] &amp;lt;= c最后一位.
+也就是说， 此时如果a[r2-1] - a[l] == c &amp;amp;&amp;amp; a[r1] - a[l] == c，中间的那一段一定都是满足条件的，我们让ans += r2 - r1即可。
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N=200010;
+int a[N];
+
+int main()
+{
+	int n,c;
+	cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;c;
+	for(int i=0;i&amp;lt;n;i++) cin&amp;gt;&amp;gt;a[i];
+	
+	sort(a,a+n);
+	
+	int l=0,r1=0,r2=0;
+	LL ans=0;
+	
+	while(l&amp;lt;n)
+	{
+		while(r1&amp;lt;n &amp;amp;&amp;amp; a[r1]-a[l] &amp;lt; c) r1++;
+		while(r2&amp;lt;n &amp;amp;&amp;amp; a[r2]-a[l] &amp;lt;= c) r2++;
+		if(a[r2-1] - a[l] == c &amp;amp;&amp;amp; a[r1]-a[l] == c)
+			ans+=r2-r1;
+		l++;
+	}
+	printf(&amp;quot;%lld\n&amp;quot;,ans);
+	
+	return 0;
+}
+
+uva11572
+给出 n个数，找尽量长的一个子序列，使得该子序列中没有重复的元素。
+右指针往右跳到不重复的最远位置,更新答案,然后左指针往右跳一位,左右指针都只跳了n次,所以查询的复杂度是O(n)
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;map&amp;gt;
+using namespace std;
+const int N=1e6+10;
+int a[N],b[N],cnt[N];
+int n;
+
+int main()
+{
+	int T;
+	cin&amp;gt;&amp;gt;T;
+	while(T--)
+	{
+		
+		scanf(&amp;quot;%d&amp;quot;,&amp;amp;n);
+		for(int i=0;i&amp;lt;n;i++)
+			scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]),b[i]=a[i];
+			
+		sort(b,b+n);
+		
+		int tot=unique(b,b+n)-b;
+		
+		for(int i=0;i&amp;lt;n;i++)
+			a[i]=lower_bound(b,b+tot,a[i])-b;
+
+		int l=0,r=0;
+		int ans=0;
+		
+		for(int i=0;i&amp;lt;tot;i++) cnt[i]=0;
+		
+		while(r&amp;lt;n)
+		{
+			while(r&amp;lt;n &amp;amp;&amp;amp; cnt[a[r]] == 0)
+				cnt[a[r++]]++;
+			
+			ans=max(ans,r-l);
+			
+			cnt[a[l++]]--;
+		}
+		
+		printf(&amp;quot;%d\n&amp;quot;,ans);
+	}
+	return 0;
+}
+
+cf660C
+大意：给定一个包含nn个元素的数组aa。数组a的每个元素不是00就是11。
+现在，让我们用f(a)表示a中连续元素序列中最长子段的长度，它只包含数字1。并且你最多可以将k个0更改为1来得到最大的f(a)。
+贪心：对于一个含0的区间，我们让区间中的0都填满是最优的
+于是维护一段区间，保证区间中的0的个数≤k就可以
+于是就可以对于0的个数≤k时右移右端点，增添新的位置，扩大区间；
+当[l,r]中0的个数＞k时右移l，到[l,r]中0的个数≤k时为止
+注意边界和初始化
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=3e5+10;
+int a[N];
+int n,k;
+
+int main()
+{
+	scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;k);
+	for(int i=1;i&amp;lt;=n;i++)	
+		scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]);
+		
+	int l=1,r=1;
+	int ans=0;
+	int sum=0;
+	int al=0,ar=0;
+	
+	while(r&amp;lt;=n)
+	{
+		while(r&amp;lt;=n &amp;amp;&amp;amp; sum&amp;lt;=k)
+		{
+			if(!a[r])
+			{
+				if(sum == k) break;//注意点！
+				else sum++;
+			}
+			r++;
+		}
+		
+		if(ans &amp;lt; r-l) ans=r-l,al=l,ar=r-1;
+		
+		if(!a[l++]) sum--;
+	}
+	
+	printf(&amp;quot;%d\n&amp;quot;,ans);
+	for(int i=1;i&amp;lt;=n;i++)
+		if(i&amp;gt;=al &amp;amp;&amp;amp; i&amp;lt;=ar)
+			printf(&amp;quot;1 &amp;quot;);
+		else 
+			printf(&amp;quot;%d &amp;quot;,a[i]);
+		
+	return 0;
+}
+
+尺取法的模型便是这样：根据区间的特征交替推进左右端点求解问题，其高效的原因在于避免了大量的无效枚举，其区间枚举都是根据区间特征有方向的枚举。
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://caifxh.github.io/post/chi-qu-fa/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+            <article class="post i-card">
+                <h2 class="post-title">
                     <a href="https://caifxh.github.io/post/si-bian-xing-bu-deng-shi/">
                         四边形不等式
                     </a>
@@ -107,7 +945,7 @@
                     <time class="post-time">2020-04-09</time>
                     
                         <a href="https://caifxh.github.io/tag/hLQFdtGuD/" class="post-tag i-tag
-                            i-tag-primary">
+                            i-tag-warning">
             #DP
         </a>
                         
@@ -744,7 +1582,7 @@ int main()
                     <time class="post-time">2020-04-08</time>
                     
                         <a href="https://caifxh.github.io/tag/TZ7cITYtt/" class="post-tag i-tag
-                            i-tag-other_2">
+                            i-tag-success">
             #其他算法
         </a>
                         
@@ -1073,7 +1911,7 @@ int main()
                     <time class="post-time">2020-04-08</time>
                     
                         <a href="https://caifxh.github.io/tag/TZ7cITYtt/" class="post-tag i-tag
-                            i-tag-banana">
+                            i-tag-error">
             #其他算法
         </a>
                         
@@ -1433,7 +2271,7 @@ int main()
                     <time class="post-time">2020-04-08</time>
                     
                         <a href="https://caifxh.github.io/tag/TZ7cITYtt/" class="post-tag i-tag
-                            i-tag-other_3">
+                            i-tag-other_4">
             #其他算法
         </a>
                         
@@ -1784,7 +2622,7 @@ code
                     <time class="post-time">2020-04-06</time>
                     
                         <a href="https://caifxh.github.io/tag/hLQFdtGuD/" class="post-tag i-tag
-                            i-tag-error">
+                            i-tag-other_3">
             #DP
         </a>
                         
@@ -3148,7 +3986,7 @@ int main()
                     <time class="post-time">2020-04-05</time>
                     
                         <a href="https://caifxh.github.io/tag/hLQFdtGuD/" class="post-tag i-tag
-                            i-tag-">
+                            i-tag-error">
             #DP
         </a>
                         
@@ -3352,7 +4190,7 @@ int main()
                     <time class="post-time">2020-04-04</time>
                     
                         <a href="https://caifxh.github.io/tag/Aq1uYaqZQ/" class="post-tag i-tag
-                            i-tag-">
+                            i-tag-success">
             #图论
         </a>
                         
@@ -3641,460 +4479,6 @@ int main()
                 </div>
             </article>
             
-            <article class="post i-card">
-                <h2 class="post-title">
-                    <a href="https://caifxh.github.io/post/kuo-zhan-kmp/">
-                        扩展KMP
-                    </a>
-                </h2>
-                <div class="post-info">
-                    <time class="post-time">2020-04-03</time>
-                    
-                        <a href="https://caifxh.github.io/tag/yImqvC-Dp/" class="post-tag i-tag
-                            i-tag-banana">
-            #字符串
-        </a>
-                        
-                </div>
-                <div class="post-article">
-                    
-                            <div class="post-content">
-                                
-                                        <div class="post-content-content">
-                                            Z算法
-
-
-
-
-r[5] = 7
-r[6] = 7
-l[5] = 5
-l[6] = 5
-
-对于 Z[2] 我们需要暴力计算。
-也就是暴力计算 S[1..|S|] 和 S[2..|S|] 的最长公共前缀。
-如果 Z[2] &amp;gt; 0, 那么 r = r[2], l = l[2] = 2
-如果 Z[2] = 0, 那么 r = r[2] = 0, l = l[2] = 0
-我们的目标就是用已有的 Z[2], Z[3], ..., Z[k-1]，来推
-出 Z[k].
-假设 k = 121, Z[2..120] 已经知道了
-r[120] = 130, l[120] = 100
-
-划分成[l,i-1],[i,r]
-
-
-
-
-
-蓝色部分一定不相等，否则说明z-box可以右移
-第一步：
-初始化 Z[]，暴力计算 Z[2]
-for(int i = 1;i &amp;lt;= n;i ++) z[i] = 0;
-int l, r;
-while(str[1 + z[2]] == str[2 + z[2]]) z[2] ++; 
-l = 2, r = 2+ z[2]-1;
-
-第二步：
-枚举 i，分三种情况依次计算 Z[i]
-for(int i = 3;i &amp;lt;= n;i ++)
-{
-    if(i &amp;gt; r)
-    {
-        while(str[1 + z[i]] == str[i + z[i]]) z[i] ++;
-        l = i, r = i + z[i] - 1;
-    }
-    else
-    {
-        if(z[i - l + 1] &amp;lt; r - i + 1) z[i] = z[i - l + 1];
-        else
-        {
-            z[i] = r - i;
-            while(str[1 + z[i]] == str[i + z[i]]) z[i] ++; 
-            l = i, r = i + z[i] - 1; 
-        }
-    } 
-}
-
-时间复杂度是 O(n) 的
-扩展KMP
-给定两个字符串 S 和 T（长度分别为 n 和 m）
-定义 extend[i] 为 S[i..n] 与 T 的最长公共前缀的长度。
-求出 extend 数组
-
-如果 S = T，那么 extend 数组就是 Z 数组。
-
-假设现在遍历到了 S[i]，且 S[1], S[2],…, S[i-1]都已经算出
-与 Z 算法类似，设置两个变量 l 和 r，r 表示能和 T 匹
-配到的最右边的位置，l 为 r 对应的起始位置。
-也就是 S[l .. r] = T[1.. r-l+1]
-
-S[i] 对应的是 T[i-l+1]
-现在要计算的是 S[i..n] 与 T 的最长公共前缀
-注意到此时 S[i..r] = T[i-l+1 .. r-l+1]
-所以我们可以先对 T 求一遍 Z 数组，然后考察一下 Z[i-l+1]
-
-
-
-void calc_Z(char *str) 
-{
-	int n = strlen(str + 1);
-	for(int i = 1; i &amp;lt;= n; i ++) z[i] = 0;
-	z[1] = n;
-	int l, r = 0;
-	for(int i = 2; i &amp;lt;= n; i ++) 
-	{
-		if(i &amp;gt; r) 
-		{
-			while(str[1 + z[i]] == str[i + z[i]]) z[i] ++;
-			l = i, r = i + z[i] - 1;
-		} else 
-		{
-			if(z[i - l + 1] &amp;lt; r - i + 1) z[i] = z[i - l + 1];
-			else 
-			{
-				z[i] = r - i + 1;
-				while(str[1 + z[i]] == str[i + z[i]]) z[i] ++;
-				l = i, r = i + z[i] - 1;
-			}
-		}
-	}
-}
-
-void calc_extend(char *S, char *T) 
-{
-	calc_Z(T);
-	int l, r = 0;
-	int n = strlen(S + 1);
-	int m = strlen(T + 1);
-	for (int i = 1; i &amp;lt;= n; i ++) 
-	{
-		if (i &amp;gt; r) 
-		{
-			while (i + ext[i] &amp;lt;= n &amp;amp;&amp;amp; 1 + ext[i] &amp;lt;= m &amp;amp;&amp;amp;
-			        S[i + ext[i]] == T[1 + ext[i]]) ext[i] ++;
-			l = i, r = i + ext[i] - 1;
-		}
-		else 
-		{
-			if (i + z[i - l + 1] - 1 &amp;lt; r) ext[i] = z[i - l + 1];
-			else 
-			{
-				ext[i] = r - i + 1;
-				while (i + ext[i] &amp;lt;= n &amp;amp;&amp;amp; 1 + ext[i] &amp;lt;= m &amp;amp;&amp;amp; S[i +ext[i]] == T[1 + ext[i]]) 
-					ext[i] ++;
-				l = i, r = i + ext[i] - 1;
-			}
-		}
-	}
-}
-
-例题
-题意：给你n个字符串，求这n个字符串的最长公共子串
-hdu4333
-给一个 L 位数的正整数 N，每次可以把这个数的最后一位移到最前面来，得到一个新的数。
-总共最多可以得到 n 个数，重复的只算一次。
-问这些数中，等于 n 的，小于 n的，大于 n 的数分别有几个。
-L ≤ 1e5
-
-样例：
-341 （答案： 1 1 1）
-我们只需要把这个数复制两遍，然后只考虑长度为 n 的子串。这些子串就是移动过程中产生的数。
-如何和原数 N 做比较呢
-假设现在的数是 S[i .. i+L-1], N 是 S[1..L]
-我们只要求出他们的最长公共前缀 x，如果 x = n 说明这两个数相等。
-否则，比较 S[x] 和 S[i+x-1] 的大小，就可以确定他们的大小关系。
-求 x ，就是扩展 KMP 中的 Z 算法。x = min(n, Z[i])
-最后一步去重。对 N 跑一次 KMP
-如果 L-next[L] 是 L 的约数，那么 L-next[L] 是 N 的最小循环节。否则 N 的 最小循环节是 L。
-对循环节内的情况枚举一遍即可,或除以最小循环节个数。
-时间复杂度 O(L)
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;cstring&amp;gt;
-#include&amp;lt;algorithm&amp;gt;
-#include&amp;lt;cstdio&amp;gt;
-using namespace std;
-const int N=200010;
-char str[N];
-int ne[N];
-int z[N];
-
-int main()
-{
-    int T;
-    scanf(&amp;quot;%d&amp;quot;,&amp;amp;T);
-    for(int kas=1;kas&amp;lt;=T;kas++)
-    {
-        scanf(&amp;quot;%s&amp;quot;,str+1);
-        
-        int len=strlen(str+1);
-        for(int i=2,j=0;i&amp;lt;=len;i++)
-        {
-            while(j &amp;amp;&amp;amp; str[i] != str[j+1])
-                j=ne[j];
-            if(str[i] == str[j+1])
-                j++;
-            ne[i]=j;
-        }
-        
-        for(int i=1;i&amp;lt;=len;i++)
-            str[i+len]=str[i];
-        str[len*2+1]=&#39;\0&#39;;
-        memset(z,0,sizeof z);
-        z[1]=len*2;
-        int l,r=0;
-        
-        for(int i=2;i&amp;lt;=len*2;i++)
-        {
-            if(i&amp;gt;r)
-            {
-                while(str[1+z[i]] == str[i+z[i]])
-                    z[i]++;
-                l=i,r=i+z[i]-1;
-            }
-            else 
-            {
-                if(z[i-l+1] &amp;lt; r-i+1)
-                    z[i]=z[i-l+1];
-                else 
-                {
-                    z[i]=r-i;
-                    while(str[1+z[i]] == str[i+z[i]])
-                        z[i]++;
-                    l=i,r=i+z[i]-1;
-                }
-            }
-        }
-        
-        int gre=0,eql=0,les=0;
-        for(int i=1;i&amp;lt;=len;i++)
-        {
-            if(z[i] &amp;gt;= len)
-                eql++;
-            else if(str[1+z[i]] &amp;gt; str[i+z[i]])
-                les++;
-            else gre++;
-        }
-        
-        int t;
-        if(len%(len-ne[len]) == 0)
-            t=len/(len-ne[len]);//循环节个数 
-        else 
-            t=1;
-        printf(&amp;quot;Case %d: %d %d %d\n&amp;quot;,kas,les/t,eql/t,gre/t);
-    }
-}
-
-对循环节内的情况枚举代码
-poj3376
-给你 n 个字符串 m[1], m[2], …, m[n]。 求 S = m[i]m[j] （1 &amp;lt;= i,j &amp;lt;= n）是回文串的数量。
-n 个字符串的长度之和不超过 2·1e6
-
-样例输入：
-3a
-ab
-ba
-答案：5（aa,aba,aba,abba,baab)
-考虑什么情况下 i 和 j 拼起来会是回文串。
-
-
-i的长度小于j，那么i一定是j的反串的前缀，且j的反串剩下的后缀是回文串
-
-
-i的长度等于j，那么i等于j的反串
-
-
-i的长度大于j，那么j的反串一定是i的前缀，且i串剩下的后缀是回文串
-
-
-我们可以将这n个字符串插入trie，每个节点要维护两个值：
-value1. 到当前节点的字符串个数；value2.当前节点后面的回文子串个数
-我们用每个字符串的反串去trie上查找，要构成回文串有以下情况：
-
-
-1.此反串是其他串的前缀，那么组合回文串的数量就要加上value2
-
-
-2.此反串的前缀是某些字符串，且反串剩下的后缀是回文串，那么组合回文串的数量要加上value1
-
-
-3.2的特例：此反串的前缀是某些字符串，且反串剩下的后缀为空，同样要加上value1，这种情况可以和2一起处理
-
-
-留下的问题就是一个字符串的所有后缀中，哪些是回文串。
-对于串 S，我们先求出正串 S 对反串 T 的 extend[i]
-那么对于每个 i，如果 S[i..n] 和 T 的最长公共前缀等于
-S[i..n] 的长度，说明 S[i..n] 是一个回文串。
-因此整道题就在线性的时间复杂度内解决了。
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;cstring&amp;gt;
-#include&amp;lt;algorithm&amp;gt;
-#include&amp;lt;cstdio&amp;gt;
-using namespace std;
-const int N=2e6+10;
-int trie[N][26],tot=1;
-int n;
-char s[N],t[N];
-int len[N];
-int slen;
-int z[N],ext[N];
-bool flag[2][N];
-int bg[N],ed[N];
-typedef long long LL;
-struct Node
-{
-	int v1,v2;
-}cnt[N];
-
-void get_z(char *s)
-{
-	int n=strlen(s+1);
-	for(int i=1;i&amp;lt;=n;i++) z[i]=0;
-	z[1]=n;
-	int l,r=0;
-	for(int i=2;i&amp;lt;=n;i++)
-	{
-		if(i&amp;gt;r)
-		{
-			while(s[1+z[i]] == s[i+z[i]])
-				z[i]++;
-			l=i,r=i+z[i]-1;
-		}
-		else
-		{
-			if(z[i-l+1] &amp;lt; r-i+1)
-				z[i]=z[i-l+1];
-			else
-			{
-				z[i]=r-i;
-				while(s[1+z[i]] == s[i+z[i]])
-					z[i]++;
-				l=i,r=i+z[i]-1;
-			}
-		}
-	}
-}
-
-void exkmp(int type,char *s,char *t)
-{
-	get_z(t);
-	int n=strlen(s+1);
-	int m=strlen(t+1);
-	for(int i=1;i&amp;lt;=n;i++)
-		ext[i]=0;
-	int l,r=0;
-	for(int i=1;i&amp;lt;=n;i++)
-	{
-		if(i&amp;gt;r)
-		{
-			while(i+ext[i] &amp;lt;=n &amp;amp;&amp;amp; 1+ext[i] &amp;lt;=m &amp;amp;&amp;amp;
-			s[i+ext[i]] == t[1+ext[i]])
-				ext[i]++;
-			l=i,r=i+ext[i]-1;
-		}
-		else
-		{
-			if(z[i-l+1] &amp;lt; r-i+1)
-				ext[i]=z[i-l+1];
-			else
-			{
-				ext[i]=r-i+1;
-				while(i + ext[i] &amp;lt;= n &amp;amp;&amp;amp; 1 + ext[i] &amp;lt;= m &amp;amp;&amp;amp; 
-				s[i+ext[i]] == t[1+ext[i]])
-					ext[i]++;
-				l=i,r=i+ext[i]-1;
-			}
-		}
-	}
-
-	for(int i=1;i&amp;lt;=n;i++)
-	{
-		//cout&amp;lt;&amp;lt;&amp;quot;---&amp;quot;&amp;lt;&amp;lt;ext[i]&amp;lt;&amp;lt;endl;
-		if(ext[i] == n-i+1)
-			flag[type][i+slen]=true;//s[i...n]为回文串
-	}
-}
-
-void insert(int k)
-{
-	int p=1;
-	for(int i=bg[k];i&amp;lt;=ed[k];i++)
-	{
-		cnt[p].v2+=flag[0][i];
-		int ch=s[i]-&#39;a&#39;;
-		if(!trie[p][ch])
-			trie[p][ch]=++tot;
-		p=trie[p][ch];
-	}
-	cnt[p].v1++;
-}
-
-void print(int k)
-{
-	int p=1;
-	for(int i=bg[k];i&amp;lt;=ed[k];i++)
-	{
-		int ch=s[i]-&#39;a&#39;;
-		p=trie[p][ch];
-		cout&amp;lt;&amp;lt;&amp;quot;---&amp;quot;&amp;lt;&amp;lt;cnt[p].v2&amp;lt;&amp;lt;&#39; &#39;&amp;lt;&amp;lt;cnt[p].v1&amp;lt;&amp;lt;endl;
-	}
-}
-
-int main()
-{
-	scanf(&amp;quot;%d&amp;quot;,&amp;amp;n);
-	
-	for(int i=1;i&amp;lt;=n;i++)
-	{
-		scanf(&amp;quot;%d&amp;quot;,&amp;amp;len[i]);
-		scanf(&amp;quot;%s&amp;quot;,s+1+slen);
-		for(int j=1;j&amp;lt;=len[i];j++)
-			t[slen+j]=s[slen+len[i]+1-j];
-		t[slen+len[i]+1]=&#39;\0&#39;;
-		exkmp(0,s+slen,t+slen);
-		exkmp(1,t+slen,s+slen);
-
-		bg[i]=slen+1;
-		slen+=len[i];
-		ed[i]=slen;
-
-		insert(i);
-		//print(i);
-	}
-
-	LL ans=0;
-	for(int i=1;i&amp;lt;=n;i++)
-	{
-		int p=1;
-		bool f=true;
-		for(int j=ed[i];j&amp;gt;=bg[i];j--)//用反串去trie上匹配
-		{
-			int k=s[j]-&#39;a&#39;;
-			if(!trie[p][k])
-			{
-				f=false;
-				break;
-			}
-			else
-				p=trie[p][k];
-			if(flag[1][bg[i]+ed[i]-j+1] || j == bg[i])
-				ans+=cnt[p].v1;
-		}
-		if(f)
-			ans+=cnt[p].v2;
-	}
-
-	printf(&amp;quot;%lld\n&amp;quot;,ans);
-	return 0;
-}
-
-
-                                        </div>
-                                        
-                                            <a class="btn btn-text" href="https://caifxh.github.io/post/kuo-zhan-kmp/">Read More ~</a>
-                            </div>
-                </div>
-            </article>
-            
                 <!-- 翻页 -->
                 
     <div class="pagination-container">
@@ -4113,7 +4497,7 @@ int main()
                     <!-- 个人信息 -->
                     
     <div class="id_card i-card">
-        <div class="id_card-avatar" style="background-image: url(https://caifxh.github.io/images/avatar.png?v=1586405129501)">
+        <div class="id_card-avatar" style="background-image: url(https://caifxh.github.io/images/avatar.png?v=1586491016728)">
         </div>
         <h1 class="id_card-title">
             fxh
