@@ -7,7 +7,7 @@
 <title>
     比赛 | fxh
 </title>
-<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1586491016728">
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1588691348423">
 <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
 <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
@@ -27,7 +27,7 @@
     <div class="nav">
         <div class="logo">
             <a href="https://caifxh.github.io">
-                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1586491016728" alt="">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1588691348423" alt="">
             </a>
             <div class="site-title">
                 <h1>
@@ -104,6 +104,515 @@
         
             <article class="post i-card">
                 <h2 class="post-title">
+                    <a href="https://caifxh.github.io/post/codeforces-round-636-div-3/">
+                        Codeforces Round #636 (Div. 3)
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2020-04-23</time>
+                    
+                        <a href="https://caifxh.github.io/tag/XNpmSrxzO/" class="post-tag i-tag
+                            i-tag-">
+            #比赛
+        </a>
+                        
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            C. Alternating Subsequence
+首先，让我们通过包含由具有相同符号的数字组成的数组的分段来提取最大值。 例如，如果数组为[1,1,2，-1，-5,2,1，-3]，则这些段为[1,1,2]，[-1，-5]，[2， 1]和[−3]。 我们可以使用任何类似于“两个指针”的算法来做到这一点。 这些段的数量是交替子序列的最大可能长度，因为我们只能从每个块中提取一个元素。 当我们想最大化总和时，我们需要从每个块中取最大元素。
+时间复杂度：O（n）
+#include&amp;lt;iostream&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N=2e5+10;
+int a[N];
+int n;
+
+int sgn(int x)
+{
+	if(x&amp;gt;0) return 1;
+	return 0;
+}
+
+int main()
+{
+	int T;
+	cin&amp;gt;&amp;gt;T;
+	while(T--)
+	{
+		int n;
+		cin&amp;gt;&amp;gt;n;
+		for(int i=1;i&amp;lt;=n;i++)
+			cin&amp;gt;&amp;gt;a[i];
+		
+		LL sum=0;
+		for(int i=1;i&amp;lt;=n;i++)
+		{
+			int cur=a[i];
+			int j=i;
+			while(j&amp;lt;=n &amp;amp;&amp;amp; sgn(a[i]) == sgn(a[j]))
+			{
+				cur=max(cur,a[j]);
+				j++;
+			}
+			sum+=cur;
+			i=j-1;
+		}
+		cout&amp;lt;&amp;lt;sum&amp;lt;&amp;lt;endl;
+	}
+	return 0;
+}
+
+D - Constant Palindrome Sum
+差分数组维护取某个值为定值时所需要的最少操作次数
+分类讨论得到：
+一、如果定值 x 在 [2,minn] 之间，即使将较大的数更改为1后，和也是大于x，说明此时这两个数都需要更改，所以这段区间的操作数+2
+二、如果定值 x 在 [maxn+k+1,2*k]之间，即使将较小的数更改为k后，和也是小于x，说明此时这两个数都需要更改，所以这段区间的操作数+2
+三、如果定值 x 在 [minn+1,maxn+k] 之间且不等于 sum，能够做到只改变其中一个数就使得和等于x，所以这个范围内操作数+1
+四、特殊处理，如果定值 x 等于 sum，不需要更改任何一个数，所以这个点的操作数不需要增加
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int N=2e5+10;
+int a[N],b[N*2];
+int n,k;
+
+int main()
+{
+	int T;
+	cin&amp;gt;&amp;gt;T;
+	while(T--)
+	{
+		memset(b,0,sizeof b);
+		
+		scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;k);
+		
+		for(int i=1;i&amp;lt;=n;i++) scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]);
+		
+		for(int i=1;i&amp;lt;=n/2;i++)
+		{
+			int maxv=max(a[i],a[n-i+1]);
+			int minv=min(a[i],a[n-i+1]);
+			
+			int sum=a[i]+a[n-i+1];
+			
+			b[2]+=2;
+			b[minv+1]-=2;
+			
+			b[maxv+k+1]+=2;
+			b[2*k+1]-=2;
+			
+			b[minv+1]++;
+			b[maxv+k+1]--;
+			
+			b[sum]--;
+			b[sum+1]++;
+		}
+		
+		int ans=n;
+		for(int i=2;i&amp;lt;=2*k;i++)
+		{
+			b[i]+=b[i-1];
+			ans=min(ans,b[i]);
+		}
+		
+		cout&amp;lt;&amp;lt;ans&amp;lt;&amp;lt;endl;
+	}
+	return 0;
+}
+
+E. Weights Distributing
+如果我们以最优方式分配成本，那么这对路径（a→b和b→c）看起来就像是一条直线路径，不会两次访问相同的顶点，或者就像是三个具有一个交点x的直线路径。 第一种情况基本上是第二种情况的子情况（具有相交点a，b或c）。 因此，如果我们固定交点x，则这两个路径（a→b和b→c）变为四个路径（a→x，x→b，b→x和x→c）。 我们可以注意到，我们表示的每条路径都应该是最短的路径，因为如果不是最短的路径，那么我们将使用一些我们无法使用的价格。
+dist（a，x）+ dist（b，x）+ dist（c，x）最小成本。 现在，我们希望以某种方式在这三个路径之间分配这些成本。 我们可以看到从b到x的路径被使用了两次，因此沿这部分分配最小的成本是最优的。 因此，令prefi为前i个最小费用的总和（只是排序数组p上的前缀总和）。 那么对于交点x，答案是pref[dist（b，x）]+ pref[dist（a，x）+ dist（b，x）+ dist（c，x）]（如果dist（a，x）+ dist（b，x ）+ dist（c，x）≤m）。
+时间复杂度：O（mlogm）
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;vector&amp;gt;
+#include&amp;lt;queue&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N=2e5+10,INF=0x3f3f3f3f;
+vector&amp;lt;int&amp;gt; g[N];
+int p[N];
+LL sum[N];
+int dist[3][N];
+int n,m,a,b,c;
+
+void bfs(int u,int type)
+{
+	memset(dist[type],0x3f,sizeof dist[type]);
+	dist[type][u]=0;
+	queue&amp;lt;int&amp;gt; q;
+	q.push(u);
+
+	while(!q.empty())
+	{
+		int t=q.front();
+		q.pop();
+		for(int i=0;i&amp;lt;g[t].size();i++)
+		{
+			int j=g[t][i];
+			if(dist[type][j] == INF)
+			{
+				dist[type][j]=dist[type][t]+1;
+				q.push(j);
+			}	
+		}
+	}
+}
+
+int main()
+{
+	int T;
+	cin&amp;gt;&amp;gt;T;
+	while(T--)
+	{
+		cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m&amp;gt;&amp;gt;a&amp;gt;&amp;gt;b&amp;gt;&amp;gt;c;
+		
+		for(int i=1;i&amp;lt;=n;i++)	
+			g[i].clear();
+			
+		for(int i=1;i&amp;lt;=m;i++)
+			scanf(&amp;quot;%d&amp;quot;,&amp;amp;p[i]);
+		sort(p+1,p+m+1);
+		
+		for(int i=1;i&amp;lt;=m;i++)
+			sum[i]=sum[i-1]+p[i];
+		
+		for(int i=0;i&amp;lt;m;i++)
+		{
+			int a,b;
+			scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;a,&amp;amp;b);
+			g[a].push_back(b);
+			g[b].push_back(a);
+		}
+		
+		bfs(a,0);
+		bfs(b,1);
+		bfs(c,2);
+		
+		LL ans=4e18;
+		for(int i=1;i&amp;lt;=n;i++)
+		{
+			int t=dist[0][i]+dist[1][i]+dist[2][i];
+			if(t &amp;lt;= m) ans=min(ans,sum[t]+sum[dist[1][i]]);
+		}
+		cout&amp;lt;&amp;lt;ans&amp;lt;&amp;lt;endl;
+	}
+	return 0;
+}
+
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://caifxh.github.io/post/codeforces-round-636-div-3/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+            <article class="post i-card">
+                <h2 class="post-title">
+                    <a href="https://caifxh.github.io/post/niu-ke-han-jia-di-er-chang/">
+                        牛客寒假第二场
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2020-04-14</time>
+                    
+                        <a href="https://caifxh.github.io/tag/XNpmSrxzO/" class="post-tag i-tag
+                            i-tag-success">
+            #比赛
+        </a>
+                        
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            E
+
+
+#include&amp;lt;iostream&amp;gt;
+using namespace std;
+
+int main()
+{
+	int n;
+	cin&amp;gt;&amp;gt;n;
+	int res=0;
+	for(int i=1;i*i&amp;lt;=n;i++)
+	{
+		int t=i*i;
+		for(int j=1;j*j&amp;lt;=t;j++)
+			if(t % j == 0)
+			{
+				res++;
+				if(j != t/j) res++;
+			}
+	}
+	
+	cout&amp;lt;&amp;lt;res&amp;lt;&amp;lt;endl;
+	
+	return 0;
+}
+
+H
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=3e5+10,INF=0x3f3f3f3f;
+int f[N];
+int a[N];
+int n,k;
+
+int main()
+{
+	cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;k;
+	
+	for(int i=1;i&amp;lt;=n;i++)
+		scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]);
+	sort(a+1,a+n+1);
+	
+	f[0]=0;
+	for(int i=1;i&amp;lt;k;i++)
+		f[i]=INF;
+		
+	int val=INF;
+	for(int i=k;i&amp;lt;=n;i++)
+	{
+		val=min(val,f[i-k]-a[i-k+1]);
+		f[i]=val+a[i];
+	}
+	
+	cout&amp;lt;&amp;lt;f[n]&amp;lt;&amp;lt;endl;
+	
+	return 0;
+}
+
+I
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;vector&amp;gt;
+#include&amp;lt;map&amp;gt;
+using namespace std;
+vector&amp;lt;int&amp;gt; a;
+map&amp;lt;int,int&amp;gt; vis;
+int n;
+
+int main()
+{
+	cin&amp;gt;&amp;gt;n;
+	
+	for(int i=1;i&amp;lt;=n;i++)
+	{
+		int x;
+		scanf(&amp;quot;%d&amp;quot;,&amp;amp;x);
+		if(vis[x]) continue;
+        vis[x]=1;
+		a.push_back(x);
+	}
+	
+	n=a.size();
+	
+	if(n == 1)
+	{
+		puts(&amp;quot;0&amp;quot;);
+		return 0;
+	}
+	
+	for(int i=0;i&amp;lt;=30;i++)
+	{
+		int cnt=0;
+		for(int j=0;j&amp;lt;n;j++)
+			if(a[j]&amp;gt;&amp;gt;i &amp;amp; 1) cnt++;
+		if(cnt &amp;gt; 0 &amp;amp;&amp;amp; cnt &amp;lt; n)
+		{
+			printf(&amp;quot;%lld\n&amp;quot;,(1ll&amp;lt;&amp;lt;i)*(n-1));
+			return 0;
+		}
+	}
+	
+}
+
+J
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+#define lc u&amp;lt;&amp;lt;1
+#define rc u&amp;lt;&amp;lt;1|1
+typedef long long LL;
+const int N=2e5+10,mod=1e9+7;
+struct Node1
+{
+	int l,r;
+	LL k;
+}tr1[N&amp;lt;&amp;lt;2];
+struct Node2
+{
+	int l,r;
+	LL val;
+}tr2[N&amp;lt;&amp;lt;2];
+struct f
+{
+	LL k,val;
+};
+int k[N],b[N];
+int n,m;
+
+void pushup(int u)
+{
+	tr1[u].k=(LL)tr1[lc].k*tr1[rc].k%mod;
+	tr2[u].val=((LL)tr2[lc].val*tr1[rc].k%mod+tr2[rc].val)%mod;
+}
+
+void build(int u,int l,int r)
+{
+	tr1[u].l=tr2[u].l=l,tr1[u].r=tr2[u].r=r;
+	if(l == r)
+	{
+		tr1[u].k=k[l];
+		tr2[u].val=b[l];
+		return;
+	}
+	int mid=l+r&amp;gt;&amp;gt;1;
+	build(lc,l,mid);
+	build(rc,mid+1,r);
+	pushup(u);
+}
+
+void modify(int u,int x,int k,int b)
+{
+	if(tr1[u].l == tr1[u].r)
+	{
+		tr1[u].k=k;
+		tr2[u].val=b;
+		return;
+	}
+	int mid=tr1[u].l+tr1[u].r&amp;gt;&amp;gt;1;
+	if(x&amp;lt;=mid) modify(lc,x,k,b);
+	else modify(rc,x,k,b);
+	pushup(u);
+}
+
+f query(int u,int l,int r)
+{
+	if(l == tr1[u].l &amp;amp;&amp;amp; tr1[u].r == r)
+		return {tr1[u].k, tr2[u].val};
+
+	int mid=tr1[u].l+tr1[u].r&amp;gt;&amp;gt;1;
+	if(r &amp;lt;= mid) 
+		return query(lc,l,r);
+	else if(l &amp;gt; mid) 
+		return query(rc,l,r);
+	else 
+	{
+		f left=query(lc,l,mid);
+		f right=query(rc,mid+1,r);
+		return {left.k*right.k%mod,(left.val*right.k%mod+right.val)%mod};
+	}
+}
+
+int main()
+{
+	cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m;
+	
+	for(int i=1;i&amp;lt;=n;i++) scanf(&amp;quot;%d&amp;quot;,&amp;amp;k[i]);
+	for(int i=1;i&amp;lt;=n;i++) scanf(&amp;quot;%d&amp;quot;,&amp;amp;b[i]);
+		
+	build(1,1,n);	
+	
+	while(m--)
+	{
+		int t;
+		scanf(&amp;quot;%d&amp;quot;,&amp;amp;t);
+		if(t == 1)
+		{
+			int i,k,b;
+			scanf(&amp;quot;%d%d%d&amp;quot;,&amp;amp;i,&amp;amp;k,&amp;amp;b);
+			modify(1,i,k,b);
+		}
+		else 
+		{
+			int l,r;
+			scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;l,&amp;amp;r);
+			auto t=query(1,l,r);
+			printf(&amp;quot;%d\n&amp;quot;,(t.k+t.val)%mod);
+		}
+	}
+	
+	return 0;
+}
+
+F
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+typedef pair&amp;lt;int,int&amp;gt; PII;
+const int N=2e5+10;
+int a[N],b[N];
+PII c[N];
+int n;
+
+bool cmp(PII x,PII y)
+{
+	return x.first &amp;gt; y.first;
+}
+
+int main()
+{
+	cin&amp;gt;&amp;gt;n;
+	for(int i=1;i&amp;lt;=n;i++)
+		scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]);
+	for(int i=1;i&amp;lt;=n;i++)
+		scanf(&amp;quot;%d&amp;quot;,&amp;amp;b[i]);
+	for(int i=1;i&amp;lt;=n;i++)
+		c[i].first=a[i]+b[i],c[i].second=i;
+	
+	sort(c+1,c+n+1,cmp);
+	
+	for(int i=2;i&amp;lt;=n;i+=2)
+		printf(&amp;quot;%d &amp;quot;,c[i].second);
+	puts(&amp;quot;&amp;quot;);
+	
+	for(int i=1;i&amp;lt;=n;i+=2)
+		printf(&amp;quot;%d &amp;quot;,c[i].second);
+	puts(&amp;quot;&amp;quot;);
+	
+	return 0;
+}
+
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://caifxh.github.io/post/niu-ke-han-jia-di-er-chang/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+            <article class="post i-card">
+                <h2 class="post-title">
                     <a href="https://caifxh.github.io/post/niu-ke-han-jia-di-yi-chang/">
                         牛客寒假第一场
                     </a>
@@ -112,7 +621,7 @@
                     <time class="post-time">2020-04-02</time>
                     
                         <a href="https://caifxh.github.io/tag/XNpmSrxzO/" class="post-tag i-tag
-                            i-tag-other_4">
+                            i-tag-banana">
             #比赛
         </a>
                         
@@ -126,38 +635,109 @@
 eli拿到了一个仅由小写字母组成的字符串。
 她想截取一段连续子串，这个子串包含至少k个相同的某个字母。
 她想知道，子串的长度最小值是多少？
-题意
-相当于就是找字符串当中拥有k个相同字母的最小长度。
-直接模拟，通过二维数组，遇到个字母把在字符串的位置它放到对应字母的后面，然后进行判断，不断更新ans的最小值
+可以单独处理每种字母找 k 个的长度（双指针），然后求最小值。
 #include&amp;lt;iostream&amp;gt;
-#include&amp;lt;vector&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
 using namespace std;
+const int N=200010;
+char a[N];
+int cnt[30];
 int n,k;
-const int INF=0x3f3f3f3f;
-int ans=INF;
-vector&amp;lt;int&amp;gt; v[26];
 
 int main()
 {
-    cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;k;
-	string str;
-	cin&amp;gt;&amp;gt;str;
+	cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;k;
+	scanf(&amp;quot;%s&amp;quot;,a);
 	
-	for(int i=0;i&amp;lt;str.size();i++)
+	int ans=n+1;
+	
+	for(int i=0;i&amp;lt;26;i++)
 	{
-		int x=str[i]-&#39;a&#39;;
-		v[x].push_back(i);
-		int len=v[x].size();
-		if(len &amp;gt;= k)
-			ans=min(ans,i-v[x][len-k]+1);
+		int l=0,r=0;
+		memset(cnt,0,sizeof cnt);
+		while(1)
+		{
+			while(r&amp;lt;n &amp;amp;&amp;amp; cnt[i] &amp;lt; k)
+				cnt[a[r++]-&#39;a&#39;]++;
+	
+			if(cnt[i] &amp;lt; k) break;
+			
+			ans=min(ans,r-l);
+			
+			cnt[a[l++]-&#39;a&#39;]--;
+		}
+	}
+	if(ans &amp;gt; n) ans=-1;
+	printf(&amp;quot;%d\n&amp;quot;,ans);
+	
+	return 0;
+}
+
+H
+
+有两种情况，一个是最长0子串，一个是最长1子串，只要取其中最大值即可
+双指针：
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+const int N=200010;
+char s[N];
+int n,k;
+
+int main()
+{
+	cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;k;
+	
+	scanf(&amp;quot;%s&amp;quot;,s);
+	
+	int sum0=0;
+	int l=0,r=0;
+	int ans=0;
+	
+	while(r&amp;lt;n)
+	{
+		while(r&amp;lt;n &amp;amp;&amp;amp; sum0 &amp;lt;= k)
+		{
+			if(s[r] - &#39;0&#39; == 0)
+			{
+				if(sum0 == k) break;
+				else sum0++;
+			}
+			r++;
+		}
+		
+		ans=max(ans,r-l);
+		
+		if(s[l++]-&#39;0&#39; == 0) sum0--;
 	}
 	
-	if(ans == INF)
-		cout&amp;lt;&amp;lt;-1&amp;lt;&amp;lt;endl;
-	else
-		cout&amp;lt;&amp;lt;ans&amp;lt;&amp;lt;endl;
-
-    return 0;
+	l=0,r=0;
+	int sum1=0;
+	
+	while(r&amp;lt;n)
+	{
+		while(r&amp;lt;n &amp;amp;&amp;amp; sum1 &amp;lt;= k)
+		{
+			if(s[r] - &#39;0&#39; == 1)
+			{
+				if(sum1 == k) break;
+				else sum1++;
+			}
+			r++;
+		}
+		
+		ans=max(ans,r-l);
+		
+		if(s[l++] -&#39;0&#39; == 1) sum1--;
+	}
+	
+	printf(&amp;quot;%d\n&amp;quot;,ans);
+	
+	return 0;
 }
 
 A
@@ -314,6 +894,39 @@ int main()
 	return 0;
 }
 
+I
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;string&amp;gt;
+using namespace std;
+const int N=300010;
+typedef long long LL;
+LL f[N];
+int n,a,b,c;
+
+int main()
+{
+	cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;a&amp;gt;&amp;gt;b&amp;gt;&amp;gt;c;
+	
+	string s;
+	cin&amp;gt;&amp;gt;s;
+	
+	for(int i=0;i&amp;lt;n;i++)
+	{
+		if(i) f[i]=f[i-1];
+		if(i &amp;gt;= 3 &amp;amp;&amp;amp; s.substr(i-3,4) == &amp;quot;nico&amp;quot;)
+			f[i]=max(f[i],f[i-3]+a);
+		if(i &amp;gt;= 5 &amp;amp;&amp;amp; s.substr(i-5,6) == &amp;quot;niconi&amp;quot;)
+			f[i]=max(f[i],f[i-5]+b);
+		if(i &amp;gt;= 9 &amp;amp;&amp;amp; s.substr(i-9,10) == &amp;quot;niconiconi&amp;quot;)
+			f[i]=max(f[i],f[i-9]+c); 
+	}
+	
+	cout&amp;lt;&amp;lt;f[n-1]&amp;lt;&amp;lt;endl;
+	
+	return 0;
+}
+
 
                                         </div>
                                         
@@ -333,7 +946,7 @@ int main()
                     <!-- 个人信息 -->
                     
     <div class="id_card i-card">
-        <div class="id_card-avatar" style="background-image: url(https://caifxh.github.io/images/avatar.png?v=1586491016728)">
+        <div class="id_card-avatar" style="background-image: url(https://caifxh.github.io/images/avatar.png?v=1588691348423)">
         </div>
         <h1 class="id_card-title">
             fxh

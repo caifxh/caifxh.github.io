@@ -7,7 +7,7 @@
 <title>
     牛客寒假第一场 | fxh
 </title>
-<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1586491016728">
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1588691348423">
 <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
 <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
@@ -28,7 +28,7 @@
     <div class="nav">
         <div class="logo">
             <a href="https://caifxh.github.io">
-                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1586491016728" alt="">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1588691348423" alt="">
             </a>
             <div class="site-title">
                 <h1>
@@ -105,7 +105,7 @@
                             <time class="post-time">2020-04-02</time>
                             
                                 <a href="https://caifxh.github.io/tag/XNpmSrxzO/" class="post-tag i-tag
-                            i-tag-other_2">
+                            i-tag-other_4">
                             #比赛
                         </a>
                                 
@@ -116,38 +116,109 @@
 eli拿到了一个仅由小写字母组成的字符串。<br>
 她想截取一段连续子串，这个子串包含至少k个相同的某个字母。<br>
 她想知道，子串的长度最小值是多少？</p>
-<p>题意<br>
-相当于就是找字符串当中拥有k个相同字母的最小长度。<br>
-直接模拟，通过二维数组，遇到个字母把在字符串的位置它放到对应字母的后面，然后进行判断，不断更新ans的最小值</p>
+<p>可以单独处理每种字母找 k 个的长度（双指针），然后求最小值。</p>
 <pre><code>#include&lt;iostream&gt;
-#include&lt;vector&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstdio&gt;
 using namespace std;
+const int N=200010;
+char a[N];
+int cnt[30];
 int n,k;
-const int INF=0x3f3f3f3f;
-int ans=INF;
-vector&lt;int&gt; v[26];
 
 int main()
 {
-    cin&gt;&gt;n&gt;&gt;k;
-	string str;
-	cin&gt;&gt;str;
+	cin&gt;&gt;n&gt;&gt;k;
+	scanf(&quot;%s&quot;,a);
 	
-	for(int i=0;i&lt;str.size();i++)
+	int ans=n+1;
+	
+	for(int i=0;i&lt;26;i++)
 	{
-		int x=str[i]-'a';
-		v[x].push_back(i);
-		int len=v[x].size();
-		if(len &gt;= k)
-			ans=min(ans,i-v[x][len-k]+1);
+		int l=0,r=0;
+		memset(cnt,0,sizeof cnt);
+		while(1)
+		{
+			while(r&lt;n &amp;&amp; cnt[i] &lt; k)
+				cnt[a[r++]-'a']++;
+	
+			if(cnt[i] &lt; k) break;
+			
+			ans=min(ans,r-l);
+			
+			cnt[a[l++]-'a']--;
+		}
+	}
+	if(ans &gt; n) ans=-1;
+	printf(&quot;%d\n&quot;,ans);
+	
+	return 0;
+}
+</code></pre>
+<p><a href="https://ac.nowcoder.com/acm/contest/3002/H">H</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/10/9969_13783b027a-40.PNG" alt="40.PNG" loading="lazy"><br>
+有两种情况，一个是最长0子串，一个是最长1子串，只要取其中最大值即可<br>
+双指针：</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstdio&gt;
+using namespace std;
+const int N=200010;
+char s[N];
+int n,k;
+
+int main()
+{
+	cin&gt;&gt;n&gt;&gt;k;
+	
+	scanf(&quot;%s&quot;,s);
+	
+	int sum0=0;
+	int l=0,r=0;
+	int ans=0;
+	
+	while(r&lt;n)
+	{
+		while(r&lt;n &amp;&amp; sum0 &lt;= k)
+		{
+			if(s[r] - '0' == 0)
+			{
+				if(sum0 == k) break;
+				else sum0++;
+			}
+			r++;
+		}
+		
+		ans=max(ans,r-l);
+		
+		if(s[l++]-'0' == 0) sum0--;
 	}
 	
-	if(ans == INF)
-		cout&lt;&lt;-1&lt;&lt;endl;
-	else
-		cout&lt;&lt;ans&lt;&lt;endl;
-
-    return 0;
+	l=0,r=0;
+	int sum1=0;
+	
+	while(r&lt;n)
+	{
+		while(r&lt;n &amp;&amp; sum1 &lt;= k)
+		{
+			if(s[r] - '0' == 1)
+			{
+				if(sum1 == k) break;
+				else sum1++;
+			}
+			r++;
+		}
+		
+		ans=max(ans,r-l);
+		
+		if(s[l++] -'0' == 1) sum1--;
+	}
+	
+	printf(&quot;%d\n&quot;,ans);
+	
+	return 0;
 }
 </code></pre>
 <p><a href="https://ac.nowcoder.com/acm/contest/3002/A">A</a><br>
@@ -300,6 +371,39 @@ int main()
 	dfs(1,-1);
 	
 	printf(&quot;%lld\n&quot;,ans);
+	
+	return 0;
+}
+</code></pre>
+<p><a href="https://ac.nowcoder.com/acm/contest/3002/I">I</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/10/9969_9192949c7a-41.PNG" alt="41.PNG" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;string&gt;
+using namespace std;
+const int N=300010;
+typedef long long LL;
+LL f[N];
+int n,a,b,c;
+
+int main()
+{
+	cin&gt;&gt;n&gt;&gt;a&gt;&gt;b&gt;&gt;c;
+	
+	string s;
+	cin&gt;&gt;s;
+	
+	for(int i=0;i&lt;n;i++)
+	{
+		if(i) f[i]=f[i-1];
+		if(i &gt;= 3 &amp;&amp; s.substr(i-3,4) == &quot;nico&quot;)
+			f[i]=max(f[i],f[i-3]+a);
+		if(i &gt;= 5 &amp;&amp; s.substr(i-5,6) == &quot;niconi&quot;)
+			f[i]=max(f[i],f[i-5]+b);
+		if(i &gt;= 9 &amp;&amp; s.substr(i-9,10) == &quot;niconiconi&quot;)
+			f[i]=max(f[i],f[i-9]+c); 
+	}
+	
+	cout&lt;&lt;f[n-1]&lt;&lt;endl;
 	
 	return 0;
 }

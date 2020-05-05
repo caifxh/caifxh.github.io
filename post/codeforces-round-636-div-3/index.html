@@ -1,0 +1,379 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>
+    Codeforces Round #636 (Div. 3) | fxh
+</title>
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1588691348423">
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://caifxh.github.io/styles/main.css">
+<!-- js -->
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://caifxh.github.io/media/js/jquery.sticky-sidebar.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+        
+</head>
+
+<body>
+    <div class="main">
+        <div class="header">
+    <div class="nav">
+        <div class="logo">
+            <a href="https://caifxh.github.io">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1588691348423" alt="">
+            </a>
+            <div class="site-title">
+                <h1>
+                    fxh
+                </h1>
+            </div>
+        </div>
+        <span class="menu-btn fa fa-align-justify"></span>
+        <div class="menu-container">
+            <ul>
+                
+                    
+                            <li>
+                                <a href="/" class="menu">
+                                    首页
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/archives" class="menu">
+                                    归档
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/tags" class="menu">
+                                    标签
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/post/about" class="menu">
+                                    关于
+                                </a>
+                            </li>
+                            
+                                
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $(".menu-btn").click(function() {
+            $(".menu-container").slideToggle();
+        });
+        $(window).resize(function() {
+
+            if (window.matchMedia('(min-width: 960px)').matches) {
+                $(".menu-container").css('display', 'block')
+            } else {
+                $(".menu-container").css('display', 'none')
+            }
+
+        });
+    });
+</script>
+
+            <div id="main-content" class="post-detail main-container">
+                <!-- left -->
+                <div id="content" class="main-container-left">
+                    <article class="post i-card">
+                        <h2 class="post-title">
+                            Codeforces Round #636 (Div. 3)
+                        </h2>
+                        <div class="post-info">
+                            <time class="post-time">2020-04-23</time>
+                            
+                                <a href="https://caifxh.github.io/tag/XNpmSrxzO/" class="post-tag i-tag
+                            i-tag-info">
+                            #比赛
+                        </a>
+                                
+                        </div>
+                        
+                                <div class="post-content">
+                                    <p><a href="https://codeforces.ml/contest/1343/problem/C">C. Alternating Subsequence</a><br>
+首先，让我们通过包含由具有相同符号的数字组成的数组的分段来提取最大值。 例如，如果数组为[1,1,2，-1，-5,2,1，-3]，则这些段为[1,1,2]，[-1，-5]，[2， 1]和[−3]。 我们可以使用任何类似于“两个指针”的算法来做到这一点。 这些段的数量是交替子序列的最大可能长度，因为我们只能从每个块中提取一个元素。 当我们想最大化总和时，我们需要从每个块中取最大元素。<br>
+时间复杂度：O（n）</p>
+<pre><code>#include&lt;iostream&gt;
+using namespace std;
+typedef long long LL;
+const int N=2e5+10;
+int a[N];
+int n;
+
+int sgn(int x)
+{
+	if(x&gt;0) return 1;
+	return 0;
+}
+
+int main()
+{
+	int T;
+	cin&gt;&gt;T;
+	while(T--)
+	{
+		int n;
+		cin&gt;&gt;n;
+		for(int i=1;i&lt;=n;i++)
+			cin&gt;&gt;a[i];
+		
+		LL sum=0;
+		for(int i=1;i&lt;=n;i++)
+		{
+			int cur=a[i];
+			int j=i;
+			while(j&lt;=n &amp;&amp; sgn(a[i]) == sgn(a[j]))
+			{
+				cur=max(cur,a[j]);
+				j++;
+			}
+			sum+=cur;
+			i=j-1;
+		}
+		cout&lt;&lt;sum&lt;&lt;endl;
+	}
+	return 0;
+}
+</code></pre>
+<p><a href="https://codeforces.ml/contest/1343/problem/D">D - Constant Palindrome Sum</a><br>
+差分数组维护取某个值为定值时所需要的最少操作次数</p>
+<p>分类讨论得到：</p>
+<p>一、如果定值 x 在 [2,minn] 之间，即使将较大的数更改为1后，和也是大于x，说明此时这两个数都需要更改，所以这段区间的操作数+2</p>
+<p>二、如果定值 x 在 [maxn+k+1,2*k]之间，即使将较小的数更改为k后，和也是小于x，说明此时这两个数都需要更改，所以这段区间的操作数+2</p>
+<p>三、如果定值 x 在 [minn+1,maxn+k] 之间且不等于 sum，能够做到只改变其中一个数就使得和等于x，所以这个范围内操作数+1</p>
+<p>四、特殊处理，如果定值 x 等于 sum，不需要更改任何一个数，所以这个点的操作数不需要增加</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+using namespace std;
+const int N=2e5+10;
+int a[N],b[N*2];
+int n,k;
+
+int main()
+{
+	int T;
+	cin&gt;&gt;T;
+	while(T--)
+	{
+		memset(b,0,sizeof b);
+		
+		scanf(&quot;%d%d&quot;,&amp;n,&amp;k);
+		
+		for(int i=1;i&lt;=n;i++) scanf(&quot;%d&quot;,&amp;a[i]);
+		
+		for(int i=1;i&lt;=n/2;i++)
+		{
+			int maxv=max(a[i],a[n-i+1]);
+			int minv=min(a[i],a[n-i+1]);
+			
+			int sum=a[i]+a[n-i+1];
+			
+			b[2]+=2;
+			b[minv+1]-=2;
+			
+			b[maxv+k+1]+=2;
+			b[2*k+1]-=2;
+			
+			b[minv+1]++;
+			b[maxv+k+1]--;
+			
+			b[sum]--;
+			b[sum+1]++;
+		}
+		
+		int ans=n;
+		for(int i=2;i&lt;=2*k;i++)
+		{
+			b[i]+=b[i-1];
+			ans=min(ans,b[i]);
+		}
+		
+		cout&lt;&lt;ans&lt;&lt;endl;
+	}
+	return 0;
+}
+</code></pre>
+<p><a href="https://codeforces.ml/contest/1343/problem/E">E. Weights Distributing</a><br>
+如果我们以最优方式分配成本，那么这对路径（a→b和b→c）看起来就像是一条直线路径，不会两次访问相同的顶点，或者就像是三个具有一个交点x的直线路径。 第一种情况基本上是第二种情况的子情况（具有相交点a，b或c）。 因此，如果我们固定交点x，则这两个路径（a→b和b→c）变为四个路径（a→x，x→b，b→x和x→c）。 我们可以注意到，我们表示的每条路径都应该是最短的路径，因为如果不是最短的路径，那么我们将使用一些我们无法使用的价格。<br>
+dist（a，x）+ dist（b，x）+ dist（c，x）最小成本。 现在，我们希望以某种方式在这三个路径之间分配这些成本。 我们可以看到从b到x的路径被使用了两次，因此沿这部分分配最小的成本是最优的。 因此，令prefi为前i个最小费用的总和（只是排序数组p上的前缀总和）。 那么对于交点x，答案是pref[dist（b，x）]+ pref[dist（a，x）+ dist（b，x）+ dist（c，x）]（如果dist（a，x）+ dist（b，x ）+ dist（c，x）≤m）。<br>
+时间复杂度：O（mlogm）</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstdio&gt;
+#include&lt;vector&gt;
+#include&lt;queue&gt;
+using namespace std;
+typedef long long LL;
+const int N=2e5+10,INF=0x3f3f3f3f;
+vector&lt;int&gt; g[N];
+int p[N];
+LL sum[N];
+int dist[3][N];
+int n,m,a,b,c;
+
+void bfs(int u,int type)
+{
+	memset(dist[type],0x3f,sizeof dist[type]);
+	dist[type][u]=0;
+	queue&lt;int&gt; q;
+	q.push(u);
+
+	while(!q.empty())
+	{
+		int t=q.front();
+		q.pop();
+		for(int i=0;i&lt;g[t].size();i++)
+		{
+			int j=g[t][i];
+			if(dist[type][j] == INF)
+			{
+				dist[type][j]=dist[type][t]+1;
+				q.push(j);
+			}	
+		}
+	}
+}
+
+int main()
+{
+	int T;
+	cin&gt;&gt;T;
+	while(T--)
+	{
+		cin&gt;&gt;n&gt;&gt;m&gt;&gt;a&gt;&gt;b&gt;&gt;c;
+		
+		for(int i=1;i&lt;=n;i++)	
+			g[i].clear();
+			
+		for(int i=1;i&lt;=m;i++)
+			scanf(&quot;%d&quot;,&amp;p[i]);
+		sort(p+1,p+m+1);
+		
+		for(int i=1;i&lt;=m;i++)
+			sum[i]=sum[i-1]+p[i];
+		
+		for(int i=0;i&lt;m;i++)
+		{
+			int a,b;
+			scanf(&quot;%d%d&quot;,&amp;a,&amp;b);
+			g[a].push_back(b);
+			g[b].push_back(a);
+		}
+		
+		bfs(a,0);
+		bfs(b,1);
+		bfs(c,2);
+		
+		LL ans=4e18;
+		for(int i=1;i&lt;=n;i++)
+		{
+			int t=dist[0][i]+dist[1][i]+dist[2][i];
+			if(t &lt;= m) ans=min(ans,sum[t]+sum[dist[1][i]]);
+		}
+		cout&lt;&lt;ans&lt;&lt;endl;
+	}
+	return 0;
+}
+</code></pre>
+
+                                </div>
+                    </article>
+                    <!--  -->
+                    
+                        <div class="next-post">
+                            <div class="next">下一篇</div>
+                            <a href="https://caifxh.github.io/post/jin-jie-zhi-nan-di-yi-zhang/">
+                                <h3 class="post-title">
+                                    进阶指南第一章
+                                </h3>
+                            </a>
+                        </div>
+                        
+                            <div id="disqus_thread"></div>
+                            <div id="gitalk-container"></div>
+                </div>
+                <!-- middle -->
+                <div class="main-container-middle"></div>
+                <!-- right -->
+                <div id="sidebar" class="main-container-right">
+                    
+                                <!-- id-card -->
+                                
+    <div class="id_card i-card">
+        <div class="id_card-avatar" style="background-image: url(https://caifxh.github.io/images/avatar.png?v=1588691348423)">
+        </div>
+        <h1 class="id_card-title">
+            fxh
+        </h1>
+        <h2 class="id_card-description">
+            菜
+        </h2>
+        <!--  -->
+        <div class="id_card-sns">
+            <!-- github -->
+            
+                    <!-- twitter -->
+                    
+                            <!-- weibo -->
+                            
+                                    <!-- facebook -->
+                                    
+
+        </div>
+    </div>
+    
+                                    
+
+                </div>
+
+
+
+
+            </div>
+
+
+            <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://caifxh.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+
+    </div>
+    <script>
+        $('#sidebar').stickySidebar({
+            topSpacing: 80,
+            // bottomSpacing: 60
+        });
+    </script>
+    
+</body>
+
+</html>

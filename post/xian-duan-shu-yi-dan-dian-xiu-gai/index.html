@@ -1,0 +1,554 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>
+    线段树（一）单点修改 | fxh
+</title>
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1588691348423">
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://caifxh.github.io/styles/main.css">
+<!-- js -->
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://caifxh.github.io/media/js/jquery.sticky-sidebar.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+        
+</head>
+
+<body>
+    <div class="main">
+        <div class="header">
+    <div class="nav">
+        <div class="logo">
+            <a href="https://caifxh.github.io">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1588691348423" alt="">
+            </a>
+            <div class="site-title">
+                <h1>
+                    fxh
+                </h1>
+            </div>
+        </div>
+        <span class="menu-btn fa fa-align-justify"></span>
+        <div class="menu-container">
+            <ul>
+                
+                    
+                            <li>
+                                <a href="/" class="menu">
+                                    首页
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/archives" class="menu">
+                                    归档
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/tags" class="menu">
+                                    标签
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/post/about" class="menu">
+                                    关于
+                                </a>
+                            </li>
+                            
+                                
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $(".menu-btn").click(function() {
+            $(".menu-container").slideToggle();
+        });
+        $(window).resize(function() {
+
+            if (window.matchMedia('(min-width: 960px)').matches) {
+                $(".menu-container").css('display', 'block')
+            } else {
+                $(".menu-container").css('display', 'none')
+            }
+
+        });
+    });
+</script>
+
+            <div id="main-content" class="post-detail main-container">
+                <!-- left -->
+                <div id="content" class="main-container-left">
+                    <article class="post i-card">
+                        <h2 class="post-title">
+                            线段树（一）单点修改
+                        </h2>
+                        <div class="post-info">
+                            <time class="post-time">2020-04-12</time>
+                            
+                        </div>
+                        
+                                <div class="post-content">
+                                    <p><img src="https://cdn.acwing.com/media/article/image/2020/03/03/9969_763e22b45d-1.png" alt="1.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/03/9969_821303de5d-2.png" alt="2.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/03/9969_83bf65885d-3.png" alt="3.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/03/9969_91287ef85d-4.png" alt="4.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/03/9969_9c5953b05d-5.png" alt="5.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/03/9969_ac52aa3c5d-6.png" alt="6.png" loading="lazy"></p>
+<pre><code>struct node//结点
+{ 
+	int l,r,mx;//l,r表示区间左右端点，mx表示区间[l,r]的最值 
+}tree[maxn*4]; //树结点存储数组 
+</code></pre>
+<p>关于空间开4*n的<a href="https://blog.csdn.net/gl486546/article/details/78243098">证明</a></p>
+<figure data-type="image" tabindex="1"><img src="https://cdn.acwing.com/media/article/image/2020/03/03/9969_ae7ea7845d-7.png" alt="7.png" loading="lazy"></figure>
+<pre><code>void build(int k,int l,int r)//创建线段树,k表示存储下标,区间[l,r]
+{
+	tree[k].l=l;
+	tree[k].r=r;
+	if(l==r)
+	{
+		tree[k].mx=a[l];
+		return;
+	}
+	int mid,lc,rc;
+	mid=(l+r)/2;//划分点 
+	lc=k*2;  //左孩子存储下标 
+	rc=k*2+1;//右孩子存储下标 
+	build(lc,l,mid);
+	build(rc,mid+1,r);
+	tree[k].mx=max(tree[lc].mx,tree[rc].mx);//结点的最大值等于左右孩子最值的最大值 		
+} 
+</code></pre>
+<p><img src="https://cdn.acwing.com/media/article/image/2020/03/03/9969_823f7c065d-8.png" alt="8.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/03/9969_939f9a6c5d-9.png" alt="9.png" loading="lazy"></p>
+<pre><code>void update(int k,int i,int v)//将a[i]修改更新为v 
+{
+	if(tree[k].l==tree[k].r&amp;&amp;tree[k].l==i)//找到a[i]
+	{
+		tree[k].mx=v;
+		return ;
+	} 
+	int mid,lc,rc;
+	mid=(tree[k].l+tree[k].r)/2;//划分点 
+	lc=k*2;  //左孩子存储下标 
+	rc=k*2+1;//右孩子存储下标
+	if(i&lt;=mid)
+		update(lc,i,v);//到左子树修改更新 
+	else
+		update(rc,i,v);//到右子树修改更新
+	tree[k].mx=max(tree[lc].mx,tree[rc].mx);//返回时修改更新最值 
+}
+</code></pre>
+<p><img src="https://cdn.acwing.com/media/article/image/2020/03/03/9969_ba5959185d-10.png" alt="10.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/03/9969_d5d4178e5d-19.png" alt="19.png" loading="lazy"><br>
+假设询问区间是 [A, B]，现在所在的节点表示的区间为[l, r]<br>
+• 计算 mid = (l + r) / 2，左子节点的区间为 [l, mid]，<br>
+右子节点的区间为 [mid+1, r].<br>
+• 如果 A &lt;= mid，即询问区间与左子节点有重合，需要递归<br>
+到左子节点。<br>
+• 如果 B &gt;= mid + 1，即询问区间与右子节点有重合，需要<br>
+递归到右子节点。<br>
+• 递归完之后，需要把两个孩子询问的结果加起来作为返回值。</p>
+<pre><code>int query(int k,int l,int r)//求区间[l..r]的最值 
+{
+	if(tree[k].l&gt;=l&amp;&amp;tree[k].r&lt;=r)//找到该区间 
+		return tree[k].mx;	
+	int mid,lc,rc;
+	mid=(tree[k].l+tree[k].r)/2;//划分点 
+	lc=k*2;  //左孩子存储下标 
+	rc=k*2+1;//右孩子存储下标
+	int Max=-inf;//注意，局部变量，全局变量不可以 
+	if(l&lt;=mid)
+		Max=max(Max,query(lc,l,r));//到左子树查询
+	if(r&gt;mid)
+		Max=max(Max,query(rc,l,r));//到右子树查询
+	return Max;
+}
+</code></pre>
+<h4 id="例题">例题</h4>
+<h4 id="问题1">问题1：</h4>
+<p>有一个长度为 n 的序列，a[1], a[2], …, a[n]。<br>
+现在执行 m 次操作，每次可以执行以下两种操作之一：</p>
+<ol>
+<li>将下标为k的数修改为 v（v&gt;0）。</li>
+<li>询问一个下标区间 [l, r] 中所有数的和。</li>
+</ol>
+<p>由于修改是对单个元素进行修改。<br>
+比如修改第 i 个元素。<br>
+我们先找到 [i, i] 所在的节点，然后修改它的 sum，然后一<br>
+路向上更新每个祖先的 sum 即可。</p>
+<pre><code>int change(int pos, int v, int l, int r, int x){
+    if (l == r){ // 找到了要修改的叶子结点
+        sum[x] = v;
+        return;
+    }
+    int mid = (l + r) &gt;&gt; 1;
+    if (pos &lt;= mid) // pos 在左子节点
+        change(pos, v, l, mid, x * 2);
+    else
+        change(pos, v, mid + 1, r, x * 2 + 1);
+    update(x); // 一定要加！因为这条路上的sum值发生了改变
+}
+</code></pre>
+<p>至此，我们已经解决了第一个问题，支持单点修改数字，和区<br>
+间查询和。<br>
+两者的时间复杂度都是单次 O(log n)。</p>
+<h4 id="例题-2">例题</h4>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1166">hdu1166</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/04/9969_427365145d-21.png" alt="21.png" loading="lazy"><br>
+<a href="https://paste.ubuntu.com/p/C7rZ5qRGVF/">代码</a><br>
+<a href="https://paste.ubuntu.com/p/mStchgkZ3B/">树状数组代码</a></p>
+<h4 id="问题2线段树求逆序对">问题2：线段树求逆序对</h4>
+<p>给定一个序列，a[1], a[2], …, a[n]. 求这个序列的逆序对数量。<br>
+逆序对是指一个有序二元组(i, j)，满足 i &lt; j, a[i] &gt;<br>
+a[j].<br>
+n &lt;= 100000, 0 &lt;= a[i] &lt;= <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><msup><mn>0</mn><mn>9</mn></msup></mrow><annotation encoding="application/x-tex">10^9</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">9</span></span></span></span></span></span></span></span></span></span></span></p>
+<blockquote>
+<p>样例: (输出 5）<br>
+5<br>
+2 7 9 6 4</p>
+</blockquote>
+<p>对于第 i 个数，我们要统计前面有多少个数大于 a[i]。<br>
+对每个数都统计一遍加起来即是答案。<br>
+假设我们可以对 [0, 109] 建一个线段树（实际上太大了）<br>
+每次先查询 [a[i]+1, 109] 的区间和，加入答案。<br>
+然后在 a[i] 的位置上加一即可</p>
+<p>10^9范围太大了，因此我们先要对 n 个数进行离散化。<br>
+离散化的过程，就是对 n 个数进行排序，最小的数赋值为<br>
+1，第二小的赋值为 2，以此类推，这样 n 个数的取值范<br>
+围就在 [1, n] 中了。<br>
+现在只要对 [1, n] 建立长度为 n 的线段树即可<br>
+离散化代码： （假设对 a[1..n] 进行离散化）</p>
+<pre><code>int cnt = 0;
+for (int i = 1;i &lt;= n;i ++)
+    b[++ cnt] = a[i];
+sort(b + 1, b + n + 1);
+cnt = unique(b + 1, b + cnt + 1) - bin - 1;
+for (int i = 1;i &lt;= n;i ++)
+    a[i] = lower_bound(b + 1, b + cnt + 1, a[i]) - bin;
+</code></pre>
+<p>回到样例：2 7 9 6 4<br>
+现进行离散化：1 4 5 3 2<br>
+然后建立长度为 5 的线段树。<br>
+枚举到 1，查询[2，5]区间和为 0，a[1] ++<br>
+枚举到 4，查询[5, 5]区间和为 0，a[4] ++<br>
+枚举到 5，查询[6, 5]区间和为 0，a[5] ++<br>
+枚举到 3，查询[4, 5]区间和为 2，a[3] ++<br>
+枚举到 2，查询[3, 5]区间和为 3，a[2] ++<br>
+答案即为 0+0+0+2+3=5</p>
+<p>对原始数组进行离散化，时间复杂度是O(nlogn).<br>
+用线段树求解逆序对，枚举每个位置，做一次区间查询和,一次单点修改，时间复杂度是O(nlogn).<br>
+总的时间复杂度就是 O(nlogn).</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+typedef long long LL;
+#define lc u&lt;&lt;1
+#define rc u&lt;&lt;1|1
+const int N=100010;
+struct Node
+{
+    int l,r;
+    LL cnt;
+}tr[N*4];
+int a[N],b[N];
+int n;
+
+void pushup(int u)
+{
+    tr[u].cnt=tr[lc].cnt+tr[rc].cnt;
+}
+
+void build(int u,int l,int r)
+{
+    tr[u].l=l,tr[u].r=r;
+    if(l==r)
+    {
+        tr[u].cnt=0;
+        return;
+    }
+    int mid=l+r&gt;&gt;1;
+    build(lc,l,mid);
+    build(rc,mid+1,r);
+    pushup(u);
+}
+
+int query(int u,int l,int r)
+{
+    if(l &lt;= tr[u].l &amp;&amp; tr[u].r &lt;= r)
+        return tr[u].cnt;
+    int mid=tr[u].l+tr[u].r&gt;&gt;1;
+    int sum=0;
+    if(l&lt;=mid) sum+=query(lc,l,r);
+    if(r&gt;mid) sum+=query(rc,l,r);
+    return sum;
+}
+
+void modify(int u,int x)
+{
+    if(tr[u].l == tr[u].r)
+    {
+        tr[u].cnt++;
+        return;
+    }
+    int mid=tr[u].l+tr[u].r&gt;&gt;1;
+    if(x&lt;=mid) modify(lc,x);
+    else modify(rc,x);
+    pushup(u);
+}
+
+int main()
+{
+    cin&gt;&gt;n;
+    for(int i=1;i&lt;=n;i++)
+        cin&gt;&gt;a[i],b[i]=a[i];
+    
+    sort(b+1,b+n+1);
+    int len=unique(b+1,b+n+1)-b-1;
+
+    for(int i=1;i&lt;=n;i++)
+        a[i]=lower_bound(b+1,b+len+1,a[i])-b;
+    
+    build(1,1,len);
+    
+    LL ans=0;
+    for(int i=1;i&lt;=n;i++)
+    {
+        ans+=query(1,a[i]+1,len);
+        modify(1,a[i]);
+    }
+    
+    cout&lt;&lt;ans&lt;&lt;endl;
+    
+    return 0;
+}
+</code></pre>
+<p><a href="https://www.acwing.com/problem/content/1277/">acwing1275</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/03/9969_f943bbac5d-18.png" alt="18.png" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+using namespace std;
+const int N=200010;
+int m,p;
+struct Node
+{
+    int l,r;
+    int v;//区间[l，r]中的最大值
+}tr[N*4];
+
+void pushup(int u)
+{
+    tr[u].v=max(tr[u&lt;&lt;1].v,tr[u&lt;&lt;1|1].v);
+}
+
+void build(int u,int l,int r)
+{
+    tr[u]={l,r};
+    if(l == r)
+        return ;
+    int mid = l+r&gt;&gt;1;
+    build(u&lt;&lt;1,l,mid);
+    build(u&lt;&lt;1|1,mid+1,r);
+}
+
+int query(int u,int l,int r)
+{
+    if(tr[u].l&gt;=l &amp;&amp; tr[u].r&lt;=r)
+        return tr[u].v;
+    int mid=tr[u].l+tr[u].r&gt;&gt;1;
+    int v=0;
+    if(l&lt;=mid)
+        v=query(u&lt;&lt;1,l,r);
+    if(r&gt;mid)
+        v=max(v,query(u&lt;&lt;1|1,l,r));
+    return v;
+}
+
+void modify(int u,int x,int v)//将x处值修改为v
+{
+    if(tr[u].l == x &amp;&amp; tr[u].r == x)
+        tr[u].v=v;
+    else
+    {
+        int mid=tr[u].l+tr[u].r&gt;&gt;1;
+        if(x&lt;=mid)
+            modify(u&lt;&lt;1,x,v);
+        else 
+            modify(u&lt;&lt;1|1,x,v);
+        pushup(u);
+    }
+}
+
+int main()
+{
+    int n=0,last=0;
+    scanf(&quot;%d%d&quot;,&amp;m,&amp;p);
+    build(1,1,m);
+    
+    int x;
+    char op[2];
+    while(m--)
+    {
+        scanf(&quot;%s%d&quot;,op,&amp;x);
+        if(*op == 'Q')
+        {
+            last=query(1,n-x+1,n);
+            printf(&quot;%d\n&quot;,last);
+        }
+        else
+        {
+            modify(1,n+1,(last+x)%p);
+            n++;
+        }
+    }
+    return 0;
+}
+</code></pre>
+<p><a href="https://www.acwing.com/problem/content/246/">acwing245</a><br>
+如果涉及到区间的操作，一定要看题目信息能否容易的按照区间进行划分与合并（即：需要满足区间可加性）。通俗的讲就是（l~r）的信息能由（l ~ mid）和（mid + 1，r）的信息推出来。</p>
+<p>看这个题，两个操作：<br>
+1是查询区间（x，y）中的最大连续子段和。<br>
+2是把a[x]改成y。<br>
+对于第2个操作，很简单用线段树的单点修改能达到目的。<br>
+对于第1个操作，这就需要仔细考虑一个结点中的值应该要有哪些属性.<br>
+首先确定要存储的东西是什么，最大连续子段和必须存储然后判断能否通过子节点最大连续子段和求出父节点的最大连续子段和，答案显然是不能的；</p>
+<ul>
+<li>
+<p>父节点的最大连续子段和可能是左边儿子的最大连续子段和，又有可能是右儿子的最大连续子段和，还有可能是左儿子的最大后缀和加上右儿子的最大前缀和，所以还得存储最大前缀和和最大后缀和</p>
+</li>
+<li>
+<p>而最大前缀和又需要如何维护，父节点的最大前缀和可能等于左儿子的最大前缀和，也可能等于左儿子的总和加上右儿子的最大前缀和，所以这里就需要取一个最大值，同理，最大后缀和也是这样的，然后利用线段树的基本套路即可。</p>
+</li>
+<li>
+<p>父节点区间和可由子结点算出</p>
+</li>
+</ul>
+<p>区间和：sum<br>
+区间最大连续子段和tmax<br>
+紧靠左端的最大连续和 lmax<br>
+紧靠右端的最大连续和 rmax</p>
+<p><img src="https://caifxh.github.io/post-images/1586865183920.png" alt="" loading="lazy"><br>
+<img src="https://caifxh.github.io/post-images/1586865190596.png" alt="" loading="lazy"></p>
+
+                                </div>
+                    </article>
+                    <!--  -->
+                    
+                        <div class="next-post">
+                            <div class="next">下一篇</div>
+                            <a href="https://caifxh.github.io/post/ac-zi-dong-ji/">
+                                <h3 class="post-title">
+                                    AC自动机
+                                </h3>
+                            </a>
+                        </div>
+                        
+                            <div id="disqus_thread"></div>
+                            <div id="gitalk-container"></div>
+                </div>
+                <!-- middle -->
+                <div class="main-container-middle"></div>
+                <!-- right -->
+                <div id="sidebar" class="main-container-right">
+                    
+                        <!-- toc -->
+                        
+    <div class="toc-card i-card ">
+        <div class="toc-title i-card-title">目录</div>
+        <div class="toc-content">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E4%BE%8B%E9%A2%98">例题</a></li>
+<li><a href="#%E9%97%AE%E9%A2%981">问题1：</a></li>
+<li><a href="#%E4%BE%8B%E9%A2%98-2">例题</a></li>
+<li><a href="#%E9%97%AE%E9%A2%982%E7%BA%BF%E6%AE%B5%E6%A0%91%E6%B1%82%E9%80%86%E5%BA%8F%E5%AF%B9">问题2：线段树求逆序对</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+        <script>
+            function locateCatelogList() {
+                /*获取文章目录集合,可通过:header过滤器*/
+                var alis = $('.post-content :header');
+                /*获取侧边栏目录列表集合**/
+                var sidebar_alis = $('.markdownIt-TOC a');
+                /*获取滚动条到顶部的距离*/
+                var scroll_height = $(window).scrollTop();
+                for (var i = 0; i < alis.length; i++) {
+                    /*获取锚点集合中的元素分别到顶点的距离*/
+                    var a_height = $(alis[i]).offset().top;
+                    if (a_height < scroll_height) {
+                        /*高亮显示*/
+                        sidebar_alis.removeClass('on');
+                        $(sidebar_alis[i]).addClass('on');
+                    }
+                }
+            }
+            $(function() {
+                /*绑定滚动事件 */
+                $(window).bind('scroll', locateCatelogList);
+            });
+        </script>
+    </div>
+    
+                            
+
+                </div>
+
+
+
+
+            </div>
+
+
+            <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://caifxh.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+
+    </div>
+    <script>
+        $('#sidebar').stickySidebar({
+            topSpacing: 80,
+            // bottomSpacing: 60
+        });
+    </script>
+    
+</body>
+
+</html>

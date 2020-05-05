@@ -1,0 +1,458 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>
+    牛客寒假第二场 | fxh
+</title>
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1588691348423">
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://caifxh.github.io/styles/main.css">
+<!-- js -->
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://caifxh.github.io/media/js/jquery.sticky-sidebar.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+        
+</head>
+
+<body>
+    <div class="main">
+        <div class="header">
+    <div class="nav">
+        <div class="logo">
+            <a href="https://caifxh.github.io">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1588691348423" alt="">
+            </a>
+            <div class="site-title">
+                <h1>
+                    fxh
+                </h1>
+            </div>
+        </div>
+        <span class="menu-btn fa fa-align-justify"></span>
+        <div class="menu-container">
+            <ul>
+                
+                    
+                            <li>
+                                <a href="/" class="menu">
+                                    首页
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/archives" class="menu">
+                                    归档
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/tags" class="menu">
+                                    标签
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/post/about" class="menu">
+                                    关于
+                                </a>
+                            </li>
+                            
+                                
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $(".menu-btn").click(function() {
+            $(".menu-container").slideToggle();
+        });
+        $(window).resize(function() {
+
+            if (window.matchMedia('(min-width: 960px)').matches) {
+                $(".menu-container").css('display', 'block')
+            } else {
+                $(".menu-container").css('display', 'none')
+            }
+
+        });
+    });
+</script>
+
+            <div id="main-content" class="post-detail main-container">
+                <!-- left -->
+                <div id="content" class="main-container-left">
+                    <article class="post i-card">
+                        <h2 class="post-title">
+                            牛客寒假第二场
+                        </h2>
+                        <div class="post-info">
+                            <time class="post-time">2020-04-14</time>
+                            
+                                <a href="https://caifxh.github.io/tag/XNpmSrxzO/" class="post-tag i-tag
+                            i-tag-">
+                            #比赛
+                        </a>
+                                
+                        </div>
+                        
+                                <div class="post-content">
+                                    <p><a href="https://ac.nowcoder.com/acm/contest/3003/E">E</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/13/9969_636ed1dc7d-46.PNG" alt="46.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/13/9969_9270230a7d-1.PNG" alt="1.PNG" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+	int n;
+	cin&gt;&gt;n;
+	int res=0;
+	for(int i=1;i*i&lt;=n;i++)
+	{
+		int t=i*i;
+		for(int j=1;j*j&lt;=t;j++)
+			if(t % j == 0)
+			{
+				res++;
+				if(j != t/j) res++;
+			}
+	}
+	
+	cout&lt;&lt;res&lt;&lt;endl;
+	
+	return 0;
+}
+</code></pre>
+<p><a href="https://ac.nowcoder.com/acm/contest/3003/H">H</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/14/9969_c4cc6de67d-7.PNG" alt="7.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/14/9969_d0e452887d-8.PNG" alt="8.PNG" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+const int N=3e5+10,INF=0x3f3f3f3f;
+int f[N];
+int a[N];
+int n,k;
+
+int main()
+{
+	cin&gt;&gt;n&gt;&gt;k;
+	
+	for(int i=1;i&lt;=n;i++)
+		scanf(&quot;%d&quot;,&amp;a[i]);
+	sort(a+1,a+n+1);
+	
+	f[0]=0;
+	for(int i=1;i&lt;k;i++)
+		f[i]=INF;
+		
+	int val=INF;
+	for(int i=k;i&lt;=n;i++)
+	{
+		val=min(val,f[i-k]-a[i-k+1]);
+		f[i]=val+a[i];
+	}
+	
+	cout&lt;&lt;f[n]&lt;&lt;endl;
+	
+	return 0;
+}
+</code></pre>
+<p><a href="https://ac.nowcoder.com/acm/contest/3003/I">I</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/14/9969_b557694a7e-10.PNG" alt="10.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/14/9969_c911d2cc7e-11.PNG" alt="11.PNG" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+#include&lt;vector&gt;
+#include&lt;map&gt;
+using namespace std;
+vector&lt;int&gt; a;
+map&lt;int,int&gt; vis;
+int n;
+
+int main()
+{
+	cin&gt;&gt;n;
+	
+	for(int i=1;i&lt;=n;i++)
+	{
+		int x;
+		scanf(&quot;%d&quot;,&amp;x);
+		if(vis[x]) continue;
+        vis[x]=1;
+		a.push_back(x);
+	}
+	
+	n=a.size();
+	
+	if(n == 1)
+	{
+		puts(&quot;0&quot;);
+		return 0;
+	}
+	
+	for(int i=0;i&lt;=30;i++)
+	{
+		int cnt=0;
+		for(int j=0;j&lt;n;j++)
+			if(a[j]&gt;&gt;i &amp; 1) cnt++;
+		if(cnt &gt; 0 &amp;&amp; cnt &lt; n)
+		{
+			printf(&quot;%lld\n&quot;,(1ll&lt;&lt;i)*(n-1));
+			return 0;
+		}
+	}
+	
+}
+</code></pre>
+<p><a href="https://ac.nowcoder.com/acm/contest/3003/J">J</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/14/9969_0c9c79727e-14.PNG" alt="14.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/14/9969_1f4a261e7e-15.PNG" alt="15.PNG" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+#define lc u&lt;&lt;1
+#define rc u&lt;&lt;1|1
+typedef long long LL;
+const int N=2e5+10,mod=1e9+7;
+struct Node1
+{
+	int l,r;
+	LL k;
+}tr1[N&lt;&lt;2];
+struct Node2
+{
+	int l,r;
+	LL val;
+}tr2[N&lt;&lt;2];
+struct f
+{
+	LL k,val;
+};
+int k[N],b[N];
+int n,m;
+
+void pushup(int u)
+{
+	tr1[u].k=(LL)tr1[lc].k*tr1[rc].k%mod;
+	tr2[u].val=((LL)tr2[lc].val*tr1[rc].k%mod+tr2[rc].val)%mod;
+}
+
+void build(int u,int l,int r)
+{
+	tr1[u].l=tr2[u].l=l,tr1[u].r=tr2[u].r=r;
+	if(l == r)
+	{
+		tr1[u].k=k[l];
+		tr2[u].val=b[l];
+		return;
+	}
+	int mid=l+r&gt;&gt;1;
+	build(lc,l,mid);
+	build(rc,mid+1,r);
+	pushup(u);
+}
+
+void modify(int u,int x,int k,int b)
+{
+	if(tr1[u].l == tr1[u].r)
+	{
+		tr1[u].k=k;
+		tr2[u].val=b;
+		return;
+	}
+	int mid=tr1[u].l+tr1[u].r&gt;&gt;1;
+	if(x&lt;=mid) modify(lc,x,k,b);
+	else modify(rc,x,k,b);
+	pushup(u);
+}
+
+f query(int u,int l,int r)
+{
+	if(l == tr1[u].l &amp;&amp; tr1[u].r == r)
+		return {tr1[u].k, tr2[u].val};
+
+	int mid=tr1[u].l+tr1[u].r&gt;&gt;1;
+	if(r &lt;= mid) 
+		return query(lc,l,r);
+	else if(l &gt; mid) 
+		return query(rc,l,r);
+	else 
+	{
+		f left=query(lc,l,mid);
+		f right=query(rc,mid+1,r);
+		return {left.k*right.k%mod,(left.val*right.k%mod+right.val)%mod};
+	}
+}
+
+int main()
+{
+	cin&gt;&gt;n&gt;&gt;m;
+	
+	for(int i=1;i&lt;=n;i++) scanf(&quot;%d&quot;,&amp;k[i]);
+	for(int i=1;i&lt;=n;i++) scanf(&quot;%d&quot;,&amp;b[i]);
+		
+	build(1,1,n);	
+	
+	while(m--)
+	{
+		int t;
+		scanf(&quot;%d&quot;,&amp;t);
+		if(t == 1)
+		{
+			int i,k,b;
+			scanf(&quot;%d%d%d&quot;,&amp;i,&amp;k,&amp;b);
+			modify(1,i,k,b);
+		}
+		else 
+		{
+			int l,r;
+			scanf(&quot;%d%d&quot;,&amp;l,&amp;r);
+			auto t=query(1,l,r);
+			printf(&quot;%d\n&quot;,(t.k+t.val)%mod);
+		}
+	}
+	
+	return 0;
+}
+</code></pre>
+<p><a href="https://ac.nowcoder.com/acm/contest/3003/F">F</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/15/9969_a68e8e207e-25.PNG" alt="25.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/15/9969_bbb04b187e-26.PNG" alt="26.PNG" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+typedef pair&lt;int,int&gt; PII;
+const int N=2e5+10;
+int a[N],b[N];
+PII c[N];
+int n;
+
+bool cmp(PII x,PII y)
+{
+	return x.first &gt; y.first;
+}
+
+int main()
+{
+	cin&gt;&gt;n;
+	for(int i=1;i&lt;=n;i++)
+		scanf(&quot;%d&quot;,&amp;a[i]);
+	for(int i=1;i&lt;=n;i++)
+		scanf(&quot;%d&quot;,&amp;b[i]);
+	for(int i=1;i&lt;=n;i++)
+		c[i].first=a[i]+b[i],c[i].second=i;
+	
+	sort(c+1,c+n+1,cmp);
+	
+	for(int i=2;i&lt;=n;i+=2)
+		printf(&quot;%d &quot;,c[i].second);
+	puts(&quot;&quot;);
+	
+	for(int i=1;i&lt;=n;i+=2)
+		printf(&quot;%d &quot;,c[i].second);
+	puts(&quot;&quot;);
+	
+	return 0;
+}
+</code></pre>
+
+                                </div>
+                    </article>
+                    <!--  -->
+                    
+                        <div class="next-post">
+                            <div class="next">下一篇</div>
+                            <a href="https://caifxh.github.io/post/er-fen/">
+                                <h3 class="post-title">
+                                    二分
+                                </h3>
+                            </a>
+                        </div>
+                        
+                            <div id="disqus_thread"></div>
+                            <div id="gitalk-container"></div>
+                </div>
+                <!-- middle -->
+                <div class="main-container-middle"></div>
+                <!-- right -->
+                <div id="sidebar" class="main-container-right">
+                    
+                                <!-- id-card -->
+                                
+    <div class="id_card i-card">
+        <div class="id_card-avatar" style="background-image: url(https://caifxh.github.io/images/avatar.png?v=1588691348423)">
+        </div>
+        <h1 class="id_card-title">
+            fxh
+        </h1>
+        <h2 class="id_card-description">
+            菜
+        </h2>
+        <!--  -->
+        <div class="id_card-sns">
+            <!-- github -->
+            
+                    <!-- twitter -->
+                    
+                            <!-- weibo -->
+                            
+                                    <!-- facebook -->
+                                    
+
+        </div>
+    </div>
+    
+                                    
+
+                </div>
+
+
+
+
+            </div>
+
+
+            <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://caifxh.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+
+    </div>
+    <script>
+        $('#sidebar').stickySidebar({
+            topSpacing: 80,
+            // bottomSpacing: 60
+        });
+    </script>
+    
+</body>
+
+</html>

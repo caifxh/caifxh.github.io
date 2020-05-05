@@ -1,0 +1,906 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>
+    AC自动机 | fxh
+</title>
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1588691348423">
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://caifxh.github.io/styles/main.css">
+<!-- js -->
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://caifxh.github.io/media/js/jquery.sticky-sidebar.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+        
+</head>
+
+<body>
+    <div class="main">
+        <div class="header">
+    <div class="nav">
+        <div class="logo">
+            <a href="https://caifxh.github.io">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1588691348423" alt="">
+            </a>
+            <div class="site-title">
+                <h1>
+                    fxh
+                </h1>
+            </div>
+        </div>
+        <span class="menu-btn fa fa-align-justify"></span>
+        <div class="menu-container">
+            <ul>
+                
+                    
+                            <li>
+                                <a href="/" class="menu">
+                                    首页
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/archives" class="menu">
+                                    归档
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/tags" class="menu">
+                                    标签
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/post/about" class="menu">
+                                    关于
+                                </a>
+                            </li>
+                            
+                                
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $(".menu-btn").click(function() {
+            $(".menu-container").slideToggle();
+        });
+        $(window).resize(function() {
+
+            if (window.matchMedia('(min-width: 960px)').matches) {
+                $(".menu-container").css('display', 'block')
+            } else {
+                $(".menu-container").css('display', 'none')
+            }
+
+        });
+    });
+</script>
+
+            <div id="main-content" class="post-detail main-container">
+                <!-- left -->
+                <div id="content" class="main-container-left">
+                    <article class="post i-card">
+                        <h2 class="post-title">
+                            AC自动机
+                        </h2>
+                        <div class="post-info">
+                            <time class="post-time">2020-04-10</time>
+                            
+                                <a href="https://caifxh.github.io/tag/yImqvC-Dp/" class="post-tag i-tag
+                            i-tag-banana">
+                            #字符串
+                        </a>
+                                
+                        </div>
+                        
+                                <div class="post-content">
+                                    <h4 id="ac自动机">AC自动机</h4>
+<p><img src="https://cdn.acwing.com/media/article/image/2020/03/11/9969_62b82fa863-1.png" alt="1.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/11/9969_661c7b4063-2.png" alt="2.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/11/9969_72245a5d63-4.png" alt="4.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/11/9969_865c0f8863-5.png" alt="5.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/11/9969_8d6beb0e63-6.png" alt="6.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/11/9969_9969b29c63-7.png" alt="7.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/11/9969_a53131a463-8.png" alt="8.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/11/9969_cbf0cdb863-9.png" alt="9.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/11/9969_cec6648a63-10.png" alt="10.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/11/9969_d9867a9063-11.png" alt="11.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/11/9969_af41834663-13.png" alt="13.png" loading="lazy"><br>
+每个结点的26个指针都有指向<br>
+匹配时判断后缀是不是单词，若为单词则也需要统计上<br>
+<a href="https://www.acwing.com/problem/content/description/1284/">模板题</a></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstdio&gt;
+using namespace std;
+const int N=5e5+10,M=1e6+10;
+int trie[N][26],cnt[N],idx;
+char s[M];
+int q[N],ne[N];
+int n;
+
+void insert(char *s)
+{
+	int p=0;
+	for(int i=0;s[i];i++)
+	{
+		int k=s[i]-'a';
+		if(!trie[p][k])
+			trie[p][k]=++idx;
+		p=trie[p][k];
+	}
+	cnt[p]++;
+}
+
+void build()
+{
+	int hh=0,tt=-1;
+	for(int i=0;i&lt;26;i++)
+		if(trie[0][i])
+			q[++tt]=trie[0][i];
+	
+	while(hh &lt;= tt)
+	{
+		int t=q[hh++];
+		for(int i=0;i&lt;26;i++)
+		{
+			int p=trie[t][i];
+		    if (!p) trie[t][i] = trie[ne[t]][i];
+            else
+            {
+                ne[p] = trie[ne[t]][i];
+                q[ ++ tt] = p;
+            }
+		}
+	}
+}
+
+int query(char *s)
+{
+	int res=0;
+	for(int i=0,j=0;s[i];i++)
+	{
+		int k=s[i]-'a';
+		j=trie[j][k];
+		
+		int p=j;
+		while(p)
+		{
+			res+=cnt[p];
+			cnt[p]=0;
+			p=ne[p];
+		}
+	}
+	return res;
+}
+
+void print()
+{
+	for(int i=0;i&lt;idx;i++)
+	{
+		cout&lt;&lt;i&lt;&lt;' '&lt;&lt;ne[i]&lt;&lt;&quot;: &quot;;
+		for(int j=0;j&lt;26;j++)
+			if(trie[i][j])
+			    cout&lt;&lt;char(j+'a')&lt;&lt;' '&lt;&lt;trie[i][j]&lt;&lt;&quot;  &quot;;
+		cout&lt;&lt;endl;
+	}
+	cout&lt;&lt;endl;
+}
+
+int main()
+{
+	int T;
+	scanf(&quot;%d&quot;,&amp;T);
+	while(T--)
+	{
+		memset(trie,0,sizeof trie);
+		memset(cnt,0,sizeof cnt);
+		memset(ne,0,sizeof ne);
+		idx=0;
+		scanf(&quot;%d&quot;,&amp;n);
+		
+		for(int i=0;i&lt;n;i++)
+		{
+			char str[55];
+			scanf(&quot;%s&quot;,str);
+			insert(str);
+		}
+		
+		build();
+		//print();
+		scanf(&quot;%s&quot;,s);
+		printf(&quot;%d\n&quot;,query(s));
+	}
+	return 0;
+}
+</code></pre>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=2896">hdu2896</a><br>
+小t收集了好多病毒的特征码，又收集了一批诡异网站的源码，他想知道这些网站中哪些是有病毒的，又是带了怎样的病毒呢？顺便还想知道他到底收集了多少带病毒的网站。</p>
+<figure data-type="image" tabindex="1"><img src="https://cdn.acwing.com/media/article/image/2020/03/11/9969_a190a2ac63-14.png" alt="14.png" loading="lazy"></figure>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstdio&gt;
+using namespace std;
+const int N=1e5+10,M=10010;
+int trie[N][128],idx;
+char s[M];
+int q[N],ne[N];
+int n,m;
+int ans[N],cnt;
+int id[N];
+int tot;
+
+void insert(char *s,int i)
+{
+	int p=0;
+	for(int i=0;s[i];i++)
+	{
+		int k=s[i]-32;
+		if(!trie[p][k])
+			trie[p][k]=++idx;
+		p=trie[p][k];
+	}
+	id[p]=i;
+}
+
+void build()
+{
+	int hh=0,tt=-1;
+	for(int i=0;i&lt;128;i++)
+		if(trie[0][i])
+			q[++tt]=trie[0][i];
+	
+	while(hh &lt;= tt)
+	{
+		int t=q[hh++];
+		for(int i=0;i&lt;128;i++)
+		{
+			int p=trie[t][i];
+		    if (!p) trie[t][i] = trie[ne[t]][i];
+            else
+            {
+                ne[p] = trie[ne[t]][i];
+                q[ ++ tt] = p;
+            }
+		}
+	}
+}
+
+int query(char *s)
+{
+	bool flag = false;
+	for(int i=0,j=0;s[i];i++)
+	{
+		int k=s[i]-32;
+		j=trie[j][k];
+		
+		int p=j;
+		while(p)
+		{
+			if(id[p])
+			{
+				flag=true;
+				ans[cnt++]=id[p];
+				//cout&lt;&lt;&quot;---&quot;&lt;&lt;id[p]&lt;&lt;endl;
+			}
+			p=ne[p];
+		}
+	}
+	return flag;
+}
+
+int main()
+{
+	scanf(&quot;%d&quot;,&amp;n);
+	
+	for(int i=1;i&lt;=n;i++)
+	{
+		char str[210];
+		scanf(&quot;%s&quot;,str);
+		insert(str,i);
+	}
+	
+	build();
+
+	scanf(&quot;%d&quot;,&amp;m);
+	for(int i=1;i&lt;=m;i++)
+	{
+		scanf(&quot;%s&quot;,s);
+		cnt=0;
+		if(query(s))
+		{
+			tot++;
+			printf(&quot;web %d:&quot;,i);
+			cnt=unique(ans,ans+cnt)-ans;
+			sort(ans,ans+cnt);
+			for(int i=0;i&lt;cnt;i++)
+				printf(&quot; %d&quot;,ans[i]);
+			puts(&quot;&quot;);
+		}
+	}
+	
+	printf(&quot;total: %d\n&quot;,tot);
+	return 0;
+}
+</code></pre>
+<p>1.本题不是计数，不需判重复，只需标记病毒编号为true，多次标记不影响最终答案<br>
+2.多个主串，字典树下一次还要再查询，不能改变字典树<br>
+附：ASCII表<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/11/9969_8f7d399863-ASCII%E8%A1%A8.jpg" alt="ASCII表.jpg" loading="lazy"></p>
+<p><a href="https://vjudge.net/problem/POJ-2778">poj2778</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/11/9969_ce862d4c63-15.png" alt="15.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/11/9969_d228a30863-16.png" alt="16.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/11/9969_d4f32f6863-17.png" alt="17.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/11/9969_ec73a48863-18.png" alt="18.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/11/9969_eea68e4663-19.png" alt="19.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/11/9969_fd08f70863-20.png" alt="20.png" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstdio&gt;
+using namespace std;
+typedef long long LL;
+const int N=110,mod=100000;
+int trie[N][4],idx;
+int ne[N];
+int cnt[N];
+int n,m;
+int q[N];
+struct matrix
+{
+	int m[N][N];
+	matrix()
+	{
+		memset(m,0,sizeof m);
+	}
+	matrix(int c[][N])
+	{
+		memcpy(m,c,sizeof m);
+	}
+};
+
+int get(char c)
+{
+	switch(c)
+	{
+		case 'A' : return 0;
+		case 'G' : return 1;
+		case 'C' : return 2;
+		case 'T' : return 3;
+	}
+}
+
+void insert(char *s)
+{
+	int p=0;
+	for(int i=0;s[i];i++)
+	{
+		int k=get(s[i]);
+		if(!trie[p][k])
+			trie[p][k]=++idx;
+		p=trie[p][k];
+	}
+	cnt[p]++;
+}
+
+void build()
+{
+	int hh=0,tt=-1;
+	for(int i=0;i&lt;4;i++)
+		if(trie[0][i])
+			q[++tt]=trie[0][i];
+	
+	while(hh &lt;= tt)
+	{
+		int t=q[hh++];
+		for(int i=0;i&lt;4;i++)
+		{
+			int p=trie[t][i];
+			if(!p) trie[t][i]=trie[ne[t]][i];
+			else 
+			{
+				ne[p]=trie[ne[t]][i];
+				q[++tt]=p;	
+				cnt[p] |= cnt[ne[p]];
+			}
+		}
+	}
+}
+
+matrix mul(matrix a,matrix b)
+{
+	matrix res;
+	for(int i=0;i&lt;=idx;i++)
+		for(int j=0;j&lt;=idx;j++)
+			for(int k=0;k&lt;=idx;k++)
+				res.m[i][j]=(res.m[i][j]+(LL)a.m[i][k]*b.m[k][j])%mod;
+	return res;
+}
+
+matrix qmi(matrix a,int k)
+{
+	matrix res;
+	for(int i=0;i&lt;=idx;i++)
+		res.m[i][i]=1;
+	while(k)
+	{
+		if(k &amp; 1)
+			res=mul(res,a);
+		a=mul(a,a);
+		k&gt;&gt;=1;
+	}
+	return res;
+}
+
+int main()
+{
+	scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+	for(int i=0;i&lt;n;i++)
+	{
+		char str[15];
+		scanf(&quot;%s&quot;,str);
+		insert(str);
+	}
+	
+	build();
+	
+	matrix g;
+	for(int i=0;i&lt;=idx;i++)
+	{
+		if(cnt[i]) continue;
+		for(int j=0;j&lt;4;j++)
+		{
+			int p=trie[i][j];
+			if(!cnt[p])
+				g.m[i][p]=(g.m[i][p]+1)%mod;
+		}
+	}
+	
+//	for(int i=0;i&lt;=idx;i++)
+//	{
+//		for(int j=0;j&lt;=idx;j++)
+//			cout&lt;&lt;g.m[i][j]&lt;&lt;' ';
+//		cout&lt;&lt;endl;
+//	}
+	
+	g=qmi(g,m);
+	int res=0;
+	for(int i=0;i&lt;=idx;i++)
+		res=(res+g.m[0][i])%mod;
+	
+	printf(&quot;%d&quot;,res);
+	
+	return 0;
+}
+</code></pre>
+<p>最后的答案为什么是g.m[0][i]求和?<br>
+矩阵g的n次幂表示构造长度为n的DNA序列的方案数（g的i次幂表示构造长度为n的DNA序列的方案数），类似离散数学中二元关系的复合运算，二元关系&lt;1,2&gt; ,&lt;2,3&gt; 复合一次可得到关系&lt;1,3&gt;</p>
+<p>由于从根结点出发构造序列，且根结点idx为0.g.m[0][i]表示从根结点走i步的方案数，即从根节点开始构造长度为i的序列的方案数。</p>
+<p><a href="https://www.acwing.com/problem/content/1055/">poj3691</a><br>
+AC自动机+DP<br>
+为每个结点构造失败指针的同时，检查其失败指针所指向的节点是否为危险节点，如果是的话也需要把当前节点标记为危险节点。<br>
+所谓的危险节点，就是指以当前节点为结尾的字符串是某个病毒串，或者包含了某个病毒串。如果在bfs的同时进行这项操作的时候就非常方便，在构造完当前失败指针的同时检查其所指向的节点是否为危险节点。</p>
+<p>根据危险DNA序列所建的字典树，我们用模拟的方式 ，从第一个字符开始构造， 依次递增，找到一个满足要求的字符串，在构造此字符串的同时，比较该字符串和输入要判断的序列S，若该位置i的字符和s[i]，相同，则表示，此位置的字符不需要改变，反则，需要把s[i]该为词字符，为一次改变操作.</p>
+<p>状态表示：dp[i][j]，表示到达查找串第i个字符时，对应于AC自动机的j节点所需要的最小改变数。<br>
+状态转移为dp[i][son[j]] = min( dp[i][son[j]], dp[i-1][j] + s[i-1]!=k )</p>
+<p>读到i个字符时，对应于j状态（DP的过程要两重循环i和j），要转移到son[j]（j的子节点状态，在这里用k在[0,3]一重循环遍历所有可以转字符），如果第i个字符跟所要转移到的字符相同，则代价为0，因为不需要改变；否则代价为1，因为需要改变。</p>
+<p>如果当前状态不可达，则不需要对其进行后续运算。</p>
+<p>如果子节点为危险节点，则不可以进行转移，即不可以使用上面的状态方程。</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstdio&gt;
+using namespace std;
+const int N=1010,INF=0x3f3f3f3f;
+int trie[N][4],idx;
+int ne[N];
+int cnt[N];
+int n;
+char s[N];
+int f[N][N];
+int q[N];
+
+int get(char c)
+{
+	switch(c)
+	{
+		case 'A' : return 0;
+		case 'G' : return 1;
+		case 'C' : return 2;
+		case 'T' : return 3;
+	}
+}
+
+void insert(char *s)
+{
+	int p=0;
+	for(int i=0;s[i];i++)
+	{
+		int k=get(s[i]);
+		if(!trie[p][k])
+			trie[p][k]=++idx;
+		p=trie[p][k];
+	}
+	cnt[p]++;
+}
+
+void build()
+{
+	int hh=0,tt=-1;
+	for(int i=0;i&lt;4;i++)
+		if(trie[0][i])
+			q[++tt]=trie[0][i];
+	
+	while(hh &lt;= tt)
+	{
+		int t=q[hh++];
+		for(int i=0;i&lt;4;i++)
+		{
+			int p=trie[t][i];
+			if(!p) trie[t][i]=trie[ne[t]][i];
+			else 
+			{
+				ne[p]=trie[ne[t]][i];
+				q[++tt]=p;
+				cnt[p] |= cnt[ne[p]];
+			}
+		}
+	}
+}
+
+void print()
+{
+    for(int i=0;i&lt;=idx;i++)
+    {
+        cout&lt;&lt;i&lt;&lt;' '&lt;&lt;ne[i]&lt;&lt;&quot;: &quot;;
+        for(int j=0;j&lt;4;j++)
+            if(trie[i][j])
+                cout&lt;&lt;trie[i][j]&lt;&lt;' ';
+        cout&lt;&lt;endl;
+    }
+}
+
+int main()
+{
+	int kas=1;
+	while(scanf(&quot;%d&quot;,&amp;n) &amp;&amp; n)
+	{
+		memset(trie,0,sizeof trie);
+		memset(ne,0,sizeof ne);
+		memset(cnt,0,sizeof cnt);
+		idx=0;
+		for(int i=0;i&lt;n;i++)
+		{
+			char str[25];
+			scanf(&quot;%s&quot;,str);
+			insert(str);
+		}
+		
+		build();
+		
+		//print();
+		
+		scanf(&quot;%s&quot;,s+1);
+		int len=strlen(s+1);
+		
+		memset(f,0x3f,sizeof f);
+		f[0][0]=0;
+		for(int i=1;i&lt;=len;i++)
+			for(int j=0;j&lt;=idx;j++)
+				for(int k=0;k&lt;4;k++)
+				{
+					int t=get(s[i]) != k;
+					int p=trie[j][k];
+					if(!cnt[p])
+						f[i][p]=min(f[i][p],f[i-1][j]+ t);
+				}
+				
+		int res=INF;
+		for(int i=0;i&lt;=idx;i++)
+			res=min(res,f[len][i]);
+		
+		if(res == INF)
+			res=-1;
+		printf(&quot;Case %d: %d\n&quot;,kas++,res);
+	}
+	return 0;
+}
+</code></pre>
+<p>最后，循环dp[len][j]，即在读完最后一个字符后检查所有状态的最终值，取其最小。如果均不可达，则返回-1。<br>
+类似题：求主串至少包含一个模式串的方案数，正难则反。<br>
+<a href="https://paste.ubuntu.com/p/8cQmVfDpxH/">代码</a></p>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=2243">hdu2233</a><br>
+长度不超过L，只由小写字母组成的，至少包含一个词根的单词，一共可能有多少个呢？<br>
+比如一共有2个词根 aa 和 ab ，则可能存在104个长度不超过3的单词，分别为<br>
+(2个) aa,ab,<br>
+(26个)aaa,aab,aac...aaz,<br>
+(26个)aba,abb,abc...abz,<br>
+(25个)baa,caa,daa...zaa,<br>
+(25个)bab,cab,dab...zab。</p>
+<p><img src="https://cdn.acwing.com/media/article/image/2020/03/12/9969_e378c0a064-21.png" alt="21.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/12/9969_f3a3c3da64-22.png" alt="22.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/12/9969_025f2e9e64-23.png" alt="23.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/12/9969_05abfa1e64-24.png" alt="24.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/12/9969_be3731ec64-25.png" alt="25.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/12/9969_c20f74aa64-26.png" alt="26.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/12/9969_d039051e64-27.png" alt="27.png" loading="lazy"><br>
+<a href="https://paste.ubuntu.com/p/vVvdmfW8dV/">代码</a><br>
+若要求长度正好为L，原矩阵的L次幂即可<br>
+长度不超过L，需要累加</p>
+<p><a href="https://www.acwing.com/problem/content/1287/">acwing1285</a><br>
+每次插入一个单词时把所有路径上的点都+1，每个单词的出现次数就是其结尾节点的fail树子树和。因为其fail指针指向的节点一定包含当前字符串。<br>
+统计贡献时要从下往上按照拓扑排序加，<br>
+<a href="https://paste.ubuntu.com/p/sxwbtsytTg/">代码</a></p>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=3695">hdu3695</a><br>
+给出 n 个模式串，给出一个长串 S，找出 S 中出现了几种模式串。注意模式串在 S 中正着出现和反着出现都算出<br>
+现。S 可能有些段是压缩过的，格式为[tx]，t 是一个数字，x 是一个字母，代表有 t 个 x。把 a[3b]c 解压后会得到<br>
+abbbc。<br>
+n≤250，模式串的长度不超过1000，t≤5·1e6, 解压后的长串的长度不超过 5100000.</p>
+<blockquote></blockquote>
+<p>样例输入：<br>
+3<br>
+2<br>
+AB DCB<br>
+DACB<br>
+3<br>
+ABC CDE GHI<br>
+ABCCDEFIHG<br>
+4<br>
+ABB ACDEE BBB FEEE<br>
+A[2B]CD[4E]F<br>
+样例输出：<br>
+0<br>
+3<br>
+2</p>
+<p>我们可以把这 n 个串插入 Trie 树，建成 AC 自动机。然后把解压后的 S 正着在 AC 自动机上跑一遍，再反着在<br>
+AC 自动机上跑一遍，对于覆盖过的模式串，打一个标记。最后统计标记的总数即可</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstdio&gt;
+using namespace std;
+const int N=250010,M=5100010;
+int trie[N][26],idx;
+char s[M],tmp[M];
+int ne[N];
+int dar[N];
+int n;
+int q[N];
+
+void insert(char *s,int k)
+{
+    int p=0;
+    for(int i=0;s[i];i++)
+    {
+        int k=s[i]-'A';
+        if(!trie[p][k])
+        {
+        	trie[p][k]=++idx;
+        	memset(trie[idx],0,sizeof trie[idx]);
+        	dar[idx]=0;
+		}
+        p=trie[p][k];
+    }
+   	dar[p]++;
+}
+
+void build()
+{
+    int hh=0,tt=-1;
+    for(int i=0;i&lt;26;i++)
+        if(trie[0][i])
+        {
+        	int t=trie[0][i];
+        	q[++tt]=t;
+        	ne[t]=0;
+		}
+    
+    while(hh &lt;= tt)
+    {
+        int t=q[hh++];
+        for(int i=0;i&lt;26;i++)
+        {
+            int p=trie[t][i];
+            if(!p) trie[t][i]=trie[ne[t]][i];
+            else 
+            {
+                ne[p]=trie[ne[t]][i];
+                q[++tt]=p;
+            }
+        }
+    }
+}
+
+int query(char *s,int type)
+{
+    int len=strlen(s);
+    if(type)
+        reverse(s,s+len);
+    //cout&lt;&lt;&quot;---&quot;&lt;&lt;s&lt;&lt;endl;
+    int res=0;
+    for(int i=0,j=0;s[i];i++)
+    {
+        int k=s[i]-'A';
+        j=trie[j][k];
+        int p=j;
+        while(p)
+        {
+        	if(dar[p])
+        	{
+        		res+=dar[p];
+        		dar[p]=0;
+			}
+			else 
+				break;
+            p=ne[p];
+        }
+    }
+    return res;
+}
+
+int main()
+{
+    int T;
+    scanf(&quot;%d&quot;,&amp;T);
+    while(T--)
+    {
+    	memset(trie[0],0,sizeof trie[0]);
+    	ne[0]=0;
+    	dar[0]=0;
+        idx=0;
+        scanf(&quot;%d&quot;,&amp;n);
+        for(int i=1;i&lt;=n;i++)
+        {
+            char str[1010];
+            scanf(&quot;%s&quot;,str);
+            insert(str,i);
+        }
+        
+        build();
+        
+        scanf(&quot;%s&quot;,s);
+        int l=0;
+        for(int i=0;s[i];i++)
+        {
+            if(s[i] !='[')
+                tmp[l++]=s[i];
+            else
+            {
+                i++;
+                int len=0;
+                while(s[i] &gt;='0' &amp;&amp; s[i] &lt;='9')
+                {
+                    len=len*10+s[i]-'0';
+                    i++;
+                }
+                for(int k=0;k&lt;len;k++)
+                    tmp[l++]=s[i];
+                i++;
+            }
+        }
+        tmp[l]=0;
+        
+        printf(&quot;%d\n&quot;,query(tmp,0)+query(tmp,1));
+    }
+}
+</code></pre>
+
+                                </div>
+                    </article>
+                    <!--  -->
+                    
+                        <div class="next-post">
+                            <div class="next">下一篇</div>
+                            <a href="https://caifxh.github.io/post/trie/">
+                                <h3 class="post-title">
+                                    Trie
+                                </h3>
+                            </a>
+                        </div>
+                        
+                            <div id="disqus_thread"></div>
+                            <div id="gitalk-container"></div>
+                </div>
+                <!-- middle -->
+                <div class="main-container-middle"></div>
+                <!-- right -->
+                <div id="sidebar" class="main-container-right">
+                    
+                        <!-- toc -->
+                        
+    <div class="toc-card i-card ">
+        <div class="toc-title i-card-title">目录</div>
+        <div class="toc-content">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#ac%E8%87%AA%E5%8A%A8%E6%9C%BA">AC自动机</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+        <script>
+            function locateCatelogList() {
+                /*获取文章目录集合,可通过:header过滤器*/
+                var alis = $('.post-content :header');
+                /*获取侧边栏目录列表集合**/
+                var sidebar_alis = $('.markdownIt-TOC a');
+                /*获取滚动条到顶部的距离*/
+                var scroll_height = $(window).scrollTop();
+                for (var i = 0; i < alis.length; i++) {
+                    /*获取锚点集合中的元素分别到顶点的距离*/
+                    var a_height = $(alis[i]).offset().top;
+                    if (a_height < scroll_height) {
+                        /*高亮显示*/
+                        sidebar_alis.removeClass('on');
+                        $(sidebar_alis[i]).addClass('on');
+                    }
+                }
+            }
+            $(function() {
+                /*绑定滚动事件 */
+                $(window).bind('scroll', locateCatelogList);
+            });
+        </script>
+    </div>
+    
+                            
+
+                </div>
+
+
+
+
+            </div>
+
+
+            <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://caifxh.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+
+    </div>
+    <script>
+        $('#sidebar').stickySidebar({
+            topSpacing: 80,
+            // bottomSpacing: 60
+        });
+    </script>
+    
+</body>
+
+</html>

@@ -7,7 +7,7 @@
 <title>
     数学 | fxh
 </title>
-<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1586491016728">
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1588691348423">
 <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
 <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
@@ -27,7 +27,7 @@
     <div class="nav">
         <div class="logo">
             <a href="https://caifxh.github.io">
-                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1586491016728" alt="">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1588691348423" alt="">
             </a>
             <div class="site-title">
                 <h1>
@@ -104,6 +104,235 @@
         
             <article class="post i-card">
                 <h2 class="post-title">
+                    <a href="https://caifxh.github.io/post/kang-tuo-zhan-kai/">
+                        康托展开
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2020-04-15</time>
+                    
+                        <a href="https://caifxh.github.io/tag/14SoYNkfD/" class="post-tag i-tag
+                            i-tag-banana">
+            #数学
+        </a>
+                        
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            1.康托展开是个啥
+一句话，给出一个全排列，求它是第几个全排列，叫做康托展开。
+另一句话，给出全排列长度和它是第几个全排列，求这个全排列，叫做逆康托展开。
+这里，全排列的顺序定义和火星人中的定义是一样的。
+
+拿52413举例子：
+1、首先看第一个数 5，不管第一位是什么数，后面都有四位数，那么这四位数全排列的方式有 4！种，而如果第一位是 1 或 2 或 3 或 4 都会比5开头的字典序要小，所以可以令1，2，3，4分别作为开头，这样的话就会有 4 * 4！种排法要比  52413这种排法的字典序要小。
+那么第一个数是1，2，3，4时候的字典序的个数数完了是 4 * 4！ 种，且这些字典序都要比52413的字典序要小。
+2、那么就可以固定第一位5，找下一位2，这时5已经用过了，所以从剩下的 1，2，3，4 里挑选比2小的数，一共1个，后面还剩三位，也就是3！种排列方式，那么这时候比 52413 字典序要小的又有  1 * 3！种，也就是当5在第一位，1在第二位的时候。
+3、再看第三位3，这时5，2都用了，所以从剩下的 1，3，4种找比他小的数的个数，原理同上，所以这时候也可以有 1 * 2!种排列方式的字典序小于 52413
+4、再看第四位1，这时候会有 0 * 1！种
+5、再看第五位3，这时候会有0 * 0！种
+综上所述：
+对于序列： 52413 该序列展开后为： 4 * 4! + 1 * 3! + 2 * 2! + 0 * 1! + 0 * 0! ，计算结果是： 106
+由于是从0开始计数的，所以最后 52413 的编号为 107
+为什么从0开始计数？
+可以这样看：我现在让你求12345的康托展开值，也就是：04！+ 03！+ 02！+ 01！+0*0！ =  0 所以明白了吧~~
+康托公式最小字典序的编号就是0，一般求出来后咱们往往习惯于从1开始。
+暴力：O(n2)O(n^2)O(n2)
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N=1e7+10,mod=998244353;
+int a[N];
+LL fac[N];
+int c[N];
+int n;
+
+void init()
+{
+	fac[0]=1;
+	for(int i=1;i&amp;lt;=n;i++)
+		fac[i]=fac[i-1]*i%mod;
+}
+
+int main()
+{
+	cin&amp;gt;&amp;gt;n;
+	
+	init();
+	
+	for(int i=1;i&amp;lt;=n;i++)
+		scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]);
+	
+	int ans=0;
+	for(int i=1;i&amp;lt;=n;i++)
+	{
+		int cnt=0;
+		for(int j=i+1;j&amp;lt;=n;j++)
+			if(a[i] &amp;gt; a[j])
+				cnt++;
+		ans=(ans+cnt*fac[n-i])%mod;
+	}
+	
+	printf(&amp;quot;%d\n&amp;quot;,ans+1);
+	
+	return 0;
+}
+
+树状数组优化：O(nlogn)O(nlogn)O(nlogn)
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N=1e7+10,mod=998244353;
+int a[N];
+LL fac[N];
+int c[N];
+int n;
+
+void init()
+{
+	fac[0]=1;
+	for(int i=1;i&amp;lt;=n;i++)
+		fac[i]=fac[i-1]*i%mod;
+}
+
+int lowbit(int x)
+{
+	return x&amp;amp;-x;
+}
+
+void add(int x,int v)
+{
+	for(int i=x;i&amp;lt;=n;i+=lowbit(i))
+		c[i]+=v;
+}
+
+int query(int x)
+{
+	int res=0;
+	for(int i=x;i;i-=lowbit(i))
+		res=(res+c[i])%mod;
+	return res;
+}
+
+int main()
+{
+	cin&amp;gt;&amp;gt;n;
+	
+	init();
+	
+	for(int i=1;i&amp;lt;=n;i++)	
+		add(i,1);
+	
+	int ans=0;
+	for(int i=1;i&amp;lt;=n;i++)
+	{
+		scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]);
+		ans=(ans+(query(a[i])-1)*fac[n-i])%mod;
+		add(a[i],-1);
+	}	
+	
+	printf(&amp;quot;%d\n&amp;quot;,ans+1);
+	
+	return 0;
+}
+
+康托逆展开
+和上面相反，已知某排列的排名xxx，求这个排列。
+解决思路基本没区别（说是相反也行）：
+假设我们现在要求aia_iai​的值，首先可以得到bi=x÷(n−i)!b_i=x\div (n-i)!bi​=x÷(n−i)!。
+那么也就是知道了aia_iai​在当前未出现过的aaa中的排名。
+但仅仅知道这个不能直接计算，所以我们还要记录一下前i−1i-1i−1位出现过的aaa。
+然后O(n)O(n)O(n)枚举求出答案。
+下面是一个例子：
+
+此时n=8,i=4n=8,i=4n=8,i=4，前333位出现了1,4,61,4,61,4,6。
+假设bi=3b_i=3bi​=3，那么aia_iai​在未出现的数里排名第333。
+由于排名是从000开始的，aia_iai​就是灰色的第444个数777。
+以{3,4,1,5,2}为例，其康托展开值为61：
+
+
+用 61 / 4! = 2余13，则a[1] = 2，即首位右边比首位小的数有2个，所以首位为3。
+
+
+用 13 / 3! = 2余1，则a[2] = 2，即在第二位之后小于第二位的数有2个，所以第二位为4。
+
+
+用 1 / 2! = 0余1，则a[3] = 0，即在第三位之后没有小于第三位的数，所以第三位为1。
+
+
+用 1 / 1! = 1余0，则a[4] = 1，即在第四位之后小于第四位的数有1个，所以第四位为5。
+
+
+最后一位自然就是剩下的数2。
+
+
+通过以上分析，所求排列组合为 34152。
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N=10010;
+int a[N];
+LL fac[N];
+bool vis[N];
+int n,m,k;
+
+void init()
+{
+	fac[0]=1;
+	for(int i=1;i&amp;lt;=n;i++)	
+		fac[i]=fac[i-1]*i;
+}
+
+void incantor()
+{
+	for(int i=1;i&amp;lt;=n;i++)
+	{
+		int t=k/fac[n-i];
+		k%=fac[n-i];
+		
+		int cnt=0;
+		int j;
+		for(j=1;;j++)
+		{
+			if(!vis[j]) cnt++;
+			if(cnt &amp;gt; t) break;
+		}
+		a[i]=j;
+		vis[j]=1;
+	}
+}
+
+int main()
+{
+	cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;k;
+	k--;
+	
+	init();
+	
+	incantor();
+
+	for(int i=1;i&amp;lt;=n;i++)
+		printf(&amp;quot;%d &amp;quot;,a[i]);
+	
+	return 0;
+}
+
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://caifxh.github.io/post/kang-tuo-zhan-kai/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+            <article class="post i-card">
+                <h2 class="post-title">
                     <a href="https://caifxh.github.io/post/qiu-zu-he-shu/">
                         求组合数
                     </a>
@@ -112,7 +341,7 @@
                     <time class="post-time">2020-03-28</time>
                     
                         <a href="https://caifxh.github.io/tag/14SoYNkfD/" class="post-tag i-tag
-                            i-tag-success">
+                            i-tag-info">
             #数学
         </a>
                         
@@ -284,7 +513,7 @@ code
                     <time class="post-time">2020-03-26</time>
                     
                         <a href="https://caifxh.github.io/tag/14SoYNkfD/" class="post-tag i-tag
-                            i-tag-error">
+                            i-tag-primary">
             #数学
         </a>
                         
@@ -1102,7 +1331,7 @@ code
                     <time class="post-time">2020-03-26</time>
                     
                         <a href="https://caifxh.github.io/tag/14SoYNkfD/" class="post-tag i-tag
-                            i-tag-other_1">
+                            i-tag-error">
             #数学
         </a>
                         
@@ -1519,7 +1748,7 @@ int main()
                     <!-- 个人信息 -->
                     
     <div class="id_card i-card">
-        <div class="id_card-avatar" style="background-image: url(https://caifxh.github.io/images/avatar.png?v=1586491016728)">
+        <div class="id_card-avatar" style="background-image: url(https://caifxh.github.io/images/avatar.png?v=1588691348423)">
         </div>
         <h1 class="id_card-title">
             fxh

@@ -1,0 +1,639 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>
+    Trie | fxh
+</title>
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1588691348423">
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://caifxh.github.io/styles/main.css">
+<!-- js -->
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://caifxh.github.io/media/js/jquery.sticky-sidebar.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+        
+</head>
+
+<body>
+    <div class="main">
+        <div class="header">
+    <div class="nav">
+        <div class="logo">
+            <a href="https://caifxh.github.io">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1588691348423" alt="">
+            </a>
+            <div class="site-title">
+                <h1>
+                    fxh
+                </h1>
+            </div>
+        </div>
+        <span class="menu-btn fa fa-align-justify"></span>
+        <div class="menu-container">
+            <ul>
+                
+                    
+                            <li>
+                                <a href="/" class="menu">
+                                    首页
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/archives" class="menu">
+                                    归档
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/tags" class="menu">
+                                    标签
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/post/about" class="menu">
+                                    关于
+                                </a>
+                            </li>
+                            
+                                
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $(".menu-btn").click(function() {
+            $(".menu-container").slideToggle();
+        });
+        $(window).resize(function() {
+
+            if (window.matchMedia('(min-width: 960px)').matches) {
+                $(".menu-container").css('display', 'block')
+            } else {
+                $(".menu-container").css('display', 'none')
+            }
+
+        });
+    });
+</script>
+
+            <div id="main-content" class="post-detail main-container">
+                <!-- left -->
+                <div id="content" class="main-container-left">
+                    <article class="post i-card">
+                        <h2 class="post-title">
+                            Trie
+                        </h2>
+                        <div class="post-info">
+                            <time class="post-time">2020-04-10</time>
+                            
+                                <a href="https://caifxh.github.io/tag/yImqvC-Dp/" class="post-tag i-tag
+                            i-tag-success">
+                            #字符串
+                        </a>
+                                
+                        </div>
+                        
+                                <div class="post-content">
+                                    <h4 id="trie">trie</h4>
+<p><img src="https://cdn.acwing.com/media/article/image/2020/03/08/9969_465a00d061-17.PNG" alt="17.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/08/9969_568cd63061-18.png" alt="18.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/08/9969_58b69c0c61-19.png" alt="19.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/08/9969_830379da61-20.png" alt="20.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/08/9969_84e99b6c61-21.png" alt="21.png" loading="lazy"></p>
+<pre><code>void insert(char *str)
+{
+    int p=1;
+    for(int i=0;str[i];i++)
+    {
+        int k=str[i]-'a';
+        if(!trie[p][k])
+            trie[p][k]=++idx;
+        p=trie[p][k];
+    }
+    cnt[p]=true;
+}
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://cdn.acwing.com/media/article/image/2020/03/08/9969_037d465861-22.png" alt="22.png" loading="lazy"></figure>
+<pre><code>int query(char *str)
+{
+    int p=1;
+    for(int i=0;str[i];i++)
+    {
+        int k=str[i]-'a';
+        p=trie[p][k];
+        if(!p)
+            return 0;
+    }
+    return cnt[p];
+}
+</code></pre>
+<p><a href="https://www.acwing.com/problem/content/837/">模板题</a></p>
+<p><img src="https://cdn.acwing.com/media/article/image/2020/03/08/9969_2cda862961-23.png" alt="23.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/08/9969_371889c861-24.png" alt="24.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/08/9969_40813ee261-25.png" alt="25.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/08/9969_6342628a61-26.png" alt="26.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/08/9969_65f359bc61-27.png" alt="27.png" loading="lazy"></p>
+<h4 id="例题">例题</h4>
+<p><a href="https://vjudge.net/problem/POJ-2503">poj2503</a><br>
+您刚从滑铁卢搬到大城市。 这里的人说的是一门不可理解的外语。 幸运的是，您有一本字典来帮助您理解它们。<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/08/9969_ae53dcea61-28.png" alt="28.png" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstdio&gt;
+#include&lt;sstream&gt;
+using namespace std;
+const int N=1000010,M=26;
+int trie[N][M];
+int cnt[N],idx=1;
+char word[N][15];
+
+void insert(string str,int k)
+{
+	int len=str.size(),p=1;
+	for(int i=0;i&lt;len;i++)
+	{
+		int ch=str[i]-'a';
+		if(!trie[p][ch])
+			trie[p][ch]=++idx;
+		p=trie[p][ch];
+	}
+	cnt[p]=k;
+}
+
+int query(string str)
+{
+	int len=str.size(),p=1;
+	for(int i=0;i&lt;len;i++)
+	{
+		int k=str[i]-'a';
+		p=trie[p][k];
+		if(!p)
+			return 0;
+	}
+	return cnt[p];
+}
+
+int main()
+{
+	string s,str;
+	int k=1;
+	while(getline(cin,s))
+	{
+		if(s.empty())
+			break;
+		stringstream ss(s);
+		ss&gt;&gt;word[k]&gt;&gt;str;
+		insert(str,k);
+		k++;
+	}
+	
+	while(cin&gt;&gt;s)
+	{
+		int k=query(s);
+		if(k)
+			cout&lt;&lt;word[k]&lt;&lt;endl;
+		else 
+			cout&lt;&lt;&quot;eh&quot;&lt;&lt;endl;
+	}
+	return 0;
+}
+</code></pre>
+<p><a href="">poj3630</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/08/9969_360d81f861-29.png" alt="29.png" loading="lazy"><br>
+给定一个电话号码列表，判断它是否一致，即没有号码是另一个号码的前缀。<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/08/9969_ae1e7c4461-29.png" alt="29.png" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstdio&gt;
+#include&lt;sstream&gt;
+using namespace std;
+const int N=100010,M=10;
+int trie[N][M];
+bool cnt[N];
+int idx;
+int n;
+
+bool insert(char *s)
+{
+	int p=1;
+	int len=strlen(s);
+	for(int i=0;i&lt;len;i++)
+	{
+		int k=s[i]-'0';
+		if(!trie[p][k])
+			trie[p][k]=++idx;
+		else if(i == len-1)//字符串处理完毕，仍不空，说明该串是其它串的前缀 
+			return true;
+		p=trie[p][k];
+		if(cnt[p])//其他串是该串前缀 
+			return true;
+	}
+	cnt[p]=true;
+	return false;
+}
+
+int main()
+{
+	int T;
+	scanf(&quot;%d&quot;,&amp;T);
+	while(T--)
+	{
+		memset(trie,0,sizeof trie);
+		memset(cnt,0,sizeof cnt);
+		idx=1;
+		bool ans=false;
+		scanf(&quot;%d&quot;,&amp;n);
+		for(int i=1;i&lt;=n;i++)
+		{
+			char s[15];
+			scanf(&quot;%s&quot;,s);
+			if(ans)
+				continue;
+			if(insert(s))//不能立即结束，仍要读取n个串 
+				ans=true;
+		}
+		if(ans)
+			cout&lt;&lt;&quot;NO&quot;&lt;&lt;endl;//有前缀输出NO 
+		else
+			cout&lt;&lt;&quot;YES&quot;&lt;&lt;endl;
+	}
+	return 0;
+}
+</code></pre>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1251">hdu1251</a><br>
+Ignatius最近遇到一个难题,老师交给他很多单词(只有小写字母组成,不会有重复的单词出现),现在老师要他统计出以某个字符串为前缀的单词数量(单词本身也是自己的前缀).<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/08/9969_1f376a1261-30.png" alt="30.png" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;string&gt;
+#include&lt;cstring&gt;
+using namespace std;
+const int maxn=500005;
+const int maxz=26;//不同字符个数，例如数字10，小写字母26
+int trie[maxn][maxz];
+int cnt[maxn];//计数器 
+void insert(string s)//将字符串s插入到字典树中 
+{
+	int len=s.length(),p=1;
+	for(int i=0;i&lt;len;i++)
+	{
+		int ch=s[i]-'a';//转换成数字
+		if(!trie[p][ch]) 
+			trie[p][ch]=++tot;//记录下标 
+		p=trie[p][ch];
+		cnt[p]++;//统计有多少个单词经过 
+	}
+}
+
+int query(string s)
+{
+	int len=s.length(),p=1;
+	for(int i=0;i&lt;len;i++)
+	{
+		int ch=s[i]-'a';//转换成数字
+		p=trie[p][ch];
+		if(!p)
+			return 0;
+	}
+	return cnt[p];	
+}
+
+int main()
+{	
+	string s;
+	memset(trie,0,sizeof(trie));
+	memset(cnt,0,sizeof(cnt));
+	tot=1;
+	while(getline(cin,s))
+	{
+		if(!s.size())
+			break;
+		insert(s);
+	}
+	while(cin&gt;&gt;s)
+		cout&lt;&lt;query(s)&lt;&lt;endl;
+	return 0;
+}
+</code></pre>
+<p>若反过来问，单词表中有多少单词是当前查询单词的前缀，只需统计查询时经过的end标记数量即可。</p>
+<p><a href="https://vjudge.net/problem/POJ-2513">poj2513</a><br>
+给你一堆木棍。 每个棍子的每个端点都带有某种颜色。是否可以将操纵杆沿一条直线对齐，以使触摸的端点的颜色具有相同的颜色？<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/08/9969_dcdfe70261-31.png" alt="31.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/08/9969_e6f7e0d261-32.png" alt="32.png" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+using namespace std;
+const int N=500010,M=26;
+int trie[N][M];
+int cnt[N];
+int d[N];
+int idx=1;
+int color;
+int p[N];
+
+int find(int x)
+{
+	if(x != p[x])
+		p[x]=find(p[x]);
+	return p[x];
+}
+
+int insert(char *s)
+{
+	int len=strlen(s),p=1;
+	for(int i=0;i&lt;len;i++)
+	{
+		int k=s[i]-'a';
+		if(!trie[p][k])
+			trie[p][k]=++idx;
+		p=trie[p][k];
+	}
+	if(cnt[p])
+		return cnt[p];
+	else 
+	{
+	    cnt[p]=++color;
+	    return cnt[p];
+	}
+}
+
+int main()
+{
+	for(int i=1;i&lt;N;i++)
+		p[i]=i;
+	char a[15],b[15];
+	while(~scanf(&quot;%s%s&quot;,a,b))
+	{
+		int i=insert(a);
+		int j=insert(b);
+		d[i]++;
+		d[j]++;
+		//cout&lt;&lt;i&lt;&lt;' '&lt;&lt;j&lt;&lt;endl;
+		int pi=find(i);
+		int pj=find(j);
+		p[pi]=pj;
+	}
+	
+	int s=find(1);
+	int num=0;
+	for(int i=1;i&lt;=color;i++)
+	{
+		if(d[i] % 2 == 1)
+			num++;
+		if(num &gt; 2 || find(i) != s)
+ 		{
+ 			puts(&quot;Impossible&quot;);
+			return 0;
+		}
+ 	}
+	if(num == 0 || num == 2)
+		puts(&quot;Possible&quot;);
+	else 
+		puts(&quot;Impossible&quot;);
+	return 0;
+}
+</code></pre>
+<p><a href="https://vjudge.net/problem/POJ-3764">poj3764</a><br>
+给出n个节点的树，每条边有边权w。 • 请你找一条路径，使得这条路径上所有边权的异或和最大。<br>
+• 数据范围<br>
+• n &lt;= 100,000, 0 &lt; w &lt; 2^31</p>
+<p>暴力的做法：<br>
+• 枚举每个点当根<br>
+• dfs整颗树，获得根到每个节点的路径异或和s[]<br>
+• 时间复杂度O(n^2)</p>
+<p>异或的性质<br>
+x xor x = 0<br>
+• 一个数异或两次会抵消掉。<br>
+• x到y的路径异或和就等于s[x] xor s[y] !<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/03/08/9969_9a3f466e61-33.png" alt="33.png" loading="lazy"><br>
+这样只要任取一个点为根，dfs得到s[]数组后，枚举x， y即可，还是O(n^2)</p>
+<p>现在的问题是，给定一个s[]数组，找两个元素，使得他<br>
+们的异或和最大。<br>
+• 给一个数x，在数组s中找一个数y使其和x的异或和最大。<br>
+• 涉及二进制的题，我们可以选择按位来考虑。</p>
+<p>假设x的二进制有31位，我们把它的二进制写出来，最高位称为第30位，最低位称为第0位。<br>
+因为要让异或值最大，所以我们从高位开始考虑。<br>
+• 如果x的第30位是1 —— if (x &gt;&gt; 30 &amp; 1)<br>
+• 那我们一定希望y的第30位是0，这样异或之后的第30位 是1.<br>
+• 否则就算第29～0位异或后都是1，也比2^30小。<br>
+• 同理，如果x的第30位是0，我们希望y的第30位是1.</p>
+<p>运用贪心的思想，假设现在枚举到x的第i位<br>
+• if x第i位是1 我们要尽可能找第i位为0的y<br>
+• if x第i位是0 我们要尽可能找第i位为1的y<br>
+涉及前缀判断，采用trie</p>
+<p>先把所有的数的二进制当作字符串，存进trie中。<br>
+• 从高往低枚举二进制位时，设置一个指针p，一开始指向trie的根节点。<br>
+• if x第i位是1 我们要尽可能找第i位为0的y 如果说明存在第i位为0的数，我们就让p往0节点走，答案中的第i位为1。<br>
+• 如果不存在第i位为0的数，我们只能退而求其次，让p往1节点走，答案中的第i位为0.<br>
+• if x第i位是0 我们要尽可能找第i位为1的y ， 同理</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+using namespace std;
+const int N=100010*31,M=N&lt;&lt;1;
+int trie[N][2],tot=1;
+int d[N];
+int n;
+int h[N],e[M],ne[M],w[M],idx;
+
+void add(int a,int b,int c)
+{
+	e[idx]=b,w[idx]=c,ne[idx]=h[a],h[a]=idx++;
+}
+
+void dfs(int u,int fa)
+{
+	for(int i=h[u];~i;i=ne[i])
+	{
+		int j=e[i];
+		if(j == fa)
+			continue;
+		d[j]=d[u]^w[i];
+		dfs(j,u);
+	}
+}
+
+void insert(int x)
+{
+	int p=1;
+	for(int i=30;i&gt;=0;i--)
+	{
+		int u=x&gt;&gt;i&amp;1;
+		if(!trie[p][u])
+			trie[p][u]=++tot;
+		p=trie[p][u];
+	}
+}
+
+int query(int x)
+{
+	int p=1;
+	int res=0;
+	for(int i=30;i&gt;=0;i--)
+	{
+		int k=x&gt;&gt;i&amp;1;
+		if(trie[p][!k])
+		{
+			res+=1&lt;&lt;i;
+			p=trie[p][!k];
+		}	
+		else 
+			p=trie[p][k];
+	}
+	return res;
+}
+
+int main()
+{
+	while(~scanf(&quot;%d&quot;,&amp;n))
+	{
+		memset(h,-1,sizeof h);
+		memset(d,0,sizeof d);
+		memset(trie,0,sizeof trie);
+		idx=0;
+		tot=1;
+		for(int i=0;i&lt;n-1;i++)
+		{
+			int a,b,c;
+			scanf(&quot;%d%d%d&quot;,&amp;a,&amp;b,&amp;c);
+			a++,b++;
+			add(a,b,c);add(b,a,c);
+		}
+		dfs(1,-1);
+		int res=0;
+//		for(int i=1;i&lt;=n;i++)
+//			cout&lt;&lt;d[i]&lt;&lt;' ';
+		
+		for(int i=1;i&lt;=n;i++)
+		{
+			insert(d[i]);
+			res=max(res,query(d[i]));
+		}
+		printf(&quot;%d\n&quot;,res);
+	}
+	return 0;
+}
+</code></pre>
+
+                                </div>
+                    </article>
+                    <!--  -->
+                    
+                        <div class="next-post">
+                            <div class="next">下一篇</div>
+                            <a href="https://caifxh.github.io/post/manacher/">
+                                <h3 class="post-title">
+                                    Manacher
+                                </h3>
+                            </a>
+                        </div>
+                        
+                            <div id="disqus_thread"></div>
+                            <div id="gitalk-container"></div>
+                </div>
+                <!-- middle -->
+                <div class="main-container-middle"></div>
+                <!-- right -->
+                <div id="sidebar" class="main-container-right">
+                    
+                        <!-- toc -->
+                        
+    <div class="toc-card i-card ">
+        <div class="toc-title i-card-title">目录</div>
+        <div class="toc-content">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#trie">trie</a></li>
+<li><a href="#%E4%BE%8B%E9%A2%98">例题</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+        <script>
+            function locateCatelogList() {
+                /*获取文章目录集合,可通过:header过滤器*/
+                var alis = $('.post-content :header');
+                /*获取侧边栏目录列表集合**/
+                var sidebar_alis = $('.markdownIt-TOC a');
+                /*获取滚动条到顶部的距离*/
+                var scroll_height = $(window).scrollTop();
+                for (var i = 0; i < alis.length; i++) {
+                    /*获取锚点集合中的元素分别到顶点的距离*/
+                    var a_height = $(alis[i]).offset().top;
+                    if (a_height < scroll_height) {
+                        /*高亮显示*/
+                        sidebar_alis.removeClass('on');
+                        $(sidebar_alis[i]).addClass('on');
+                    }
+                }
+            }
+            $(function() {
+                /*绑定滚动事件 */
+                $(window).bind('scroll', locateCatelogList);
+            });
+        </script>
+    </div>
+    
+                            
+
+                </div>
+
+
+
+
+            </div>
+
+
+            <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://caifxh.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+
+    </div>
+    <script>
+        $('#sidebar').stickySidebar({
+            topSpacing: 80,
+            // bottomSpacing: 60
+        });
+    </script>
+    
+</body>
+
+</html>

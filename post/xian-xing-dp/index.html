@@ -7,7 +7,7 @@
 <title>
     线性dp | fxh
 </title>
-<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1586491016728">
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1588691348423">
 <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
 <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
@@ -28,7 +28,7 @@
     <div class="nav">
         <div class="logo">
             <a href="https://caifxh.github.io">
-                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1586491016728" alt="">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1588691348423" alt="">
             </a>
             <div class="site-title">
                 <h1>
@@ -105,7 +105,7 @@
                             <time class="post-time">2020-03-26</time>
                             
                                 <a href="https://caifxh.github.io/tag/hLQFdtGuD/" class="post-tag i-tag
-                            i-tag-info">
+                            i-tag-error">
                             #DP
                         </a>
                                 
@@ -408,6 +408,509 @@ int main()
 <p><a href="https://vjudge.net/problem/POJ-2250">poj2250</a><br>
 <img src="https://cdn.acwing.com/media/article/image/2020/03/23/9969_5f95e4ce6c-11.png" alt="11.png" loading="lazy"><br>
 <a href="https://paste.ubuntu.com/p/sqtP3jt5kc/">code</a></p>
+<p><a href="https://www.acwing.com/problem/content/description/1020/">acwing1018</a><br>
+用f[i][j]表示当前在从（1,1）第i行第j列的最小费用；<br>
+我们的状态转移方程就是：f[i][j]=min(f[i-1][j],f[i][j-1])+a[i][j]。</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+const int N=109;
+int n;
+int g[N][N];
+int f[N][N];
+
+int main()
+{
+    memset(f, 0x3f ,sizeof f);
+
+    scanf(&quot;%d&quot;, &amp;n);
+
+    for(int i=1;i&lt;=n;i++)
+        for(int j=1;j&lt;=n;j++)
+            scanf(&quot;%d&quot;,&amp;g[i][j]);
+
+    for(int i=1;i&lt;=n;i++)
+        for(int j=1;j&lt;=n;j++)        
+            if(i==1 &amp;&amp; j==1)
+                f[i][j]=g[i][j];
+            else 
+            {
+                if(i&gt;1)
+                    f[i][j]=min(f[i][j],f[i-1][j]+g[i][j]);
+                if(j&gt;1)
+                    f[i][j]=min(f[i][j],f[i][j-1]+g[i][j]);
+            }
+
+    printf(&quot;%d\n&quot;, f[n][n]);
+    
+    return 0;
+}
+</code></pre>
+<p><a href="https://www.acwing.com/problem/content/description/1029/">acwing1027</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/15/9969_e5c124707e-19.PNG" alt="19.PNG" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+using namespace std;
+const int N=13;
+int n;
+int g[N][N];
+int f[N][N][N*2];
+
+int main()
+{
+    cin&gt;&gt;n;
+    int a,b,c;
+    while(cin&gt;&gt;a&gt;&gt;b&gt;&gt;c &amp;&amp; a)
+        g[a][b]=c;
+
+    for(int i1=1;i1&lt;=n;i1++)
+        for(int i2=1;i2&lt;=n;i2++)
+            for(int k=2;k&lt;=2*n;k++)
+            {
+                int j1=k-i1,j2=k-i2;
+                int &amp;x=f[i1][i2][k];
+                int t=g[i1][j1]+g[i2][j2];
+                if(j1&gt;=1 &amp;&amp; j1&lt;=n &amp;&amp; j2&gt;=1 &amp;&amp; j2&lt;=n)
+                {
+                    if(i1 == i2)    
+                        t/=2;
+                    x=max(x,f[i1-1][i2][k-1]);
+                    x=max(x,f[i1][i2-1][k-1]);
+                    x=max(x,f[i1][i2][k-1]);
+                    x=max(x,f[i1-1][i2-1][k-1]);
+                    x+=t;
+                }
+            }
+    cout&lt;&lt;f[n][n][n*2]&lt;&lt;endl;
+    return 0;
+    
+}
+</code></pre>
+<p>如果用两次的动规取每次的最大值，其实是贪心的思想，因为分别跑时并没有考虑到另一次的路程。所以这种只是具体过程中用的是动态规划而已（下面的简单例子即可说明为何不行）：<br>
+0 3 5<br>
+2 6 0<br>
+0 4 0<br>
+第一次求最大值的话，是0-&gt;3-&gt;6-&gt;4-&gt;0<br>
+第二次求最大值的话，是0-&gt;3（已经被去掉了，为了方便看）-&gt;5-&gt;0-&gt;0<br>
+合起来是18，而实际答案应该是20：<br>
+第一次：0-&gt;3-&gt;5-&gt;0-&gt;0<br>
+第二次：0-&gt;2-&gt;6-&gt;4-&gt;0<br>
+所以这题其实是经典的思维DP，我们用数组dp[i][j][k][l]表示第一次走到(i,j)时和第二次走到(k,l)时的最大值能取到多少。</p>
+<p><a href="https://www.acwing.com/problem/content/277/">acwing275</a></p>
+<pre><code>#include&lt;iostream&gt;
+using namespace std;
+const int N=55;
+int n,m;
+int g[N][N];
+int f[N&lt;&lt;1][N][N];
+
+int main()
+{
+    cin&gt;&gt;m&gt;&gt;n;
+    for(int i=1;i&lt;=m;i++)   
+        for(int j=1;j&lt;=n;j++)
+            cin&gt;&gt;g[i][j];
+
+    for(int k=1;k&lt;=n+m;k++)
+        for(int i=1;i&lt;=m;i++)   
+            for(int j=1;j&lt;=m;j++)
+            {
+                int a=k-i,b=k-j;
+                if(a&gt;=1 &amp;&amp; a&lt;=n &amp;&amp; b&gt;=1 &amp;&amp; b&lt;=n)
+                {
+                    int t=g[i][a]+g[j][b];
+                    if(i == j) t/=2;
+                    f[k][i][j]=max(f[k][i][j],f[k-1][i-1][j]);
+                    f[k][i][j]=max(f[k][i][j],f[k-1][i][j-1]);
+                    f[k][i][j]=max(f[k][i][j],f[k-1][i][j]);
+                    f[k][i][j]=max(f[k][i][j],f[k-1][i-1][j-1]);
+                    f[k][i][j]+=t;
+                }
+            }
+    cout&lt;&lt;f[n+m][m][m]&lt;&lt;endl;
+    return 0;
+
+}
+</code></pre>
+<p><a href="https://www.acwing.com/problem/content/description/1019/">acwing1019</a><br>
+确定滑行方向后就转化为了LIS问题,原问题相当于正向和反向以ai为结尾的最长上升子序列长度，<br>
+分别正向和反向各进行一次LIS，取得最大值即可。<br>
+<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><msup><mi>n</mi><mn>2</mn></msup><mo>)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+using namespace std;
+const int N=110;
+int q[N];
+int f[N];
+
+int main()
+{
+    int t;
+    cin&gt;&gt;t;
+    while(t--)
+    {
+        int n;
+        cin&gt;&gt;n;
+        for(int i=1;i&lt;=n;i++)
+            cin&gt;&gt;q[i];
+        int res=0;
+        for(int i=1;i&lt;=n;i++)
+        {
+            f[i]=1;
+            for(int j=1;j&lt;=i;j++)
+                if(q[j]&lt;q[i])
+                    f[i]=max(f[i],f[j]+1);
+            res=max(res,f[i]);
+        }
+
+        for(int i=n;i;i--)
+        {
+            f[i]=1;
+            for(int j=n;j&gt;i;j--)
+                if(q[j]&lt;q[i])
+                    f[i]=max(f[i],f[j]+1);
+            res=max(res,f[i]);
+        }
+        cout&lt;&lt;res&lt;&lt;endl;
+    }
+}
+</code></pre>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mi>n</mi><mi>l</mi><mi>o</mi><mi>g</mi><mi>n</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">O(nlogn)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstring&gt;
+using namespace std;
+const int N=110;
+int d[N];
+int a[N];
+int n;
+
+int main()
+{
+    int T;
+    cin&gt;&gt;T;
+    while(T--)
+    {
+        scanf(&quot;%d&quot;,&amp;n);
+        
+        for(int i=1;i&lt;=n;i++)
+            scanf(&quot;%d&quot;,&amp;a[i]);
+
+        int res=0;
+        int len=1;
+        d[1]=a[1];
+        for(int i=2;i&lt;=n;i++)
+        {
+            if(a[i] &gt; d[len])
+                d[++len]=a[i];
+            else 
+                *lower_bound(d+1,d+len+1,a[i])=a[i];
+        }
+    
+        res=max(res,len);
+        
+        len=1;
+        d[1]=a[n];
+        for(int i=n-1;i;i--)
+        {
+            if(a[i] &gt; d[len])
+                d[++len]=a[i];
+            else 
+                *lower_bound(d+1,d+len+1,a[i])=a[i];
+        }
+        
+        res=max(res,len);
+        
+        cout&lt;&lt;res&lt;&lt;endl;
+    }
+    return 0;
+}
+</code></pre>
+<p><a href="https://www.acwing.com/problem/content/description/1016/">acwing1014</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/16/9969_ede6e4ee7f-33.PNG" alt="33.PNG" loading="lazy"></p>
+<p><a href="https://www.acwing.com/problem/content/1014/">acwing1012</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/16/9969_1aa680567f-35.PNG" alt="35.PNG" loading="lazy"></p>
+<ul>
+<li>航道交叉也就是a1&gt;=a2&amp;b1&lt;=b2(其中a，b表示两岸)</li>
+<li>将一岸升序排序，另一岸找最长上升子序列</li>
+</ul>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><msup><mi>n</mi><mn>2</mn></msup><mo>)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+#define x first
+#define y second
+typedef pair&lt;int,int&gt; PII;
+const int N=5010;
+PII a[N];
+int f[N];
+int n;
+
+int main()
+{
+	cin&gt;&gt;n;
+	
+	for(int i=1;i&lt;=n;i++)
+		cin&gt;&gt;a[i].x&gt;&gt;a[i].y;
+	
+	sort(a+1,a+n+1);
+	
+	int res=0;
+	for(int i=1;i&lt;=n;i++)
+	{
+		f[i]=1;
+		for(int j=1;j&lt;i;j++)
+			if(a[j].y &lt; a[i].y)
+				f[i]=max(f[i],f[j]+1);
+		res=max(res,f[i]);	
+	}
+	
+	cout&lt;&lt;res&lt;&lt;endl;
+	
+	return 0;
+}
+</code></pre>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mi>n</mi><mi>l</mi><mi>o</mi><mi>g</mi><mi>n</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">O(nlogn)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+#define x first
+#define y second
+typedef pair&lt;int,int&gt; PII;
+const int N=5010;
+PII a[N];
+int d[N];
+int n;
+
+int main()
+{
+	cin&gt;&gt;n;
+	
+	for(int i=1;i&lt;=n;i++)
+		cin&gt;&gt;a[i].x&gt;&gt;a[i].y;
+	
+	sort(a+1,a+n+1);
+	
+	int len=1;
+	d[1]=a[1].y;
+	for(int i=2;i&lt;=n;i++)
+	{
+		if(a[i].y &gt; d[len])
+			d[++len]=a[i].y;
+		else 
+			*lower_bound(d+1,d+len+1,a[i].y)=a[i].y;
+	}
+	
+	cout&lt;&lt;len&lt;&lt;endl;
+	
+	return 0;
+}
+</code></pre>
+<p><a href="https://www.acwing.com/problem/content/description/1018/">最大上升子序列和 </a>状态表示：<br>
+f[i] 表示前i个数中的最大子序列和<br>
+状态转移：<br>
+对于每一个小于a[i]的a[j] (j &lt; i) f[i] = max(f[i], f[j] + a[i])</p>
+<pre><code>#include&lt;iostream&gt;
+using namespace std;
+const int N=1010;
+int q[N];
+int f[N];
+
+int main()
+{
+    int n;
+    cin&gt;&gt;n;
+    for(int i=0;i&lt;n;i++)
+        cin&gt;&gt;q[i];
+    
+    int res=0;
+    for(int i=0;i&lt;n;i++)
+    {
+        f[i]=q[i];
+        for(int j=0;j&lt;i;j++)
+            if(q[j]&lt;q[i])
+                f[i]=max(f[i],f[j]+q[i]);
+        res=max(res,f[i]);
+    }
+    cout&lt;&lt;res&lt;&lt;endl;
+    return 0;
+}
+</code></pre>
+<p><a href="https://www.acwing.com/problem/content/1012/">acwing1010</a><br>
+1、对于问一直接用O（n*logn）的方法求最长不升子序列即可。</p>
+<p>2、对于问二求整个数列的最长上升子序列即可。证明如下：</p>
+<p>（1）假设打导弹的方法是这样的：取任意一个导弹，从这个导弹开始将能打的导弹全部打完。而这些导弹全部记为为同一组，再在没打下来的导弹中任选一个重复上述步骤，直到打完所有导弹。</p>
+<p>（2）假设我们得到了最小划分的K组导弹，从第a(1&lt;=a&lt;=K)组导弹中任取一个导弹，必定可以从a+1组中找到一个导弹的高度比这个导弹高（因为假如找不到，那么它就是比a+1组中任意一个导更高，在打第a组时应该会把a+1组所有导弹一起打下而不是另归为第a+1组），同样从a+1组到a+2组也是如此。那么就可以从前往后在每一组导弹中找一个更高的连起来，连成一条上升子序列，其长度即为K;</p>
+<p>（3）设最长上升子序列长度为P，则有K&lt;=P;又因为最长上升子序列中任意两个不在同一组内(否则不满足单调不升)，则有<br>
+P&gt;=K，所以K=P。</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+#include&lt;sstream&gt;
+using namespace std;
+const int N=100010;
+int a[N];
+int d1[N],d2[N];
+int n;
+
+int main()
+{
+	string s;
+	getline(cin,s);
+	stringstream ss(s);
+	
+	while(ss&gt;&gt;a[n]) n++;
+	
+	int len1=1,len2=1;
+	d1[1]=d2[1]=a[0];
+	
+	for(int i=1;i&lt;n;i++)
+	{
+		if(a[i] &lt;= d1[len1]) d1[++len1]=a[i];
+		else *upper_bound(d1+1,d1+len1+1,a[i],greater&lt;int&gt;())=a[i];
+		
+		if(a[i] &gt; d2[len2]) d2[++len2]=a[i];
+		else *lower_bound(d2+1,d2+len2+1,a[i])=a[i];
+	}
+	
+	cout&lt;&lt;len1&lt;&lt;endl&lt;&lt;len2&lt;&lt;endl;
+	
+	return 0;
+}
+</code></pre>
+<p><a href="https://www.luogu.com.cn/problem/P1140">P1140</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/28/9969_3c7d486889-48.PNG" alt="48.PNG" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/28/9969_4d55767489-49.PNG" alt="49.PNG" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+using namespace std;
+const int N=110,INF=0x3f3f3f3f;
+int w[5][5]={
+    {5,-1,-2,-1,-3},
+    {-1,5,-3,-2,-4},
+    {-2,-3,5,-2,-2},
+    {-1,-2,-2,5,-1},
+    {-3,-4,-2,-1,0}
+};
+int f[N][N];
+char sa[N],sb[N];
+int a[N],b[N];
+int n,m;
+
+int get(char c)
+{
+	if(c == 'A') return 0;
+	else if(c == 'C') return 1;
+	else if(c == 'G') return 2;
+	else return 3;
+}
+
+int main()
+{
+	cin&gt;&gt;n&gt;&gt;sa+1;
+	cin&gt;&gt;m&gt;&gt;sb+1;
+	
+	for(int i=1;i&lt;=n;i++)
+		a[i]=get(sa[i]);
+	for(int i=1;i&lt;=m;i++)
+		b[i]=get(sb[i]);
+		
+	for(int i=1;i&lt;=n;i++)
+		for(int j=1;j&lt;=m;j++)
+			f[i][j]=-INF;
+	f[0][0]=0;
+	for(int i=1;i&lt;=n;i++)
+		f[i][0]=f[i-1][0]+w[a[i]][4];
+	for(int i=1;i&lt;=m;i++)
+		f[0][i]=f[0][i-1]+w[4][b[i]];
+	
+	for(int i=1;i&lt;=n;i++)
+		for(int j=1;j&lt;=m;j++)
+		{
+			f[i][j]=max(f[i][j],f[i][j-1]+w[4][b[j]]);
+			f[i][j]=max(f[i][j],f[i-1][j]+w[a[i]][4]);
+			f[i][j]=max(f[i][j],f[i-1][j-1]+w[a[i]][b[j]]);
+		}
+	
+	printf(&quot;%d\n&quot;,f[n][m]);
+		
+	return 0;
+}
+</code></pre>
+<p><a href="https://www.luogu.com.cn/problem/P1508">P1508</a><br>
+【题目分析】<br>
+一个人从最后一行中间那个点的下方开始每一次都吃正前方，左前方和右前方的食物,求一直吃到第一行能够吃到的最多能量是多少</p>
+<p>首先李大水牛一开始在最后一行的中间的下方故： 我么需要的答案为最后一行中间三个的最大值（及 max(dp[n][m/2+1],max(dp[n][m/2],dp[n][m/2+2])); ）</p>
+<p>其次是递归公式 这是一个二维dp，dp公式是该值是他的左上、正上、右上的dp结果的最大值+自身（及 dp[i][j]=max(max(dp[i-1][j],dp[i-1][j+1]),dp[i-1][j-1])+dp[i][j]; ）</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+using namespace std;
+const int N=1010;
+int f[N][N];
+int a[N][N];
+int n,m;
+
+int main()
+{
+	cin&gt;&gt;n&gt;&gt;m;
+	
+	for(int i=1;i&lt;=n;i++)
+		for(int j=1;j&lt;=m;j++)
+			cin&gt;&gt;a[i][j];
+			
+	int sx=n+1,sy=m/2+1;
+	
+	for(int i=1;i&lt;=n;i++)
+		for(int j=1;j&lt;=m;j++)
+			f[i][j]=max(f[i-1][j],max(f[i-1][j-1],f[i-1][j+1]))+a[i][j];
+	
+	cout&lt;&lt;max(f[sx-1][sy],max(f[sx-1][sy-1],f[sx-1][sy+1]));
+	
+	return 0;
+}
+</code></pre>
+<p><a href="https://www.luogu.com.cn/problem/P1280">P1280</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/28/9969_925872c289-47.PNG" alt="47.PNG" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+#include&lt;vector&gt;
+using namespace std;
+const int N=10010;
+int f[N];
+vector&lt;int&gt; v[N];
+int n,k;
+
+int main()
+{
+	cin&gt;&gt;n&gt;&gt;k;
+	
+	for(int i=0;i&lt;k;i++)
+	{
+		int s,t;
+		cin&gt;&gt;s&gt;&gt;t;
+		v[s].push_back(t);
+	}
+	
+	for(int i=n;i;i--)
+	{
+		if(v[i].size())
+			for(int j=0;j&lt;v[i].size();j++)
+				f[i]=max(f[i],f[i+v[i][j]]);
+		else 
+			f[i]=f[i+1]+1;
+	}
+	
+	printf(&quot;%d&quot;,f[1]);
+	
+	return 0;
+}
+</code></pre>
 
                                 </div>
                     </article>

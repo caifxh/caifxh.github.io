@@ -1,0 +1,347 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>
+    优先队列 | fxh
+</title>
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1588691348423">
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://caifxh.github.io/styles/main.css">
+<!-- js -->
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://caifxh.github.io/media/js/jquery.sticky-sidebar.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+        
+</head>
+
+<body>
+    <div class="main">
+        <div class="header">
+    <div class="nav">
+        <div class="logo">
+            <a href="https://caifxh.github.io">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1588691348423" alt="">
+            </a>
+            <div class="site-title">
+                <h1>
+                    fxh
+                </h1>
+            </div>
+        </div>
+        <span class="menu-btn fa fa-align-justify"></span>
+        <div class="menu-container">
+            <ul>
+                
+                    
+                            <li>
+                                <a href="/" class="menu">
+                                    首页
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/archives" class="menu">
+                                    归档
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/tags" class="menu">
+                                    标签
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/post/about" class="menu">
+                                    关于
+                                </a>
+                            </li>
+                            
+                                
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $(".menu-btn").click(function() {
+            $(".menu-container").slideToggle();
+        });
+        $(window).resize(function() {
+
+            if (window.matchMedia('(min-width: 960px)').matches) {
+                $(".menu-container").css('display', 'block')
+            } else {
+                $(".menu-container").css('display', 'none')
+            }
+
+        });
+    });
+</script>
+
+            <div id="main-content" class="post-detail main-container">
+                <!-- left -->
+                <div id="content" class="main-container-left">
+                    <article class="post i-card">
+                        <h2 class="post-title">
+                            优先队列
+                        </h2>
+                        <div class="post-info">
+                            <time class="post-time">2020-05-05</time>
+                            
+                        </div>
+                        
+                                <div class="post-content">
+                                    <h4 id="优先队列">优先队列</h4>
+<p><a href="https://vjudge.net/problem/HDU-4006">hdu4006</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/05/05/9969_45c264ba8e-%E5%9B%BE%E7%89%871.png" alt="图片1.png" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+#include&lt;queue&gt;
+using namespace std;
+int n,k;
+
+int main()
+{
+	while(~scanf(&quot;%d%d&quot;,&amp;n,&amp;k))
+	{
+		priority_queue&lt;int,vector&lt;int&gt;,greater&lt;int&gt; &gt; heap;	
+		for(int i=1;i&lt;=n;i++)
+		{
+			char op[2];
+			scanf(&quot;%s&quot;,op);
+			if(*op == 'I')
+			{
+				int x;
+				scanf(&quot;%d&quot;,&amp;x);
+				if(heap.size() &lt; k)
+					heap.push(x);
+				else if(heap.top() &lt; x)
+					heap.pop(),heap.push(x);
+			}
+			else 
+				printf(&quot;%d\n&quot;,heap.top());
+		}
+	}
+	return 0;
+ } 
+</code></pre>
+<p><a href="https://vjudge.net/problem/POJ-2833">poj2833</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/05/05/9969_391cc90c8e-8.png" alt="8.png" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+#include&lt;queue&gt;
+using namespace std;
+typedef long long LL;
+int n,n1,n2;
+
+int main()
+{
+	while(~scanf(&quot;%d%d%d&quot;,&amp;n1,&amp;n2,&amp;n))
+	{
+		if(!n1 &amp;&amp; !n2 &amp;&amp; !n) break;
+		
+		priority_queue&lt;int,vector&lt;int&gt;,greater&lt;int&gt; &gt; heap1;
+		priority_queue&lt;int&gt; heap2;
+		
+		LL sum=0;
+		for(int i=0;i&lt;n;i++)
+		{
+			int x;
+			scanf(&quot;%d&quot;,&amp;x);
+			sum+=x;
+			
+			if(heap1.size() &lt; n1) heap1.push(x);
+			else if(heap1.top() &lt; x)
+				heap1.pop(),heap1.push(x);
+			
+			if(heap2.size() &lt; n2) heap2.push(x);
+			else if(heap2.top() &gt; x)
+				heap2.pop(),heap2.push(x);
+		}
+		while(!heap1.empty()) sum-=heap1.top(),heap1.pop();
+		while(!heap2.empty()) sum-=heap2.top(),heap2.pop();
+		
+		printf(&quot;%.6f\n&quot;,(double)sum/(n-n1-n2));
+	}
+}
+</code></pre>
+<p><a href="https://vjudge.net/problem/POJ-2431">poj2431</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/05/05/9969_ca5052fa8e-9.PNG" alt="9.PNG" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+#include&lt;queue&gt;
+using namespace std;
+const int N=10010;
+typedef pair&lt;int,int&gt; PII;
+PII sta[N];
+int n,L,P;
+
+int main()
+{
+	cin&gt;&gt;n;
+	
+	for(int i=0;i&lt;n;i++)
+	cin&gt;&gt;sta[i].first&gt;&gt;sta[i].second;
+
+	cin&gt;&gt;L&gt;&gt;P;
+	
+	sort(sta,sta+n,greater&lt;PII&gt;());
+	n++;
+	sta[n-1]={0,0};
+	
+	int res=0;
+	int oil=P;
+	int last=L;
+	priority_queue&lt;int&gt; heap;
+	bool flag=true;
+	for(int i=0;i&lt;n;i++)
+	{
+		oil-=last-sta[i].first;	
+		//cout&lt;&lt;last-sta[i].first&lt;&lt;endl;
+		last=sta[i].first;
+	
+		while(oil &lt; 0)
+		{
+			if(heap.empty())
+			{
+				flag=false;
+				break;
+			}
+			int t=heap.top();
+			heap.pop();
+			res++;
+			oil+=t;
+		}
+		
+		if(!flag) break;
+		
+		heap.push(sta[i].second);
+	}
+	if(!flag) res=-1;
+	printf(&quot;%d\n&quot;,res);
+
+	return 0;
+}
+</code></pre>
+
+                                </div>
+                    </article>
+                    <!--  -->
+                    
+                        <div class="next-post">
+                            <div class="next">下一篇</div>
+                            <a href="https://caifxh.github.io/post/stl/">
+                                <h3 class="post-title">
+                                    STL
+                                </h3>
+                            </a>
+                        </div>
+                        
+                            <div id="disqus_thread"></div>
+                            <div id="gitalk-container"></div>
+                </div>
+                <!-- middle -->
+                <div class="main-container-middle"></div>
+                <!-- right -->
+                <div id="sidebar" class="main-container-right">
+                    
+                        <!-- toc -->
+                        
+    <div class="toc-card i-card ">
+        <div class="toc-title i-card-title">目录</div>
+        <div class="toc-content">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97">优先队列</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+        <script>
+            function locateCatelogList() {
+                /*获取文章目录集合,可通过:header过滤器*/
+                var alis = $('.post-content :header');
+                /*获取侧边栏目录列表集合**/
+                var sidebar_alis = $('.markdownIt-TOC a');
+                /*获取滚动条到顶部的距离*/
+                var scroll_height = $(window).scrollTop();
+                for (var i = 0; i < alis.length; i++) {
+                    /*获取锚点集合中的元素分别到顶点的距离*/
+                    var a_height = $(alis[i]).offset().top;
+                    if (a_height < scroll_height) {
+                        /*高亮显示*/
+                        sidebar_alis.removeClass('on');
+                        $(sidebar_alis[i]).addClass('on');
+                    }
+                }
+            }
+            $(function() {
+                /*绑定滚动事件 */
+                $(window).bind('scroll', locateCatelogList);
+            });
+        </script>
+    </div>
+    
+                            
+
+                </div>
+
+
+
+
+            </div>
+
+
+            <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://caifxh.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+
+    </div>
+    <script>
+        $('#sidebar').stickySidebar({
+            topSpacing: 80,
+            // bottomSpacing: 60
+        });
+    </script>
+    
+</body>
+
+</html>

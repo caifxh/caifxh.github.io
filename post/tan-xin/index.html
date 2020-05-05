@@ -1,0 +1,379 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>
+    贪心 | fxh
+</title>
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1588691348423">
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://caifxh.github.io/styles/main.css">
+<!-- js -->
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://caifxh.github.io/media/js/jquery.sticky-sidebar.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+        
+</head>
+
+<body>
+    <div class="main">
+        <div class="header">
+    <div class="nav">
+        <div class="logo">
+            <a href="https://caifxh.github.io">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1588691348423" alt="">
+            </a>
+            <div class="site-title">
+                <h1>
+                    fxh
+                </h1>
+            </div>
+        </div>
+        <span class="menu-btn fa fa-align-justify"></span>
+        <div class="menu-container">
+            <ul>
+                
+                    
+                            <li>
+                                <a href="/" class="menu">
+                                    首页
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/archives" class="menu">
+                                    归档
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/tags" class="menu">
+                                    标签
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/post/about" class="menu">
+                                    关于
+                                </a>
+                            </li>
+                            
+                                
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $(".menu-btn").click(function() {
+            $(".menu-container").slideToggle();
+        });
+        $(window).resize(function() {
+
+            if (window.matchMedia('(min-width: 960px)').matches) {
+                $(".menu-container").css('display', 'block')
+            } else {
+                $(".menu-container").css('display', 'none')
+            }
+
+        });
+    });
+</script>
+
+            <div id="main-content" class="post-detail main-container">
+                <!-- left -->
+                <div id="content" class="main-container-left">
+                    <article class="post i-card">
+                        <h2 class="post-title">
+                            贪心
+                        </h2>
+                        <div class="post-info">
+                            <time class="post-time">2020-04-14</time>
+                            
+                                <a href="https://caifxh.github.io/tag/TZ7cITYtt/" class="post-tag i-tag
+                            i-tag-other_2">
+                            #其他算法
+                        </a>
+                                
+                        </div>
+                        
+                                <div class="post-content">
+                                    <h4 id="贪心法正确性证明方法">贪心法正确性证明方法</h4>
+<p>方法一：数学归纳法<br>
+主要步骤如下：<br>
+（1）叙述一个论证算法正确性的与自然数相关的命题P(n)，这里的n可以代表算法步数或者实例规模。例如：<br>
+对于任何正整数n，贪心法的前n步选择将导致最优解。<br>
+对于任何正整数n，贪心法对于规模为n的任何实例都得到最优解。</p>
+<p>（2）使用第一或者第二数学归纳法证明上述命题P(n)。<br>
+第一数学归纳法：<br>
+证：<br>
+P(1)为真；<br>
+若P(n)为真，则P(n+1)为真。</p>
+<p>第二数学归纳法：<br>
+证：<br>
+P(1)为真；<br>
+若对所有k&lt;n，有P(k)为真， 则P(n)为真。</p>
+<p>方法二：交换论证法<br>
+主要步骤如下：<br>
+（1）分析一般最优解与贪心法的解的区别，然后定义一种转换规则，使得从任意一个最优解出发，经过不断对解的某些成分的排列次序进行交换或者用其他元素替换，将这个解最终能够转变成贪心法的解。<br>
+（2）证明在上述转换中解得优化函数值不会变坏。<br>
+（3）证明上述转换在有限步结束。</p>
+<p>1.活动安排问题<br>
+<a href="https://www.acwing.com/problem/content/910/">acwing908</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/14/9969_47c476f27e-16.PNG" alt="16.PNG" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+const int N=100010;
+
+struct Range
+{
+    int l,r;
+    bool operator&lt; (const Range &amp;w)const
+    {
+        return r&lt;w.r;
+    }
+}ranges[N];
+
+int main()
+{
+    int n;
+    cin&gt;&gt;n;
+    for(int i=0;i&lt;n;i++)
+    {
+        int l,r;
+        cin&gt;&gt;l&gt;&gt;r;
+        ranges[i]={l,r};
+    }
+    
+    sort(ranges,ranges+n);
+    int res=0,ed=-2e9;
+    for(int i=0;i&lt;n;i++)
+        if(ranges[i].l&gt;ed)
+        {
+            res++;
+            ed=ranges[i].r;
+        }
+    cout&lt;&lt;res&lt;&lt;endl;
+    return 0;
+}
+</code></pre>
+<p>2.区间覆盖问题<br>
+<a href="https://www.acwing.com/problem/content/description/909/">acwing907</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/04/14/9969_7a77c5687e-17.PNG" alt="17.PNG" loading="lazy"></p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+const int N = 100010;
+struct Range
+{
+    int l, r;
+    bool operator&lt; (const Range &amp;W)const
+    {
+        return l &lt; W.l;
+    }
+}range[N];
+int n;
+
+int main()
+{
+    int st, ed;
+    scanf(&quot;%d%d&quot;, &amp;st, &amp;ed);
+    scanf(&quot;%d&quot;, &amp;n);
+    for (int i = 0; i &lt; n; i ++ )
+    {
+        int l, r;
+        scanf(&quot;%d%d&quot;, &amp;l, &amp;r);
+        range[i] = {l, r};
+    }
+
+    sort(range, range + n);
+
+    int res = 0;
+    int j=0;
+    while(st &lt; ed)
+    {
+        int r=-2e9;
+        while(j &lt; n &amp;&amp; range[j].l &lt;= st)
+            r=max(r,range[j].r),j++;
+        
+        if(r &lt; st)
+        {
+            res=-1;
+            break;
+        }
+        st=r;
+        res++;
+    }
+    
+    printf(&quot;%d\n&quot;, res);
+
+    return 0;
+}
+</code></pre>
+<p>3.最优装载<br>
+<a href="http://acm.hdu.edu.cn/showproblem.php?pid=2570">hdu2570</a><br>
+有n种体积V都相同，浓度为Pi%的万能药水，挑选尽可能多的万能药水混合，需满足混合后的浓度≤W%。</p>
+<p>解题思路：<br>
+此题是一道贪心题，为了能够选择尽可能多的万能药水，所以我们应该先选浓度低的，可以达到降低混合后浓度的作用。</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+const int N=110;
+int a[N];
+int n,v,w;
+
+int main()
+{
+	int T;
+	cin&gt;&gt;T;
+	while(T--)
+	{
+		scanf(&quot;%d%d%d&quot;,&amp;n,&amp;v,&amp;w);
+		
+		for(int i=1;i&lt;=n;i++)
+			scanf(&quot;%d&quot;,&amp;a[i]);
+		
+		sort(a+1,a+1+n);
+		
+		double sum=0;
+		int cnt=0;
+		int i;
+		for(i=1;i&lt;=n;i++)
+			if((sum+a[i])/i &lt;= w)
+				sum+=a[i],cnt++;
+			else 
+				break;
+		
+		if(cnt==0) printf(&quot;0 0.00\n&quot;);
+		else printf(&quot;%d %.2lf\n&quot;,cnt*v,sum/100/cnt);
+	}
+	return 0;
+}
+</code></pre>
+<p>4.多机调度</p>
+<p>设有n个独立的作业，由m台相同的机器进行加工处理。作业i所需的处理时间为t[i]。任何作业可以在任何一台机器上面加工处理，但未完工之前不允许中断处理。任何作业不能拆分成更小的作业。要求给出一种作业调度方案，使所给的n个作业在尽可能短的时间内由m台机器加工处理完成。</p>
+<p>采用最长处理时间作业优先的贪心选择策略，可以设计出解多机调度问题较好的近似算法。</p>
+<ul>
+<li>
+<p>当n&lt;=m(作业数小于机器数)时，只要将机器 i 的 时间区间分配给作业 i 即可</p>
+</li>
+<li>
+<p>当n&gt;m时，首先将n个作业从大到小排序，然后依此顺序将作业分配给空闲的处理机。也就是说从剩下的作业中，选择需要处理时间最长的，然后依次选择处理时间次长的，直到所有的作业全部处理完毕，或者机器不能再处理其他作业为止。如果我们每次是将需要处理时间最短的作业分配给空闲的机器，那么可能就会出现其它所有作业都处理完了只剩所需时间最长的作业在处理的情况，这样势必效率较低。</p>
+</li>
+</ul>
+
+                                </div>
+                    </article>
+                    <!--  -->
+                    
+                        <div class="next-post">
+                            <div class="next">下一篇</div>
+                            <a href="https://caifxh.github.io/post/niu-ke-han-jia-di-er-chang/">
+                                <h3 class="post-title">
+                                    牛客寒假第二场
+                                </h3>
+                            </a>
+                        </div>
+                        
+                            <div id="disqus_thread"></div>
+                            <div id="gitalk-container"></div>
+                </div>
+                <!-- middle -->
+                <div class="main-container-middle"></div>
+                <!-- right -->
+                <div id="sidebar" class="main-container-right">
+                    
+                        <!-- toc -->
+                        
+    <div class="toc-card i-card ">
+        <div class="toc-title i-card-title">目录</div>
+        <div class="toc-content">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E8%B4%AA%E5%BF%83%E6%B3%95%E6%AD%A3%E7%A1%AE%E6%80%A7%E8%AF%81%E6%98%8E%E6%96%B9%E6%B3%95">贪心法正确性证明方法</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+        <script>
+            function locateCatelogList() {
+                /*获取文章目录集合,可通过:header过滤器*/
+                var alis = $('.post-content :header');
+                /*获取侧边栏目录列表集合**/
+                var sidebar_alis = $('.markdownIt-TOC a');
+                /*获取滚动条到顶部的距离*/
+                var scroll_height = $(window).scrollTop();
+                for (var i = 0; i < alis.length; i++) {
+                    /*获取锚点集合中的元素分别到顶点的距离*/
+                    var a_height = $(alis[i]).offset().top;
+                    if (a_height < scroll_height) {
+                        /*高亮显示*/
+                        sidebar_alis.removeClass('on');
+                        $(sidebar_alis[i]).addClass('on');
+                    }
+                }
+            }
+            $(function() {
+                /*绑定滚动事件 */
+                $(window).bind('scroll', locateCatelogList);
+            });
+        </script>
+    </div>
+    
+                            
+
+                </div>
+
+
+
+
+            </div>
+
+
+            <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://caifxh.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+
+    </div>
+    <script>
+        $('#sidebar').stickySidebar({
+            topSpacing: 80,
+            // bottomSpacing: 60
+        });
+    </script>
+    
+</body>
+
+</html>
