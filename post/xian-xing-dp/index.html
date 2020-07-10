@@ -1,118 +1,102 @@
 <html>
-
-<head>
+  <head>
     <meta charset="utf-8" />
-<meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>
-    线性dp | fxh
-</title>
-<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1588691348423">
-<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
-<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<title>线性dp | Gridea</title>
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1594373367136">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://caifxh.github.io/styles/main.css">
-<!-- js -->
-<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://caifxh.github.io/media/js/jquery.sticky-sidebar.min.js"></script>
-<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+<link rel="alternate" type="application/atom+xml" title="线性dp | Gridea - Atom Feed" href="https://caifxh.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
-        
-</head>
 
-<body>
+    <meta name="description" content="
+多阶段决策问题
+有一类活动的过程，可以分成若干个互相联系的阶段，在它的每一阶段都需要作出决策，从而使整个过程达到最好的活动效。
+当然，各个阶段的决策的选取不是任意确定的，它依赖于当前的状态，又会影响以后的发展。
+当各个阶段决策决定后，就组..." />
+    <meta name="keywords" content="DP" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
     <div class="main">
-        <div class="header">
-    <div class="nav">
-        <div class="logo">
-            <a href="https://caifxh.github.io">
-                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1588691348423" alt="">
-            </a>
-            <div class="site-title">
-                <h1>
-                    fxh
-                </h1>
-            </div>
-        </div>
-        <span class="menu-btn fa fa-align-justify"></span>
-        <div class="menu-container">
-            <ul>
-                
-                    
-                            <li>
-                                <a href="/" class="menu">
-                                    首页
-                                </a>
-                            </li>
-                            
-                                
-                    
-                            <li>
-                                <a href="/archives" class="menu">
-                                    归档
-                                </a>
-                            </li>
-                            
-                                
-                    
-                            <li>
-                                <a href="/tags" class="menu">
-                                    标签
-                                </a>
-                            </li>
-                            
-                                
-                    
-                            <li>
-                                <a href="/post/about" class="menu">
-                                    关于
-                                </a>
-                            </li>
-                            
-                                
-            </ul>
-        </div>
-    </div>
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://caifxh.github.io">
+  <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1594373367136" alt="">
+  </a>
+  <h1 class="site-title">
+    Gridea
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
 </div>
 
-<script>
-    $(document).ready(function() {
-        $(".menu-btn").click(function() {
-            $(".menu-container").slideToggle();
-        });
-        $(window).resize(function() {
-
-            if (window.matchMedia('(min-width: 960px)').matches) {
-                $(".menu-container").css('display', 'block')
-            } else {
-                $(".menu-container").css('display', 'none')
-            }
-
-        });
-    });
-</script>
-
-            <div id="main-content" class="post-detail main-container">
-                <!-- left -->
-                <div id="content" class="main-container-left">
-                    <article class="post i-card">
-                        <h2 class="post-title">
-                            线性dp
-                        </h2>
-                        <div class="post-info">
-                            <time class="post-time">2020-03-26</time>
-                            
-                                <a href="https://caifxh.github.io/tag/hLQFdtGuD/" class="post-tag i-tag
-                            i-tag-error">
-                            #DP
-                        </a>
-                                
-                        </div>
-                        
-                                <div class="post-content">
-                                    <figure data-type="image" tabindex="1"><img src="https://cdn.acwing.com/media/article/image/2020/03/22/9969_063efe606b-34.png" alt="34.png" loading="lazy"></figure>
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              线性dp
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-03-26
+              </span>
+              <span>
+                41 min read
+              </span>
+              
+                <a href="https://caifxh.github.io/tag/Iu6lDT60Hd/" class="post-tag">
+                  # DP
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <figure data-type="image" tabindex="1"><img src="https://cdn.acwing.com/media/article/image/2020/03/22/9969_063efe606b-34.png" alt="34.png" loading="lazy"></figure>
 <h4 id="多阶段决策问题">多阶段决策问题</h4>
 <p>有一类活动的过程，可以分成若干个互相联系的阶段，在它的每一阶段都需要作出决策，从而使整个过程达到最好的活动效。<br>
 当然，各个阶段的决策的选取不是任意确定的，它依赖于当前的状态，又会影响以后的发展。</p>
@@ -296,6 +280,17 @@ int main()
 </code></pre>
 <p>如果题目要求严格递增，则必须用lower_bound，因为要替换掉相同的元素而不是增长序列。<br>
 如果题目要求最长不下降子序列，则必须用 upper_bound。</p>
+<pre><code>int len=1;
+        d[1]=b[1];
+
+        for(int i=2;i&lt;=n;i++)
+        {
+            if(b[i] &gt;= d[len])
+                d[++len]=b[i];
+            else
+                *upper_bound(d+1,d+len+1,b[i])=b[i];
+        }
+</code></pre>
 <p><a href="https://vjudge.net/problem/POJ-3486">poj3486</a><br>
 你想保证 n 年中你都有一台电脑，一开始你有一台。<br>
 如果你在第 y (1≤y≤n) 年购买了一台电脑，那么你需要花费 c的代价。<br>
@@ -746,6 +741,7 @@ int main()
 <p>（2）假设我们得到了最小划分的K组导弹，从第a(1&lt;=a&lt;=K)组导弹中任取一个导弹，必定可以从a+1组中找到一个导弹的高度比这个导弹高（因为假如找不到，那么它就是比a+1组中任意一个导更高，在打第a组时应该会把a+1组所有导弹一起打下而不是另归为第a+1组），同样从a+1组到a+2组也是如此。那么就可以从前往后在每一组导弹中找一个更高的连起来，连成一条上升子序列，其长度即为K;</p>
 <p>（3）设最长上升子序列长度为P，则有K&lt;=P;又因为最长上升子序列中任意两个不在同一组内(否则不满足单调不升)，则有<br>
 P&gt;=K，所以K=P。</p>
+<p>Dilworth定理的大概意思：不下降子序列最小个数等于最大上升子序列的长度。</p>
 <pre><code>#include&lt;iostream&gt;
 #include&lt;cstdio&gt;
 #include&lt;cstring&gt;
@@ -911,34 +907,432 @@ int main()
 	return 0;
 }
 </code></pre>
+<p><a href="https://www.luogu.com.cn/problem/P1387">P1387</a><br>
+题意：<br>
+在一个n*m的只包含0和1的矩阵里找出一个不包含0的最大正方形，输出边长。</p>
+<p>题解：<br>
+状态转移方程<br>
+if(mp[i][j]==1){<br>
+dp[i][j]=min(min(dp[i-1][j],dp[i][j-1]),dp[i-1][j-1])+1;<br>
+}</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+const int N=110;
+int a[N][N];
+int f[N][N];
+int n,m;
 
-                                </div>
-                    </article>
-                    <!--  -->
-                    
-                        <div class="next-post">
-                            <div class="next">下一篇</div>
-                            <a href="https://caifxh.github.io/post/zi-fu-chuan-fu-xi-yi/">
-                                <h3 class="post-title">
-                                    字符串复习（一）
-                                </h3>
-                            </a>
-                        </div>
-                        
-                            <div id="disqus_thread"></div>
-                            <div id="gitalk-container"></div>
-                </div>
-                <!-- middle -->
-                <div class="main-container-middle"></div>
-                <!-- right -->
-                <div id="sidebar" class="main-container-right">
-                    
-                        <!-- toc -->
-                        
-    <div class="toc-card i-card ">
-        <div class="toc-title i-card-title">目录</div>
-        <div class="toc-content">
-            <ul class="markdownIt-TOC">
+int main()
+{
+	cin&gt;&gt;n&gt;&gt;m;
+	
+	for(int i=1;i&lt;=n;i++)
+		for(int j=1;j&lt;=m;j++)
+			scanf(&quot;%d&quot;,&amp;a[i][j]);
+	
+	int ans=0;
+	for(int i=1;i&lt;=n;i++)
+		for(int j=1;j&lt;=m;j++)
+		{
+			if(a[i][j] == 1)
+				f[i][j]=min(min(f[i-1][j],f[i][j-1]),f[i-1][j-1])+1;
+			ans=max(ans,f[i][j]);	
+		}	
+	
+	cout&lt;&lt;ans&lt;&lt;endl;
+	
+	return 0;
+}
+</code></pre>
+<p><a href="https://www.luogu.com.cn/problem/P2062">P2062</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/05/16/9969_0aea860297-20.PNG" alt="20.PNG" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+const int N=1e6+10;
+int a[N];
+int f[N],g[N];
+int n;
+
+int main()
+{
+	cin&gt;&gt;n;
+	
+	for(int i=1;i&lt;=n;i++) scanf(&quot;%d&quot;,&amp;a[i]);
+
+	sort(a+1,a+n+1);
+
+	for(int i=1;i&lt;=n;i++)
+	{
+		if(i &gt;= a[i]) f[i]=g[i-a[i]]+1;
+		g[i]=max(g[i-1],f[i]);
+	}
+	
+	cout&lt;&lt;f[n]&lt;&lt;endl;
+	
+	return 0;
+}
+</code></pre>
+<p><a href="https://www.luogu.com.cn/problem/P1108">P1108</a><br>
+1.由于数据是5000的，而且需要统计方案数，所以我们对于第一个问题直接用个O(n^2)的最长下降子序列搞一搞就好了。<br>
+用f数组保存以第i个数字为结尾的最长下降序列的长度。<br>
+2.对于第2问，<br>
+有一个变种（比本题较为简单）：就是不去重的方案数。那么我们考虑维护另一个g数组<br>
+令g[i]表示以第i个数字为结尾的最长序列的个数，我们在1...i-1找到所有的满足a[j]&gt;a[i]并且f[j]+1==f[i]，这样就说明i可以由j转移过来，那么我们把g[i]+=g[j]就好了，对于所有f[i]==1的，g[i]直接赋成1就好了。</p>
+<p>然后我们再来考虑本题。<br>
+我们考虑一下什么样的方案是重复的？就是有同一个数字的。并且这个数字在同一个位置上。</p>
+<p>转化成程序语言就是假设枚举到一个i时，存在一个j使得a[i]==a[j] &amp;&amp; f[i]==f[j]，那么这个i与j显然就是完全等效的了，我们只需要一个，而i&gt;j，所以直接把g[j]赋成0（直接去掉这个方案）就可以了。</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+using namespace std;
+const int N=5010;
+typedef long long LL;
+int a[N];
+int f[N],g[N];
+int n;
+
+int main()
+{
+	cin&gt;&gt;n;
+	
+	for(int i=1;i&lt;=n;i++)
+		cin&gt;&gt;a[i];
+	
+	int ans=0;
+	for(int i=1;i&lt;=n;i++)
+	{
+		f[i]=1;
+		for(int j=1;j&lt;i;j++)
+			if(a[i] &lt; a[j]) 
+				f[i]=max(f[i],f[j]+1);
+		ans=max(ans,f[i]);
+	}
+	
+	cout&lt;&lt;ans&lt;&lt;' ';
+	
+	int res=0;
+	for(int i=1;i&lt;=n;i++)
+	{
+		if(f[i] == 1) g[i]=1;
+		for(int j=1;j&lt;i;j++)
+			if(f[i] == f[j]+1 &amp;&amp; a[i] &lt; a[j]) g[i]+=g[j];
+			else if(f[i] == f[j] &amp;&amp; a[i] == a[j]) g[j]=0;
+		
+	}
+	
+	for(int i=1;i&lt;=n;i++)
+		if(f[i] == ans) res+=g[i];
+	
+	cout&lt;&lt;res&lt;&lt;endl;
+	
+	return 0;
+}
+</code></pre>
+<p><a href="https://www.luogu.com.cn/problem/P1736">P1736</a><br>
+这道题其实和P1387 最大正方形很像，只不过多了一个预处理罢了</p>
+<p>s1[i][j]表示（i，j）最多向左（或右）延伸多少个格子，使这些格子中的数都是0（不包括（i，j））<br>
+s2[i][j]表示（i，j）最多向上延伸多少个格子，使这些格子中的数都是0（不包括（i，j））<br>
+f[i][j]表以（i，j）为右下（左下）角的最大对角线长度</p>
+<p>方程：f[i][j]=min(f[i-1][j-1],min(s1[i][j-1],s2[i-1][j]))+1;</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+using namespace std;
+const int N=2510;
+int a[N][N];
+int f[N][N];
+int lt[N][N],rt[N][N],up[N][N];
+int n,m;
+
+int main()
+{
+	cin&gt;&gt;n&gt;&gt;m;
+	
+	int ans=0;
+	for(int i=1;i&lt;=n;i++)
+		for(int j=1;j&lt;=m;j++)
+		{
+			scanf(&quot;%d&quot;,&amp;a[i][j]);
+			if(!a[i][j]) lt[i][j]=lt[i][j-1]+1,up[i][j]=up[i-1][j]+1;
+			else f[i][j]=min(f[i-1][j-1],min(lt[i][j-1],up[i-1][j]))+1;
+			
+			ans=max(ans,f[i][j]);
+		}
+	
+	memset(f,0,sizeof f);
+	memset(up,0,sizeof up);
+	
+	for(int i=1;i&lt;=n;i++)
+		for(int j=m;j&gt;=1;j--)
+		{
+			if(!a[i][j]) rt[i][j]=rt[i][j+1]+1,up[i][j]=up[i-1][j]+1;
+			else f[i][j]=min(f[i-1][j+1],min(rt[i][j+1],up[i-1][j]))+1;
+			
+			ans=max(ans,f[i][j]);
+		}
+	
+	cout&lt;&lt;ans&lt;&lt;endl;
+	
+	return 0;
+}
+</code></pre>
+<p><a href="https://www.luogu.com.cn/problem/P3089">P3089</a><br>
+f[i][j]表示最后一步跳到点从j点跳到i点的最大价值（状态不能设成f[i]，因为j对后面的决策是有影响的），然后枚举k转移，但这样在时限内是无法通过的，于是考虑如何优化dp，可以改变一下枚举顺序，也就是一般的都是先枚举i再枚举j，可以先枚举j再枚举i，这样有什么好处呢，那么k就以直接用一个指针从j-1扫到1，因为随着i的不断增加，i与j之间的距离是递增的，那么之前合法的决策现在也一定合法，那么就可以用一个值记录最大的f[j][k]，转移即可。然后还要记得正反做两遍。</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstring&gt;
+using namespace std;
+const int N=1010;
+struct Node
+{
+	int x,p;
+	bool operator&lt;(const Node &amp;W) const 
+	{
+		return x&lt;W.x;
+	}
+}a[N];
+int f[N][N];//前i个，从第j个跳过来 
+int n;
+
+int main()
+{
+	cin&gt;&gt;n;
+	
+	for(int i=1;i&lt;=n;i++) cin&gt;&gt;a[i].x&gt;&gt;a[i].p;
+	
+	sort(a+1,a+n+1);
+	
+	int ans=0;
+	for(int j=1;j&lt;=n;j++)
+	{
+		int k=j-1,val=a[j].p;
+		for(int i=j+1;i&lt;=n;i++)
+		{
+			while(k &amp;&amp; a[i].x - a[j].x &gt;= a[j].x - a[k].x)
+				val=max(val,f[j][k]),k--;
+			f[i][j]=max(f[i][j],val+a[i].p);
+			ans=max(ans,f[i][j]);
+		}
+	}
+	
+	for(int j=n;j&gt;=1;j--)
+	{
+		int k=j+1,val=a[j].p;
+		for(int i=j-1;i&gt;=1;i--)
+		{
+			while(k &lt;= n &amp;&amp; a[j].x - a[i].x &gt;= a[k].x - a[j].x)
+				val=max(val,f[j][k]),k++;
+			f[i][j]=max(f[i][j],val+a[i].p);
+			ans=max(ans,f[i][j]);
+		}	
+	}
+	
+	cout&lt;&lt;ans&lt;&lt;endl;
+	
+	return 0;
+}
+</code></pre>
+<p><a href="https://www.luogu.com.cn/problem/P1353">P1353</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/05/21/9969_518a703c9b-29.PNG" alt="29.PNG" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+using namespace std;
+const int N=10010,M=510;
+int f[N][M];//前i分钟疲劳度为j 
+int d[N];
+int n,m;
+
+int main()
+{
+	cin&gt;&gt;n&gt;&gt;m;
+	
+	for(int i=1;i&lt;=n;i++) cin&gt;&gt;d[i];
+	
+	for(int i=1;i&lt;=n;i++)
+	{
+		f[i][0]=max(f[i][0],f[i-1][0]);
+		for(int j=1;j&lt;=min(i,m);j++)
+		{
+			f[i][0]=max(f[i][0],f[i-j][j]);	//休息
+			f[i][j]=max(f[i][j],f[i-1][j-1]+d[i]);//跑步
+		}
+	}
+	
+	cout&lt;&lt;f[n][0]&lt;&lt;endl;
+	
+	return 0;
+}
+</code></pre>
+<p><a href="https://vjudge.net/problem/POJ-3267">poj3267</a><br>
+dp[i]表示从1-&gt;i中最少要删除的字符数量<br>
+状态转移方程：<br>
+1、当匹配到单词时 dp[i] = min(dp[i],dp[l] + r - l - len[k])<br>
+2、当匹配不到单词是 dp[i] = dp[i-1] + 1</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+using namespace std;
+const int N=610,M=310;
+char s[N][30];
+char str[M];
+int f[M];
+int n,m;
+
+int main()
+{
+	cin&gt;&gt;n&gt;&gt;m;
+	cin&gt;&gt;str+1;
+	
+	for(int i=1;i&lt;=n;i++) cin&gt;&gt;s[i]+1;
+	
+	for(int i=1;i&lt;=m;i++)
+	{
+		f[i]=f[i-1]+1;
+		for(int j=1;j&lt;=n;j++)
+		{
+			int l=i,r=i;
+			int len=strlen(s[j]+1);
+			int k=len;
+			for(;k &amp;&amp; l;l--)
+				if(s[j][k] == str[l])
+					k--;
+			
+			if(!k) f[i]=min(f[i],f[l]+i-l-len);
+		}
+	}
+	
+	cout&lt;&lt;f[m]&lt;&lt;endl;
+	return 0;
+}
+</code></pre>
+<p><a href="https://www.luogu.com.cn/problem/P228">P2285</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/05/23/9969_d9fa64009c-31.PNG" alt="31.PNG" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;cmath&gt;
+using namespace std;
+const int N=10010;
+int x[N],y[N],t[N];
+int f[N];
+int n,m;
+
+int main()
+{
+	cin&gt;&gt;n&gt;&gt;m;
+	
+	for(int i=1;i&lt;=m;i++) scanf(&quot;%d%d%d&quot;,t+i,x+i,y+i);
+
+	for(int i=1;i&lt;=m;i++) f[i]=1;
+	
+	int ans=0;	
+	for(int i=1;i&lt;=m;i++)
+	{
+		for(int j=1;j&lt;i;j++)
+			if(abs(x[i]-x[j])+abs(y[i]-y[j]) &lt;= t[i]-t[j])
+				f[i]=max(f[i],f[j]+1);
+		ans=max(ans,f[i]);
+	}
+	
+	cout&lt;&lt;ans&lt;&lt;endl;
+	
+	return 0;
+}
+</code></pre>
+<p><a href="https://www.luogu.com.cn/problem/P1107">P1107</a><br>
+a[i][x] 第i棵树高度j上的柿子数量<br>
+f[i][j] 到第i棵树的高度j时所能摘到的最多数量<br>
+如果当前高度j&gt;delta 那么f[i][j]=max(往下走1 f[i][j-1],往其它柱子跳）+当前点的柿子数<br>
+这时枚举k 表示要跳到的其它柱子，注意k不能等于i，方程：f[i][j]=max(f[i][j],f[k][j-delta]);</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+using namespace std;
+const int N=2010;
+int a[N][N];
+int f[N][N];//当前在第i根柱子上，处于第j层 
+int n,h,delta;
+
+int main()
+{
+	scanf(&quot;%d%d%d&quot;,&amp;n,&amp;h,&amp;delta);
+	
+	for(int i=1;i&lt;=n;i++)
+	{
+		int k;
+		scanf(&quot;%d&quot;,&amp;k);
+		for(int j=1;j&lt;=k;j++)
+		{
+			int x;
+			scanf(&quot;%d&quot;,&amp;x);
+			a[i][x]++;
+		}
+	}
+	for(int j=1;j&lt;=h;j++)
+		for(int i=1;i&lt;=n;i++)
+		{
+			f[i][j]=f[i][j-1]+a[i][j];
+			for(int k=1;k&lt;=n;k++)
+				if(k != i &amp;&amp; j &gt;= delta)
+					f[i][j]=max(f[i][j],f[k][j-delta]+a[i][j]);
+		}
+	
+	int ans=0;	
+	for(int i=1;i&lt;=n;i++)
+		ans=max(ans,f[i][h]);
+	
+	cout&lt;&lt;ans&lt;&lt;endl;
+	
+	return 0;
+ } 
+</code></pre>
+<p>观察发现，f[i][j]的值为f[k][j−delta]（k不等于i）和f[i][j−1]中的最小值，所以我们不妨把f[i][j]的初值制为f[i][j−1]。用ans[i]代表到高度为i的地方所能摘到的最大数量</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+using namespace std;
+const int N=2010;
+int a[N][N];
+int f[N][N];//当前在第i根柱子上，处于第j层 
+int ans[N];
+int n,h,delta;
+
+int main()
+{
+	scanf(&quot;%d%d%d&quot;,&amp;n,&amp;h,&amp;delta);
+	
+	for(int i=1;i&lt;=n;i++)
+	{
+		int k;
+		scanf(&quot;%d&quot;,&amp;k);
+		for(int j=1;j&lt;=k;j++)
+		{
+			int x;
+			scanf(&quot;%d&quot;,&amp;x);
+			a[i][x]++;
+		}
+	}
+	for(int j=1;j&lt;=h;j++)
+		for(int i=1;i&lt;=n;i++)
+		{
+			f[i][j]=f[i][j-1]+a[i][j];
+			if(j &gt;= delta) f[i][j]=max(f[i][j],ans[j-delta]+a[i][j]);
+			ans[j]=max(ans[j],f[i][j]);
+		}
+
+	cout&lt;&lt;ans[h]&lt;&lt;endl;
+	
+	return 0;
+ } 
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
 <li>
 <ul>
 <li>
@@ -960,60 +1354,73 @@ int main()
 </li>
 </ul>
 
-        </div>
-        <script>
-            function locateCatelogList() {
-                /*获取文章目录集合,可通过:header过滤器*/
-                var alis = $('.post-content :header');
-                /*获取侧边栏目录列表集合**/
-                var sidebar_alis = $('.markdownIt-TOC a');
-                /*获取滚动条到顶部的距离*/
-                var scroll_height = $(window).scrollTop();
-                for (var i = 0; i < alis.length; i++) {
-                    /*获取锚点集合中的元素分别到顶点的距离*/
-                    var a_height = $(alis[i]).offset().top;
-                    if (a_height < scroll_height) {
-                        /*高亮显示*/
-                        sidebar_alis.removeClass('on');
-                        $(sidebar_alis[i]).addClass('on');
-                    }
-                }
-            }
-            $(function() {
-                /*绑定滚动事件 */
-                $(window).bind('scroll', locateCatelogList);
-            });
-        </script>
-    </div>
-    
-                            
-
-                </div>
-
-
-
-
+              </div>
             </div>
+          </article>
+        </div>
 
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://caifxh.github.io/post/zi-fu-chuan-fu-xi-yi/">
+              <h3 class="post-title">
+                字符串复习（一）
+              </h3>
+            </a>
+          </div>
+        
 
-            <div class="site-footer">
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
-  <a class="rss" href="https://caifxh.github.io/atom.xml" target="_blank">RSS</a>
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://caifxh.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
 </div>
 
-<script>
-  hljs.initHighlightingOnLoad()
-</script>
-
-
+      </div>
     </div>
-    <script>
-        $('#sidebar').stickySidebar({
-            topSpacing: 80,
-            // bottomSpacing: 60
-        });
-    </script>
-    
-</body>
 
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
 </html>

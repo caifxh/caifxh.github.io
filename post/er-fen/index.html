@@ -1,118 +1,100 @@
 <html>
-
-<head>
+  <head>
     <meta charset="utf-8" />
-<meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>
-    二分 | fxh
-</title>
-<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1588691348423">
-<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
-<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<title>二分 | Gridea</title>
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1594373367136">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://caifxh.github.io/styles/main.css">
-<!-- js -->
-<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://caifxh.github.io/media/js/jquery.sticky-sidebar.min.js"></script>
-<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+<link rel="alternate" type="application/atom+xml" title="二分 | Gridea - Atom Feed" href="https://caifxh.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
-        
-</head>
 
-<body>
+    <meta name="description" content="P1462
+∎题目描述
+　给定无向图，n个点，m条双向边，每个点有点权fi（这个点的过路费），有边权ci（这条路的血量）。求起点1到终点N的所有可能路径中，在总边权（总血量）不超过给定的b的前提下，所经过的路径中最大点权（这条路径上过路费最..." />
+    <meta name="keywords" content="其他算法" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
     <div class="main">
-        <div class="header">
-    <div class="nav">
-        <div class="logo">
-            <a href="https://caifxh.github.io">
-                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1588691348423" alt="">
-            </a>
-            <div class="site-title">
-                <h1>
-                    fxh
-                </h1>
-            </div>
-        </div>
-        <span class="menu-btn fa fa-align-justify"></span>
-        <div class="menu-container">
-            <ul>
-                
-                    
-                            <li>
-                                <a href="/" class="menu">
-                                    首页
-                                </a>
-                            </li>
-                            
-                                
-                    
-                            <li>
-                                <a href="/archives" class="menu">
-                                    归档
-                                </a>
-                            </li>
-                            
-                                
-                    
-                            <li>
-                                <a href="/tags" class="menu">
-                                    标签
-                                </a>
-                            </li>
-                            
-                                
-                    
-                            <li>
-                                <a href="/post/about" class="menu">
-                                    关于
-                                </a>
-                            </li>
-                            
-                                
-            </ul>
-        </div>
-    </div>
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://caifxh.github.io">
+  <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1594373367136" alt="">
+  </a>
+  <h1 class="site-title">
+    Gridea
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
 </div>
 
-<script>
-    $(document).ready(function() {
-        $(".menu-btn").click(function() {
-            $(".menu-container").slideToggle();
-        });
-        $(window).resize(function() {
-
-            if (window.matchMedia('(min-width: 960px)').matches) {
-                $(".menu-container").css('display', 'block')
-            } else {
-                $(".menu-container").css('display', 'none')
-            }
-
-        });
-    });
-</script>
-
-            <div id="main-content" class="post-detail main-container">
-                <!-- left -->
-                <div id="content" class="main-container-left">
-                    <article class="post i-card">
-                        <h2 class="post-title">
-                            二分
-                        </h2>
-                        <div class="post-info">
-                            <time class="post-time">2020-04-13</time>
-                            
-                                <a href="https://caifxh.github.io/tag/TZ7cITYtt/" class="post-tag i-tag
-                            i-tag-other_2">
-                            #其他算法
-                        </a>
-                                
-                        </div>
-                        
-                                <div class="post-content">
-                                    <p><a href="https://www.luogu.com.cn/problem/P1462">P1462</a><br>
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              二分
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-04-13
+              </span>
+              <span>
+                21 min read
+              </span>
+              
+                <a href="https://caifxh.github.io/tag/PJzBixWKZ/" class="post-tag">
+                  # 其他算法
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p><a href="https://www.luogu.com.cn/problem/P1462">P1462</a><br>
 ∎题目描述<br>
 　给定无向图，n个点，m条双向边，每个点有点权fi（这个点的过路费），有边权ci（这条路的血量）。求起点1到终点N的所有可能路径中，在总边权（总血量）不超过给定的b的前提下，所经过的路径中最大点权（这条路径上过路费最大的那个点）的最小值是多少。<br>
 题目数据：n≤10000，m≤50000，fi，ci，B≤1e9。<br>
@@ -696,34 +678,142 @@ int main()
 	return 0;
 }
 </code></pre>
+<p><a href="https://vjudge.net/problem/POJ-3104">poj3104</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/05/14/9969_d774c16495-11.png" alt="11.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/05/14/9969_da4a6b4695-12.PNG" alt="12.PNG" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+const int N=1e5+10;
+typedef long long LL;
+int a[N];
+int n,k;
 
-                                </div>
-                    </article>
-                    <!--  -->
-                    
-                        <div class="next-post">
-                            <div class="next">下一篇</div>
-                            <a href="https://caifxh.github.io/post/xian-duan-shu-yi-dan-dian-xiu-gai/">
-                                <h3 class="post-title">
-                                    线段树（一）单点修改
-                                </h3>
-                            </a>
-                        </div>
-                        
-                            <div id="disqus_thread"></div>
-                            <div id="gitalk-container"></div>
-                </div>
-                <!-- middle -->
-                <div class="main-container-middle"></div>
-                <!-- right -->
-                <div id="sidebar" class="main-container-right">
-                    
-                        <!-- toc -->
-                        
-    <div class="toc-card i-card ">
-        <div class="toc-title i-card-title">目录</div>
-        <div class="toc-content">
-            <ul class="markdownIt-TOC">
+bool check(int mid)
+{
+	LL sumt=0;
+	for(int i=0;i&lt;n;i++)
+	{
+		if(a[i] &gt; mid)
+			sumt+=(a[i]-mid+k-2)/(k-1);//上取整 
+	}
+	
+	return sumt &lt;= mid;
+}
+
+int main()
+{
+	scanf(&quot;%d&quot;,&amp;n);
+	
+	int l=1,r=0;
+	for(int i=0;i&lt;n;i++) scanf(&quot;%d&quot;,&amp;a[i]),r=max(r,a[i]);
+	
+	scanf(&quot;%d&quot;,&amp;k);
+	
+	if(k == 1)
+	{
+		cout&lt;&lt;r&lt;&lt;endl;
+		return 0;
+	}
+
+	while(l&lt;r)
+	{
+		int mid=l+r&gt;&gt;1;
+		if(check(mid)) r=mid;
+		else l=mid+1;
+	}
+	
+	cout&lt;&lt;l&lt;&lt;endl;
+	
+	return 0;
+}
+</code></pre>
+<p><a href="https://vjudge.net/problem/POJ-2002">poj2002</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/05/15/9969_3608931496-13.png" alt="13.png" loading="lazy"><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/05/15/9969_38d0bed296-14.png" alt="14.png" loading="lazy"><br>
+解题思路：</p>
+<ul>
+<li>把输入数据放入哈希表</li>
+<li>根据两个点（x1,y1）,(x2,y2），得到另外2个点（x3,y3）,(x4,y4），在哈希表中查找是否存在，如果存在，计数；</li>
+<li>根据两个点（x1,y1）,(x2,y2），得到另外2个点（x5,y5）,(x6,y6），在哈希表中查找是否存在，如果存在，计数；</li>
+<li>计数时每个正方形每条边都枚举了一次，所以答案除以4。。</li>
+</ul>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+using namespace std;
+const int N=1010,mod=1003;
+typedef pair&lt;int,int&gt; PII;
+int px[N],py[N];
+int h[N],ne[N],idx;
+PII e[N];
+int n;
+
+void insert(int x,int y)
+{
+	int k=(x*x+y*y)%mod;
+	e[idx]=make_pair(x,y);
+	ne[idx]=h[k];
+	h[k]=idx++;
+}
+
+bool find(int x,int y)
+{
+	int k=(x*x+y*y)%mod;
+	for(int i=h[k];~i;i=ne[i])
+	{
+		PII t=e[i];
+		if(t.first == x &amp;&amp; t.second == y) return true;
+	}
+	return false;
+}
+
+int main()
+{
+	while(~scanf(&quot;%d&quot;,&amp;n) &amp;&amp; n)
+	{
+		memset(h,-1,sizeof h);
+		idx=0;
+		for(int i=0;i&lt;n;i++)
+		{
+			scanf(&quot;%d%d&quot;,&amp;px[i],&amp;py[i]);
+			insert(px[i],py[i]);
+		}
+		
+		int ans=0;
+		for(int i=0;i&lt;n;i++)
+			for(int j=i+1;j&lt;n;j++)
+			{
+				int x1=px[i]+(py[j]-py[i]);
+				int y1=py[i]+(px[i]-px[j]);
+				int x2=px[j]+(py[j]-py[i]);
+				int y2=py[j]+(px[i]-px[j]);
+				if(find(x1,y1) &amp;&amp; find(x2,y2))
+					ans++;
+			}
+		
+		for(int i=0;i&lt;n;i++)
+			for(int j=i+1;j&lt;n;j++)
+			{
+				int x1=px[i]-(py[j]-py[i]);
+				int y1=py[i]-(px[i]-px[j]);
+				int x2=px[j]-(py[j]-py[i]);
+				int y2=py[j]-(px[i]-px[j]);
+				if(find(x1,y1) &amp;&amp; find(x2,y2))
+					ans++;
+			}
+		
+		ans&gt;&gt;=2;
+		printf(&quot;%d\n&quot;,ans);
+	}
+}
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
 <li>
 <ul>
 <li>
@@ -739,60 +829,73 @@ int main()
 </li>
 </ul>
 
-        </div>
-        <script>
-            function locateCatelogList() {
-                /*获取文章目录集合,可通过:header过滤器*/
-                var alis = $('.post-content :header');
-                /*获取侧边栏目录列表集合**/
-                var sidebar_alis = $('.markdownIt-TOC a');
-                /*获取滚动条到顶部的距离*/
-                var scroll_height = $(window).scrollTop();
-                for (var i = 0; i < alis.length; i++) {
-                    /*获取锚点集合中的元素分别到顶点的距离*/
-                    var a_height = $(alis[i]).offset().top;
-                    if (a_height < scroll_height) {
-                        /*高亮显示*/
-                        sidebar_alis.removeClass('on');
-                        $(sidebar_alis[i]).addClass('on');
-                    }
-                }
-            }
-            $(function() {
-                /*绑定滚动事件 */
-                $(window).bind('scroll', locateCatelogList);
-            });
-        </script>
-    </div>
-    
-                            
-
-                </div>
-
-
-
-
+              </div>
             </div>
+          </article>
+        </div>
 
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://caifxh.github.io/post/xian-duan-shu-yi-dan-dian-xiu-gai/">
+              <h3 class="post-title">
+                线段树（一）单点修改
+              </h3>
+            </a>
+          </div>
+        
 
-            <div class="site-footer">
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
-  <a class="rss" href="https://caifxh.github.io/atom.xml" target="_blank">RSS</a>
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://caifxh.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
 </div>
 
-<script>
-  hljs.initHighlightingOnLoad()
-</script>
-
-
+      </div>
     </div>
-    <script>
-        $('#sidebar').stickySidebar({
-            topSpacing: 80,
-            // bottomSpacing: 60
-        });
-    </script>
-    
-</body>
 
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
 </html>

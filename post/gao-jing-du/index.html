@@ -1,118 +1,101 @@
 <html>
-
-<head>
+  <head>
     <meta charset="utf-8" />
-<meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>
-    高精度 | fxh
-</title>
-<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1588691348423">
-<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
-<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<title>高精度 | Gridea</title>
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1594373367136">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://caifxh.github.io/styles/main.css">
-<!-- js -->
-<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://caifxh.github.io/media/js/jquery.sticky-sidebar.min.js"></script>
-<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+<link rel="alternate" type="application/atom+xml" title="高精度 | Gridea - Atom Feed" href="https://caifxh.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
-        
-</head>
 
-<body>
+    <meta name="description" content="高精度加法
+当进行加法运算的数字较大时，受存储范围限制，无法使用int或longlong型变量进行存储。
+考虑到加法运算的本质，不妨将数字拆开来存储。
+对于一个超过变量存储数据范围的数字，可以将这个数字拆开，拆成一位一位的，或者是几位几位的..." />
+    <meta name="keywords" content="其他算法" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
     <div class="main">
-        <div class="header">
-    <div class="nav">
-        <div class="logo">
-            <a href="https://caifxh.github.io">
-                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1588691348423" alt="">
-            </a>
-            <div class="site-title">
-                <h1>
-                    fxh
-                </h1>
-            </div>
-        </div>
-        <span class="menu-btn fa fa-align-justify"></span>
-        <div class="menu-container">
-            <ul>
-                
-                    
-                            <li>
-                                <a href="/" class="menu">
-                                    首页
-                                </a>
-                            </li>
-                            
-                                
-                    
-                            <li>
-                                <a href="/archives" class="menu">
-                                    归档
-                                </a>
-                            </li>
-                            
-                                
-                    
-                            <li>
-                                <a href="/tags" class="menu">
-                                    标签
-                                </a>
-                            </li>
-                            
-                                
-                    
-                            <li>
-                                <a href="/post/about" class="menu">
-                                    关于
-                                </a>
-                            </li>
-                            
-                                
-            </ul>
-        </div>
-    </div>
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://caifxh.github.io">
+  <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1594373367136" alt="">
+  </a>
+  <h1 class="site-title">
+    Gridea
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
 </div>
 
-<script>
-    $(document).ready(function() {
-        $(".menu-btn").click(function() {
-            $(".menu-container").slideToggle();
-        });
-        $(window).resize(function() {
-
-            if (window.matchMedia('(min-width: 960px)').matches) {
-                $(".menu-container").css('display', 'block')
-            } else {
-                $(".menu-container").css('display', 'none')
-            }
-
-        });
-    });
-</script>
-
-            <div id="main-content" class="post-detail main-container">
-                <!-- left -->
-                <div id="content" class="main-container-left">
-                    <article class="post i-card">
-                        <h2 class="post-title">
-                            高精度
-                        </h2>
-                        <div class="post-info">
-                            <time class="post-time">2020-04-08</time>
-                            
-                                <a href="https://caifxh.github.io/tag/TZ7cITYtt/" class="post-tag i-tag
-                            i-tag-other_2">
-                            #其他算法
-                        </a>
-                                
-                        </div>
-                        
-                                <div class="post-content">
-                                    <h4 id="高精度加法">高精度加法</h4>
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              高精度
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-04-08
+              </span>
+              <span>
+                14 min read
+              </span>
+              
+                <a href="https://caifxh.github.io/tag/PJzBixWKZ/" class="post-tag">
+                  # 其他算法
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h4 id="高精度加法">高精度加法</h4>
 <p>当进行加法运算的数字较大时，受存储范围限制，无法使用int或longlong型变量进行存储。<br>
 考虑到加法运算的本质，不妨将数字拆开来存储。<br>
 对于一个超过变量存储数据范围的数字，可以将这个数字拆开，拆成一位一位的，或者是几位几位的存储到一个数组中， 用一个数组去表示一个数字</p>
@@ -435,34 +418,190 @@ int main()
 <p><a href="https://www.luogu.com.cn/problem/P1255">数楼梯</a><br>
 斐波那契递推<br>
 <a href="https://paste.ubuntu.com/p/JKWpDTPXrj/">code</a></p>
+<p><a href="https://www.luogu.com.cn/problem/P1249">P1249</a><br>
+【思路】<br>
+1、这道题预先需要知道的一点是：数越多，乘积越大。<br>
+“1”对于乘积是没有收益的，我们要从2~n-1中选出尽可能多的数，使它们的和为n。然后把选出的数相乘就是答案。<br>
+2、两个特例，“3”和“4”。这两个只能从拆成“1+2”和“1+3”</p>
+<p>【流程】<br>
+输入——选数——高精度乘法——输出。（选数时和高精度乘法无关）<br>
+【如何选数】<br>
+我们就以13为例，“2”、“3”、“4”都可以选，但是“5”如果选了，sum（2，3，4，5）=14超过13，5不能选。此时sum（2，3，4）=9，还余4，我们把4这个值分配到“2”、“3”、“4”这三个数上。</p>
+<p>怎么分最好？这里有两个原则：<br>
+（1）增长的数的个数越多，乘积越大。“2+1”、“3+1”、“4+2”优于“2”、“3”、“4+4”；<br>
+（2）若只有部分数能增长，那么本身大的增长后，乘积更大。“2”、“3”、“4+1”优于“2+1”、“3”、“4”<br>
+所以对于 “2”、“3”、“4”，余4 来说。</p>
+<p>可以都增长，那么变成 “2+1”、“3+1”、“4+1”，余1 。<br>
+不能都增长，那么变成 “3”、“4”、“5+1”，余0</p>
+<p>【高精度乘法】<br>
+选数之后就是把所有选择的数相乘，因为最终值可能很大，所以需要用到高精度乘法，关于高精度乘法，不赘述。<br>
+【代码】</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+#include&lt;vector&gt;
+using namespace std;
+const int N=40010;
+struct bignum
+{
+	int m[N];
+	int len;
+	bignum()
+	{
+		memset(m,0,sizeof m);
+		len=0;
+	}
+};
+vector&lt;int&gt; num;
+int n;
 
-                                </div>
-                    </article>
-                    <!--  -->
-                    
-                        <div class="next-post">
-                            <div class="next">下一篇</div>
-                            <a href="https://caifxh.github.io/post/shu-xing-dp/">
-                                <h3 class="post-title">
-                                    树形dp
-                                </h3>
-                            </a>
-                        </div>
-                        
-                            <div id="disqus_thread"></div>
-                            <div id="gitalk-container"></div>
-                </div>
-                <!-- middle -->
-                <div class="main-container-middle"></div>
-                <!-- right -->
-                <div id="sidebar" class="main-container-right">
-                    
-                        <!-- toc -->
-                        
-    <div class="toc-card i-card ">
-        <div class="toc-title i-card-title">目录</div>
-        <div class="toc-content">
-            <ul class="markdownIt-TOC">
+void init()
+{
+	int sum=0;
+	for(int i=2;i&lt;n;i++)
+		if(sum + i &gt; n)
+		{
+			int remain=n-sum;
+			while(remain)
+			{
+				for(int j=num.size()-1;j&gt;=0;j--)
+				{
+					remain--;
+					num[j]++;
+					if(!remain) return;
+				}
+			}
+		}
+		else num.push_back(i),sum+=i;
+}
+
+bignum mul(bignum a,int b)
+{
+	bignum c;
+	c.len=a.len;
+	for(int i=0;i&lt;c.len;i++) c.m[i]=a.m[i]*b;
+	for(int i=0;i&lt;c.len;i++)
+	{
+		c.m[i+1]+=c.m[i]/10;
+		c.m[i]%=10;
+		if(i == c.len-1 &amp;&amp; c.m[i+1]) c.len++;
+	}
+	return c;
+}
+
+int main()
+{
+	cin&gt;&gt;n;
+	
+	if(n == 3)
+	{
+		cout&lt;&lt;1&lt;&lt;' '&lt;&lt;2&lt;&lt;endl;
+		cout&lt;&lt;2&lt;&lt;endl;
+	}
+	else if(n == 4)
+	{
+		cout&lt;&lt;1&lt;&lt;' '&lt;&lt;3&lt;&lt;endl;
+		cout&lt;&lt;3&lt;&lt;endl;
+	}
+	else 
+	{
+		init();
+		
+		bignum ans;
+		ans.m[0]=1,ans.len=1;
+		
+		for(int i=0;i&lt;num.size();i++)
+			ans=mul(ans,num[i]);
+		
+		for(int i=0;i&lt;num.size();i++)
+			cout&lt;&lt;num[i]&lt;&lt;' ';
+		cout&lt;&lt;endl;
+		
+		for(int i=ans.len-1;i&gt;=0;i--)
+			printf(&quot;%d&quot;,ans.m[i]);
+		puts(&quot;&quot;);
+	}
+	return 0;
+}
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://cdn.acwing.com/media/article/image/2020/05/25/9969_2bdee5009e-33.PNG" alt="33.PNG" loading="lazy"></figure>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+#include&lt;vector&gt;
+#include&lt;cmath&gt;
+using namespace std;
+const int N=10010,M=40010,INF=0x3f3f3f3f;
+struct bignum
+{
+	int m[M];
+	int len;
+	bignum()
+	{
+		memset(m,0,sizeof m);
+		len=0;
+	}
+};
+double w[N];
+double f[N];
+int trans[N];
+vector&lt;int&gt; num;
+int n;
+
+bignum mul(bignum a,int b)
+{
+	bignum c;
+	c.len=a.len;
+	for(int i=0;i&lt;c.len;i++) c.m[i]=a.m[i]*b;
+	
+	for(int i=0;i&lt;c.len;i++)
+	{
+		c.m[i+1]+=c.m[i]/10;
+		c.m[i]%=10;
+		if(i == c.len-1 &amp;&amp; c.m[i+1]) c.len++;
+	}
+	return c;
+}
+
+int main()
+{
+	cin&gt;&gt;n;
+	
+	for(int i=1;i&lt;=n;i++) w[i]=log(i);
+	
+	for(int i=1;i&lt;=n;i++) f[i]=-INF;
+	
+	for(int i=1;i&lt;=n;i++)
+		for(int j=n;j&gt;=i;j--)
+			if(f[j-i]+w[i] &gt; f[j])
+				f[j]=f[j-i]+w[i],trans[j]=j-i;
+				
+	for(int p=n;p;p=trans[p])
+		num.push_back(p-trans[p]);
+ 
+	bignum ans;
+	ans.m[0]=1,ans.len=1;
+	
+	for(int i=num.size()-1;i&gt;=0;i--)
+		ans=mul(ans,num[i]);
+	
+	for(int i=num.size()-1;i&gt;=0;i--)
+		cout&lt;&lt;num[i]&lt;&lt;' ';
+	cout&lt;&lt;endl;
+	
+	for(int i=ans.len-1;i&gt;=0;i--)
+		printf(&quot;%d&quot;,ans.m[i]);
+	puts(&quot;&quot;);
+	
+	return 0;
+}
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
 <li>
 <ul>
 <li>
@@ -484,60 +623,73 @@ int main()
 </li>
 </ul>
 
-        </div>
-        <script>
-            function locateCatelogList() {
-                /*获取文章目录集合,可通过:header过滤器*/
-                var alis = $('.post-content :header');
-                /*获取侧边栏目录列表集合**/
-                var sidebar_alis = $('.markdownIt-TOC a');
-                /*获取滚动条到顶部的距离*/
-                var scroll_height = $(window).scrollTop();
-                for (var i = 0; i < alis.length; i++) {
-                    /*获取锚点集合中的元素分别到顶点的距离*/
-                    var a_height = $(alis[i]).offset().top;
-                    if (a_height < scroll_height) {
-                        /*高亮显示*/
-                        sidebar_alis.removeClass('on');
-                        $(sidebar_alis[i]).addClass('on');
-                    }
-                }
-            }
-            $(function() {
-                /*绑定滚动事件 */
-                $(window).bind('scroll', locateCatelogList);
-            });
-        </script>
-    </div>
-    
-                            
-
-                </div>
-
-
-
-
+              </div>
             </div>
+          </article>
+        </div>
 
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://caifxh.github.io/post/shu-xing-dp/">
+              <h3 class="post-title">
+                树形dp
+              </h3>
+            </a>
+          </div>
+        
 
-            <div class="site-footer">
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
-  <a class="rss" href="https://caifxh.github.io/atom.xml" target="_blank">RSS</a>
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://caifxh.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
 </div>
 
-<script>
-  hljs.initHighlightingOnLoad()
-</script>
-
-
+      </div>
     </div>
-    <script>
-        $('#sidebar').stickySidebar({
-            topSpacing: 80,
-            // bottomSpacing: 60
-        });
-    </script>
-    
-</body>
 
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
 </html>

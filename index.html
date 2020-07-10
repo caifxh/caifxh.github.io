@@ -1,2716 +1,313 @@
 <html>
-
-<head>
+  <head>
     <meta charset="utf-8" />
-<meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>
-    fxh
-</title>
-<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1588691348423">
-<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
-<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<title>Gridea</title>
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1594373367136">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://caifxh.github.io/styles/main.css">
-<!-- js -->
-<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://caifxh.github.io/media/js/jquery.sticky-sidebar.min.js"></script>
-<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+<link rel="alternate" type="application/atom+xml" title="Gridea - Atom Feed" href="https://caifxh.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
-</head>
 
-<body>
+    <meta name="description" content="温故而知新" />
+  </head>
+  <body>
     <div class="main">
-        <div class="header">
-    <div class="nav">
-        <div class="logo">
-            <a href="https://caifxh.github.io">
-                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1588691348423" alt="">
-            </a>
-            <div class="site-title">
-                <h1>
-                    fxh
-                </h1>
-            </div>
-        </div>
-        <span class="menu-btn fa fa-align-justify"></span>
-        <div class="menu-container">
-            <ul>
-                
-                    
-                            <li>
-                                <a href="/" class="menu">
-                                    首页
-                                </a>
-                            </li>
-                            
-                                
-                    
-                            <li>
-                                <a href="/archives" class="menu">
-                                    归档
-                                </a>
-                            </li>
-                            
-                                
-                    
-                            <li>
-                                <a href="/tags" class="menu">
-                                    标签
-                                </a>
-                            </li>
-                            
-                                
-                    
-                            <li>
-                                <a href="/post/about" class="menu">
-                                    关于
-                                </a>
-                            </li>
-                            
-                                
-            </ul>
-        </div>
-    </div>
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://caifxh.github.io">
+  <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1594373367136" alt="">
+  </a>
+  <h1 class="site-title">
+    Gridea
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
 </div>
 
-<script>
-    $(document).ready(function() {
-        $(".menu-btn").click(function() {
-            $(".menu-container").slideToggle();
-        });
-        $(window).resize(function() {
-
-            if (window.matchMedia('(min-width: 960px)').matches) {
-                $(".menu-container").css('display', 'block')
-            } else {
-                $(".menu-container").css('display', 'none')
-            }
-
-        });
-    });
-</script>
-
-            <div id="main-content" class="post-container main-container">
-                <div id="content" class="main-container-left">
-                    
-        
-            <article class="post i-card">
-                <h2 class="post-title">
-                    <a href="https://caifxh.github.io/post/you-xian-dui-lie/">
-                        优先队列
-                    </a>
-                </h2>
-                <div class="post-info">
-                    <time class="post-time">2020-05-05</time>
-                    
-                </div>
-                <div class="post-article">
-                    
-                            <div class="post-content">
-                                
-                                        <div class="post-content-content">
-                                            优先队列
-hdu4006
-
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;cstdio&amp;gt;
-#include&amp;lt;cstring&amp;gt;
-#include&amp;lt;algorithm&amp;gt;
-#include&amp;lt;queue&amp;gt;
-using namespace std;
-int n,k;
-
-int main()
-{
-	while(~scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;k))
-	{
-		priority_queue&amp;lt;int,vector&amp;lt;int&amp;gt;,greater&amp;lt;int&amp;gt; &amp;gt; heap;	
-		for(int i=1;i&amp;lt;=n;i++)
-		{
-			char op[2];
-			scanf(&amp;quot;%s&amp;quot;,op);
-			if(*op == &#39;I&#39;)
-			{
-				int x;
-				scanf(&amp;quot;%d&amp;quot;,&amp;amp;x);
-				if(heap.size() &amp;lt; k)
-					heap.push(x);
-				else if(heap.top() &amp;lt; x)
-					heap.pop(),heap.push(x);
-			}
-			else 
-				printf(&amp;quot;%d\n&amp;quot;,heap.top());
-		}
-	}
-	return 0;
- } 
-
-poj2833
-
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;cstdio&amp;gt;
-#include&amp;lt;cstring&amp;gt;
-#include&amp;lt;algorithm&amp;gt;
-#include&amp;lt;queue&amp;gt;
-using namespace std;
-typedef long long LL;
-int n,n1,n2;
-
-int main()
-{
-	while(~scanf(&amp;quot;%d%d%d&amp;quot;,&amp;amp;n1,&amp;amp;n2,&amp;amp;n))
-	{
-		if(!n1 &amp;amp;&amp;amp; !n2 &amp;amp;&amp;amp; !n) break;
-		
-		priority_queue&amp;lt;int,vector&amp;lt;int&amp;gt;,greater&amp;lt;int&amp;gt; &amp;gt; heap1;
-		priority_queue&amp;lt;int&amp;gt; heap2;
-		
-		LL sum=0;
-		for(int i=0;i&amp;lt;n;i++)
-		{
-			int x;
-			scanf(&amp;quot;%d&amp;quot;,&amp;amp;x);
-			sum+=x;
-			
-			if(heap1.size() &amp;lt; n1) heap1.push(x);
-			else if(heap1.top() &amp;lt; x)
-				heap1.pop(),heap1.push(x);
-			
-			if(heap2.size() &amp;lt; n2) heap2.push(x);
-			else if(heap2.top() &amp;gt; x)
-				heap2.pop(),heap2.push(x);
-		}
-		while(!heap1.empty()) sum-=heap1.top(),heap1.pop();
-		while(!heap2.empty()) sum-=heap2.top(),heap2.pop();
-		
-		printf(&amp;quot;%.6f\n&amp;quot;,(double)sum/(n-n1-n2));
-	}
-}
-
-poj2431
-
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;cstdio&amp;gt;
-#include&amp;lt;cstring&amp;gt;
-#include&amp;lt;algorithm&amp;gt;
-#include&amp;lt;queue&amp;gt;
-using namespace std;
-const int N=10010;
-typedef pair&amp;lt;int,int&amp;gt; PII;
-PII sta[N];
-int n,L,P;
-
-int main()
-{
-	cin&amp;gt;&amp;gt;n;
-	
-	for(int i=0;i&amp;lt;n;i++)
-	cin&amp;gt;&amp;gt;sta[i].first&amp;gt;&amp;gt;sta[i].second;
-
-	cin&amp;gt;&amp;gt;L&amp;gt;&amp;gt;P;
-	
-	sort(sta,sta+n,greater&amp;lt;PII&amp;gt;());
-	n++;
-	sta[n-1]={0,0};
-	
-	int res=0;
-	int oil=P;
-	int last=L;
-	priority_queue&amp;lt;int&amp;gt; heap;
-	bool flag=true;
-	for(int i=0;i&amp;lt;n;i++)
-	{
-		oil-=last-sta[i].first;	
-		//cout&amp;lt;&amp;lt;last-sta[i].first&amp;lt;&amp;lt;endl;
-		last=sta[i].first;
-	
-		while(oil &amp;lt; 0)
-		{
-			if(heap.empty())
-			{
-				flag=false;
-				break;
-			}
-			int t=heap.top();
-			heap.pop();
-			res++;
-			oil+=t;
-		}
-		
-		if(!flag) break;
-		
-		heap.push(sta[i].second);
-	}
-	if(!flag) res=-1;
-	printf(&amp;quot;%d\n&amp;quot;,res);
-
-	return 0;
-}
-
-
-                                        </div>
-                                        
-                                            <a class="btn btn-text" href="https://caifxh.github.io/post/you-xian-dui-lie/">Read More ~</a>
-                            </div>
-                </div>
-            </article>
-            
-            <article class="post i-card">
-                <h2 class="post-title">
-                    <a href="https://caifxh.github.io/post/stl/">
-                        STL
-                    </a>
-                </h2>
-                <div class="post-info">
-                    <time class="post-time">2020-04-30</time>
-                    
-                        <a href="https://caifxh.github.io/tag/TZ7cITYtt/" class="post-tag i-tag
-                            i-tag-error">
-            #其他算法
-        </a>
-                        
-                </div>
-                <div class="post-article">
-                    
-                            <div class="post-content">
-                                
-                                        <div class="post-content-content">
-                                            STL的lower_bound()和upper_bound()
-如果只是简单地找x或x附近的数，就用STL的lower_bound()和upper_bound()函数。有以下情况：
-（1）查找第一个大于x的元素的位置：upper_bound()。代码例如：
-pos = upper_bound(a, a+n, test) - a;
-（2）查找第一个等于或者大于x的元素：lower_bound()。
-（3）查找第一个与x相等的元素：lower_bound()且 = x。
-（4）查找最后一个与x相等的元素：upper_bound()的前一个且 = x。
-（5）查找最后一个等于或者小于x的元素：upper_bound()的前一个。
-（6）查找最后一个小于x的元素：lower_bound()的前一个。
-（7）单调序列中数x的个数：upper_bound() - lower_bound()。
-
-                                        </div>
-                                        
-                                            <a class="btn btn-text" href="https://caifxh.github.io/post/stl/">Read More ~</a>
-                            </div>
-                </div>
-            </article>
-            
-            <article class="post i-card">
-                <h2 class="post-title">
-                    <a href="https://caifxh.github.io/post/codeforces-round-636-div-3/">
-                        Codeforces Round #636 (Div. 3)
-                    </a>
-                </h2>
-                <div class="post-info">
-                    <time class="post-time">2020-04-23</time>
-                    
-                        <a href="https://caifxh.github.io/tag/XNpmSrxzO/" class="post-tag i-tag
-                            i-tag-success">
-            #比赛
-        </a>
-                        
-                </div>
-                <div class="post-article">
-                    
-                            <div class="post-content">
-                                
-                                        <div class="post-content-content">
-                                            C. Alternating Subsequence
-首先，让我们通过包含由具有相同符号的数字组成的数组的分段来提取最大值。 例如，如果数组为[1,1,2，-1，-5,2,1，-3]，则这些段为[1,1,2]，[-1，-5]，[2， 1]和[−3]。 我们可以使用任何类似于“两个指针”的算法来做到这一点。 这些段的数量是交替子序列的最大可能长度，因为我们只能从每个块中提取一个元素。 当我们想最大化总和时，我们需要从每个块中取最大元素。
-时间复杂度：O（n）
-#include&amp;lt;iostream&amp;gt;
-using namespace std;
-typedef long long LL;
-const int N=2e5+10;
-int a[N];
-int n;
-
-int sgn(int x)
-{
-	if(x&amp;gt;0) return 1;
-	return 0;
-}
-
-int main()
-{
-	int T;
-	cin&amp;gt;&amp;gt;T;
-	while(T--)
-	{
-		int n;
-		cin&amp;gt;&amp;gt;n;
-		for(int i=1;i&amp;lt;=n;i++)
-			cin&amp;gt;&amp;gt;a[i];
-		
-		LL sum=0;
-		for(int i=1;i&amp;lt;=n;i++)
-		{
-			int cur=a[i];
-			int j=i;
-			while(j&amp;lt;=n &amp;amp;&amp;amp; sgn(a[i]) == sgn(a[j]))
-			{
-				cur=max(cur,a[j]);
-				j++;
-			}
-			sum+=cur;
-			i=j-1;
-		}
-		cout&amp;lt;&amp;lt;sum&amp;lt;&amp;lt;endl;
-	}
-	return 0;
-}
-
-D - Constant Palindrome Sum
-差分数组维护取某个值为定值时所需要的最少操作次数
-分类讨论得到：
-一、如果定值 x 在 [2,minn] 之间，即使将较大的数更改为1后，和也是大于x，说明此时这两个数都需要更改，所以这段区间的操作数+2
-二、如果定值 x 在 [maxn+k+1,2*k]之间，即使将较小的数更改为k后，和也是小于x，说明此时这两个数都需要更改，所以这段区间的操作数+2
-三、如果定值 x 在 [minn+1,maxn+k] 之间且不等于 sum，能够做到只改变其中一个数就使得和等于x，所以这个范围内操作数+1
-四、特殊处理，如果定值 x 等于 sum，不需要更改任何一个数，所以这个点的操作数不需要增加
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;cstdio&amp;gt;
-#include&amp;lt;cstring&amp;gt;
-using namespace std;
-const int N=2e5+10;
-int a[N],b[N*2];
-int n,k;
-
-int main()
-{
-	int T;
-	cin&amp;gt;&amp;gt;T;
-	while(T--)
-	{
-		memset(b,0,sizeof b);
-		
-		scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;k);
-		
-		for(int i=1;i&amp;lt;=n;i++) scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]);
-		
-		for(int i=1;i&amp;lt;=n/2;i++)
-		{
-			int maxv=max(a[i],a[n-i+1]);
-			int minv=min(a[i],a[n-i+1]);
-			
-			int sum=a[i]+a[n-i+1];
-			
-			b[2]+=2;
-			b[minv+1]-=2;
-			
-			b[maxv+k+1]+=2;
-			b[2*k+1]-=2;
-			
-			b[minv+1]++;
-			b[maxv+k+1]--;
-			
-			b[sum]--;
-			b[sum+1]++;
-		}
-		
-		int ans=n;
-		for(int i=2;i&amp;lt;=2*k;i++)
-		{
-			b[i]+=b[i-1];
-			ans=min(ans,b[i]);
-		}
-		
-		cout&amp;lt;&amp;lt;ans&amp;lt;&amp;lt;endl;
-	}
-	return 0;
-}
-
-E. Weights Distributing
-如果我们以最优方式分配成本，那么这对路径（a→b和b→c）看起来就像是一条直线路径，不会两次访问相同的顶点，或者就像是三个具有一个交点x的直线路径。 第一种情况基本上是第二种情况的子情况（具有相交点a，b或c）。 因此，如果我们固定交点x，则这两个路径（a→b和b→c）变为四个路径（a→x，x→b，b→x和x→c）。 我们可以注意到，我们表示的每条路径都应该是最短的路径，因为如果不是最短的路径，那么我们将使用一些我们无法使用的价格。
-dist（a，x）+ dist（b，x）+ dist（c，x）最小成本。 现在，我们希望以某种方式在这三个路径之间分配这些成本。 我们可以看到从b到x的路径被使用了两次，因此沿这部分分配最小的成本是最优的。 因此，令prefi为前i个最小费用的总和（只是排序数组p上的前缀总和）。 那么对于交点x，答案是pref[dist（b，x）]+ pref[dist（a，x）+ dist（b，x）+ dist（c，x）]（如果dist（a，x）+ dist（b，x ）+ dist（c，x）≤m）。
-时间复杂度：O（mlogm）
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;cstring&amp;gt;
-#include&amp;lt;algorithm&amp;gt;
-#include&amp;lt;cstdio&amp;gt;
-#include&amp;lt;vector&amp;gt;
-#include&amp;lt;queue&amp;gt;
-using namespace std;
-typedef long long LL;
-const int N=2e5+10,INF=0x3f3f3f3f;
-vector&amp;lt;int&amp;gt; g[N];
-int p[N];
-LL sum[N];
-int dist[3][N];
-int n,m,a,b,c;
-
-void bfs(int u,int type)
-{
-	memset(dist[type],0x3f,sizeof dist[type]);
-	dist[type][u]=0;
-	queue&amp;lt;int&amp;gt; q;
-	q.push(u);
-
-	while(!q.empty())
-	{
-		int t=q.front();
-		q.pop();
-		for(int i=0;i&amp;lt;g[t].size();i++)
-		{
-			int j=g[t][i];
-			if(dist[type][j] == INF)
-			{
-				dist[type][j]=dist[type][t]+1;
-				q.push(j);
-			}	
-		}
-	}
-}
-
-int main()
-{
-	int T;
-	cin&amp;gt;&amp;gt;T;
-	while(T--)
-	{
-		cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m&amp;gt;&amp;gt;a&amp;gt;&amp;gt;b&amp;gt;&amp;gt;c;
-		
-		for(int i=1;i&amp;lt;=n;i++)	
-			g[i].clear();
-			
-		for(int i=1;i&amp;lt;=m;i++)
-			scanf(&amp;quot;%d&amp;quot;,&amp;amp;p[i]);
-		sort(p+1,p+m+1);
-		
-		for(int i=1;i&amp;lt;=m;i++)
-			sum[i]=sum[i-1]+p[i];
-		
-		for(int i=0;i&amp;lt;m;i++)
-		{
-			int a,b;
-			scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;a,&amp;amp;b);
-			g[a].push_back(b);
-			g[b].push_back(a);
-		}
-		
-		bfs(a,0);
-		bfs(b,1);
-		bfs(c,2);
-		
-		LL ans=4e18;
-		for(int i=1;i&amp;lt;=n;i++)
-		{
-			int t=dist[0][i]+dist[1][i]+dist[2][i];
-			if(t &amp;lt;= m) ans=min(ans,sum[t]+sum[dist[1][i]]);
-		}
-		cout&amp;lt;&amp;lt;ans&amp;lt;&amp;lt;endl;
-	}
-	return 0;
-}
-
-
-                                        </div>
-                                        
-                                            <a class="btn btn-text" href="https://caifxh.github.io/post/codeforces-round-636-div-3/">Read More ~</a>
-                            </div>
-                </div>
-            </article>
-            
-            <article class="post i-card">
-                <h2 class="post-title">
-                    <a href="https://caifxh.github.io/post/jin-jie-zhi-nan-di-yi-zhang/">
-                        进阶指南第一章
-                    </a>
-                </h2>
-                <div class="post-info">
-                    <time class="post-time">2020-04-17</time>
-                    
-                        <a href="https://caifxh.github.io/tag/dftBgq7Gf/" class="post-tag i-tag
-                            i-tag-">
-            #蓝书
-        </a>
-                        
-                </div>
-                <div class="post-article">
-                    
-                            <div class="post-content">
-                                
-                                        <div class="post-content-content">
-                                            递推和递归
-acwing95
-
-每个位置至多只会被点击一次
-若固定了第一行，则满足题意的点击方案至多只有一种。原因：当第i行某一位为1时，若前i行已被固定，只能点击第i+1行该位置上的数字才能使dii行的这一位变成0.从上到下使用归纳法可得上述结论。
-点击的先后顺序不影响最终结果
-
-于是，我们不妨先考虑第一行如何点击。在枚举第一行的点击方案后，就可以认为第一行固定不动，在考虑2~5行如何点击
-若到达第n行是不全为1，说明这种点击方式不合法。
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;cstdio&amp;gt;
-#include&amp;lt;cstring&amp;gt;
-#include&amp;lt;algorithm&amp;gt;
-using namespace std;
-const int N=6,INF=0x3f3f3f3f;
-int g[N][N];
-int tmp[N][N];
-int dx[]={0,-1,0,1,0},dy[]={0,0,-1,0,1};
-
-void modify(int x,int y)
-{
-	for(int i=0;i&amp;lt;5;i++)
-	{
-		int a=x+dx[i],b=y+dy[i];
-		if(a&amp;gt;=0 &amp;amp;&amp;amp; a&amp;lt;5 &amp;amp;&amp;amp; b&amp;gt;=0 &amp;amp;&amp;amp; b&amp;lt;5)
-		    tmp[a][b]^=1;
-	}
-}
-
-int main()
-{
-	int T;
-	cin&amp;gt;&amp;gt;T;
-	while(T--)
-	{
-		for(int i=0;i&amp;lt;5;i++)
-			for(int j=0;j&amp;lt;5;j++)
-			{
-			    char c;
-			    cin&amp;gt;&amp;gt;c;
-			    g[i][j]=c-&#39;0&#39;;
-			}
-
-		int ans=INF;
-		int cnt=0;
-		for(int s=0;s&amp;lt;1&amp;lt;&amp;lt;5;s++)//枚举第一行点击方案
-		{
-			cnt=0;
-			memcpy(tmp,g,sizeof g);
-			for(int i=0;i&amp;lt;5;i++)
-			    if(s&amp;gt;&amp;gt;i &amp;amp; 1) 
-			    {
-			        modify(0,i);
-			        cnt++;
-			    }
+    
+        <div class="post-container">
   
-			for(int i=0;i&amp;lt;4;i++)
-				for(int j=0;j&amp;lt;5;j++)
-					if(!tmp[i][j])
-					{
-						modify(i+1,j);
-						cnt++;
-					}
-			
-			bool flag=true;
-		    for(int i=0;i&amp;lt;5;i++)
-		        if(!tmp[4][i])   
-		            flag=false;
-		
-			if(flag) ans=min(ans,cnt);
-		}
-		
-		if(ans &amp;gt; 6) cout&amp;lt;&amp;lt;-1&amp;lt;&amp;lt;endl;
-	    else cout&amp;lt;&amp;lt;ans&amp;lt;&amp;lt;endl;
-	}
-
-	return 0;
-}
-
-aciwng96
-
-我们先考虑三个塔的汉诺塔问题，最优秀方案：必然是先挪走n-1个圆盘，然后再挪走圆盘N，
-因此可以得出递推方程也就是 d[i]=d[i-1]*2+1;
-之所以要乘以2，是因为第一次挪到第二个塔，然后还要挪移回到第三个塔，下面四个塔也是这样的
-接着考虑四塔问题，我们可以这么思考，首先挪走j个塔，也就是有四个塔可以选择，然后再挪走剩下的n-j个塔，此时有三个塔可以选择，因此这就是我们的状态转移方程：f[i]=min(f[i],f[j]*2+d[n-j]);//i表示当前一共有几个塔，也就是上文所说的n
-
-#include &amp;lt;bits/stdc++.h&amp;gt;
-using namespace std;
-int d[15],f[15];
-
-int main()
-{
-    for (int i=1;i&amp;lt;=12;i++)
-        d[i]=2*d[i-1]+1;
+    <article class="post">
+      <a href="https://caifxh.github.io/post/sou-suo/">
+        <h2 class="post-title">搜索</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2020-05-30
+        </span>
+        <span>
+          16 min read
+        </span>
         
-    memset(f,0x3f,sizeof(f));
-    f[0]=0;
-    
-    for (int i=1;i&amp;lt;=12;i++)
-        for (int j=0;j&amp;lt;i;j++)
-            f[i]=min(f[i],f[j]+f[j]+d[i-j]);
-    
-    for (int i=1;i&amp;lt;=12;i++)
-        cout&amp;lt;&amp;lt;f[i]&amp;lt;&amp;lt;endl;
-    
-    return 0;
-}
-
-acwing98
-1.绕原点顺时针旋转θ角度的变换矩阵
- \begin{matrix}
-   cosθ &amp;amp; sinθ \\\
-   -sinθ &amp;amp; cosθ  \\\
-  \end{matrix} 
-
-2.为方便计算，下标从1开始
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;cstdio&amp;gt;
-#include&amp;lt;cstring&amp;gt;
-#include&amp;lt;algorithm&amp;gt;
-#include&amp;lt;cmath&amp;gt;
-using namespace std;
-typedef long long LL;
-typedef pair&amp;lt;LL,LL&amp;gt; PLL;
-int n;
-LL a,b;
-
-PLL calc(int n,LL m)
-{
-	if(!n) return {0,0};
-	LL len=1ll&amp;lt;&amp;lt;(n-1),cnt=1ll&amp;lt;&amp;lt;(2*n-2);
-	PLL pos=calc(n-1,m%cnt);
-	LL x=pos.first,y=pos.second;
-	LL z=m/cnt;
-	if(z == 0) return {y,x};
-	else if(z == 1) return {x,y+len};
-	else if(z == 2) return {x+len,y+len};
-	else return {2*len-1-y,len-1-x};
-}
-
-int main()
-{
-	int T;
-	cin&amp;gt;&amp;gt;T;
-	while(T--)
-	{
-		cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;a&amp;gt;&amp;gt;b;
-		PLL pa=calc(n,a-1);
-		PLL pb=calc(n,b-1);
-
-		double dx=pa.first-pb.first,dy=pa.second-pb.second;
-		printf(&amp;quot;%.0f\n&amp;quot;,round(sqrt(dx*dx+dy*dy)*10));
-	}
-	return 0;
-}
-
-差分
-acwing100
-因为是区间整体加减1，所以我们很自然的就可以想到用差分求解。
-这道题可以看做求出原序列的差分之后，将 S[2...n] 全部变为0所需的最少的步数和可以使 S[1] 变为多少种不同的数。
-求出a的差分序列b，其中b1 = a1,b(i) = a(i) - a(i - 1) (2 &amp;lt;= i &amp;lt;= n)。令b(n + 1) = 0，题目对序列a的操作，相当于每次可以选出b1,b2…b(n + 1)中的任意两个数，一个加1，另外一个减一。目标是把b2,b3,…bn变为全0。最终得到的数列a就是由 n 个 b1 构成的
-任选两个数的方法可分为四类
-1、2 &amp;lt;= i , j &amp;lt;=n（优先）
-2、i = 1, 2 &amp;lt;=j &amp;lt;=n
-3、2 &amp;lt;= i &amp;lt;= n , j = n + 1
-4、i = 1, j = n + 1（没有意义）
-设b2,b3....bn中正数总和为p，负数总和的绝对值为q。首先以正负数匹配的方式尽量执行1类操作，可执行min(p,q)次。剩余|p - q|个为匹对，每个可以选与b1或b(n + 1)匹配，即执行2 或 3 类操作，共需|p - q|次
-综上所诉，最少操作次数为min(p,q) + |p - q|。根据|p - q|次第2、3类操作的选择分配情况，能产生|p - q| + 1中不同的b1的值，即最终得到的序列a可能有|p - q| + 1 种
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;cstdio&amp;gt;
-#include&amp;lt;algorithm&amp;gt;
-#include&amp;lt;cstring&amp;gt;
-using namespace std;
-typedef long long LL;
-const int N=500010;
-int a[N],b[N];
-int n;
-
-int main()
-{
-	cin&amp;gt;&amp;gt;n;
-	
-	for(int i=1;i&amp;lt;=n;i++) cin&amp;gt;&amp;gt;a[i];
-	
-	for(int i=1;i&amp;lt;=n;i++) b[i]=a[i]-a[i-1];
-	
-    LL pos=0,neg=0;
-	for(int i=2;i&amp;lt;=n;i++)
-		if(b[i] &amp;gt; 0) pos+=b[i];
-		else neg-=b[i];
-		
-	cout&amp;lt;&amp;lt;min(pos,neg)+abs(pos-neg)&amp;lt;&amp;lt;endl;
-	cout&amp;lt;&amp;lt;abs(pos-neg)+1&amp;lt;&amp;lt;endl;
-	
-	return 0; 
- } 
-
-二分
-通过二分给定一个平均数，如果把数列中每个数都减去平均数得到数组B[]，就转换为判定“是否存在一个长度不小于L的子段，子段和非负”
-上述问题中，需要对B[]数组进行前缀和sun[],[i,j]表示长度为L的区间，minv表示sum[i]的最小值（该最小值的位置和 j 位置的距离一定大于等于L），通过j枚举整个数组B[]，若sum[j] - minv &amp;gt;= 0 则表示存在该平均数使得该平均数满足题目条件，返回ture，否则返回false
-#include&amp;lt;iostream&amp;gt;
-using namespace std;
-const int N=100010;
-int a[N];
-double s[N];
-int n,m;
-
-bool check(double mid)
-{
-	for(int i=1;i&amp;lt;=n;i++)
-		s[i]=s[i-1]+a[i]-mid;
-	
-	double val=1e9;
-	for(int i=m;i&amp;lt;=n;i++)
-	{
-		val=min(val,s[i-m]);
-		if(s[i] - val &amp;gt;= 0) return true;
-	}
-	return false;
-}
-
-int main()
-{
-	cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m;
-	
-	double l=0,r=0;
-	for(int i=1;i&amp;lt;=n;i++)
-		cin&amp;gt;&amp;gt;a[i],r=max(r,(double)a[i]);
-		
-	while(r-l&amp;gt;1e-5)
-	{
-		double mid=(l+r)/2;
-		if(check(mid)) l=mid;
-		else r=mid;
-	}
-	
-	printf(&amp;quot;%d\n&amp;quot;,int(r*1000));
-	
-	return 0;
-}
-
-
-                                        </div>
-                                        
-                                            <a class="btn btn-text" href="https://caifxh.github.io/post/jin-jie-zhi-nan-di-yi-zhang/">Read More ~</a>
-                            </div>
-                </div>
-            </article>
-            
-            <article class="post i-card">
-                <h2 class="post-title">
-                    <a href="https://caifxh.github.io/post/kang-tuo-zhan-kai/">
-                        康托展开
-                    </a>
-                </h2>
-                <div class="post-info">
-                    <time class="post-time">2020-04-15</time>
-                    
-                        <a href="https://caifxh.github.io/tag/14SoYNkfD/" class="post-tag i-tag
-                            i-tag-primary">
-            #数学
-        </a>
-                        
-                </div>
-                <div class="post-article">
-                    
-                            <div class="post-content">
-                                
-                                        <div class="post-content-content">
-                                            1.康托展开是个啥
-一句话，给出一个全排列，求它是第几个全排列，叫做康托展开。
-另一句话，给出全排列长度和它是第几个全排列，求这个全排列，叫做逆康托展开。
-这里，全排列的顺序定义和火星人中的定义是一样的。
-
-拿52413举例子：
-1、首先看第一个数 5，不管第一位是什么数，后面都有四位数，那么这四位数全排列的方式有 4！种，而如果第一位是 1 或 2 或 3 或 4 都会比5开头的字典序要小，所以可以令1，2，3，4分别作为开头，这样的话就会有 4 * 4！种排法要比  52413这种排法的字典序要小。
-那么第一个数是1，2，3，4时候的字典序的个数数完了是 4 * 4！ 种，且这些字典序都要比52413的字典序要小。
-2、那么就可以固定第一位5，找下一位2，这时5已经用过了，所以从剩下的 1，2，3，4 里挑选比2小的数，一共1个，后面还剩三位，也就是3！种排列方式，那么这时候比 52413 字典序要小的又有  1 * 3！种，也就是当5在第一位，1在第二位的时候。
-3、再看第三位3，这时5，2都用了，所以从剩下的 1，3，4种找比他小的数的个数，原理同上，所以这时候也可以有 1 * 2!种排列方式的字典序小于 52413
-4、再看第四位1，这时候会有 0 * 1！种
-5、再看第五位3，这时候会有0 * 0！种
-综上所述：
-对于序列： 52413 该序列展开后为： 4 * 4! + 1 * 3! + 2 * 2! + 0 * 1! + 0 * 0! ，计算结果是： 106
-由于是从0开始计数的，所以最后 52413 的编号为 107
-为什么从0开始计数？
-可以这样看：我现在让你求12345的康托展开值，也就是：04！+ 03！+ 02！+ 01！+0*0！ =  0 所以明白了吧~~
-康托公式最小字典序的编号就是0，一般求出来后咱们往往习惯于从1开始。
-暴力：O(n2)O(n^2)O(n2)
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;cstdio&amp;gt;
-using namespace std;
-typedef long long LL;
-const int N=1e7+10,mod=998244353;
-int a[N];
-LL fac[N];
-int c[N];
-int n;
-
-void init()
-{
-	fac[0]=1;
-	for(int i=1;i&amp;lt;=n;i++)
-		fac[i]=fac[i-1]*i%mod;
-}
-
-int main()
-{
-	cin&amp;gt;&amp;gt;n;
-	
-	init();
-	
-	for(int i=1;i&amp;lt;=n;i++)
-		scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]);
-	
-	int ans=0;
-	for(int i=1;i&amp;lt;=n;i++)
-	{
-		int cnt=0;
-		for(int j=i+1;j&amp;lt;=n;j++)
-			if(a[i] &amp;gt; a[j])
-				cnt++;
-		ans=(ans+cnt*fac[n-i])%mod;
-	}
-	
-	printf(&amp;quot;%d\n&amp;quot;,ans+1);
-	
-	return 0;
-}
-
-树状数组优化：O(nlogn)O(nlogn)O(nlogn)
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;cstdio&amp;gt;
-using namespace std;
-typedef long long LL;
-const int N=1e7+10,mod=998244353;
-int a[N];
-LL fac[N];
-int c[N];
-int n;
-
-void init()
-{
-	fac[0]=1;
-	for(int i=1;i&amp;lt;=n;i++)
-		fac[i]=fac[i-1]*i%mod;
-}
-
-int lowbit(int x)
-{
-	return x&amp;amp;-x;
-}
-
-void add(int x,int v)
-{
-	for(int i=x;i&amp;lt;=n;i+=lowbit(i))
-		c[i]+=v;
-}
-
-int query(int x)
-{
-	int res=0;
-	for(int i=x;i;i-=lowbit(i))
-		res=(res+c[i])%mod;
-	return res;
-}
-
-int main()
-{
-	cin&amp;gt;&amp;gt;n;
-	
-	init();
-	
-	for(int i=1;i&amp;lt;=n;i++)	
-		add(i,1);
-	
-	int ans=0;
-	for(int i=1;i&amp;lt;=n;i++)
-	{
-		scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]);
-		ans=(ans+(query(a[i])-1)*fac[n-i])%mod;
-		add(a[i],-1);
-	}	
-	
-	printf(&amp;quot;%d\n&amp;quot;,ans+1);
-	
-	return 0;
-}
-
-康托逆展开
-和上面相反，已知某排列的排名xxx，求这个排列。
-解决思路基本没区别（说是相反也行）：
-假设我们现在要求aia_iai​的值，首先可以得到bi=x÷(n−i)!b_i=x\div (n-i)!bi​=x÷(n−i)!。
-那么也就是知道了aia_iai​在当前未出现过的aaa中的排名。
-但仅仅知道这个不能直接计算，所以我们还要记录一下前i−1i-1i−1位出现过的aaa。
-然后O(n)O(n)O(n)枚举求出答案。
-下面是一个例子：
-
-此时n=8,i=4n=8,i=4n=8,i=4，前333位出现了1,4,61,4,61,4,6。
-假设bi=3b_i=3bi​=3，那么aia_iai​在未出现的数里排名第333。
-由于排名是从000开始的，aia_iai​就是灰色的第444个数777。
-以{3,4,1,5,2}为例，其康托展开值为61：
-
-
-用 61 / 4! = 2余13，则a[1] = 2，即首位右边比首位小的数有2个，所以首位为3。
-
-
-用 13 / 3! = 2余1，则a[2] = 2，即在第二位之后小于第二位的数有2个，所以第二位为4。
-
-
-用 1 / 2! = 0余1，则a[3] = 0，即在第三位之后没有小于第三位的数，所以第三位为1。
-
-
-用 1 / 1! = 1余0，则a[4] = 1，即在第四位之后小于第四位的数有1个，所以第四位为5。
-
-
-最后一位自然就是剩下的数2。
-
-
-通过以上分析，所求排列组合为 34152。
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;cstdio&amp;gt;
-using namespace std;
-typedef long long LL;
-const int N=10010;
-int a[N];
-LL fac[N];
-bool vis[N];
-int n,m,k;
-
-void init()
-{
-	fac[0]=1;
-	for(int i=1;i&amp;lt;=n;i++)	
-		fac[i]=fac[i-1]*i;
-}
-
-void incantor()
-{
-	for(int i=1;i&amp;lt;=n;i++)
-	{
-		int t=k/fac[n-i];
-		k%=fac[n-i];
-		
-		int cnt=0;
-		int j;
-		for(j=1;;j++)
-		{
-			if(!vis[j]) cnt++;
-			if(cnt &amp;gt; t) break;
-		}
-		a[i]=j;
-		vis[j]=1;
-	}
-}
-
-int main()
-{
-	cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;k;
-	k--;
-	
-	init();
-	
-	incantor();
-
-	for(int i=1;i&amp;lt;=n;i++)
-		printf(&amp;quot;%d &amp;quot;,a[i]);
-	
-	return 0;
-}
-
-
-                                        </div>
-                                        
-                                            <a class="btn btn-text" href="https://caifxh.github.io/post/kang-tuo-zhan-kai/">Read More ~</a>
-                            </div>
-                </div>
-            </article>
-            
-            <article class="post i-card">
-                <h2 class="post-title">
-                    <a href="https://caifxh.github.io/post/niu-ke-han-jia-di-san-chang/">
-                        牛客寒假第三场
-                    </a>
-                </h2>
-                <div class="post-info">
-                    <time class="post-time">2020-04-14</time>
-                    
-                </div>
-                <div class="post-article">
-                    
-                            <div class="post-content">
-                                
-                                        <div class="post-content-content">
-                                            A
-
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;cstdio&amp;gt;
-using namespace std;
-const int N=55,mod=1e9+7;
-char g[N][N];
-int f[N][N];
-int n,m;
-
-int main()
-{
-	cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m;
-	
-	for(int i=0;i&amp;lt;n;i++)
-		for(int j=0;j&amp;lt;m;j++)
-		{
-			char c;
-			cin&amp;gt;&amp;gt;c;
-			g[i][j]=c;
-		}
-		
-	f[0][0]=1;
-		
-	for(int i=0;i&amp;lt;n;i++)
-		for(int j=0;j&amp;lt;m;j++)
-		{
-			if(g[i][j] == &#39;R&#39;) f[i][j+1]=(f[i][j+1]+f[i][j])%mod;
-			if(g[i][j] == &#39;D&#39;) f[i+1][j]=(f[i+1][j]+f[i][j])%mod;
-			if(g[i][j] == &#39;B&#39;) f[i+1][j]=(f[i+1][j]+f[i][j])%mod,f[i][j+1]=(f[i][j+1]+f[i][j])%mod;
-		}
-		
-	cout&amp;lt;&amp;lt;f[n-1][m-1]&amp;lt;&amp;lt;endl;
-	
-	return 0;
-}
-
-H
-
-题解：
-
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;cstdio&amp;gt;
-using namespace std;
-const int N=100010;
-bool st[N];
-int cnt[N],f[N];
-int n,m;
-
-void init(int n)
-{
-	for(int i=2;i&amp;lt;=n;i++)
-	{
-		if(!st[i])
-		{
-			for(int j=i+i;j&amp;lt;=n;j+=i)
-				st[j]=true;
-		}
-		else 
-		{
-			for(int j=i;j&amp;lt;=n;j+=i)
-				cnt[j]++;
-		}
-		f[cnt[i]]++;
-	}
-}
-
-int main()
-{
-	cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m;
-	
-	init(n);
-	
-	while(m--)
-	{
-		int k;
-		scanf(&amp;quot;%d&amp;quot;,&amp;amp;k);
-		printf(&amp;quot;%d\n&amp;quot;,f[k]);
-	}
-	return 0;
-}
-
-F
-题意：
-给定长度为n的01串，任意两个1之间能够产生的能量为它们的下标差，求01串能量总和。
-
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;cstdio&amp;gt;
-using namespace std;
-const int N=100010,mod=1e9+7;
-typedef long long LL;
-char str[N];
-int pos[N];
-int d[N];
-int n;
- 
-int main()
-{
-    cin&amp;gt;&amp;gt;n;
-    cin&amp;gt;&amp;gt;str+1;
-     
-    int cnt=0;
-    for(int i=1;i&amp;lt;=n;i++)
-        if(str[i] == &#39;1&#39;)
-            pos[cnt++]=i;
-             
-    for(int i=1;i&amp;lt;cnt;i++)
-        d[i]=pos[i]-pos[i-1];
-     
-    int ans=0;
-    for(int i=1;i&amp;lt;cnt;i++)
-        ans=(ans+(LL)i*(cnt-i)%mod*d[i]%mod)%mod;
-         
-    cout&amp;lt;&amp;lt;ans&amp;lt;&amp;lt;endl;
-     
-    return 0;
-}
-
-
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;cstdio&amp;gt;
-using namespace std;
-const int N=100010,mod=1e9+7;
-typedef long long LL;
-char str[N];
-int p[N];
-int s[N];
-int n;
-
-int main()
-{
-	cin&amp;gt;&amp;gt;n;
-	cin&amp;gt;&amp;gt;str+1;
-	
-	int cnt=0;
-	for(int i=1;i&amp;lt;=n;i++)
-		if(str[i] == &#39;1&#39;)
-			p[++cnt]=i;
-			
-	for(int i=1;i&amp;lt;=cnt;i++)
-		s[i]=(s[i-1]+p[i])%mod;
-	
-	int ans=0;
-	for(int i=1;i&amp;lt;=cnt;i++)
-		ans=(ans+(LL)(i-1)*p[i]-s[i-1]+mod)%mod;
-	
-	cout&amp;lt;&amp;lt;ans&amp;lt;&amp;lt;endl;
-	return 0;
-}
-
-
-                                        </div>
-                                        
-                                            <a class="btn btn-text" href="https://caifxh.github.io/post/niu-ke-han-jia-di-san-chang/">Read More ~</a>
-                            </div>
-                </div>
-            </article>
-            
-            <article class="post i-card">
-                <h2 class="post-title">
-                    <a href="https://caifxh.github.io/post/tan-xin/">
-                        贪心
-                    </a>
-                </h2>
-                <div class="post-info">
-                    <time class="post-time">2020-04-14</time>
-                    
-                        <a href="https://caifxh.github.io/tag/TZ7cITYtt/" class="post-tag i-tag
-                            i-tag-error">
-            #其他算法
-        </a>
-                        
-                </div>
-                <div class="post-article">
-                    
-                            <div class="post-content">
-                                
-                                        <div class="post-content-content">
-                                            贪心法正确性证明方法
-方法一：数学归纳法
-主要步骤如下：
-（1）叙述一个论证算法正确性的与自然数相关的命题P(n)，这里的n可以代表算法步数或者实例规模。例如：
-对于任何正整数n，贪心法的前n步选择将导致最优解。
-对于任何正整数n，贪心法对于规模为n的任何实例都得到最优解。
-（2）使用第一或者第二数学归纳法证明上述命题P(n)。
-第一数学归纳法：
-证：
-P(1)为真；
-若P(n)为真，则P(n+1)为真。
-第二数学归纳法：
-证：
-P(1)为真；
-若对所有k&amp;lt;n，有P(k)为真， 则P(n)为真。
-方法二：交换论证法
-主要步骤如下：
-（1）分析一般最优解与贪心法的解的区别，然后定义一种转换规则，使得从任意一个最优解出发，经过不断对解的某些成分的排列次序进行交换或者用其他元素替换，将这个解最终能够转变成贪心法的解。
-（2）证明在上述转换中解得优化函数值不会变坏。
-（3）证明上述转换在有限步结束。
-1.活动安排问题
-acwing908
-
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;algorithm&amp;gt;
-using namespace std;
-const int N=100010;
-
-struct Range
-{
-    int l,r;
-    bool operator&amp;lt; (const Range &amp;amp;w)const
-    {
-        return r&amp;lt;w.r;
-    }
-}ranges[N];
-
-int main()
-{
-    int n;
-    cin&amp;gt;&amp;gt;n;
-    for(int i=0;i&amp;lt;n;i++)
-    {
-        int l,r;
-        cin&amp;gt;&amp;gt;l&amp;gt;&amp;gt;r;
-        ranges[i]={l,r};
-    }
-    
-    sort(ranges,ranges+n);
-    int res=0,ed=-2e9;
-    for(int i=0;i&amp;lt;n;i++)
-        if(ranges[i].l&amp;gt;ed)
-        {
-            res++;
-            ed=ranges[i].r;
-        }
-    cout&amp;lt;&amp;lt;res&amp;lt;&amp;lt;endl;
-    return 0;
-}
-
-2.区间覆盖问题
-acwing907
-
-#include &amp;lt;iostream&amp;gt;
-#include &amp;lt;algorithm&amp;gt;
-using namespace std;
-const int N = 100010;
-struct Range
-{
-    int l, r;
-    bool operator&amp;lt; (const Range &amp;amp;W)const
-    {
-        return l &amp;lt; W.l;
-    }
-}range[N];
-int n;
-
-int main()
-{
-    int st, ed;
-    scanf(&amp;quot;%d%d&amp;quot;, &amp;amp;st, &amp;amp;ed);
-    scanf(&amp;quot;%d&amp;quot;, &amp;amp;n);
-    for (int i = 0; i &amp;lt; n; i ++ )
-    {
-        int l, r;
-        scanf(&amp;quot;%d%d&amp;quot;, &amp;amp;l, &amp;amp;r);
-        range[i] = {l, r};
-    }
-
-    sort(range, range + n);
-
-    int res = 0;
-    int j=0;
-    while(st &amp;lt; ed)
-    {
-        int r=-2e9;
-        while(j &amp;lt; n &amp;amp;&amp;amp; range[j].l &amp;lt;= st)
-            r=max(r,range[j].r),j++;
+      </div>
+      
+      <div class="post-abstract">
         
-        if(r &amp;lt; st)
-        {
-            res=-1;
-            break;
-        }
-        st=r;
-        res++;
-    }
-    
-    printf(&amp;quot;%d\n&amp;quot;, res);
-
-    return 0;
-}
-
-3.最优装载
-hdu2570
-有n种体积V都相同，浓度为Pi%的万能药水，挑选尽可能多的万能药水混合，需满足混合后的浓度≤W%。
-解题思路：
-此题是一道贪心题，为了能够选择尽可能多的万能药水，所以我们应该先选浓度低的，可以达到降低混合后浓度的作用。
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;cstdio&amp;gt;
-#include&amp;lt;algorithm&amp;gt;
-using namespace std;
-const int N=110;
-int a[N];
-int n,v,w;
-
-int main()
-{
-	int T;
-	cin&amp;gt;&amp;gt;T;
-	while(T--)
-	{
-		scanf(&amp;quot;%d%d%d&amp;quot;,&amp;amp;n,&amp;amp;v,&amp;amp;w);
-		
-		for(int i=1;i&amp;lt;=n;i++)
-			scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]);
-		
-		sort(a+1,a+1+n);
-		
-		double sum=0;
-		int cnt=0;
-		int i;
-		for(i=1;i&amp;lt;=n;i++)
-			if((sum+a[i])/i &amp;lt;= w)
-				sum+=a[i],cnt++;
-			else 
-				break;
-		
-		if(cnt==0) printf(&amp;quot;0 0.00\n&amp;quot;);
-		else printf(&amp;quot;%d %.2lf\n&amp;quot;,cnt*v,sum/100/cnt);
-	}
-	return 0;
-}
-
-4.多机调度
-设有n个独立的作业，由m台相同的机器进行加工处理。作业i所需的处理时间为t[i]。任何作业可以在任何一台机器上面加工处理，但未完工之前不允许中断处理。任何作业不能拆分成更小的作业。要求给出一种作业调度方案，使所给的n个作业在尽可能短的时间内由m台机器加工处理完成。
-采用最长处理时间作业优先的贪心选择策略，可以设计出解多机调度问题较好的近似算法。
-
-
-当n&amp;lt;=m(作业数小于机器数)时，只要将机器 i 的 时间区间分配给作业 i 即可
-
-
-当n&amp;gt;m时，首先将n个作业从大到小排序，然后依此顺序将作业分配给空闲的处理机。也就是说从剩下的作业中，选择需要处理时间最长的，然后依次选择处理时间次长的，直到所有的作业全部处理完毕，或者机器不能再处理其他作业为止。如果我们每次是将需要处理时间最短的作业分配给空闲的机器，那么可能就会出现其它所有作业都处理完了只剩所需时间最长的作业在处理的情况，这样势必效率较低。
-
-
-
-                                        </div>
-                                        
-                                            <a class="btn btn-text" href="https://caifxh.github.io/post/tan-xin/">Read More ~</a>
-                            </div>
-                </div>
-            </article>
-            
-            <article class="post i-card">
-                <h2 class="post-title">
-                    <a href="https://caifxh.github.io/post/niu-ke-han-jia-di-er-chang/">
-                        牛客寒假第二场
-                    </a>
-                </h2>
-                <div class="post-info">
-                    <time class="post-time">2020-04-14</time>
-                    
-                        <a href="https://caifxh.github.io/tag/XNpmSrxzO/" class="post-tag i-tag
-                            i-tag-other_1">
-            #比赛
-        </a>
-                        
-                </div>
-                <div class="post-article">
-                    
-                            <div class="post-content">
-                                
-                                        <div class="post-content-content">
-                                            E
-
-
-#include&amp;lt;iostream&amp;gt;
-using namespace std;
-
-int main()
-{
-	int n;
-	cin&amp;gt;&amp;gt;n;
-	int res=0;
-	for(int i=1;i*i&amp;lt;=n;i++)
-	{
-		int t=i*i;
-		for(int j=1;j*j&amp;lt;=t;j++)
-			if(t % j == 0)
-			{
-				res++;
-				if(j != t/j) res++;
-			}
-	}
-	
-	cout&amp;lt;&amp;lt;res&amp;lt;&amp;lt;endl;
-	
-	return 0;
-}
-
-H
-
-
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;cstdio&amp;gt;
-#include&amp;lt;algorithm&amp;gt;
-using namespace std;
-const int N=3e5+10,INF=0x3f3f3f3f;
-int f[N];
-int a[N];
-int n,k;
-
-int main()
-{
-	cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;k;
-	
-	for(int i=1;i&amp;lt;=n;i++)
-		scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]);
-	sort(a+1,a+n+1);
-	
-	f[0]=0;
-	for(int i=1;i&amp;lt;k;i++)
-		f[i]=INF;
-		
-	int val=INF;
-	for(int i=k;i&amp;lt;=n;i++)
-	{
-		val=min(val,f[i-k]-a[i-k+1]);
-		f[i]=val+a[i];
-	}
-	
-	cout&amp;lt;&amp;lt;f[n]&amp;lt;&amp;lt;endl;
-	
-	return 0;
-}
-
-I
-
-
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;cstring&amp;gt;
-#include&amp;lt;cstdio&amp;gt;
-#include&amp;lt;algorithm&amp;gt;
-#include&amp;lt;vector&amp;gt;
-#include&amp;lt;map&amp;gt;
-using namespace std;
-vector&amp;lt;int&amp;gt; a;
-map&amp;lt;int,int&amp;gt; vis;
-int n;
-
-int main()
-{
-	cin&amp;gt;&amp;gt;n;
-	
-	for(int i=1;i&amp;lt;=n;i++)
-	{
-		int x;
-		scanf(&amp;quot;%d&amp;quot;,&amp;amp;x);
-		if(vis[x]) continue;
-        vis[x]=1;
-		a.push_back(x);
-	}
-	
-	n=a.size();
-	
-	if(n == 1)
-	{
-		puts(&amp;quot;0&amp;quot;);
-		return 0;
-	}
-	
-	for(int i=0;i&amp;lt;=30;i++)
-	{
-		int cnt=0;
-		for(int j=0;j&amp;lt;n;j++)
-			if(a[j]&amp;gt;&amp;gt;i &amp;amp; 1) cnt++;
-		if(cnt &amp;gt; 0 &amp;amp;&amp;amp; cnt &amp;lt; n)
-		{
-			printf(&amp;quot;%lld\n&amp;quot;,(1ll&amp;lt;&amp;lt;i)*(n-1));
-			return 0;
-		}
-	}
-	
-}
-
-J
-
-
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;cstring&amp;gt;
-#include&amp;lt;cstdio&amp;gt;
-#include&amp;lt;algorithm&amp;gt;
-using namespace std;
-#define lc u&amp;lt;&amp;lt;1
-#define rc u&amp;lt;&amp;lt;1|1
-typedef long long LL;
-const int N=2e5+10,mod=1e9+7;
-struct Node1
-{
-	int l,r;
-	LL k;
-}tr1[N&amp;lt;&amp;lt;2];
-struct Node2
-{
-	int l,r;
-	LL val;
-}tr2[N&amp;lt;&amp;lt;2];
-struct f
-{
-	LL k,val;
-};
-int k[N],b[N];
-int n,m;
-
-void pushup(int u)
-{
-	tr1[u].k=(LL)tr1[lc].k*tr1[rc].k%mod;
-	tr2[u].val=((LL)tr2[lc].val*tr1[rc].k%mod+tr2[rc].val)%mod;
-}
-
-void build(int u,int l,int r)
-{
-	tr1[u].l=tr2[u].l=l,tr1[u].r=tr2[u].r=r;
-	if(l == r)
-	{
-		tr1[u].k=k[l];
-		tr2[u].val=b[l];
-		return;
-	}
-	int mid=l+r&amp;gt;&amp;gt;1;
-	build(lc,l,mid);
-	build(rc,mid+1,r);
-	pushup(u);
-}
-
-void modify(int u,int x,int k,int b)
-{
-	if(tr1[u].l == tr1[u].r)
-	{
-		tr1[u].k=k;
-		tr2[u].val=b;
-		return;
-	}
-	int mid=tr1[u].l+tr1[u].r&amp;gt;&amp;gt;1;
-	if(x&amp;lt;=mid) modify(lc,x,k,b);
-	else modify(rc,x,k,b);
-	pushup(u);
-}
-
-f query(int u,int l,int r)
-{
-	if(l == tr1[u].l &amp;amp;&amp;amp; tr1[u].r == r)
-		return {tr1[u].k, tr2[u].val};
-
-	int mid=tr1[u].l+tr1[u].r&amp;gt;&amp;gt;1;
-	if(r &amp;lt;= mid) 
-		return query(lc,l,r);
-	else if(l &amp;gt; mid) 
-		return query(rc,l,r);
-	else 
-	{
-		f left=query(lc,l,mid);
-		f right=query(rc,mid+1,r);
-		return {left.k*right.k%mod,(left.val*right.k%mod+right.val)%mod};
-	}
-}
-
-int main()
-{
-	cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m;
-	
-	for(int i=1;i&amp;lt;=n;i++) scanf(&amp;quot;%d&amp;quot;,&amp;amp;k[i]);
-	for(int i=1;i&amp;lt;=n;i++) scanf(&amp;quot;%d&amp;quot;,&amp;amp;b[i]);
-		
-	build(1,1,n);	
-	
-	while(m--)
-	{
-		int t;
-		scanf(&amp;quot;%d&amp;quot;,&amp;amp;t);
-		if(t == 1)
-		{
-			int i,k,b;
-			scanf(&amp;quot;%d%d%d&amp;quot;,&amp;amp;i,&amp;amp;k,&amp;amp;b);
-			modify(1,i,k,b);
-		}
-		else 
-		{
-			int l,r;
-			scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;l,&amp;amp;r);
-			auto t=query(1,l,r);
-			printf(&amp;quot;%d\n&amp;quot;,(t.k+t.val)%mod);
-		}
-	}
-	
-	return 0;
-}
-
-F
-
-
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;cstdio&amp;gt;
-#include&amp;lt;algorithm&amp;gt;
-using namespace std;
-typedef pair&amp;lt;int,int&amp;gt; PII;
-const int N=2e5+10;
-int a[N],b[N];
-PII c[N];
-int n;
-
-bool cmp(PII x,PII y)
-{
-	return x.first &amp;gt; y.first;
-}
-
-int main()
-{
-	cin&amp;gt;&amp;gt;n;
-	for(int i=1;i&amp;lt;=n;i++)
-		scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]);
-	for(int i=1;i&amp;lt;=n;i++)
-		scanf(&amp;quot;%d&amp;quot;,&amp;amp;b[i]);
-	for(int i=1;i&amp;lt;=n;i++)
-		c[i].first=a[i]+b[i],c[i].second=i;
-	
-	sort(c+1,c+n+1,cmp);
-	
-	for(int i=2;i&amp;lt;=n;i+=2)
-		printf(&amp;quot;%d &amp;quot;,c[i].second);
-	puts(&amp;quot;&amp;quot;);
-	
-	for(int i=1;i&amp;lt;=n;i+=2)
-		printf(&amp;quot;%d &amp;quot;,c[i].second);
-	puts(&amp;quot;&amp;quot;);
-	
-	return 0;
-}
-
-
-                                        </div>
-                                        
-                                            <a class="btn btn-text" href="https://caifxh.github.io/post/niu-ke-han-jia-di-er-chang/">Read More ~</a>
-                            </div>
-                </div>
-            </article>
-            
-            <article class="post i-card">
-                <h2 class="post-title">
-                    <a href="https://caifxh.github.io/post/er-fen/">
-                        二分
-                    </a>
-                </h2>
-                <div class="post-info">
-                    <time class="post-time">2020-04-13</time>
-                    
-                        <a href="https://caifxh.github.io/tag/TZ7cITYtt/" class="post-tag i-tag
-                            i-tag-warning">
-            #其他算法
-        </a>
-                        
-                </div>
-                <div class="post-article">
-                    
-                            <div class="post-content">
-                                
-                                        <div class="post-content-content">
-                                            P1462
-∎题目描述
-　给定无向图，n个点，m条双向边，每个点有点权fi（这个点的过路费），有边权ci（这条路的血量）。求起点1到终点N的所有可能路径中，在总边权（总血量）不超过给定的b的前提下，所经过的路径中最大点权（这条路径上过路费最大的那个点）的最小值是多少。
-题目数据：n≤10000，m≤50000，fi，ci，B≤1e9。
-　　
-∎题解
-对点权fi进行二分，用dijkstra求最短路，检验总边权是否小于b。二分法是最小化最大值问题。
-这一题是二分法和最短路算法的简单结合。
-（1）对点权（过路费）二分。题目的要求是：从1到N有很多路径，其中的一个可行路径Pi，它有一个点的过路费最大，记为Fi；在所有可行路径中，找到那个有最小F的路径，输出F。解题方案是：先对所有点的fi排序，然后用二分法，找符合要求的最小的fi。二分次数log(fi)=log(1e9) &amp;lt; 30。
-（2）在检查某个fi时，删除所有大于fi的点，在剩下的点中，求1到N的最短路，看总边权是否小于b，如果满足，这个fi是合适的（如果最短路的边权都大于b，那么其他路径的总边权就更大，肯定不符合要求）。一次Dijkstra求最短路，复杂度是O(mlogn)。
-总复杂度满足要求。
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;cstdio&amp;gt;
-#include&amp;lt;cstring&amp;gt;
-#include&amp;lt;queue&amp;gt;
-#include&amp;lt;algorithm&amp;gt;
-using namespace std;
-const int N=10010,M=100010,INF=0x3f3f3f3f;
-int h[N],e[M],ne[M],w[M],idx;
-int n,m,b;
-int f[N],cost[N];
-int dist[N];
-typedef pair&amp;lt;int,int&amp;gt; PII;
-bool st[N];
-int sum;
-
-void add(int a,int b,int c)
-{
-    e[idx]=b;
-    w[idx]=c;
-    ne[idx]=h[a];
-    h[a]=idx++;
-}
-
-bool check(int x)
-{
-    memset(dist,0x3f,sizeof dist);
-    memset(st,false,sizeof st);
-    dist[1]=0;
-    priority_queue&amp;lt;PII,vector&amp;lt;PII&amp;gt;,greater&amp;lt;PII&amp;gt; &amp;gt; heap;
-    heap.push({0,1});
-
-    while(heap.size())
-    {
-        PII t=heap.top();
-        heap.pop();
-        int distance=t.first,ver=t.second;
-        if(st[ver])
-            continue;
-        st[ver]=true;
-        for(int i=h[ver];~i;i=ne[i])
-        {
-            int j=e[i];
-            if(dist[j] &amp;gt; distance + w[i] &amp;amp;&amp;amp; cost[j] &amp;lt;= x)
-            {
-                dist[j] = distance + w[i];
-                heap.push({dist[j],j});
-            }
-        }
-    }
-
-    if(dist[n] &amp;lt;= b)
-        return true;
-    else
-        return false;
-}
-
-int main()
-{
-    scanf(&amp;quot;%d%d%d&amp;quot;,&amp;amp;n,&amp;amp;m,&amp;amp;b);
-    memset(h,-1,sizeof h);
-    for(int i=1;i&amp;lt;=n;i++)
-    {
-        cin&amp;gt;&amp;gt;f[i];
-        cost[i]=f[i];
-    }
-    while(m--)
-    {
-        int a,b,c;
-        cin&amp;gt;&amp;gt;a&amp;gt;&amp;gt;b&amp;gt;&amp;gt;c;
-        add(a,b,c);
-        add(b,a,c);
-    }
-
-    sort(f+1,f+n+1);
-
-    int l=1,r=n;
-
-    //在点权最大的情况下，依旧大于b，不满足
-    if(!check(f[n]+10))
-    {
-        cout&amp;lt;&amp;lt;&amp;quot;AFK&amp;quot;&amp;lt;&amp;lt;endl;
-        return 0;
-    }
-    while(l &amp;lt; r)
-    {
-        int mid=l+r&amp;gt;&amp;gt;1;
-        if(check(f[mid]))
-            r=mid;
-        else
-            l=mid+1;
-    }
-
-    cout&amp;lt;&amp;lt;f[l]&amp;lt;&amp;lt;endl;
-    return 0;
-}
-
-P1624
-在一条很长的直线上，指定n个坐标点（x1, …, xn）。有c头牛，安排每头牛站在其中一个点（牛棚）上。这些牛喜欢打架，所以尽量距离远一些。问最近的两头牛之间距离的最大值可以是多少。
-这个题目里，所有的牛棚两两之间的距离有个最小值，题目要求使得这个最小值最大化。
-∎题解
-（1）暴力法。从小到大枚举最小距离的值dis，然后检查，如果发现有一次不行，那么上次枚举的就是最大值。如何检查呢？用贪心法：第一头牛放在x1，第二头牛放在xj≥x1+dis的点xi,第三头牛放在xk≥xj+dis的点xk，等等，如果在当前最小距离下，不能放c条牛，那么这个dis就不可取。复杂度O(nc)。
-（2）二分。分析从小到大检查dis的过程，发现可以用二分的方法找这个dis。这个dis符合二分法：它有上下边界、它是单调递增的。复杂度O(nlogn)。
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;algorithm&amp;gt;
-using namespace std;
-const int N=100010;
-int q[N];
-int n,c;
-
-//相距x，是否能放置c头牛
-bool check(int dist)
-{
-    int cnt=1,last=0;
-
-    for(int i=1;i&amp;lt;n;i++)
-    {
-        if(q[i] - q[last] &amp;gt;= dist)
-        {
-            cnt++;
-            last=i;
-        }
-    }
-
-    if(cnt &amp;gt;= c)
-        return true;
-    else
-        return false;
-}
-
-int main()
-{
-    cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;c;
-
-    for(int i=0;i&amp;lt;n;i++)
-        cin&amp;gt;&amp;gt;q[i];
-    sort(q,q+n);
-    int l=1,r=q[n-1]-q[0];
-    while(l &amp;lt; r)
-    {
-        int mid=l+r+1&amp;gt;&amp;gt;1;
-        if(check(mid))
-            l=mid;
-        else
-            r=mid-1;
-    }
-
-    cout&amp;lt;&amp;lt;l&amp;lt;&amp;lt;endl;
-    return 0;
-}
-
-实数二分
-const double eps =1e-7;        //精度。如果下面用for，可以不要eps
-while(right - left &amp;gt; eps){     //for(int i = 0; i&amp;lt;100; i++){
-      double mid = left+(right-left)/2;
-      if (check(mid)) right = mid;           //判定，然后继续二分
-      else            left  = mid;
-}
-
-其中，循环用2种方法都可以：
-while(right - left &amp;gt; eps)  　{ ... }
-或者：
-for(int i = 0; i &amp;lt; 100; i++) { ... }
-
-如果用for循环，由于循环内用了二分，执行100次，相当于实现了 1/21001/2^{100}1/2100的精度，一般比eps更精确。
-for循环的100次，比while的循环次数要多。如果时间要求不是太苛刻，用for循环更简便
-poj3122
-主人过生日，m个人来庆生，有n块半径不同的圆形蛋糕，由m+1个人（加上主人）分，每人的蛋糕必须一样重，而且是一整块（不能是几个蛋糕碎块，也就是说，每个人的蛋糕都是从一块圆蛋糕中切下来的完整一块）。问每个人能分到的最大蛋糕是多大。
-∎题解
-最小值最大化问题。设每人能分到的蛋糕大小是x，用二分法枚举x。
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;cstring&amp;gt;
-#include&amp;lt;cstdio&amp;gt;
-#include&amp;lt;algorithm&amp;gt;
-#include&amp;lt;cmath&amp;gt;
-using namespace std;
-const double PI=acos(-1.0);
-const int eps=1e-8;
-const int N=100010;
-double s[N];
-int n,m;
-
-bool check(double mid)
-{
-	int sum=0;
-	for(int i=0;i&amp;lt;n;i++)
-		sum+=int(s[i]/mid);
-	
-	if(sum &amp;gt;= m) return 1;
-	else return 0;
-}
-
-int main()
-{
-	int T;
-	cin&amp;gt;&amp;gt;T;
-	while(T--)
-	{
-		scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;m);
-		m++;
-		
-		double l=0,r=0;
-		for(int i=0;i&amp;lt;n;i++)
-		{
-			int x;
-			scanf(&amp;quot;%d&amp;quot;,&amp;amp;x);
-			s[i]=PI*x*x;
-			r=max(r,s[i]);
-		}
-		
-		for(int i=0;i&amp;lt;100;i++)
-		{
-			double mid=l+(r-l)/2;
-			if(check(mid)) l=mid;
-			else r=mid;
-		}
-		
-		printf(&amp;quot;%.4f\n&amp;quot;,l);
-	}
-	return 0;
-}
-
-P1419
-题意理解
-就是给你一些区间,要求选择的区间包含以下条件.
-
-选取区间总长度最大
-选取的区间之间不得用重叠部分,包括区间左右端点部分
-
-状态设计
-解决一道动态规划的题目,最主要的就是状态设计和状态转移
-一个个区间,都包含了[l,r],因此我们可以设置.每一个点,作为分段点
-因此,我们得出了.f[i]表示[1,i]区间的最大利润
-状态转移
-假如说,我们现在位于i这个节点处.那么对于这个点而言,显然包含它的区间的右端点一定为i
-换种表达为,[s,i]为包含这个端点的区间
-当然s是属于一类集合,也就是,所有右端点为i的区间.
-因此我们不难推导出转移方程.
-f[i]=f[i−1]不选择当前任何一个区间
-f[i]=max(f[i],f[sj]+(i−sj+1))选择[sj,i]这个区间i−sj+1为该区间的利润
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;cstring&amp;gt;
-#include&amp;lt;algorithm&amp;gt;
-#include&amp;lt;cstdio&amp;gt;
-#include&amp;lt;vector&amp;gt;
-using namespace std;
-const int N=3e6+10;
-int f[N];
-vector&amp;lt;int&amp;gt; g[N];
-int n;
-
-int main()
-{
-	cin&amp;gt;&amp;gt;n;
-	
-	int r=0;
-	for(int i=1;i&amp;lt;=n;i++)
-	{
-		int a,b;
-		scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;a,&amp;amp;b);
-		r=max(r,b);
-		g[b].push_back(a);
-	}
-	
-	for(int i=1;i&amp;lt;=r;i++)
-	{
-		f[i]=f[i-1];
-		for(int j=0;j&amp;lt;g[i].size();j++)
-        {
-            int t=g[i][j];
-			f[i]=max(f[i],f[t-1]+(i-t+1));
-        }
-	}
-	
-	printf(&amp;quot;%d\n&amp;quot;,f[r]);
-	
-	return 0;
-}
-
-二分+DP
-
-线段不重复，可以借用贪心的思想，对右端点进行从小到大的排序，排除后效性。
-以 f[i]表示前 i 条线段中选出若干条（必选第 i 条）的最大总长度。
-简单地说，就是只要保证后一条线段不与当前线段重合，就可以添加当前线段。
-f[i]=max(f[j],r(j)&amp;lt;l(i)+length(i)
-
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;cstring&amp;gt;
-#include&amp;lt;algorithm&amp;gt;
-#include&amp;lt;cstdio&amp;gt;
-#include&amp;lt;vector&amp;gt;
-using namespace std;
-const int N=150010;
-int f[N];
-struct line
-{
-	int l,r;
-	int val;
-	
-	bool operator&amp;lt;(const line &amp;amp;W) const
-	{
-		return r&amp;lt;W.r;
-	}
-}g[N];
-int n;
-
-int find(int l,int r,int key)
-{
-	while(l&amp;lt;r)
-	{
-		int mid=l+r+1&amp;gt;&amp;gt;1;
-		if(g[mid].r &amp;lt; key) l=mid;
-		else r=mid-1;
-	}
-	
-	return l;
-}
-
-int main()
-{
-	cin&amp;gt;&amp;gt;n;
-
-	for(int i=1;i&amp;lt;=n;i++)
-	{
-		int x,y;
-		scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;x,&amp;amp;y);
-		g[i].l=x,g[i].r=y,g[i].val=y-x+1;
-	}
-	
-	sort(g+1,g+n+1);
-	
-	for(int i=1;i&amp;lt;=n;i++)
-	{
-		f[i]=f[i-1];
-		int t=find(0,i-1,g[i].l);
-		f[i]=max(f[i],f[t]+g[i].val);
-		
-	}
-	
-	printf(&amp;quot;%d\n&amp;quot;,f[n]);
-	
-	return 0;
-}
-
-P1419
-题意：求一个连续子段，其长度在[S,T]之间，使其平均值最大。保留三位小数
-
-
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;cstring&amp;gt;
-#include&amp;lt;cstdio&amp;gt;
-#include&amp;lt;algorithm&amp;gt;
-using namespace std;
-const int N=100010;
-double a[N];
-double s[N];
-int q[N];
-int n;
-int S,T;
-
-bool check(double mid)
-{
-	for(int i=1;i&amp;lt;=n;i++)	
-		s[i]=s[i-1]+a[i]-mid;
-		
-	int hh=0,tt=-1;
-
-	for(int i=S;i&amp;lt;=n;i++)
-	{
-		if(hh &amp;lt;= tt &amp;amp;&amp;amp; i-T &amp;gt; q[hh])
-			hh++;
-
-		while(hh &amp;lt;= tt &amp;amp;&amp;amp; s[q[tt]] &amp;gt;= s[i-S])
-			tt--;
-		q[++tt]=i-S;
-		
-		if(hh&amp;lt;=tt &amp;amp;&amp;amp; s[i] &amp;gt;= s[q[hh]])
-			return true;
-	}
-	return false;
-}
-
-int main()
-{
-	cin&amp;gt;&amp;gt;n;
-	cin&amp;gt;&amp;gt;S&amp;gt;&amp;gt;T;
-	
-	double l=10000,r=-10000;
-	for(int i=1;i&amp;lt;=n;i++)
-	{
-		scanf(&amp;quot;%lf&amp;quot;,&amp;amp;a[i]);
-		r=max(r,a[i]);
-		l=min(l,a[i]);
-	}
-	
-	while(r-l&amp;gt;1e-5)
-	{
-		double mid=l+(r-l)/2;
-		if(check(mid))
-			l=mid;
-		else 
-			r=mid;
-	}
-		
-	printf(&amp;quot;%.3f\n&amp;quot;,l);
-	
-	return 0;
-}
-
-反思
-一直没有推到最后一步。依然在判断a[l]+...+a[r]≥k∗(r−l+1)的子序列的存在问题。
-事实上这样的判断让二分没有意义了。我们是在找最大的一段a了，跟k完全没有关系。因为是求平均值，一段和较大的子序列不一定平均值就大了。我们巧妙地通过将k移项，使平均值问题转化为了求和问题。
-P1258
-由题意知，若要二人一起到达B点时耗时相同且最短，则二人走的路程、坐车的路程以及走和坐车的时间相同，并且车只能回接一次。设第一个人走的路程为x、时间为t1，坐车的时间为t2，车返回接另一个人所用时间为t3，
-则t1=x/a，t2=(s-x)/b，t3=(s-2x)/b;（甲和乙走的路程均为x）
-t2+t3=t1=(2s-3x)/b=x/a,解得x=2as/(3a+b) 故轻松地用数学解出此题。
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;cstdio&amp;gt;
-using namespace std;
-
-int main()
-{
-	double s,a,b;
-	cin&amp;gt;&amp;gt;s&amp;gt;&amp;gt;a&amp;gt;&amp;gt;b;
-	double x=2*a*s/(3*a+b);
-	
-	printf(&amp;quot;%.6f\n&amp;quot;,x/a+(s-x)/b);
-	
-	return 0;
-}
-
-既然是个二分题，当然也可以用二分做了。我们可以二分车回接另一个人时的位置，算出若在此位置车回接，二人到终点分别的总耗时t1、t2，若t1==t2，输出答案，若t1&amp;gt;t2，使左端点等于mid，若t1&amp;lt;t2，则使右端点等于mid，直至有答案产生或两端点的差距小于1e-8为止。
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;cstdio&amp;gt;
-#include&amp;lt;cmath&amp;gt;
-using namespace std;
-const double eps=1e-8;
-double s,a,b;
-
-int main()
-{
-	cin&amp;gt;&amp;gt;s&amp;gt;&amp;gt;a&amp;gt;&amp;gt;b;
-	
-	double l=0,r=s;
-	while(r-l&amp;gt;1e-8)
-	{
-		double mid=l+(r-l)/2;
-		
-		double t1=(s-mid)/a+mid/b;
-		double t2=mid/b+
-				(mid-mid/b*a)/(a+b)+
-				(s-(mid/b+(mid-mid/b*a)/(a+b))*a)/b;
-		if(t1 &amp;gt; t2)
-			l=mid;
-		else 
-			r=mid;
-	}
-	
-	printf(&amp;quot;%.6f\n&amp;quot;,l/b+(s-l)/a);
-	
-	return 0;
-}
-
-P2678
-可以去模拟这个跳石头的过程。开始你在i(i=0)位置，我在跳下一步的时候去判断我这个当前跳跃的距离，如果这个跳跃距离比二分出来的mid小，那这就是一个不合法的石头，应该移走。为什么？我们二分的是最短跳跃距离，已经是最短了，如果跳跃距离比最短更短岂不是显然不合法，是这样的吧。移走之后要怎么做？先把计数器加上1，再考虑向前跳啊。去看移走之后的下一块石头，再次判断跳过去的距离，如果这次的跳跃距离比最短的长，那么这样跳是完全可以的，我们就跳过去，继续判断，如果跳过去的距离不合法就再拿走，这样不断进行这个操作，直到i = n+1，为啥是n+1？河中间有n块石头，显然终点在n+1处。
-模拟完这个过程，我们查看计数器的值，这个值代表的含义是我们以mid作为答案需要移走的石头数量，然后判断这个数量 是不是超了就行。如果超了就返回false，不超就返回true。
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;cstring&amp;gt;
-#include&amp;lt;cstdio&amp;gt;
-#include&amp;lt;algorithm&amp;gt;
-using namespace std;
-const int N=50010;
-int d[N];
-int L,n,m;
-
-bool check(int mid)
-{
-	int cnt=0,last=0;
-	for(int i=1;i&amp;lt;=n;i++)
-		if(d[i]-last &amp;lt; mid) cnt++;
-		else last=d[i];
-		
-	return cnt&amp;lt;=m;
-}
-
-int main()
-{
-	cin&amp;gt;&amp;gt;L&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m;
-	
-	for(int i=1;i&amp;lt;=n;i++)
-		cin&amp;gt;&amp;gt;d[i];
-		
-	d[++n]=L;
-	int l=0,r=L;
-	while(l&amp;lt;r)
-	{
-		int mid=l+r+1&amp;gt;&amp;gt;1;
-		if(check(mid))
-			l=mid;
-		else 
-			r=mid-1;
-	}
-	
-	cout&amp;lt;&amp;lt;l&amp;lt;&amp;lt;endl;
-	
-	return 0;
-}
-
-acwing499
-
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;cstring&amp;gt;
-#include&amp;lt;cstdio&amp;gt;
-#include&amp;lt;algorithm&amp;gt;
-using namespace std;
-typedef long long LL;
-const int N=2e5+10;
-int w[N],v[N];
-int l[N],r[N];
-LL s[N];
-int cnt[N];
-LL n,m,S;
-LL ans;
-
-LL get(int mid)
-{
-	for(int i=1;i&amp;lt;=n;i++)
-	{
-		if(w[i] &amp;gt;= mid)
-		{
-			s[i]=s[i-1]+v[i];
-			cnt[i]=cnt[i-1]+1;
-		}
-		else 
-		{
-			s[i]=s[i-1];
-			cnt[i]=cnt[i-1];
-		}
-	}
-	
-	LL res=0;
-	for(int i=1;i&amp;lt;=m;i++)
-		res+=((cnt[r[i]]-cnt[l[i]-1])*(s[r[i]]-s[l[i]-1]));
-	
-	return res;
-}
-
-int main()
-{
-	cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m&amp;gt;&amp;gt;S;
-	
-	for(int i=1;i&amp;lt;=n;i++)
-		scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;w[i],&amp;amp;v[i]);
-		
-	for(int i=1;i&amp;lt;=m;i++)
-		scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;l[i],&amp;amp;r[i]);
-		
-	int l=1,r=1e6+1;//r要多1，才能枚举到一个都不选的情况 
-	
-	while(l&amp;lt;r)
-	{
-		int mid=l+r+1&amp;gt;&amp;gt;1;
-		if(get(mid) &amp;gt;= S)
-			l=mid;
-		else 
-			r=mid-1;
-	}
-	
-	cout &amp;lt;&amp;lt; min(abs(get(r) - S), abs(get(r + 1)-S)) &amp;lt;&amp;lt; endl;
-	//r为&amp;gt;=S的情况下最小值，而求的是abs最小，需要和r+1情况下的最小值比较一下 
-	
-	return 0;
-}
-
-
-                                        </div>
-                                        
-                                            <a class="btn btn-text" href="https://caifxh.github.io/post/er-fen/">Read More ~</a>
-                            </div>
-                </div>
-            </article>
-            
-            <article class="post i-card">
-                <h2 class="post-title">
-                    <a href="https://caifxh.github.io/post/xian-duan-shu-yi-dan-dian-xiu-gai/">
-                        线段树（一）单点修改
-                    </a>
-                </h2>
-                <div class="post-info">
-                    <time class="post-time">2020-04-12</time>
-                    
-                </div>
-                <div class="post-article">
-                    
-                            <div class="post-content">
-                                
-                                        <div class="post-content-content">
-                                            
-
-
-
-
-
-struct node//结点
-{ 
-	int l,r,mx;//l,r表示区间左右端点，mx表示区间[l,r]的最值 
-}tree[maxn*4]; //树结点存储数组 
-
-关于空间开4*n的证明
-
-void build(int k,int l,int r)//创建线段树,k表示存储下标,区间[l,r]
-{
-	tree[k].l=l;
-	tree[k].r=r;
-	if(l==r)
-	{
-		tree[k].mx=a[l];
-		return;
-	}
-	int mid,lc,rc;
-	mid=(l+r)/2;//划分点 
-	lc=k*2;  //左孩子存储下标 
-	rc=k*2+1;//右孩子存储下标 
-	build(lc,l,mid);
-	build(rc,mid+1,r);
-	tree[k].mx=max(tree[lc].mx,tree[rc].mx);//结点的最大值等于左右孩子最值的最大值 		
-} 
-
-
-
-void update(int k,int i,int v)//将a[i]修改更新为v 
-{
-	if(tree[k].l==tree[k].r&amp;amp;&amp;amp;tree[k].l==i)//找到a[i]
-	{
-		tree[k].mx=v;
-		return ;
-	} 
-	int mid,lc,rc;
-	mid=(tree[k].l+tree[k].r)/2;//划分点 
-	lc=k*2;  //左孩子存储下标 
-	rc=k*2+1;//右孩子存储下标
-	if(i&amp;lt;=mid)
-		update(lc,i,v);//到左子树修改更新 
-	else
-		update(rc,i,v);//到右子树修改更新
-	tree[k].mx=max(tree[lc].mx,tree[rc].mx);//返回时修改更新最值 
-}
-
-
-
-假设询问区间是 [A, B]，现在所在的节点表示的区间为[l, r]
-• 计算 mid = (l + r) / 2，左子节点的区间为 [l, mid]，
-右子节点的区间为 [mid+1, r].
-• 如果 A &amp;lt;= mid，即询问区间与左子节点有重合，需要递归
-到左子节点。
-• 如果 B &amp;gt;= mid + 1，即询问区间与右子节点有重合，需要
-递归到右子节点。
-• 递归完之后，需要把两个孩子询问的结果加起来作为返回值。
-int query(int k,int l,int r)//求区间[l..r]的最值 
-{
-	if(tree[k].l&amp;gt;=l&amp;amp;&amp;amp;tree[k].r&amp;lt;=r)//找到该区间 
-		return tree[k].mx;	
-	int mid,lc,rc;
-	mid=(tree[k].l+tree[k].r)/2;//划分点 
-	lc=k*2;  //左孩子存储下标 
-	rc=k*2+1;//右孩子存储下标
-	int Max=-inf;//注意，局部变量，全局变量不可以 
-	if(l&amp;lt;=mid)
-		Max=max(Max,query(lc,l,r));//到左子树查询
-	if(r&amp;gt;mid)
-		Max=max(Max,query(rc,l,r));//到右子树查询
-	return Max;
-}
-
-例题
-问题1：
-有一个长度为 n 的序列，a[1], a[2], …, a[n]。
-现在执行 m 次操作，每次可以执行以下两种操作之一：
-
-将下标为k的数修改为 v（v&amp;gt;0）。
-询问一个下标区间 [l, r] 中所有数的和。
-
-由于修改是对单个元素进行修改。
-比如修改第 i 个元素。
-我们先找到 [i, i] 所在的节点，然后修改它的 sum，然后一
-路向上更新每个祖先的 sum 即可。
-int change(int pos, int v, int l, int r, int x){
-    if (l == r){ // 找到了要修改的叶子结点
-        sum[x] = v;
-        return;
-    }
-    int mid = (l + r) &amp;gt;&amp;gt; 1;
-    if (pos &amp;lt;= mid) // pos 在左子节点
-        change(pos, v, l, mid, x * 2);
-    else
-        change(pos, v, mid + 1, r, x * 2 + 1);
-    update(x); // 一定要加！因为这条路上的sum值发生了改变
-}
-
-至此，我们已经解决了第一个问题，支持单点修改数字，和区
-间查询和。
-两者的时间复杂度都是单次 O(log n)。
-例题
-hdu1166
-
-代码
-树状数组代码
-问题2：线段树求逆序对
-给定一个序列，a[1], a[2], …, a[n]. 求这个序列的逆序对数量。
-逆序对是指一个有序二元组(i, j)，满足 i &amp;lt; j, a[i] &amp;gt;
-a[j].
-n &amp;lt;= 100000, 0 &amp;lt;= a[i] &amp;lt;= 10910^9109
-
-样例: (输出 5）
-5
-2 7 9 6 4
-
-对于第 i 个数，我们要统计前面有多少个数大于 a[i]。
-对每个数都统计一遍加起来即是答案。
-假设我们可以对 [0, 109] 建一个线段树（实际上太大了）
-每次先查询 [a[i]+1, 109] 的区间和，加入答案。
-然后在 a[i] 的位置上加一即可
-10^9范围太大了，因此我们先要对 n 个数进行离散化。
-离散化的过程，就是对 n 个数进行排序，最小的数赋值为
-1，第二小的赋值为 2，以此类推，这样 n 个数的取值范
-围就在 [1, n] 中了。
-现在只要对 [1, n] 建立长度为 n 的线段树即可
-离散化代码： （假设对 a[1..n] 进行离散化）
-int cnt = 0;
-for (int i = 1;i &amp;lt;= n;i ++)
-    b[++ cnt] = a[i];
-sort(b + 1, b + n + 1);
-cnt = unique(b + 1, b + cnt + 1) - bin - 1;
-for (int i = 1;i &amp;lt;= n;i ++)
-    a[i] = lower_bound(b + 1, b + cnt + 1, a[i]) - bin;
-
-回到样例：2 7 9 6 4
-现进行离散化：1 4 5 3 2
-然后建立长度为 5 的线段树。
-枚举到 1，查询[2，5]区间和为 0，a[1] ++
-枚举到 4，查询[5, 5]区间和为 0，a[4] ++
-枚举到 5，查询[6, 5]区间和为 0，a[5] ++
-枚举到 3，查询[4, 5]区间和为 2，a[3] ++
-枚举到 2，查询[3, 5]区间和为 3，a[2] ++
-答案即为 0+0+0+2+3=5
-对原始数组进行离散化，时间复杂度是O(nlogn).
-用线段树求解逆序对，枚举每个位置，做一次区间查询和,一次单点修改，时间复杂度是O(nlogn).
-总的时间复杂度就是 O(nlogn).
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;cstring&amp;gt;
-#include&amp;lt;cstdio&amp;gt;
-#include&amp;lt;algorithm&amp;gt;
-using namespace std;
-typedef long long LL;
-#define lc u&amp;lt;&amp;lt;1
-#define rc u&amp;lt;&amp;lt;1|1
-const int N=100010;
-struct Node
-{
-    int l,r;
-    LL cnt;
-}tr[N*4];
-int a[N],b[N];
-int n;
-
-void pushup(int u)
-{
-    tr[u].cnt=tr[lc].cnt+tr[rc].cnt;
-}
-
-void build(int u,int l,int r)
-{
-    tr[u].l=l,tr[u].r=r;
-    if(l==r)
-    {
-        tr[u].cnt=0;
-        return;
-    }
-    int mid=l+r&amp;gt;&amp;gt;1;
-    build(lc,l,mid);
-    build(rc,mid+1,r);
-    pushup(u);
-}
-
-int query(int u,int l,int r)
-{
-    if(l &amp;lt;= tr[u].l &amp;amp;&amp;amp; tr[u].r &amp;lt;= r)
-        return tr[u].cnt;
-    int mid=tr[u].l+tr[u].r&amp;gt;&amp;gt;1;
-    int sum=0;
-    if(l&amp;lt;=mid) sum+=query(lc,l,r);
-    if(r&amp;gt;mid) sum+=query(rc,l,r);
-    return sum;
-}
-
-void modify(int u,int x)
-{
-    if(tr[u].l == tr[u].r)
-    {
-        tr[u].cnt++;
-        return;
-    }
-    int mid=tr[u].l+tr[u].r&amp;gt;&amp;gt;1;
-    if(x&amp;lt;=mid) modify(lc,x);
-    else modify(rc,x);
-    pushup(u);
-}
-
-int main()
-{
-    cin&amp;gt;&amp;gt;n;
-    for(int i=1;i&amp;lt;=n;i++)
-        cin&amp;gt;&amp;gt;a[i],b[i]=a[i];
-    
-    sort(b+1,b+n+1);
-    int len=unique(b+1,b+n+1)-b-1;
-
-    for(int i=1;i&amp;lt;=n;i++)
-        a[i]=lower_bound(b+1,b+len+1,a[i])-b;
-    
-    build(1,1,len);
-    
-    LL ans=0;
-    for(int i=1;i&amp;lt;=n;i++)
-    {
-        ans+=query(1,a[i]+1,len);
-        modify(1,a[i]);
-    }
-    
-    cout&amp;lt;&amp;lt;ans&amp;lt;&amp;lt;endl;
-    
-    return 0;
-}
-
-acwing1275
-
-#include&amp;lt;iostream&amp;gt;
-using namespace std;
-const int N=200010;
-int m,p;
-struct Node
-{
-    int l,r;
-    int v;//区间[l，r]中的最大值
-}tr[N*4];
-
-void pushup(int u)
-{
-    tr[u].v=max(tr[u&amp;lt;&amp;lt;1].v,tr[u&amp;lt;&amp;lt;1|1].v);
-}
-
-void build(int u,int l,int r)
-{
-    tr[u]={l,r};
-    if(l == r)
-        return ;
-    int mid = l+r&amp;gt;&amp;gt;1;
-    build(u&amp;lt;&amp;lt;1,l,mid);
-    build(u&amp;lt;&amp;lt;1|1,mid+1,r);
-}
-
-int query(int u,int l,int r)
-{
-    if(tr[u].l&amp;gt;=l &amp;amp;&amp;amp; tr[u].r&amp;lt;=r)
-        return tr[u].v;
-    int mid=tr[u].l+tr[u].r&amp;gt;&amp;gt;1;
-    int v=0;
-    if(l&amp;lt;=mid)
-        v=query(u&amp;lt;&amp;lt;1,l,r);
-    if(r&amp;gt;mid)
-        v=max(v,query(u&amp;lt;&amp;lt;1|1,l,r));
-    return v;
-}
-
-void modify(int u,int x,int v)//将x处值修改为v
-{
-    if(tr[u].l == x &amp;amp;&amp;amp; tr[u].r == x)
-        tr[u].v=v;
-    else
-    {
-        int mid=tr[u].l+tr[u].r&amp;gt;&amp;gt;1;
-        if(x&amp;lt;=mid)
-            modify(u&amp;lt;&amp;lt;1,x,v);
-        else 
-            modify(u&amp;lt;&amp;lt;1|1,x,v);
-        pushup(u);
-    }
-}
-
-int main()
-{
-    int n=0,last=0;
-    scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;m,&amp;amp;p);
-    build(1,1,m);
-    
-    int x;
-    char op[2];
-    while(m--)
-    {
-        scanf(&amp;quot;%s%d&amp;quot;,op,&amp;amp;x);
-        if(*op == &#39;Q&#39;)
-        {
-            last=query(1,n-x+1,n);
-            printf(&amp;quot;%d\n&amp;quot;,last);
-        }
-        else
-        {
-            modify(1,n+1,(last+x)%p);
-            n++;
-        }
-    }
-    return 0;
-}
-
-acwing245
-如果涉及到区间的操作，一定要看题目信息能否容易的按照区间进行划分与合并（即：需要满足区间可加性）。通俗的讲就是（l~r）的信息能由（l ~ mid）和（mid + 1，r）的信息推出来。
-看这个题，两个操作：
-1是查询区间（x，y）中的最大连续子段和。
-2是把a[x]改成y。
-对于第2个操作，很简单用线段树的单点修改能达到目的。
-对于第1个操作，这就需要仔细考虑一个结点中的值应该要有哪些属性.
-首先确定要存储的东西是什么，最大连续子段和必须存储然后判断能否通过子节点最大连续子段和求出父节点的最大连续子段和，答案显然是不能的；
-
-
-父节点的最大连续子段和可能是左边儿子的最大连续子段和，又有可能是右儿子的最大连续子段和，还有可能是左儿子的最大后缀和加上右儿子的最大前缀和，所以还得存储最大前缀和和最大后缀和
-
-
-而最大前缀和又需要如何维护，父节点的最大前缀和可能等于左儿子的最大前缀和，也可能等于左儿子的总和加上右儿子的最大前缀和，所以这里就需要取一个最大值，同理，最大后缀和也是这样的，然后利用线段树的基本套路即可。
-
-
-父节点区间和可由子结点算出
-
-
-区间和：sum
-区间最大连续子段和tmax
-紧靠左端的最大连续和 lmax
-紧靠右端的最大连续和 rmax
-
-
-
-                                        </div>
-                                        
-                                            <a class="btn btn-text" href="https://caifxh.github.io/post/xian-duan-shu-yi-dan-dian-xiu-gai/">Read More ~</a>
-                            </div>
-                </div>
-            </article>
-            
-                <!-- 翻页 -->
-                
-    <div class="pagination-container">
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://caifxh.github.io/post/you-xian-dui-lie/">
+        <h2 class="post-title">优先队列</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2020-05-05
+        </span>
+        <span>
+          5 min read
+        </span>
         
-                
-                    <a href="https://caifxh.github.io/page/2" class="page-btn btn">下一页</a>
-                    
-    </div>
-    
-                </div>
-                <!--  -->
-                <div class="main-container-middle"></div>
-                <!--  -->
-                <div id="sidebar" class="main-container-right">
-
-                    <!-- 个人信息 -->
-                    
-    <div class="id_card i-card">
-        <div class="id_card-avatar" style="background-image: url(https://caifxh.github.io/images/avatar.png?v=1588691348423)">
-        </div>
-        <h1 class="id_card-title">
-            fxh
-        </h1>
-        <h2 class="id_card-description">
-            菜
-        </h2>
-        <!--  -->
-        <div class="id_card-sns">
-            <!-- github -->
-            
-                    <!-- twitter -->
-                    
-                            <!-- weibo -->
-                            
-                                    <!-- facebook -->
-                                    
-
-        </div>
-    </div>
-    
-
-                        <!-- 公告栏 -->
-                        
-
-                </div>
-            </div>
-
-
-
-            <div class="site-footer">
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
-  <a class="rss" href="https://caifxh.github.io/atom.xml" target="_blank">RSS</a>
+      </div>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://caifxh.github.io/post/stl/">
+        <h2 class="post-title">STL</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2020-04-30
+        </span>
+        <span>
+          1 min read
+        </span>
+        
+          <a href="https://caifxh.github.io/tag/PJzBixWKZ/" class="post-tag">
+            # 其他算法
+          </a>
+        
+      </div>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://caifxh.github.io/post/codeforces-round-636-div-3/">
+        <h2 class="post-title">Codeforces Round #636 (Div. 3)</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2020-04-23
+        </span>
+        <span>
+          7 min read
+        </span>
+        
+          <a href="https://caifxh.github.io/tag/htyucSYc3e/" class="post-tag">
+            # 比赛
+          </a>
+        
+      </div>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://caifxh.github.io/post/jin-jie-zhi-nan-di-yi-zhang/">
+        <h2 class="post-title">进阶指南第一章</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2020-04-17
+        </span>
+        <span>
+          36 min read
+        </span>
+        
+          <a href="https://caifxh.github.io/tag/LoMa6pDh9G/" class="post-tag">
+            # 蓝书
+          </a>
+        
+      </div>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://caifxh.github.io/post/kang-tuo-zhan-kai/">
+        <h2 class="post-title">康托展开</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2020-04-15
+        </span>
+        <span>
+          7 min read
+        </span>
+        
+          <a href="https://caifxh.github.io/tag/sYjK35WHzb/" class="post-tag">
+            # 数学
+          </a>
+        
+      </div>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://caifxh.github.io/post/niu-ke-han-jia-di-san-chang/">
+        <h2 class="post-title">牛客寒假第三场</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2020-04-14
+        </span>
+        <span>
+          4 min read
+        </span>
+        
+      </div>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://caifxh.github.io/post/tan-xin/">
+        <h2 class="post-title">贪心</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2020-04-14
+        </span>
+        <span>
+          6 min read
+        </span>
+        
+          <a href="https://caifxh.github.io/tag/PJzBixWKZ/" class="post-tag">
+            # 其他算法
+          </a>
+        
+      </div>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://caifxh.github.io/post/niu-ke-han-jia-di-er-chang/">
+        <h2 class="post-title">牛客寒假第二场</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2020-04-14
+        </span>
+        <span>
+          6 min read
+        </span>
+        
+          <a href="https://caifxh.github.io/tag/htyucSYc3e/" class="post-tag">
+            # 比赛
+          </a>
+        
+      </div>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://caifxh.github.io/post/er-fen/">
+        <h2 class="post-title">二分</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2020-04-13
+        </span>
+        <span>
+          21 min read
+        </span>
+        
+          <a href="https://caifxh.github.io/tag/PJzBixWKZ/" class="post-tag">
+            # 其他算法
+          </a>
+        
+      </div>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
 </div>
 
-<script>
-  hljs.initHighlightingOnLoad()
-</script>
+    
+        <div class="pagination-container">
+  
+  
+    <a href="https://caifxh.github.io/page/2" class="next-page">下一页</a>
+  
+</div>
 
+    
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://caifxh.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
     </div>
-    <script>
-        $('#sidebar').stickySidebar({
-            topSpacing: 80,
-            // bottomSpacing: 60
-        });
-    </script>
-</body>
-
+  </body>
 </html>

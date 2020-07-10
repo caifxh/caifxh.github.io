@@ -1,0 +1,691 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>搜索 | Gridea</title>
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1594373367136">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://caifxh.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="搜索 | Gridea - Atom Feed" href="https://caifxh.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="DFS代码框架
+ans;                  //答案，用全局变量表示
+void dfs(层数，其他参数){
+    if (出局判断){    //到达最底层，或者满足条件退出 
+        更新答案;     //答案..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://caifxh.github.io">
+  <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1594373367136" alt="">
+  </a>
+  <h1 class="site-title">
+    Gridea
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              搜索
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-05-30
+              </span>
+              <span>
+                16 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h4 id="dfs代码框架">DFS代码框架</h4>
+<pre><code>ans;                  //答案，用全局变量表示
+void dfs(层数，其他参数){
+    if (出局判断){    //到达最底层，或者满足条件退出 
+        更新答案;     //答案一般用全局变量表示
+        return;       //返回到上一层
+    }
+    (剪枝)            //在进一步DFS之前剪枝
+    for (枚举下一层可能的情况)    //对每一个情况继续DFS 
+        if (used[i] == 0) {       //如果状态i没有用过，就可以进入下一层
+            used[i] = 1;   //标记状态i,表示已经用过，在更底层不能再使用
+            dfs(层数+1，其他参数);    //下一层 
+            used[i] = 0;   //恢复状态，回溯时，不影响上一层对这个状态的使用
+            }
+    return;          //返回到上一层
+}
+</code></pre>
+<p><a href="https://vjudge.net/problem/UVA-1599">uva1599</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/05/15/9969_28f1216a96-15.png" alt="15.png" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+#include&lt;vector&gt;
+#include&lt;queue&gt;
+using namespace std;
+const int N=100010,M=400010,INF=0x3f3f3f3f;
+int h[N],e[M],ne[M],w[M],idx;
+int dist[N];
+int q[N];
+int ans[N];
+bool st[N];
+int n,m;
+
+void add(int a,int b,int c)
+{
+	e[idx]=b,w[idx]=c,ne[idx]=h[a],h[a]=idx++;
+}
+
+void bfs1()//从终点开始bfs 
+{
+	memset(dist,-1,sizeof dist);
+	int hh=0,tt=-1;
+	q[++tt]=n;
+	dist[n]=0;
+	
+	while(hh &lt;= tt)
+	{
+		int t=q[hh++];
+		for(int i=h[t];~i;i=ne[i])
+		{
+			int j=e[i];
+			if(dist[j] == -1) 
+			{
+				dist[j]=dist[t]+1;
+				q[++tt]=j;
+			}
+		}
+	}
+}
+
+void bfs2()//从起点开始bfs 
+{
+	memset(ans,0,sizeof ans);
+	memset(st,0,sizeof st);
+	queue&lt;int&gt; q;
+	q.push(1);
+	
+	while(q.size())
+	{
+		int t=q.front();
+		q.pop();
+		if(t == n)
+		{
+			cout&lt;&lt;ans[0];
+			for(int i=1;i&lt;=dist[1]-1;i++)
+				cout&lt;&lt;' '&lt;&lt;ans[i];
+			cout&lt;&lt;endl;
+			return;
+		}
+		int minc=INF;
+		for(int i=h[t];~i;i=ne[i])
+		{
+			int j=e[i];
+			if(dist[t] - 1 == dist[j])
+				minc=min(minc,w[i]);
+		}
+
+		for(int i=h[t];~i;i=ne[i])
+		{
+			int j=e[i];
+			if(dist[t] - 1 == dist[j] &amp;&amp; w[i] == minc &amp;&amp; !st[j])
+				q.push(j),st[j]=true;
+		}
+		int k=dist[1]-dist[t];
+		if(ans[k] == 0) ans[k] = minc;
+		else ans[k]=min(ans[k],minc);
+	}
+}
+
+int main()
+{
+	while(~scanf(&quot;%d%d&quot;,&amp;n,&amp;m))
+	{
+		memset(h,-1,sizeof h);
+		idx=0;
+		while(m--)
+		{
+			int a,b,c;
+			scanf(&quot;%d%d%d&quot;,&amp;a,&amp;b,&amp;c);
+			add(a,b,c);
+			add(b,a,c);
+		}
+		
+		bfs1();
+		cout&lt;&lt;dist[1]&lt;&lt;endl;
+		
+		bfs2();
+	
+	}
+}
+</code></pre>
+<p>bfs2需要一个st数组，防止下一层的结点多次入队（存在重边）</p>
+<p><a href="https://www.luogu.com.cn/problem/P1118">P1118</a><br>
+题目描述：写出一个1至N的排列ai，然后每次将相邻两个数相加，构成新的序列，再对新序列进行这样的操作，显然每次构成的序列都比上一次的序列长度少1，直到只剩下一个数字位置。下面是一个例子：<br>
+  3  1  2  4<br>
+    4  3  6<br>
+     7  9<br>
+      16<br>
+  最后得到16这样一个数字。<br>
+  现在倒着玩这样一个游戏，如果知道N，知道最后得到的数字的大小sum，请你求出最初序列ai，为1至N的一个排列。若答案有多种可能，则输出字典序最小的那一个。n≤12, sum≤12345。</p>
+<p>题解：<br>
+  （1）暴力法。对1～N这N个数做从小到大的全排列，对每个全排列进行三角形的计算，判断是否等于N。<br>
+  对每个排列进行三角形计算，需要<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><msup><mi>N</mi><mn>2</mn></msup><mo>)</mo></mrow><annotation encoding="application/x-tex">O(N^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>次。例如第1行有5个数{a,b,c,d,e}，那么第2行计算4次，第3行计算3次…等等，总次数是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><msup><mi>N</mi><mn>2</mn></msup><mo>)</mo></mrow><annotation encoding="application/x-tex">O(N^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>的。<br>
+  a    b    c    d    e<br>
+    a+b    b+c   c+d   d+e<br>
+      a+2b+c b+2c+d c+2d+e<br>
+       a+3b+3c+d b+3c+3d+e<br>
+          a+4b+6c+4d+e<br>
+  共有N!=4亿个排列，总复杂度是$O(N!N^2)的，显然会超时。<br>
+  2）三角计算优化+剪枝。<br>
+  1）三角计算的优化。对排列进行三角形计算，并不需要按部就班地算，比如{a,b,c,d,e}这5个数，直接算最后一行的公式a+4b+6c+4d+e就好了，复杂度是O(N)的。不同的N有不同的系数，比如5个数的系数是{1,4,6,4,1}，提前算出所有N的系数备用。可以发现，这些系数正好是杨辉三角。<br>
+  2）剪枝。即使有了杨辉三角的优化，总复杂度还是有O(N!N)，所以必须进行最优性剪枝。对某个排列求三角形和时，如果前面几个元素和已经大于sum，那么后面的元素就不用再算了。例如，N=9时，计算到排列{2,1,3,4,5,6,7,8,9}，如果前5个元素{2,1,3,4,5}求和已经大于sum，那么后面的{6,7,8,9}～{9,8,7,6}都可以跳过，下一个排序从{2,1,3,4,6,5,7,8,9}开始。本题sum≤12345，和不大，用这个简单的剪枝方法可以通过。</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+const int N=15;
+int c[N][N];
+int path[N];
+bool st[N];
+int n,sum;
+
+void init()
+{
+	for(int i=0;i&lt;=n;i++)
+		for(int j=0;j&lt;=i;j++)
+			if(!j) c[i][j]=1;
+			else c[i][j]=c[i-1][j]+c[i-1][j-1];
+}
+
+bool dfs(int dep,int s)
+{
+	if(s &gt; sum) return false;
+	
+	if(dep == n) 
+	{
+		if(s == sum)
+		{
+			for(int i=0;i&lt;n;i++)
+				cout&lt;&lt;path[i]&lt;&lt;' ';
+			cout&lt;&lt;endl;
+			return true;
+		}
+		return false;
+	}
+	
+	for(int i=1;i&lt;=n;i++)
+		if(!st[i])
+		{
+			st[i]=true;
+			path[dep]=i;
+			if(dfs(dep+1,s+i*c[n-1][dep])) return true;;
+			st[i]=false;
+		}
+	return false;
+}
+
+int main()
+{
+	cin&gt;&gt;n&gt;&gt;sum;
+	
+	init();
+	
+	dfs(0,0);
+	
+	return 0;
+}
+</code></pre>
+<h4 id="奇偶剪枝">奇偶剪枝</h4>
+<p>搜索用BFS还是DFS？对于路径问题，应该用DFS，因为DFS“一路深入”，天然就产生了一条路径，而BFS逐层推进，把层与层之间连续的路径打断了，想表示一个路径很困难。<br>
+首先考虑暴力搜索的复杂度。在所有可能的路径中，看其中是否有长度为T的路径。<br>
+直接搜所有的路径，会超时。有多少可能的路径呢？这题图很小，但是路径数量很惊人。1 &lt; N, M &lt; 7，最多36个格子，设最长路径是36，每个点有3个出口，那么就有<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>3</mn><mn>36</mn></msup></mrow><annotation encoding="application/x-tex">3^{36}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">3</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span><span class="mord mtight">6</span></span></span></span></span></span></span></span></span></span></span></span>个路径，是天文数字。即使在DFS的时候加上一点限制条件，即格子不能重复走，那么也会搜到百万以上的的路径。<br>
+这一题最重要的技术，网上称为“奇偶剪枝”。不过，本文认为“奇偶剪枝”这个说法不准确，称为“奇偶判断”更合适，因为它并不需要在DFS内部剪枝，见本节后面的讨论。</p>
+<p><img src="https://cdn.acwing.com/media/article/image/2020/05/15/9969_5d530dd696-16.PNG" alt="16.PNG" loading="lazy"><br>
+以上2个优化很有限，真正有用的是“奇偶剪枝”：若tmp是偶数，则可能有解；若tmp是奇数，肯定无解。<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/05/15/9969_96d5692896-17.PNG" alt="17.PNG" loading="lazy"><br>
+所以，奇偶判断应该在DFS之前做，判断有解后再进行DFS。DFS内部的奇偶判断是多余的；奇偶判断并不能减少DFS内部搜索的数量，因为这是独立的两件事。<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/05/15/9969_cc68d46296-18.PNG" alt="18.PNG" loading="lazy"><br>
+所以，给定起点S、终点D，以及限制的步数T，可以立刻判断是否有解：<br>
+（1）S和D同0或同1，T是偶数，可能有解；T是奇数，必定无解。<br>
+（2）S和D不同，T是奇数，可能有解；T是偶数，必定无解。<br>
+<img src="https://cdn.acwing.com/media/article/image/2020/05/15/9969_cd5666f496-19.PNG" alt="19.PNG" loading="lazy"><br>
+最后，从以上分析可以知道，奇偶判断只能用在方格图上。方格里允许有不可走的障碍，这些障碍不影响逻辑正确性。</p>
+<pre><code> #include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+using namespace std;
+const int N=10;
+typedef pair&lt;int,int&gt; PII;
+char g[N][N];
+bool vis[N][N];
+PII st,ed;
+int n,m,t;
+int dx[]={-1,0,1,0},dy[]={0,1,0,-1};
+
+bool dfs(int x,int y,int cnt)
+{
+	if(x == ed.first &amp;&amp; y == ed.second)
+	{
+		if(cnt == t)
+			return true;
+		return false;
+	}
+	
+	if(cnt &gt; t) return false;
+	int remain=t-cnt-abs(x-ed.first)-abs(y-ed.second);
+	if(remain &lt; 0) return false;
+	
+	for(int i=0;i&lt;4;i++)
+	{
+		int a=x+dx[i],b=y+dy[i];
+		if(a &lt; 0 || a &gt;= n || b &lt; 0 || b &gt;= m) continue;
+		if(g[a][b] == 'X') continue;
+		if(vis[a][b]) continue;
+		vis[a][b]=1;
+		if(dfs(a,b,cnt+1)) return true;
+		vis[a][b]=0;
+	}
+	return false;
+}
+
+int main()
+{
+	while(~scanf(&quot;%d%d%d&quot;,&amp;n,&amp;m,&amp;t))
+	{
+		if(!n &amp;&amp; !m &amp;&amp; !t) break;
+		memset(vis,0,sizeof vis);
+		for(int i=0;i&lt;n;i++)
+			for(int j=0;j&lt;m;j++)
+			{
+				char c;
+				cin&gt;&gt;c;
+				g[i][j]=c;
+				if(c == 'S') st={i,j};
+				if(c == 'D') ed={i,j};
+			}
+			
+		int f=t-abs(st.first-ed.first)-abs(st.second-ed.second);
+		
+		if(f &amp; 1) // 无解
+		{
+			puts(&quot;NO&quot;);
+			continue;
+		 } 
+		 
+		vis[st.first][st.second]=1;
+		if(dfs(st.first,st.second,0))
+		 	puts(&quot;YES&quot;);
+		else 
+			puts(&quot;NO&quot;);
+	}
+	return 0;
+}
+</code></pre>
+<p><a href="https://www.luogu.com.cn/problem/P1126">P1126</a><br>
+<img src="https://cdn.acwing.com/media/article/image/2020/05/17/9969_ec4cc5d897-21.PNG" alt="21.PNG" loading="lazy"></p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+#include&lt;queue&gt;
+using namespace std;
+const int N=55;
+struct Point
+{
+	int x,y,dir,dist;
+};
+int g[N][N];
+bool vis[N][N][5];
+Point st,ed;
+int dx[]={0,1,0,-1},dy[]={1,0,-1,0}; //E,S,W,N
+int n,m;
+
+inline int mod(int x)
+{
+	return (x%4+4)%4;
+}
+
+int get(char c)
+{
+	if(c == 'E') return 0;
+	else if(c == 'S') return 1;
+	else if(c == 'W') return 2;
+	else return 3;
+}
+
+int bfs()
+{
+	queue&lt;Point&gt; q;
+	st.dist=0;
+	q.push(st);
+	vis[st.x][st.y][st.dir]=1;
+	while(q.size())
+	{
+		Point t=q.front();
+		q.pop();
+		
+		if(t.x == ed.x &amp;&amp; t.y == ed.y)
+			return t.dist;
+			
+		for(int i=1;i&lt;=3;i++)
+		{
+			int a=t.x+i*dx[t.dir];
+			int b=t.y+i*dy[t.dir];
+			if(a &lt;= 0 || a &gt;= n || b &lt;= 0 || b &gt;= m || g[a][b] == 1) break;
+			if(vis[a][b][t.dir]) continue;
+			vis[a][b][t.dir]=1;
+			q.push({a,b,t.dir,t.dist+1});                                      
+		}
+		if(!vis[t.x][t.y][mod(t.dir+1)])
+		{
+			vis[t.x][t.y][mod(t.dir+1)]=1;
+			q.push({t.x,t.y,mod(t.dir+1),t.dist+1});
+		}
+		if(!vis[t.x][t.y][mod(t.dir-1)])
+		{
+			vis[t.x][t.y][mod(t.dir-1)]=1;
+			q.push({t.x,t.y,mod(t.dir-1),t.dist+1});
+		}
+	}	
+	
+	return -1;
+}
+
+int main()
+{
+	cin&gt;&gt;n&gt;&gt;m;
+	
+	for(int i=1;i&lt;=n;i++)
+		for(int j=1;j&lt;=m;j++)
+		{
+			cin&gt;&gt;g[i][j];
+			if(g[i][j] == 1)
+			{
+				g[i-1][j-1]=g[i-1][j]=g[i][j-1]=1;
+			}
+		}
+	
+	char c;
+	cin&gt;&gt;st.x&gt;&gt;st.y&gt;&gt;ed.x&gt;&gt;ed.y&gt;&gt;c;
+	st.dir=get(c);
+
+	int t=bfs();
+	
+	cout&lt;&lt;t&lt;&lt;endl;
+	
+	return 0;
+}
+</code></pre>
+<p><a href="https://www.acwing.com/problem/content/170/">acwing168</a><br>
+可以发现从上往下 r 和 h 都是递增的。<br>
+因此 r[1] 和 h[1] 至少是 m。这样就可以从第一层开始枚举 r[1] 和 h[1]，接下来每层都进行枚举。</p>
+<ul>
+<li>一个比较显然的最优化剪枝：如果 S &gt; ans 可以结束搜索</li>
+<li>进一步的，因为第 i 层的半径和高度至少是 i。所以表面积和体积都是存在下界 lowS[i] 和 lowV[i] 的。<br>
+可以加两个可行性剪枝：</li>
+<li>如果当前的 V + lowV[i] &gt; N，那么肯定不行。</li>
+<li>如果当前的 S + lowS[i] &gt; ans，那么也肯定不是答案。</li>
+<li>最后还有个重要的可行性剪枝：<br>
+如果拿剩下的全部体积来做一个圆柱体（这样是理论上的表面积最小值，因为半径越大，高度越小，则侧面积越小），加上当前的表面积 S 都会超过 ans，<br>
+那么结束搜索。</li>
+<li>if (2 * (N - V) / r + S &gt; ans) return;<br>
+（推导：2rh = S, r2h = N-V）</li>
+</ul>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+const int N=25,INF=0x3f3f3f3f;
+int minv[N],mins[N];
+int n,m;
+int ans;
+
+void dfs(int dep,int s,int v,int r,int h)
+{
+	if(s &gt; ans) return;
+	if(s + mins[dep] &gt; ans) return;
+	if(v + minv[dep] &gt; n) return;
+	if(s + 2*(n-v)/r &gt; ans) return;
+	
+	if(!dep)
+	{
+		if(v == n)
+			ans=s;
+		return;
+	}
+	
+	for(int i=r-1;i&gt;=dep;i--)
+	{
+		if(dep == m) s=i*i;
+		for(int j=h-1;j&gt;=dep;j--)
+			dfs(dep-1,s+2*i*j,v+i*i*j,i,j);
+	}
+}
+
+int main()
+{
+	cin&gt;&gt;n&gt;&gt;m;
+	
+	for(int i=1;i&lt;=m;i++)
+	{
+		minv[i]=minv[i-1]+i*i*i;
+		mins[i]=mins[i-1]+2*i*i;
+	}
+	
+	ans=INF;
+	dfs(m,0,0,100,10000);
+	
+	if(ans == INF) cout&lt;&lt;0&lt;&lt;endl;
+	else cout&lt;&lt;ans&lt;&lt;endl;
+	
+	return 0;
+}
+</code></pre>
+<p><a href="https://vjudge.net/problem/Aizu-0525">Aizu - 0525</a></p>
+<ul>
+<li>行数比较小，先不考虑对列的操作，将行数的所有情况举出来最多2^10种情况。</li>
+<li>对于已经固定了行操作后，这种情况下对列的最优操作就是对每一列，如果此时1比0多就不变，不然就反转。</li>
+</ul>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+#include&lt;map&gt;
+#include&lt;queue&gt;
+#include&lt;sstream&gt;
+#include&lt;set&gt;
+using namespace std;
+int dx[]={-1,0,1,0},dy[]={0,1,0,-1};
+const int N=10010;
+int g[15][N];
+int n,m;
+int ans;
+
+void dfs(int u)
+{
+   if(u == n)
+   {
+       int sum=0;
+       for(int j=0;j&lt;m;j++)
+       {
+           int tot=0;
+           for(int i=0;i&lt;n;i++)
+               if(g[i][j] == 1) tot++;
+           sum+=max(tot,n-tot);
+       }
+       ans=max(ans,sum);
+       return;
+   }
+
+   dfs(u+1);//not reverse
+
+   for(int i=0;i&lt;m;i++) g[u][i]=!g[u][i];
+   dfs(u+1);
+   for(int i=0;i&lt;m;i++) g[u][i]=!g[u][i];
+}
+
+int main()
+{
+   while(~scanf(&quot;%d%d&quot;,&amp;n,&amp;m))
+   {
+       if(!n &amp;&amp; !m) break;
+
+       for(int i=0;i&lt;n;i++)
+           for(int j=0;j&lt;m;j++)
+               cin&gt;&gt;g[i][j];
+
+       ans=0;
+       dfs(0);
+
+       cout&lt;&lt;ans&lt;&lt;endl;
+   }
+  // system(&quot;pause&quot;);
+}
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#dfs%E4%BB%A3%E7%A0%81%E6%A1%86%E6%9E%B6">DFS代码框架</a></li>
+<li><a href="#%E5%A5%87%E5%81%B6%E5%89%AA%E6%9E%9D">奇偶剪枝</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://caifxh.github.io/post/you-xian-dui-lie/">
+              <h3 class="post-title">
+                优先队列
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://caifxh.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
