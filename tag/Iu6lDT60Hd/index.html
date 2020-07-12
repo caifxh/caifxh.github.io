@@ -1,256 +1,6375 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <title>Gridea</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="Cache-Control" content="no-siteapp"/>
-    <link rel="stylesheet" href="/styles/main.css">
-    <link rel="stylesheet" href="//cdnjs.loli.net/ajax/libs/mdui/0.4.3/css/mdui.min.css">
-    <link rel="stylesheet" href="media/live2d/css/live2d.css" />
-    
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>
+    DP | Gridea
+</title>
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1594530133163">
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://caifxh.github.io/styles/main.css">
+<!-- js -->
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://caifxh.github.io/media/js/jquery.sticky-sidebar.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
 </head>
-<body class=" mdui-appbar-with-toolbar  mdui-theme-primary-pink mdui-theme-accent-pink">
-        <header class="mdui-toolbar mdui-color-pink mdui-appbar-fixed mdui-appbar-scroll-toolbar-hide" style="z-index: 1000">
-    <a href="javascript:;" mdui-drawer="{target: '#left-drawer',overlay:true}" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">menu</i></a>
-    <span class="mdui-typo-title">Gridea</span>
-    <div class="mdui-toolbar-spacer"></div>
-<!--    <a href="javascript:history.go(0);" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
-    <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">more_vert</i></a>
-</header>
 
-        <div class="mdui-drawer mdui-color-white mdui-drawer-full-height mdui-drawer-close" id="left-drawer">
-    <ul class="mdui-list">
-        <li class="mdui-subheader">菜单</li>
-        
-        <li class="mdui-list-item mdui-ripple">
-            <a href="/" class="mdui-list-item-content">首页</a>
-        </li>
-        
-        <li class="mdui-list-item mdui-ripple">
-            <a href="/archives" class="mdui-list-item-content">归档</a>
-        </li>
-        
-        <li class="mdui-list-item mdui-ripple">
-            <a href="/tags" class="mdui-list-item-content">标签</a>
-        </li>
-        
-        <li class="mdui-list-item mdui-ripple">
-            <a href="/post/about" class="mdui-list-item-content">关于</a>
-        </li>
-        
-    </ul>
+<body>
+    <div class="main">
+        <div class="header">
+    <div class="nav">
+        <div class="logo">
+            <a href="https://caifxh.github.io">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1594530133163" alt="">
+            </a>
+            <div class="site-title">
+                <h1>
+                    Gridea
+                </h1>
+            </div>
+        </div>
+        <span class="menu-btn fa fa-align-justify"></span>
+        <div class="menu-container">
+            <ul>
+                
+                    
+                            <li>
+                                <a href="/" class="menu">
+                                    首页
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/archives" class="menu">
+                                    归档
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/tags" class="menu">
+                                    标签
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/post/about" class="menu">
+                                    关于
+                                </a>
+                            </li>
+                            
+                                
+            </ul>
+        </div>
+    </div>
 </div>
 
-        <div class="mdui-container">
-            <div class="mdui-row mdui-row-gapless">
-                <div class="k-container">
-                    <div class="head_card-offset"></div>
-                    
-    <div class="mdui-card">
-        <div class="mdui-card-media">
-            <img src="https://caifxh.github.io/media/img/bai.jpg"/>
-            <div class="mdui-card-media-covered">
-                <div class="mdui-card-primary">
-                    <div class="mdui-card-primary-title">四边形不等式</div>
-                    <div class="mdui-card-primary-subtitle"></div>
-                </div>
-                <div class="mdui-card-actions" style="float:right;">
-                    <a href="https://caifxh.github.io/post/si-bian-xing-bu-deng-shi/" class="mdui-btn mdui-ripple mdui-ripple-white">点击查看</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="head_card-offset"></div>
-
-    <div class="mdui-card">
-        <div class="mdui-card-media">
-            <img src="https://caifxh.github.io/media/img/bai.jpg"/>
-            <div class="mdui-card-media-covered">
-                <div class="mdui-card-primary">
-                    <div class="mdui-card-primary-title">斜率优化</div>
-                    <div class="mdui-card-primary-subtitle"></div>
-                </div>
-                <div class="mdui-card-actions" style="float:right;">
-                    <a href="https://caifxh.github.io/post/xie-lu-you-hua/" class="mdui-btn mdui-ripple mdui-ripple-white">点击查看</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="head_card-offset"></div>
-
-    <div class="mdui-card">
-        <div class="mdui-card-media">
-            <img src="https://caifxh.github.io/media/img/bai.jpg"/>
-            <div class="mdui-card-media-covered">
-                <div class="mdui-card-primary">
-                    <div class="mdui-card-primary-title">树形dp</div>
-                    <div class="mdui-card-primary-subtitle"></div>
-                </div>
-                <div class="mdui-card-actions" style="float:right;">
-                    <a href="https://caifxh.github.io/post/shu-xing-dp/" class="mdui-btn mdui-ripple mdui-ripple-white">点击查看</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="head_card-offset"></div>
-
-    <div class="mdui-card">
-        <div class="mdui-card-media">
-            <img src="https://caifxh.github.io/media/img/bai.jpg"/>
-            <div class="mdui-card-media-covered">
-                <div class="mdui-card-primary">
-                    <div class="mdui-card-primary-title">状态机</div>
-                    <div class="mdui-card-primary-subtitle"></div>
-                </div>
-                <div class="mdui-card-actions" style="float:right;">
-                    <a href="https://caifxh.github.io/post/zhuang-tai-ji/" class="mdui-btn mdui-ripple mdui-ripple-white">点击查看</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="head_card-offset"></div>
-
-    <div class="mdui-card">
-        <div class="mdui-card-media">
-            <img src="https://caifxh.github.io/media/img/bai.jpg"/>
-            <div class="mdui-card-media-covered">
-                <div class="mdui-card-primary">
-                    <div class="mdui-card-primary-title">DP其他优化</div>
-                    <div class="mdui-card-primary-subtitle"></div>
-                </div>
-                <div class="mdui-card-actions" style="float:right;">
-                    <a href="https://caifxh.github.io/post/dp-you-hua/" class="mdui-btn mdui-ripple mdui-ripple-white">点击查看</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="head_card-offset"></div>
-
-    <div class="mdui-card">
-        <div class="mdui-card-media">
-            <img src="https://caifxh.github.io/media/img/bai.jpg"/>
-            <div class="mdui-card-media-covered">
-                <div class="mdui-card-primary">
-                    <div class="mdui-card-primary-title">状压dp</div>
-                    <div class="mdui-card-primary-subtitle"></div>
-                </div>
-                <div class="mdui-card-actions" style="float:right;">
-                    <a href="https://caifxh.github.io/post/zhuang-ya-dp/" class="mdui-btn mdui-ripple mdui-ripple-white">点击查看</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="head_card-offset"></div>
-
-    <div class="mdui-card">
-        <div class="mdui-card-media">
-            <img src="https://caifxh.github.io/media/img/bai.jpg"/>
-            <div class="mdui-card-media-covered">
-                <div class="mdui-card-primary">
-                    <div class="mdui-card-primary-title">数位dp</div>
-                    <div class="mdui-card-primary-subtitle"></div>
-                </div>
-                <div class="mdui-card-actions" style="float:right;">
-                    <a href="https://caifxh.github.io/post/shu-wei-dp/" class="mdui-btn mdui-ripple mdui-ripple-white">点击查看</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="head_card-offset"></div>
-
-    <div class="mdui-card">
-        <div class="mdui-card-media">
-            <img src="https://caifxh.github.io/media/img/bai.jpg"/>
-            <div class="mdui-card-media-covered">
-                <div class="mdui-card-primary">
-                    <div class="mdui-card-primary-title">单调队列优化dp</div>
-                    <div class="mdui-card-primary-subtitle"></div>
-                </div>
-                <div class="mdui-card-actions" style="float:right;">
-                    <a href="https://caifxh.github.io/post/dan-diao-dui-lie-you-hua-dp/" class="mdui-btn mdui-ripple mdui-ripple-white">点击查看</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="head_card-offset"></div>
-
-    <div class="mdui-card">
-        <div class="mdui-card-media">
-            <img src="https://caifxh.github.io/media/img/bai.jpg"/>
-            <div class="mdui-card-media-covered">
-                <div class="mdui-card-primary">
-                    <div class="mdui-card-primary-title">线性dp</div>
-                    <div class="mdui-card-primary-subtitle"></div>
-                </div>
-                <div class="mdui-card-actions" style="float:right;">
-                    <a href="https://caifxh.github.io/post/xian-xing-dp/" class="mdui-btn mdui-ripple mdui-ripple-white">点击查看</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="head_card-offset"></div>
-
-
-                </div>
-            </div>
-            <div class="mdui-row mdui-row-gapless">
-                <div class="k-container">
-                    
-
-                </div>
-            </div>
-        </div>
-        <footer class="mdui-container footer ">
-    <div class="head_card-offset"></div>
-    <div class="mdui-row mdui-row-gapless">
-        <div class="k-container">
-            <img width="100%" src="/media/img/skirt.png">
-        </div>
-    </div>
-
-    <div class="site-info">
-        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
-    </div>
-</footer>
-<div id="landlord" style="left:5px;bottom:0px;">
-    <div class="message" style="opacity:0"></div>
-    <canvas id="live2d" width="500" height="560" class="live2d"></canvas>
-    <div class="live_talk_input_body">
-        <div class="live_talk_input_name_body">
-            <input name="name" type="text" class="live_talk_name white_input" id="AIuserName" autocomplete="off" placeholder="你的名字" />
-        </div>
-        <div class="live_talk_input_text_body">
-            <input name="talk" type="text" class="live_talk_talk white_input" id="AIuserText" autocomplete="off" placeholder="要和我聊什么呀？"/>
-            <button type="button" class="live_talk_send_btn" id="talk_send">发送</button>
-        </div>
-    </div>
-    <input name="live_talk" id="live_talk" value="1" type="hidden" />
-    <div class="live_ico_box">
-        <div class="live_ico_item type_info" id="showInfoBtn"></div>
-        <div class="live_ico_item type_talk" id="showTalkBtn"></div>
-        <div class="live_ico_item type_music" id="musicButton"></div>
-        <div class="live_ico_item type_youdu" id="youduButton"></div>
-        <div class="live_ico_item type_quit" id="hideButton"></div>
-        <input name="live_statu_val" id="live_statu_val" value="0" type="hidden" />
-        <audio src="" style="display:none;" id="live2d_bgm" data-bgm="0" preload="none"></audio>
-        <input name="live2dBGM" value="https://img.apa70.com/123.mp3" type="hidden">
-        <input name="live2dBGM" value="https://img.apa70.com/123.mp3" type="hidden">
-        <input id="duType" value="douqilai,l2d_caihong" type="hidden">
-    </div>
-</div>
-<div id="open_live2d">召唤伊斯特瓦尔</div>
 <script>
-    var message_Path = '/media/live2d/';//资源目录，如果目录不对请更改
-    var talkAPI = "";//如果有类似图灵机器人的聊天接口请填写接口路径
-</script>
-<!--<script src="/media/js/jquery-3.3.1.min.js"></script>-->
-<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-<script type="text/javascript" src="/media/live2d/js/live2d.js"></script>
-<script type="text/javascript" src="/media/live2d/js/message.js"></script>
+    $(document).ready(function() {
+        $(".menu-btn").click(function() {
+            $(".menu-container").slideToggle();
+        });
+        $(window).resize(function() {
 
-    </body>
-<script src="//cdnjs.loli.net/ajax/libs/mdui/0.4.3/js/mdui.min.js"></script>
+            if (window.matchMedia('(min-width: 960px)').matches) {
+                $(".menu-container").css('display', 'block')
+            } else {
+                $(".menu-container").css('display', 'none')
+            }
+
+        });
+    });
+</script>
+
+            <div id="main-content" class="post-container main-container">
+                <div id="content" class="main-container-left">
+                    
+    <div class="i-card">
+        <b>标签：#
+        DP</b>
+    </div>
+    
+        
+            <article class="post i-card">
+                <h2 class="post-title">
+                    <a href="https://caifxh.github.io/post/si-bian-xing-bu-deng-shi/">
+                        四边形不等式
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2020-04-09</time>
+                    
+                        <a href="https://caifxh.github.io/tag/Iu6lDT60Hd/" class="post-tag i-tag
+                            i-tag-error">
+            #DP
+        </a>
+                        
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            四边形不等式优化主要针对区间DP模型。
+转移方程形如：
+f[i][j] = min(f[i][k] + f[k + 1][j] + w(i, j))
+对于每个区间都要枚举 k
+时间复杂度 O(n3n^3n3)
+状态数已经定好了是 O(n2n^2n2)，我们能想办法优化的部分就是把 O(n) 的转移优化到 O(1)
+这里就要用到四边形不等式优化。
+对于 a &amp;lt; b &amp;lt; c &amp;lt; d：
+如果有 f(a, c) + f(b, d) &amp;lt;= f(b, c) + f(a, d) 交叉 &amp;lt;= 包含
+我们就称 f 满足四边形不等式。
+如果代价函数 w(i,j) 满足单调性和四边形不等式，那么 dp 函数 f(i,j) 也满足四边形不等式。
+定义 s(i,j) 为 f(i,j) 取得最优值对应的转移（即 k）
+如果 f(i,j) 满足四边形不等式，那么 s(i,j) 单调
+即s(i,j)≤s(i,j+1)≤s(i+1,j+1)
+应用背景
+
+
+
+四边形不等式定义和单调性定义
+
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int N=310,INF=0x3f3f3f3f;
+int f[N][N];
+int sum[N];
+int s[N][N];
+int n;
+
+int main()
+{
+    cin&amp;gt;&amp;gt;n;
+
+    for(int i=1;i&amp;lt;=n;i++)
+    {
+        cin&amp;gt;&amp;gt;sum[i];
+        sum[i]+=sum[i-1];
+        s[i][i]=i;
+    }
+
+    for(int len=2;len&amp;lt;=n;len++)
+    {
+        for(int i=1;i+len-1&amp;lt;=n;i++)
+        {
+            int j=i+len-1;
+            f[i][j]=INF;
+            for(int k=s[i][j-1];k&amp;lt;=s[i+1][j];k++)
+                if(f[i][j] &amp;gt; f[i][k]+f[k+1][j]+sum[j]-sum[i-1])
+                {
+                    f[i][j] = f[i][k]+f[k+1][j]+sum[j]-sum[i-1];
+                    s[i][j]=k;
+                }
+        }
+    }
+
+    cout&amp;lt;&amp;lt;f[1][n]&amp;lt;&amp;lt;endl;
+
+    return 0;
+}
+
+
+acwing1068
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=210,INF=0x3f3f3f3f;
+int f[N][N];
+int g[N][N];
+int w[N];
+int sum[N];
+int s[N][N];
+int n;
+
+int main()
+{
+    cin&amp;gt;&amp;gt;n;
+    
+    for(int i=1;i&amp;lt;=n;i++)
+    {
+        cin&amp;gt;&amp;gt;w[i];
+        w[n+i]=w[i];
+    }
+    
+    for(int i=1;i&amp;lt;=n*2;i++)
+    {
+        sum[i]=sum[i-1]+w[i];
+        s[i][i]=i;
+    }
+    
+    for(int len=2;len&amp;lt;=n*2;len++)
+    {
+        for(int i=1;i+len-1&amp;lt;=n*2;i++)
+        {
+            int j=i+len-1;
+            f[i][j]=INF;
+            for(int k=s[i][j-1];k&amp;lt;=s[i+1][j];k++)
+                if(f[i][j] &amp;gt; f[i][k]+f[k+1][j]+sum[j]-sum[i-1])
+                {
+                    f[i][j] = f[i][k]+f[k+1][j]+sum[j]-sum[i-1];
+                    s[i][j]=k;
+                }
+                
+            g[i][j]=max(g[i+1][j],g[i][j-1])+sum[j]-sum[i-1];
+        }
+    }
+    
+    int maxv=0;
+    int minv=INF;
+    for(int i=1;i&amp;lt;=n;i++)
+    {
+        maxv=max(maxv,g[i][n+i-1]);
+        minv=min(minv,f[i][n+i-1]);
+    }
+    
+    cout&amp;lt;&amp;lt;minv&amp;lt;&amp;lt;endl&amp;lt;&amp;lt;maxv&amp;lt;&amp;lt;endl;
+    
+    return 0;
+}
+
+四边形不等式定理
+
+一维线性DP的四边形不等式优化
+
+比赛时，我们只要先写出暴力的 DP 然后打出 cost、dp、和决策数组，验证 cost、dp函数是否满足四边形不等式，
+以及决策是否具有单调性。
+
+拿到题目后，先判断w是否单调、是否满足四边形不等式，再使用四边形不等式优化DP。
+
+最优二叉搜索树
+
+
+
+题目给出的数列(val)是有序的，假设我们以i为根，1i-1就是左子树，i+1n就是右子树
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=260;
+int w[N];
+int sum[N];
+int s[N][N];
+int f[N][N];
+int n;
+
+int main()
+{
+	while(~scanf(&amp;quot;%d&amp;quot;,&amp;amp;n))
+	{
+		for(int i=1;i&amp;lt;=n;i++)
+		{
+			cin&amp;gt;&amp;gt;w[i];
+			sum[i]=sum[i-1]+w[i];
+			s[i][i]=i;
+		}
+		
+		for(int len=1;len&amp;lt;=n;len++)
+		{
+			for(int i=1;i+len-1&amp;lt;=n;i++)
+			{
+				int j=i+len-1;
+				f[i][j]=1e9;
+				if(len == 1) f[i][j]=0;
+				
+				for(int k=s[i][j-1];k&amp;lt;=s[i+1][j];k++)
+					if(f[i][j] &amp;gt; f[i][k-1]+f[k+1][j]+sum[j]-sum[i-1]-w[k])
+					{
+						f[i][j] = f[i][k-1]+f[k+1][j]+sum[j]-sum[i-1]-w[k];
+						s[i][j]=k;
+					}
+			}
+		}
+		
+		cout&amp;lt;&amp;lt;f[1][n]&amp;lt;&amp;lt;endl;
+	}
+	return 0;
+}
+
+hdu2829
+有 n 个火车站，第 i 个火车站有一个重要度 a[i]。
+你现在可以炸掉 m 条铁轨。这样铁轨就断成了 m + 1 段，每一段都有一个战略值，它等于这一段铁轨上的火车站两两的重要度乘积之和。请你最小化总的战略值之和。
+0 ≤ m &amp;lt; n ≤ 1000
+斜率优化：
+
+那么，就有：dp[i][j] = min( dp[k][j-1] + w[k+1][i] )，j≤k&amp;lt;i；
+方程的意义是：炸毁仓库k和仓库k+1之间的那段铁路（即第k段铁路），算出总价值，枚举k找到最小的。
+那么如何计算w[k+1][i]呢？假设sum[i]=∑k=1iv[k]\sum_{k=1}^{i}v[k]∑k=1i​v[k] ，那么就有：w[1][i] = w[1][k] + w[k+1][i] + (v[1]+v[2]+…+v[k]) × (v[k+1]+v[k+2]+…+v[i])= w[1][k] + w[k+1][i] + sum[k] × (sum[i]-sum[k])
+即w[k+1][i] = w[1][i] - w[1][k] - sum[k] × (sum[i]-sum[k])
+我们把w[k+1][i]的计算式带入状态转移方程得到：
+dp[i][j] = min{ dp[k][j-1] + w[1][i] - w[1][k] - sum[k] × (sum[i]-sum[k]) }
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N=1010;
+int f[N][N];
+int s[N],w[N];
+int q[N];
+int n,m;
+
+int getY(int i,int j,int k)
+{
+	return f[i-1][j]-w[j]+s[j]*s[j]-f[i-1][k]+w[k]-s[k]*s[k];
+}
+
+int getX(int i,int j)
+{
+	return s[i]-s[j];
+}
+
+int main()
+{
+	while(~scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;m))
+	{
+		if(!n &amp;amp;&amp;amp; !m) break;
+		
+		for(int i=1;i&amp;lt;=n;i++)
+		{
+			int x;
+			scanf(&amp;quot;%d&amp;quot;,&amp;amp;x);
+			s[i]=s[i-1]+x;
+			w[i]=w[i-1]+s[i-1]*x;
+			f[0][i]=w[i];
+		}
+		
+		for(int i=1;i&amp;lt;=m;i++)
+		{
+			int hh=0,tt=-1;
+			q[++tt]=0;
+			for(int j=1;j&amp;lt;=n;j++)
+			{
+				while(hh &amp;lt; tt &amp;amp;&amp;amp; getY(i,q[hh+1],q[hh]) &amp;lt;= s[j]*getX(q[hh+1],q[hh]))
+					hh++;
+				int k=q[hh];
+				f[i][j]=f[i-1][k]+w[j]-w[k]-s[k]*(s[j]-s[k]);
+				
+				while(hh &amp;lt; tt &amp;amp;&amp;amp; getY(i,q[tt],q[tt-1])*getX(j,q[tt]) &amp;gt;= getY(i,j,q[tt])*getX(q[tt],q[tt-1]))
+					tt--;
+				q[++tt]=j;
+			}			
+		}
+		
+		printf(&amp;quot;%d\n&amp;quot;,f[m][n]);
+	}
+	return 0;
+}
+
+四边形不等式：
+用 f[i][j] 来表示在前 j 个火车站中用了 i 个炸弹得到的最小的战略值总和。
+枚举上一次使用炸弹的位置 k，得到
+f[i][j] = min(f[i - 1][k] + w[k + 1][j])(i-1 &amp;lt; k &amp;lt; j)
+w[i][j] = [i, j] 中两两乘积之和= [(a[i] + a[i + 1] + … + a[j])2 - (a[i]2 + a[i + 1]2 + … + a[j]2)] / 2
+可以验证它是满足单调性和四边形不等式的。
+因此这题可以用四边形不等式来优化。
+f[i][j] = min(f[i - 1][k] + w[k + 1][j])
+(s[i-1][j] &amp;lt; k &amp;lt; s[i+1][j])
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N=1010;
+int f[N][N];
+int a[N];
+int w[N][N];
+int p[N][N];
+int n,m;
+
+int main()
+{
+	while(~scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;m))
+	{
+		if(!n &amp;amp;&amp;amp; !m) break;
+		
+		for(int i=1;i&amp;lt;=n;i++) scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]);
+		
+		for(int i=1;i&amp;lt;=n;i++)
+		{
+			int sum=0;
+			w[i][i]=0;
+			for(int j=i+1;j&amp;lt;=n;j++)
+			{
+				sum+=a[j-1];
+				w[i][j]=w[i][j-1]+sum*a[j];
+			}
+		}
+		
+		//      打表
+// 		for(int i=1;i&amp;lt;=n;i++) 
+// 		{
+// 		    for(int j=1;j&amp;lt;=n;j++)
+// 		        cout&amp;lt;&amp;lt;w[i][j]&amp;lt;&amp;lt;&#39; &#39;;
+// 		    cout&amp;lt;&amp;lt;endl;
+// 		}
+		
+		for(int i=0;i&amp;lt;=n;i++)
+		{
+			f[0][i]=w[1][i];
+			p[0][i]=0;
+			p[i][n+1]=n;
+		}
+	
+		
+		for(int i=1;i&amp;lt;=m;i++)
+			for(int j=n;j&amp;gt;=1;j--)
+			{
+				f[i][j]=1e9;
+				for(int k=p[i-1][j];k&amp;lt;=p[i][j+1];k++)
+					if(f[i][j] &amp;gt; f[i-1][k] + w[k+1][j])
+					{
+						f[i][j] = f[i-1][k] + w[k+1][j];
+						p[i][j]=k;
+					}
+			}
+		
+		printf(&amp;quot;%d\n&amp;quot;,f[m][n]);
+	}
+	return 0;
+}
+
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://caifxh.github.io/post/si-bian-xing-bu-deng-shi/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+            <article class="post i-card">
+                <h2 class="post-title">
+                    <a href="https://caifxh.github.io/post/xie-lu-you-hua/">
+                        斜率优化
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2020-04-08</time>
+                    
+                        <a href="https://caifxh.github.io/tag/Iu6lDT60Hd/" class="post-tag i-tag
+                            i-tag-other_2">
+            #DP
+        </a>
+                        
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            
+
+hdu3507
+
+
+
+
+
+
+
+
+
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int N=500010;
+int f[N];
+int s[N];
+int q[N];
+int n,m;
+
+int getY(int i,int j)
+{
+	return f[i]+s[i]*s[i]-f[j]-s[j]*s[j];
+}
+
+int getX(int i,int j)
+{
+	return s[i]-s[j];
+}
+
+int main()
+{
+	while(~scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;m))
+	{
+		for(int i=1;i&amp;lt;=n;i++)
+		{
+			scanf(&amp;quot;%d&amp;quot;,&amp;amp;s[i]);
+			s[i]+=s[i-1];
+		}
+		
+		int hh=0,tt=-1;
+		q[++tt]=0;
+		
+		for(int i=1;i&amp;lt;=n;i++)
+		{
+			while(hh&amp;lt;tt &amp;amp;&amp;amp; getY(q[hh+1],q[hh]) &amp;lt;= 2*s[i]*getX(q[hh+1],q[hh]))
+				hh++;
+			int j=q[hh];
+			f[i]=f[j]+(s[i]-s[j])*(s[i]-s[j])+m;
+			while(hh&amp;lt;tt &amp;amp;&amp;amp; getY(q[tt],q[tt-1])*getX(i,q[tt]) &amp;gt;= getY(i,q[tt])*getX(q[tt],q[tt-1]))
+				tt--;
+			q[++tt]=i;
+		}
+		
+		printf(&amp;quot;%d\n&amp;quot;,f[n]);
+	}
+	return 0;
+}
+
+
+acwing302
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N=300010;
+LL st[N],sc[N];
+LL f[N];
+int q[N];
+int n,s;
+
+LL getY(int i,int j)
+{
+    return f[i]-f[j];
+}
+
+LL getX(int i,int j)
+{
+    return sc[i]-sc[j];
+}
+
+int main()
+{
+    cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;s;
+    
+    for(int i=1;i&amp;lt;=n;i++)
+    {
+        scanf(&amp;quot;%lld%lld&amp;quot;,&amp;amp;st[i],&amp;amp;sc[i]);
+        st[i]+=st[i-1];
+        sc[i]+=sc[i-1];
+    }
+    
+    int hh=0,tt=-1;
+    q[++tt]=0;
+    for(int i=1;i&amp;lt;=n;i++)
+    {
+        int l=hh,r=tt;
+        while(l&amp;lt;r)
+        {
+            int mid=l+r&amp;gt;&amp;gt;1;
+            if(getY(q[mid+1],q[mid]) &amp;gt;= (s+st[i])*getX(q[mid+1],q[mid])) r=mid;
+            else l=mid+1;
+        }
+        
+        int j=q[l];
+        f[i]=f[j]-(s+st[i])*sc[j]+s*sc[n]+st[i]*sc[i];
+        while(hh&amp;lt;tt &amp;amp;&amp;amp; getY(q[tt],q[tt-1])*getX(i,q[tt]) &amp;gt;= getY(i,q[tt])*getX(q[tt],q[tt-1]))
+            tt--;
+        q[++tt]=i;
+    }
+    
+    cout&amp;lt;&amp;lt;f[n]&amp;lt;&amp;lt;endl;
+    
+    return 0;
+}
+
+acwing303
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N=100010,M=100010,P=110;
+LL f[P][M];
+LL d[N];
+int t[M],a[M];
+LL s[M];
+int q[M];
+int n,m,p;
+
+LL getY(int i,int j,int k)
+{
+    return f[i-1][j]+s[j]-f[i-1][k]-s[k];
+}
+
+int getX(int i,int j)
+{
+    return i-j;
+}
+
+int main()
+{
+    cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m&amp;gt;&amp;gt;p;
+    
+    for(int i=2;i&amp;lt;=n;i++)
+        cin&amp;gt;&amp;gt;d[i],d[i]+=d[i-1];
+        
+    for(int i=1;i&amp;lt;=m;i++)
+    {
+        int h;
+        cin&amp;gt;&amp;gt;h&amp;gt;&amp;gt;t[i];
+        a[i]=t[i]-d[h];
+    }
+    
+    sort(a+1,a+m+1);
+    
+    
+    for(int i=1;i&amp;lt;=m;i++) s[i]=s[i-1]+a[i];
+    
+    memset(f,0x3f,sizeof f);
+    for(int i=0;i&amp;lt;=p;i++) f[i][0]=0;
+    
+    for(int i=1;i&amp;lt;=p;i++)
+    {
+        
+        int hh=0,tt=-1;
+        q[++tt]=0;
+        
+        for(int j=1;j&amp;lt;=m;j++)
+        {
+            while(hh &amp;lt; tt &amp;amp;&amp;amp; getY(i,q[hh+1],q[hh]) &amp;lt;= (LL)a[j]*getX(q[hh+1],q[hh]))
+                hh++;
+            int k=q[hh];
+            f[i][j]=f[i-1][k]+(LL)a[j]*(j-k)-(s[j]-s[k]);
+            while(hh &amp;lt; tt &amp;amp;&amp;amp; getY(i,q[tt],q[tt-1])*getX(j,q[tt]) &amp;gt;= getY(i,j,q[tt])*getX(q[tt],q[tt-1]))
+                tt--;
+            q[++tt]=j;
+        }
+    }
+
+    cout&amp;lt;&amp;lt;f[p][m]&amp;lt;&amp;lt;endl;
+    
+    return 0;
+}
+
+P2120
+
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N=1000010;
+LL f[N];
+LL x[N],c[N],p[N];
+LL sp[N],sxp[N];
+int q[N];
+int n;
+
+LL getY(int i,int j)
+{
+	return f[i]+sxp[i]-f[j]-sxp[j];
+}
+
+LL getX(int i,int j)
+{
+	return sp[i]-sp[j];
+}
+
+int main()
+{
+	cin&amp;gt;&amp;gt;n;
+	
+	for(int i=1;i&amp;lt;=n;i++)
+	{
+		scanf(&amp;quot;%lld%lld%lld&amp;quot;,&amp;amp;x[i],&amp;amp;p[i],&amp;amp;c[i]);
+		sp[i]=sp[i-1]+p[i];
+		sxp[i]=sxp[i-1]+x[i]*p[i];
+	}
+	
+	int hh=0,tt=-1;
+	q[++tt]=0;
+	
+	for(int i=1;i&amp;lt;=n;i++)
+	{
+		while(hh &amp;lt; tt &amp;amp;&amp;amp; getY(q[hh+1],q[hh]) &amp;lt;= x[i]*getX(q[hh+1],q[hh]))
+			hh++;
+		int j=q[hh];
+		f[i]=f[j]+x[i]*(sp[i]-sp[j])-(sxp[i]-sxp[j])+c[i];
+		while(hh &amp;lt; tt &amp;amp;&amp;amp; getY(q[tt],q[tt-1])*getX(i,q[tt]) &amp;gt;= getY(i,q[tt])*getX(q[tt],q[tt-1]))
+			tt--;
+		q[++tt]=i;
+	}
+	
+	printf(&amp;quot;%lld\n&amp;quot;,f[n]);
+	
+	return 0;
+}
+
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://caifxh.github.io/post/xie-lu-you-hua/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+            <article class="post i-card">
+                <h2 class="post-title">
+                    <a href="https://caifxh.github.io/post/shu-xing-dp/">
+                        树形dp
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2020-04-06</time>
+                    
+                        <a href="https://caifxh.github.io/tag/Iu6lDT60Hd/" class="post-tag i-tag
+                            i-tag-warning">
+            #DP
+        </a>
+                        
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            树的重心
+对于一棵 n 个节点的无根树，找到一个点 A，使得把树变成以
+该点为根的有根树时，最大子树的结点树最小。A 叫做重心。
+给定一棵树，找重心。
+求一下每个点子树的点数，然后对于每个点考虑一下他作为重心
+时候最大子树的大小是多少，和当前的重心进行比对就可以了。
+代码非常简单易懂。
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace  std;
+const int N=100010,M=N*2;
+int h[N],e[M],ne[M],idx;
+int ans=N;
+bool st[N];
+int cnt[N];
+int n;
+int poi;
+
+void add(int a,int b)
+{
+    e[idx]=b;
+    ne[idx]=h[a];
+    h[a]=idx++;
+}
+
+void dfs(int u,int fa)
+{
+    cnt[u]=1;
+    int res=0;
+    for(int i=h[u];i!=-1;i=ne[i])
+    {
+        int j=e[i];
+        if(j == fa)
+            continue;
+        dfs(j,u);
+        cnt[u]+=cnt[j];
+        res=max(res,cnt[j]);
+    }
+    res=max(res,n-cnt[u]);
+
+    if(res &amp;lt; ans)
+    {
+        ans=res;
+        poi=u;
+    }
+}
+
+int main()
+{
+    
+    memset(h,-1,sizeof h);
+    cin&amp;gt;&amp;gt;n;
+    for(int i=0;i&amp;lt;n-1;i++)
+    {
+        int a,b;
+        cin&amp;gt;&amp;gt;a&amp;gt;&amp;gt;b;
+        add(a,b);
+        add(b,a);
+    }
+    
+    dfs(1,-1);
+    
+    cout&amp;lt;&amp;lt;ans&amp;lt;&amp;lt;endl;
+    //cout&amp;lt;&amp;lt;poi&amp;lt;&amp;lt;endl;重心
+    return 0;
+}
+
+树的最长路径
+妨枚举直径在树上转弯的点。所以我们维护出到一个节点
+时向下的最长链和次长链，然后用二者加和来更新答案，同时更
+新父亲节点的最长链和次长链。
+f[i][0]表示根节点为i，向下所能到达的最长路径长度
+f[i][1]表示根节点为i，向下所能到达的次长路径长度
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int N=10010,M=N*2;
+int h[N],e[M],ne[M],w[M],idx;
+int n,m;
+int ans;
+int f[N][2];//0表示最长路径， 1表示次长路径
+
+void add(int a, int b, int c)
+{
+    e[idx] = b, w[idx] = c, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+void dfs(int u,int fa)
+{
+    for(int i=h[u];~i;i=ne[i])
+    {
+        int v=e[i];
+        if(v == fa)
+            continue;
+        dfs(v,u);
+        if(f[v][0] + w[i] &amp;gt; f[u][0])
+        {
+            f[u][1]=f[u][0];
+            f[u][0]=f[v][0]+w[i];
+        }
+        else if(f[v][0] + w[i] &amp;gt; f[u][1])
+            f[u][1]=f[v][0]+w[i];
+    }
+    
+    ans=max(ans,f[u][0]+f[u][1]);
+}
+
+int main()
+{
+    cin&amp;gt;&amp;gt;n;
+    memset(h,-1,sizeof h);
+    for(int i=0;i&amp;lt;n-1;i++)
+    {
+        int a,b,c;
+        cin&amp;gt;&amp;gt;a&amp;gt;&amp;gt;b&amp;gt;&amp;gt;c;
+        add(a,b,c);
+        add(b,a,c);
+    }
+
+    dfs(1,-1);
+
+    cout&amp;lt;&amp;lt;ans&amp;lt;&amp;lt;endl;
+
+    return 0;
+}
+
+hdu2196
+    
+f[i][0]表示根节点为i，向下所能到达的最长路径长度
+f[i][1]表示根节点为i，向下所能到达的次长路径长度
+f[i][2]表示根节点为i，向上所能到达的最长路径长度
+（1）f[i][0]，f[i][1]的求法同树的直径
+（2）f[i][2]的求法分两种情况：
+①从父结点向上走的最长路径长度
+②从父节点向下走其他子树的最长路径长度（若父节点向下走的最长路径经过当前点，则向下走其他子树的最长路径长度为父节点向下走的次长路径长度；若不经过，则取父节点向下走的最长路径）
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int N=10010,M=N*2;
+int h[N],e[M],ne[M],w[M],idx;
+int n;
+int f[N][3]; // 0表示向下走的最大长度，1表示次大长度，2表示向上走的最大长度
+
+void add(int a, int b, int c)
+{
+    e[idx] = b, w[idx] = c, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+void dfs_d(int u,int fa)
+{
+    int one=0,two=0;
+    for(int i=h[u];~i;i=ne[i])
+    {
+        int j=e[i];
+        if(j == fa)
+            continue;
+        dfs_d(j,u);
+        //cout&amp;lt;&amp;lt;u&amp;lt;&amp;lt;&amp;quot;:&amp;quot;&amp;lt;&amp;lt;j&amp;lt;&amp;lt;&amp;quot; &amp;quot;&amp;lt;&amp;lt;d&amp;lt;&amp;lt;endl;
+        int d=f[j][0]+w[i];
+        if(d &amp;gt; one) 
+            two=one,one=d;
+        else if(d &amp;gt; two)
+            two=d;
+    }
+    f[u][0]=one;
+    f[u][1]=two;
+}
+
+void dfs_u(int u,int fa)//先更新后递归
+{
+    for(int i=h[u];~i;i=ne[i])
+    {
+        int j=e[i];
+        if(j == fa) 
+            continue;
+        if(f[j][0] + w[i] == f[u][0])//父节点向下走的最长路径经过当前点
+            f[j][2]=max(f[u][2],f[u][1])+w[i];
+        else 
+            f[j][2]=max(f[u][2],f[u][0])+w[i];//父节点向下走的最长路径不经过当前点
+        dfs_u(j,u);
+    }
+}
+
+int main()
+{
+    while(~scanf(&amp;quot;%d&amp;quot;,&amp;amp;n))
+    {
+        memset(h,-1,sizeof h);
+        memset(f,0,sizeof f);
+        idx=0;
+        
+        for(int i=2;i&amp;lt;=n;i++)
+        {
+            int a,b;
+            cin&amp;gt;&amp;gt;a&amp;gt;&amp;gt;b;
+            add(i,a,b);
+            add(a,i,b);
+        }
+        
+        dfs_d(1,-1);//子节点更新父节点
+        
+        dfs_u(1,-1);//父节点更新子节点
+        
+        for(int i=1;i&amp;lt;=n;i++)
+            cout&amp;lt;&amp;lt;max(f[i][0],f[i][2])&amp;lt;&amp;lt;endl;
+    }
+    
+    return 0;
+}
+
+
+我们通常认为，树形DP的写法有两种：
+a.根到叶子: 不过这种动态规划在实际的问题中运用的不多。
+b.叶子到根: 既根的子节点传递有用的信息给根，完后根得出最优解的过程。这类的习题比较的多。
+
+hdu1520
+最大独立集
+
+
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;vector&amp;gt;
+using namespace std;
+const int N=6000+10;
+int val[N],dp[N][2],fa[N],n;
+vector&amp;lt;int&amp;gt;E[N];
+
+void dfs(int u){
+	dp[u][0]=0;
+	dp[u][1]=val[u];
+	for(int i=0;i&amp;lt;E[u].size();i++){
+		int v=E[u][i];
+		dfs(v);
+		dp[u][0]+=max(dp[v][1],dp[v][0]);
+		dp[u][1]+=dp[v][0];
+	}
+}
+
+int main(){
+	while(~scanf(&amp;quot;%d&amp;quot;,&amp;amp;n)){
+		for(int i=1;i&amp;lt;=n;i++){
+			scanf(&amp;quot;%d&amp;quot;,&amp;amp;val[i]);
+			E[i].clear();
+			fa[i]=-1;
+		}
+		while(1){
+			int a,b;
+			scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;a,&amp;amp;b);
+	        if(a==0&amp;amp;&amp;amp;b==0) break;
+	        E[b].push_back(a);
+	        fa[a]=b;
+		}
+	    int rt=1;
+	    while(fa[rt]!=-1) rt=fa[rt];
+	    dfs(rt);
+	    printf(&amp;quot;%d\n&amp;quot;,max(dp[rt][1],dp[rt][0]));
+    }
+    return 0;
+}
+
+poj3398
+最小支配集
+   
+#include&amp;lt;cstdio&amp;gt; 
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;vector&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int maxn=10010;
+int n;
+vector&amp;lt;int&amp;gt; E[maxn];
+int dp[maxn][3];
+
+void dfs(int u,int fa)
+{
+    dp[u][0]=1; //加上自身为服务器,选择当前结点 
+    dp[u][1]=0;//不选当前结点，选其父节点 
+    dp[u][2]=maxn;//选一个子节点 
+    int k=E[u].size();
+    for(int i=0;i&amp;lt;k;i++)
+    {
+        int v=E[u][i];
+        if(v==fa) continue;
+        dfs(v,u);
+        dp[u][0]+=min(dp[v][0],dp[v][1]);
+        dp[u][1]+=dp[v][2];
+    }
+    for(int i=0;i&amp;lt;k;i++)
+    {
+        int v=E[u][i];
+        if(v==fa)  continue;
+        dp[u][2]=min(dp[u][2],dp[u][1]-dp[v][2]+dp[v][0]);
+    }
+}
+
+int main()
+{
+    int u,v;
+    while(scanf(&amp;quot;%d&amp;quot;,&amp;amp;n))
+    {
+        for(int i=1;i&amp;lt;=n;i++)
+            E[i].clear();
+        for(int i=1;i&amp;lt;n;i++)
+        {
+            scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;u,&amp;amp;v);
+            E[u].push_back(v);
+            E[v].push_back(u);
+        }
+        dfs(1,0);
+		printf(&amp;quot;%d\n&amp;quot;,min(dp[1][0],dp[1][2])); 
+		int t;
+		scanf(&amp;quot;%d&amp;quot;,&amp;amp;t);
+		if(t == -1)
+			break;
+    }
+    return 0;
+}
+
+acwing1077
+题目说的很清楚，用最少的点覆盖所有的点。题目给出的是个树,所以可以用动态规划来解决。
+给出如下定义：
+f[u][0]表示 u不放看守 ,且u点被父节点监视,
+易得在这类情况下子节点可以自己放守卫或者在子节点上放守卫。
+由于有多个子节点，为使得所有子节点都被看守，
+所以每个节点的最小值累加求和
+f[u][0] = ∑(min(f[j][1] , f[j][2]))
+f[u][2]表示u放看守,
+既然u已经放上了看守，说明子节点必然已经被看到，
+因此对于所有子节点可自己放守卫，可被父节点监视，可被子节点监视
+f[u][2] = ∑min(min(f[j][0],f[j][1]),f[j][2])+w[u]
+f[u][1]表示 u不放看守 ,且u点被一个儿子监视,
+首先我们可以枚举当前哪一颗子结点监视u，其余节点可自己放守卫或在子节点放守卫，
+f[u][1]=min(f[u][1],f[j][2]+∑min(f[k][2],f[k][1])),j为当前监视u的结点，k为除了j之外u其他的子节点
+而f[u][0]=∑(min(f[j][1] , f[j][2]))
+则f[u][1]=min(f[u][1],f[j][2]+f[u][0] - min(f[j][2],f[j][1]))
+#include &amp;lt;cstring&amp;gt;
+#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;algorithm&amp;gt;
+
+using namespace std;
+
+const int N = 1510;
+
+int n;
+int h[N], w[N], e[N], ne[N], idx;
+int f[N][3];
+int fa[N];
+
+void add(int a, int b)
+{
+    e[idx] = b, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+void dfs(int u)
+{
+    f[u][2] = w[u];
+
+    for (int i = h[u]; ~i; i = ne[i])
+    {
+        int j = e[i];
+        dfs(j);
+        f[u][0] += min(f[j][1], f[j][2]);
+        f[u][2] += min(min(f[j][0], f[j][1]), f[j][2]);
+    }
+
+    f[u][1] = 1e9;
+    for (int i = h[u]; ~i; i = ne[i])
+    {
+        int j = e[i];
+        f[u][1] = min(f[u][1], f[u][0] + f[j][2] - min(f[j][1], f[j][2]));
+    }
+}
+
+int main()
+{
+    cin &amp;gt;&amp;gt; n;
+
+    memset(h, -1, sizeof h);
+    memset(fa,-1,sizeof fa);
+    for (int i = 1; i &amp;lt;= n; i ++ )
+    {
+        int id, cost, cnt;
+        cin &amp;gt;&amp;gt; id &amp;gt;&amp;gt; cost &amp;gt;&amp;gt; cnt;
+        w[id] = cost;
+        while (cnt -- )
+        {
+            int ver;
+            cin &amp;gt;&amp;gt; ver;
+            add(id, ver);
+            fa[ver]=id;
+        }
+    }
+
+    int root = 1;
+    while (fa[root] != -1) root =fa[root] ;
+
+    dfs(root);
+
+    cout &amp;lt;&amp;lt; min(f[root][1], f[root][2]) &amp;lt;&amp;lt; endl;
+
+    return 0;
+}
+
+hdu2412
+最大独立集+唯一性判断
+
+
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;string&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;map&amp;gt;
+#include&amp;lt;vector&amp;gt;
+using namespace std;
+const int N=200+10;
+int dp[N][2],f[N][2],n;
+vector&amp;lt;int&amp;gt;E[N];
+
+void dfs(int u){
+   	dp[u][0]=0;
+	dp[u][1]=1;
+	for(int i=0;i&amp;lt;E[u].size();i++){
+		int v=E[u][i];
+		dfs(v);
+		if(dp[v][0]==dp[v][1]){
+			dp[u][0]+=dp[v][0];
+			f[u][0]=0;
+		}else if(dp[v][0]&amp;gt;dp[v][1]){
+			dp[u][0]+=dp[v][0];
+			if(!f[v][0]) f[u][0]=0;
+		}
+		else{
+			dp[u][0]+=dp[v][1];
+			if(!f[v][1]) f[u][0]=0;
+		}
+		dp[u][1]+=dp[v][0];
+		if(!f[v][0]) f[u][1]=0;
+	}
+}
+
+int main(){
+	int n,k;
+	string s1,s2;
+	map&amp;lt;string,int&amp;gt;mp;
+	while(cin&amp;gt;&amp;gt;n&amp;amp;&amp;amp;n){//n为0时结束 
+		mp.clear();
+		for(int i=0;i&amp;lt;=n;i++)//尽量不要使用memset清0的办法，尽管也可以用 
+			E[i].clear();
+		memset(f,1,sizeof(f));
+		k=1;
+		cin&amp;gt;&amp;gt;s1;
+		mp[s1]=k++;
+		E[0].push_back(mp[s1]);//增加超根 
+		for(int i=1;i&amp;lt;=n-1;i++){
+			cin&amp;gt;&amp;gt;s1&amp;gt;&amp;gt;s2;
+			if(mp[s1]==0)
+				mp[s1]=k++;
+			if(mp[s2]==0)
+				mp[s2]=k++;
+			E[mp[s2]].push_back(mp[s1]);
+		}
+	    dfs(0);
+	    printf(&amp;quot;%d &amp;quot;,dp[0][0]);
+	    if(f[0][0])
+	    	printf(&amp;quot;Yes\n&amp;quot;);
+		else
+			printf(&amp;quot;No\n&amp;quot;);	
+    }
+    return 0;
+}
+
+poj1463
+
+
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;vector&amp;gt;
+using namespace std;
+const int N=1500+10;
+int val[N],dp[N][2],fa[N],n;
+vector&amp;lt;int&amp;gt;E[N];
+
+void dfs(int u){
+	dp[u][0]=0;
+	dp[u][1]=1;
+	for(int i=0;i&amp;lt;E[u].size();i++){
+		int v=E[u][i];
+		dfs(v);
+		dp[u][1]+=min(dp[v][1],dp[v][0]);
+		dp[u][0]+=dp[v][1];
+	}
+}
+
+int main(){
+	while(~scanf(&amp;quot;%d&amp;quot;,&amp;amp;n)){
+		for(int i=0;i&amp;lt;n;i++)//编号从0开始 
+			E[i].clear();
+		memset(fa,-1,sizeof(fa));
+		memset(dp,0,sizeof(dp));
+		for(int i=0;i&amp;lt;n;i++){
+			int a,b,m;
+			scanf(&amp;quot;%d:(%d)&amp;quot;,&amp;amp;a,&amp;amp;m);//注意读入 
+	        while(m--)
+	        {
+	        	scanf(&amp;quot;%d&amp;quot;,&amp;amp;b);
+	        	E[a].push_back(b);
+	        	fa[b]=a;
+			}
+		}
+	    int rt=0;//编号从0开始
+	    while(fa[rt]!=-1) rt=fa[rt];
+	    dfs(rt);
+	    printf(&amp;quot;%d\n&amp;quot;,min(dp[rt][1],dp[rt][0]));
+    }
+    return 0;
+}
+
+背包类树形dp
+hdu1561
+
+
+
+加上虚根一共m+1个结点
+#include &amp;lt;cstring&amp;gt;
+#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;algorithm&amp;gt;
+
+using namespace std;
+
+const int N = 210,M=N*2;
+int n, m;
+int w[N];
+int h[N], e[M], ne[M], idx;
+int f[N][N];
+
+void add(int a, int b)
+{
+    e[idx] = b, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+void dfs(int u)
+{
+    for (int i = h[u]; ~i; i = ne[i])
+    {
+        int son=e[i];
+        dfs(son);
+        for (int j = m ; j &amp;gt;= 0; j -- )
+            for (int k = 0; k &amp;lt;= j; k ++ )
+                f[u][j] = max(f[u][j], f[u][j - k] + f[son][k]);
+    }
+
+    for (int j = m+1; j &amp;gt;= 1; j -- ) f[u][j] = f[u][j - 1] + w[u];
+    for (int j = 0; j &amp;lt; 1; j ++ ) f[u][j] = 0;
+}
+
+int main()
+{
+    while(cin &amp;gt;&amp;gt; n &amp;gt;&amp;gt; m &amp;amp;&amp;amp; n)
+    {
+    	memset(h, -1, sizeof h);
+    	memset(f,0,sizeof f);
+    	idx=0;
+	    for (int i = 1; i &amp;lt;= n; i ++ )
+	    {
+	    	int a,b;
+	    	cin&amp;gt;&amp;gt;a&amp;gt;&amp;gt;b;
+	    	if(!a)
+	    		add(0,i);
+	    	else 
+	    		add(a,i);
+	    	w[i]=b;
+	    }
+	
+	    dfs(0);
+	
+	    cout &amp;lt;&amp;lt; f[0][m+1]&amp;lt;&amp;lt; endl;
+	}
+
+    return 0;
+}
+
+acwing286
+同背包类树形dp
+#include &amp;lt;cstring&amp;gt;
+#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;algorithm&amp;gt;
+
+using namespace std;
+
+const int N = 310;
+
+int n, m;
+int h[N], e[N], ne[N], idx;
+int w[N];
+int f[N][N];
+
+void add(int a, int b)
+{
+    e[idx] = b, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+void dfs(int u)
+{
+    for (int i = h[u]; ~i; i = ne[i])
+    {
+        int son = e[i];
+        dfs(son);
+
+        for (int j = m - 1; j &amp;gt;= 0; j -- )
+            for (int k = 0; k &amp;lt;= j; k ++ )
+                f[u][j] = max(f[u][j], f[u][j - k] + f[son][k]);
+    }
+
+    for (int i = m; i&amp;gt;=1; i -- ) f[u][i] = f[u][i - 1] + w[u];
+    for(int i=0;i&amp;lt;1;i++) f[u][i]=0;
+}
+
+int main()
+{
+    cin &amp;gt;&amp;gt; n &amp;gt;&amp;gt; m;
+
+    memset(h, -1, sizeof h);
+    for (int i = 1; i &amp;lt;= n; i ++ )
+    {
+        int p;
+        cin &amp;gt;&amp;gt; p &amp;gt;&amp;gt; w[i];
+        add(p, i);
+    }
+
+    m ++ ;
+    dfs(0);
+
+    cout &amp;lt;&amp;lt; f[0][m] &amp;lt;&amp;lt; endl;
+
+    return 0;
+}
+
+acwing1075
+如果x和y可以互相转化，就连接一条无向边，最后得到的图其实是一个森林，每棵树都是无根树，其实就是要求，整个森林中两个连通的点的最远距离（这里边权都是1），和在无根树中求两点最远距离是一样的，不过这题的特殊性，可以更方便点
+对于任意一条边，必有x&amp;lt;y，在树中，x就应该为y的双亲（因为y的约数和是唯一的，但x可能是很多个数的约数和，这正好对应树的关系，双亲唯一，孩子不定）。而dp思想照样是找出每个节点到叶子的最大值m1和次大值m2，再两者相加的dp[rt]，而整个树中的最大值，就是扫描全部节点，找到最大的dp[rt]
+由于这题，每个节点的双亲是可以记录下来的，所以dp的时候不用递归，而写成递推式，直接从叶往上递推，
+还有一个重要的时候就是怎么找出约数和，数据比较大，应该尽量避免多余的判断，用筛法求约数和则是一个不错的方法
+#include&amp;lt;bits/stdc++.h&amp;gt;
+using namespace std;
+int n;
+const int N=50010;
+int f[N][2];
+int sum[N];
+ 
+int main()
+{
+   cin&amp;gt;&amp;gt;n;
+   
+   for(int i=1;i&amp;lt;=n;i++)
+		for(int j=2*i;j&amp;lt;=n;j+=i)//求约数和 
+			sum[j]+=i;
+	
+	for(int i=n;i&amp;gt;=1;i--)
+	{
+		if(sum[i]&amp;lt;i)//判断是否符合条件，注意审题。
+		{
+			if(f[i][0]+1&amp;gt;f[sum[i]][0])
+			{
+				f[sum[i]][1]=f[sum[i]][0];
+				f[sum[i]][0]=f[i][0]+1;
+			}
+			else if(f[i][0]+1&amp;gt;f[sum[i]][1])
+				f[sum[i]][1]=f[i][0]+1;
+		} 
+	}
+	int ans=0;
+	for(int i=1;i&amp;lt;=n;i++)
+		ans=max(f[i][0]+f[i][1],ans);
+	cout&amp;lt;&amp;lt;ans&amp;lt;&amp;lt;endl;
+	
+   return 0;
+}
+
+acwing1074
+
+
+#include &amp;lt;cstring&amp;gt;
+#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;algorithm&amp;gt;
+
+using namespace std;
+
+const int N = 110, M = N * 2;
+
+int n, m;
+int h[N], e[M], w[M], ne[M], idx;
+int f[N][N];
+
+void add(int a, int b, int c)
+{
+    e[idx] = b, w[idx] = c, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+void dfs(int u, int father)
+{
+    for (int i = h[u]; ~i; i = ne[i])
+    {
+        if (e[i] == father) continue;
+        dfs(e[i], u);
+        for (int j = m; j&amp;gt;=0; j -- )
+            for (int k = 0; k &amp;lt; j; k ++ )
+                f[u][j] = max(f[u][j], f[u][j - k - 1] + f[e[i]][k] + w[i]);
+    }
+}
+
+int main()
+{
+    cin &amp;gt;&amp;gt; n &amp;gt;&amp;gt; m;
+    memset(h, -1, sizeof h);
+    for (int i = 0; i &amp;lt; n - 1; i ++ )
+    {
+        int a, b, c;
+        scanf(&amp;quot;%d%d%d&amp;quot;, &amp;amp;a, &amp;amp;b, &amp;amp;c);
+        add(a, b, c), add(b, a, c);
+    }
+
+    dfs(1, -1);
+
+    printf(&amp;quot;%d\n&amp;quot;, f[1][m]);
+
+    return 0;
+}
+
+左儿子右兄弟
+POJ2486
+题目大意：一个叫Wshxzt的可爱的女孩子被HX大叔带到了一棵苹果树边。众所周知，苹
+果树是一个树形的结构，在节点处长有苹果）。现在我们知道Wshxzt是个苹果控，她只要访问到一个节点，就一定会吃光这个节点所有的苹果。当然一个节点的苹果只能吃一次。HX大叔为了防止Wshxzt长胖，限制她只能走K（1 ≤ K ≤ 200）步，从一个节点走到另
+一个相邻的节点是所谓走一步。Wshxzt从节点1开始。树上的节点有N（1 ≤ N ≤ 100）
+个，你需要计算Wshxzt最多能吃到多少苹果。
+
+
+
+
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=110,M=N*2;
+int n,m,cnt;
+//dp[u][j][0]表示以u为根的树经过j步没有回到点u得到的最值
+//dp[u][j][1]表示以u为根的树经过j步回到点u得到的最值 
+int dp[N][M][2],val[N],head[N];
+ 
+struct edge{
+	int v,next;
+}e[M];
+ 
+void init(){
+	memset(head,-1,sizeof(head));
+	memset(dp,0,sizeof(dp));
+	cnt=0;
+}
+ 
+void add(int u,int v){
+	e[cnt].v=v;
+	e[cnt].next=head[u];
+	head[u]=cnt++;
+}
+ 
+void dfs(int u,int fa){
+	for(int i=0;i&amp;lt;=m;i++)//不论走多少步，均初始化为 
+		dp[u][i][0]=dp[u][i][1]=val[u];
+	for(int i=head[u];~i;i=e[i].next){
+		int v=e[i].v;
+		if(v==fa) continue;
+		dfs(v,u);
+		for(int j=m;j&amp;gt;=1;j--){//树形背包 
+			for(int k=1;k&amp;lt;=j;k++){
+				dp[u][j][0]=max(dp[u][j][0],dp[u][j-k][1]+dp[v][k-1][0]);
+				if(k&amp;gt;=2) dp[u][j][0]=max(dp[u][j][0],dp[u][j-k][0]+dp[v][k-2][1]);
+				if(k&amp;gt;=2) dp[u][j][1]=max(dp[u][j][1],dp[u][j-k][1]+dp[v][k-2][1]);
+			}
+		}
+	}
+}
+ 
+int main(){
+	int u,v;
+	while(~scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;m)){
+		init();
+		for(int i=1;i&amp;lt;=n;++i)
+			scanf(&amp;quot;%d&amp;quot;,&amp;amp;val[i]);
+		for(int i=1;i&amp;lt;n;++i){
+			scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;u,&amp;amp;v);
+			add(u,v);
+			add(v,u);
+		}
+		dfs(1,-1);
+		printf(&amp;quot;%d\n&amp;quot;,max(dp[1][m][0],dp[1][m][1]));
+	}
+	return 0;
+}
+
+uva12186
+一个老板和n个员工组成树状结构，每个员工都有自己的唯一上司，老板的编号为0，员工1~n，工人们打算签署一个志愿书给老板，但无法跨级，当一个中级员工（非是工人的员工）的直属下属中不小于T%的人签字时，他也会签字并且递给他的直属上司，问：要让老板收到请愿书至少需要多少个工人签字。
+注意：这里要求的是最底层工人（即叶子结点）的最少个数。
+
+
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;vector&amp;gt;
+#include&amp;lt;iostream&amp;gt;
+
+using namespace std;
+const int N=100010;
+vector&amp;lt;int&amp;gt; E[N];
+int n,T;
+
+int dfs(int u)
+{
+	if(E[u].size() == 0)
+		return 1;
+	vector&amp;lt;int&amp;gt; res;
+    for(int i=0;i&amp;lt;E[u].size();i++)
+    {
+    	int j=E[u][i];
+    	int t=dfs(j);
+    	res.push_back(t);
+	}
+	
+	sort(res.begin(),res.end());
+	int k=E[u].size();
+	int c=(k*T-1)/100+1;
+	int ans=0;
+	for(int i=0;i&amp;lt;c;i++)
+		ans+=res[i];
+
+	return ans;
+}
+
+int main()
+{
+    while(~scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;T)&amp;amp;&amp;amp;n){
+        for(int i=0;i&amp;lt;=n;i++)
+			E[i].clear();
+        for(int i=1;i&amp;lt;=n;i++)
+        {
+            int u;
+            scanf(&amp;quot;%d&amp;quot;,&amp;amp;u);
+            E[u].push_back(i);
+        }
+        printf(&amp;quot;%d\n&amp;quot;,dfs(0));
+    }
+    return 0;
+}
+
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://caifxh.github.io/post/shu-xing-dp/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+            <article class="post i-card">
+                <h2 class="post-title">
+                    <a href="https://caifxh.github.io/post/zhuang-tai-ji/">
+                        状态机
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2020-04-05</time>
+                    
+                        <a href="https://caifxh.github.io/tag/Iu6lDT60Hd/" class="post-tag i-tag
+                            i-tag-">
+            #DP
+        </a>
+                        
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            acwing1049
+
+不合法状态按照问题的性质初始化为INF(求最小值)/-(求最大值)
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int N=100010,INF=0x3f3f3f3f;
+int w[N];
+int f[N][2];
+
+int main()
+{
+    int t;
+    cin&amp;gt;&amp;gt;t;
+    while(t--)
+    {
+        int n;
+        scanf(&amp;quot;%d&amp;quot;,&amp;amp;n);
+        for(int i=1;i&amp;lt;=n;i++)
+            scanf(&amp;quot;%d&amp;quot;,&amp;amp;w[i]);
+        
+        f[0][0]=0,f[0][1]=-INF;
+        for(int i=1;i&amp;lt;=n;i++)
+        {
+            f[i][0]=max(f[i-1][0],f[i-1][1]);
+            f[i][1]=f[i-1][0]+w[i];
+        }
+        printf(&amp;quot;%d\n&amp;quot;,max(f[n][0],f[n][1]));
+    }
+    return 0;
+}
+
+acwing1057
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int N=100010,M=110;
+int w[N];
+int f[N][M][2];
+
+int main()
+{
+    int n,k;
+    cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;k;
+    
+    for(int i=1;i&amp;lt;=n;i++)
+        cin&amp;gt;&amp;gt;w[i];
+    memset(f,-0x3f,sizeof f);
+    for(int i=0;i&amp;lt;=n;i++) f[i][0][0]=0;
+    for(int i=1;i&amp;lt;=n;i++)
+        for(int j=1;j&amp;lt;=k;j++)
+        {
+            f[i][j][0]=max(f[i-1][j][0],f[i-1][j][1]+w[i]);
+            f[i][j][1]=max(f[i-1][j][1],f[i-1][j-1][0]-w[i]);
+        }
+    int res=0;
+    for(int i=0;i&amp;lt;=k;i++)
+        res=max(res,f[n][i][0]);
+    cout&amp;lt;&amp;lt;res&amp;lt;&amp;lt;endl;
+    return 0;
+}
+
+acwing1058
+
+#include &amp;lt;cstring&amp;gt;
+#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N = 100010, INF = 0x3f3f3f3f;
+
+int n;
+int w[N];
+int f[N][3];
+
+int main()
+{
+    scanf(&amp;quot;%d&amp;quot;, &amp;amp;n);
+
+    for (int i = 1; i &amp;lt;= n; i ++ ) scanf(&amp;quot;%d&amp;quot;, &amp;amp;w[i]);
+
+    f[0][0] = f[0][1] = -INF, f[0][2] = 0;
+    for (int i = 1; i &amp;lt;= n; i ++ )
+    {
+        f[i][0] = max(f[i - 1][0], f[i - 1][2] - w[i]);
+        f[i][1] = f[i - 1][0] + w[i];
+        f[i][2] = max(f[i - 1][2], f[i - 1][1]);
+    }
+
+    printf(&amp;quot;%d\n&amp;quot;, max(f[n][1], f[n][2]));
+
+    return 0;
+}
+
+poj3401
+最近，lxhgww沉迷于股票，经过几天的研究，他发现了一些规律的模式。
+他预测未来T天的股票市场。 在第i天，您可以以APi的价格购买一只股票或卖出一只股票以获得BPi。
+还有其他一些限制，即在第一天就可以购买最多ASi股票，最多可以卖出BSi股票。两个交易日的间隔应大于W天。 也就是说，假设您在第i天进行了交易（任何买卖股票都被视为一项交易），那么下一个交易日必须在第（i + W + 1）天或更晚的时间进行。而且，任何时候最多只能拥有MaxP股票。
+在第一天之前，lxhgww已经拥有无限的资金，但是没有股票，当然，他希望从股市中赚到尽可能多的钱。 所以问题来了，他最多只能赚多少钱？
+
+
+
+
+
+
+
+动态规划方程：
+1.不买不卖。dp[i][j]=max(dp[i-1][j],dp[i][j]);
+2.买一些股票。dp[i][j]=max(dp[i-1][k]-(j-k)*ap[i]);(0&amp;lt;=k&amp;lt;=j&amp;lt;=Maxp)
+3.卖一些股票。dp[i][j]=max(dp[i-1][k]+(k-j)*bp[i]);(0&amp;lt;=j&amp;lt;=k&amp;lt;=Maxp)
+注意：
+1.把所有未定义的状态都设置为-INF，1~w+1天得初始化，因为这些天不能有前面的状态推出来，初始化为对应购买多少股票所减去的钱数，因为一开始只有买，不能卖。
+2.循环的递减还是递增问题，跟当前要访问的状态有关。
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int N=2010;
+int f[N][N];
+int ap[N],bp[N];//买入价格，卖出价格 
+int as[N],bs[N];//买入限制，卖出限制
+int q[N];
+int n,m,w;
+
+int main()
+{
+    int T;
+    cin&amp;gt;&amp;gt;T;
+    while(T--)
+    {
+        scanf(&amp;quot;%d%d%d&amp;quot;,&amp;amp;n,&amp;amp;m,&amp;amp;w);
+        for(int i=1;i&amp;lt;=n;i++)
+            scanf(&amp;quot;%d%d%d%d&amp;quot;,&amp;amp;ap[i],&amp;amp;bp[i],&amp;amp;as[i],&amp;amp;bs[i]);
+    
+        memset(f,-0x3f,sizeof f);
+        f[0][0]=0;
+        for(int i=1;i&amp;lt;=w+1;i++)
+            for(int j=0;j&amp;lt;=as[i];j++)
+                f[i][j]=-j*ap[i];
+        
+        for(int i=1;i&amp;lt;=n;i++)
+        {
+            for(int j=0;j&amp;lt;=m;j++)
+                f[i][j]=max(f[i][j],f[i-1][j]);//没有交易
+            if(i &amp;lt;= w+1) continue;
+            int hh=0,tt=-1;
+            for(int j=0;j&amp;lt;=m;j++)
+            {
+                if(hh &amp;lt;= tt &amp;amp;&amp;amp; j-as[i] &amp;gt; q[hh]) 
+                    hh++;
+                
+                while(hh&amp;lt;=tt &amp;amp;&amp;amp; f[i-w-1][j]+j*ap[i] &amp;gt;= f[i-w-1][q[tt]]+q[tt]*ap[i])
+                    tt--;
+                q[++tt]=j;
+                f[i][j]=max(f[i][j],f[i-w-1][q[hh]]+q[hh]*ap[i]-j*ap[i]);//买入 
+             } 
+             
+            hh=0,tt=-1;
+            for(int j=m;j&amp;gt;=0;j--)
+            {
+                if(hh &amp;lt;= tt &amp;amp;&amp;amp; j+bs[i] &amp;lt; q[hh]) 
+                    hh++;
+                
+                while(hh&amp;lt;=tt &amp;amp;&amp;amp; f[i-w-1][j]+j*bp[i] &amp;gt;= f[i-w-1][q[tt]]+q[tt]*bp[i])
+                    tt--;
+                q[++tt]=j;
+                f[i][j]=max(f[i][j],f[i-w-1][q[hh]]+q[hh]*bp[i]-j*bp[i]);//卖出 
+             } 
+        }
+        printf(&amp;quot;%d\n&amp;quot;,f[n][0]);
+    }
+    return 0;
+ } 
+
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://caifxh.github.io/post/zhuang-tai-ji/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+            <article class="post i-card">
+                <h2 class="post-title">
+                    <a href="https://caifxh.github.io/post/dp-you-hua/">
+                        DP其他优化
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2020-04-02</time>
+                    
+                        <a href="https://caifxh.github.io/tag/Iu6lDT60Hd/" class="post-tag i-tag
+                            i-tag-warning">
+            #DP
+        </a>
+                        
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            滚动数组优化
+P2679
+有两个仅包含小写英文字母的字符串 A 和 B。现在要从字符串 A 中取出 k 个互不重叠的非空子串，然后把这 k 个子串按照其在字符串 A中出现的顺序依次连接起来得到一个新的字符串。请问有多少种方案可以使得这个新串与字符串 B 相等？
+注意：子串取出的位置不同也认为是不同的方案。
+1 ≤ |A| ≤ 1000， 1 ≤ k ≤ |B| ≤ 200
+样例输入：（答案：7）
+6 3 2
+aabaab
+aab
+我们令f[i][j][k][0/1]表示A串用了前i个字符，B串已覆盖前j个字符，目前为止已经选了
+k个子串，最后的0/1表示A串的这个字符选了没有(0没选，1选了)。
+为了得出状态转移方程，我们分情况讨论：
+先看f[i][j][k]1，显然当且仅当a[i]=b[j]的时候它才有意义，否则
+f[i][j][k][1]=0。
+到这个状态有三种方法：
+
+上一位没有选，新开一个子串
+上一位选了，延续这个子串
+上一位选了，但是仍然新开一个子串
+因此，我们有
+f[i][j][k][1]=f[i-1][j-1][k-1][0]+f[i-1][j-1][k][1]+f[i-1][j-1][k-1][1]
+
+然后讨论另一种情况：这个字符不选。
+这个比较简单，到这个状态有两种方法：
+
+上一位没有选，现在仍然不选
+上一位选了，结束这个子串
+因此，我们有
+f[i][j][k][0]=f[i-1][j][k][0]+f[i-1][j][k][1]。
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+const int N=210,M=1010,mod=1e9+7;
+int f[2][N][N][2];
+int n,m,k;
+char a[M],b[N];
+
+int main()
+{
+	cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m&amp;gt;&amp;gt;k;
+	cin&amp;gt;&amp;gt;a+1&amp;gt;&amp;gt;b+1;
+	
+	f[0][0][0][0]=1;
+	for(int i=1;i&amp;lt;=n;i++)
+	{
+	    f[i&amp;amp;1][0][0][0]=1;
+		for(int j=1;j&amp;lt;=m;j++)
+			for(int t=1;t&amp;lt;=k;t++)
+				if(a[i] == b[j])
+					f[i&amp;amp;1][j][t][1]=((f[i-1&amp;amp;1][j-1][t-1][1]+f[i-1&amp;amp;1][j-1][t][1])%mod+f[i-1&amp;amp;1][j-1][t-1][0])%mod,
+					f[i&amp;amp;1][j][t][0]=(f[i-1&amp;amp;1][j][t][1]+f[i-1&amp;amp;1][j][t][0])%mod;
+				else 
+				 	f[i&amp;amp;1][j][t][0]=(f[i-1&amp;amp;1][j][t][0]+f[i-1&amp;amp;1][j][t][1])%mod,
+				 	f[i&amp;amp;1][j][t][1]=0;
+	}
+	
+	printf(&amp;quot;%d\n&amp;quot;,(f[n&amp;amp;1][m][k][0]+f[n&amp;amp;1][m][k][1])%mod);
+	return 0;
+}
+
+矩阵乘法优化
+对于两维以上的 dp，如 f[i][j][k]，如果它的转移全部来自 f[i - 1]，那我们可以使用矩阵来加速。
+也就是把 f[i] 压缩成一维数组，f[i-1] 也压缩成一维数组。
+转移方程 就相当于 f[i-1] 到 f[i] 乘上的转移矩阵。
+比如 f[i][t] += f[i-1][s]，那么转移矩阵中的第 s 行第t 列的元素就要加一。
+这样对于转移 n 次的 dp，我们只要计算矩阵的 n 次幂即可。
+时间复杂度可以从 O(n) 减少为 O(log n)
+有 N 个方格排成一列，用红、绿、蓝、黄四种颜色来涂每个方格。
+每个格子都必须涂，且只能涂一次。问使得红色和蓝色的格子的数量为偶数的方案数。N ≤ 1e9
+简单的线性模型。
+我们可以用 f[i][a][b][c][d] 来表示填了前 i 个数字，且4 种颜色的奇偶性分别为 a, b, c, d。（0 表示偶数，1 表
+示奇数）
+方便起见我们把 abcd 看作一个二进制数 s，范围是 0～15,记为 f[i][s]
+思考转移：
+f[i][s] 可以转移到哪些状态呢？
+枚举第 i+1 位的颜色：一共有 0，1，2，3 四种选择。
+假设选择颜色 j，那么颜色 j 的奇偶性会发生改变，也就是
+得到了新的状态 s ^ (1 &amp;lt;&amp;lt; j)
+f[i + 1][s ^ (1 &amp;lt;&amp;lt; j)] += f[i][s]
+可以发现每次都是从 f[i] 转移到 f[i + 1]
+因此我们只要让矩阵的第 s 行第 s ^ (1 &amp;lt;&amp;lt; j) 列 加一即可。
+然后计算矩阵的 n 次幂，乘上 f[0] 就可以得到 f[n] 了。
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=20,mod=10007;
+struct matrix
+{
+	int m[N][N];
+	matrix()
+	{
+		memset(m,0,sizeof m);
+	}
+};
+int n;
+
+matrix mul(matrix a,matrix b)
+{
+	matrix c;
+	for(int i=0;i&amp;lt;1&amp;lt;&amp;lt;4;i++)
+		for(int j=0;j&amp;lt;1&amp;lt;&amp;lt;4;j++)
+			for(int k=0;k&amp;lt;1&amp;lt;&amp;lt;4;k++)
+				c.m[i][j]=(c.m[i][j]+a.m[i][k]*b.m[k][j])%mod;
+	return c;
+}
+
+matrix qmi(matrix a,int k)
+{
+	matrix c;
+	for(int i=0;i&amp;lt;1&amp;lt;&amp;lt;4;i++)
+		c.m[i][i]=1;
+		
+	while(k)
+	{
+		if(k&amp;amp;1) c=mul(c,a);
+		a=mul(a,a);
+		k&amp;gt;&amp;gt;=1;
+	}
+	return c;
+}
+
+int main()
+{
+	int T;
+	cin&amp;gt;&amp;gt;T;
+	while(T--)
+	{
+		scanf(&amp;quot;%d&amp;quot;,&amp;amp;n);
+		
+		matrix a;
+		for(int s=0;s&amp;lt;1&amp;lt;&amp;lt;4;s++)
+			for(int i=0;i&amp;lt;4;i++)
+				a.m[s][s^(1&amp;lt;&amp;lt;i)]=1;
+		
+		a=qmi(a,n);
+		
+		int ans=0;
+		for(int i=0;i&amp;lt;1&amp;lt;&amp;lt;4;i++)
+			if(!(i&amp;gt;&amp;gt;1 &amp;amp; 1) &amp;amp;&amp;amp; !(i&amp;gt;&amp;gt;2 &amp;amp; 1))
+				ans=(ans+a.m[0][i])%mod;
+		
+		printf(&amp;quot;%d\n&amp;quot;,ans);
+	}
+	return 0;
+}
+
+前缀数组优化
+新的电话线架设在已有的 N(2≤N≤100000) 根电话线杆上，第 i 根电话线杆的高度为hi。如果两根电话线杆的高度不同，那么就需要支付 C *电话线杆高度差(1≤C≤100)的费用。你不能移动电话线杆，只能按照原有的顺序在相邻的线杆间架设电话线。当然你也可以加高某些电话线杆，加高 X 米需要付出 X2 的费用。
+请问最少需要花多少钱建设新的电话线。
+基本思路：
+观察发现 h[i] 不大，可以作为状态。
+用 f[i][j] 表示第 i 根电线杆的长度为 j 时的最小代价。
+状态转移：
+f[i][j] = min{f[i-1][k] + c * |j - k| + (j - h[i])2}
+这样的时间复杂度是 O(NK2)
+状态有 NK 个，瓶颈在于计算每个状态需要枚举前一个电线杆的可能的 K 种高度。
+f[i][j] = min{f[i-1][k] + c * |j - k|} + (j - h[i])2
+但是前一部分还是有 j 在，如果我们能把 j 和 k 分离，我们就可以方便的优化。
+我们可以把绝对值拆掉，也就是分类讨论：
+如果 j &amp;gt; k，那么 |j - k| = j - k
+f[i][j] = min{f[i-1][k] - ck} + cj + (j - h[i])2
+如果 j &amp;lt; k，那么 |j - k| = k - j
+f[i][j] = min{f[i-1][k] + ck} - cj + (j - h[i])2
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=100010,M=110,INF=0x3f3f3f3f;
+int f[2][M];
+int h[N],mx;
+int n,c;
+
+int sqr(int x)
+{
+	return x*x;
+}
+
+int main()
+{
+	scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;c);
+	
+	for(int i=1;i&amp;lt;=n;i++)
+		scanf(&amp;quot;%d&amp;quot;,&amp;amp;h[i]),mx=max(mx,h[i]);
+	
+	for(int i=1;i&amp;lt;=mx;i++)
+	    f[0][i]=f[1][i]=INF;
+	
+	for(int i=h[1];i&amp;lt;=mx;i++)
+		f[1][i]=sqr(i-h[1]);//增高第一个电线杆的高度至i的花费为(i-h[1])(i-h[1]) 
+	
+	for(int i=2;i&amp;lt;=n;i++)
+	{
+        int val=INF;
+		for(int j=1;j&amp;lt;=mx;j++)
+		{
+			val=min(val,f[i-1&amp;amp;1][j]-c*j);
+			if(j &amp;gt;= h[i])
+			    f[i&amp;amp;1][j]=min(f[i&amp;amp;1][j],val+c*j+sqr(j-h[i]));
+                //f[i&amp;amp;1]每轮要初始化为INF，因为比较时用到了f[i&amp;amp;1]
+		}
+		
+		val=INF;
+		for(int j=mx;j&amp;gt;=h[i];j--)
+		{
+			val=min(val,f[i-1&amp;amp;1][j]+c*j);
+			f[i&amp;amp;1][j]=min(f[i&amp;amp;1][j],val-c*j+sqr(j-h[i]));
+		}
+		
+		for(int j=1;j&amp;lt;=mx;j++)1]
+		    f[i+1&amp;amp;1][j]=INF;
+	}
+	
+	int ans=INF;
+	for(int i=h[n];i&amp;lt;=mx;i++)
+		ans=min(ans,f[n&amp;amp;1][i]);
+	
+	printf(&amp;quot;%d\n&amp;quot;,ans);
+	return 0;
+}
+
+例题
+acwing223
+首先考虑计算从 x 到 y 的耗费体力最小的路径。
+显然是最短路问题。
+因为最多只有 300 个点，可以方便的使用 Floyd 算法先用
+O(V3V^3V3) 的时间复杂度预处理出任意两点间的最短路。
+如何计算耗费体力值的期望值？
+只用对每条边考虑有多少概率会经过这条边。
+设概率为 p，这条边耗费的体力值是 w
+那么这条边对答案的贡献就是 pw。
+最后只要把每条边的贡献加起来就是耗费体力值的总和的期望。(期望的可加性)
+用 f[i][j][p] 来表示前 i 节课中用了 j 次换教室的机会
+的最小体力总和的期望。
+p = 0 或 1，表示第 i 节课是否用了换教室的机会。
+目的是定位此时牛牛在哪个教室。
+p = 0 ➔ 没换，在 c[i] 教室
+p = 1 ➔ 换了，在 d[i] 教室
+对第 i 节课，考虑决策：换 or 不换。
+不换：
+牛牛需要赶到教室 c[i]
+有两种可能
+一种是上一节课换了：
+
+有k[i-1]的概率从d[i-1]赶来
+有(1-k[i-1])的概率从c[i-1]赶来
+
+另一种是没换：
+
+从c[i-1]赶来
+
+换：
+牛牛有 k[i] 的概率需要赶到教室 d[i]， 有 (1-k[i]) 的概率需要赶到教室 c[i]
+而上一节课也有两种可能：
+上一节课换了：
+
+有k[i-1]的概率从d[i-1]赶来
+有(1-k[i-1])的概率从c[i-1]赶来
+
+上一节课没换：
+
+从c[i-1]赶来
+
+最后的答案就是 min{f[n][i][0], f[n][i][1] | 0≤i≤m}
+预处理最短路：
+时间复杂度 O(V3V^3V3)
+DP状态数 O(nm)，转移 O(1)，时间复杂度 O(nm)
+由于 f[i] 由 f[i-1] 转移过来，可以使用滚动数组优化空间。空间复杂度 O(m)
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+const double INF=1e9;
+const int N=2010,M=310;
+int c[N],d[N];
+double k[N];
+int dist[N][N];
+double f[2][N][2];//f[i][j][0/1]表示前i节课用来j次换教室的机会，上节课换/没换 
+int n,m,v,e;
+
+void floyd()
+{
+    for(int k=1;k&amp;lt;=v;k++)
+        for(int i=1;i&amp;lt;=v;i++)
+            for(int j=1;j&amp;lt;=v;j++)
+                dist[i][j]=min(dist[i][j],dist[i][k]+dist[k][j]);
+}
+
+int main()
+{
+    cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m&amp;gt;&amp;gt;v&amp;gt;&amp;gt;e;
+    for(int i=1;i&amp;lt;=n;i++)
+        cin&amp;gt;&amp;gt;c[i];
+    for(int i=1;i&amp;lt;=n;i++)
+        cin&amp;gt;&amp;gt;d[i];
+    for(int i=1;i&amp;lt;=n;i++)
+        cin&amp;gt;&amp;gt;k[i];
+
+    memset(dist,0x3f,sizeof dist);
+    for(int i=1;i&amp;lt;=v;i++) dist[i][i]=0;//初始化为0，因为可能通过换教室使得下节课教室不变
+    while(e--)
+    {
+        int a,b,c;
+        cin&amp;gt;&amp;gt;a&amp;gt;&amp;gt;b&amp;gt;&amp;gt;c;
+        dist[a][b]=dist[b][a]=min(dist[a][b],c);
+    }
+
+    floyd();
+
+    for(int j=0;j&amp;lt;=m;j++)
+        f[0][j][0]=f[0][j][1]=f[1][j][0]=f[1][j][1]=INF;
+
+    f[1][0][0]=f[1][1][1]=0;
+    for(int i=2;i&amp;lt;=n;i++)
+        for(int j=0;j&amp;lt;=m;j++)
+        {
+            //这节不换,上节换/不换 
+            f[i&amp;amp;1][j][0]=min(f[i-1&amp;amp;1][j][0]+dist[c[i-1]][c[i]],
+                            f[i-1&amp;amp;1][j][1]+k[i-1]*dist[d[i-1]][c[i]]+
+                            (1-k[i-1])*dist[c[i-1]][c[i]]);
+
+            //这节换，上节换/不换
+            if(j)
+            f[i&amp;amp;1][j][1]=min(f[i-1&amp;amp;1][j-1][0]+dist[c[i-1]][c[i]]*(1-k[i])+
+                            dist[c[i-1]][d[i]]*k[i],
+                            f[i-1&amp;amp;1][j-1][1]+(1-k[i-1])*dist[c[i-1]][c[i]]*(1-k[i])+
+                            (1-k[i-1])*dist[c[i-1]][d[i]]*k[i]+
+                            k[i-1]*dist[d[i-1]][c[i]]*(1-k[i])+
+                            k[i-1]*dist[d[i-1]][d[i]]*k[i]);    
+        }
+
+    double ans=INF;
+    for(int i=0;i&amp;lt;=m;i++)
+        ans=min(ans,min(f[n&amp;amp;1][i][0],f[n&amp;amp;1][i][1]));
+
+    printf(&amp;quot;%.2f\n&amp;quot;,ans);
+
+    return 0;
+
+}
+
+hdu2294
+你有 k 种珍珠，想用它们组成一个长度在1～n之间的一条首饰并且满足 k 种珍珠都至少出现一次。
+问有多少种不同的首饰。n ≤ 1e9, k ≤ 30
+样例：
+n = 3, k = 2
+答案：8（ab,ba,aab,aba,abb,baa,bab,bba)
+用 f[i][j] 表示现在拼出了长度为 i 的序列，用了 j 种珍珠。
+决策是第 i 个珍珠是否使用新的种类：
+如果是旧的，那么有 j 种可能： j * f[i-1][j]
+如果是新的，那么有 k-j+1 种可能：(k-j+1)*f[i-1][j-1]
+因此我们得到了：
+f[i][j] = j * f[i - 1][j] + (k - j + 1) * f[i - 1][j - 1];
+答案就是 f[0][k] + f[2][k] + … + f[n][k]
+由于 n 特别大，我们只能考虑矩阵乘法优化。
+显然 f[i] 都是由 f[i - 1] 转移过来的。
+那么我们可以把 f[i] 看作是一个长度为 k + 1 的向量。
+[ f[i][0], f[i][1], …, f[i][k] ]
+然后就可以构造转移矩阵 A。
+这样 f[i] = f[i-1] * A
+f[n] = f[0] * AnA^nAn
+f[n - 1] = f[0] * An−1A^{n-1}An−1 …
+f[0]=[ 1, 0, 0,.., 0]
+因此我们需要计算出 f[0] * (I+A+A2+…+An)(I + A + A^2 + … + A^n)(I+A+A2+…+An)
+这是一个经典问题，二分 + 矩阵快速幂即可解决。
+a.data[0][k] 即为答案。(相当于f[0][k] + f[2][k] + … + f[n][k])
+时间复杂度 O(k^3log n)
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N=35,mod=1234567891;
+struct matrix
+{
+	int m[N][N];
+	matrix()
+	{
+		memset(m,0,sizeof m);
+	}
+};
+int n,k;
+
+matrix add(matrix a,matrix b)
+{
+	matrix c;
+	for(int i=0;i&amp;lt;=k;i++)
+		for(int j=0;j&amp;lt;=k;j++)
+			c.m[i][j]=((LL)a.m[i][j]+b.m[i][j])%mod;
+	return c;
+}
+
+matrix mul(matrix a,matrix b)
+{
+	matrix c;
+	for(int i=0;i&amp;lt;=k;i++)
+		for(int j=0;j&amp;lt;=k;j++)
+			for(int t=0;t&amp;lt;=k;t++)
+				c.m[i][j]=(c.m[i][j]+(LL)a.m[i][t]*b.m[t][j])%mod;
+	
+	return c;
+}
+
+matrix qmi(matrix a,int b)
+{
+	matrix c;
+	for(int i=0;i&amp;lt;=k;i++)
+		c.m[i][i]=1;
+		
+	while(b)
+	{
+		if(b &amp;amp; 1) c=mul(c,a);
+		a=mul(a,a);
+		b&amp;gt;&amp;gt;=1;
+	}
+	
+	return c;
+}
+
+matrix sum(matrix a,int b)
+{
+	if(b == 1) return a;
+	matrix c;
+	for(int i=0;i&amp;lt;=k;i++)
+		c.m[i][i]=1;
+	
+	c=add(c,qmi(a,b&amp;gt;&amp;gt;1));
+	c=mul(c,sum(a,b&amp;gt;&amp;gt;1));
+	if(b &amp;amp; 1) c=add(c,qmi(a,b));
+	
+	return c;
+}
+
+int main()
+{
+	int T;
+	cin&amp;gt;&amp;gt;T;
+	while(T--)
+	{
+		scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;k);
+		
+		matrix a;
+		for(int i=0;i&amp;lt;=k;i++)
+		{
+			a.m[i][i]=i;
+			a.m[i-1][i]=k-i+1;
+		}	
+
+		a=sum(a,n);
+
+		printf(&amp;quot;%d\n&amp;quot;,a.m[0][k]);
+	}
+	return 0;
+}
+
+数据结构优化
+hdu4991
+
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=10010,M=110,mod=123456789;
+int a[N],b[N];
+int f[N][M];
+int n,m,len;
+
+int lowbit(int x)
+{
+	return x&amp;amp;-x;
+}
+
+void add(int x,int j,int val)
+{
+	for(int i=x;i&amp;lt;=len;i+=lowbit(i))
+		f[i][j]=(f[i][j]+val)%mod;	
+}
+
+int query(int x,int j)
+{
+	int res=0;
+	for(int i=x;i;i-=lowbit(i))
+		res=(res+f[i][j])%mod;
+	return res;
+}
+
+int main()
+{
+	while(~scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;m))
+	{
+		for(int i=1;i&amp;lt;=n;i++)
+			scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]),b[i]=a[i];
+		
+		memset(f,0,sizeof f);
+		sort(b+1,b+n+1);
+		len=unique(b+1,b+n+1)-b-1;
+		for(int i=1;i&amp;lt;=n;i++)
+		{
+			int pos=lower_bound(b+1,b+len+1,a[i])-b;
+			add(pos,1,1);
+			for(int j=2;j&amp;lt;=m;j++)
+			{
+				int sum=query(pos-1,j-1);
+				add(pos,j,sum);
+			}
+		}
+		
+		printf(&amp;quot;%d\n&amp;quot;,query(len,m));
+	}
+	return 0;
+}
+
+poj1769
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+#define lc u&amp;lt;&amp;lt;1
+#define rc u&amp;lt;&amp;lt;1|1
+const int N=50010,M=500010,INF=0x3f3f3f3f;
+struct Node
+{
+	int l,r;
+	int val;
+}tr[4*M];
+int a[M],b[M];
+int n,m;
+
+void pushup(int u)
+{
+	tr[u].val=min(tr[lc].val,tr[rc].val);
+}
+
+void build(int u,int l,int r)
+{
+	tr[u].l=l,tr[u].r=r;
+	if(l == r)
+	{
+		if(l == 1) tr[u].val=0;
+		else tr[u].val=INF;
+		return;
+	}
+	int mid=l+r&amp;gt;&amp;gt;1;
+	build(lc,l,mid);
+	build(rc,mid+1,r);
+	pushup(u);
+}
+
+void modify(int u,int x,int v)
+{
+	if(tr[u].l == tr[u].r)
+	{
+		tr[u].val=v;
+		return;
+	}
+	
+	int mid=tr[u].l+tr[u].r&amp;gt;&amp;gt;1;
+	if(x&amp;lt;=mid) modify(lc,x,v);
+	else modify(rc,x,v);
+	pushup(u);
+}
+
+int query(int u,int l,int r)
+{
+	if(l &amp;lt;= tr[u].l &amp;amp;&amp;amp; tr[u].r &amp;lt;= r)
+		return tr[u].val;
+	int mid=tr[u].l+tr[u].r&amp;gt;&amp;gt;1;
+	int res=INF;
+	if(l&amp;lt;=mid) res=min(res,query(lc,l,r));
+	if(r&amp;gt;mid) res=min(res,query(rc,l,r));
+	return res;
+}
+
+int main()
+{
+	cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m;
+	for(int i=0;i&amp;lt;m;i++)
+		scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;a[i],&amp;amp;b[i]);
+	
+	build(1,1,n);
+	
+	for(int i=0;i&amp;lt;m;i++)
+	{
+		int v1=query(1,a[i],b[i])+1;
+		int v2=query(1,b[i],b[i]);
+		modify(1,b[i],min(v1,v2));
+	}
+	
+	printf(&amp;quot;%d\n&amp;quot;,query(1,n,n));
+	
+	return 0;
+}
+
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://caifxh.github.io/post/dp-you-hua/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+            <article class="post i-card">
+                <h2 class="post-title">
+                    <a href="https://caifxh.github.io/post/zhuang-ya-dp/">
+                        状压dp
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2020-04-01</time>
+                    
+                        <a href="https://caifxh.github.io/tag/Iu6lDT60Hd/" class="post-tag i-tag
+                            i-tag-other_4">
+            #DP
+        </a>
+                        
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            棋盘类（基于连通性）状压dp
+1.十字型
+玉米田
+输入样例：
+2 3
+1 1 1
+0 1 0
+
+输出样例：
+9
+
+用二进制数来描述一行中方格的状态，1表示种玉米，0表示不种玉米
+样例第一行有以下5种种玉米的方案
+
+根据题意，把每一行的状态用二进制的数表示，0代表不在这块放牛，1表示在这一块放牛。首先很容易看到，每一行的状态要符合牧场的硬件条件，即牛必须放在能放牧的方格上。这样就能排除一些状态。另外，牛与牛之间不能相邻，这样就要求每一行中不能存在两个相邻的1，这样也能排除很多状态。然后就是根据上一行的状态转移到当前行的状态的问题了。必须符合不能有两个1在同一列（两只牛也不能竖着相邻）的条件。这样也能去掉一些状态。然后，上一行的所有符合条件的状态的总的方案数就是当前行该状态的方案数。
+（1）初始化所有合法状态，即找没有相邻1的二进制数。用state[]存储合法状态
+（2）枚举不同合法状态之间的转移关系，只要a&amp;amp;b == 0,状态a就可转到b
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;vector&amp;gt;
+#include&amp;lt;bitset&amp;gt;
+using namespace std;
+const int N=15,M=1&amp;lt;&amp;lt;12,mod=1e8;
+int f[N][M];
+int g[N];
+int n,m;
+vector&amp;lt;int&amp;gt; state;
+vector&amp;lt;int&amp;gt; head[M];
+
+bool check(int state)//判断相邻两列
+{
+    if(state &amp;amp; state&amp;lt;&amp;lt;1)
+        return false;
+    return true;
+}
+
+int main()
+{
+    cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m;
+    
+    for(int i=1;i&amp;lt;=n;i++)
+        for(int j=0;j&amp;lt;m;j++)
+        {
+            int x;
+            cin&amp;gt;&amp;gt;x;//若x为1，表示玉米田不可用
+            g[i]+=!x&amp;lt;&amp;lt;(m-1-j);
+        }
+
+    for(int i=0;i&amp;lt;1&amp;lt;&amp;lt;m;i++)
+        if(check(i))
+            state.push_back(i);//所有合法状态
+    
+    f[0][0]=1;//边界
+    for(int i=1;i&amp;lt;=n+1;i++)//枚举到第n+1行，省略求和
+        for(int a=0;a&amp;lt;state.size();a++)//第i行状态为a，i-1行状态为b
+            for(int b=0;b&amp;lt;state.size();b++)
+            {
+                if((g[i] &amp;amp; state[a]) == 0 &amp;amp;&amp;amp; (state[a] &amp;amp; state[b]) == 0) //不与上一行冲突，且不能在地图上0的地方种玉米
+                    f[i][a]=(f[i][a]+f[i-1][b])%mod;
+                }
+    
+    cout&amp;lt;&amp;lt;f[n+1][0]&amp;lt;&amp;lt;endl;
+    return 0;
+}
+
+炮兵阵地
+状态：f[i][j][k],已经摆完前i行，第i行状态是j，第i-1行状态是k的摆放方案
+属性： max
+划分依据，
+第i行状态不仅和第i-1行状态有关，还和第i-2行状态有关,所有f[i][j][k]第i行状态是j，第i-1行状态是k，依据i-2行状态来划分。
+a表示第i行状态，b表示第i-1行状态，c表示第i-2行状态
+要求：
+（1）每行的意大利炮不能相互攻击到，((a &amp;amp; b) || (a &amp;amp; c) || (a &amp;amp; b))==0
+（2）意大利炮只能放在平地上,(g[i] &amp;amp; a )||(g[i-1] &amp;amp; b),无需判断g[i-2]行，若g[i-2]行意大利炮放到了山地上属于不合法状态，一定为0
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;vector&amp;gt;
+using namespace std;
+const int N=110,M=1&amp;lt;&amp;lt;10;//n的范围远大于m的范围，以列作为枚举的状态
+int g[N];
+int cnt[M];//状态对应的1的个数
+vector&amp;lt;int&amp;gt; state;
+int n,m;
+int f[2][M][M];//f[i,j,k] 第i行状态是j，第i-1行状态是k
+
+bool check(int state)
+{
+    if((state &amp;amp; state&amp;lt;&amp;lt;1) || (state &amp;amp; state&amp;lt;&amp;lt;2))
+        return false;
+    return true;
+}
+
+int count(int state)
+{
+    int res=0;
+    for(int i=0;i&amp;lt;m;i++)
+        if(state&amp;gt;&amp;gt;i &amp;amp;1)
+            res++;
+    return res;
+}
+
+int main()
+{
+    cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m;
+    
+    for(int i=1;i&amp;lt;=n;i++)
+        for(int j=0;j&amp;lt;m;j++)
+        {
+            char c;
+            cin&amp;gt;&amp;gt;c;
+            if(c == &#39;H&#39;)
+                g[i]+=1&amp;lt;&amp;lt;(m-1-j);
+        }
+        
+    for(int i=0;i&amp;lt;1&amp;lt;&amp;lt;m;i++)
+    {
+        if(check(i))
+        {
+            state.push_back(i);
+            cnt[i]=count(i);
+        }
+    }
+    //f[i,j,k] 已经摆完前i行，第i行状态是j，第i-1行状态是k
+    for(int i=1;i&amp;lt;=n+2;i++)
+        for(int j=0;j&amp;lt;state.size();j++)
+            for(int k=0;k&amp;lt;state.size();k++)
+                for(int u=0;u&amp;lt;state.size();u++)
+                {
+                    int a=state[j],b=state[k],c=state[u];//a表示第i行状态，b表示第i-1行状态，c表示第i-2行状态
+                    if((a &amp;amp; b) || (a &amp;amp; c) || (a &amp;amp; b))//相邻两行不能相互攻击到
+                        continue;
+                    if((g[i] &amp;amp; a )||(g[i-1] &amp;amp; b))//意大利炮不能放山地上
+                        continue;
+                    f[i&amp;amp;1][a][b]=max(f[i&amp;amp;1][a][b],f[i-1&amp;amp;1][b][c]+cnt[a]);
+                }
+                
+    cout&amp;lt;&amp;lt;f[n+2&amp;amp;1][0][0]&amp;lt;&amp;lt;endl;
+    return 0;
+}
+
+2.井字型
+骑士
+状态：f[i][j][k],已经摆完前i行，第i行摆放状态是j（二进制位为1表示摆放，0表示不摆），已经摆了k个
+属性：count
+状态划分：
+要求：国王不能左右相邻，不能上下相邻，不能对角相邻，第i行状态为a，i-1行状态为b
+（1）每行内部不能有两个1相邻,（预处理）
+（2）第i行和第i-1行状态不能相互攻击到，(a &amp;amp; b) == 0 ,a|b不能有两个相邻的1
+//第i行状态只跟第i-1行状态有关
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;vector&amp;gt;
+using namespace std;
+const int N=12,M=1&amp;lt;&amp;lt;10,K=110;
+typedef long long LL;
+LL f[N][M][K];
+vector&amp;lt;int&amp;gt; state;
+int cnt[M];//每个状态对应1的数目
+int n,m;
+
+bool check(int state)
+{
+    for(int i=0;i&amp;lt;n;i++)
+    {
+        if((state&amp;gt;&amp;gt;i &amp;amp;1) &amp;amp;&amp;amp; (state&amp;gt;&amp;gt;i+1 &amp;amp;1))
+            return false;
+    }
+    return true;
+}
+
+int count(int state)
+{
+    int res=0;
+    for(int i=0;i&amp;lt;n;i++)    
+        res+=state&amp;gt;&amp;gt;i &amp;amp;1;
+    return res;
+}
+
+int main()
+{
+    
+    cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m;
+    
+    for(int i=0;i&amp;lt;1&amp;lt;&amp;lt;n;i++)//如果满足左右互不相邻，则存储当前状态
+        if(check(i))
+        {
+            state.push_back(i);
+            cnt[i]=count(i);
+        }
+    //cout&amp;lt;&amp;lt;state.size()&amp;lt;&amp;lt;endl;
+    f[0][0][0]=1;
+    for(int i=1;i&amp;lt;=n+1;i++)
+        for(int a=0;a&amp;lt;state.size();a++) 
+            for(int k=0;k&amp;lt;=m;k++)
+                for(int b=0;b&amp;lt;state.size();b++)
+                {
+                    int sa=state[a],sb=state[b];//sa表示第i行状态,sb表示第i-1行状态
+                    if((sa &amp;amp; sb) == 0 &amp;amp;&amp;amp; check(sa|sb))
+                    {
+                        int c=cnt[sa];
+                        //cout&amp;lt;&amp;lt;sa&amp;lt;&amp;lt;&#39; &#39;&amp;lt;&amp;lt;sb&amp;lt;&amp;lt;&#39; &#39;&amp;lt;&amp;lt;k&amp;lt;&amp;lt;&#39; &#39;&amp;lt;&amp;lt;c&amp;lt;&amp;lt;endl;
+                        if(k&amp;gt;=c)
+                            f[i][sa][k]+=f[i-1][sb][k-c];
+                    }
+                }
+    
+    cout&amp;lt;&amp;lt;f[n+1][0][m]&amp;lt;&amp;lt;endl;
+    return 0;
+}
+
+3.插头型
+蒙德里安的梦想
+考虑决策——骨牌的放法：横着 或者 竖着。
+如果横着：
+需要两个连续的空位，并且上一行的这两个位置也得已经被覆盖。
+如果竖着：
+(a) 上一行对应的位置是空的，我们把那个空填上。
+(b) 上一行对应的位置是被覆盖的，那么我们把这一行的位置设为空，表示下一行的对应位置必须竖放，填上这块空白
+状态表示：f[i][j],表示第i行的形态为j时的摆放方案数量
+j是用十进制记录的m位二进制数，其中第k（0&amp;lt;=k&amp;lt;m）位为1表示第k列是一个竖着的1*2的长方形的上面一半。
+
+记第i-1行状态为k，第i行状态为j
+k能转移到j，当且仅当：
+(1)j和k执行按位与为0，保证每个数字1下必须是0，才得以补全12的长方形
+(2)j和k执行按位或的结果，连续的0必须是偶数。这些0表示若干横着的12长方形，奇数个0无法满足这种摆放形态。
+
+可以预处理出[0,2m2^{m}2m-1]内所有满足连续的0必须是偶数的整数
+#include&amp;lt;bits/stdc++.h&amp;gt;
+using namespace std;
+const int N = 12, M = 1 &amp;lt;&amp;lt; N;
+int st[M];
+long long f[N][M];
+
+int main()
+{
+    int n, m;
+    while (cin &amp;gt;&amp;gt; n &amp;gt;&amp;gt; m &amp;amp;&amp;amp; n)
+    {
+
+        for (int i = 0; i &amp;lt; 1 &amp;lt;&amp;lt; m; i ++)
+        {
+            int cnt = 0;// cnt 为当前已经存在多少个连续的0
+            st[i] = true;
+            for (int j = 0; j &amp;lt; m; j ++)
+                if (i &amp;gt;&amp;gt; j &amp;amp; 1)
+                {
+                    if (cnt &amp;amp; 1) //当前位为1，上一段连续为0的位置已结束
+                        st[i] = false; 
+                    cnt = 0;
+                }
+                else cnt ++;
+            if (cnt &amp;amp; 1) st[i] = false; // 扫完后要判断一下最后一段有多少个连续的0
+        }
+    
+        memset(f, 0, sizeof f);
+        f[0][0] = 1;
+        for (int i = 1; i &amp;lt;= n; i ++)
+            for (int j = 0; j &amp;lt; 1 &amp;lt;&amp;lt; m; j ++)
+                for (int k = 0; k &amp;lt; 1 &amp;lt;&amp;lt; m; k ++)
+                    if ((j &amp;amp; k) == 0 &amp;amp;&amp;amp; (st[j | k])) 
+                    // j &amp;amp; k == 0 表示 i 行和 i-1 行不能同时捅出来
+                    // st[j | k] == 1 表示 在 i 列状态 j， i - 1 列状态 k 的情况下（连续的0必须有偶数个）是合法的.
+                        f[i][j] += f[i - 1][k];      
+        cout &amp;lt;&amp;lt; f[n][0] &amp;lt;&amp;lt; endl;
+    }
+    return 0;
+}
+
+
+
+集合类（每个元素是否在集合里面）状压dp
+最短Hamilton路径
+给定一张 n 个点的带权无向图，点从 0~n-1 标号，求起点 0 到终点 n-1 的最短Hamilton路径。 Hamilton路径的定义是从 0 到 n-1 不重不漏地经过每个点恰好一次。
+状态表示：dp[i][j] ：所有从0走到j，走过的所有点的状态是i的最短路径
+状态划分：
+dp[i][j]表示所有从0走到j，当前已经走过点的为i的集合。所以这个状态转移方程就是找一个中间点k，将已经走过点的集合i中去除掉j（表示j不在经过的点的集合中），然后再加上从k到j的权值。问题在于如何表达已经走过点的集合i，其实很简单，假如走过0,1,4这三个点，我们用二进制10011就可以表示，2,3没走过所以是0。
+那么走过点的集合i中去除掉点j也很容易表示i - (1 &amp;lt;&amp;lt; j)，比方说i是{0,1,4}，j是1，那么i = 10011，(1 &amp;lt;&amp;lt; j) = 10，i - (1 &amp;lt;&amp;lt; j) = 10001
+那么问题的答案就应该是dp[01....111][n-1]，表示0~n-1都走过，且当前移动到n-1这个点。
+下时间复杂度：
+n为20的时候，外层循环(1&amp;lt;&amp;lt;20)，内层循环20，所以整体时间复杂度O(20∗22020∗2^{20}20∗220)，这比O(n∗n!)快多了
+#include &amp;lt;cstring&amp;gt;
+#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;algorithm&amp;gt;
+
+using namespace std;
+
+const int N = 20, M = 1 &amp;lt;&amp;lt; N;
+
+int n;
+int w[N][N];
+int f[M][N];
+
+int main()
+{
+    cin &amp;gt;&amp;gt; n;
+    for (int i = 0; i &amp;lt; n; i ++ )
+        for (int j = 0; j &amp;lt; n; j ++ )
+            cin &amp;gt;&amp;gt; w[i][j];
+
+    memset(f, 0x3f, sizeof f);
+    f[1][0] = 0;//第一个点是不需要任何费用的
+    /*
+    注意循环顺序
+    如果反过来写，不能保证在f[i][j] = min(f[i][j], f[i - (1 &amp;lt;&amp;lt; j)][k] + w[k][j])中右边的状态在左边的状态之前被计算出来。
+    */
+    for (int i = 0; i &amp;lt; 1 &amp;lt;&amp;lt; n; i ++ )//i代表着是一个方案集合，其中每一个位置1和0，代表着这个点经过还是没有经过
+        for (int j = 0; j &amp;lt; n; j ++ )//枚举当前到了哪一个点
+            if (i &amp;gt;&amp;gt; j &amp;amp; 1)//如果i集合中第j位是1，也就是到达过这个点
+                for (int k = 0; k &amp;lt; n; k ++ )//枚举到达j的点k
+                    if (i &amp;gt;&amp;gt; k &amp;amp; 1)
+                        f[i][j] = min(f[i][j], f[i - (1 &amp;lt;&amp;lt; j)][k] + w[k][j]);
+
+    cout &amp;lt;&amp;lt; f[(1 &amp;lt;&amp;lt; n) - 1][n - 1];
+
+    return 0;
+}
+
+poj2288
+题意：
+给出n个点，m条边的无向图，给出每个点的点权，求点权和最小的哈密顿路径，相邻两个点要加上点权的乘积，形成环要加上环上的点权
+这题先占个坑，以后补。。。。
+hdu1074
+题意：
+给了n个家庭作业，然后给了每个家庭作业的完成期限和花费的实践，如果完成时间超过了期限，那么就要扣除分数，然后让你找出一个最优方案使扣除的分数最少，当存在多种方案时，输出字典序最小的那种，因为题意已经说了家庭作业的名字是按照字典序从小到大输入的，所以处理起来就好多了。
+思路
+在引出正解前，我们从DFS开始引入，如果这题用DFS来写，想必大家都有思路，很好理解。因为每个作业要么写，要么不写，因此开个布尔数组搜就行了，而且这题n &amp;lt;= 15;仔细想来，加点剪枝还是可以过的没准。
+如果我们把布尔数组看成一个二进制位，进行状态压缩，很明显可以知道，最多只有2的15次方位的1二进制大小的状态。因此可以用2进制所对应的10进制来表示状态，这就是状态压缩。
+状态表示:dp[i]记录完成作业状态为i时的最少损失的分数。
+状态划分：
+1.状态a能做第i号作业的条件是a中作业i尚未完成，即a&amp;amp;i=0。
+2.若有两个状态dp[a],dp[b]都能到达dp[i],那么选择能使到达i扣分小的那一条路径，若分数相同，转入3
+3.这两种状态扣的分数相同，那么选择字典序小的，由于作业按字典序输入，故即dp[i].pre = min(a,b);
+最后dp[2^n-1]即为最少扣分，课程安排可递归的输出
+#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;algorithm&amp;gt;
+#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;cstring&amp;gt;
+#include &amp;lt;bitset&amp;gt;
+using namespace std;
+const int N=20,M=1&amp;lt;&amp;lt;15;
+const int INF=0x3f3f3f3f;
+struct
+{
+    char sbj[110];
+	int deadline;
+	int fintime;
+}w[N];
+int dp[M];//dp[i]表示当前写作业状态是i的情况下被扣分的最小值 
+int pre[M];//记录前驱 
+int day[M];//记录当前写作业状态是i的情况下已经过了多少天 
+int n;
+
+void print_path(int state)
+{
+    if(state==0)return;
+    int t=0;
+    for(int i=0;i&amp;lt;n;i++)
+      if( (state&amp;amp;(1&amp;lt;&amp;lt;i))!=0 &amp;amp;&amp;amp; (pre[state]&amp;amp;(1&amp;lt;&amp;lt;i))==0 )
+      {
+          t=i;
+          break;//按字典序最小输出，由于输入时已按字典序输入，找到第一个满足的break 
+      }
+    print_path(pre[state]);
+    cout&amp;lt;&amp;lt;w[t].sbj&amp;lt;&amp;lt;endl;
+}
+
+int main()
+{
+    int T;
+    scanf(&amp;quot;%d&amp;quot;,&amp;amp;T);
+    while(T--)
+    {
+        scanf(&amp;quot;%d&amp;quot;,&amp;amp;n);
+        for(int i=0;i&amp;lt;n;i++)
+          scanf(&amp;quot;%s%d%d&amp;quot;,&amp;amp;w[i].sbj,&amp;amp;w[i].deadline,&amp;amp;w[i].fintime);
+        memset(dp,0x3f,sizeof dp);
+        memset(day,0,sizeof day); 
+        dp[0]=0;//当前还未做作业时被扣分为0 
+        for(int i=0;i&amp;lt;1&amp;lt;&amp;lt;n;i++)
+        {
+        	//cout&amp;lt;&amp;lt;(bitset&amp;lt;3&amp;gt;(i))&amp;lt;&amp;lt;&amp;quot; : &amp;quot;&amp;lt;&amp;lt;endl;
+            for(int j=0;j&amp;lt;n;j++)
+            {
+                if(i&amp;amp;(1&amp;lt;&amp;lt;j))continue;//第j位为1，表示第j位上的作业已完成，continue 
+                int today=0;
+//                for(int k=0;k&amp;lt;n;k++)
+//                  if(i&amp;amp;(1&amp;lt;&amp;lt;k))
+//                     today+=w[k].fintime;
+//                today+=w[j].fintime;
+				today=day[i]+w[j].fintime;//today表示今天是第几天 
+				int score=0; 
+                if(today&amp;gt;w[j].deadline) 
+					score=today-w[j].deadline;//完成日期与截止日期的差值 ，若差值&amp;lt;0,则不需扣分 
+                if(dp[i|(1&amp;lt;&amp;lt;j)]&amp;gt;dp[i]+score)
+                {
+                    dp[i|(1&amp;lt;&amp;lt;j)]=dp[i]+score;
+                    day[i|1&amp;lt;&amp;lt;j]=day[i]+w[j].fintime;
+                    //cout&amp;lt;&amp;lt;&amp;quot;--&amp;quot;&amp;lt;&amp;lt;(bitset&amp;lt;3&amp;gt;(i|(1&amp;lt;&amp;lt;j)))&amp;lt;&amp;lt;&#39; &#39;&amp;lt;&amp;lt;dp[i|(1&amp;lt;&amp;lt;j)]&amp;lt;&amp;lt;endl;
+                    pre[i|(1&amp;lt;&amp;lt;j)]=i;
+                }
+            }
+            //cout&amp;lt;&amp;lt;endl;
+        }
+        printf(&amp;quot;%d\n&amp;quot;,dp[(1&amp;lt;&amp;lt;n)-1]);
+        print_path((1&amp;lt;&amp;lt;n)-1);
+    }
+    return 0;
+}
+
+旅行商问题(TSP)，
+
+TSP问题是NP难度的，没有多项式时间的高效算法。
+
+假设最短的TSP路径是path=（v0-&amp;gt;v1-&amp;gt;v2-&amp;gt;v3-&amp;gt;v4-&amp;gt;v0）
+那么path=(v0-&amp;gt;v1)+(v1-&amp;gt;v2-&amp;gt;v3-&amp;gt;v0)
+所以问题转变为：求经过所有城市的最短回路-&amp;gt;从某个城市回到起点的最短路径
+DP状态：假设已经访问过的城市集合是S（已访问为1，未访问为0），当前所在城市是u，用dp[S][u]表示从u出发访问剩余的所有城市最后回到起点的路径费用总和的最小值。
+状态转移方程：
+dp[S][u]=min(dp[S∪{v}][v]+dist(u,v)|v∉S}
+
+临界条件如果递推的话是起点，递归的话是终点
+#include&amp;lt;cstring&amp;gt;//递推，输出路径 
+#include&amp;lt;bitset&amp;gt;
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int INF=0x3f3f3f3f;
+int dp[1&amp;lt;&amp;lt;15][15];//dp[S][u]:S表示已经过的节点，从u出发走完所有剩余顶点回到起点的最短距离
+int g[15][15];
+int path[1&amp;lt;&amp;lt;15][15];//最优路径
+int n,m; //n个节点，m条边
+
+void Init()
+{
+    memset(dp,0x3f,sizeof(dp));
+    memset(g,0x3f,sizeof(g));
+    memset(path,-1,sizeof(path));
+}
+
+void Traveling()//计算dp[S][u]
+{
+    dp[(1&amp;lt;&amp;lt;n)-1][0]=0;//注意：1&amp;lt;&amp;lt;n一定要加括号 
+	for(int S=(1&amp;lt;&amp;lt;n)-2;S&amp;gt;=0;S--)
+        for(int u=0;u&amp;lt;n;u++)
+            for(int v=0;v&amp;lt;n;v++)
+			{//u可以等于0,起点0可看做已访问（从起点0出发回到起点0） 
+            	if((u!=0&amp;amp;&amp;amp;!(S&amp;gt;&amp;gt;u&amp;amp;1))||g[u][v]==INF) continue;，//若 u!=0，则u必须已访问 
+				if(!(S&amp;gt;&amp;gt;v&amp;amp;1)&amp;amp;&amp;amp;dp[S][u]&amp;gt;dp[S|1&amp;lt;&amp;lt;v][v]+g[u][v])
+                {
+                    dp[S][u]=dp[S|1&amp;lt;&amp;lt;v][v]+g[u][v];
+                    cout&amp;lt;&amp;lt;&amp;quot;S=&amp;quot;&amp;lt;&amp;lt;(bitset&amp;lt;5&amp;gt;(S))&amp;lt;&amp;lt;&amp;quot;\t   u=&amp;quot;&amp;lt;&amp;lt;u&amp;lt;&amp;lt;&amp;quot;\tv=&amp;quot;&amp;lt;&amp;lt;v&amp;lt;&amp;lt;&amp;quot;\tdp[&amp;quot;&amp;lt;&amp;lt;(bitset&amp;lt;5&amp;gt;(S))&amp;lt;&amp;lt;&amp;quot;][&amp;quot;&amp;lt;&amp;lt;u&amp;lt;&amp;lt;&amp;quot;]=&amp;quot;;
+					cout&amp;lt;&amp;lt;&amp;quot;dp[&amp;quot;&amp;lt;&amp;lt;(bitset&amp;lt;5&amp;gt;(S|1&amp;lt;&amp;lt;v))&amp;lt;&amp;lt;&amp;quot;][&amp;quot;&amp;lt;&amp;lt;v&amp;lt;&amp;lt;&amp;quot;]+&amp;quot;&amp;lt;&amp;lt;g[u][v]&amp;lt;&amp;lt;&amp;quot;=&amp;quot;&amp;lt;&amp;lt;dp[S][u]&amp;lt;&amp;lt;endl;
+                    path[S][u]=v;//记录后继节点
+                }
+        	}
+}
+
+void print(int S,int u)//打印路径
+{
+    if(S==(1&amp;lt;&amp;lt;n)-1) return;
+    int v=path[S][u];//u的后继v
+    cout&amp;lt;&amp;lt;&amp;quot;---&amp;gt;&amp;quot;&amp;lt;&amp;lt;v;
+	print(S|1&amp;lt;&amp;lt;v,v);//将v加入已走过的节点集合，再从v出发
+}
+
+int main()
+{
+	int u,v,w;//u,v代表城市，w代表u和v城市之间路的长度
+    cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m;
+    Init();
+    for(int i=0;i&amp;lt;m;i++)
+    {
+       cin&amp;gt;&amp;gt;u&amp;gt;&amp;gt;v&amp;gt;&amp;gt;w;
+       //g[u][v]=g[v][u]=w;//无向图 
+       g[u][v]=w;//有向图 
+    }
+    Traveling();
+    cout&amp;lt;&amp;lt;&amp;quot;最短路径: &amp;quot;&amp;lt;&amp;lt;0;
+    print(0,0);
+    cout&amp;lt;&amp;lt;endl;
+    cout&amp;lt;&amp;lt;&amp;quot;最短路径长度:&amp;quot;&amp;lt;&amp;lt;dp[0][0]&amp;lt;&amp;lt;endl;
+    return 0;
+}
+
+
+#include&amp;lt;cstring&amp;gt;//记忆化递归，输出路径 
+#include&amp;lt;bitset&amp;gt;
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int INF=0x3f3f3f3f;
+int dp[1&amp;lt;&amp;lt;15][15];//dp[S][u]:S表示已经过的节点，从u出发走完所有剩余顶点回到起点的最短距离
+int g[15][15];
+int path[1&amp;lt;&amp;lt;15][15];//最优路径
+int n,m; //n个节点，m条边
+
+void Init()
+{
+    memset(dp,-1,sizeof(dp));
+    memset(g,0x3f,sizeof(g));
+    memset(path,-1,sizeof(path));
+}
+
+int Traveling(int S,int u)//计算dp[S][u],记忆化递归 
+{
+    if(dp[S][u]&amp;gt;=0)
+    	return dp[S][u];
+	if(S==(1&amp;lt;&amp;lt;n)-1&amp;amp;&amp;amp;u==0)
+		return dp[S][u]=0;//递归结束条件
+    int ans=INF;
+	for(int v=0;v&amp;lt;n;v++)
+		if(!(S&amp;gt;&amp;gt;v&amp;amp;1)&amp;amp;&amp;amp;g[u][v]!=INF)
+		{
+			int tmp=Traveling(S|1&amp;lt;&amp;lt;v,v)+g[u][v];
+			if(ans&amp;gt;tmp)
+			{
+				ans=tmp;
+				cout&amp;lt;&amp;lt;&amp;quot;S=&amp;quot;&amp;lt;&amp;lt;(bitset&amp;lt;5&amp;gt;(S))&amp;lt;&amp;lt;&amp;quot;\t   u=&amp;quot;&amp;lt;&amp;lt;u&amp;lt;&amp;lt;&amp;quot;\tv=&amp;quot;&amp;lt;&amp;lt;v&amp;lt;&amp;lt;&amp;quot;\tdp[&amp;quot;&amp;lt;&amp;lt;(bitset&amp;lt;5&amp;gt;(S))&amp;lt;&amp;lt;&amp;quot;][&amp;quot;&amp;lt;&amp;lt;u&amp;lt;&amp;lt;&amp;quot;]=&amp;quot;;
+				cout&amp;lt;&amp;lt;&amp;quot;dp[&amp;quot;&amp;lt;&amp;lt;(bitset&amp;lt;5&amp;gt;(S|1&amp;lt;&amp;lt;v))&amp;lt;&amp;lt;&amp;quot;][&amp;quot;&amp;lt;&amp;lt;v&amp;lt;&amp;lt;&amp;quot;]+&amp;quot;&amp;lt;&amp;lt;g[u][v]&amp;lt;&amp;lt;&amp;quot;=&amp;quot;&amp;lt;&amp;lt;ans&amp;lt;&amp;lt;endl;
+				path[S][u]=v;//记录后继节点
+			}		
+		}
+    return dp[S][u]=ans;
+}
+
+void print(int S,int u)//打印路径
+{
+    if(S==(1&amp;lt;&amp;lt;n)-1) return;
+    int v=path[S][u];//u的后继v
+    cout&amp;lt;&amp;lt;&amp;quot;---&amp;gt;&amp;quot;&amp;lt;&amp;lt;v;
+	print(S|1&amp;lt;&amp;lt;v,v);//将v加入已走过的节点集合，再从v出发
+}
+
+int main()
+{
+	int u,v,w;//u,v代表城市，w代表u和v城市之间路的长度
+    cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m;
+    Init();
+    for(int i=0;i&amp;lt;m;i++)
+    {
+       cin&amp;gt;&amp;gt;u&amp;gt;&amp;gt;v&amp;gt;&amp;gt;w;
+       //g[u][v]=g[v][u]=w;
+       g[u][v]=w;
+    }
+    Traveling(0,0);
+    cout&amp;lt;&amp;lt;&amp;quot;最短路径: &amp;quot;&amp;lt;&amp;lt;0;
+    print(0,0);
+    cout&amp;lt;&amp;lt;endl;
+    cout&amp;lt;&amp;lt;&amp;quot;最短路径长度:&amp;quot;&amp;lt;&amp;lt;dp[0][0]&amp;lt;&amp;lt;endl;
+    return 0;
+}
+
+例题
+poj3311
+
+思路
+由于题中明确说了两个城市间的直接可达路径（即不经过其它城市结点）不一定是最短路径，所以需要借助邻接矩阵首先求出任意两个城市间的最短距离（因为这里的点可以多次遍历，并没有次数限制，所以才能用floyd的，如果有次数限制x的话，就不能用floyd预处理，而应该用x进制的状态压缩了）。这一步骤使用Floyd最短路径算法即可。然后，在此基础上来求出遍历各个城市后回到出发点的最短路径的距离，即求解TSP问题。
+//求走过所有点并回到原点的最短路,可以走一个点多次.
+//因为可以走一个点多次，所以，可以先求出每两个点之间的最短路，然后用经典的旅行商问题的状态压缩DP做法。
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=12,M=1&amp;lt;&amp;lt;11,INF=0x3f3f3f3f;
+int n;
+int g[N][N];
+int dp[M][N];
+
+void Init()
+{
+    memset(dp,-1,sizeof(dp));
+    memset(g,0x3f,sizeof(g));
+}
+
+void floyd()
+{
+    for(int k=0;k&amp;lt;n;k++)
+        for(int i=0;i&amp;lt;n;i++)
+            for(int j=0;j&amp;lt;n;j++)
+                g[i][j]=min(g[i][j],g[i][k]+g[k][j]);
+}
+
+int Tsp(int S,int u)//计算dp[S][u],记忆化递归 
+{
+	if(dp[S][u]&amp;gt;=0)
+    	return dp[S][u];
+	if(S==(1&amp;lt;&amp;lt;n)-1&amp;amp;&amp;amp;u==0)//递归结束条件
+		return dp[S][u]=0;
+    int ans=INF;
+	for(int v=0;v&amp;lt;n;v++)
+		if(!(S&amp;gt;&amp;gt;v&amp;amp;1)&amp;amp;&amp;amp;g[u][v]!=INF)
+			ans=min(ans,Tsp(S|1&amp;lt;&amp;lt;v,v)+g[u][v]);
+    return dp[S][u]=ans;
+}
+
+int main()
+{
+    while(~scanf(&amp;quot;%d&amp;quot;,&amp;amp;n),n)
+    {
+        n++;//源点0加上 
+		Init();
+        for(int i=0;i&amp;lt;n;i++)
+            for(int j=0;j&amp;lt;n;j++)
+                scanf(&amp;quot;%d&amp;quot;,&amp;amp;g[i][j]);
+        floyd();
+        printf(&amp;quot;%d\n&amp;quot;,Tsp(0,0));
+    }
+    return 0;
+}
+
+递推
+//求走过所有点并回到原点的最短路,可以走一个点多次.
+//因为可以走一个点多次，所以，可以先求出每两个点之间的最短路，然后用经典的旅行商问题的状态压缩DP做法。
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=12,M=1&amp;lt;&amp;lt;11,INF=0x3f3f3f3f;
+int n;
+int g[N][N];
+int dp[M][N];
+
+void Init()
+{
+    memset(dp,0x3f,sizeof(dp));//递推时初始化为INF，记忆化递归初始化为-1 
+    memset(g,0x3f,sizeof(g));
+}
+
+void floyd()
+{
+    for(int k=0;k&amp;lt;n;k++)
+        for(int i=0;i&amp;lt;n;i++)
+            for(int j=0;j&amp;lt;n;j++)
+                g[i][j]=min(g[i][j],g[i][k]+g[k][j]);
+}
+
+void Tsp()//计算dp[S][u]
+{
+    dp[(1&amp;lt;&amp;lt;n)-1][0]=0;//注意：1&amp;lt;&amp;lt;n一定要加括号 
+	for(int S=(1&amp;lt;&amp;lt;n)-2;S&amp;gt;=0;S--)
+        for(int u=0;u&amp;lt;n;u++)
+            for(int v=0;v&amp;lt;n;v++)
+			{
+            	if((u!=0&amp;amp;&amp;amp;!(S&amp;gt;&amp;gt;u&amp;amp;1))||g[u][v]==INF) continue;//可以加约束条件，不加状态多 
+				if(!(S&amp;gt;&amp;gt;v&amp;amp;1))
+                    dp[S][u]=min(dp[S][u],dp[S|1&amp;lt;&amp;lt;v][v]+g[u][v]);
+        	}
+}
+
+int main()
+{
+    while(~scanf(&amp;quot;%d&amp;quot;,&amp;amp;n),n)
+    {
+        n++;//加上源点 
+		Init();
+        for(int i=0;i&amp;lt;n;i++)
+            for(int j=0;j&amp;lt;n;j++)
+                scanf(&amp;quot;%d&amp;quot;,&amp;amp;g[i][j]);
+        floyd();
+		Tsp();
+        printf(&amp;quot;%d\n&amp;quot;,dp[0][0]);
+    }
+    return 0;
+}
+
+poj2686
+
+
+
+
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+const int N=10,M=35,INF=0x3f3f3f3f;
+int n,m,p,a,b;
+int t[N];
+int g[M][M];
+double dp[1&amp;lt;&amp;lt;8][M];//d[S][u],所用车票状态是S,从起点走到点u所需的最短时间 
+
+int main()
+{
+	while(cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m&amp;gt;&amp;gt;p&amp;gt;&amp;gt;a&amp;gt;&amp;gt;b &amp;amp;&amp;amp; n)
+	{
+		for(int i=0;i&amp;lt;n;i++)
+			cin&amp;gt;&amp;gt;t[i];
+		memset(g,0x3f,sizeof g);
+		while(p--)
+		{
+			int a,b,c;
+			cin&amp;gt;&amp;gt;a&amp;gt;&amp;gt;b&amp;gt;&amp;gt;c;
+			g[a][b]=g[b][a]=c;
+		}
+		//memset(dp,0x3f,sizeof(dp));//double不可以memset 
+	    for(int i=0;i&amp;lt;1&amp;lt;&amp;lt;n;i++)
+	    	fill(dp[i]+1,dp[i]+m+1,INF);
+	//	for(int i=0;i&amp;lt;1&amp;lt;&amp;lt;n;i++)
+	//		for(int j=1;j&amp;lt;=m;j++)
+	//			dp[i][j]=INF;
+		dp[(1&amp;lt;&amp;lt;n)-1][a]=0;
+		double ans=INF;
+		for(int S=(1&amp;lt;&amp;lt;n)-1;S&amp;gt;=0;S--)//状态 
+		{
+			for(int u=1;u&amp;lt;=m;u++)//城市 
+				for(int i=0;i&amp;lt;n;i++)//车票 
+					if(S&amp;gt;&amp;gt;i &amp;amp; 1)
+						for(int v=1;v&amp;lt;=m;v++)//城市 
+							if(g[u][v] != INF)
+								dp[S-(1&amp;lt;&amp;lt;i)][v]=min(dp[S-(1&amp;lt;&amp;lt;i)][v],dp[S][u]+g[u][v]/(double)t[i]);
+			ans=min(ans,dp[S][b]);
+		}
+							
+		if(ans == INF)
+			puts(&amp;quot;Impossible&amp;quot;);
+		else
+			printf(&amp;quot;%.3f\n&amp;quot;,ans);
+	}
+	return 0;
+}
+
+hdu3001
+题意：
+ACMer 想要游玩n个城市，告诉我们每个城市间的旅行费用，并且要求每个城市最多走两遍！问最小花费是多少
+本题n=10，数据很小，但是由于每个城市可以走两遍，可能的路线就变成了(2n)!,所以不能暴力
+用状压dp，时间复杂度O(3nn2)O(3^{n}n^{2})O(3nn2)
+
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cmath&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+const int N=15,M=60000,INF=0x3f3f3f3f;
+int n,m;
+int bit[12]={0,1,3,9,27,81,243,729,2187,6561,19683,59049};//三进制每位为1时对应十进制，如第3位是1，(100)3=9 
+int tri[M][N];//dp[S][j]状态S的第j位是多少
+int dp[M][N];
+int g[N][N];
+
+int main()
+{
+	//cout&amp;lt;&amp;lt;pow(3,10)&amp;lt;&amp;lt;endl;
+	for(int i=0;i&amp;lt;59050;i++)//预处理所有合法状态 
+	{
+		int t=i;
+		for(int j=1;j&amp;lt;=10;j++)
+		{
+			tri[i][j]=t%3;//预处理当前状态S下每个顶点的访问次数 
+			t/=3;
+			if(!t)
+				break;
+		}
+	}
+	
+	while(~scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;m)) 
+	{
+		int ans=INF;
+		memset(g,0x3f,sizeof g);
+		memset(dp,0x3f,sizeof dp);
+		
+		while(m--)
+		{
+			int a,b,c;
+			cin&amp;gt;&amp;gt;a&amp;gt;&amp;gt;b&amp;gt;&amp;gt;c;
+			g[a][b]=g[b][a]=min(g[a][b],c);
+		}
+		
+		for(int i=1;i&amp;lt;=n;i++)
+			dp[bit[i]][i]=0;//每个顶点都可以作为起点，初始化状态为tri[i]时，从i出发最小费用为0
+		
+		for(int S=0;S&amp;lt;bit[n+1];S++)
+		{
+			bool visit_all=true;//标记所有的城市都遍历1次以上 
+			for(int u=1;u&amp;lt;=n;u++)
+			{
+				if(tri[S][u] == 0)//u点没被访问 
+				{
+					visit_all=false;//当前状态不能访问所有顶点至少一次 
+					continue; 
+				}
+				for(int v=1;v&amp;lt;=n;v++)
+				{
+					if(tri[S][v] == 0)//v点未访问
+						continue;
+					if(g[u][v] != INF)
+						dp[S][u]=min(dp[S][u],dp[S-bit[u]][v]+g[u][v]);//u从S中减去 
+				}
+			}
+			if(visit_all)//所有的城市都遍历1次以上
+				for(int u=1;u&amp;lt;=n;u++)
+					ans=min(ans,dp[S][u]);
+		}
+			
+		if(ans == INF)
+			puts(&amp;quot;-1&amp;quot;);
+		else
+			cout&amp;lt;&amp;lt;ans&amp;lt;&amp;lt;endl;
+	}
+	return 0;
+}
+
+hdu4628
+有一个长度不超过 16 的字符串。
+每次你可以从中删除一个子序列，但是要求这个子序列是回文的。
+问最少删除几次可以把这个字符串删光。
+样例：
+2
+aa （1次）
+abb （2次）
+每次可以选择一个子序列，而子序列是可以用二进制来表示的。
+用一个 n 位的二进制数 s 来表示，如果第 i 位是 1，则表示第 i 个数在这个子序列中。
+由此衍生出：用 f[s] 来表示把 s 这个子序列删完的最小步数。
+答案自然就是 f[(1 &amp;lt;&amp;lt; n) - 1]
+一个显然的想法，可以把 s 分成两个不相交的集合 x 和 y， 即 x ∩ y = ∅，x ∪ y = s
+f[s] = min(f[s], f[s-x] + 1) (x 是回文子串）
+如何判断x是s的子集？
+x|s == s
+直接枚举 x 和 y 的时间复杂度是 O(2n2^n2n)，对于每个状态都有枚举2^n,总时间复杂度是O(4n4^n4n)，无法承受。
+注意到 x 和 y 都是 s 的子集。
+所有集合的子集个数之和的级别是 O(3^n)
+就是说一个集合,有n个元素,2n个子集,把这2n个子集的所有子集数相加就是3^n
+证明可以对每个集合考虑贡献，二项式定理
+空集的子集只有一个——它本身.即C(n,0)×20个.有一个元素的子集有C(n,1)=n个,它们分别有21=2个子集.共C(n,1)×21个.有两个元素的子集有C(n,2)个,它们分别有22=4个子集.共C(n,2)×2^2个...
+我们只要枚举 s 的子集 x，那么 y 自然就是 s - x
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=20,M=1&amp;lt;&amp;lt;16;
+char s[N];
+int f[M];
+bool st[M];
+int n;
+
+bool check(int x)
+{
+    char str[20];
+    int tot=0;
+    for(int i=0;i&amp;lt;n;i++)
+        if(x&amp;gt;&amp;gt;i &amp;amp; 1) str[tot++]=s[i];
+    
+    for(int i=0;i&amp;lt;tot/2;i++)
+        if(str[i] != str[tot-1-i])
+            return 0;
+    
+    return 1;
+}
+
+void init()
+{
+    memset(st,0,sizeof st);
+    for(int i=0;i&amp;lt;1&amp;lt;&amp;lt;n;i++)
+        if(check(i))
+            st[i]=true;
+}
+
+int main()
+{
+    int T;
+    cin&amp;gt;&amp;gt;T;
+    while(T--)
+    {
+        scanf(&amp;quot;%s&amp;quot;,s);
+        n=strlen(s);
+        init();
+        
+        memset(f,0x3f,sizeof f);
+        f[0]=0;
+        for(int i=0;i&amp;lt;1&amp;lt;&amp;lt;n;i++)
+            for(int j=i;j;j=(j-1)&amp;amp;i)
+                if(st[j]) f[i]=min(f[i],f[i-j]+1);
+        
+        printf(&amp;quot;%d\n&amp;quot;,f[(1&amp;lt;&amp;lt;n)-1]);
+    }
+    return 0;
+}
+
+hdu6149
+给定一张 N 个点 M 条边的无向图，其中有 K 个点被标记为高点，剩下的 (N-K) 个点是低点。
+图中的山谷定义为三元组 &amp;lt;X,Y,Z&amp;gt;，满足X和Y之间有边，Y与 Z之间也有边，同时X和Z是高点，Y是低点。
+问这个图中最多有几个山谷（一个点只能出现在一个山谷中）N ≤ 30, K ≤ min(N,15)
+高点最多只有 15 个。
+可以考虑用状态压缩，s 表示高点的使用状态。
+低点排成一个长度为 n-k 的序列。
+f[i][s] 表示前 i 个低点，使用过的高点的状态为 s 的情况下，组成的山谷的最大可能值。
+转移 f[i][s] 的时候，取出第 i+1 个低点。
+枚举不在 s 中的两个高点 p 和 q.
+检查 p 和 q 和第 i+1 个低点能否配对。
+如果可以，那么就可以用 f[i][s] + 1 去更新
+f[i + 1][s | (1 &amp;lt;&amp;lt; p) | (1 &amp;lt;&amp;lt; q)]
+答案就是 max{ f[n-k][i] | 0 ≤ i &amp;lt; 2k2^k2k }
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;vector&amp;gt;
+using namespace std;
+typedef pair&amp;lt;int,int&amp;gt; PII;
+const int N=35,M=1&amp;lt;&amp;lt;15;
+int f[N][M];
+int g[N][N];
+int n,m,k;
+int high[N],low[N];
+bool st[N];
+vector&amp;lt;PII&amp;gt; trans[N];
+int tot;
+
+void init()
+{
+	for(int i=1;i&amp;lt;=n;i++)
+		if(!st[i])
+			low[++tot]=i;
+	
+	for(int i=1;i&amp;lt;=tot;i++)
+	{
+		trans[i].clear();
+		for(int p=0;p&amp;lt;k;p++)
+			if(g[low[i]][high[p]])
+				for(int q=p+1;q&amp;lt;k;q++)
+					if(g[low[i]][high[q]])
+						trans[i].push_back(make_pair(p,q));							
+	}
+}
+
+int main()
+{
+	int T;
+	cin&amp;gt;&amp;gt;T;
+	while(T--)
+	{
+		memset(g,0,sizeof g);
+		memset(st,0,sizeof st);
+		memset(f,0,sizeof f);
+		tot=0;
+		scanf(&amp;quot;%d%d%d&amp;quot;,&amp;amp;n,&amp;amp;m,&amp;amp;k);
+		for(int i=0;i&amp;lt;m;i++)
+		{
+			int x,y;
+			scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;x,&amp;amp;y);
+			g[x][y]=g[y][x]=1;
+		}
+		
+		for(int i=0;i&amp;lt;k;i++)
+		{
+			scanf(&amp;quot;%d&amp;quot;,&amp;amp;high[i]);
+			st[high[i]]=true;
+		}
+		
+		init();
+		
+		for(int i=1;i&amp;lt;=tot;i++)
+		{
+			for(int s=0;s&amp;lt;1&amp;lt;&amp;lt;k;s++)
+				f[i][s]=f[i-1][s];//不选第i个点
+			
+			for(int s=0;s&amp;lt;1&amp;lt;&amp;lt;k;s++)
+			{
+				for(int j=0;j&amp;lt;trans[i].size();j++)
+				{
+					int x=trans[i][j].first;
+					int y=trans[i][j].second;
+					if(s&amp;gt;&amp;gt;x &amp;amp; 1) continue;
+					if(s&amp;gt;&amp;gt;y &amp;amp; 1) continue;
+					f[i][s|(1&amp;lt;&amp;lt;x)|(1&amp;lt;&amp;lt;y)]=max(f[i][s|(1&amp;lt;&amp;lt;x)|(1&amp;lt;&amp;lt;y)],f[i-1][s]+1);//选第i个点
+				}
+			}
+		}
+			
+		int ans=0;
+		for(int i=0;i&amp;lt;1&amp;lt;&amp;lt;k;i++)
+			ans=max(ans,f[tot][i]);
+		
+		printf(&amp;quot;%d\n&amp;quot;,ans);
+	}
+	return 0;
+}
+
+acwing524
+数据范围非常小，可以考虑状态压缩DP。 设 f[s] 表示清除掉 s 集合中的猪花费的最小步数。
+思考转移。
+在已有的 s 集合基础上，再选择一条抛物线使得它经过 t集合的点。
+那么就可以用 f[s] + 1 去更新 f[s | t]
+三点确定一条抛物线。
+而三点之中必须有一个原点，因此只要两个点就能确定一条抛物线。
+因此我们可以枚举 s 集合以外的任意两个点，算出经过这两个点的抛物线，枚举所有的点看是否落在抛物线上，得到抛
+物线经过的点集 t。
+f[s | t] = min(f[s | t], f[s] + 1);
+经过点 i 和 j 的抛物线经过的点集 t[i][j] 可以预处理。时间复杂度 O(n3n^3n3)
+之后 DP 枚举每个集合，对每个集合都要枚举两个点。
+时间复杂度 O(n2nn2^nn2n)
+预处理：
+ax[i]2+bx[i]=y[i]ax[i]^2 + bx[i] = y[i]ax[i]2+bx[i]=y[i]
+ax[j]2+bx[j]=y[j]ax[j]^2 + bx[j] = y[j]ax[j]2+bx[j]=y[j]
+解二元一次方程组，得到 a 和 b。
+如果 a &amp;gt;= 0，不符合题意，t[i][j] = 0
+否则对每个点判断一下是否落在这条抛物线上，如果第 k 个点落在抛物线上，
+t[i][j] |= (1 &amp;lt;&amp;lt; (k - 1));
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cmath&amp;gt;
+using namespace std;
+const int N=20,M=1&amp;lt;&amp;lt;18;
+const double eps=1e-8;
+double x[N],y[N];
+int path[N][N];
+int f[M];
+int n,m;
+
+int cmp(double a,double b)
+{
+	if(fabs(a-b) &amp;lt; eps) return 0;
+	else return a&amp;lt;b? -1 : 1;
+}
+
+void init()
+{
+	for(int i=0;i&amp;lt;n;i++)
+	{
+	    path[i][i] |= 1&amp;lt;&amp;lt;i;
+	    
+		for(int j=i+1;j&amp;lt;n;j++)
+		{
+			if(!cmp(x[i],x[j])) continue;
+			
+			double a=(y[i]/x[i]-y[j]/x[j])/(x[i]-x[j]);
+			if(cmp(a,0) &amp;gt;= 0) continue;
+			double b=y[i]/x[i]-a*x[i];
+			
+			for(int k=0;k&amp;lt;n;k++)
+				if(!cmp(a*x[k]*x[k]+b*x[k],y[k])) path[i][j]|=1&amp;lt;&amp;lt;k;
+		}
+	}
+}
+
+int main()
+{
+	int T;
+	cin&amp;gt;&amp;gt;T;
+	while(T--)
+	{
+		scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;m);
+		for(int i=0;i&amp;lt;n;i++)
+			scanf(&amp;quot;%lf%lf&amp;quot;,&amp;amp;x[i],&amp;amp;y[i]);
+		memset(path,0,sizeof path);
+		
+		init();
+		
+		memset(f,0x3f,sizeof f);
+		f[0]=0;
+		for(int s=0;s&amp;lt;1&amp;lt;&amp;lt;n;s++)
+			for(int i=0;i&amp;lt;n;i++)
+				if(!(s&amp;gt;&amp;gt;i &amp;amp; 1))
+				{
+					for(int j=i;j&amp;lt;n;j++)//记得处理只射一只猪的情况(i == j)
+					{
+					    if(!(s&amp;gt;&amp;gt;j &amp;amp; 1))
+							f[s|path[i][j]] = min(f[s|path[i][j]],f[s]+1);
+					}
+					break;
+					//对于我们枚举的每一个状态i，我们找到它正数第一只没射掉的猪进行转移后break。
+                    //因为如果我们转移了第一只后面的没射的猪，到时候还要回头来将第一只猪射掉。
+                    //所以后面的没射的猪的转移其实是多余的，射完第一只猪后按顺序接着往后射就可以了。
+				}
+						
+		printf(&amp;quot;%d\n&amp;quot;,f[(1&amp;lt;&amp;lt;n)-1]);
+	}
+	return 0;
+}
+
+acwing529
+简化版题目：
+给定一个 n 个点 m 条边的图，请你求出一个有根树，满足每个点的深度和它到父节点的边权乘积之和最小。
+n ≤ 12，m ≤ 1000
+考虑到点数只有12个，可以考虑状态压缩 DP。 用 s 表示当前加入的点集。
+为了方便转移，我们不记录根是谁，而是直接去考虑深度。
+也就是用 f[i][s] 表示当前的点集是 s，最深的点为 i。
+然后我们去枚举 s 的补集的子集 t，把 t 都作为第 i+1 层加入 s。
+我们不用去考虑 t 里的点在这颗树中是否真的是第 i+1层
+因为如果不是的话只可能小于i+1层，答案会更小。
+那么一定存在一种转移顺序，考虑到这种更优的情况，也就是先把这个点加入 s 集合。
+例如，如果第j层中用到的某条边(a, b)应该在比j小的层，假设a是S中的点，b是第j层的点，则在枚举S + {b}时会得到更小的花费。
+具体的操作是：
+对于 s，枚举 t（s 的补集的子集），检查 t 里的点是否都和 s 里的点有连边，处理出每个点到 s 里的点的最短边。
+设这些最短边边权之和为 v。
+那么 f[i][s | t] = min(f[i][s | t], f[i - 1][s] + (i - 1) * v)
+时间复杂度分析：
+s 一共有 2n2^n2n 个，s 的补集的子集一共有 3n3^n3n 个。
+处理 t 里的每个点到 s 里的点的最短边，预处理时间复杂度 O(n2n^2n2)
+验证 t 是否可行，时间复杂度 O(n)。
+转移时对每个深度都要更新一次，时间复杂度O(n)
+总时间复杂度就是 O(n22n+n3nn^22^n + n3^nn22n+n3n)，即 O(n3nn3^nn3n)
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;bitset&amp;gt;
+using namespace std;
+const int N=15,M=1&amp;lt;&amp;lt;12,INF=0x3f3f3f3f;
+int f[M][N];
+int g[N][N];
+int dist[M][N];
+int n,m;
+
+void init()
+{
+    memset(dist,0x3f,sizeof dist);
+
+    for(int s=0;s&amp;lt;1&amp;lt;&amp;lt;n;s++)//集合s 
+        for(int i=0;i&amp;lt;n;i++)
+            if(!(s&amp;gt;&amp;gt;i &amp;amp; 1))//枚举不在集合s中的点i 
+                for(int j=0;j&amp;lt;n;j++)
+                    if(s&amp;gt;&amp;gt;j &amp;amp; 1)//预处理出i到集合s的最短距离 
+                        dist[s][i]=min(dist[s][i],g[i][j]);
+}
+
+int main()
+{
+    scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;m);
+
+    memset(g,0x3f,sizeof g);
+    while(m--)
+    {
+        int a,b,c;
+        scanf(&amp;quot;%d%d%d&amp;quot;,&amp;amp;a,&amp;amp;b,&amp;amp;c);
+        a--,b--;
+        g[a][b]=g[b][a]=min(g[a][b],c);
+    }
+
+    init();
+
+    memset(f,0x3f,sizeof f);
+    for(int i=0;i&amp;lt;n;i++) f[1&amp;lt;&amp;lt;i][1]=0;
+
+    for(int s=0;s&amp;lt;1&amp;lt;&amp;lt;n;s++)//集合s 
+    {
+        int c=(1&amp;lt;&amp;lt;n)-1-s;
+        for(int t=c;t;t=(t-1)&amp;amp;c)//集合s的补集t 
+        {
+            int sum=0;
+            for(int i=0;i&amp;lt;n;i++)
+                if(t&amp;gt;&amp;gt;i &amp;amp; 1)
+                {
+                    sum+=dist[s][i];
+                    if(sum &amp;gt;= INF) break;
+                }   
+
+            if(sum &amp;lt; INF)
+                for(int i=1;i&amp;lt;=n;i++)
+                    f[s|t][i]=min(f[s|t][i],f[s][i-1]+(i-1)*sum);
+        }
+    }
+
+    int ans=INF;
+    for(int i=1;i&amp;lt;=n;i++)
+        ans=min(ans,f[(1&amp;lt;&amp;lt;n)-1][i]);
+
+    printf(&amp;quot;%d\n&amp;quot;,ans);
+
+    return 0;
+}
+
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://caifxh.github.io/post/zhuang-ya-dp/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+            <article class="post i-card">
+                <h2 class="post-title">
+                    <a href="https://caifxh.github.io/post/shu-wei-dp/">
+                        数位dp
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2020-03-28</time>
+                    
+                        <a href="https://caifxh.github.io/tag/Iu6lDT60Hd/" class="post-tag i-tag
+                            i-tag-">
+            #DP
+        </a>
+                        
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            问题的一般形式是这样的：
+定义一个条件 A，比如：被 7 整除、数位中含有 3 等等。
+询问区间 [L, R] 中有几个数满足条件 A L 和 R 的范围一般非常大，比如101810^{18}1018
+通过数位 DP，我们会发现这些问题的规模实际上是 log10Rlog_{10} Rlog10​R
+数位 DP 就是考虑数字的每一位。
+问题的规模变为log10Rlog_{10} Rlog10​R
+每一位作为不同的阶段，设计状态。
+我们从高位往低位依次枚举。
+每一位的数选择的范围是不同的，依据前面选的数决定。
+acwing1085
+
+
+
+
+
+
+
+
+
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+int dp[15][15];
+int num[15];
+
+void init(){//预处理 
+    dp[0][0]=1;
+    for(int i=1;i&amp;lt;=9;i++)
+        for(int j=0;j&amp;lt;=9;j++){
+            if(j==4)
+                dp[i][j]=0;
+            else
+                for(int k=0;k&amp;lt;=9;k++){
+                    if(j==6&amp;amp;&amp;amp;k==2)
+                        continue;
+                    dp[i][j]+=dp[i-1][k];
+                }
+        }
+}
+
+int solve(int x)//求解[1..x]之间满足条件的个数 
+{
+    int ans=0,cnt=0;
+    while(x)
+        num[++cnt]=x%10,x/=10;
+    num[cnt+1]=0;
+    for(int i=cnt;i&amp;gt;=1;i--){//高位向低位计算 
+        for(int j=0;j&amp;lt;num[i];j++)
+            if(j==4||(j==2&amp;amp;&amp;amp;num[i+1]==6))
+            	continue;
+            else
+				ans+=dp[i][j];
+        if(num[i]==4||(num[i]==2&amp;amp;&amp;amp;num[i+1]==6)){
+			ans--;//减1，例如4，统计0，1 ，2，3共4个其实只有3个满足（不包括0） 
+				 //例如3，统计0，1 ，2共3个满足，0相当于统计了3本身 
+            break;
+    	}
+    }
+    return ans;
+}
+
+void print(){//输出初始化处理后的dp数组 
+	printf(&amp;quot;  j=\t&amp;quot;);
+	for(int j=0;j&amp;lt;=9;j++)
+		printf(&amp;quot;%-10d&amp;quot;,j);
+	printf(&amp;quot;\n&amp;quot;);
+	for(int i=1;i&amp;lt;=9;i++){
+    	printf(&amp;quot;i=%d\t&amp;quot;,i);
+		for(int j=0;j&amp;lt;=9;j++)
+			printf(&amp;quot;%-10d&amp;quot;,dp[i][j]);	
+		printf(&amp;quot;\n&amp;quot;);
+	}
+}
+
+int main()
+{
+    int n,m;
+    memset(dp,0,sizeof dp);
+    init();//初始化处理 
+    //print();//输出dp数组 
+    while(~scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;m,&amp;amp;n),n+m){//测试 1 24  62 386
+    	//printf(&amp;quot;%d\n&amp;quot;,solve(n));
+    	//printf(&amp;quot;%d\n&amp;quot;,solve(m));
+        printf(&amp;quot;%d\n&amp;quot;,solve(n)-solve(m-1));
+	}
+    return 0;
+}
+
+记忆化递归
+
+
+
+
+
+
+
+
+
+
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+int a[20];
+int dp[20][2];
+//dp[pos][sta]表示当前第pos位，sta状态下满足条件的个数，sta表示前一位是否是6，只有0和1两种状态
+int dfs(int pos,bool sta,bool limit)
+{
+    if(pos==0) return 1;
+    if(!limit&amp;amp;&amp;amp;dp[pos][sta]!=-1) return dp[pos][sta];
+    int len=limit?a[pos]:9;
+    int ans=0;
+    for(int i=0;i&amp;lt;=len;i++)
+    {
+        if(sta&amp;amp;&amp;amp;i==2)continue;
+        if(i==4) continue;//都是保证枚举合法性
+        ans+=dfs(pos-1,i==6,limit&amp;amp;&amp;amp;i==len);
+    }
+    if(!limit) dp[pos][sta]=ans;
+    return ans;
+}
+
+int solve(int x)//求解[0..x]之间满足条件的个数 
+{
+    int pos=0;
+    while(x){
+        a[++pos]=x%10;
+        x/=10;
+    }
+    return dfs(pos,0,1);//如果不包括0，此处减1即可
+}
+
+void print(){//输出dp数组 
+	printf(&amp;quot;  j=\t&amp;quot;);
+	for(int j=0;j&amp;lt;=1;j++)
+		printf(&amp;quot;%-10d&amp;quot;,j);
+	printf(&amp;quot;\n&amp;quot;);
+	for(int i=1;i&amp;lt;=9;i++){
+    	printf(&amp;quot;i=%d\t&amp;quot;,i);
+		for(int j=0;j&amp;lt;=1;j++)
+			printf(&amp;quot;%-10d&amp;quot;,dp[i][j]);	
+		printf(&amp;quot;\n&amp;quot;);
+	}
+}
+
+int main()
+{
+    int a,b;
+    memset(dp,-1,sizeof dp);
+    while(~scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;a,&amp;amp;b),a+b)//测试24 386 
+    {
+		//printf(&amp;quot;%d\n&amp;quot;,solve(a));
+		//print();
+    	//printf(&amp;quot;%d\n&amp;quot;,solve(b));
+    	//print();
+		printf(&amp;quot;%d\n&amp;quot;,solve(b)-solve(a-1));
+    }
+    return 0;
+}
+
+例题
+hdu3555
+
+
+
+正向做法
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N=20;
+LL f[N][2];
+LL ten[N];
+int num[N];
+LL n;
+
+LL dfs(int pos,bool sta,bool limit)
+{
+	if(pos == 0) return 0;
+	if(!limit &amp;amp;&amp;amp; f[pos][sta] != -1)
+		return f[pos][sta];
+	
+	int len=limit?num[pos]:9;
+	LL ans=0;
+	for(int i=0;i&amp;lt;=len;i++)
+	{
+		if(sta &amp;amp;&amp;amp; i==9)
+			ans+=limit?n%ten[pos-1]+1:ten[pos-1];
+		else
+			ans+=dfs(pos-1,i==4,limit&amp;amp;&amp;amp;i==len);
+	}
+	if(!limit)
+		f[pos][sta]=ans;
+	return ans;
+}
+
+LL dp(LL n)//求解[1..x]之间满足条件的个数 
+{
+	int pos=0;
+	while(n)
+	{
+		num[++pos]=n%10;
+		n/=10;
+	}
+	
+	return dfs(pos,0,1);
+}
+
+int main()
+{
+	int T;
+	cin&amp;gt;&amp;gt;T;
+	memset(f,-1,sizeof f);
+	ten[0]=1;
+	for(int i=1;i&amp;lt;N;i++)
+		ten[i]=ten[i-1]*10;
+	while(T--)
+	{
+		scanf(&amp;quot;%lld&amp;quot;,&amp;amp;n);
+		printf(&amp;quot;%lld\n&amp;quot;,dp(n));
+	}
+	return 0;
+}
+
+反向做法
+#include&amp;lt;cstdio&amp;gt;//求不包含49的个数ans(不包括0)，然后n-ans
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+typedef long long LL;//注意！！本题数据类型为ll 
+const int N=30;
+int dig[N];
+LL dp[N][2],n;
+//dp[pos][sta]表示当前第pos位，sta状态下满足条件的个数，sta表示前一位是否是4，只有0和1两种状态
+LL dfs(int pos,bool sta,bool limit)//求不包含49的个数
+{
+    if(!pos) return 1;//包括0 
+    if(!limit&amp;amp;&amp;amp;dp[pos][sta]!=-1) return dp[pos][sta];
+    int len=limit?dig[pos]:9;
+    LL ans=0;
+    for(int i=0;i&amp;lt;=len;i++)
+    {
+        if(sta&amp;amp;&amp;amp;i==9)
+        	continue;
+        ans+=dfs(pos-1,i==4,limit&amp;amp;&amp;amp;i==len);
+    }
+    if(!limit) dp[pos][sta]=ans;
+    return ans;
+}
+
+LL solve(LL x)//求解[1..x]之间不包含49的个数 
+{
+    int pos=0;
+    while(x){
+        dig[++pos]=x%10;
+        x/=10;
+    }
+    return dfs(pos,0,1)-1;//除去0 
+}
+
+int main()
+{
+    memset(dp,-1,sizeof(dp));
+	int T;
+	scanf(&amp;quot;%d&amp;quot;,&amp;amp;T);
+	while(T--){
+		scanf(&amp;quot;%I64d&amp;quot;,&amp;amp;n);
+		printf(&amp;quot;%I64d\n&amp;quot;,n-solve(n));
+	}
+    return 0;
+}
+
+acwing338
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=10;
+int f[N][10][N];
+int num[N];
+int ans1[N];
+int ans2[N];
+
+int dfs(int pos,int val,int cnt,bool lead,bool limit)
+{
+    if(pos == 0) return cnt;
+    if(!limit &amp;amp;&amp;amp; !lead &amp;amp;&amp;amp; f[pos][val][cnt] != -1)
+        return f[pos][val][cnt];
+
+    int len=limit?num[pos]:9;
+    int ans=0,t=0;
+    for(int i=0;i&amp;lt;=len;i++)
+    {
+        if(val != i) t=cnt;
+        else 
+        {
+            if(lead &amp;amp;&amp;amp; val==0)
+                t=0;
+            else  
+                t=cnt+1;
+        }
+        ans+=dfs(pos-1,val,t,lead&amp;amp;&amp;amp;i==0,limit&amp;amp;&amp;amp;i==len);
+    }
+    if(!limit &amp;amp;&amp;amp; !lead) f[pos][val][cnt]=ans;
+    return ans;
+}
+
+void dp(int n,int ans[])
+{
+    int pos=0;
+    while(n)
+    {
+        num[++pos]=n%10;
+        n/=10;
+    }
+
+    for(int i=0;i&amp;lt;=9;i++)
+        ans[i]=dfs(pos,i,0,1,1);
+}
+
+int main()
+{
+    memset(f,-1,sizeof f);
+    int a,b;
+    while(~scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;a,&amp;amp;b))
+    {
+        if(!a &amp;amp;&amp;amp; !b) break;
+        if(a&amp;gt;b) swap(a,b);
+        dp(b,ans1);
+        dp(a-1,ans2);
+        for(int i=0;i&amp;lt;10;i++)
+            printf(&amp;quot;%d &amp;quot;,ans1[i]-ans2[i]);
+    }
+    return 0;
+}
+
+poj3252
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=35;
+int f[N][N][N];
+int num[N];
+
+int dfs(int pos,int cnt0,int cnt1,bool lead,bool limit)
+{
+	if(pos == 0) return cnt0&amp;gt;=cnt1;
+	if(!limit &amp;amp;&amp;amp; !lead &amp;amp;&amp;amp; f[pos][cnt0][cnt1] != -1)
+		return f[pos][cnt0][cnt1];
+
+	int len=limit?num[pos]:1;
+	int ans=0;
+	for(int i=0;i&amp;lt;=len;i++)
+	{
+		if(lead &amp;amp;&amp;amp; !i)
+			ans+=dfs(pos-1,0,0,1,limit&amp;amp;&amp;amp;i==len);
+		else 
+			ans+=dfs(pos-1,cnt0+(i==0),cnt1+(i==1),0,limit&amp;amp;&amp;amp;i==len);
+	}
+	if(!limit &amp;amp;&amp;amp; !lead)
+		f[pos][cnt0][cnt1]=ans;
+	return ans;
+}
+
+int dp(int n)
+{
+	int pos=0;
+	while(n)
+	{
+		num[++pos]=n%2;
+		n/=2;
+	}
+	
+	return dfs(pos,0,0,1,1);
+}
+
+int main()
+{
+	int a,b;
+	memset(f,-1,sizeof f);
+	while(~scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;a,&amp;amp;b))
+		printf(&amp;quot;%d\n&amp;quot;,dp(b)-dp(a-1));
+	return 0;
+}
+
+hdu4734
+
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=10,M=4610;
+int f[N][M];
+int num[N];
+int a,b;
+
+int dfs(int pos,int val,bool limit)
+{
+	if(pos == 0) return val&amp;gt;=0;
+	if(val &amp;lt; 0) return 0;
+	if(!limit &amp;amp;&amp;amp; f[pos][val] != -1)
+		return f[pos][val];
+	
+	int ans=0;
+	int len=limit?num[pos]:9;
+	for(int i=0;i&amp;lt;=len;i++)
+		ans+=dfs(pos-1,val-i*(1&amp;lt;&amp;lt;pos-1),limit &amp;amp;&amp;amp; i==len);
+	if(!limit) f[pos][val]=ans;
+	return ans;
+
+}
+
+
+int F(int n)
+{
+	int ans=0,len=0;
+	while(n)
+	{
+		ans+=(n%10)*(1&amp;lt;&amp;lt;len);
+		len++;
+		n/=10;
+	}
+	return ans;
+}
+
+int dp(int n)//求解小于等于f(a)的数的个数 
+{
+	int pos=0;
+	while(n)
+	{
+		num[++pos]=n%10;
+		n/=10;
+	}
+	
+	return dfs(pos,F(a),1);
+}
+
+int main()
+{
+	int T,kas=1;
+	cin&amp;gt;&amp;gt;T;
+	memset(f,-1,sizeof f);
+	while(T--)
+	{
+		scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;a,&amp;amp;b);
+		printf(&amp;quot;Case #%d: %d\n&amp;quot;,kas++,dp(b));
+	}
+	return 0;
+}
+
+acwing1081
+统计区间内一个数的B进制表示下恰好有k位为1的数的个数
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=35;
+int f[N][N];
+int num[N];
+int k,b;
+
+int dfs(int pos,int cnt,bool limit)
+{
+    if(cnt &amp;gt; k) return 0;
+	if(pos == 0) return cnt==k;
+	
+	if(f[pos][cnt] != -1 &amp;amp;&amp;amp; !limit) 
+		return f[pos][cnt];
+	
+	int len=limit?num[pos]:1;
+	int ans=0;
+	for(int i=0;i&amp;lt;=min(len,1);i++)
+		if(i) ans+=dfs(pos-1,cnt+1,limit&amp;amp;&amp;amp;i==len);
+		else ans+=dfs(pos-1,cnt,limit&amp;amp;&amp;amp;i==len);
+
+	if(!limit) f[pos][cnt]=ans;
+	return ans;
+}
+
+int dp(int n)
+{
+	int pos=0;
+	while(n) num[++pos]=n%b,n/=b;
+	
+	return dfs(pos,0,1);
+}
+
+int main()
+{
+	int l,r;
+	memset(f,-1,sizeof f);
+	scanf(&amp;quot;%d%d%d%d&amp;quot;,&amp;amp;l,&amp;amp;r,&amp;amp;k,&amp;amp;b);
+	
+	printf(&amp;quot;%d\n&amp;quot;,dp(r)-dp(l-1));
+	return 0;
+}
+
+acwing1082
+统计区间内不下降数的个数
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=15;
+int f[N][10];
+int num[N];
+
+int dfs(int pos,int last,bool limit)
+{
+	if(pos ==0) return 1;
+	if(f[pos][last] != -1 &amp;amp;&amp;amp; !limit)
+		return f[pos][last];
+
+	int ans=0;
+	int len=limit?num[pos]:9;
+	for(int i=0;i&amp;lt;=len;i++)
+	{
+		if(i&amp;lt;last) continue;
+		ans+=dfs(pos-1,i,limit&amp;amp;&amp;amp;i==len);
+	}
+	
+	if(!limit) f[pos][last]=ans;
+	return ans;
+	
+}
+
+int dp(int n)
+{
+	int pos=0;
+	while(n)
+	{
+		num[++pos]=n%10;
+		n/=10;
+	}
+	
+	return dfs(pos,0,1);
+}
+
+int main()
+{
+	int a,b;
+	memset(f,-1,sizeof f);
+	while(~scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;a,&amp;amp;b))
+		printf(&amp;quot;%d\n&amp;quot;,dp(b)-dp(a-1));
+	
+	return 0;
+}
+
+P4127
+询问 [L,R] 中各位数字之和能整除原数的个数。1 ≤ L ≤ R ≤ 1e18
+思路
+可以发现各位数之和最大只能是 9 * 18 = 162
+我们可以枚举这个和 sum
+然后去统计可以被 sum 整除，且数位和是 sum 的数。
+我们把状态定义为 f[dep][cur][mod]
+表示当前枚举第 dep 位，目前这个数的数位和是 cur，对
+sum 取模是 mod.
+cur = sum 且 mod = 0 的个数要统计进答案
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N=20,M=170;
+LL f[N][M][M];
+int num[N];
+LL a,b;
+LL sum;
+
+LL dfs(int pos,int val,int mod,bool limit)//val为当前各位数字之和 
+{
+	if(pos == 0) return val==sum &amp;amp;&amp;amp; mod==0;
+	if(val &amp;gt; sum) return 0;
+	
+	if(!limit &amp;amp;&amp;amp; f[pos][val][mod] != -1)
+		return f[pos][val][mod];
+	
+	int len=limit?num[pos]:9;
+	LL ans=0;
+	for(int i=0;i&amp;lt;=len;i++)
+		ans+=dfs(pos-1,val+i,(mod*10+i)%sum,limit&amp;amp;&amp;amp;i==len);
+	
+	if(!limit) f[pos][val][mod]=ans;
+	return ans;
+}
+
+LL dp(LL n)
+{
+	int pos=0;
+	while(n)
+	{
+		num[++pos]=n%10;
+		n/=10;
+	}
+	
+	LL res=0;
+	for(int i=1;i&amp;lt;=pos*9;i++)//枚举各位之和
+	{
+		memset(f,-1,sizeof f);
+		sum=i;
+		res+=dfs(pos,0,0,1);
+	}
+	
+	return res;
+}
+
+int main()
+{
+	cin&amp;gt;&amp;gt;a&amp;gt;&amp;gt;b;
+	cout&amp;lt;&amp;lt;dp(b)-dp(a-1)&amp;lt;&amp;lt;endl;
+	
+	return 0;
+}
+
+acwing1083
+求区间内任意相邻位上的数字之差的绝对值大于等于二的数的个数
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=11;
+int f[N][10];
+int num[N];
+
+int dfs(int pos,int val,bool lead,bool limit)
+{
+	if(pos == 0) return 1;
+	if(!limit &amp;amp;&amp;amp; !lead &amp;amp;&amp;amp; f[pos][val] != -1)
+		return f[pos][val];
+	
+	int len=limit?num[pos]:9;
+	int ans=0;
+	for(int i=0;i&amp;lt;=len;i++)
+	{
+		if(lead || abs(i-val) &amp;gt;= 2)//如果包含前导零不能让i与之做差，直接让i成为下一位即可
+			ans+=dfs(pos-1,i,lead&amp;amp;&amp;amp;i==0,limit&amp;amp;&amp;amp;i==len);
+	}
+	
+	if(!limit &amp;amp;&amp;amp; !lead) f[pos][val]=ans;
+	return ans;
+}
+
+int dp(int n)
+{
+	int pos=0;
+	while(n)
+	{
+		num[++pos]=n%10;
+		n/=10;
+	}
+	
+	return dfs(pos,-2,1,1);
+}
+
+int main()
+{
+	memset(f,-1,sizeof f);
+	int a,b;
+	cin&amp;gt;&amp;gt;a&amp;gt;&amp;gt;b;
+	cout&amp;lt;&amp;lt;dp(b)-dp(a-1)&amp;lt;&amp;lt;endl;
+	return 0;
+}
+
+acwing1084
+求区间内各位数字之和mod N为0的数的个数
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=11,M=110;
+int f[N][M];
+int num[N];
+int a,b,mod;
+
+int dfs(int pos,int val,bool limit)
+{
+	if(pos == 0) return val == 0;
+	if(!limit &amp;amp;&amp;amp; f[pos][val] != -1)
+		return f[pos][val];
+	
+	int len=limit?num[pos]:9;
+	int ans=0;
+	for(int i=0;i&amp;lt;=len;i++)
+		ans+=dfs(pos-1,(val+i)%mod,limit&amp;amp;&amp;amp;i==len);
+	
+	if(!limit) f[pos][val]=ans;
+	return ans;
+}
+
+int dp(int n)
+{
+	int pos=0;
+	while(n)
+	{
+		num[++pos]=n%10;
+		n/=10;
+	}
+	
+	return dfs(pos,0,1);
+}
+
+int main()
+{
+	while(~scanf(&amp;quot;%d%d%d&amp;quot;,&amp;amp;a,&amp;amp;b,&amp;amp;mod))
+	{
+		memset(f,-1,sizeof f);
+		printf(&amp;quot;%d\n&amp;quot;,dp(b)-dp(a-1));
+	}
+	return 0;
+}
+
+hdu3709
+
+
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+typedef long long LL;
+using namespace std;
+const int N=20,M=2000;
+LL f[N][N][M];
+int num[N];
+
+LL dfs(int pos,int val,int sum,bool limit)
+{
+	if(pos == 0) return sum==0;
+	if(sum&amp;lt;0) return 0;
+	if(!limit &amp;amp;&amp;amp; f[pos][val][sum] != -1)
+		return f[pos][val][sum];
+	
+	int len=limit?num[pos]:9;
+	LL ans=0;
+	for(int i=0;i&amp;lt;=len;i++)
+		ans+=dfs(pos-1,val,sum+(pos-val)*i,limit&amp;amp;&amp;amp;i==len);
+	
+	if(!limit) f[pos][val][sum]=ans;
+	return ans;
+}
+
+LL dp(LL n)
+{
+	if(n&amp;lt;0) return 0;
+	int pos=0;
+	while(n)
+	{
+		num[++pos]=n%10;
+		n/=10;
+	}
+	
+	LL ans=0;
+	for(int i=1;i&amp;lt;=pos;i++)
+		ans+=dfs(pos,i,0,1);
+	return ans-pos+1;//pos次循环统计了pos次0，应减去多算的pos-1个0的出现次数
+}
+
+int main()
+{
+	int T;
+	cin&amp;gt;&amp;gt;T;
+	memset(f,-1,sizeof f);
+	while(T--)
+	{
+		LL a,b;
+		scanf(&amp;quot;%lld%lld&amp;quot;,&amp;amp;a,&amp;amp;b);
+		printf(&amp;quot;%lld\n&amp;quot;,dp(b)-dp(a-1));
+	}
+	return 0;
+}
+
+hdu4507
+如果一个整数符合下面3个条件之一，那么我们说这个整数和7有关：
+整数中某一位是7
+整数的每一位加起来的和是7的整数倍
+这个整数是7的整数倍
+询问[L,R]中与7无关的数字的平方和，模1e9+7.1≤L≤R≤1e18
+为了转移需要维护三个值：
+cnt 和 7 有关的数的个数
+sum 和 7 有关的数的和
+sqr 和 7 有关的数的平方和
+
+因此对于所有回溯上来的数x1,x2,x3..xn，你得知道与7无关的数的个数（对应n个d2d^2d2的和），
+与7有关的数之和（对应2d(x1+x2+...+xn），与7有关的数的平方和（对应x12+x22+...+xn2x_1^2+x_2^2+...+x_n^2x12​+x22​+...+xn2​）
+假设当前状态是 f，从 g 状态转移过来（dfs回溯上来）
+f.cnt += g.cnt
+f.sum += g.sum + d * g.cnt
+f.sqr += d * d * g.cnt + 2 * d * g.sum + g.sqr
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+typedef long long LL;
+using namespace std;
+const int N=20,mod=1e9+7;
+struct Node
+{
+	LL cnt;
+	LL sum;
+	LL sqr;
+}f[N][7][7];//分别表示数位，各位和%7，数本身%7 
+int num[N];
+LL ten[N];
+
+Node dfs(int pos,int val,int sum,bool limit)
+{
+	if(pos == 0)
+	{
+		Node t;
+		t.cnt= val&amp;gt;0 &amp;amp;&amp;amp; sum&amp;gt;0;
+		t.sum=0;
+		t.sqr=0;
+		return t;
+	}
+	if(!limit &amp;amp;&amp;amp; f[pos][val][sum].cnt != -1)
+		return f[pos][val][sum];
+	
+	int len=limit?num[pos]:9;
+	Node ans;
+	ans.cnt=ans.sum=ans.sqr=0;
+	for(int i=0;i&amp;lt;=len;i++)
+	{
+		if(i == 7) continue;
+		LL d=i*ten[pos-1]%mod;
+		Node t=dfs(pos-1,(val+i)%7,(sum*10+i)%7,limit&amp;amp;&amp;amp;i==len);
+		ans.cnt=(ans.cnt+t.cnt)%mod;
+		ans.sum=(ans.sum+t.sum+d*t.cnt%mod)%mod;
+		ans.sqr=(ans.sqr+t.sqr+d*d%mod*t.cnt%mod+2*d%mod*t.sum%mod)%mod;
+	}
+	
+	if(!limit) f[pos][val][sum]=ans;
+	return ans;
+}
+
+int dp(LL n)
+{
+	int pos=0;
+	while(n)
+	{
+		num[++pos]=n%10;
+		n/=10;
+	}
+	
+	return dfs(pos,0,0,1).sqr;
+}
+
+int main()
+{
+	int T;
+	cin&amp;gt;&amp;gt;T;
+	memset(f,-1,sizeof f);
+	ten[0]=1;
+	for(int i=1;i&amp;lt;N;i++)
+		ten[i]=ten[i-1]*10%mod;
+
+	while(T--)
+	{
+		LL a,b;
+		scanf(&amp;quot;%lld%lld&amp;quot;,&amp;amp;a,&amp;amp;b);
+		printf(&amp;quot;%d\n&amp;quot;,((dp(b)-dp(a-1))%mod+mod)%mod);
+	}
+	return 0;
+}
+
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://caifxh.github.io/post/shu-wei-dp/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+            <article class="post i-card">
+                <h2 class="post-title">
+                    <a href="https://caifxh.github.io/post/dan-diao-dui-lie-you-hua-dp/">
+                        单调队列优化dp
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2020-03-27</time>
+                    
+                        <a href="https://caifxh.github.io/tag/Iu6lDT60Hd/" class="post-tag i-tag
+                            i-tag-other_4">
+            #DP
+        </a>
+                        
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            
+
+
+acwing272
+
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+const int N=3010;
+int f[2][N];
+int a[N],b[N];
+int n;
+int ans;
+
+int main()
+{
+	scanf(&amp;quot;%d&amp;quot;,&amp;amp;n);
+	for(int i=1;i&amp;lt;=n;i++) scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]);
+	for(int i=1;i&amp;lt;=n;i++) scanf(&amp;quot;%d&amp;quot;,&amp;amp;b[i]);
+	
+	for(int i=1;i&amp;lt;=n;i++)
+	{
+		int val=0;//记录决策集合S(i,j)中dp[i-1][k]的最大值
+		for(int j=1;j&amp;lt;=n;j++)
+		{
+			if(a[i] != b[j]) f[i&amp;amp;1][j]=f[i-1&amp;amp;1][j];
+			else f[i&amp;amp;1][j]=val+1;
+			if(b[j] &amp;lt; a[i]) val=max(val,f[i-1&amp;amp;1][j]);//j满足条件，加入决策集合，更新最值 
+		}
+	}
+	
+	for(int i=1;i&amp;lt;=n;i++)
+	    ans=max(ans,f[n&amp;amp;1][i]);
+			
+	printf(&amp;quot;%d\n&amp;quot;,ans);
+	return 0;
+}
+
+poj2373
+在一片草场上:有一条长度为L (1 &amp;lt;= L &amp;lt;= 1,000,000， L为偶数)的线段。 John的N (1 &amp;lt;= N &amp;lt;= 1000)头奶牛都沿着草场上这条线段吃草，每头牛的活动范围是一个开区间(S,E)， S，E都是整数。不同奶牛的活动范围可以有重叠。John要在这条线段上安装喷水头灌溉草场。每个喷水头的喷洒半径可以随意调节，调节范围是 [A B ](1 &amp;lt;= A &amp;lt;= B &amp;lt;= 1000)，A,B都是整数。要求线段上的每个整点恰好位于一个喷水头的喷洒范围内每头奶牛的活动范围要位于一个喷水头的喷洒范围内任何喷水头的喷洒范围不可越过线段的两端(左端是0,右端是L )。
+请问， John 最少需要安装多少个喷水头。
+
+
+
+
+
+状态dp[i] 表示恰好到覆盖到 [0, i]时最少需要的喷水装置数量, 答案自然也就是dp[L], 把长度作为容量,是线性Dp的一种常见方案
+
+
+i一定是偶数, 因为我们的目的是放置合适的喷水装置来覆盖, 2*r(直径)一定是偶数
+
+
+i一定不在奶牛的范围之内, 因为如果i在某奶牛范围之内, 该奶牛范围也就被分割为了两块,不符合题中要求的恰好位于一个喷水器的覆盖范围内
+
+
+i一定大于2*a, 因为最小半径是a
+
+
+对于i &amp;gt; 2 *a时, dp[i]在满足12的情况下, 应该在[i-2b, i-2a]这个区间中找到一个最小的+1.这个地方需要仔细理一下, 就是dp[i]并不表示把喷水器放在了i, 而是放在了[i-2b, i-2a]这个区间中, 依次递推.
+
+
+可得状态转移方程: dp[i] = min{dp[j] | i-2b &amp;lt;= j &amp;lt;= i-2a} +1
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+const int N=1e6+10,INF=0x3f3f3f3f;
+int f[N];
+bool flag[N];
+int n,l,a,b;
+
+int main()
+{
+	cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;l&amp;gt;&amp;gt;a&amp;gt;&amp;gt;b;
+	memset(f,0x3f,sizeof f);
+	
+	for(int i=0;i&amp;lt;n;i++)
+	{
+		int s,e;
+		cin&amp;gt;&amp;gt;s&amp;gt;&amp;gt;e;
+		for(int j=s+1;j&amp;lt;e;j++)
+			flag[j]=1;
+	}
+	
+	if(l &amp;amp; 1) puts(&amp;quot;-1&amp;quot;);
+	else 
+	{
+		f[0]=0;
+		for(int i=2;i&amp;lt;=l;i+=2)
+		{
+			if(!flag[i])
+			{
+				int val=INF;
+				for(int j=a;j&amp;lt;=b;j++)
+				{
+					int k=i-2*j;
+					if(k &amp;lt; 0) break;
+					val=min(val,f[k]);
+				}
+				f[i]=val+1;
+			}
+		}
+		
+		if(f[l] &amp;gt;= INF) puts(&amp;quot;-1&amp;quot;);
+		else cout&amp;lt;&amp;lt;f[l]&amp;lt;&amp;lt;endl;
+	}
+	return 0;
+}
+
+
+
+
+code
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=1e6+10,INF=0x3f3f3f3f;
+int f[N];
+int q[N];
+bool flag[N];
+int n,l,a,b;
+
+int main()
+{
+	cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;l&amp;gt;&amp;gt;a&amp;gt;&amp;gt;b;
+	memset(f,0x3f,sizeof f);
+	
+	for(int i=0;i&amp;lt;n;i++)
+	{
+		int s,e;
+		cin&amp;gt;&amp;gt;s&amp;gt;&amp;gt;e;
+		for(int j=s+1;j&amp;lt;e;j++)
+			flag[j]=1;
+	}
+	
+	f[0]=0;
+	int hh=0,tt=-1;
+	for(int i=a*2;i&amp;lt;=l;i+=2)
+	{
+		if(hh &amp;lt;= tt &amp;amp;&amp;amp; i-2*b &amp;gt; q[hh]) hh++;
+		while(hh&amp;lt;=tt &amp;amp;&amp;amp; f[q[tt]] &amp;gt;= f[i-2*a])
+			tt--;
+		q[++tt]=i-2*a;
+		if(!flag[i]) f[i]=f[q[hh]]+1;
+	}
+	
+	if(f[l] &amp;gt;= INF) puts(&amp;quot;-1&amp;quot;);
+	else cout&amp;lt;&amp;lt;f[l]&amp;lt;&amp;lt;endl;
+
+	return 0;
+}
+
+acwing1088
+
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=2e6+10;
+typedef long long LL;
+int p[N],d[N];
+LL s[N];
+int q[N];
+bool ans[N];
+int n;
+
+int main()
+{
+    scanf(&amp;quot;%d&amp;quot;,&amp;amp;n);
+    for(int i=1;i&amp;lt;=n;i++)
+    {
+        scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;p[i],&amp;amp;d[i]);
+        p[i+n]=p[i];
+        d[i+n]=d[i];
+    }
+
+    for(int i=1;i&amp;lt;=n*2;i++) s[i]=s[i-1]+p[i]-d[i];
+
+    int hh=0,tt=-1;
+    for(int i=1;i&amp;lt;=n*2;i++)//顺时针求长度为n的窗口内前缀和的最小值
+    {
+        if(hh &amp;lt;= tt &amp;amp;&amp;amp; i - q[hh] &amp;gt;= n) hh++;
+
+        while(hh &amp;lt;= tt &amp;amp;&amp;amp; s[q[tt]] &amp;gt;= s[i])
+            tt--;
+        q[++tt]=i;
+        if(i &amp;gt;= n &amp;amp;&amp;amp; s[q[hh]] &amp;gt;= s[i-n])
+            ans[i-n+1]=true;
+    }
+
+    d[0]=d[n];
+    for(int i=n*2;i&amp;gt;=1;i--) s[i]=s[i+1]+p[i]-d[i-1];
+
+    hh=0,tt=-1;
+    for(int i=n*2;i&amp;gt;=1;i--)//逆时针求长度为n的窗口内后缀和的最小值
+    {
+        if(hh &amp;lt;= tt &amp;amp;&amp;amp; q[hh]-i &amp;gt;= n) hh++;
+
+        while(hh &amp;lt;= tt &amp;amp;&amp;amp; s[q[tt]] &amp;gt;= s[i])
+            tt--;
+        q[++tt]=i;
+        if(i&amp;lt;=n+1 &amp;amp;&amp;amp; s[q[hh]] &amp;gt;= s[i+n])
+            ans[i-1]=true;
+    }
+
+    for(int i=1;i&amp;lt;=n;i++)
+        if(ans[i]) puts(&amp;quot;TAK&amp;quot;);
+        else puts(&amp;quot;NIE&amp;quot;);
+    return 0;   
+}
+
+acwing1089
+
+#include &amp;lt;cstring&amp;gt;
+#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N = 2e5 + 10, INF = 0x3f3f3f3f;
+int n, m;
+int w[N], q[N];
+int f[N];
+
+int main()
+{
+    scanf(&amp;quot;%d%d&amp;quot;, &amp;amp;n, &amp;amp;m);
+    for (int i = 1; i &amp;lt;= n; i ++ ) scanf(&amp;quot;%d&amp;quot;, &amp;amp;w[i]);
+
+    int hh = 0, tt = 0;
+    q[0]=0;
+    for (int i = 1; i &amp;lt;= n; i ++ )
+    {
+        if (i - q[hh] &amp;gt; m) hh ++ ;
+        f[i] = f[q[hh]] + w[i];
+        while (hh &amp;lt;= tt &amp;amp;&amp;amp; f[q[tt]] &amp;gt;= f[i]) tt -- ;
+        q[ ++ tt] = i;
+    }
+
+    int res = INF;
+    for (int i = n - m + 1; i &amp;lt;= n; i ++ ) res = min(res, f[i]);
+    printf(&amp;quot;%d\n&amp;quot;, res);
+
+    return 0;
+}
+
+acwing1090
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+const int N=50010,INF=0x3f3f3f3f;
+int n,t;
+int a[N];
+int f[N];
+int q[N];
+
+bool check(int mid)
+{
+    int hh=0,tt=-1;
+    q[++tt]=0;
+    for(int i=1;i&amp;lt;=n;i++)
+    {
+        if(hh &amp;lt;= tt &amp;amp;&amp;amp; i - q[hh] &amp;gt; mid+1) hh++;
+        f[i]=f[q[hh]]+a[i];
+        while(hh &amp;lt;= tt &amp;amp;&amp;amp; f[q[tt]] &amp;gt;= f[i])
+            tt--;
+        q[++tt]=i;
+    }
+    
+    int res=INF;
+    for(int i=n-mid;i&amp;lt;=n;i++)
+        res=min(res,f[i]);
+    
+    return res&amp;lt;=t;
+}
+
+int main()
+{
+    cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;t;
+    for(int i=1;i&amp;lt;=n;i++)
+        cin&amp;gt;&amp;gt;a[i];
+
+    int l=0,r=n;
+    while(l &amp;lt; r)
+    {
+        int mid=l+r&amp;gt;&amp;gt;1;
+        if(check(mid))
+            r=mid;
+        else
+            l=mid+1;
+    }
+    
+    cout&amp;lt;&amp;lt;l&amp;lt;&amp;lt;endl;
+    return 0;
+}
+
+acwing1087
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N=100010;
+LL f[N][2];
+int n,k;
+int e[N];
+LL s[N];
+int q[N];
+
+int main()
+{
+    cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;k;
+    
+    for(int i=1;i&amp;lt;=n;i++)
+        cin&amp;gt;&amp;gt;e[i];
+        
+    for(int i=1;i&amp;lt;=n;i++)
+    	s[i]=s[i-1]+e[i];
+    
+    int hh=0,tt=-1;
+    q[++tt]=0;
+    for(int i=1;i&amp;lt;=n;i++)
+    {
+    	f[i][0]=max(f[i-1][0],f[i-1][1]);
+    	if(hh &amp;lt;= tt &amp;amp;&amp;amp; i-q[hh] &amp;gt; k) hh++;
+    	
+    	f[i][1]=f[q[hh]][0]-s[q[hh]]+s[i];
+    	while(hh &amp;lt;= tt &amp;amp;&amp;amp; f[i][0]-s[i] &amp;gt;= f[q[tt]][0] -s[q[tt]])
+    		tt--;
+    	q[++tt]=i;
+	}
+	
+	cout&amp;lt;&amp;lt;max(f[n][0],f[n][1])&amp;lt;&amp;lt;endl;
+	return 0;
+}
+
+acwing1087
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N=100010,INF=0x3f3f3f3f;
+LL f[N];
+int n,k;
+int e[N];
+LL s[N];
+int q[N];
+
+int main()
+{
+    cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;k;
+    
+    for(int i=1;i&amp;lt;=n;i++)
+        cin&amp;gt;&amp;gt;e[i];
+        
+    for(int i=1;i&amp;lt;=n;i++)
+    	s[i]=s[i-1]+e[i];
+    
+    int hh=0,tt=-1;
+    q[++tt]=0;
+    for(int i=1;i&amp;lt;=n;i++)
+    {
+    	if(hh &amp;lt;= tt &amp;amp;&amp;amp; i-q[hh] &amp;gt; k) hh++;
+    	
+    	f[i]=f[q[hh]-1]-s[q[hh]]+s[i];
+    	while(hh &amp;lt;= tt &amp;amp;&amp;amp; f[i-1]-s[i] &amp;gt;= f[q[tt]-1] -s[q[tt]])
+    		tt--;
+    	q[++tt]=i;
+	}
+	
+	LL res=-1e18;
+	for(int i=n-k;i&amp;lt;=n;i++)
+	    res=max(res,f[i]);
+	cout&amp;lt;&amp;lt;res&amp;lt;&amp;lt;endl;
+	return 0;
+}
+
+acwing1091
+先用滑动窗口+单调队列求出每一行长度为k的连续序列中的最大值、最小值，
+存到rmin[i][j],rmax[i][j]两个数组里，
+再用相同的方法求这两个数组中每一列长度为k的连续序列的最大值、最小值存到cmin[i],cmax[i]中。
+遍历cmin,cmax得出答案。
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=1010,INF=0x3f3f3f3f;
+int n,m,k;
+int a[N][N];
+int rmax[N][N],rmin[N][N];
+int cmax[N],cmin[N];
+int tmp[N];
+int q[N];
+
+void get(int a[],int b[],int len,int type)//0:最小值，1：最大值 
+{
+    int hh=0,tt=-1;
+    for(int i=1;i&amp;lt;=len;i++)
+    {
+        if(hh &amp;lt;= tt &amp;amp;&amp;amp; i-q[hh] &amp;gt;=k) hh++;
+        while(hh &amp;lt;= tt &amp;amp;&amp;amp;(type?a[q[tt]]&amp;lt;=a[i]:a[q[tt]]&amp;gt;=a[i]))
+            tt--;
+        q[++tt]=i;
+        b[i]=a[q[hh]];
+    }
+}
+
+int main()
+{
+    scanf(&amp;quot;%d%d%d&amp;quot;,&amp;amp;n,&amp;amp;m,&amp;amp;k);
+
+    for(int i=1;i&amp;lt;=n;i++)
+        for(int j=1;j&amp;lt;=m;j++)
+            scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i][j]);
+
+    for(int i=1;i&amp;lt;=n;i++)
+    {
+        get(a[i],rmin[i],m,0);
+        get(a[i],rmax[i],m,1);
+    }
+
+    int ans=INF;
+    for(int i=k;i&amp;lt;=m;i++)
+    {
+        for(int j=1;j&amp;lt;=n;j++) tmp[j]=rmin[j][i];
+        get(tmp,cmin,n,0);
+
+        for(int j=1;j&amp;lt;=n;j++) tmp[j]=rmax[j][i];
+        get(tmp,cmax,n,1);
+
+        for(int j=k;j&amp;lt;=n;j++)
+            ans=min(ans,cmax[j]-cmin[j]);
+    }
+
+    printf(&amp;quot;%d\n&amp;quot;,ans);
+
+    return 0;   
+}
+
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://caifxh.github.io/post/dan-diao-dui-lie-you-hua-dp/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+            <article class="post i-card">
+                <h2 class="post-title">
+                    <a href="https://caifxh.github.io/post/xian-xing-dp/">
+                        线性dp
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2020-03-26</time>
+                    
+                        <a href="https://caifxh.github.io/tag/Iu6lDT60Hd/" class="post-tag i-tag
+                            i-tag-success">
+            #DP
+        </a>
+                        
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            
+多阶段决策问题
+有一类活动的过程，可以分成若干个互相联系的阶段，在它的每一阶段都需要作出决策，从而使整个过程达到最好的活动效。
+当然，各个阶段的决策的选取不是任意确定的，它依赖于当前的状态，又会影响以后的发展。
+当各个阶段决策决定后，就组成一个决策序列，因而也就确定了整个过程的一条活动路线。
+这种把一个问题看做是一个前后关联、具有链状结构的多阶段过程就称为多阶段决策过程，这种问题就称为多阶段决策问题。
+各个阶段采取的决策， 一般来说是与阶段有关的。
+决策依赖于当前的状态，又随即引起状态的转移。
+一个决策序列就是在变化的状态中产生出来的。
+称这种解决多阶段决策最优化的过程为动态规划（DP）。
+动态规划（Dynamic Programming）程序设计是对解最优化问题的一种途径、一种方法，而不是一种特殊算法。
+由于各种问题的性质不同，确定最优解的条件也互不相同，因此不存在一种万能的动态规划算法可以解决各类最优化问题。
+常见的 DP 类型有：
+线性模型
+区间 DP
+背包 DP
+数位 DP
+状态压缩 DP
+树状 DP
+常见的 DP 优化方法有：
+滚动数组优化
+矩阵乘法优化
+斜率优化
+四边形不等式优化
+决策单调性优化
+数据结构优化
+动态规划的基本概念
+1.阶段和阶段变量
+将问题的全过程恰当地分成若干个相互联系的阶段。
+阶段的划分一般根据时间和空间的自然特征去划分。
+阶段的划分要便于把问题转化成多阶段决策问题。
+2.状态和状态变量
+通常一个阶段包含若干状态。
+状态可由变量来描述。
+3.决策、决策变量和决策允许集合。
+在对问题的处理中作出的每种选择性的行动就是决策。
+即从该阶段的每一个状态出发， 通过一次选择性的行动转移至下一阶段的相应状态。
+一个实际问题可能需要有多次决策和多个决策点，在每一个阶段的每一个状态中都需要有一次决策，
+决策也可以用变量来描述，称这种变量为决策变量。
+在实际问题中，决策变量的取值往往限制在某一个范围之内，此范围就称为决策允许集合。
+4.策略和最优策略
+所有阶段一次排列构成问题的全过程。
+全过程中各阶段决策变量所组成的有序总体称为策略。
+在实际问题中，从决策允许集合中找出最优效果的策略称为最优策略。
+5.状态转移方程
+前一阶段的终点就是后一阶段的起点，对前一阶段的状态做出某种决策，产生后一种阶段的状态，这种关系描述了从 i
+阶段到 i+1 阶段状态的演变规律，称为状态转移方程。
+从 n 个数中取出 k 个数，使得他们的和最大。
+f[i][j] 表示现在考虑到了第 i 个数，已经选出了 j 个数。
+阶段：枚举到第i个数
+状态：已经选出了 j 个数。
+决策：第i个数选或不选
+策略：和最大
+状态转移方程：f[i][j]=max(f[i-1][j],f[i-1][j-1]+a[i])
+动态规划的性质
+什么样的“多阶段决策问题”才可以用动态规划的方法来求解呢？
+
+
+对于不能划分阶段的题，不能用动态规划来解。
+不符合最优化原理，不能用动态规划来解。
+不具备无后效性原则的，不能用动态规划来解。
+误用动态规划解决问题会得到错误的结果
+动态规划设计方法
+正推：从初始状态开始，通过对中间阶段的决策的选择，达到结束状态。我们也称递推。
+倒推：从结束状态开始，通过对中间阶段的决策的选择，达到开始状态。我们可以把这种方法看成记忆化搜索。
+动态规划设计方法的一般模式
+
+划分阶段
+确定状态和状态变量
+确定决策并写出状态转移方程
+寻找边界条件
+设计并实现程序
+
+动态规划与记忆化搜索
+实现一个函数，用“搜索”的方法实现 DP 的更新。
+通常用于解决转移顺序不方便人为确定的 DP。
+数字三角形
+5
+7
+3 8
+8 1 0
+2 7 4 4
+4 5 2 6 5
+设 f[i][j] 表示走到了第 i 行第 j 列的最大值。
+正常 DP：
+f[i][j] = max(f[i – 1][j], f[i – 1][j – 1]) + a[i][j]
+搜索：
+int dp(int i, int j)
+{
+if (i == 0) return 0;
+    return a[i][j] + max(dp(i - 1, j), dp(i - 1, j - 1));
+}
+
+这样有很多状态其实会重复计算。
+对于计算过的 dp(i, j)，我们用 f[i][j] 来存。
+f 初始化为 -1
+记忆化搜索：
+int dp(int i, int j){
+    if (i == 0) return 0;
+    if (f[i][j] &amp;gt;= 0) return f[i][j];
+    f[i][j] = a[i][j] + max(dp(i - 1, j), dp(i - 1, j - 1));
+    return f[i][j];
+}
+
+acwing901
+一个人可以从某个点滑向上下左右相邻四个点之一，当且仅当高度减小。
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=310;
+int h[N][N];
+int f[N][N];
+int n,m;
+int dx[4]={-1,0,1,0},dy[4]={0,-1,0,1};
+
+int dp(int x,int y)
+{
+    if(f[x][y]!=-1)
+        return f[x][y];
+    
+    f[x][y]=1;
+    for(int i=0;i&amp;lt;4;i++)
+    {
+        int a=x+dx[i],b=y+dy[i];
+        if(a&amp;gt;=1 &amp;amp;&amp;amp; a&amp;lt;=n &amp;amp;&amp;amp; b&amp;gt;=1 &amp;amp;&amp;amp; b&amp;lt;=m &amp;amp;&amp;amp; h[x][y]&amp;gt;h[a][b])
+            f[x][y]=max(f[x][y],dp(a,b)+1);
+    }
+    return f[x][y];
+}
+
+int main()
+{
+    scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;m);
+    for(int i=1;i&amp;lt;=n;i++)
+        for(int j=1;j&amp;lt;=m;j++)
+            scanf(&amp;quot;%d&amp;quot;,&amp;amp;h[i][j]);
+    memset(f,-1,sizeof f);
+    
+    int res=0;    
+    for(int i=1;i&amp;lt;=n;i++)
+        for(int j=1;j&amp;lt;=m;j++)
+            res=max(res,dp(i,j));
+    printf(&amp;quot;%d\n&amp;quot;,res);
+    return 0;
+}
+
+线性模型
+这里的线性指的是状态的排布是呈线性的。
+
+最长上升子序列问题。
+f[i] 表示以 a[i] 结尾的最长上升子序列问题。
+计算 f[i] 的时候，只需要去考虑 f[1], f[2], …, f[i-1] 看是否能够转移即可。
+f[i] = max{ f[j] + 1 | 1≤j&amp;lt;i, a[j]&amp;lt;a[i] }
+
+贪心思想，数越小形成的最长上升子序列长度可能越大。
+#include&amp;lt;cstdio&amp;gt;//最长上升子序列，优化算法，时间复杂度O(nlogn)
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int maxn=100010;
+int d[maxn];//d[]表示从最长上升序列的元素
+int a[maxn];
+
+int main()
+{
+    int n;
+	scanf(&amp;quot;%d&amp;quot;,&amp;amp;n);
+	for(int i=1;i&amp;lt;=n;i++)
+		scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]);
+    int len=1;
+    d[1]=a[1];
+    for(int i=2;i&amp;lt;=n;i++)
+	{
+		if(a[i] &amp;gt; d[len])
+            d[++len]=a[i];
+        else//a[i]覆盖d[]中第一个大于a[i]的数 
+        	*lower_bound(d+1,d+len+1,a[i])=a[i];
+    }
+    printf(&amp;quot;%d\n&amp;quot;,len);
+    return 0;
+}
+
+如果题目要求严格递增，则必须用lower_bound，因为要替换掉相同的元素而不是增长序列。
+如果题目要求最长不下降子序列，则必须用 upper_bound。
+int len=1;
+        d[1]=b[1];
+
+        for(int i=2;i&amp;lt;=n;i++)
+        {
+            if(b[i] &amp;gt;= d[len])
+                d[++len]=b[i];
+            else
+                *upper_bound(d+1,d+len+1,b[i])=b[i];
+        }
+
+poj3486
+你想保证 n 年中你都有一台电脑，一开始你有一台。
+如果你在第 y (1≤y≤n) 年购买了一台电脑，那么你需要花费 c的代价。
+如果你这台电脑一直用到了第 z 年，在第 z 年又买了一台新的，您需要在您拥有该计算机的每一年中支付维护成本m（y，z）
+给定 n，c，数组 m。求最小花费
+首先划分阶段。
+每一年可以划分为一个阶段。
+f[i] 表示直到第 i 年f[0], f[1],…,f[i-1]你手里都有一台电脑的最小花费。
+f[i] 需要从 转移过来。
+如何转移？
+枚举上一次买电脑是哪一年
+假设上一次买电脑是第 j 年。
+那么1~j-1年就是一个子问题，我们已经算出了 f[j-1] 是满足
+这个子问题的最优解，后面我们就不用考虑前 j-1年的情况，
+且它也不会影响我们后面的决策。
+第 j 年到第 i 年的维修费用是 m(j, i)，花费是 c
+因此可以用 f[j-1]+m(j,i)+c 来更新 f[i]
+f[i] = min{ f[j-1]+m(j,i) + c | 1≤j≤i }
+边界条件：
+f[0] = 0
+f[1], f[2], …, f[n] 一开始都应该初始化为 +∞
+code
+acwing278
+
+hdu1003
+
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int maxn=100005;
+int a[maxn],dp[maxn];//dp[i]表示从start开始到第i个元素的最大子段和 
+int main()
+{
+	int t,n,cas=0;
+	scanf(&amp;quot;%d&amp;quot;,&amp;amp;t);
+	while(t--)
+	{
+		scanf(&amp;quot;%d&amp;quot;,&amp;amp;n);
+		for(int i=1;i&amp;lt;=n;i++)
+			scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]);//也可以省略原数组，直接用dp[] 
+		int l=1,r=1;//记录区间
+		int start=1;//记录起点
+		dp[1]=a[1];
+		
+		int ans=dp[1];
+		for(int i=2;i&amp;lt;=n;i++)
+		{
+            if(dp[i-1]&amp;gt;=0)//dp[i-1]大于等于0，则累加，否则重新开始 
+                dp[i]=dp[i-1]+a[i];
+            else
+            {
+            	dp[i]=a[i];
+            	start=i;//重新开始
+			}	
+            if(dp[i]&amp;gt;ans)//更新最值
+            {
+            	ans=dp[i];
+				l=start;
+         	    r=i;
+            }
+		}
+		if(cas)
+			printf(&amp;quot;\n&amp;quot;);
+		printf(&amp;quot;Case %d:\n&amp;quot;,++cas);
+		printf(&amp;quot;%d %d %d\n&amp;quot;,ans,l,r);
+	}
+	return 0;
+}
+
+poj2479
+
+
+
+
+因为我们会从左到右枚举每一个lt[i],当然更新一遍lt[i]也没有错。
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int maxn=50010;
+const int inf=0x3f3f3f3f;
+int lt[maxn],rt[maxn];//lt[i]表示从左端开始，以i结尾的子段和最大值 
+int a[maxn];
+ 
+int main()
+{
+	int t,n;
+	scanf(&amp;quot;%d&amp;quot;,&amp;amp;t);
+	while(t--)
+	{
+		scanf(&amp;quot;%d&amp;quot;,&amp;amp;n);
+		for(int i=1;i&amp;lt;=n;i++)
+			scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]);
+		lt[1]=a[1];
+		for(int i=2;i&amp;lt;=n;i++)//从左向右 
+			lt[i]=max(a[i],lt[i-1]+a[i]);
+		rt[n]=a[n];
+		for(int i=n-1;i&amp;gt;=1;i--)//从右向左
+			rt[i]=max(a[i],rt[i+1]+a[i]); 
+		for(int i=n-1;i&amp;gt;=1;i--)//更新为从右端开始n..i个元素之中最大连续子段和 
+			rt[i]=max(rt[i+1],rt[i]);
+		int ans=-inf;
+		for(int i=2;i&amp;lt;=n;i++)
+			ans=max(ans,lt[i-1]+rt[i]);
+		printf(&amp;quot;%d\n&amp;quot;,ans);
+	}
+	return 0;
+}
+
+poj2250
+
+code
+acwing1018
+用f[i][j]表示当前在从（1,1）第i行第j列的最小费用；
+我们的状态转移方程就是：f[i][j]=min(f[i-1][j],f[i][j-1])+a[i][j]。
+#include &amp;lt;bits/stdc++.h&amp;gt;
+using namespace std;
+const int N=109;
+int n;
+int g[N][N];
+int f[N][N];
+
+int main()
+{
+    memset(f, 0x3f ,sizeof f);
+
+    scanf(&amp;quot;%d&amp;quot;, &amp;amp;n);
+
+    for(int i=1;i&amp;lt;=n;i++)
+        for(int j=1;j&amp;lt;=n;j++)
+            scanf(&amp;quot;%d&amp;quot;,&amp;amp;g[i][j]);
+
+    for(int i=1;i&amp;lt;=n;i++)
+        for(int j=1;j&amp;lt;=n;j++)        
+            if(i==1 &amp;amp;&amp;amp; j==1)
+                f[i][j]=g[i][j];
+            else 
+            {
+                if(i&amp;gt;1)
+                    f[i][j]=min(f[i][j],f[i-1][j]+g[i][j]);
+                if(j&amp;gt;1)
+                    f[i][j]=min(f[i][j],f[i][j-1]+g[i][j]);
+            }
+
+    printf(&amp;quot;%d\n&amp;quot;, f[n][n]);
+    
+    return 0;
+}
+
+acwing1027
+
+#include&amp;lt;iostream&amp;gt;
+using namespace std;
+const int N=13;
+int n;
+int g[N][N];
+int f[N][N][N*2];
+
+int main()
+{
+    cin&amp;gt;&amp;gt;n;
+    int a,b,c;
+    while(cin&amp;gt;&amp;gt;a&amp;gt;&amp;gt;b&amp;gt;&amp;gt;c &amp;amp;&amp;amp; a)
+        g[a][b]=c;
+
+    for(int i1=1;i1&amp;lt;=n;i1++)
+        for(int i2=1;i2&amp;lt;=n;i2++)
+            for(int k=2;k&amp;lt;=2*n;k++)
+            {
+                int j1=k-i1,j2=k-i2;
+                int &amp;amp;x=f[i1][i2][k];
+                int t=g[i1][j1]+g[i2][j2];
+                if(j1&amp;gt;=1 &amp;amp;&amp;amp; j1&amp;lt;=n &amp;amp;&amp;amp; j2&amp;gt;=1 &amp;amp;&amp;amp; j2&amp;lt;=n)
+                {
+                    if(i1 == i2)    
+                        t/=2;
+                    x=max(x,f[i1-1][i2][k-1]);
+                    x=max(x,f[i1][i2-1][k-1]);
+                    x=max(x,f[i1][i2][k-1]);
+                    x=max(x,f[i1-1][i2-1][k-1]);
+                    x+=t;
+                }
+            }
+    cout&amp;lt;&amp;lt;f[n][n][n*2]&amp;lt;&amp;lt;endl;
+    return 0;
+    
+}
+
+如果用两次的动规取每次的最大值，其实是贪心的思想，因为分别跑时并没有考虑到另一次的路程。所以这种只是具体过程中用的是动态规划而已（下面的简单例子即可说明为何不行）：
+0 3 5
+2 6 0
+0 4 0
+第一次求最大值的话，是0-&amp;gt;3-&amp;gt;6-&amp;gt;4-&amp;gt;0
+第二次求最大值的话，是0-&amp;gt;3（已经被去掉了，为了方便看）-&amp;gt;5-&amp;gt;0-&amp;gt;0
+合起来是18，而实际答案应该是20：
+第一次：0-&amp;gt;3-&amp;gt;5-&amp;gt;0-&amp;gt;0
+第二次：0-&amp;gt;2-&amp;gt;6-&amp;gt;4-&amp;gt;0
+所以这题其实是经典的思维DP，我们用数组dp[i][j][k][l]表示第一次走到(i,j)时和第二次走到(k,l)时的最大值能取到多少。
+acwing275
+#include&amp;lt;iostream&amp;gt;
+using namespace std;
+const int N=55;
+int n,m;
+int g[N][N];
+int f[N&amp;lt;&amp;lt;1][N][N];
+
+int main()
+{
+    cin&amp;gt;&amp;gt;m&amp;gt;&amp;gt;n;
+    for(int i=1;i&amp;lt;=m;i++)   
+        for(int j=1;j&amp;lt;=n;j++)
+            cin&amp;gt;&amp;gt;g[i][j];
+
+    for(int k=1;k&amp;lt;=n+m;k++)
+        for(int i=1;i&amp;lt;=m;i++)   
+            for(int j=1;j&amp;lt;=m;j++)
+            {
+                int a=k-i,b=k-j;
+                if(a&amp;gt;=1 &amp;amp;&amp;amp; a&amp;lt;=n &amp;amp;&amp;amp; b&amp;gt;=1 &amp;amp;&amp;amp; b&amp;lt;=n)
+                {
+                    int t=g[i][a]+g[j][b];
+                    if(i == j) t/=2;
+                    f[k][i][j]=max(f[k][i][j],f[k-1][i-1][j]);
+                    f[k][i][j]=max(f[k][i][j],f[k-1][i][j-1]);
+                    f[k][i][j]=max(f[k][i][j],f[k-1][i][j]);
+                    f[k][i][j]=max(f[k][i][j],f[k-1][i-1][j-1]);
+                    f[k][i][j]+=t;
+                }
+            }
+    cout&amp;lt;&amp;lt;f[n+m][m][m]&amp;lt;&amp;lt;endl;
+    return 0;
+
+}
+
+acwing1019
+确定滑行方向后就转化为了LIS问题,原问题相当于正向和反向以ai为结尾的最长上升子序列长度，
+分别正向和反向各进行一次LIS，取得最大值即可。
+O(n2)O(n^2)O(n2)
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int N=110;
+int q[N];
+int f[N];
+
+int main()
+{
+    int t;
+    cin&amp;gt;&amp;gt;t;
+    while(t--)
+    {
+        int n;
+        cin&amp;gt;&amp;gt;n;
+        for(int i=1;i&amp;lt;=n;i++)
+            cin&amp;gt;&amp;gt;q[i];
+        int res=0;
+        for(int i=1;i&amp;lt;=n;i++)
+        {
+            f[i]=1;
+            for(int j=1;j&amp;lt;=i;j++)
+                if(q[j]&amp;lt;q[i])
+                    f[i]=max(f[i],f[j]+1);
+            res=max(res,f[i]);
+        }
+
+        for(int i=n;i;i--)
+        {
+            f[i]=1;
+            for(int j=n;j&amp;gt;i;j--)
+                if(q[j]&amp;lt;q[i])
+                    f[i]=max(f[i],f[j]+1);
+            res=max(res,f[i]);
+        }
+        cout&amp;lt;&amp;lt;res&amp;lt;&amp;lt;endl;
+    }
+}
+
+O(nlogn)O(nlogn)O(nlogn)
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int N=110;
+int d[N];
+int a[N];
+int n;
+
+int main()
+{
+    int T;
+    cin&amp;gt;&amp;gt;T;
+    while(T--)
+    {
+        scanf(&amp;quot;%d&amp;quot;,&amp;amp;n);
+        
+        for(int i=1;i&amp;lt;=n;i++)
+            scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]);
+
+        int res=0;
+        int len=1;
+        d[1]=a[1];
+        for(int i=2;i&amp;lt;=n;i++)
+        {
+            if(a[i] &amp;gt; d[len])
+                d[++len]=a[i];
+            else 
+                *lower_bound(d+1,d+len+1,a[i])=a[i];
+        }
+    
+        res=max(res,len);
+        
+        len=1;
+        d[1]=a[n];
+        for(int i=n-1;i;i--)
+        {
+            if(a[i] &amp;gt; d[len])
+                d[++len]=a[i];
+            else 
+                *lower_bound(d+1,d+len+1,a[i])=a[i];
+        }
+        
+        res=max(res,len);
+        
+        cout&amp;lt;&amp;lt;res&amp;lt;&amp;lt;endl;
+    }
+    return 0;
+}
+
+acwing1014
+
+acwing1012
+
+
+航道交叉也就是a1&amp;gt;=a2&amp;amp;b1&amp;lt;=b2(其中a，b表示两岸)
+将一岸升序排序，另一岸找最长上升子序列
+
+O(n2)O(n^2)O(n2)
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+#define x first
+#define y second
+typedef pair&amp;lt;int,int&amp;gt; PII;
+const int N=5010;
+PII a[N];
+int f[N];
+int n;
+
+int main()
+{
+	cin&amp;gt;&amp;gt;n;
+	
+	for(int i=1;i&amp;lt;=n;i++)
+		cin&amp;gt;&amp;gt;a[i].x&amp;gt;&amp;gt;a[i].y;
+	
+	sort(a+1,a+n+1);
+	
+	int res=0;
+	for(int i=1;i&amp;lt;=n;i++)
+	{
+		f[i]=1;
+		for(int j=1;j&amp;lt;i;j++)
+			if(a[j].y &amp;lt; a[i].y)
+				f[i]=max(f[i],f[j]+1);
+		res=max(res,f[i]);	
+	}
+	
+	cout&amp;lt;&amp;lt;res&amp;lt;&amp;lt;endl;
+	
+	return 0;
+}
+
+O(nlogn)O(nlogn)O(nlogn)
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+#define x first
+#define y second
+typedef pair&amp;lt;int,int&amp;gt; PII;
+const int N=5010;
+PII a[N];
+int d[N];
+int n;
+
+int main()
+{
+	cin&amp;gt;&amp;gt;n;
+	
+	for(int i=1;i&amp;lt;=n;i++)
+		cin&amp;gt;&amp;gt;a[i].x&amp;gt;&amp;gt;a[i].y;
+	
+	sort(a+1,a+n+1);
+	
+	int len=1;
+	d[1]=a[1].y;
+	for(int i=2;i&amp;lt;=n;i++)
+	{
+		if(a[i].y &amp;gt; d[len])
+			d[++len]=a[i].y;
+		else 
+			*lower_bound(d+1,d+len+1,a[i].y)=a[i].y;
+	}
+	
+	cout&amp;lt;&amp;lt;len&amp;lt;&amp;lt;endl;
+	
+	return 0;
+}
+
+最大上升子序列和 状态表示：
+f[i] 表示前i个数中的最大子序列和
+状态转移：
+对于每一个小于a[i]的a[j] (j &amp;lt; i) f[i] = max(f[i], f[j] + a[i])
+#include&amp;lt;iostream&amp;gt;
+using namespace std;
+const int N=1010;
+int q[N];
+int f[N];
+
+int main()
+{
+    int n;
+    cin&amp;gt;&amp;gt;n;
+    for(int i=0;i&amp;lt;n;i++)
+        cin&amp;gt;&amp;gt;q[i];
+    
+    int res=0;
+    for(int i=0;i&amp;lt;n;i++)
+    {
+        f[i]=q[i];
+        for(int j=0;j&amp;lt;i;j++)
+            if(q[j]&amp;lt;q[i])
+                f[i]=max(f[i],f[j]+q[i]);
+        res=max(res,f[i]);
+    }
+    cout&amp;lt;&amp;lt;res&amp;lt;&amp;lt;endl;
+    return 0;
+}
+
+acwing1010
+1、对于问一直接用O（n*logn）的方法求最长不升子序列即可。
+2、对于问二求整个数列的最长上升子序列即可。证明如下：
+（1）假设打导弹的方法是这样的：取任意一个导弹，从这个导弹开始将能打的导弹全部打完。而这些导弹全部记为为同一组，再在没打下来的导弹中任选一个重复上述步骤，直到打完所有导弹。
+（2）假设我们得到了最小划分的K组导弹，从第a(1&amp;lt;=a&amp;lt;=K)组导弹中任取一个导弹，必定可以从a+1组中找到一个导弹的高度比这个导弹高（因为假如找不到，那么它就是比a+1组中任意一个导更高，在打第a组时应该会把a+1组所有导弹一起打下而不是另归为第a+1组），同样从a+1组到a+2组也是如此。那么就可以从前往后在每一组导弹中找一个更高的连起来，连成一条上升子序列，其长度即为K;
+（3）设最长上升子序列长度为P，则有K&amp;lt;=P;又因为最长上升子序列中任意两个不在同一组内(否则不满足单调不升)，则有
+P&amp;gt;=K，所以K=P。
+Dilworth定理的大概意思：不下降子序列最小个数等于最大上升子序列的长度。
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;sstream&amp;gt;
+using namespace std;
+const int N=100010;
+int a[N];
+int d1[N],d2[N];
+int n;
+
+int main()
+{
+	string s;
+	getline(cin,s);
+	stringstream ss(s);
+	
+	while(ss&amp;gt;&amp;gt;a[n]) n++;
+	
+	int len1=1,len2=1;
+	d1[1]=d2[1]=a[0];
+	
+	for(int i=1;i&amp;lt;n;i++)
+	{
+		if(a[i] &amp;lt;= d1[len1]) d1[++len1]=a[i];
+		else *upper_bound(d1+1,d1+len1+1,a[i],greater&amp;lt;int&amp;gt;())=a[i];
+		
+		if(a[i] &amp;gt; d2[len2]) d2[++len2]=a[i];
+		else *lower_bound(d2+1,d2+len2+1,a[i])=a[i];
+	}
+	
+	cout&amp;lt;&amp;lt;len1&amp;lt;&amp;lt;endl&amp;lt;&amp;lt;len2&amp;lt;&amp;lt;endl;
+	
+	return 0;
+}
+
+P1140
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+const int N=110,INF=0x3f3f3f3f;
+int w[5][5]={
+    {5,-1,-2,-1,-3},
+    {-1,5,-3,-2,-4},
+    {-2,-3,5,-2,-2},
+    {-1,-2,-2,5,-1},
+    {-3,-4,-2,-1,0}
+};
+int f[N][N];
+char sa[N],sb[N];
+int a[N],b[N];
+int n,m;
+
+int get(char c)
+{
+	if(c == &#39;A&#39;) return 0;
+	else if(c == &#39;C&#39;) return 1;
+	else if(c == &#39;G&#39;) return 2;
+	else return 3;
+}
+
+int main()
+{
+	cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;sa+1;
+	cin&amp;gt;&amp;gt;m&amp;gt;&amp;gt;sb+1;
+	
+	for(int i=1;i&amp;lt;=n;i++)
+		a[i]=get(sa[i]);
+	for(int i=1;i&amp;lt;=m;i++)
+		b[i]=get(sb[i]);
+		
+	for(int i=1;i&amp;lt;=n;i++)
+		for(int j=1;j&amp;lt;=m;j++)
+			f[i][j]=-INF;
+	f[0][0]=0;
+	for(int i=1;i&amp;lt;=n;i++)
+		f[i][0]=f[i-1][0]+w[a[i]][4];
+	for(int i=1;i&amp;lt;=m;i++)
+		f[0][i]=f[0][i-1]+w[4][b[i]];
+	
+	for(int i=1;i&amp;lt;=n;i++)
+		for(int j=1;j&amp;lt;=m;j++)
+		{
+			f[i][j]=max(f[i][j],f[i][j-1]+w[4][b[j]]);
+			f[i][j]=max(f[i][j],f[i-1][j]+w[a[i]][4]);
+			f[i][j]=max(f[i][j],f[i-1][j-1]+w[a[i]][b[j]]);
+		}
+	
+	printf(&amp;quot;%d\n&amp;quot;,f[n][m]);
+		
+	return 0;
+}
+
+P1508
+【题目分析】
+一个人从最后一行中间那个点的下方开始每一次都吃正前方，左前方和右前方的食物,求一直吃到第一行能够吃到的最多能量是多少
+首先李大水牛一开始在最后一行的中间的下方故： 我么需要的答案为最后一行中间三个的最大值（及 max(dp[n][m/2+1],max(dp[n][m/2],dp[n][m/2+2])); ）
+其次是递归公式 这是一个二维dp，dp公式是该值是他的左上、正上、右上的dp结果的最大值+自身（及 dp[i][j]=max(max(dp[i-1][j],dp[i-1][j+1]),dp[i-1][j-1])+dp[i][j]; ）
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+const int N=1010;
+int f[N][N];
+int a[N][N];
+int n,m;
+
+int main()
+{
+	cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m;
+	
+	for(int i=1;i&amp;lt;=n;i++)
+		for(int j=1;j&amp;lt;=m;j++)
+			cin&amp;gt;&amp;gt;a[i][j];
+			
+	int sx=n+1,sy=m/2+1;
+	
+	for(int i=1;i&amp;lt;=n;i++)
+		for(int j=1;j&amp;lt;=m;j++)
+			f[i][j]=max(f[i-1][j],max(f[i-1][j-1],f[i-1][j+1]))+a[i][j];
+	
+	cout&amp;lt;&amp;lt;max(f[sx-1][sy],max(f[sx-1][sy-1],f[sx-1][sy+1]));
+	
+	return 0;
+}
+
+P1280
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;vector&amp;gt;
+using namespace std;
+const int N=10010;
+int f[N];
+vector&amp;lt;int&amp;gt; v[N];
+int n,k;
+
+int main()
+{
+	cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;k;
+	
+	for(int i=0;i&amp;lt;k;i++)
+	{
+		int s,t;
+		cin&amp;gt;&amp;gt;s&amp;gt;&amp;gt;t;
+		v[s].push_back(t);
+	}
+	
+	for(int i=n;i;i--)
+	{
+		if(v[i].size())
+			for(int j=0;j&amp;lt;v[i].size();j++)
+				f[i]=max(f[i],f[i+v[i][j]]);
+		else 
+			f[i]=f[i+1]+1;
+	}
+	
+	printf(&amp;quot;%d&amp;quot;,f[1]);
+	
+	return 0;
+}
+
+P1387
+题意：
+在一个n*m的只包含0和1的矩阵里找出一个不包含0的最大正方形，输出边长。
+题解：
+状态转移方程
+if(mp[i][j]==1){
+dp[i][j]=min(min(dp[i-1][j],dp[i][j-1]),dp[i-1][j-1])+1;
+}
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=110;
+int a[N][N];
+int f[N][N];
+int n,m;
+
+int main()
+{
+	cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m;
+	
+	for(int i=1;i&amp;lt;=n;i++)
+		for(int j=1;j&amp;lt;=m;j++)
+			scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i][j]);
+	
+	int ans=0;
+	for(int i=1;i&amp;lt;=n;i++)
+		for(int j=1;j&amp;lt;=m;j++)
+		{
+			if(a[i][j] == 1)
+				f[i][j]=min(min(f[i-1][j],f[i][j-1]),f[i-1][j-1])+1;
+			ans=max(ans,f[i][j]);	
+		}	
+	
+	cout&amp;lt;&amp;lt;ans&amp;lt;&amp;lt;endl;
+	
+	return 0;
+}
+
+P2062
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=1e6+10;
+int a[N];
+int f[N],g[N];
+int n;
+
+int main()
+{
+	cin&amp;gt;&amp;gt;n;
+	
+	for(int i=1;i&amp;lt;=n;i++) scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]);
+
+	sort(a+1,a+n+1);
+
+	for(int i=1;i&amp;lt;=n;i++)
+	{
+		if(i &amp;gt;= a[i]) f[i]=g[i-a[i]]+1;
+		g[i]=max(g[i-1],f[i]);
+	}
+	
+	cout&amp;lt;&amp;lt;f[n]&amp;lt;&amp;lt;endl;
+	
+	return 0;
+}
+
+P1108
+1.由于数据是5000的，而且需要统计方案数，所以我们对于第一个问题直接用个O(n^2)的最长下降子序列搞一搞就好了。
+用f数组保存以第i个数字为结尾的最长下降序列的长度。
+2.对于第2问，
+有一个变种（比本题较为简单）：就是不去重的方案数。那么我们考虑维护另一个g数组
+令g[i]表示以第i个数字为结尾的最长序列的个数，我们在1...i-1找到所有的满足a[j]&amp;gt;a[i]并且f[j]+1==f[i]，这样就说明i可以由j转移过来，那么我们把g[i]+=g[j]就好了，对于所有f[i]==1的，g[i]直接赋成1就好了。
+然后我们再来考虑本题。
+我们考虑一下什么样的方案是重复的？就是有同一个数字的。并且这个数字在同一个位置上。
+转化成程序语言就是假设枚举到一个i时，存在一个j使得a[i]==a[j] &amp;amp;&amp;amp; f[i]==f[j]，那么这个i与j显然就是完全等效的了，我们只需要一个，而i&amp;gt;j，所以直接把g[j]赋成0（直接去掉这个方案）就可以了。
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+const int N=5010;
+typedef long long LL;
+int a[N];
+int f[N],g[N];
+int n;
+
+int main()
+{
+	cin&amp;gt;&amp;gt;n;
+	
+	for(int i=1;i&amp;lt;=n;i++)
+		cin&amp;gt;&amp;gt;a[i];
+	
+	int ans=0;
+	for(int i=1;i&amp;lt;=n;i++)
+	{
+		f[i]=1;
+		for(int j=1;j&amp;lt;i;j++)
+			if(a[i] &amp;lt; a[j]) 
+				f[i]=max(f[i],f[j]+1);
+		ans=max(ans,f[i]);
+	}
+	
+	cout&amp;lt;&amp;lt;ans&amp;lt;&amp;lt;&#39; &#39;;
+	
+	int res=0;
+	for(int i=1;i&amp;lt;=n;i++)
+	{
+		if(f[i] == 1) g[i]=1;
+		for(int j=1;j&amp;lt;i;j++)
+			if(f[i] == f[j]+1 &amp;amp;&amp;amp; a[i] &amp;lt; a[j]) g[i]+=g[j];
+			else if(f[i] == f[j] &amp;amp;&amp;amp; a[i] == a[j]) g[j]=0;
+		
+	}
+	
+	for(int i=1;i&amp;lt;=n;i++)
+		if(f[i] == ans) res+=g[i];
+	
+	cout&amp;lt;&amp;lt;res&amp;lt;&amp;lt;endl;
+	
+	return 0;
+}
+
+P1736
+这道题其实和P1387 最大正方形很像，只不过多了一个预处理罢了
+s1[i][j]表示（i，j）最多向左（或右）延伸多少个格子，使这些格子中的数都是0（不包括（i，j））
+s2[i][j]表示（i，j）最多向上延伸多少个格子，使这些格子中的数都是0（不包括（i，j））
+f[i][j]表以（i，j）为右下（左下）角的最大对角线长度
+方程：f[i][j]=min(f[i-1][j-1],min(s1[i][j-1],s2[i-1][j]))+1;
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+const int N=2510;
+int a[N][N];
+int f[N][N];
+int lt[N][N],rt[N][N],up[N][N];
+int n,m;
+
+int main()
+{
+	cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m;
+	
+	int ans=0;
+	for(int i=1;i&amp;lt;=n;i++)
+		for(int j=1;j&amp;lt;=m;j++)
+		{
+			scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i][j]);
+			if(!a[i][j]) lt[i][j]=lt[i][j-1]+1,up[i][j]=up[i-1][j]+1;
+			else f[i][j]=min(f[i-1][j-1],min(lt[i][j-1],up[i-1][j]))+1;
+			
+			ans=max(ans,f[i][j]);
+		}
+	
+	memset(f,0,sizeof f);
+	memset(up,0,sizeof up);
+	
+	for(int i=1;i&amp;lt;=n;i++)
+		for(int j=m;j&amp;gt;=1;j--)
+		{
+			if(!a[i][j]) rt[i][j]=rt[i][j+1]+1,up[i][j]=up[i-1][j]+1;
+			else f[i][j]=min(f[i-1][j+1],min(rt[i][j+1],up[i-1][j]))+1;
+			
+			ans=max(ans,f[i][j]);
+		}
+	
+	cout&amp;lt;&amp;lt;ans&amp;lt;&amp;lt;endl;
+	
+	return 0;
+}
+
+P3089
+f[i][j]表示最后一步跳到点从j点跳到i点的最大价值（状态不能设成f[i]，因为j对后面的决策是有影响的），然后枚举k转移，但这样在时限内是无法通过的，于是考虑如何优化dp，可以改变一下枚举顺序，也就是一般的都是先枚举i再枚举j，可以先枚举j再枚举i，这样有什么好处呢，那么k就以直接用一个指针从j-1扫到1，因为随着i的不断增加，i与j之间的距离是递增的，那么之前合法的决策现在也一定合法，那么就可以用一个值记录最大的f[j][k]，转移即可。然后还要记得正反做两遍。
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int N=1010;
+struct Node
+{
+	int x,p;
+	bool operator&amp;lt;(const Node &amp;amp;W) const 
+	{
+		return x&amp;lt;W.x;
+	}
+}a[N];
+int f[N][N];//前i个，从第j个跳过来 
+int n;
+
+int main()
+{
+	cin&amp;gt;&amp;gt;n;
+	
+	for(int i=1;i&amp;lt;=n;i++) cin&amp;gt;&amp;gt;a[i].x&amp;gt;&amp;gt;a[i].p;
+	
+	sort(a+1,a+n+1);
+	
+	int ans=0;
+	for(int j=1;j&amp;lt;=n;j++)
+	{
+		int k=j-1,val=a[j].p;
+		for(int i=j+1;i&amp;lt;=n;i++)
+		{
+			while(k &amp;amp;&amp;amp; a[i].x - a[j].x &amp;gt;= a[j].x - a[k].x)
+				val=max(val,f[j][k]),k--;
+			f[i][j]=max(f[i][j],val+a[i].p);
+			ans=max(ans,f[i][j]);
+		}
+	}
+	
+	for(int j=n;j&amp;gt;=1;j--)
+	{
+		int k=j+1,val=a[j].p;
+		for(int i=j-1;i&amp;gt;=1;i--)
+		{
+			while(k &amp;lt;= n &amp;amp;&amp;amp; a[j].x - a[i].x &amp;gt;= a[k].x - a[j].x)
+				val=max(val,f[j][k]),k++;
+			f[i][j]=max(f[i][j],val+a[i].p);
+			ans=max(ans,f[i][j]);
+		}	
+	}
+	
+	cout&amp;lt;&amp;lt;ans&amp;lt;&amp;lt;endl;
+	
+	return 0;
+}
+
+P1353
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+const int N=10010,M=510;
+int f[N][M];//前i分钟疲劳度为j 
+int d[N];
+int n,m;
+
+int main()
+{
+	cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m;
+	
+	for(int i=1;i&amp;lt;=n;i++) cin&amp;gt;&amp;gt;d[i];
+	
+	for(int i=1;i&amp;lt;=n;i++)
+	{
+		f[i][0]=max(f[i][0],f[i-1][0]);
+		for(int j=1;j&amp;lt;=min(i,m);j++)
+		{
+			f[i][0]=max(f[i][0],f[i-j][j]);	//休息
+			f[i][j]=max(f[i][j],f[i-1][j-1]+d[i]);//跑步
+		}
+	}
+	
+	cout&amp;lt;&amp;lt;f[n][0]&amp;lt;&amp;lt;endl;
+	
+	return 0;
+}
+
+poj3267
+dp[i]表示从1-&amp;gt;i中最少要删除的字符数量
+状态转移方程：
+1、当匹配到单词时 dp[i] = min(dp[i],dp[l] + r - l - len[k])
+2、当匹配不到单词是 dp[i] = dp[i-1] + 1
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int N=610,M=310;
+char s[N][30];
+char str[M];
+int f[M];
+int n,m;
+
+int main()
+{
+	cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m;
+	cin&amp;gt;&amp;gt;str+1;
+	
+	for(int i=1;i&amp;lt;=n;i++) cin&amp;gt;&amp;gt;s[i]+1;
+	
+	for(int i=1;i&amp;lt;=m;i++)
+	{
+		f[i]=f[i-1]+1;
+		for(int j=1;j&amp;lt;=n;j++)
+		{
+			int l=i,r=i;
+			int len=strlen(s[j]+1);
+			int k=len;
+			for(;k &amp;amp;&amp;amp; l;l--)
+				if(s[j][k] == str[l])
+					k--;
+			
+			if(!k) f[i]=min(f[i],f[l]+i-l-len);
+		}
+	}
+	
+	cout&amp;lt;&amp;lt;f[m]&amp;lt;&amp;lt;endl;
+	return 0;
+}
+
+P2285
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cmath&amp;gt;
+using namespace std;
+const int N=10010;
+int x[N],y[N],t[N];
+int f[N];
+int n,m;
+
+int main()
+{
+	cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m;
+	
+	for(int i=1;i&amp;lt;=m;i++) scanf(&amp;quot;%d%d%d&amp;quot;,t+i,x+i,y+i);
+
+	for(int i=1;i&amp;lt;=m;i++) f[i]=1;
+	
+	int ans=0;	
+	for(int i=1;i&amp;lt;=m;i++)
+	{
+		for(int j=1;j&amp;lt;i;j++)
+			if(abs(x[i]-x[j])+abs(y[i]-y[j]) &amp;lt;= t[i]-t[j])
+				f[i]=max(f[i],f[j]+1);
+		ans=max(ans,f[i]);
+	}
+	
+	cout&amp;lt;&amp;lt;ans&amp;lt;&amp;lt;endl;
+	
+	return 0;
+}
+
+P1107
+a[i][x] 第i棵树高度j上的柿子数量
+f[i][j] 到第i棵树的高度j时所能摘到的最多数量
+如果当前高度j&amp;gt;delta 那么f[i][j]=max(往下走1 f[i][j-1],往其它柱子跳）+当前点的柿子数
+这时枚举k 表示要跳到的其它柱子，注意k不能等于i，方程：f[i][j]=max(f[i][j],f[k][j-delta]);
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int N=2010;
+int a[N][N];
+int f[N][N];//当前在第i根柱子上，处于第j层 
+int n,h,delta;
+
+int main()
+{
+	scanf(&amp;quot;%d%d%d&amp;quot;,&amp;amp;n,&amp;amp;h,&amp;amp;delta);
+	
+	for(int i=1;i&amp;lt;=n;i++)
+	{
+		int k;
+		scanf(&amp;quot;%d&amp;quot;,&amp;amp;k);
+		for(int j=1;j&amp;lt;=k;j++)
+		{
+			int x;
+			scanf(&amp;quot;%d&amp;quot;,&amp;amp;x);
+			a[i][x]++;
+		}
+	}
+	for(int j=1;j&amp;lt;=h;j++)
+		for(int i=1;i&amp;lt;=n;i++)
+		{
+			f[i][j]=f[i][j-1]+a[i][j];
+			for(int k=1;k&amp;lt;=n;k++)
+				if(k != i &amp;amp;&amp;amp; j &amp;gt;= delta)
+					f[i][j]=max(f[i][j],f[k][j-delta]+a[i][j]);
+		}
+	
+	int ans=0;	
+	for(int i=1;i&amp;lt;=n;i++)
+		ans=max(ans,f[i][h]);
+	
+	cout&amp;lt;&amp;lt;ans&amp;lt;&amp;lt;endl;
+	
+	return 0;
+ } 
+
+观察发现，f[i][j]的值为f[k][j−delta]（k不等于i）和f[i][j−1]中的最小值，所以我们不妨把f[i][j]的初值制为f[i][j−1]。用ans[i]代表到高度为i的地方所能摘到的最大数量
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int N=2010;
+int a[N][N];
+int f[N][N];//当前在第i根柱子上，处于第j层 
+int ans[N];
+int n,h,delta;
+
+int main()
+{
+	scanf(&amp;quot;%d%d%d&amp;quot;,&amp;amp;n,&amp;amp;h,&amp;amp;delta);
+	
+	for(int i=1;i&amp;lt;=n;i++)
+	{
+		int k;
+		scanf(&amp;quot;%d&amp;quot;,&amp;amp;k);
+		for(int j=1;j&amp;lt;=k;j++)
+		{
+			int x;
+			scanf(&amp;quot;%d&amp;quot;,&amp;amp;x);
+			a[i][x]++;
+		}
+	}
+	for(int j=1;j&amp;lt;=h;j++)
+		for(int i=1;i&amp;lt;=n;i++)
+		{
+			f[i][j]=f[i][j-1]+a[i][j];
+			if(j &amp;gt;= delta) f[i][j]=max(f[i][j],ans[j-delta]+a[i][j]);
+			ans[j]=max(ans[j],f[i][j]);
+		}
+
+	cout&amp;lt;&amp;lt;ans[h]&amp;lt;&amp;lt;endl;
+	
+	return 0;
+ } 
+
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://caifxh.github.io/post/xian-xing-dp/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+                <!-- 翻页 -->
+                
+                </div>
+                <!--  -->
+                <div class="main-container-middle"></div>
+                <!--  -->
+                <div id="sidebar" class="main-container-right">
+
+                    <!-- 个人信息 -->
+                    
+    <div class="id_card i-card">
+        <div class="id_card-avatar" style="background-image: url(https://caifxh.github.io/images/avatar.png?v=1594530133163)">
+        </div>
+        <h1 class="id_card-title">
+            Gridea
+        </h1>
+        <h2 class="id_card-description">
+            温故而知新
+        </h2>
+        <!--  -->
+        <div class="id_card-sns">
+            <!-- github -->
+            
+                    <!-- twitter -->
+                    
+                            <!-- weibo -->
+                            
+                                    <!-- facebook -->
+                                    
+
+        </div>
+    </div>
+    
+
+                        <!-- 公告栏 -->
+                        
+
+                </div>
+            </div>
+
+
+
+            <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://caifxh.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+    <script>
+        $('#sidebar').stickySidebar({
+            topSpacing: 80,
+            // bottomSpacing: 60
+        });
+    </script>
+</body>
+
 </html>

@@ -1,323 +1,4948 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <title>Gridea</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="Cache-Control" content="no-siteapp"/>
-    <link rel="stylesheet" href="/styles/main.css">
-    <link rel="stylesheet" href="//cdnjs.loli.net/ajax/libs/mdui/0.4.3/css/mdui.min.css">
-    <link rel="stylesheet" href="media/css/index.css">
-    <link rel="stylesheet" href="media/live2d/css/live2d.css" />
-    
-    <style>
-        #centerbg{
-            background-image: url();
-        }
-    </style>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>
+    Gridea
+</title>
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1594530133163">
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://caifxh.github.io/styles/main.css">
+<!-- js -->
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://caifxh.github.io/media/js/jquery.sticky-sidebar.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
 </head>
-<body class=" mdui-loaded">
-<header class="mdui-toolbar mdui-color-theme mdui-appbar-fixed mdui-appbar-scroll-toolbar-hide" style="z-index: 1000">
-    <a href="javascript:;" mdui-drawer="{target: '#left-drawer',overlay:true}" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">menu</i></a>
-    <span class="mdui-typo-title">Gridea</span>
-    <div class="mdui-toolbar-spacer"></div>
-<!--    <a href="javascript:history.go(0);" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
-    <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">more_vert</i></a>
-</header>
-<div class="meteor">
-    <div class="red" style="left:600px;"></div>
-    <div class="orange" style="left:700px;"></div>
-    <div class="yellow" style="left:900px;"></div>
-    <div class="green" style="left:1100px;"></div>
-    <div class="cyan" style="left:1260px;"></div>
-    <div class="blue" style="left:1400px;"></div>
-    <div class="purple" style="left:1500px;"></div>
-    <div class="red" style="left:0px;"></div>
-    <div class="orange" style="left:100px;"></div>
-    <div class="yellow" style="left:300px;"></div>
-    <div class="green" style="left:500px;"></div>
-    <div class="cyan" style="left:660px;"></div>
-    <div class="blue" style="left:800px;"></div>
-    <div class="purple" style="left:900px;"></div>
-    <div class="red" style="left:1200px;"></div>
-    <div class="orange" style="left:1300px;"></div>
-    <div class="yellow" style="left:1500px;"></div>
-    <div class="green" style="left:1700px;"></div>
-    <div class="cyan" style="left:1860px;"></div>
-    <div class="blue" style="left:2000px;"></div>
-    <div class="purple" style="left:2100px;"></div>
-</div>
-<div class="mdui-drawer mdui-color-white mdui-drawer-full-height mdui-drawer-close" id="left-drawer">
-    <ul class="mdui-list">
-        <li class="mdui-subheader">菜单</li>
-        
-        <li class="mdui-list-item mdui-ripple">
-            <a href="/" class="mdui-list-item-content">首页</a>
-        </li>
-        
-        <li class="mdui-list-item mdui-ripple">
-            <a href="/archives" class="mdui-list-item-content">归档</a>
-        </li>
-        
-        <li class="mdui-list-item mdui-ripple">
-            <a href="/tags" class="mdui-list-item-content">标签</a>
-        </li>
-        
-        <li class="mdui-list-item mdui-ripple">
-            <a href="/post/about" class="mdui-list-item-content">关于</a>
-        </li>
-        
-    </ul>
-</div>
 
-<div class="headertop filter-grid" style="height: auto">
-    <figure id="centerbg" class="centerbg" style="">
-        <div class="focusinfo">
-            <div class="header-tou">
-                <a href=">">
-                    <img src="/images/avatar.png">
-                </a>
+<body>
+    <div class="main">
+        <div class="header">
+    <div class="nav">
+        <div class="logo">
+            <a href="https://caifxh.github.io">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1594530133163" alt="">
+            </a>
+            <div class="site-title">
+                <h1>
+                    Gridea
+                </h1>
             </div>
-            <div class="header-info">
-                <p>温故而知新</p>
-            </div>
-            <div class="top-social">
+        </div>
+        <span class="menu-btn fa fa-align-justify"></span>
+        <div class="menu-container">
+            <ul>
                 
-                
-                
-                 
-                
-                
-                
-                
-
-            </div>
+                    
+                            <li>
+                                <a href="/" class="menu">
+                                    首页
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/archives" class="menu">
+                                    归档
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/tags" class="menu">
+                                    标签
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/post/about" class="menu">
+                                    关于
+                                </a>
+                            </li>
+                            
+                                
+            </ul>
         </div>
-    </figure>
-</div>
-<div class="mdui-container">
-    <div class="mdui-row mdui-row-gapless">
-        <div class="k-container">
-            <div class="head_card-offset"></div>
-            <div class="head_card-offset"></div>
-            
-    <div class="mdui-card">
-        <div class="mdui-card-media">
-            <img src="https://caifxh.github.io/media/img/bai.jpg"/>
-            <div class="mdui-card-media-covered">
-                <div class="mdui-card-primary">
-                    <div class="mdui-card-primary-title">线段树（一）单点修改</div>
-                    <div class="mdui-card-primary-subtitle"></div>
-                </div>
-                <div class="mdui-card-actions" style="float:right;">
-                    <a href="https://caifxh.github.io/post/xian-duan-shu-yi-dan-dian-xiu-gai/" class="mdui-btn mdui-ripple mdui-ripple-white">点击查看</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="head_card-offset"></div>
-
-    <div class="mdui-card">
-        <div class="mdui-card-media">
-            <img src="https://caifxh.github.io/media/img/bai.jpg"/>
-            <div class="mdui-card-media-covered">
-                <div class="mdui-card-primary">
-                    <div class="mdui-card-primary-title">AC自动机</div>
-                    <div class="mdui-card-primary-subtitle"></div>
-                </div>
-                <div class="mdui-card-actions" style="float:right;">
-                    <a href="https://caifxh.github.io/post/ac-zi-dong-ji/" class="mdui-btn mdui-ripple mdui-ripple-white">点击查看</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="head_card-offset"></div>
-
-    <div class="mdui-card">
-        <div class="mdui-card-media">
-            <img src="https://caifxh.github.io/media/img/bai.jpg"/>
-            <div class="mdui-card-media-covered">
-                <div class="mdui-card-primary">
-                    <div class="mdui-card-primary-title">Trie</div>
-                    <div class="mdui-card-primary-subtitle"></div>
-                </div>
-                <div class="mdui-card-actions" style="float:right;">
-                    <a href="https://caifxh.github.io/post/trie/" class="mdui-btn mdui-ripple mdui-ripple-white">点击查看</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="head_card-offset"></div>
-
-    <div class="mdui-card">
-        <div class="mdui-card-media">
-            <img src="https://caifxh.github.io/media/img/bai.jpg"/>
-            <div class="mdui-card-media-covered">
-                <div class="mdui-card-primary">
-                    <div class="mdui-card-primary-title">Manacher</div>
-                    <div class="mdui-card-primary-subtitle"></div>
-                </div>
-                <div class="mdui-card-actions" style="float:right;">
-                    <a href="https://caifxh.github.io/post/manacher/" class="mdui-btn mdui-ripple mdui-ripple-white">点击查看</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="head_card-offset"></div>
-
-    <div class="mdui-card">
-        <div class="mdui-card-media">
-            <img src="https://caifxh.github.io/media/img/bai.jpg"/>
-            <div class="mdui-card-media-covered">
-                <div class="mdui-card-primary">
-                    <div class="mdui-card-primary-title">尺取法</div>
-                    <div class="mdui-card-primary-subtitle"></div>
-                </div>
-                <div class="mdui-card-actions" style="float:right;">
-                    <a href="https://caifxh.github.io/post/chi-qu-fa/" class="mdui-btn mdui-ripple mdui-ripple-white">点击查看</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="head_card-offset"></div>
-
-    <div class="mdui-card">
-        <div class="mdui-card-media">
-            <img src="https://caifxh.github.io/media/img/bai.jpg"/>
-            <div class="mdui-card-media-covered">
-                <div class="mdui-card-primary">
-                    <div class="mdui-card-primary-title">四边形不等式</div>
-                    <div class="mdui-card-primary-subtitle"></div>
-                </div>
-                <div class="mdui-card-actions" style="float:right;">
-                    <a href="https://caifxh.github.io/post/si-bian-xing-bu-deng-shi/" class="mdui-btn mdui-ripple mdui-ripple-white">点击查看</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="head_card-offset"></div>
-
-    <div class="mdui-card">
-        <div class="mdui-card-media">
-            <img src="https://caifxh.github.io/media/img/bai.jpg"/>
-            <div class="mdui-card-media-covered">
-                <div class="mdui-card-primary">
-                    <div class="mdui-card-primary-title">斜率优化</div>
-                    <div class="mdui-card-primary-subtitle"></div>
-                </div>
-                <div class="mdui-card-actions" style="float:right;">
-                    <a href="https://caifxh.github.io/post/xie-lu-you-hua/" class="mdui-btn mdui-ripple mdui-ripple-white">点击查看</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="head_card-offset"></div>
-
-    <div class="mdui-card">
-        <div class="mdui-card-media">
-            <img src="https://caifxh.github.io/media/img/bai.jpg"/>
-            <div class="mdui-card-media-covered">
-                <div class="mdui-card-primary">
-                    <div class="mdui-card-primary-title">前缀和 差分</div>
-                    <div class="mdui-card-primary-subtitle"></div>
-                </div>
-                <div class="mdui-card-actions" style="float:right;">
-                    <a href="https://caifxh.github.io/post/qian-zhui-he-chai-fen/" class="mdui-btn mdui-ripple mdui-ripple-white">点击查看</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="head_card-offset"></div>
-
-    <div class="mdui-card">
-        <div class="mdui-card-media">
-            <img src="https://caifxh.github.io/media/img/bai.jpg"/>
-            <div class="mdui-card-media-covered">
-                <div class="mdui-card-primary">
-                    <div class="mdui-card-primary-title">单调数据结构</div>
-                    <div class="mdui-card-primary-subtitle"></div>
-                </div>
-                <div class="mdui-card-actions" style="float:right;">
-                    <a href="https://caifxh.github.io/post/dan-diao-shu-ju-jie-gou/" class="mdui-btn mdui-ripple mdui-ripple-white">点击查看</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="head_card-offset"></div>
-
-    <div class="mdui-card">
-        <div class="mdui-card-media">
-            <img src="https://caifxh.github.io/media/img/bai.jpg"/>
-            <div class="mdui-card-media-covered">
-                <div class="mdui-card-primary">
-                    <div class="mdui-card-primary-title">高精度</div>
-                    <div class="mdui-card-primary-subtitle"></div>
-                </div>
-                <div class="mdui-card-actions" style="float:right;">
-                    <a href="https://caifxh.github.io/post/gao-jing-du/" class="mdui-btn mdui-ripple mdui-ripple-white">点击查看</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="head_card-offset"></div>
-
-
-        </div>
-    </div>
-    <div class="mdui-row">
     </div>
 </div>
-<footer class="mdui-container footer ">
-    <div class="head_card-offset"></div>
-    <div class="mdui-row mdui-row-gapless">
-        <div class="k-container">
-            <img width="100%" src="/media/img/skirt.png">
-        </div>
-    </div>
 
-    <div class="site-info">
-        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
-    </div>
-</footer>
-<div id="landlord" style="left:5px;bottom:0px;">
-    <div class="message" style="opacity:0"></div>
-    <canvas id="live2d" width="500" height="560" class="live2d"></canvas>
-    <div class="live_talk_input_body">
-        <div class="live_talk_input_name_body">
-            <input name="name" type="text" class="live_talk_name white_input" id="AIuserName" autocomplete="off" placeholder="你的名字" />
-        </div>
-        <div class="live_talk_input_text_body">
-            <input name="talk" type="text" class="live_talk_talk white_input" id="AIuserText" autocomplete="off" placeholder="要和我聊什么呀？"/>
-            <button type="button" class="live_talk_send_btn" id="talk_send">发送</button>
-        </div>
-    </div>
-    <input name="live_talk" id="live_talk" value="1" type="hidden" />
-    <div class="live_ico_box">
-        <div class="live_ico_item type_info" id="showInfoBtn"></div>
-        <div class="live_ico_item type_talk" id="showTalkBtn"></div>
-        <div class="live_ico_item type_music" id="musicButton"></div>
-        <div class="live_ico_item type_youdu" id="youduButton"></div>
-        <div class="live_ico_item type_quit" id="hideButton"></div>
-        <input name="live_statu_val" id="live_statu_val" value="0" type="hidden" />
-        <audio src="" style="display:none;" id="live2d_bgm" data-bgm="0" preload="none"></audio>
-        <input name="live2dBGM" value="https://img.apa70.com/123.mp3" type="hidden">
-        <input name="live2dBGM" value="https://img.apa70.com/123.mp3" type="hidden">
-        <input id="duType" value="douqilai,l2d_caihong" type="hidden">
-    </div>
-</div>
-<div id="open_live2d">召唤伊斯特瓦尔</div>
 <script>
-    var message_Path = '/media/live2d/';//资源目录，如果目录不对请更改
-    var talkAPI = "";//如果有类似图灵机器人的聊天接口请填写接口路径
-</script>
-<!--<script src="/media/js/jquery-3.3.1.min.js"></script>-->
-<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-<script type="text/javascript" src="/media/live2d/js/live2d.js"></script>
-<script type="text/javascript" src="/media/live2d/js/message.js"></script>
+    $(document).ready(function() {
+        $(".menu-btn").click(function() {
+            $(".menu-container").slideToggle();
+        });
+        $(window).resize(function() {
 
+            if (window.matchMedia('(min-width: 960px)').matches) {
+                $(".menu-container").css('display', 'block')
+            } else {
+                $(".menu-container").css('display', 'none')
+            }
+
+        });
+    });
+</script>
+
+            <div id="main-content" class="post-container main-container">
+                <div id="content" class="main-container-left">
+                    
+        
+            <article class="post i-card">
+                <h2 class="post-title">
+                    <a href="https://caifxh.github.io/post/xian-duan-shu-yi-dan-dian-xiu-gai/">
+                        线段树（一）单点修改
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2020-04-12</time>
+                    
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            
+
+
+
+
+
+struct node//结点
+{ 
+	int l,r,mx;//l,r表示区间左右端点，mx表示区间[l,r]的最值 
+}tree[maxn*4]; //树结点存储数组 
+
+关于空间开4*n的证明
+
+void build(int k,int l,int r)//创建线段树,k表示存储下标,区间[l,r]
+{
+	tree[k].l=l;
+	tree[k].r=r;
+	if(l==r)
+	{
+		tree[k].mx=a[l];
+		return;
+	}
+	int mid,lc,rc;
+	mid=(l+r)/2;//划分点 
+	lc=k*2;  //左孩子存储下标 
+	rc=k*2+1;//右孩子存储下标 
+	build(lc,l,mid);
+	build(rc,mid+1,r);
+	tree[k].mx=max(tree[lc].mx,tree[rc].mx);//结点的最大值等于左右孩子最值的最大值 		
+} 
+
+
+
+void update(int k,int i,int v)//将a[i]修改更新为v 
+{
+	if(tree[k].l==tree[k].r&amp;amp;&amp;amp;tree[k].l==i)//找到a[i]
+	{
+		tree[k].mx=v;
+		return ;
+	} 
+	int mid,lc,rc;
+	mid=(tree[k].l+tree[k].r)/2;//划分点 
+	lc=k*2;  //左孩子存储下标 
+	rc=k*2+1;//右孩子存储下标
+	if(i&amp;lt;=mid)
+		update(lc,i,v);//到左子树修改更新 
+	else
+		update(rc,i,v);//到右子树修改更新
+	tree[k].mx=max(tree[lc].mx,tree[rc].mx);//返回时修改更新最值 
+}
+
+
+
+假设询问区间是 [A, B]，现在所在的节点表示的区间为[l, r]
+• 计算 mid = (l + r) / 2，左子节点的区间为 [l, mid]，
+右子节点的区间为 [mid+1, r].
+• 如果 A &amp;lt;= mid，即询问区间与左子节点有重合，需要递归
+到左子节点。
+• 如果 B &amp;gt;= mid + 1，即询问区间与右子节点有重合，需要
+递归到右子节点。
+• 递归完之后，需要把两个孩子询问的结果加起来作为返回值。
+int query(int k,int l,int r)//求区间[l..r]的最值 
+{
+	if(tree[k].l&amp;gt;=l&amp;amp;&amp;amp;tree[k].r&amp;lt;=r)//找到该区间 
+		return tree[k].mx;	
+	int mid,lc,rc;
+	mid=(tree[k].l+tree[k].r)/2;//划分点 
+	lc=k*2;  //左孩子存储下标 
+	rc=k*2+1;//右孩子存储下标
+	int Max=-inf;//注意，局部变量，全局变量不可以 
+	if(l&amp;lt;=mid)
+		Max=max(Max,query(lc,l,r));//到左子树查询
+	if(r&amp;gt;mid)
+		Max=max(Max,query(rc,l,r));//到右子树查询
+	return Max;
+}
+
+例题
+问题1：
+有一个长度为 n 的序列，a[1], a[2], …, a[n]。
+现在执行 m 次操作，每次可以执行以下两种操作之一：
+
+将下标为k的数修改为 v（v&amp;gt;0）。
+询问一个下标区间 [l, r] 中所有数的和。
+
+由于修改是对单个元素进行修改。
+比如修改第 i 个元素。
+我们先找到 [i, i] 所在的节点，然后修改它的 sum，然后一
+路向上更新每个祖先的 sum 即可。
+int change(int pos, int v, int l, int r, int x){
+    if (l == r){ // 找到了要修改的叶子结点
+        sum[x] = v;
+        return;
+    }
+    int mid = (l + r) &amp;gt;&amp;gt; 1;
+    if (pos &amp;lt;= mid) // pos 在左子节点
+        change(pos, v, l, mid, x * 2);
+    else
+        change(pos, v, mid + 1, r, x * 2 + 1);
+    update(x); // 一定要加！因为这条路上的sum值发生了改变
+}
+
+至此，我们已经解决了第一个问题，支持单点修改数字，和区
+间查询和。
+两者的时间复杂度都是单次 O(log n)。
+例题
+hdu1166
+
+代码
+树状数组代码
+问题2：线段树求逆序对
+给定一个序列，a[1], a[2], …, a[n]. 求这个序列的逆序对数量。
+逆序对是指一个有序二元组(i, j)，满足 i &amp;lt; j, a[i] &amp;gt;
+a[j].
+n &amp;lt;= 100000, 0 &amp;lt;= a[i] &amp;lt;= 10910^9109
+
+样例: (输出 5）
+5
+2 7 9 6 4
+
+对于第 i 个数，我们要统计前面有多少个数大于 a[i]。
+对每个数都统计一遍加起来即是答案。
+假设我们可以对 [0, 109] 建一个线段树（实际上太大了）
+每次先查询 [a[i]+1, 109] 的区间和，加入答案。
+然后在 a[i] 的位置上加一即可
+10^9范围太大了，因此我们先要对 n 个数进行离散化。
+离散化的过程，就是对 n 个数进行排序，最小的数赋值为
+1，第二小的赋值为 2，以此类推，这样 n 个数的取值范
+围就在 [1, n] 中了。
+现在只要对 [1, n] 建立长度为 n 的线段树即可
+离散化代码： （假设对 a[1..n] 进行离散化）
+int cnt = 0;
+for (int i = 1;i &amp;lt;= n;i ++)
+    b[++ cnt] = a[i];
+sort(b + 1, b + n + 1);
+cnt = unique(b + 1, b + cnt + 1) - bin - 1;
+for (int i = 1;i &amp;lt;= n;i ++)
+    a[i] = lower_bound(b + 1, b + cnt + 1, a[i]) - bin;
+
+回到样例：2 7 9 6 4
+现进行离散化：1 4 5 3 2
+然后建立长度为 5 的线段树。
+枚举到 1，查询[2，5]区间和为 0，a[1] ++
+枚举到 4，查询[5, 5]区间和为 0，a[4] ++
+枚举到 5，查询[6, 5]区间和为 0，a[5] ++
+枚举到 3，查询[4, 5]区间和为 2，a[3] ++
+枚举到 2，查询[3, 5]区间和为 3，a[2] ++
+答案即为 0+0+0+2+3=5
+对原始数组进行离散化，时间复杂度是O(nlogn).
+用线段树求解逆序对，枚举每个位置，做一次区间查询和,一次单点修改，时间复杂度是O(nlogn).
+总的时间复杂度就是 O(nlogn).
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+typedef long long LL;
+#define lc u&amp;lt;&amp;lt;1
+#define rc u&amp;lt;&amp;lt;1|1
+const int N=100010;
+struct Node
+{
+    int l,r;
+    LL cnt;
+}tr[N*4];
+int a[N],b[N];
+int n;
+
+void pushup(int u)
+{
+    tr[u].cnt=tr[lc].cnt+tr[rc].cnt;
+}
+
+void build(int u,int l,int r)
+{
+    tr[u].l=l,tr[u].r=r;
+    if(l==r)
+    {
+        tr[u].cnt=0;
+        return;
+    }
+    int mid=l+r&amp;gt;&amp;gt;1;
+    build(lc,l,mid);
+    build(rc,mid+1,r);
+    pushup(u);
+}
+
+int query(int u,int l,int r)
+{
+    if(l &amp;lt;= tr[u].l &amp;amp;&amp;amp; tr[u].r &amp;lt;= r)
+        return tr[u].cnt;
+    int mid=tr[u].l+tr[u].r&amp;gt;&amp;gt;1;
+    int sum=0;
+    if(l&amp;lt;=mid) sum+=query(lc,l,r);
+    if(r&amp;gt;mid) sum+=query(rc,l,r);
+    return sum;
+}
+
+void modify(int u,int x)
+{
+    if(tr[u].l == tr[u].r)
+    {
+        tr[u].cnt++;
+        return;
+    }
+    int mid=tr[u].l+tr[u].r&amp;gt;&amp;gt;1;
+    if(x&amp;lt;=mid) modify(lc,x);
+    else modify(rc,x);
+    pushup(u);
+}
+
+int main()
+{
+    cin&amp;gt;&amp;gt;n;
+    for(int i=1;i&amp;lt;=n;i++)
+        cin&amp;gt;&amp;gt;a[i],b[i]=a[i];
+    
+    sort(b+1,b+n+1);
+    int len=unique(b+1,b+n+1)-b-1;
+
+    for(int i=1;i&amp;lt;=n;i++)
+        a[i]=lower_bound(b+1,b+len+1,a[i])-b;
+    
+    build(1,1,len);
+    
+    LL ans=0;
+    for(int i=1;i&amp;lt;=n;i++)
+    {
+        ans+=query(1,a[i]+1,len);
+        modify(1,a[i]);
+    }
+    
+    cout&amp;lt;&amp;lt;ans&amp;lt;&amp;lt;endl;
+    
+    return 0;
+}
+
+acwing1275
+
+#include&amp;lt;iostream&amp;gt;
+using namespace std;
+const int N=200010;
+int m,p;
+struct Node
+{
+    int l,r;
+    int v;//区间[l，r]中的最大值
+}tr[N*4];
+
+void pushup(int u)
+{
+    tr[u].v=max(tr[u&amp;lt;&amp;lt;1].v,tr[u&amp;lt;&amp;lt;1|1].v);
+}
+
+void build(int u,int l,int r)
+{
+    tr[u]={l,r};
+    if(l == r)
+        return ;
+    int mid = l+r&amp;gt;&amp;gt;1;
+    build(u&amp;lt;&amp;lt;1,l,mid);
+    build(u&amp;lt;&amp;lt;1|1,mid+1,r);
+}
+
+int query(int u,int l,int r)
+{
+    if(tr[u].l&amp;gt;=l &amp;amp;&amp;amp; tr[u].r&amp;lt;=r)
+        return tr[u].v;
+    int mid=tr[u].l+tr[u].r&amp;gt;&amp;gt;1;
+    int v=0;
+    if(l&amp;lt;=mid)
+        v=query(u&amp;lt;&amp;lt;1,l,r);
+    if(r&amp;gt;mid)
+        v=max(v,query(u&amp;lt;&amp;lt;1|1,l,r));
+    return v;
+}
+
+void modify(int u,int x,int v)//将x处值修改为v
+{
+    if(tr[u].l == x &amp;amp;&amp;amp; tr[u].r == x)
+        tr[u].v=v;
+    else
+    {
+        int mid=tr[u].l+tr[u].r&amp;gt;&amp;gt;1;
+        if(x&amp;lt;=mid)
+            modify(u&amp;lt;&amp;lt;1,x,v);
+        else 
+            modify(u&amp;lt;&amp;lt;1|1,x,v);
+        pushup(u);
+    }
+}
+
+int main()
+{
+    int n=0,last=0;
+    scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;m,&amp;amp;p);
+    build(1,1,m);
+    
+    int x;
+    char op[2];
+    while(m--)
+    {
+        scanf(&amp;quot;%s%d&amp;quot;,op,&amp;amp;x);
+        if(*op == &#39;Q&#39;)
+        {
+            last=query(1,n-x+1,n);
+            printf(&amp;quot;%d\n&amp;quot;,last);
+        }
+        else
+        {
+            modify(1,n+1,(last+x)%p);
+            n++;
+        }
+    }
+    return 0;
+}
+
+acwing245
+如果涉及到区间的操作，一定要看题目信息能否容易的按照区间进行划分与合并（即：需要满足区间可加性）。通俗的讲就是（l~r）的信息能由（l ~ mid）和（mid + 1，r）的信息推出来。
+看这个题，两个操作：
+1是查询区间（x，y）中的最大连续子段和。
+2是把a[x]改成y。
+对于第2个操作，很简单用线段树的单点修改能达到目的。
+对于第1个操作，这就需要仔细考虑一个结点中的值应该要有哪些属性.
+首先确定要存储的东西是什么，最大连续子段和必须存储然后判断能否通过子节点最大连续子段和求出父节点的最大连续子段和，答案显然是不能的；
+
+
+父节点的最大连续子段和可能是左边儿子的最大连续子段和，又有可能是右儿子的最大连续子段和，还有可能是左儿子的最大后缀和加上右儿子的最大前缀和，所以还得存储最大前缀和和最大后缀和
+
+
+而最大前缀和又需要如何维护，父节点的最大前缀和可能等于左儿子的最大前缀和，也可能等于左儿子的总和加上右儿子的最大前缀和，所以这里就需要取一个最大值，同理，最大后缀和也是这样的，然后利用线段树的基本套路即可。
+
+
+父节点区间和可由子结点算出
+
+
+区间和：sum
+区间最大连续子段和tmax
+紧靠左端的最大连续和 lmax
+紧靠右端的最大连续和 rmax
+
+
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://caifxh.github.io/post/xian-duan-shu-yi-dan-dian-xiu-gai/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+            <article class="post i-card">
+                <h2 class="post-title">
+                    <a href="https://caifxh.github.io/post/ac-zi-dong-ji/">
+                        AC自动机
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2020-04-10</time>
+                    
+                        <a href="https://caifxh.github.io/tag/O-y3VW7ncS/" class="post-tag i-tag
+                            i-tag-banana">
+            #字符串
+        </a>
+                        
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            AC自动机
+
+
+
+
+
+
+
+
+
+
+
+每个结点的26个指针都有指向
+匹配时判断后缀是不是单词，若为单词则也需要统计上
+模板题
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+const int N=5e5+10,M=1e6+10;
+int trie[N][26],cnt[N],idx;
+char s[M];
+int q[N],ne[N];
+int n;
+
+void insert(char *s)
+{
+	int p=0;
+	for(int i=0;s[i];i++)
+	{
+		int k=s[i]-&#39;a&#39;;
+		if(!trie[p][k])
+			trie[p][k]=++idx;
+		p=trie[p][k];
+	}
+	cnt[p]++;
+}
+
+void build()
+{
+	int hh=0,tt=-1;
+	for(int i=0;i&amp;lt;26;i++)
+		if(trie[0][i])
+			q[++tt]=trie[0][i];
+	
+	while(hh &amp;lt;= tt)
+	{
+		int t=q[hh++];
+		for(int i=0;i&amp;lt;26;i++)
+		{
+			int p=trie[t][i];
+		    if (!p) trie[t][i] = trie[ne[t]][i];
+            else
+            {
+                ne[p] = trie[ne[t]][i];
+                q[ ++ tt] = p;
+            }
+		}
+	}
+}
+
+int query(char *s)
+{
+	int res=0;
+	for(int i=0,j=0;s[i];i++)
+	{
+		int k=s[i]-&#39;a&#39;;
+		j=trie[j][k];
+		
+		int p=j;
+		while(p)
+		{
+			res+=cnt[p];
+			cnt[p]=0;
+			p=ne[p];
+		}
+	}
+	return res;
+}
+
+void print()
+{
+	for(int i=0;i&amp;lt;idx;i++)
+	{
+		cout&amp;lt;&amp;lt;i&amp;lt;&amp;lt;&#39; &#39;&amp;lt;&amp;lt;ne[i]&amp;lt;&amp;lt;&amp;quot;: &amp;quot;;
+		for(int j=0;j&amp;lt;26;j++)
+			if(trie[i][j])
+			    cout&amp;lt;&amp;lt;char(j+&#39;a&#39;)&amp;lt;&amp;lt;&#39; &#39;&amp;lt;&amp;lt;trie[i][j]&amp;lt;&amp;lt;&amp;quot;  &amp;quot;;
+		cout&amp;lt;&amp;lt;endl;
+	}
+	cout&amp;lt;&amp;lt;endl;
+}
+
+int main()
+{
+	int T;
+	scanf(&amp;quot;%d&amp;quot;,&amp;amp;T);
+	while(T--)
+	{
+		memset(trie,0,sizeof trie);
+		memset(cnt,0,sizeof cnt);
+		memset(ne,0,sizeof ne);
+		idx=0;
+		scanf(&amp;quot;%d&amp;quot;,&amp;amp;n);
+		
+		for(int i=0;i&amp;lt;n;i++)
+		{
+			char str[55];
+			scanf(&amp;quot;%s&amp;quot;,str);
+			insert(str);
+		}
+		
+		build();
+		//print();
+		scanf(&amp;quot;%s&amp;quot;,s);
+		printf(&amp;quot;%d\n&amp;quot;,query(s));
+	}
+	return 0;
+}
+
+hdu2896
+小t收集了好多病毒的特征码，又收集了一批诡异网站的源码，他想知道这些网站中哪些是有病毒的，又是带了怎样的病毒呢？顺便还想知道他到底收集了多少带病毒的网站。
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+const int N=1e5+10,M=10010;
+int trie[N][128],idx;
+char s[M];
+int q[N],ne[N];
+int n,m;
+int ans[N],cnt;
+int id[N];
+int tot;
+
+void insert(char *s,int i)
+{
+	int p=0;
+	for(int i=0;s[i];i++)
+	{
+		int k=s[i]-32;
+		if(!trie[p][k])
+			trie[p][k]=++idx;
+		p=trie[p][k];
+	}
+	id[p]=i;
+}
+
+void build()
+{
+	int hh=0,tt=-1;
+	for(int i=0;i&amp;lt;128;i++)
+		if(trie[0][i])
+			q[++tt]=trie[0][i];
+	
+	while(hh &amp;lt;= tt)
+	{
+		int t=q[hh++];
+		for(int i=0;i&amp;lt;128;i++)
+		{
+			int p=trie[t][i];
+		    if (!p) trie[t][i] = trie[ne[t]][i];
+            else
+            {
+                ne[p] = trie[ne[t]][i];
+                q[ ++ tt] = p;
+            }
+		}
+	}
+}
+
+int query(char *s)
+{
+	bool flag = false;
+	for(int i=0,j=0;s[i];i++)
+	{
+		int k=s[i]-32;
+		j=trie[j][k];
+		
+		int p=j;
+		while(p)
+		{
+			if(id[p])
+			{
+				flag=true;
+				ans[cnt++]=id[p];
+				//cout&amp;lt;&amp;lt;&amp;quot;---&amp;quot;&amp;lt;&amp;lt;id[p]&amp;lt;&amp;lt;endl;
+			}
+			p=ne[p];
+		}
+	}
+	return flag;
+}
+
+int main()
+{
+	scanf(&amp;quot;%d&amp;quot;,&amp;amp;n);
+	
+	for(int i=1;i&amp;lt;=n;i++)
+	{
+		char str[210];
+		scanf(&amp;quot;%s&amp;quot;,str);
+		insert(str,i);
+	}
+	
+	build();
+
+	scanf(&amp;quot;%d&amp;quot;,&amp;amp;m);
+	for(int i=1;i&amp;lt;=m;i++)
+	{
+		scanf(&amp;quot;%s&amp;quot;,s);
+		cnt=0;
+		if(query(s))
+		{
+			tot++;
+			printf(&amp;quot;web %d:&amp;quot;,i);
+			cnt=unique(ans,ans+cnt)-ans;
+			sort(ans,ans+cnt);
+			for(int i=0;i&amp;lt;cnt;i++)
+				printf(&amp;quot; %d&amp;quot;,ans[i]);
+			puts(&amp;quot;&amp;quot;);
+		}
+	}
+	
+	printf(&amp;quot;total: %d\n&amp;quot;,tot);
+	return 0;
+}
+
+1.本题不是计数，不需判重复，只需标记病毒编号为true，多次标记不影响最终答案
+2.多个主串，字典树下一次还要再查询，不能改变字典树
+附：ASCII表
+
+poj2778
+
+
+
+
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N=110,mod=100000;
+int trie[N][4],idx;
+int ne[N];
+int cnt[N];
+int n,m;
+int q[N];
+struct matrix
+{
+	int m[N][N];
+	matrix()
+	{
+		memset(m,0,sizeof m);
+	}
+	matrix(int c[][N])
+	{
+		memcpy(m,c,sizeof m);
+	}
+};
+
+int get(char c)
+{
+	switch(c)
+	{
+		case &#39;A&#39; : return 0;
+		case &#39;G&#39; : return 1;
+		case &#39;C&#39; : return 2;
+		case &#39;T&#39; : return 3;
+	}
+}
+
+void insert(char *s)
+{
+	int p=0;
+	for(int i=0;s[i];i++)
+	{
+		int k=get(s[i]);
+		if(!trie[p][k])
+			trie[p][k]=++idx;
+		p=trie[p][k];
+	}
+	cnt[p]++;
+}
+
+void build()
+{
+	int hh=0,tt=-1;
+	for(int i=0;i&amp;lt;4;i++)
+		if(trie[0][i])
+			q[++tt]=trie[0][i];
+	
+	while(hh &amp;lt;= tt)
+	{
+		int t=q[hh++];
+		for(int i=0;i&amp;lt;4;i++)
+		{
+			int p=trie[t][i];
+			if(!p) trie[t][i]=trie[ne[t]][i];
+			else 
+			{
+				ne[p]=trie[ne[t]][i];
+				q[++tt]=p;	
+				cnt[p] |= cnt[ne[p]];
+			}
+		}
+	}
+}
+
+matrix mul(matrix a,matrix b)
+{
+	matrix res;
+	for(int i=0;i&amp;lt;=idx;i++)
+		for(int j=0;j&amp;lt;=idx;j++)
+			for(int k=0;k&amp;lt;=idx;k++)
+				res.m[i][j]=(res.m[i][j]+(LL)a.m[i][k]*b.m[k][j])%mod;
+	return res;
+}
+
+matrix qmi(matrix a,int k)
+{
+	matrix res;
+	for(int i=0;i&amp;lt;=idx;i++)
+		res.m[i][i]=1;
+	while(k)
+	{
+		if(k &amp;amp; 1)
+			res=mul(res,a);
+		a=mul(a,a);
+		k&amp;gt;&amp;gt;=1;
+	}
+	return res;
+}
+
+int main()
+{
+	scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;m);
+	for(int i=0;i&amp;lt;n;i++)
+	{
+		char str[15];
+		scanf(&amp;quot;%s&amp;quot;,str);
+		insert(str);
+	}
+	
+	build();
+	
+	matrix g;
+	for(int i=0;i&amp;lt;=idx;i++)
+	{
+		if(cnt[i]) continue;
+		for(int j=0;j&amp;lt;4;j++)
+		{
+			int p=trie[i][j];
+			if(!cnt[p])
+				g.m[i][p]=(g.m[i][p]+1)%mod;
+		}
+	}
+	
+//	for(int i=0;i&amp;lt;=idx;i++)
+//	{
+//		for(int j=0;j&amp;lt;=idx;j++)
+//			cout&amp;lt;&amp;lt;g.m[i][j]&amp;lt;&amp;lt;&#39; &#39;;
+//		cout&amp;lt;&amp;lt;endl;
+//	}
+	
+	g=qmi(g,m);
+	int res=0;
+	for(int i=0;i&amp;lt;=idx;i++)
+		res=(res+g.m[0][i])%mod;
+	
+	printf(&amp;quot;%d&amp;quot;,res);
+	
+	return 0;
+}
+
+最后的答案为什么是g.m[0][i]求和?
+矩阵g的n次幂表示构造长度为n的DNA序列的方案数（g的i次幂表示构造长度为n的DNA序列的方案数），类似离散数学中二元关系的复合运算，二元关系&amp;lt;1,2&amp;gt; ,&amp;lt;2,3&amp;gt; 复合一次可得到关系&amp;lt;1,3&amp;gt;
+由于从根结点出发构造序列，且根结点idx为0.g.m[0][i]表示从根结点走i步的方案数，即从根节点开始构造长度为i的序列的方案数。
+poj3691
+AC自动机+DP
+为每个结点构造失败指针的同时，检查其失败指针所指向的节点是否为危险节点，如果是的话也需要把当前节点标记为危险节点。
+所谓的危险节点，就是指以当前节点为结尾的字符串是某个病毒串，或者包含了某个病毒串。如果在bfs的同时进行这项操作的时候就非常方便，在构造完当前失败指针的同时检查其所指向的节点是否为危险节点。
+根据危险DNA序列所建的字典树，我们用模拟的方式 ，从第一个字符开始构造， 依次递增，找到一个满足要求的字符串，在构造此字符串的同时，比较该字符串和输入要判断的序列S，若该位置i的字符和s[i]，相同，则表示，此位置的字符不需要改变，反则，需要把s[i]该为词字符，为一次改变操作.
+状态表示：dp[i][j]，表示到达查找串第i个字符时，对应于AC自动机的j节点所需要的最小改变数。
+状态转移为dp[i][son[j]] = min( dp[i][son[j]], dp[i-1][j] + s[i-1]!=k )
+读到i个字符时，对应于j状态（DP的过程要两重循环i和j），要转移到son[j]（j的子节点状态，在这里用k在[0,3]一重循环遍历所有可以转字符），如果第i个字符跟所要转移到的字符相同，则代价为0，因为不需要改变；否则代价为1，因为需要改变。
+如果当前状态不可达，则不需要对其进行后续运算。
+如果子节点为危险节点，则不可以进行转移，即不可以使用上面的状态方程。
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+const int N=1010,INF=0x3f3f3f3f;
+int trie[N][4],idx;
+int ne[N];
+int cnt[N];
+int n;
+char s[N];
+int f[N][N];
+int q[N];
+
+int get(char c)
+{
+	switch(c)
+	{
+		case &#39;A&#39; : return 0;
+		case &#39;G&#39; : return 1;
+		case &#39;C&#39; : return 2;
+		case &#39;T&#39; : return 3;
+	}
+}
+
+void insert(char *s)
+{
+	int p=0;
+	for(int i=0;s[i];i++)
+	{
+		int k=get(s[i]);
+		if(!trie[p][k])
+			trie[p][k]=++idx;
+		p=trie[p][k];
+	}
+	cnt[p]++;
+}
+
+void build()
+{
+	int hh=0,tt=-1;
+	for(int i=0;i&amp;lt;4;i++)
+		if(trie[0][i])
+			q[++tt]=trie[0][i];
+	
+	while(hh &amp;lt;= tt)
+	{
+		int t=q[hh++];
+		for(int i=0;i&amp;lt;4;i++)
+		{
+			int p=trie[t][i];
+			if(!p) trie[t][i]=trie[ne[t]][i];
+			else 
+			{
+				ne[p]=trie[ne[t]][i];
+				q[++tt]=p;
+				cnt[p] |= cnt[ne[p]];
+			}
+		}
+	}
+}
+
+void print()
+{
+    for(int i=0;i&amp;lt;=idx;i++)
+    {
+        cout&amp;lt;&amp;lt;i&amp;lt;&amp;lt;&#39; &#39;&amp;lt;&amp;lt;ne[i]&amp;lt;&amp;lt;&amp;quot;: &amp;quot;;
+        for(int j=0;j&amp;lt;4;j++)
+            if(trie[i][j])
+                cout&amp;lt;&amp;lt;trie[i][j]&amp;lt;&amp;lt;&#39; &#39;;
+        cout&amp;lt;&amp;lt;endl;
+    }
+}
+
+int main()
+{
+	int kas=1;
+	while(scanf(&amp;quot;%d&amp;quot;,&amp;amp;n) &amp;amp;&amp;amp; n)
+	{
+		memset(trie,0,sizeof trie);
+		memset(ne,0,sizeof ne);
+		memset(cnt,0,sizeof cnt);
+		idx=0;
+		for(int i=0;i&amp;lt;n;i++)
+		{
+			char str[25];
+			scanf(&amp;quot;%s&amp;quot;,str);
+			insert(str);
+		}
+		
+		build();
+		
+		//print();
+		
+		scanf(&amp;quot;%s&amp;quot;,s+1);
+		int len=strlen(s+1);
+		
+		memset(f,0x3f,sizeof f);
+		f[0][0]=0;
+		for(int i=1;i&amp;lt;=len;i++)
+			for(int j=0;j&amp;lt;=idx;j++)
+				for(int k=0;k&amp;lt;4;k++)
+				{
+					int t=get(s[i]) != k;
+					int p=trie[j][k];
+					if(!cnt[p])
+						f[i][p]=min(f[i][p],f[i-1][j]+ t);
+				}
+				
+		int res=INF;
+		for(int i=0;i&amp;lt;=idx;i++)
+			res=min(res,f[len][i]);
+		
+		if(res == INF)
+			res=-1;
+		printf(&amp;quot;Case %d: %d\n&amp;quot;,kas++,res);
+	}
+	return 0;
+}
+
+最后，循环dp[len][j]，即在读完最后一个字符后检查所有状态的最终值，取其最小。如果均不可达，则返回-1。
+类似题：求主串至少包含一个模式串的方案数，正难则反。
+代码
+hdu2233
+长度不超过L，只由小写字母组成的，至少包含一个词根的单词，一共可能有多少个呢？
+比如一共有2个词根 aa 和 ab ，则可能存在104个长度不超过3的单词，分别为
+(2个) aa,ab,
+(26个)aaa,aab,aac...aaz,
+(26个)aba,abb,abc...abz,
+(25个)baa,caa,daa...zaa,
+(25个)bab,cab,dab...zab。
+
+
+
+
+
+
+
+代码
+若要求长度正好为L，原矩阵的L次幂即可
+长度不超过L，需要累加
+acwing1285
+每次插入一个单词时把所有路径上的点都+1，每个单词的出现次数就是其结尾节点的fail树子树和。因为其fail指针指向的节点一定包含当前字符串。
+统计贡献时要从下往上按照拓扑排序加，
+代码
+hdu3695
+给出 n 个模式串，给出一个长串 S，找出 S 中出现了几种模式串。注意模式串在 S 中正着出现和反着出现都算出
+现。S 可能有些段是压缩过的，格式为[tx]，t 是一个数字，x 是一个字母，代表有 t 个 x。把 a[3b]c 解压后会得到
+abbbc。
+n≤250，模式串的长度不超过1000，t≤5·1e6, 解压后的长串的长度不超过 5100000.
+
+样例输入：
+3
+2
+AB DCB
+DACB
+3
+ABC CDE GHI
+ABCCDEFIHG
+4
+ABB ACDEE BBB FEEE
+A[2B]CD[4E]F
+样例输出：
+0
+3
+2
+我们可以把这 n 个串插入 Trie 树，建成 AC 自动机。然后把解压后的 S 正着在 AC 自动机上跑一遍，再反着在
+AC 自动机上跑一遍，对于覆盖过的模式串，打一个标记。最后统计标记的总数即可
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+const int N=250010,M=5100010;
+int trie[N][26],idx;
+char s[M],tmp[M];
+int ne[N];
+int dar[N];
+int n;
+int q[N];
+
+void insert(char *s,int k)
+{
+    int p=0;
+    for(int i=0;s[i];i++)
+    {
+        int k=s[i]-&#39;A&#39;;
+        if(!trie[p][k])
+        {
+        	trie[p][k]=++idx;
+        	memset(trie[idx],0,sizeof trie[idx]);
+        	dar[idx]=0;
+		}
+        p=trie[p][k];
+    }
+   	dar[p]++;
+}
+
+void build()
+{
+    int hh=0,tt=-1;
+    for(int i=0;i&amp;lt;26;i++)
+        if(trie[0][i])
+        {
+        	int t=trie[0][i];
+        	q[++tt]=t;
+        	ne[t]=0;
+		}
+    
+    while(hh &amp;lt;= tt)
+    {
+        int t=q[hh++];
+        for(int i=0;i&amp;lt;26;i++)
+        {
+            int p=trie[t][i];
+            if(!p) trie[t][i]=trie[ne[t]][i];
+            else 
+            {
+                ne[p]=trie[ne[t]][i];
+                q[++tt]=p;
+            }
+        }
+    }
+}
+
+int query(char *s,int type)
+{
+    int len=strlen(s);
+    if(type)
+        reverse(s,s+len);
+    //cout&amp;lt;&amp;lt;&amp;quot;---&amp;quot;&amp;lt;&amp;lt;s&amp;lt;&amp;lt;endl;
+    int res=0;
+    for(int i=0,j=0;s[i];i++)
+    {
+        int k=s[i]-&#39;A&#39;;
+        j=trie[j][k];
+        int p=j;
+        while(p)
+        {
+        	if(dar[p])
+        	{
+        		res+=dar[p];
+        		dar[p]=0;
+			}
+			else 
+				break;
+            p=ne[p];
+        }
+    }
+    return res;
+}
+
+int main()
+{
+    int T;
+    scanf(&amp;quot;%d&amp;quot;,&amp;amp;T);
+    while(T--)
+    {
+    	memset(trie[0],0,sizeof trie[0]);
+    	ne[0]=0;
+    	dar[0]=0;
+        idx=0;
+        scanf(&amp;quot;%d&amp;quot;,&amp;amp;n);
+        for(int i=1;i&amp;lt;=n;i++)
+        {
+            char str[1010];
+            scanf(&amp;quot;%s&amp;quot;,str);
+            insert(str,i);
+        }
+        
+        build();
+        
+        scanf(&amp;quot;%s&amp;quot;,s);
+        int l=0;
+        for(int i=0;s[i];i++)
+        {
+            if(s[i] !=&#39;[&#39;)
+                tmp[l++]=s[i];
+            else
+            {
+                i++;
+                int len=0;
+                while(s[i] &amp;gt;=&#39;0&#39; &amp;amp;&amp;amp; s[i] &amp;lt;=&#39;9&#39;)
+                {
+                    len=len*10+s[i]-&#39;0&#39;;
+                    i++;
+                }
+                for(int k=0;k&amp;lt;len;k++)
+                    tmp[l++]=s[i];
+                i++;
+            }
+        }
+        tmp[l]=0;
+        
+        printf(&amp;quot;%d\n&amp;quot;,query(tmp,0)+query(tmp,1));
+    }
+}
+
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://caifxh.github.io/post/ac-zi-dong-ji/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+            <article class="post i-card">
+                <h2 class="post-title">
+                    <a href="https://caifxh.github.io/post/trie/">
+                        Trie
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2020-04-10</time>
+                    
+                        <a href="https://caifxh.github.io/tag/O-y3VW7ncS/" class="post-tag i-tag
+                            i-tag-other_2">
+            #字符串
+        </a>
+                        
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            trie
+
+
+
+
+
+void insert(char *str)
+{
+    int p=1;
+    for(int i=0;str[i];i++)
+    {
+        int k=str[i]-&#39;a&#39;;
+        if(!trie[p][k])
+            trie[p][k]=++idx;
+        p=trie[p][k];
+    }
+    cnt[p]=true;
+}
+
+
+int query(char *str)
+{
+    int p=1;
+    for(int i=0;str[i];i++)
+    {
+        int k=str[i]-&#39;a&#39;;
+        p=trie[p][k];
+        if(!p)
+            return 0;
+    }
+    return cnt[p];
+}
+
+模板题
+
+
+
+
+
+例题
+poj2503
+您刚从滑铁卢搬到大城市。 这里的人说的是一门不可理解的外语。 幸运的是，您有一本字典来帮助您理解它们。
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;sstream&amp;gt;
+using namespace std;
+const int N=1000010,M=26;
+int trie[N][M];
+int cnt[N],idx=1;
+char word[N][15];
+
+void insert(string str,int k)
+{
+	int len=str.size(),p=1;
+	for(int i=0;i&amp;lt;len;i++)
+	{
+		int ch=str[i]-&#39;a&#39;;
+		if(!trie[p][ch])
+			trie[p][ch]=++idx;
+		p=trie[p][ch];
+	}
+	cnt[p]=k;
+}
+
+int query(string str)
+{
+	int len=str.size(),p=1;
+	for(int i=0;i&amp;lt;len;i++)
+	{
+		int k=str[i]-&#39;a&#39;;
+		p=trie[p][k];
+		if(!p)
+			return 0;
+	}
+	return cnt[p];
+}
+
+int main()
+{
+	string s,str;
+	int k=1;
+	while(getline(cin,s))
+	{
+		if(s.empty())
+			break;
+		stringstream ss(s);
+		ss&amp;gt;&amp;gt;word[k]&amp;gt;&amp;gt;str;
+		insert(str,k);
+		k++;
+	}
+	
+	while(cin&amp;gt;&amp;gt;s)
+	{
+		int k=query(s);
+		if(k)
+			cout&amp;lt;&amp;lt;word[k]&amp;lt;&amp;lt;endl;
+		else 
+			cout&amp;lt;&amp;lt;&amp;quot;eh&amp;quot;&amp;lt;&amp;lt;endl;
+	}
+	return 0;
+}
+
+poj3630
+
+给定一个电话号码列表，判断它是否一致，即没有号码是另一个号码的前缀。
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;sstream&amp;gt;
+using namespace std;
+const int N=100010,M=10;
+int trie[N][M];
+bool cnt[N];
+int idx;
+int n;
+
+bool insert(char *s)
+{
+	int p=1;
+	int len=strlen(s);
+	for(int i=0;i&amp;lt;len;i++)
+	{
+		int k=s[i]-&#39;0&#39;;
+		if(!trie[p][k])
+			trie[p][k]=++idx;
+		else if(i == len-1)//字符串处理完毕，仍不空，说明该串是其它串的前缀 
+			return true;
+		p=trie[p][k];
+		if(cnt[p])//其他串是该串前缀 
+			return true;
+	}
+	cnt[p]=true;
+	return false;
+}
+
+int main()
+{
+	int T;
+	scanf(&amp;quot;%d&amp;quot;,&amp;amp;T);
+	while(T--)
+	{
+		memset(trie,0,sizeof trie);
+		memset(cnt,0,sizeof cnt);
+		idx=1;
+		bool ans=false;
+		scanf(&amp;quot;%d&amp;quot;,&amp;amp;n);
+		for(int i=1;i&amp;lt;=n;i++)
+		{
+			char s[15];
+			scanf(&amp;quot;%s&amp;quot;,s);
+			if(ans)
+				continue;
+			if(insert(s))//不能立即结束，仍要读取n个串 
+				ans=true;
+		}
+		if(ans)
+			cout&amp;lt;&amp;lt;&amp;quot;NO&amp;quot;&amp;lt;&amp;lt;endl;//有前缀输出NO 
+		else
+			cout&amp;lt;&amp;lt;&amp;quot;YES&amp;quot;&amp;lt;&amp;lt;endl;
+	}
+	return 0;
+}
+
+hdu1251
+Ignatius最近遇到一个难题,老师交给他很多单词(只有小写字母组成,不会有重复的单词出现),现在老师要他统计出以某个字符串为前缀的单词数量(单词本身也是自己的前缀).
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;string&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int maxn=500005;
+const int maxz=26;//不同字符个数，例如数字10，小写字母26
+int trie[maxn][maxz];
+int cnt[maxn];//计数器 
+void insert(string s)//将字符串s插入到字典树中 
+{
+	int len=s.length(),p=1;
+	for(int i=0;i&amp;lt;len;i++)
+	{
+		int ch=s[i]-&#39;a&#39;;//转换成数字
+		if(!trie[p][ch]) 
+			trie[p][ch]=++tot;//记录下标 
+		p=trie[p][ch];
+		cnt[p]++;//统计有多少个单词经过 
+	}
+}
+
+int query(string s)
+{
+	int len=s.length(),p=1;
+	for(int i=0;i&amp;lt;len;i++)
+	{
+		int ch=s[i]-&#39;a&#39;;//转换成数字
+		p=trie[p][ch];
+		if(!p)
+			return 0;
+	}
+	return cnt[p];	
+}
+
+int main()
+{	
+	string s;
+	memset(trie,0,sizeof(trie));
+	memset(cnt,0,sizeof(cnt));
+	tot=1;
+	while(getline(cin,s))
+	{
+		if(!s.size())
+			break;
+		insert(s);
+	}
+	while(cin&amp;gt;&amp;gt;s)
+		cout&amp;lt;&amp;lt;query(s)&amp;lt;&amp;lt;endl;
+	return 0;
+}
+
+若反过来问，单词表中有多少单词是当前查询单词的前缀，只需统计查询时经过的end标记数量即可。
+poj2513
+给你一堆木棍。 每个棍子的每个端点都带有某种颜色。是否可以将操纵杆沿一条直线对齐，以使触摸的端点的颜色具有相同的颜色？
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+const int N=500010,M=26;
+int trie[N][M];
+int cnt[N];
+int d[N];
+int idx=1;
+int color;
+int p[N];
+
+int find(int x)
+{
+	if(x != p[x])
+		p[x]=find(p[x]);
+	return p[x];
+}
+
+int insert(char *s)
+{
+	int len=strlen(s),p=1;
+	for(int i=0;i&amp;lt;len;i++)
+	{
+		int k=s[i]-&#39;a&#39;;
+		if(!trie[p][k])
+			trie[p][k]=++idx;
+		p=trie[p][k];
+	}
+	if(cnt[p])
+		return cnt[p];
+	else 
+	{
+	    cnt[p]=++color;
+	    return cnt[p];
+	}
+}
+
+int main()
+{
+	for(int i=1;i&amp;lt;N;i++)
+		p[i]=i;
+	char a[15],b[15];
+	while(~scanf(&amp;quot;%s%s&amp;quot;,a,b))
+	{
+		int i=insert(a);
+		int j=insert(b);
+		d[i]++;
+		d[j]++;
+		//cout&amp;lt;&amp;lt;i&amp;lt;&amp;lt;&#39; &#39;&amp;lt;&amp;lt;j&amp;lt;&amp;lt;endl;
+		int pi=find(i);
+		int pj=find(j);
+		p[pi]=pj;
+	}
+	
+	int s=find(1);
+	int num=0;
+	for(int i=1;i&amp;lt;=color;i++)
+	{
+		if(d[i] % 2 == 1)
+			num++;
+		if(num &amp;gt; 2 || find(i) != s)
+ 		{
+ 			puts(&amp;quot;Impossible&amp;quot;);
+			return 0;
+		}
+ 	}
+	if(num == 0 || num == 2)
+		puts(&amp;quot;Possible&amp;quot;);
+	else 
+		puts(&amp;quot;Impossible&amp;quot;);
+	return 0;
+}
+
+poj3764
+给出n个节点的树，每条边有边权w。 • 请你找一条路径，使得这条路径上所有边权的异或和最大。
+• 数据范围
+• n &amp;lt;= 100,000, 0 &amp;lt; w &amp;lt; 2^31
+暴力的做法：
+• 枚举每个点当根
+• dfs整颗树，获得根到每个节点的路径异或和s[]
+• 时间复杂度O(n^2)
+异或的性质
+x xor x = 0
+• 一个数异或两次会抵消掉。
+• x到y的路径异或和就等于s[x] xor s[y] !
+
+这样只要任取一个点为根，dfs得到s[]数组后，枚举x， y即可，还是O(n^2)
+现在的问题是，给定一个s[]数组，找两个元素，使得他
+们的异或和最大。
+• 给一个数x，在数组s中找一个数y使其和x的异或和最大。
+• 涉及二进制的题，我们可以选择按位来考虑。
+假设x的二进制有31位，我们把它的二进制写出来，最高位称为第30位，最低位称为第0位。
+因为要让异或值最大，所以我们从高位开始考虑。
+• 如果x的第30位是1 —— if (x &amp;gt;&amp;gt; 30 &amp;amp; 1)
+• 那我们一定希望y的第30位是0，这样异或之后的第30位 是1.
+• 否则就算第29～0位异或后都是1，也比2^30小。
+• 同理，如果x的第30位是0，我们希望y的第30位是1.
+运用贪心的思想，假设现在枚举到x的第i位
+• if x第i位是1 我们要尽可能找第i位为0的y
+• if x第i位是0 我们要尽可能找第i位为1的y
+涉及前缀判断，采用trie
+先把所有的数的二进制当作字符串，存进trie中。
+• 从高往低枚举二进制位时，设置一个指针p，一开始指向trie的根节点。
+• if x第i位是1 我们要尽可能找第i位为0的y 如果说明存在第i位为0的数，我们就让p往0节点走，答案中的第i位为1。
+• 如果不存在第i位为0的数，我们只能退而求其次，让p往1节点走，答案中的第i位为0.
+• if x第i位是0 我们要尽可能找第i位为1的y ， 同理
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+const int N=100010*31,M=N&amp;lt;&amp;lt;1;
+int trie[N][2],tot=1;
+int d[N];
+int n;
+int h[N],e[M],ne[M],w[M],idx;
+
+void add(int a,int b,int c)
+{
+	e[idx]=b,w[idx]=c,ne[idx]=h[a],h[a]=idx++;
+}
+
+void dfs(int u,int fa)
+{
+	for(int i=h[u];~i;i=ne[i])
+	{
+		int j=e[i];
+		if(j == fa)
+			continue;
+		d[j]=d[u]^w[i];
+		dfs(j,u);
+	}
+}
+
+void insert(int x)
+{
+	int p=1;
+	for(int i=30;i&amp;gt;=0;i--)
+	{
+		int u=x&amp;gt;&amp;gt;i&amp;amp;1;
+		if(!trie[p][u])
+			trie[p][u]=++tot;
+		p=trie[p][u];
+	}
+}
+
+int query(int x)
+{
+	int p=1;
+	int res=0;
+	for(int i=30;i&amp;gt;=0;i--)
+	{
+		int k=x&amp;gt;&amp;gt;i&amp;amp;1;
+		if(trie[p][!k])
+		{
+			res+=1&amp;lt;&amp;lt;i;
+			p=trie[p][!k];
+		}	
+		else 
+			p=trie[p][k];
+	}
+	return res;
+}
+
+int main()
+{
+	while(~scanf(&amp;quot;%d&amp;quot;,&amp;amp;n))
+	{
+		memset(h,-1,sizeof h);
+		memset(d,0,sizeof d);
+		memset(trie,0,sizeof trie);
+		idx=0;
+		tot=1;
+		for(int i=0;i&amp;lt;n-1;i++)
+		{
+			int a,b,c;
+			scanf(&amp;quot;%d%d%d&amp;quot;,&amp;amp;a,&amp;amp;b,&amp;amp;c);
+			a++,b++;
+			add(a,b,c);add(b,a,c);
+		}
+		dfs(1,-1);
+		int res=0;
+//		for(int i=1;i&amp;lt;=n;i++)
+//			cout&amp;lt;&amp;lt;d[i]&amp;lt;&amp;lt;&#39; &#39;;
+		
+		for(int i=1;i&amp;lt;=n;i++)
+		{
+			insert(d[i]);
+			res=max(res,query(d[i]));
+		}
+		printf(&amp;quot;%d\n&amp;quot;,res);
+	}
+	return 0;
+}
+
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://caifxh.github.io/post/trie/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+            <article class="post i-card">
+                <h2 class="post-title">
+                    <a href="https://caifxh.github.io/post/manacher/">
+                        Manacher
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2020-04-10</time>
+                    
+                        <a href="https://caifxh.github.io/tag/O-y3VW7ncS/" class="post-tag i-tag
+                            i-tag-other_4">
+            #字符串
+        </a>
+                        
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            Manacher
+回文串:对于一个长度为 n 的字符串 str，如果它正着读和反着读一样，即 str[i] = str[n - i + 1] (1 &amp;lt;= i &amp;lt; n - i + 1),如 aba，acbbca 就是回文串，abc，abab 就不是回文串。
+Manacher 算法可以求出以每个位置为中心，向两边能扩展的最长回文子串长度 p[i]，它的时间复杂度是 O(n) 的。
+注意到回文子串的长度可能是偶数， 如 abba，中心不是某个字符（中心是两个 b 之间的空隙），所以先要在相邻的
+字符中插入一个标识符，例如 #,这样例如 #a#b#b#a# 的中心就是 # 了。
+我们用 abbabcba 来举例。
+先插入 # 得到 #a#b#b#a#b#c#b#a#。
+然后用 Manacher 可以得到如下的 p 数组。
+对于每个 p[i]，一定有 str[i + j] == str[i - j] (1 ≤ j &amp;lt; p[i])
+
+类比 Z 算法，我们也维护一个 mx 和 id，表示对于当前计算的所有 i，i + p[i] 的最大值是 mx，mx 对应的 i 记为id。
+当你现在开始计算 p[i] 时，默认 p[1..i-1] 都已经算出。
+
+计算最长回文子串长度
+以字符串&amp;quot;cabbaf&amp;quot;为例，将预处理后的新字符串&amp;quot;#c#a#b#b#a#f#&amp;quot;变成一个字符数组arr，定义一个辅助数组int[] p，p的长度与arr等长，p[i]表示以arr[i]字符为中心的最长回文半径，p[i]=1表示只有arr[i]字符本身是回文子串。
+i       0 1 2 3 4 5 6 7 8 9 10 11 12
+arr[i]  # c # a # b # b # a #  f  #
+p[i]    1 2 1 2 1 2 5 2 1 2 1  2  1
+
+我们来比对分下一下最长回文半径和原字符串之间的关系。在上面例子中，最长回文子串是&amp;quot;#a#b#b#a#&amp;quot;，它以arr[6]为中心，半径是5，其代表的原始字符串是&amp;quot;abba&amp;quot;，而&amp;quot;abba&amp;quot;的长度为4，可以通过5减去1得到，是字符串&amp;quot;cabbaf&amp;quot;中的最长回文子串，那么我们是不是可以得出最长回文半径和最长回文子串长度之间的关系？
+让我们再多看几个例子，如&amp;quot;aba&amp;quot;，转换后是&amp;quot;#a#b#a#&amp;quot;，以字符&#39;b&#39;为中心的回文，半径是4，减1得到3，3是原字符串的最长回文子串长度。
+再例如&amp;quot;effe&amp;quot;，转换后是&amp;quot;#e#f#f#e#&amp;quot;，以最中间的&#39;#&#39;为中心的回文，半径是5，减1得到4，4是原字符串的最长回文子串长度。
+因此，最后我们得到最长回文半径和最长回文子串长度之间的关系：int maxLength = p[i]-1。maxLength表示最长回文子串长度。
+计算最长回文子串起始索引
+知道了最长回文子串的长度，我们还需要知道它的起始索引值，这样才能截取出完整的最长回文子串。
+继续以第三步中的字符串&amp;quot;cabbaf&amp;quot;为例，p[6]=5，是最长半径，用6(i)减去最长半径5(p[i])得到1，而1恰好是最长回文子串&amp;quot;abba&amp;quot;的起始索引。
+我们再来看一个奇回文的例子。例如&amp;quot;aba&amp;quot;，转换后是&amp;quot;#a#b#a#&amp;quot;，p[3]=4，最长半径是4，i为3，用i减去4得到-1，数组下标越界了。
+在偶回文的情况下，可以满足i减最长半径，而奇回文却会下标越界，我们需要在转换后的字符串前面再加一个字符，解决下标越界的问题，不能是&#39;#&#39;，那就加个&#39;$&#39;字符吧，但是加过一个字符后，字符串的长度不是奇数了，只能在尾部再加一个不会重复出现的字符，比如&#39;@&#39;(也可不加，因为字符串结尾为&#39;\0&#39;)，这样字符串的长度依旧是奇数了，满足前面第三部分的条件。
+加多一个字符后，奇回文可以正常做减法了，偶回文呢？
+i       0 1 2 3 4 5 6 7 8 9 10 11 12 13
+arr[i]  $ # c # a # b # b # a  #  f  #
+p[i]      1 2 1 2 1 2 5 2 1 2  1  2  1
+
+在补上字符&#39;$&#39;后，p[7]=5，用i减去最长半径，7-5=2，而理想的结果应该是1，那就再除以2吧，这样就能得到1了。而奇回文&amp;quot;aba&amp;quot;在用i减去最长半径后得到的是0，除以2后还是0，可以完美解决下标越界的问题。
+结论：最长回文子串的起始索引int index = (i - p[i])/2。
+模板题
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=11000010;
+char s[N];
+charma[N&amp;lt;&amp;lt;1];
+int p[N&amp;lt;&amp;lt;1];
+
+void manacher(char *s,int len)
+{
+	int l=0;
+	ma[l++]=&#39;$&#39;;
+	ma[l++]=&#39;#&#39;;
+	for(int i=0;i&amp;lt;len;i++)
+	{
+		ma[l++]=s[i];
+		ma[l++]=&#39;#&#39;;
+	}
+	ma[l]=0;
+	int mx=0,id=0;
+	for(int i=0;i&amp;lt;l;i++)
+	{
+		if(mx&amp;gt;i) p[i]=min(p[id*2-i],mx-i);
+		else p[i]=1;
+		while(ma[i+p[i]] == ma[i-p[i]])
+			p[i]++;
+		if(i+p[i]&amp;gt;mx)
+		{
+			mx=i+p[i];
+			id=i;
+		}
+	}
+}
+
+int main()
+{
+	while(~scanf(&amp;quot;%s&amp;quot;,s))
+	{
+		int len=strlen(s);
+		manacher(s,len);
+		int ans=0;
+		for(int i=0;i&amp;lt;2*len+2;i++)
+			ans=max(ans,p[i]-1);
+		printf(&amp;quot;%d\n&amp;quot;,ans);
+	}
+	return 0;
+}
+
+Codeforces 17E
+给出一个字符串 s。 求 s 有多少对相交的回文子串。包含也算作相交。
+如 babb 一共有 6 对相交的回文子串：
+s[1..1] and s[1..3]
+s[1..3] and s[2..2]
+s[1..3] and s[3..3]
+s[1..3] and s[3..4]
+s[3..3] and s[3..4]
+s[3..4] and s[4..4]
+|s| ≤ 2·e6
+正难则反
+统计不相交的回文子串对数。
+不相交的回文子串假设端点分别为 x1,y1,x2,y2
+那么一定有 x1 &amp;lt;= y1 &amp;lt; x2 &amp;lt;= y2
+我们只要统计出以 i 为起点的回文串个数 st[i]，和以 i为终点的回文串个数 ed[i]。
+然后计算
+
+在使用 manacher 算法的时候，对每个 i 都计算出了 p[i]
+那么我们就要把[i-p[i], i+p[i]] 这个极大回文子串对 st和 ed 的贡献算进去。
+对于 st: [i-p[i]+1, i] 这些点每个位置都要 +1
+对于 ed：[i, i+p[i]-1] 这些点每个位置都要 +1
+只需要通过差分转化为单点修改即可。
+最后用总的回文子串对数减去不相交的回文子串对数即是答案
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N=2e6+10,mod=51123987;
+char s[N];
+int p[N&amp;lt;&amp;lt;1];
+int n;
+char ma[N&amp;lt;&amp;lt;1];
+int l[N&amp;lt;&amp;lt;1],r[N&amp;lt;&amp;lt;1];
+
+void manacher(char *s,int len)
+{
+	int l=0;
+	ma[l++]=&#39;$&#39;;
+	ma[l++]=&#39;#&#39;;
+	for(int i=0;i&amp;lt;len;i++)
+	{
+		ma[l++]=s[i];
+		ma[l++]=&#39;#&#39;;
+	}
+	ma[l]=0;
+	int mx=0,id=0;
+	for(int i=0;i&amp;lt;l;i++)
+	{
+		if(mx&amp;gt;i) p[i]=min(p[id*2-i],mx-i);
+		else p[i]=1;
+		while(ma[i+p[i]] == ma[i-p[i]]) p[i]++;
+		if(i+p[i] &amp;gt; mx)
+		{
+			mx=i+p[i];
+			id=i;
+		}
+	}
+}
+
+int main()
+{
+	scanf(&amp;quot;%d&amp;quot;,&amp;amp;n);
+	scanf(&amp;quot;%s&amp;quot;,s);
+	manacher(s,n);
+	n=n*2+2;
+	
+	int ans=0;
+	for(int i=0;i&amp;lt;n;i++)
+	{
+		l[i-p[i]+1]++,l[i+1]--;
+		r[i]++,r[i+p[i]]--;
+		ans=(ans+p[i]/2)%mod;
+	}
+	ans=(LL)ans*(ans-1)/2%mod;
+	
+	int sum=0;
+	for(int i=1;i&amp;lt;n;i++)
+	{
+		l[i]+=l[i-1];r[i]+=r[i-1];
+		if(i&amp;amp;1) continue;
+		ans=(ans-(LL)sum*l[i]%mod+mod)%mod;
+		sum=(sum+r[i])%mod;
+	}
+	printf(&amp;quot;%d&amp;quot;,ans);
+}
+
+BZOJ 2565
+定义双回文串 T，满足存在 T = ab，其中 a 和 b 都是回文串。
+给定字符串 S，求一个 S 的最长的双回文子串 T。
+|S| ≤ 1e6
+
+Lmax是一个点往左扩展，越靠右越可能长，所以做逆推；Rmax是一个点往右扩展，越靠左越可能长，所以做顺推。递推式子见代码。处理好之后扫一遍就出解了。
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;iostream&amp;gt;
+using namespace std;
+const int N=100010;
+int n;
+int l[N*2],r[N*2],p[N*2];
+char ma[N*2],a[N];
+
+void manacher(char *s,int len)
+{
+    int k=0;
+    ma[k++]=&#39;$&#39;;
+    ma[k++]=&#39;#&#39;;
+    for(int i=0;i&amp;lt;len;i++)
+    {
+        ma[k++]=s[i];
+        ma[k++]=&#39;#&#39;;
+    }
+    ma[k]=0;
+    int mx=0,id=0;
+    for(int i=0;i&amp;lt;k;i++)
+    {
+        if(mx&amp;gt;i) p[i]=min(p[id*2-i],mx-i);
+        else p[i]=1;
+        while(ma[i+p[i]] == ma[i-p[i]])
+            p[i]++;
+        if(i+p[i]&amp;gt;mx)
+        {
+            mx=i+p[i];
+            id=i;
+        }
+        l[i+p[i]-1]=max(l[i+p[i]-1],p[i]-1);
+        //cout&amp;lt;&amp;lt;l[i+p[i]-1]&amp;lt;&amp;lt;&#39; &#39;&amp;lt;&amp;lt;p[i]-1&amp;lt;&amp;lt;endl;
+        r[i-p[i]+1]=max(r[i-p[i]+1],p[i]-1);
+        //cout&amp;lt;&amp;lt;r[i-p[i]+1]&amp;lt;&amp;lt;&#39; &#39;&amp;lt;&amp;lt;p[i]-1&amp;lt;&amp;lt;endl;
+    }
+}
+
+ 
+int main()
+{
+	scanf(&amp;quot;%s&amp;quot;,a);
+	
+	int n=strlen(a);
+	manacher(a,n);
+	n=n*2+2;
+	
+	for(int i=1;i&amp;lt;n;i+=2) r[i]=max(r[i],r[i-2]-2);
+	for(int i=n-1;i&amp;gt;=1;i-=2) l[i]=max(l[i],l[i+2]-2);
+	
+	int ans=0;
+	for(int i=1;i&amp;lt;n;i++) 
+		if(l[i] &amp;amp;&amp;amp; r[i])
+			ans=max(ans,l[i]+r[i]);
+	cout&amp;lt;&amp;lt;ans;
+	
+	return 0;
+}
+
+bzoj4755
+有两个长度均为 N 的字符串 A 和 B。
+扭动的字符串 S(i,j,k) 定义为 A[i..j]+B[j..k] 若 A=’xyz’, B=‘uvw’, 则 S(1,2,3)=‘xyvw’
+定义扭动的回文串为如下情况中的一个；
+A 中的一个回文串
+B 中的一个回文串
+某一个回文的扭动字符串S(i,j,k)
+求最长的扭动回文串
+1≤N≤100000，字符串只含大写字母
+
+样例：
+5
+ABCDE
+BAECB
+答案：
+5
+最长的扭动回文串是 S(2,3,5) = BCECB
+对于前两种情况，我们只需要用 manacher 算法求出每个位置的回文扩展半径，然后取一个最大值即可。
+对于第三种情况，需要在两个字符串中各取一段拼起来。
+我们可以把答案字符串分解为 STS’
+其中 S’ 是 S 的反串，T 是回文串。
+可以发现一定是 S 在一个串，TS’ 在另一个串；或者 ST 在一个串，S’在另一个串。
+且T 一定是极大的回文子串。
+那么我们只要枚举极大回文子串 T 即可。
+假设中心在 A 中，枚举中心 i。
+(1)假设A[i-p[i], i+p[i]] 是极大回文子串。
+枚举 A[i+p[i]+1..n] 的前缀和 B[1..i-p[i]] 的后缀最长能匹配上多少。
+(2)假设B[i-p[i], i+p[i]] 是极大回文子串。
+枚举 A[1..i-p[i]-1] 的后缀 和 B[i + p[i]..n] 的前缀最长能匹配上多少。
+这两部分的最大值 * 2 + 极大回文子串的长度就是答案了。
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+typedef unsigned long long ULL;
+const int N=100010,M=N&amp;lt;&amp;lt;1,P=131;
+char a[N],b[N];
+char ma[M];
+int pa[M],pb[M];
+int n;
+ULL ha[N],hb[N],p[N];
+int ans;
+
+ULL getha(int l,int r)
+{
+	return ha[r]-ha[l-1]*p[r-l+1];
+}
+
+ULL gethb(int l,int r)
+{
+	return hb[l]-hb[r+1]*p[r-l+1];
+}
+
+void manacher(char *s,int len,int p[])
+{
+	int l=0;
+	ma[l++]=&#39;$&#39;;
+	ma[l++]=&#39;#&#39;;
+	for(int i=1;i&amp;lt;=len;i++)
+	{
+		ma[l++]=s[i];
+		ma[l++]=&#39;#&#39;;
+	}
+	ma[l++]=0;
+	
+	int mx=0,id=0;
+	for(int i=0;i&amp;lt;l;i++)
+	{
+		if(mx &amp;gt; i) p[i]=min(p[2*id-i],mx-i);
+		else p[i]=1;
+		while(ma[i+p[i]] == ma[i-p[i]]) p[i]++;
+		if(i+p[i] &amp;gt; mx)
+		{
+			mx=i+p[i];
+			id=i;
+		}
+	}	
+}
+
+int search(int L,int R)
+{
+	int l=0,r=min(L,n-R+1);
+	while(l&amp;lt;r)
+	{
+		int mid=l+r+1&amp;gt;&amp;gt;1;
+		if(getha(L-mid+1,L) == gethb(R,R+mid-1))
+			l=mid;
+		else 
+			r=mid-1;
+	}
+	return l;
+}
+
+int main()
+{
+	scanf(&amp;quot;%d&amp;quot;,&amp;amp;n);
+	scanf(&amp;quot;%s&amp;quot;,a+1);
+	scanf(&amp;quot;%s&amp;quot;,b+1);
+	
+	p[0]=1;
+	for(int i=1;i&amp;lt;=n;i++)
+		p[i]=p[i-1]*P;
+	for(int i=1;i&amp;lt;=n;i++)
+		ha[i]=ha[i-1]*P+a[i];
+	for(int i=n;i&amp;gt;=1;i--)
+		hb[i]=hb[i+1]*P+b[i];
+	
+	manacher(a,n,pa);
+	manacher(b,n,pb);
+	n=n*2+1;
+	for(int i=1;i&amp;lt;=n;i++) ans=max(ans,pa[i]-1);
+	for(int i=1;i&amp;lt;=n;i++) ans=max(ans,pb[i]-1);
+	for(int i=1;i&amp;lt;=n;i++)
+	{
+		int l=(i-pa[i])/2+1,r=(i+pa[i])/2-1;//下标从1开始
+		if(l&amp;lt;=r)
+			ans=max(ans,pa[i]-1+search(l-1,r)*2);
+	}
+	for(int i=1;i&amp;lt;=n;i++)
+	{
+		int l=(i-pb[i])/2+1,r=(i+pb[i])/2-1;
+		if(l&amp;lt;=r)
+			ans=max(ans,pb[i]-1+search(l,r+1)*2);
+	}
+	printf(&amp;quot;%d&amp;quot;,ans);
+	return 0;
+}
+
+SP7586
+求一个串中包含几个回文串
+用马拉车求出以每个字母为对称轴的回文串长度，因为一个回文串长度/2就是这个回文串包含的子回文串长度，所以最后统计一下即可
+代码
+BZOJ 2084 Antisymmetry
+给定一个长度为 n 的01串，问有多少个子串满足翻转并取反后和原来一样。
+比如0101翻转并取反后还是和原来一样。
+只要定义 0 = 1， 0 ≠ 0，1 ≠ 1 即可。跑一遍 Manacher 即可。
+以 0/1 扩展的 p[i] 一定是 0 （即没有奇数长度的合法子串）
+以 # 扩展的累加起来即可
+接下来我们来考虑如果我们确定了一个中心后，向外扩展出一个最大可能的反对称串，那么这个串中一定含有len/2个满足条件的串，其中len为串长，因为要想大的满足条件，则在里面的小串必须满足是反对称的
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=500010;
+char s[N];
+char ma[N&amp;lt;&amp;lt;1];
+int p[N&amp;lt;&amp;lt;1];
+int n;
+
+void manacher(char *s,int len)
+{
+    int l=0;
+    ma[l++]=&#39;$&#39;;
+    ma[l++]=&#39;#&#39;;
+    for(int i=0;i&amp;lt;len;i++)
+    {
+        ma[l++]=s[i];
+        ma[l++]=&#39;#&#39;;
+    }
+    ma[l]=0;
+    int mx=0,id=0;
+    for(int i=1;i&amp;lt;l;i+=2)
+    {
+        if(mx&amp;gt;i) p[i]=min(p[id*2-i],mx-i);
+        else p[i]=1;
+        while(ma[i+p[i]]-&#39;0&#39;+ma[i-p[i]]-&#39;0&#39;==1 || (ma[i+p[i]]==ma[i-p[i]] &amp;amp;&amp;amp; ma[i+p[i]]==&#39;#&#39;))
+            p[i]++;
+        if(i+p[i]&amp;gt;mx)
+        {
+            mx=i+p[i];
+            id=i;
+        }
+    }
+}
+
+int main()
+{
+	scanf(&amp;quot;%d&amp;quot;,&amp;amp;n);
+	scanf(&amp;quot;%s&amp;quot;,s);
+    manacher(s,n);
+    long long ans=0;
+    for(int i=1;i&amp;lt;n*2+2;i+=2)
+    	ans+=p[i]/2;
+	
+    printf(&amp;quot;%lld\n&amp;quot;,ans);
+    return 0;
+}
+
+BZOJ 3790
+母亲节就要到了，小 H 准备送给她一个特殊的项链。这个项链可以看作一个用小写字母组成的字符串，每个小写字母表示一种颜色。为了制作这个项链，小 H 购买了两个机器。第一个机器可以生成所有形式的回文串，第二个机器可以把两个回文串连接起来，而且第二个机器还有一个特殊的性质：假如一个字符串的后缀和一个字符串的前缀是完全相同的，那么可以将这个重复部分重叠。
+例如：aba和aca连接起来，可以生成串abaaca或 abaca。现在给出目标项链的样式，询问你需要使用第二个机器多少次才能生成这个特殊的项链。
+
+样例：
+abcdcba （答案：0）
+abacada （答案：2）
+abcdef （答案：5）
+题目的意思就是用尽可能少的回文子串去覆盖原串。
+我们可以先跑一遍 Manacher 算法得到每个位置的覆盖半径。
+问题转化为了有许多个区间 [i-p[i], i+p[i]]，要选出尽可能少的区间来覆盖 [1, n] 区间
+贪心即可。
+对所有的区间按照左端点从小到大排序。
+每次都选右端点最远的那个区间。
+设当前覆盖到的右端点为 right。
+每次找出左端点在[1, right] 中的右端点的最大的那个线段，再做一次覆盖。
+时间复杂度 O(n log n)
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+const int N=50010,M=N&amp;lt;&amp;lt;1;
+char s[N],ma[M];
+int p[M];
+struct Node
+{
+	int l,r;
+	bool operator&amp;lt;(const Node &amp;amp;W) const
+	{
+		return l&amp;lt;W.l;
+	}
+}e[M];
+
+void manacher(char *s,int len)
+{
+	int l=0;
+	ma[l++]=&#39;$&#39;;
+	ma[l++]=&#39;#&#39;;
+	for(int i=0;i&amp;lt;len;i++)
+	{
+		ma[l++]=s[i];
+		ma[l++]=&#39;#&#39;;
+	}
+	ma[l]=0;
+	int mx=0,id=0;
+	for(int i=0;i&amp;lt;l;i++)
+	{
+		if(mx&amp;gt;i) p[i]=min(p[id*2-i],mx-i);
+		else p[i]=1;
+		while(ma[i+p[i]] == ma[i-p[i]])
+			p[i]++;
+		if(i+p[i] &amp;gt; mx)
+		{
+			mx=i+p[i];
+			id=i;
+		}
+		e[i].l=i-p[i]+1,e[i].r=i+p[i]-1;
+	}
+}
+
+int main()
+{
+	while(~scanf(&amp;quot;%s&amp;quot;,s))
+	{
+		int n=strlen(s);
+		manacher(s,n);
+		
+		n=n*2+1;
+		sort(e+1,e+n+1);
+		
+		int st=1,j=1,ed=n;
+		int res=0;
+		
+		while(st &amp;lt; ed)
+		{
+			int r=0;
+			while(j &amp;lt;= n &amp;amp;&amp;amp; e[j].l &amp;lt;= st)
+				r=max(r,e[j].r),j++;
+			
+			st=r;
+			res++;
+		}
+		printf(&amp;quot;%d\n&amp;quot;,res-1);
+	}
+}
+
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://caifxh.github.io/post/manacher/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+            <article class="post i-card">
+                <h2 class="post-title">
+                    <a href="https://caifxh.github.io/post/chi-qu-fa/">
+                        尺取法
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2020-04-10</time>
+                    
+                        <a href="https://caifxh.github.io/tag/PJzBixWKZ/" class="post-tag i-tag
+                            i-tag-">
+            #其他算法
+        </a>
+                        
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            尺取法
+尺取法（又称为：双指针、twopointers），是算法竞赛中一个常用的优化技巧，用来解决序列的区间问题，操作简单、容易编程。
+如果区间是单调的，也常常用二分法来求解，所以很多问题用尺取法和二分法都行。
+尺取法：顾名思义，像尺子一样取一段，借用挑战书上面的话说，尺取法通常是对数组保存一对下标，即所选取的区间的左右端点，然后根据实际情况不断地推进区间左右端点以得出答案。之所以需要掌握这个技巧，是因为尺取法比直接暴力枚举区间效率高很多，尤其是数据量大的时候，所以尺取法是一种高效的枚举区间的方法，一般用于求取有一定限制的区间个数或最短的区间等等。当然任何技巧都存在其不足的地方，有些情况下尺取法不可行，无法得出正确答案。
+使用尺取法时应清楚以下四点：
+1、  什么情况下能使用尺取法?
+2、何时推进区间的端点？
+3、如何推进区间的端点？
+4、何时结束区间的枚举？
+尺取法通常适用于选取区间有一定规律，或者说所选取的区间有一定的变化趋势的情况，通俗地说，在对所选取区间进行判断之后，我们可以明确如何进一步有方向地推进区间端点以求解满足条件的区间，如果已经判断了目前所选取的区间，但却无法确定所要求解的区间如何进一步得到根据其端点得到，那么尺取法便是不可行的。首先，明确题目所需要求解的量之后，区间左右端点一般从最整个数组的起点开始，之后判断区间是否符合条件在根据实际情况变化区间的端点求解答案。
+尺取法的概念
+什么是尺取法？为什么尺取法能优化呢？
+考虑下面的应用背景：
+（1）给定一个序列。有时候需要它是有序的，先排序。
+（2）问题和序列的区间有关，且需要操作2个变量，可以用两个下标（指针）i、j扫描区间。
+对于上面的应用，一般的做法，是用i、j分别扫描区间，有两重循环，复杂度O(n2)。以反向扫描（即i、j方向相反，后文有解释）为例，代码是：
+for(int i = 0; i &amp;lt; n; i++)           //i从头扫到尾
+	for(int j = n-1; j &amp;gt;= 0; j--){   //j从尾扫到头
+        ......
+    }
+
+下面用尺取法来优化上面的算法。
+实际上，尺取法就是把两重循环变成了一个循环，在这个循环中一起处理i和j。复杂度也就从O(n2n^2n2)变成了O(n)。仍以上面的反向扫描为例，代码是：
+//用while实现：
+int i = 0, j = n - 1;
+while (i &amp;lt; j) {      //i和j在中间相遇。这样做还能防止i、j越界
+        ......       //满足题意的操作
+        i++;         //i从头扫到尾
+        j--;         //j从尾扫到头
+}
+//用for实现：
+for (int i = 0, j = n - 1; i &amp;lt; j; i++, j--) {
+    ......
+}
+
+在尺取法中，这两个指针i、j，有两种扫描方向：
+（a）反向扫描。i、j方向相反，i从头到尾，j从尾到头，在中间相会。
+（b）同向扫描。i、j方向相同，都从头到尾，可以让j跑在i前面。
+把同向扫描的i、j指针称为“快慢指针”，把反向扫描的i、j指针称为“左右指针”，更加形象。快慢指针在序列上产生了一个大小可变的“滑动窗口”，有灵活的应用
+反向扫描
+1.找指定和的整数对
+这个问题是尺取法最经典，也最简单直接的应用。
+输入n ( n≤100,000)个整数，放在数组a[]中。找出其中的两个数，它们之和等于整数m(假定肯定有解)。题中所有整数都是int型。
+样例输入：
+21 4 5 6 13 65 32 9 23
+28
+样例输出：
+5 23
+说明：样例输入的第一行是数组a[]，第2行是m = 28。样例输出5和23，相加得28。
+为了说明尺取法的优势，下面给出四种方法：
+（1）用两重循环暴力搜，枚举所有的取数方法，复杂度O(n2)，超时。暴力法不需要排序。
+（2）二分法。首先对数组从小到大排序，复杂度O(nlogn)；然后，从头到尾处理数组中的每个元素a[i]，在大于a[i]的数中二分查找是否存在一个等于 m - a[i]的数，复杂度也是O(nlogn)。两部分相加，总复杂度仍然是O(nlogn)。
+（3）Hash。分配一个hash空间s，把n个数放进去。逐个检查a[]中的n个数，例如a[i]，检查m - a[i]在s中是否有值，如果有，那么存在一个答案。复杂度是O(n)。
+hash方法很快，但是需要一个额外的、可能很大的hash空间。
+（4）尺取法。这是标准解法。首先对数组从小到大排序；然后，设置两个变量i和j，分别指向头和尾，i初值是0，j初值是n-1，然后让i和j逐渐向中间移动，检查a[i]+a[j]，如果大于m，就让j减1，如果小于m，就让i加1，直至a[i]+a[j] = m。排序复杂度O(nlogn)，检查的复杂度O(n)，合起来总复杂度O(nlogn)。
+void find_sum(int a[], int n, int m){ 
+     sort(a, a + n - 1);      //先排序，复杂度O(nlogn)
+     int i = 0, j = n - 1;    //i指向头，j指向尾
+     while (i &amp;lt; j){           //复杂度O(n)
+		    int sum = a[i] + a[j];
+		    if (sum &amp;gt; m)   j--;
+		    if (sum &amp;lt; m)   i++;
+		    if (sum == m){     
+			    cout &amp;lt;&amp;lt; a[i] &amp;lt;&amp;lt; &amp;quot; &amp;quot; &amp;lt;&amp;lt; a[j] &amp;lt;&amp;lt; endl;  //打印一种情况
+                i++;          //可能有多个答案，继续
+		    }
+	  }
+}
+
+判断回文串
+2.给一个字符串，判断它是不是回文串。
+“回文串”是一个正读和反读都一样的字符串，比如“level”或者“noon”就是回文串。写一个程序判断读入的字符串是否是“回文”。如果是，输出“yes”，否则输出“no”。
+#include &amp;lt;bits/stdc++.h&amp;gt;
+using namespace std;
+int main(){
+    int n;
+    cin &amp;gt;&amp;gt; n;                         //n是测试用例个数
+    while(n--){
+        string s;  cin &amp;gt;&amp;gt; s;          //读一个字符串
+        bool ans = true;
+        int i = 0, j = s.size() - 1;  //双指针
+        while(i &amp;lt; j){ 
+            if(s[i] != s[j]){
+                ans = false;
+                break;
+            }
+            i++;   j--;               //移动双指针
+        }
+        if(ans)   cout &amp;lt;&amp;lt; &amp;quot;yes&amp;quot; &amp;lt;&amp;lt; endl;
+        else      cout &amp;lt;&amp;lt; &amp;quot;no&amp;quot;  &amp;lt;&amp;lt; endl;
+    }
+    return 0;
+}
+
+允许删除（或插入，本题只考虑删除）最多1个字符，判断是否能构成回文字符串。
+设反向扫描双指针为i、j。如果 s[i]和s[j]相同，i++、j–；如果s[i]和s[j]不同，那么，或者删除s[i]，或者删除s[j]，看剩下的字符串是否是回文串即可。
+同向扫描
+1.寻找区间和
+这是用尺取法产生“滑动窗口”的典型例子。
+给定一个长度为n的数组a[]和一个数s，在这个数组中找一个区间，使得这个区间之和等于s。输出区间的起点和终点位置。
+样例输入：
+15
+6 1 2 3 4 6 4 2 8 9 10 11 12 13 14
+6
+样例输出：
+0 0
+1 3
+5 5
+6 7
+说明：样例输入的第1行是n=15，第2行是数组a[]，第3行是区间和s=6。样例输出，共有4个情况。
+题解
+指针i和j，i&amp;lt;=j，都从头向尾扫描，判断区间[i,j]的和是否等于s。
+如何寻找区间和等于s的区间？如果简单地对i和j做二重循环，复杂度是O(n2n^2n2)。用尺取法，复杂度O(n)，操作步骤是：
+（1）初始值i=0、j=0，即开始都指向第一个元素a[0]。定义sum是区间[i, j]的和，初始值sum = a[0]。
+（2）如果sum等于s，输出一个解。继续，把sum减掉元素a[i]，并把i往后移动一位。
+（3）如果sum大于s，让sum减掉元素a[i]，并把i往后移动一位。
+（4）如果sum小于s，把j往后挪一位，并把sum的值加上这个新元素。
+在上面的步骤中，有2个关键技巧：
+（1）滑动窗口的实现。窗口就是区间[i,j]，随着i和j从头到尾移动，窗口就“滑动”扫描了整个序列，检索了所有的数据。i和j并不是同步增加的，窗口像一只蚯蚓伸缩前进，它的长度是变化的，这个变化，正对应了对区间和的计算。
+（2）sum的使用。如何计算区间和？暴力的方法是从a[i]到a[j]累加，但是，这个累加的复杂度是O(n)的，会超时。如果利用sum，每次移动i或j的时候，只需要把sum加或减一次，就得到了区间和，复杂度是O(1)。这是“前缀和”递推思想的应用。
+以下是几个经典的使用尺取法的例题，都是从挑战书上引用的。（尺取法通常会需要对某些量进行预处理，以便能在使用时快速地判断。
+poj3061
+题意：给定一个序列，找出最短的子序列长度，使得其和大于或等于S。
+
+
+分析：首先，序列都是正数，如果一个区间其和大于等于S了，那么不需要在向后推进右端点了，因为其和也肯定大于等于S但长度更长，所以，当区间和小于S时右端点向右移动，和大于等于S时，左端点向右移动以进一步找到最短的区间，如果右端点移动到区间末尾其和还不大于等于S，结束区间的枚举。
+Input：
+10 15
+5 1 3 5 10 7 4 9 2 8
+
+二分+前缀和：
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=100010;
+int s[N];
+int n,m;
+
+bool check(int mid)
+{
+	for(int i=1;i&amp;lt;=n-mid+1;i++)
+		if(s[i+mid-1]-s[i-1] &amp;gt;= m)
+			return 1;
+	return 0;
+}
+
+int main()
+{
+	int T;
+	cin&amp;gt;&amp;gt;T;
+	while(T--)
+	{
+		scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;m);
+		
+		for(int i=1;i&amp;lt;=n;i++)
+			scanf(&amp;quot;%d&amp;quot;,&amp;amp;s[i]),s[i]+=s[i-1];
+			
+		if(s[n] &amp;lt; m) 
+		{
+			cout&amp;lt;&amp;lt;0&amp;lt;&amp;lt;endl;
+			continue;
+		}
+		
+		int l=1,r=n;
+		while(l&amp;lt;r)
+		{
+			int mid=l+r&amp;gt;&amp;gt;1;
+			if(check(mid))
+				r=mid;
+			else 
+				l=mid+1;
+		}
+		
+		printf(&amp;quot;%d\n&amp;quot;,l);
+	}
+	return 0;
+}
+
+尺取法：
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=100010;
+int a[N];
+int n,m;
+
+int main()
+{
+	int T;
+	cin&amp;gt;&amp;gt;T;
+	while(T--)
+	{
+		scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;m);
+		for(int i=0;i&amp;lt;n;i++)
+			scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]);
+		int ans=n+1;
+		int sum=0;
+		int l=0,r=0;
+		while(1)
+		{
+			while(r&amp;lt;n &amp;amp;&amp;amp; sum&amp;lt;m)
+				sum+=a[r],r++;
+			
+			if(sum &amp;lt; m) break;
+			
+			ans=min(ans,r-l);
+			sum-=a[l++];//左端点向右移动以进一步找到最短的区间
+		}
+		
+		if(ans == n+1) ans=0;
+		printf(&amp;quot;%d\n&amp;quot;,ans);
+	}
+	return 0;
+}
+
+poj3320
+题意：一本书有P页，每一页都一个知识点，求去最少的连续页数覆盖所有的知识点。
+和上面的题一样的思路，如果一个区间的子区间满足条件，那么在区间推进到该处时，右端点会固定，左端点会向右移动到其子区间，且其子区间会是更短的，只是需要存储所选取的区间的知识点的数量，那么使用map进行映射以快速判断是否所选取的页数是否覆盖了所有的知识点。
+
+当前区间若可行，则需在保证可行的前提下，缩小区间范围，将l指针右移
+当前区间若不可行，则需要扩大区间范围，将r指针右移
+当r已到末尾且l已经最优时，结束枚举
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;map&amp;gt;
+using namespace std;
+const int N=1000010;
+int a[N],cnt[N];
+map&amp;lt;int,int&amp;gt; m;
+int tot;
+int n;
+
+int main()
+{
+	scanf(&amp;quot;%d&amp;quot;,&amp;amp;n);
+	
+	for(int i=1;i&amp;lt;=n;i++)
+	{
+		scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]);
+		if(!m[a[i]]) m[a[i]]=++tot;
+		a[i]=m[a[i]];
+	}
+	
+	int ans=n;
+	int l=1,r=1;
+	int sum=0;
+	
+	while(1)
+	{
+		while(r&amp;lt;=n &amp;amp;&amp;amp; sum&amp;lt;tot)
+			if(cnt[a[r++]]++ == 0)
+				sum++;
+			
+		if(sum &amp;lt; tot) break;
+		ans=min(ans,r-l);
+		if(--cnt[a[l++]] == 0) sum--;
+	}
+	
+	printf(&amp;quot;%d\n&amp;quot;,ans);
+	
+	return 0;
+}
+
+poj2566
+题意：给你n个数字，这些数字可正可负，再给你个数字t,求在这个数列中一个连续的子序列，和的绝对值与t相差最小
+一般来说，我们必须要保证数列单调性，才能使用尺取法。
+预处理出前i个数的前缀和，和编号i一起放入pair中，然而根据前缀和大小进行排序。由于
+abs(sum[i]-sum[j]) =  abs(sum[j]-sum[i])
+可以忽视数列前缀和的前后关系。此时，sum[r]-sum[l]有单调性。
+因此我们可以先比较当前sum[r]-sum[l]与t的差，并更新答案。
+如果当前sum[r]-sum[l]&amp;lt;t,说明和还可以更大，r++。
+同理，如果sum[r]-sum[l]&amp;gt;t，说明和还可以更小，l++。
+如果sum[r]-sum[l]=t，必定是最小答案。
+
+尺取的前提是一个有序的，可判定的序列，由于题目说的是连续序列和的绝对值，也就是说我们只需要知道两个端点
+利用前缀和来进行判定，我们来枚举前缀和的两个端点，从而可以找到一个最接近询问值的数，
+我们在存前缀和的同时还得把相应的坐标给存上，
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+#define x first
+#define y second
+typedef pair&amp;lt;int,int&amp;gt; PII;
+const int N=100010,INF=0x3f3f3f3f;
+PII s[N];
+int n,m;
+int ans,st,ed;
+
+int main()
+{
+	while(~scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;m))
+	{
+		if(!n &amp;amp;&amp;amp; !m) break;
+		s[0]=make_pair(0,0);
+		for(int i=1;i&amp;lt;=n;i++)
+		{
+			scanf(&amp;quot;%d&amp;quot;,&amp;amp;s[i].x);
+			s[i].y=i;
+			s[i].x+=s[i-1].x;
+		}
+		
+		sort(s,s+n+1);
+		
+		while(m--)
+		{
+			int t;
+			scanf(&amp;quot;%d&amp;quot;,&amp;amp;t);
+			int l=0,r=1;
+			int mi=INF;
+			while(r&amp;lt;=n)                                            
+			{
+				int val=s[r].x-s[l].x;
+				if(abs(val-t) &amp;lt; mi)
+				{                              
+					mi=abs(val-t);
+					ans=val;
+					st=s[l].y;
+					ed=s[r].y;
+				}
+				
+				if(val &amp;lt; t) r++;
+				else if(val &amp;gt; t) l++;
+				else break;
+				
+				if(l == r) r++;
+			}
+			
+			if(st &amp;gt; ed) swap(st,ed);
+			
+			printf(&amp;quot;%d %d %d\n&amp;quot;,ans,st+1,ed);
+		}
+	}
+	return 0;
+}
+
+
+由于序列不能为空，如果l==r,则r++。
+我们更新答案的时候左右区间端点为乱序，输出的时候调整一下。
+
+poj2739
+题意：找到某一个区间使得区间内的数的和等于某一给定值k。
+设输入为x，只要判断x是否可以表示为x=y(i)+y(i+1)+y(i+2)+...+y(i+m)，即可，其中y为某一个素数。只要设置两个变量i，j，分别指向这个连续素数串的头和尾，不停的移动寻找解即可。不过首先需要得到10000以内的所有素数，如果每次输入都计算这些素数，没有必要而且可能会超时，所以先把所有素数计算出来并存储在一个数组中。
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=10010;
+int primes[N],cnt;
+int n;
+
+bool isprime(int x)
+{
+	for(int i=2;i*i&amp;lt;=x;i++)
+		if(x%i == 0) 
+			return false;
+	return true;
+}
+
+void init(int n)
+{
+	for(int i=2;i&amp;lt;=n;i++)
+		if(isprime(i))
+			primes[cnt++]=i;
+}
+
+int main()
+{
+	init(N-1);
+
+	while(~scanf(&amp;quot;%d&amp;quot;,&amp;amp;n))
+	{
+	    if(!n) break;
+	    int l=0,r=0;
+    	int ans=0;
+    	int sum=0;
+    	
+    	while(1)
+	    {
+    		while(r&amp;lt;cnt &amp;amp;&amp;amp; sum&amp;lt;n)
+    			sum+=primes[r++];
+    		if(sum &amp;lt;n) break;
+    		
+    		if(sum == n)
+    			ans++;
+    		sum-=primes[l++];
+	    }
+	    
+	    printf(&amp;quot;%d\n&amp;quot;,ans);
+	}
+
+	return 0;
+}
+
+poj2100
+题意:给你一个数，询问有多少种连续自然数的平方和等于这个数，输出所有可能
+题解:尺取法遍历所有符合条件的区间，满足的话记录左边界以及右边界，计数器+1。
+尺取法过程:
+
+
+1.初始化左右端点
+
+
+2.不断扩大右端点，直到满足条件
+
+
+3.如果第二步中无法满足条件，则终止，否则更新结果
+
+
+4.将左端点扩大1，然后回到第二步
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;vector&amp;gt;
+using namespace std;
+#define x first 
+#define y second
+typedef long long LL;
+typedef pair&amp;lt;int,int&amp;gt; PII;
+const int N=1e7+10;
+vector&amp;lt;PII&amp;gt; ans;
+LL n;
+
+int main()
+{
+	while(~scanf(&amp;quot;%lld&amp;quot;,&amp;amp;n))
+	{
+		ans.clear();
+		
+		LL l=1,r=1;
+		LL sum=0;
+		
+		while(1)
+		{
+			while(r*r &amp;lt;= n &amp;amp;&amp;amp; sum &amp;lt; n)
+				sum+=r*r,r++;
+			
+			if(sum &amp;lt; n) break;
+			
+			if(sum == n) ans.push_back(make_pair(l,r-1));
+			
+			sum-=l*l,l++;
+		}
+		
+		printf(&amp;quot;%d\n&amp;quot;,ans.size());
+		for(int i=0;i&amp;lt;ans.size();i++)
+		{
+			printf(&amp;quot;%d &amp;quot;,ans[i].y-ans[i].x+1);
+			for(int j=ans[i].x;j&amp;lt;ans[i].y;j++)
+				printf(&amp;quot;%d &amp;quot;,j);
+			printf(&amp;quot;%d\n&amp;quot;,ans[i].y);
+		}	
+	}
+	
+	return 0;
+}
+
+hdu5672
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N=1e6+10;
+char s[N];
+int cnt[30];
+int k;
+
+int main()
+{
+	int T;
+	cin&amp;gt;&amp;gt;T;
+	while(T--)
+	{
+		memset(cnt,0,sizeof cnt);
+		scanf(&amp;quot;%s&amp;quot;,s);
+		scanf(&amp;quot;%d&amp;quot;,&amp;amp;k);
+		int n=strlen(s);
+		int l=0,r=0;
+		LL ans=0;
+		int sum=0;
+		
+		while(1)
+		{
+			while(r&amp;lt;n &amp;amp;&amp;amp; sum&amp;lt;k)
+				if(cnt[s[r++]-&#39;a&#39;]++ == 0)
+					sum++;
+			
+			if(sum &amp;lt; k) break;
+			
+			ans+=n-r+1;
+			
+			if(--cnt[s[l++]-&#39;a&#39;] == 0) sum--;
+		}
+		
+		printf(&amp;quot;%lld\n&amp;quot;,ans);
+	}
+	return 0;
+}
+
+P1638
+博览馆正在展出由世上最佳的 M 位画家所画的图画。
+wangjy想到博览馆去看这几位大师的作品。
+可是，那里的博览馆有一个很奇怪的规定，就是在购买门票时必须说明两个数字，a和b，代表他要看展览中的第 a 幅至第 b 幅画(包含 a 和 b)之间的所有图画，而门票的价钱就是一张图画一元。
+为了看到更多名师的画，wangjy希望入场后可以看到所有名师的图画(至少各一张)。
+可是他又想节省金钱。。。
+作为wangjy的朋友，他请你写一个程序决定他购买门票时的 a 值和 b 值。
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=1e6+10,M=2010;
+int a[N],cnt[M];
+int n,m;
+
+int main()
+{
+	scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;m);
+	
+	for(int i=1;i&amp;lt;=n;i++)
+		scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]);
+		
+	int l=1,r=1;
+	int sum=0;
+	int ans=n;
+	int al=1,ar=n;//初始化
+	
+	while(1)
+	{
+		while(r&amp;lt;=n &amp;amp;&amp;amp; sum&amp;lt;m)
+			if(cnt[a[r++]]++ == 0)
+				sum++;
+		
+		if(sum &amp;lt; m) break;
+		
+		if(ans &amp;gt; r-l) ans=r-l,al=l,ar=r-1;
+		
+		if(--cnt[a[l++]] == 0) sum--;
+	}
+	
+	printf(&amp;quot;%d %d\n&amp;quot;,al,ar);
+	
+	return 0;
+}
+
+hdu5056
+
+如果有一段字符刚刚好满足条件，那么后面的包含这个串的子串全部满足，我们可以尺取l和r，对于一个r满足的话，后面len  -  r + 1个子串也满足，然后更新l就可以了，因为l和r是分开更新的，所以复杂度是O(n)。
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N=100010;
+char s[N];
+int cnt[30];
+int k;
+
+int main()
+{
+    int T;
+    cin&amp;gt;&amp;gt;T;
+    while(T--)
+    {
+        memset(cnt,0,sizeof cnt);
+        scanf(&amp;quot;%s&amp;quot;,s);
+        scanf(&amp;quot;%d&amp;quot;,&amp;amp;k);
+        int n=strlen(s);
+        int l=0,r=0;
+        LL ans=0;
+        
+        while(l&amp;lt;n)
+        {
+            while(r&amp;lt;n)
+            {
+                cnt[s[r]-&#39;a&#39;]++;
+                if(cnt[s[r]-&#39;a&#39;] &amp;lt;= k)
+                    ans+=r-l+1,r++;
+                else 
+                {
+                    cnt[s[r]-&#39;a&#39;]--;
+                    break;
+                }
+            }
+                
+            cnt[s[l]-&#39;a&#39;]--,l++;
+        }
+        printf(&amp;quot;%lld\n&amp;quot;,ans);
+    }
+    return 0;
+}
+
+hdu5358
+log2(f(i,j))表示f(i,j)转换为2进制的长度，然后我们经过分析log2(f(i,j))+1的值域为[1,34]然后我们枚举log2(f(i,j))+1的值，例如我们枚举其值为k，对于一个k我们找到所有满足条件的区间(i,j),这个条件的代数表达为
+2k−1+1&amp;lt;=f(i,j)+1&amp;lt;=2k2^{k-1}+1&amp;lt;= f(i,j)+1 &amp;lt;=2^k2k−1+1&amp;lt;=f(i,j)+1&amp;lt;=2k;
+因此我们需要再枚举一个区间的左端点，对于一个给定的左端点，因为f(i,j)在给定i的情况下单调，我们可以用尺取法求得一个区间[l,r]，使得区间内的j (l&amp;lt;=j&amp;lt;=r)都瞒住log2sum(i,j)+1=klog_2sum(i,j)+1=klog2​sum(i,j)+1=k;
+区间(i+j)的和可以表示为 i*(r-l+1) + (r+l)*(r-l+1)/2
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cmath&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N=100010;
+LL s[N];
+int n;
+
+int main()
+{
+	//cout&amp;lt;&amp;lt;log2(1e10)&amp;lt;&amp;lt;endl;
+	int T;
+	cin&amp;gt;&amp;gt;T;
+	while(T--)
+	{
+		scanf(&amp;quot;%d&amp;quot;,&amp;amp;n);
+		
+		for(int i=1;i&amp;lt;=n;i++)
+		{
+			scanf(&amp;quot;%lld&amp;quot;,&amp;amp;s[i]);
+			s[i]+=s[i-1];
+		}
+		
+		LL ans=0;
+		for(LL k=1;k&amp;lt;=34;k++)
+		{
+			LL l=1,r=1;
+			LL lmax=1ll&amp;lt;&amp;lt;(k-1),rmax=1ll&amp;lt;&amp;lt;k;
+			if(k == 1) lmax=0;
+			for(LL i=1;i&amp;lt;=n;i++)
+			{
+				l=max(l,i),r=max(r,i);
+				while(l&amp;lt;=n &amp;amp;&amp;amp; s[l]-s[i-1] &amp;lt; lmax)
+					l++;
+				while(r&amp;lt;=n &amp;amp;&amp;amp; s[r]-s[i-1] &amp;lt; rmax)
+					r++;
+				r--;
+				ans+=k*(i*(r-l+1)+(l+r)*(r-l+1)/2);
+			}
+		}
+		printf(&amp;quot;%lld\n&amp;quot;,ans);
+	}
+	
+	return 0;
+}
+
+P1102
+我们考虑题目要求求出所有A-B=C的数对，我们可以先将原数组排序，然后就会发现每个数A，对应的数B一定是一段连续的区间。
+然后我们再考虑如何去找到这个区间。
+我们显然是要找到这个连续区间的左端点和右端点。
+考虑到排序之后序列的有序性，我们枚举每个数，他们的左端点和右端点都是单调不降的，因此我们可以用双指针来维护这个东西。
+具体的实现就是，我们维护两个右端点r1 , r2，每次r1右移到a[r1] - a[l] &amp;lt;c的最后位置的下一位，r2右移到满足a[r2] - a[l] &amp;lt;= c最后一位.
+也就是说， 此时如果a[r2-1] - a[l] == c &amp;amp;&amp;amp; a[r1] - a[l] == c，中间的那一段一定都是满足条件的，我们让ans += r2 - r1即可。
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N=200010;
+int a[N];
+
+int main()
+{
+	int n,c;
+	cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;c;
+	for(int i=0;i&amp;lt;n;i++) cin&amp;gt;&amp;gt;a[i];
+	
+	sort(a,a+n);
+	
+	int l=0,r1=0,r2=0;
+	LL ans=0;
+	
+	while(l&amp;lt;n)
+	{
+		while(r1&amp;lt;n &amp;amp;&amp;amp; a[r1]-a[l] &amp;lt; c) r1++;
+		while(r2&amp;lt;n &amp;amp;&amp;amp; a[r2]-a[l] &amp;lt;= c) r2++;
+		if(a[r2-1] - a[l] == c &amp;amp;&amp;amp; a[r1]-a[l] == c)
+			ans+=r2-r1;
+		l++;
+	}
+	printf(&amp;quot;%lld\n&amp;quot;,ans);
+	
+	return 0;
+}
+
+uva11572
+给出 n个数，找尽量长的一个子序列，使得该子序列中没有重复的元素。
+右指针往右跳到不重复的最远位置,更新答案,然后左指针往右跳一位,左右指针都只跳了n次,所以查询的复杂度是O(n)
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;map&amp;gt;
+using namespace std;
+const int N=1e6+10;
+int a[N],b[N],cnt[N];
+int n;
+
+int main()
+{
+	int T;
+	cin&amp;gt;&amp;gt;T;
+	while(T--)
+	{
+		
+		scanf(&amp;quot;%d&amp;quot;,&amp;amp;n);
+		for(int i=0;i&amp;lt;n;i++)
+			scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]),b[i]=a[i];
+			
+		sort(b,b+n);
+		
+		int tot=unique(b,b+n)-b;
+		
+		for(int i=0;i&amp;lt;n;i++)
+			a[i]=lower_bound(b,b+tot,a[i])-b;
+
+		int l=0,r=0;
+		int ans=0;
+		
+		for(int i=0;i&amp;lt;tot;i++) cnt[i]=0;
+		
+		while(r&amp;lt;n)
+		{
+			while(r&amp;lt;n &amp;amp;&amp;amp; cnt[a[r]] == 0)
+				cnt[a[r++]]++;
+			
+			ans=max(ans,r-l);
+			
+			cnt[a[l++]]--;
+		}
+		
+		printf(&amp;quot;%d\n&amp;quot;,ans);
+	}
+	return 0;
+}
+
+cf660C
+大意：给定一个包含nn个元素的数组aa。数组a的每个元素不是00就是11。
+现在，让我们用f(a)表示a中连续元素序列中最长子段的长度，它只包含数字1。并且你最多可以将k个0更改为1来得到最大的f(a)。
+贪心：对于一个含0的区间，我们让区间中的0都填满是最优的
+于是维护一段区间，保证区间中的0的个数≤k就可以
+于是就可以对于0的个数≤k时右移右端点，增添新的位置，扩大区间；
+当[l,r]中0的个数＞k时右移l，到[l,r]中0的个数≤k时为止
+注意边界和初始化
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=3e5+10;
+int a[N];
+int n,k;
+
+int main()
+{
+	scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;k);
+	for(int i=1;i&amp;lt;=n;i++)	
+		scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]);
+		
+	int l=1,r=1;
+	int ans=0;
+	int sum=0;
+	int al=0,ar=0;
+	
+	while(r&amp;lt;=n)
+	{
+		while(r&amp;lt;=n &amp;amp;&amp;amp; sum&amp;lt;=k)
+		{
+			if(!a[r])
+			{
+				if(sum == k) break;//注意点！
+				else sum++;
+			}
+			r++;
+		}
+		
+		if(ans &amp;lt; r-l) ans=r-l,al=l,ar=r-1;
+		
+		if(!a[l++]) sum--;
+	}
+	
+	printf(&amp;quot;%d\n&amp;quot;,ans);
+	for(int i=1;i&amp;lt;=n;i++)
+		if(i&amp;gt;=al &amp;amp;&amp;amp; i&amp;lt;=ar)
+			printf(&amp;quot;1 &amp;quot;);
+		else 
+			printf(&amp;quot;%d &amp;quot;,a[i]);
+		
+	return 0;
+}
+
+尺取法的模型便是这样：根据区间的特征交替推进左右端点求解问题，其高效的原因在于避免了大量的无效枚举，其区间枚举都是根据区间特征有方向的枚举。
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://caifxh.github.io/post/chi-qu-fa/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+            <article class="post i-card">
+                <h2 class="post-title">
+                    <a href="https://caifxh.github.io/post/si-bian-xing-bu-deng-shi/">
+                        四边形不等式
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2020-04-09</time>
+                    
+                        <a href="https://caifxh.github.io/tag/Iu6lDT60Hd/" class="post-tag i-tag
+                            i-tag-success">
+            #DP
+        </a>
+                        
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            四边形不等式优化主要针对区间DP模型。
+转移方程形如：
+f[i][j] = min(f[i][k] + f[k + 1][j] + w(i, j))
+对于每个区间都要枚举 k
+时间复杂度 O(n3n^3n3)
+状态数已经定好了是 O(n2n^2n2)，我们能想办法优化的部分就是把 O(n) 的转移优化到 O(1)
+这里就要用到四边形不等式优化。
+对于 a &amp;lt; b &amp;lt; c &amp;lt; d：
+如果有 f(a, c) + f(b, d) &amp;lt;= f(b, c) + f(a, d) 交叉 &amp;lt;= 包含
+我们就称 f 满足四边形不等式。
+如果代价函数 w(i,j) 满足单调性和四边形不等式，那么 dp 函数 f(i,j) 也满足四边形不等式。
+定义 s(i,j) 为 f(i,j) 取得最优值对应的转移（即 k）
+如果 f(i,j) 满足四边形不等式，那么 s(i,j) 单调
+即s(i,j)≤s(i,j+1)≤s(i+1,j+1)
+应用背景
+
+
+
+四边形不等式定义和单调性定义
+
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int N=310,INF=0x3f3f3f3f;
+int f[N][N];
+int sum[N];
+int s[N][N];
+int n;
+
+int main()
+{
+    cin&amp;gt;&amp;gt;n;
+
+    for(int i=1;i&amp;lt;=n;i++)
+    {
+        cin&amp;gt;&amp;gt;sum[i];
+        sum[i]+=sum[i-1];
+        s[i][i]=i;
+    }
+
+    for(int len=2;len&amp;lt;=n;len++)
+    {
+        for(int i=1;i+len-1&amp;lt;=n;i++)
+        {
+            int j=i+len-1;
+            f[i][j]=INF;
+            for(int k=s[i][j-1];k&amp;lt;=s[i+1][j];k++)
+                if(f[i][j] &amp;gt; f[i][k]+f[k+1][j]+sum[j]-sum[i-1])
+                {
+                    f[i][j] = f[i][k]+f[k+1][j]+sum[j]-sum[i-1];
+                    s[i][j]=k;
+                }
+        }
+    }
+
+    cout&amp;lt;&amp;lt;f[1][n]&amp;lt;&amp;lt;endl;
+
+    return 0;
+}
+
+
+acwing1068
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=210,INF=0x3f3f3f3f;
+int f[N][N];
+int g[N][N];
+int w[N];
+int sum[N];
+int s[N][N];
+int n;
+
+int main()
+{
+    cin&amp;gt;&amp;gt;n;
+    
+    for(int i=1;i&amp;lt;=n;i++)
+    {
+        cin&amp;gt;&amp;gt;w[i];
+        w[n+i]=w[i];
+    }
+    
+    for(int i=1;i&amp;lt;=n*2;i++)
+    {
+        sum[i]=sum[i-1]+w[i];
+        s[i][i]=i;
+    }
+    
+    for(int len=2;len&amp;lt;=n*2;len++)
+    {
+        for(int i=1;i+len-1&amp;lt;=n*2;i++)
+        {
+            int j=i+len-1;
+            f[i][j]=INF;
+            for(int k=s[i][j-1];k&amp;lt;=s[i+1][j];k++)
+                if(f[i][j] &amp;gt; f[i][k]+f[k+1][j]+sum[j]-sum[i-1])
+                {
+                    f[i][j] = f[i][k]+f[k+1][j]+sum[j]-sum[i-1];
+                    s[i][j]=k;
+                }
+                
+            g[i][j]=max(g[i+1][j],g[i][j-1])+sum[j]-sum[i-1];
+        }
+    }
+    
+    int maxv=0;
+    int minv=INF;
+    for(int i=1;i&amp;lt;=n;i++)
+    {
+        maxv=max(maxv,g[i][n+i-1]);
+        minv=min(minv,f[i][n+i-1]);
+    }
+    
+    cout&amp;lt;&amp;lt;minv&amp;lt;&amp;lt;endl&amp;lt;&amp;lt;maxv&amp;lt;&amp;lt;endl;
+    
+    return 0;
+}
+
+四边形不等式定理
+
+一维线性DP的四边形不等式优化
+
+比赛时，我们只要先写出暴力的 DP 然后打出 cost、dp、和决策数组，验证 cost、dp函数是否满足四边形不等式，
+以及决策是否具有单调性。
+
+拿到题目后，先判断w是否单调、是否满足四边形不等式，再使用四边形不等式优化DP。
+
+最优二叉搜索树
+
+
+
+题目给出的数列(val)是有序的，假设我们以i为根，1i-1就是左子树，i+1n就是右子树
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=260;
+int w[N];
+int sum[N];
+int s[N][N];
+int f[N][N];
+int n;
+
+int main()
+{
+	while(~scanf(&amp;quot;%d&amp;quot;,&amp;amp;n))
+	{
+		for(int i=1;i&amp;lt;=n;i++)
+		{
+			cin&amp;gt;&amp;gt;w[i];
+			sum[i]=sum[i-1]+w[i];
+			s[i][i]=i;
+		}
+		
+		for(int len=1;len&amp;lt;=n;len++)
+		{
+			for(int i=1;i+len-1&amp;lt;=n;i++)
+			{
+				int j=i+len-1;
+				f[i][j]=1e9;
+				if(len == 1) f[i][j]=0;
+				
+				for(int k=s[i][j-1];k&amp;lt;=s[i+1][j];k++)
+					if(f[i][j] &amp;gt; f[i][k-1]+f[k+1][j]+sum[j]-sum[i-1]-w[k])
+					{
+						f[i][j] = f[i][k-1]+f[k+1][j]+sum[j]-sum[i-1]-w[k];
+						s[i][j]=k;
+					}
+			}
+		}
+		
+		cout&amp;lt;&amp;lt;f[1][n]&amp;lt;&amp;lt;endl;
+	}
+	return 0;
+}
+
+hdu2829
+有 n 个火车站，第 i 个火车站有一个重要度 a[i]。
+你现在可以炸掉 m 条铁轨。这样铁轨就断成了 m + 1 段，每一段都有一个战略值，它等于这一段铁轨上的火车站两两的重要度乘积之和。请你最小化总的战略值之和。
+0 ≤ m &amp;lt; n ≤ 1000
+斜率优化：
+
+那么，就有：dp[i][j] = min( dp[k][j-1] + w[k+1][i] )，j≤k&amp;lt;i；
+方程的意义是：炸毁仓库k和仓库k+1之间的那段铁路（即第k段铁路），算出总价值，枚举k找到最小的。
+那么如何计算w[k+1][i]呢？假设sum[i]=∑k=1iv[k]\sum_{k=1}^{i}v[k]∑k=1i​v[k] ，那么就有：w[1][i] = w[1][k] + w[k+1][i] + (v[1]+v[2]+…+v[k]) × (v[k+1]+v[k+2]+…+v[i])= w[1][k] + w[k+1][i] + sum[k] × (sum[i]-sum[k])
+即w[k+1][i] = w[1][i] - w[1][k] - sum[k] × (sum[i]-sum[k])
+我们把w[k+1][i]的计算式带入状态转移方程得到：
+dp[i][j] = min{ dp[k][j-1] + w[1][i] - w[1][k] - sum[k] × (sum[i]-sum[k]) }
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N=1010;
+int f[N][N];
+int s[N],w[N];
+int q[N];
+int n,m;
+
+int getY(int i,int j,int k)
+{
+	return f[i-1][j]-w[j]+s[j]*s[j]-f[i-1][k]+w[k]-s[k]*s[k];
+}
+
+int getX(int i,int j)
+{
+	return s[i]-s[j];
+}
+
+int main()
+{
+	while(~scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;m))
+	{
+		if(!n &amp;amp;&amp;amp; !m) break;
+		
+		for(int i=1;i&amp;lt;=n;i++)
+		{
+			int x;
+			scanf(&amp;quot;%d&amp;quot;,&amp;amp;x);
+			s[i]=s[i-1]+x;
+			w[i]=w[i-1]+s[i-1]*x;
+			f[0][i]=w[i];
+		}
+		
+		for(int i=1;i&amp;lt;=m;i++)
+		{
+			int hh=0,tt=-1;
+			q[++tt]=0;
+			for(int j=1;j&amp;lt;=n;j++)
+			{
+				while(hh &amp;lt; tt &amp;amp;&amp;amp; getY(i,q[hh+1],q[hh]) &amp;lt;= s[j]*getX(q[hh+1],q[hh]))
+					hh++;
+				int k=q[hh];
+				f[i][j]=f[i-1][k]+w[j]-w[k]-s[k]*(s[j]-s[k]);
+				
+				while(hh &amp;lt; tt &amp;amp;&amp;amp; getY(i,q[tt],q[tt-1])*getX(j,q[tt]) &amp;gt;= getY(i,j,q[tt])*getX(q[tt],q[tt-1]))
+					tt--;
+				q[++tt]=j;
+			}			
+		}
+		
+		printf(&amp;quot;%d\n&amp;quot;,f[m][n]);
+	}
+	return 0;
+}
+
+四边形不等式：
+用 f[i][j] 来表示在前 j 个火车站中用了 i 个炸弹得到的最小的战略值总和。
+枚举上一次使用炸弹的位置 k，得到
+f[i][j] = min(f[i - 1][k] + w[k + 1][j])(i-1 &amp;lt; k &amp;lt; j)
+w[i][j] = [i, j] 中两两乘积之和= [(a[i] + a[i + 1] + … + a[j])2 - (a[i]2 + a[i + 1]2 + … + a[j]2)] / 2
+可以验证它是满足单调性和四边形不等式的。
+因此这题可以用四边形不等式来优化。
+f[i][j] = min(f[i - 1][k] + w[k + 1][j])
+(s[i-1][j] &amp;lt; k &amp;lt; s[i+1][j])
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N=1010;
+int f[N][N];
+int a[N];
+int w[N][N];
+int p[N][N];
+int n,m;
+
+int main()
+{
+	while(~scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;m))
+	{
+		if(!n &amp;amp;&amp;amp; !m) break;
+		
+		for(int i=1;i&amp;lt;=n;i++) scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]);
+		
+		for(int i=1;i&amp;lt;=n;i++)
+		{
+			int sum=0;
+			w[i][i]=0;
+			for(int j=i+1;j&amp;lt;=n;j++)
+			{
+				sum+=a[j-1];
+				w[i][j]=w[i][j-1]+sum*a[j];
+			}
+		}
+		
+		//      打表
+// 		for(int i=1;i&amp;lt;=n;i++) 
+// 		{
+// 		    for(int j=1;j&amp;lt;=n;j++)
+// 		        cout&amp;lt;&amp;lt;w[i][j]&amp;lt;&amp;lt;&#39; &#39;;
+// 		    cout&amp;lt;&amp;lt;endl;
+// 		}
+		
+		for(int i=0;i&amp;lt;=n;i++)
+		{
+			f[0][i]=w[1][i];
+			p[0][i]=0;
+			p[i][n+1]=n;
+		}
+	
+		
+		for(int i=1;i&amp;lt;=m;i++)
+			for(int j=n;j&amp;gt;=1;j--)
+			{
+				f[i][j]=1e9;
+				for(int k=p[i-1][j];k&amp;lt;=p[i][j+1];k++)
+					if(f[i][j] &amp;gt; f[i-1][k] + w[k+1][j])
+					{
+						f[i][j] = f[i-1][k] + w[k+1][j];
+						p[i][j]=k;
+					}
+			}
+		
+		printf(&amp;quot;%d\n&amp;quot;,f[m][n]);
+	}
+	return 0;
+}
+
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://caifxh.github.io/post/si-bian-xing-bu-deng-shi/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+            <article class="post i-card">
+                <h2 class="post-title">
+                    <a href="https://caifxh.github.io/post/xie-lu-you-hua/">
+                        斜率优化
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2020-04-08</time>
+                    
+                        <a href="https://caifxh.github.io/tag/Iu6lDT60Hd/" class="post-tag i-tag
+                            i-tag-warning">
+            #DP
+        </a>
+                        
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            
+
+hdu3507
+
+
+
+
+
+
+
+
+
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int N=500010;
+int f[N];
+int s[N];
+int q[N];
+int n,m;
+
+int getY(int i,int j)
+{
+	return f[i]+s[i]*s[i]-f[j]-s[j]*s[j];
+}
+
+int getX(int i,int j)
+{
+	return s[i]-s[j];
+}
+
+int main()
+{
+	while(~scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;m))
+	{
+		for(int i=1;i&amp;lt;=n;i++)
+		{
+			scanf(&amp;quot;%d&amp;quot;,&amp;amp;s[i]);
+			s[i]+=s[i-1];
+		}
+		
+		int hh=0,tt=-1;
+		q[++tt]=0;
+		
+		for(int i=1;i&amp;lt;=n;i++)
+		{
+			while(hh&amp;lt;tt &amp;amp;&amp;amp; getY(q[hh+1],q[hh]) &amp;lt;= 2*s[i]*getX(q[hh+1],q[hh]))
+				hh++;
+			int j=q[hh];
+			f[i]=f[j]+(s[i]-s[j])*(s[i]-s[j])+m;
+			while(hh&amp;lt;tt &amp;amp;&amp;amp; getY(q[tt],q[tt-1])*getX(i,q[tt]) &amp;gt;= getY(i,q[tt])*getX(q[tt],q[tt-1]))
+				tt--;
+			q[++tt]=i;
+		}
+		
+		printf(&amp;quot;%d\n&amp;quot;,f[n]);
+	}
+	return 0;
+}
+
+
+acwing302
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N=300010;
+LL st[N],sc[N];
+LL f[N];
+int q[N];
+int n,s;
+
+LL getY(int i,int j)
+{
+    return f[i]-f[j];
+}
+
+LL getX(int i,int j)
+{
+    return sc[i]-sc[j];
+}
+
+int main()
+{
+    cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;s;
+    
+    for(int i=1;i&amp;lt;=n;i++)
+    {
+        scanf(&amp;quot;%lld%lld&amp;quot;,&amp;amp;st[i],&amp;amp;sc[i]);
+        st[i]+=st[i-1];
+        sc[i]+=sc[i-1];
+    }
+    
+    int hh=0,tt=-1;
+    q[++tt]=0;
+    for(int i=1;i&amp;lt;=n;i++)
+    {
+        int l=hh,r=tt;
+        while(l&amp;lt;r)
+        {
+            int mid=l+r&amp;gt;&amp;gt;1;
+            if(getY(q[mid+1],q[mid]) &amp;gt;= (s+st[i])*getX(q[mid+1],q[mid])) r=mid;
+            else l=mid+1;
+        }
+        
+        int j=q[l];
+        f[i]=f[j]-(s+st[i])*sc[j]+s*sc[n]+st[i]*sc[i];
+        while(hh&amp;lt;tt &amp;amp;&amp;amp; getY(q[tt],q[tt-1])*getX(i,q[tt]) &amp;gt;= getY(i,q[tt])*getX(q[tt],q[tt-1]))
+            tt--;
+        q[++tt]=i;
+    }
+    
+    cout&amp;lt;&amp;lt;f[n]&amp;lt;&amp;lt;endl;
+    
+    return 0;
+}
+
+acwing303
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N=100010,M=100010,P=110;
+LL f[P][M];
+LL d[N];
+int t[M],a[M];
+LL s[M];
+int q[M];
+int n,m,p;
+
+LL getY(int i,int j,int k)
+{
+    return f[i-1][j]+s[j]-f[i-1][k]-s[k];
+}
+
+int getX(int i,int j)
+{
+    return i-j;
+}
+
+int main()
+{
+    cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m&amp;gt;&amp;gt;p;
+    
+    for(int i=2;i&amp;lt;=n;i++)
+        cin&amp;gt;&amp;gt;d[i],d[i]+=d[i-1];
+        
+    for(int i=1;i&amp;lt;=m;i++)
+    {
+        int h;
+        cin&amp;gt;&amp;gt;h&amp;gt;&amp;gt;t[i];
+        a[i]=t[i]-d[h];
+    }
+    
+    sort(a+1,a+m+1);
+    
+    
+    for(int i=1;i&amp;lt;=m;i++) s[i]=s[i-1]+a[i];
+    
+    memset(f,0x3f,sizeof f);
+    for(int i=0;i&amp;lt;=p;i++) f[i][0]=0;
+    
+    for(int i=1;i&amp;lt;=p;i++)
+    {
+        
+        int hh=0,tt=-1;
+        q[++tt]=0;
+        
+        for(int j=1;j&amp;lt;=m;j++)
+        {
+            while(hh &amp;lt; tt &amp;amp;&amp;amp; getY(i,q[hh+1],q[hh]) &amp;lt;= (LL)a[j]*getX(q[hh+1],q[hh]))
+                hh++;
+            int k=q[hh];
+            f[i][j]=f[i-1][k]+(LL)a[j]*(j-k)-(s[j]-s[k]);
+            while(hh &amp;lt; tt &amp;amp;&amp;amp; getY(i,q[tt],q[tt-1])*getX(j,q[tt]) &amp;gt;= getY(i,j,q[tt])*getX(q[tt],q[tt-1]))
+                tt--;
+            q[++tt]=j;
+        }
+    }
+
+    cout&amp;lt;&amp;lt;f[p][m]&amp;lt;&amp;lt;endl;
+    
+    return 0;
+}
+
+P2120
+
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N=1000010;
+LL f[N];
+LL x[N],c[N],p[N];
+LL sp[N],sxp[N];
+int q[N];
+int n;
+
+LL getY(int i,int j)
+{
+	return f[i]+sxp[i]-f[j]-sxp[j];
+}
+
+LL getX(int i,int j)
+{
+	return sp[i]-sp[j];
+}
+
+int main()
+{
+	cin&amp;gt;&amp;gt;n;
+	
+	for(int i=1;i&amp;lt;=n;i++)
+	{
+		scanf(&amp;quot;%lld%lld%lld&amp;quot;,&amp;amp;x[i],&amp;amp;p[i],&amp;amp;c[i]);
+		sp[i]=sp[i-1]+p[i];
+		sxp[i]=sxp[i-1]+x[i]*p[i];
+	}
+	
+	int hh=0,tt=-1;
+	q[++tt]=0;
+	
+	for(int i=1;i&amp;lt;=n;i++)
+	{
+		while(hh &amp;lt; tt &amp;amp;&amp;amp; getY(q[hh+1],q[hh]) &amp;lt;= x[i]*getX(q[hh+1],q[hh]))
+			hh++;
+		int j=q[hh];
+		f[i]=f[j]+x[i]*(sp[i]-sp[j])-(sxp[i]-sxp[j])+c[i];
+		while(hh &amp;lt; tt &amp;amp;&amp;amp; getY(q[tt],q[tt-1])*getX(i,q[tt]) &amp;gt;= getY(i,q[tt])*getX(q[tt],q[tt-1]))
+			tt--;
+		q[++tt]=i;
+	}
+	
+	printf(&amp;quot;%lld\n&amp;quot;,f[n]);
+	
+	return 0;
+}
+
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://caifxh.github.io/post/xie-lu-you-hua/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+            <article class="post i-card">
+                <h2 class="post-title">
+                    <a href="https://caifxh.github.io/post/qian-zhui-he-chai-fen/">
+                        前缀和 差分
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2020-04-08</time>
+                    
+                        <a href="https://caifxh.github.io/tag/PJzBixWKZ/" class="post-tag i-tag
+                            i-tag-">
+            #其他算法
+        </a>
+                        
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            前缀和
+给定一个序列a[1−n]a[1-n]a[1−n]。
+有很多次询问，每个询问形如:l r  询问a[l,r]a[l,r]a[l,r]的区间和。
+每次询问的复杂度要求 O(1)
+
+预处理时间复杂度O(n)O(n)O(n)
+for(int i=1;i&amp;lt;=n;i++)
+{
+    scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]);
+    s[i]=s[i-1]+a[i];
+}
+
+a[l,r]a[l,r]a[l,r]的区间和: s[r]-s[l-1]
+查询时间复杂度O(1)O(1)O(1)
+while(m--)
+{
+    int l,r;
+    scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;l,&amp;amp;r);
+    printf(&amp;quot;%d\n&amp;quot;,s[r]-s[l-1]);
+}
+
+PS:前缀和下标从1开始
+区间加/差分
+给定一个序列a[1−n]a[1-n]a[1−n](初值全为0)。
+有很多次操作，每个操作形如:l r  将a[l,r]a[l,r]a[l,r]的每个值加上k。
+最后输出整个数组。复杂度要求O(n)O(n)O(n)
+
+区间加[l,r]，实际上是发生了这两件事：
+a[l]比前一个元素多了k;
+a[r+1]比前一个元素少了k.
+
+我们用数组b表示刚刚的差值，b[i]=a[i]-a[i-1].
+那么：区间加[𝒍,𝒓]，可以化为这两个操作： b[l]+=k; b[r+1]-=k;
+void insert(int l,int r,int c)
+{
+    b[l]+=c;
+    b[r+1]-=c;
+}
+
+因此，一次区间加只修改这两个元素； 最后利用b数组求出a数组(a数组为b数组的前缀和)，对b数组求一遍前缀和即为答案。
+for(int i=1;i&amp;lt;=n;i++)
+{
+    b[i]+=b[i-1];
+    printf(&amp;quot;%d &amp;quot;,b[i]);
+}
+
+PS:数组a初值为0，进行n次插入操作可得到数组a。
+for(int i=1;i&amp;lt;=n;i++)
+    scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]);
+for(int i=1;i&amp;lt;=n;i++)
+    insert(i,i,a[i]);
+
+总结：差分无需构造，前缀和需构造
+通过上述的两个方法，我们能轻易地处理这两类问题：
+
+数组固定，然后大量询问；
+大量做区间加，最后要你给出这个数组。
+
+例题
+Luogu2879
+有好几头牛从１到n线性排列，每头牛的高度为h[i]现在告诉你这里面的牛的最大高 度为maxH,而且有r组关系，每组关系输入两个数字，假设为a和b,表示第a头牛能看到第b头牛，能看到的条件是a, b之间的其它牛的高度都严格小于min(h[a], h[b]),而 h[b] &amp;gt;= h[a] 最后求所有牛的可能最高身高输出
+思路：
+首先假设所有牛都是最高身高。 读入的约束信息需要去重，这个利用排序或者set可以解决。 可以发现对于每个位置h[i],假设它被覆盖了x次，最后答案就是h[i]-x. 如果出现了一对[l,r]，把区间(l,r)的数都-1就可以了。（注意区间开闭）
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;set&amp;gt; 
+using namespace std;
+const int N=10010;
+int height[N];
+set&amp;lt;pair&amp;lt;int,int&amp;gt; &amp;gt; S;
+
+int main()
+{
+	int n,i,h,r;
+	cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;i&amp;gt;&amp;gt;h&amp;gt;&amp;gt;r;
+	height[1]=h;//差分数组 
+	
+	while(r--)
+	{
+		int a,b;
+		cin&amp;gt;&amp;gt;a&amp;gt;&amp;gt;b;
+		if(a&amp;gt;b)
+			swap(a,b);
+		if(!S.count({a,b}))
+		{
+			S.insert({a,b});
+			height[a+1]--;
+			height[b]++;
+		}
+	}
+	
+	for(int i=1;i&amp;lt;=n;i++)
+	{
+		height[i]+=height[i-1];
+		cout&amp;lt;&amp;lt;height[i]&amp;lt;&amp;lt;endl;
+	}
+	return 0;
+ } 
+
+Luogu3406
+该铁路经过N个城市，每个城市都有一个站。不过，由于各个城市之间不能协调好 ，于是乘车每经过两个相邻的城市之间（方向不限），必须单独购买这一小段的车 票。第i段铁路连接了城市i和城市i+1(1&amp;lt;=i&amp;lt;N)。如果搭乘的比较远，需要购买多张 车票。第i段铁路购买纸质单程票需要Ai博艾元。 虽然一些事情没有协调好，各段铁路公司也为了方便乘客，推出了IC卡。对于第i段 铁路，需要花Ci博艾元的工本费购买一张IC卡，然后乘坐这段铁路一次就只要扣 Bi(Bi&amp;lt;Ai)元。IC卡可以提前购买，有钱就可以从网上买得到，而不需要亲自去对应 的城市购买。工本费不能退，也不能购买车票。每张卡都可以充值任意数额。对于 第i段铁路的IC卡，无法乘坐别的铁路的车。 Uim现在需要出差，要去M个城市，从城市P1出发分别按照P1,P2,P3...PM的顺序访 问各个城市，可能会多次访问一个城市，且相邻访问的城市位置不一定相邻，而且 不会是同一个城市。 现在他希望知道，出差结束后，至少会花掉多少的钱，包括购买纸质车票、买卡和 充值的总费用。
+直接模拟每段铁路的覆盖即可
+ #include&amp;lt;iostream&amp;gt;
+using namespace std;
+const int N=100010;
+ int a[N];
+ int b[N];//差分数组 
+ typedef long long LL;
+ 
+ int main()
+ {
+ 	int n,m;
+ 	cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m;
+ 	for(int i=1;i&amp;lt;=m;i++)
+ 		cin&amp;gt;&amp;gt;a[i];
+ 	for(int i=1;i&amp;lt;m;i++)
+ 	{
+ 		b[min(a[i],a[i+1])]++;
+ 		b[max(a[i],a[i+1])]--;
+	 }
+	 
+	 for(int i=1;i&amp;lt;=n;i++)
+	 	b[i]+=b[i-1];
+	
+//	for(int i=1;i&amp;lt;=n;i++)
+//		cout&amp;lt;&amp;lt;&amp;quot;--&amp;quot;&amp;lt;&amp;lt;b[i]&amp;lt;&amp;lt;&#39; &#39;;
+	
+	LL sum=0;
+	for(int i=1;i&amp;lt;n;i++)
+	{
+		LL ai,bi,ci;
+		cin&amp;gt;&amp;gt;ai&amp;gt;&amp;gt;bi&amp;gt;&amp;gt;ci;
+		sum+=min(ai*b[i],ci+bi*b[i]);
+	}
+	
+	cout&amp;lt;&amp;lt;sum&amp;lt;&amp;lt;endl;
+	return 0;
+ }
+
+Luogu1083
+思路1：
+利用差分数组存每天的教室使用情况，然后求前缀和，如果发现不符合要求，就从后往前撤回订单，直到每天都符合要求，那么我们撤回的最后一个（也就是最靠前的一个）即为ans
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+int n,m;
+const int N=1000010,INF=0x3f3f3f3f;
+int a[N];
+int b[N];
+int l[N],r[N],d[N];
+int res=INF;
+
+int main()
+{
+	cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m;
+	
+	for(int i=1;i&amp;lt;=n;i++)
+		scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]);
+	
+	for(int i=1;i&amp;lt;=m;i++)
+	{
+		scanf(&amp;quot;%d%d%d&amp;quot;,&amp;amp;d[i],&amp;amp;l[i],&amp;amp;r[i]);
+		b[l[i]]+=d[i];
+		b[r[i]+1]-=d[i];
+	}
+	
+	int j=m;//从后往前撤回订单，直至满足要求 
+	int sum=0;
+	for(int i=1;i&amp;lt;=n;i++)
+	{
+		sum+=b[i];
+		//cout&amp;lt;&amp;lt;sum&amp;lt;&amp;lt;&#39; &#39;;
+		if(sum&amp;gt;a[i])
+		{
+			//从后往前撤回 
+			while(sum&amp;gt;a[i])
+			{
+				b[l[j]]-=d[j];
+				b[r[j]+1]+=d[j];
+				if(i&amp;gt;=l[j] &amp;amp;&amp;amp; i&amp;lt;=r[j])
+					sum-=d[j];
+				j--;
+			}
+			res=min(res,j);
+		}	
+	}
+	
+	if(res==INF)
+		cout&amp;lt;&amp;lt;&amp;quot;0&amp;quot;;
+    else 
+		cout&amp;lt;&amp;lt;&amp;quot;-1&amp;quot;&amp;lt;&amp;lt;endl&amp;lt;&amp;lt;res+1&amp;lt;&amp;lt;endl;
+    return 0;
+}
+
+思路2：
+在这个题里，因为如果前一份订单都不满足，那么之后的所有订单都不用继续考虑；而如果后一份订单都满足，那么之前的所有订单一定都可以满足，符合局部舍弃性，所以可以二分订单数量。
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+int n,m;
+const int N=1000010,INF=0x3f3f3f3f;
+int a[N];
+int b[N];
+int s[N],t[N],d[N];
+
+bool check(int x)//判断前x份订单能否全部满足 
+{
+	memset(b,0,sizeof b);
+	for(int i=1;i&amp;lt;=x;i++)
+	{
+		b[s[i]]+=d[i];
+		b[t[i]+1]-=d[i];
+	}
+
+	for(int i=1;i&amp;lt;=n;i++)
+	{
+		b[i]+=b[i-1];
+		if(b[i]&amp;gt;a[i])
+			return false;
+	}
+	return true;
+}
+
+int main()
+{
+//	freopen(&amp;quot;test.in.txt&amp;quot;,&amp;quot;r&amp;quot;,stdin);
+//	freopen(&amp;quot;test.out&amp;quot;,&amp;quot;w&amp;quot;,stdout);
+	scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;m);
+	
+	for(int i=1;i&amp;lt;=n;i++)
+		scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]);
+	
+	for(int i=1;i&amp;lt;=m;i++)
+	{
+		scanf(&amp;quot;%d%d%d&amp;quot;,&amp;amp;d[i],&amp;amp;s[i],&amp;amp;t[i]);
+	}
+	if(check(m))
+	{
+		puts(&amp;quot;0&amp;quot;);
+		return 0;
+	}
+	int l=0,r=m;//l取成0，防止无解情况 
+	while(l&amp;lt;r)
+	{
+		int mid=l+r+1&amp;gt;&amp;gt;1;
+		if(check(mid))
+			l=mid;
+		else	
+			r=mid-1;
+	}
+	cout&amp;lt;&amp;lt;-1&amp;lt;&amp;lt;endl;
+	cout&amp;lt;&amp;lt;l+1&amp;lt;&amp;lt;endl;
+
+    return 0;
+}
+
+前缀和+差分
+luoguP3948
+#include&amp;lt;bits/stdc++.h&amp;gt;
+using namespace std;
+const int N=80010;
+typedef long long LL;
+LL b[N];
+int sum[N];
+int n,opt,minn,maxx,l,r,x,f;
+LL mod;
+char ch[5];
+
+int main()
+{
+    scanf(&amp;quot;%d%d%lld%d%d&amp;quot;,&amp;amp;n,&amp;amp;opt,&amp;amp;mod,&amp;amp;minn,&amp;amp;maxx);
+    for(int j=1;j&amp;lt;=opt;j++){
+        scanf(&amp;quot;%s%d%d%&amp;quot;,&amp;amp;ch,&amp;amp;l,&amp;amp;r);
+        if(ch[0]==&#39;A&#39;){
+            scanf(&amp;quot;%d&amp;quot;,&amp;amp;x);
+            b[l]+=x;
+            b[r+1]-=x;
+        }
+        else{
+            int ans=0;
+			LL now=0;
+            for(int i=1;i&amp;lt;=r;i++){
+                now+=b[i];
+                if(i&amp;gt;=l&amp;amp;&amp;amp;(now*i)%mod&amp;gt;=minn&amp;amp;&amp;amp;(now*i)%mod&amp;lt;=maxx)ans++;
+            }
+            printf(&amp;quot;%d\n&amp;quot;,ans);
+        }
+    }
+    scanf(&amp;quot;%d&amp;quot;,&amp;amp;f);
+    for(int i=1;i&amp;lt;=n;i++){
+        b[i]+=b[i-1];
+        if((b[i]*i)%mod&amp;gt;=minn&amp;amp;&amp;amp;(b[i]*i)%mod&amp;lt;=maxx)sum[i]=sum[i-1]+1;
+        else sum[i]=sum[i-1];
+    }
+    for(int j=1;j&amp;lt;=f;j++){
+        scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;l,&amp;amp;r);
+        printf(&amp;quot;%d\n&amp;quot;,sum[r]-sum[l-1]);
+    }
+    return 0;
+}
+
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://caifxh.github.io/post/qian-zhui-he-chai-fen/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+            <article class="post i-card">
+                <h2 class="post-title">
+                    <a href="https://caifxh.github.io/post/dan-diao-shu-ju-jie-gou/">
+                        单调数据结构
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2020-04-08</time>
+                    
+                        <a href="https://caifxh.github.io/tag/PJzBixWKZ/" class="post-tag i-tag
+                            i-tag-success">
+            #其他算法
+        </a>
+                        
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            单调栈
+
+给定一个序列。对序列中的每个元素，求出它左侧的第一个小于它 的元素的位置。若没有这样的元素，输出0。
+
+样例输入：
+4
+5 3 7 4
+样例输出：
+0 0 2 2
+
+模板题1
+#include&amp;lt;iostream&amp;gt;
+using namespace std;
+const int N=100010;
+int stk[N],top;
+
+int main()
+{
+    int n;
+    cin&amp;gt;&amp;gt;n;
+    while(n--)
+    {
+        int x;
+        cin&amp;gt;&amp;gt;x;
+        while(top&amp;amp;&amp;amp;stk[top]&amp;gt;=x)
+            top--;
+        if(top)  
+            cout&amp;lt;&amp;lt;stk[top]&amp;lt;&amp;lt;&amp;quot; &amp;quot;;
+        else 
+            cout&amp;lt;&amp;lt;-1&amp;lt;&amp;lt;&amp;quot; &amp;quot;;
+        stk[++top]=x;
+    }
+    return 0;
+}
+
+模板题2
+找出第 i 个元素之后第一个大于 ai的元素的下标
+分析：
+从后往前枚举，对于i&amp;lt;j,若a[i]&amp;gt;=a[j],则j不可能成为下标小于i的元素的答案。
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+const int N=3e6+10;
+int stk[N],top;
+int n;
+int a[N];
+int ans[N];
+
+int main()
+{
+	cin&amp;gt;&amp;gt;n;
+	for(int i=1;i&amp;lt;=n;i++) scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]);
+	
+	for(int i=n;i&amp;gt;=1;i--)
+	{
+		while(top &amp;amp;&amp;amp; a[stk[top]] &amp;lt;= a[i]) top--;
+		
+		if(top) ans[i]=stk[top];
+		else ans[i]=0;
+		
+		stk[++top]=i;
+		
+	}
+	
+	for(int i=1;i&amp;lt;=n;i++) printf(&amp;quot;%d &amp;quot;,ans[i]);
+	return 0;
+}
+
+例题
+poj2559
+
+首先考虑最大面积的矩形X的左右边界的性质：
+设其左边界为L，右边界为R，则其高H = min{h[i] | L &amp;lt;= i &amp;lt;= R}
+此时最大面积为 (R - L + 1) * H
+若此时左边界的左边那个矩形的高度 h[L-1] &amp;gt;= H
+则左边界可以向左拓展，则新的面积为：
+(R - (L-1) + 1) * H &amp;gt; 原面积
+则与原假设条件冲突
+故左边界左边的那个矩形的高度 :h[L-1] &amp;lt; H
+同理右边界右边的那个矩形的高度： h[R+1] &amp;lt; H
+设H = h[i]
+所以左边界L是满足h[j-1] &amp;lt; h[i]的最大的j，即从i点向左遍历的第一个高度比i小的点的右边一个点
+而右边界R是满足 h[j+1] &amp;lt; h[i]的最小的j，即从i点向右遍历第一个高度比i小的点的左边一个点
+所以我们可以利用单调栈的性质得到每个确定点，即确定高度的最大面积矩形的左右边界，然后枚举取最大即可。
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N=100010;
+int h[N];
+int l[N],r[N];
+int stk[N],top;
+int n;
+
+int main()
+{
+	while(~scanf(&amp;quot;%d&amp;quot;,&amp;amp;n) &amp;amp;&amp;amp; n)
+	{
+		top=0;
+		for(int i=1;i&amp;lt;=n;i++)
+			scanf(&amp;quot;%d&amp;quot;,&amp;amp;h[i]);
+		
+		for(int i=1;i&amp;lt;=n;i++)//找出h[i]左边第一个小于h[i]的位置 
+		{
+			while(top &amp;amp;&amp;amp; h[stk[top]] &amp;gt;= h[i]) 
+				top--;
+			
+			if(top) l[i]=stk[top]+1;
+			else l[i]=1;//表示左边没有比h[i]小的位置 
+			
+			stk[++top]=i;
+		}
+		
+		top=0;
+		for(int i=n;i&amp;gt;=1;i--)//找出h[i]右边第一个小于h[i]的位置 
+		{
+			while(top &amp;amp;&amp;amp; h[stk[top]] &amp;gt;= h[i])
+				top--;
+			if(top) r[i]=stk[top]-1;
+			else r[i]=n;//表示右边没有比h[i]大的位置 
+				
+			stk[++top]=i; 
+		}
+		
+		LL ans=0;
+		for(int i=1;i&amp;lt;=n;i++)
+			ans=max(ans,(LL)h[i]*(r[i]-l[i]+1));
+	
+		printf(&amp;quot;%lld\n&amp;quot;,ans);
+	}
+	return 0;
+}
+
+P1901
+对于一个新的信号塔:
+
+当他加入栈中时,会挡住之前比它低的塔的传播,同时 , 也会接受到比它低的塔的信号
+所以将栈顶所有比它低的塔删除,(因为他们已经不能再传播给其他塔信号了),同时 , 新的塔接收到的能量加上 删掉的塔传播的能量
+对于原有的高度比它高的信号塔,离此新的信号塔最近的(当前栈顶元素),会接受到新的塔的信号
+再将此新的信号塔加入栈中,最后O(n)扫一遍后,输出最大值即可
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=1e6+10;
+int stk[N],top;
+int sum[N];
+int h[N],w[N];
+int n;
+
+int main()
+{
+	cin&amp;gt;&amp;gt;n;
+	for(int i=1;i&amp;lt;=n;i++)
+	{
+		cin&amp;gt;&amp;gt;h[i]&amp;gt;&amp;gt;w[i];
+		
+		while(top &amp;amp;&amp;amp; h[stk[top]] &amp;lt;= h[i])
+			sum[i]+=w[stk[top--]];
+		sum[stk[top]]+=w[i];
+		
+		stk[++top]=i;
+	}
+	
+	int ans=0;
+	for(int i=1;i&amp;lt;=n;i++)
+		ans=max(ans,sum[i]);
+	
+	printf(&amp;quot;%d\n&amp;quot;,ans);
+	return 0;
+}
+
+P1823
+先假设每个人身高不同，脑补一下走过整个队列。
+
+观察队伍中的一个人A。如果我们他后面找到了一个比他不知道高到哪里去了的B，A就不能与B后面的人谈笑风生了。
+因此我们可以维护一个单调栈，记录我们已经找到过的高人，显然栈上的高人们按高度的降序排列，栈顶的人最矮。
+当我们找到一个新的高人时，他可以向栈里比他矮的人传授人生经验，并让他们出栈。如果出栈之后栈非空，他还可以与栈顶的高人谈笑风生。然后我们再另请这位高明进栈。
+我们还要考虑两个人身高相同的情况。我们可以在栈里存pair&amp;lt;身高，人数&amp;gt;并维护它。
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+typedef pair&amp;lt;int,int&amp;gt; PII;
+#define x first
+#define y second
+typedef long long LL;
+const int N=500010;
+int h[N];
+PII stk[N];
+int top;
+int n;
+
+int main()
+{
+	cin&amp;gt;&amp;gt;n;
+	LL ans=0;
+	for(int i=1;i&amp;lt;=n;i++)
+	{
+		scanf(&amp;quot;%d&amp;quot;,&amp;amp;h[i]);
+		
+		PII p=make_pair(h[i],1);
+		while(top &amp;amp;&amp;amp; stk[top].x &amp;lt;= h[i])
+		{
+			if(stk[top].x == h[i]) 
+				p.y+=stk[top].y;
+			ans+=stk[top].y;
+			top--;
+		}
+		
+		if(top) ans++;
+		stk[++top]=p;
+	}
+	printf(&amp;quot;%lld\n&amp;quot;,ans);
+	return 0;
+}
+
+单调队列
+
+模板题
+
+单调队列与普通队列不一样的地方就在于单调队列既可以从队首出队，也可以从队尾出队。
+那么我们应该怎样实现单调队列呢?
+就拿样例来谈谈，设以最小的为标准。
+
+8 3
+1 3 -1 -3 5 3 6 7
+下文中我们用q来表示单调队列，p来表示其所对应的在原列表里的序号。
+
+
+由于此时队中没有一个元素，我们直接令1进队。此时，q={1},p={1}。
+
+
+现在3面临着抉择。下面基于这样一个思想:假如把3放进去，如果后面2个数都比它大，那么3在其有生之年就有可能成为最小的。此时，q={1,3},p={1,2}
+
+
+下面出现了-1。队尾元素3比-1大，那么意味着只要-1进队，那么3在其有生之年必定成为不了最小值，原因很明显:因为当下面3被框起来，那么-1也一定被框起来，所以3永远不能当最小值。所以，3从队尾出队。同理，1从队尾出队。最后-1进队，此时q={-1},p={3}
+
+
+出现-3，同上面分析，-1&amp;gt;-3，-1从队尾出队,-3从队尾进队。q={-3}，p={4}。
+
+
+出现5，因为5&amp;gt;-3，同第二条分析，5在有生之年还是有希望的，所以5进队。此时，q={-3,5},p={4,5}
+
+
+出现3。3先与队尾的5比较，3&amp;lt;5，按照第3条的分析，5从队尾出队。3再与-3比较，同第二条分析，3进队。此时，q={-3,3},p={4,6}
+
+
+出现6。6与3比较，因为3&amp;lt;6，所以3不必出队。由于3以前元素都＜3，所以不必再比较，6进队。因为-3此时已经在滑动窗口之外，所以-3从队首出队。此时，q={3,6},p={6,7}
+
+
+出现7。队尾元素6小于7，7进队。此时，q={3,6,7},p={6,7,8}。
+
+
+那么，我们对单调队列的基本操作已经分析完毕。因为单调队列中元素大小单调递(增/减/自定义比较)，因此，队首元素必定是最值。按题意输出即可。
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=1000010;
+int a[N];
+int q[N];
+int n,k;
+
+int main()
+{
+	scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;k);
+	
+	int hh=0,tt=-1;
+	
+	for(int i=1;i&amp;lt;=n;i++)
+		scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]);
+		
+	for(int i=1;i&amp;lt;=n;i++)//求滑动窗口最小值 
+	{
+		if(hh &amp;lt;= tt &amp;amp;&amp;amp; i-k&amp;gt;= q[hh]) hh++;
+		while(hh &amp;lt;= tt &amp;amp;&amp;amp; a[q[tt]] &amp;gt;= a[i])
+			tt--;
+		q[++tt]=i;
+		if(i &amp;gt;= k)
+			printf(&amp;quot;%d &amp;quot;,a[q[hh]]);
+	}
+	puts(&amp;quot;&amp;quot;);
+	
+	hh=0,tt=-1;
+	for(int i=1;i&amp;lt;=n;i++)
+	{
+		if(hh &amp;lt;= tt &amp;amp;&amp;amp; i-k&amp;gt;=q[hh]) hh++;
+		while(hh &amp;lt;= tt &amp;amp;&amp;amp; a[q[tt]] &amp;lt;= a[i])
+			tt--;
+		q[++tt]=i;
+		if(i &amp;gt;= k)
+			printf(&amp;quot;%d &amp;quot;,a[q[hh]]);
+	}
+	return 0;
+}
+
+acwing135
+
+#include &amp;lt;cstring&amp;gt;
+#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N = 300010, INF = 0x3f3f3f3f;
+int n, m;
+int s[N];
+int q[N];
+
+int main()
+{
+    scanf(&amp;quot;%d%d&amp;quot;, &amp;amp;n, &amp;amp;m);
+    for (int i = 1; i &amp;lt;= n; i ++ ) scanf(&amp;quot;%d&amp;quot;, &amp;amp;s[i]), s[i] += s[i - 1];
+
+    int res = -INF;
+    int hh = 0, tt = -1;
+    q[++tt]=0;//将s[0]入队
+    for (int i = 1; i &amp;lt;= n; i ++ )
+    {
+        if(hh&amp;lt;=tt &amp;amp;&amp;amp; i-m &amp;gt; q[hh]) hh++;
+        res=max(res,s[i]-s[q[hh]]);
+        while (hh &amp;lt;= tt &amp;amp;&amp;amp; s[q[tt]] &amp;gt;= s[i]) tt -- ;
+        q[ ++ tt] = i;
+    }
+
+    printf(&amp;quot;%d\n&amp;quot;, res);
+
+    return 0;
+}
+
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://caifxh.github.io/post/dan-diao-shu-ju-jie-gou/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+            <article class="post i-card">
+                <h2 class="post-title">
+                    <a href="https://caifxh.github.io/post/gao-jing-du/">
+                        高精度
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2020-04-08</time>
+                    
+                        <a href="https://caifxh.github.io/tag/PJzBixWKZ/" class="post-tag i-tag
+                            i-tag-success">
+            #其他算法
+        </a>
+                        
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            高精度加法
+当进行加法运算的数字较大时，受存储范围限制，无法使用int或longlong型变量进行存储。
+考虑到加法运算的本质，不妨将数字拆开来存储。
+对于一个超过变量存储数据范围的数字，可以将这个数字拆开，拆成一位一位的，或者是几位几位的存储到一个数组中， 用一个数组去表示一个数字
+采用用顺序存储数据方式，会有一个问题：最高位进位变得很困难。
+最高位在num[0]，所以一旦有进位，需要将num[]数组中每一位都往后移，时间复杂度O(len)
+·倒序存储·：num[]数组从0到len-1依次存储整数个位到最高位。则最高位进位时，只需要num[len++]=t，t为最高位数字
+进位：
+方法一：设一个变量t，记录当前进位
+边计算边进位和逐位相加不进位最后再统一进位效果是一样的如下，先进行一遍逐位相加。
+然后，从0开始遍历一遍ans.num[]，将本位大于9的部分进位给更高位。
+最后判断是否最高位有进位，有则ans.len++
+模板题
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+const int N=510;
+char s[N];
+struct bignum
+{
+	int m[N],len;
+	bignum()
+	{
+		memset(m,0,sizeof m);
+		len=0;
+	}
+};
+
+bignum add(bignum a,bignum b)
+{
+	bignum c;
+	c.len=max(a.len , b.len);
+	for(int i=0;i&amp;lt;c.len;i++) c.m[i]=a.m[i]+b.m[i];
+	for(int i=0;i&amp;lt;c.len;i++)
+		if(c.m[i] &amp;gt; 9)
+		{
+			c.m[i+1]+=1;
+			c.m[i]-=10;
+		}
+	if(c.m[c.len]) c.len++;
+	return c;
+}
+
+int main()
+{
+	scanf(&amp;quot;%s&amp;quot;,s);
+	bignum a,b;
+	int len=strlen(s);
+	a.len=len;
+	for(int i=0;i&amp;lt;len;i++)
+		a.m[len-i-1]=s[i]-&#39;0&#39;;
+	
+	scanf(&amp;quot;%s&amp;quot;,s);
+	len=strlen(s);
+	b.len=len;
+	for(int i=0;i&amp;lt;len;i++)
+		b.m[len-i-1]=s[i]-&#39;0&#39;;
+	bignum c=add(a,b);
+	for(int i=c.len-1;i&amp;gt;=0;i--)
+		printf(&amp;quot;%d&amp;quot;,c.m[i]);
+	puts(&amp;quot;&amp;quot;);
+	return 0;
+}
+
+高精度减法
+
+判断正负
+基本和加法一模一样，只不过从进位变成退位
+退位后更新结果长度
+模板题
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+const int N=10100;
+char s[N];
+struct bignum
+{
+	int m[N],len;
+	bignum()
+	{
+		memset(m,0,sizeof m);
+		len=0;
+	}
+};
+
+int judge(bignum a,bignum b)
+{
+	if(a.len &amp;gt; b.len) return 1;
+	if(a.len &amp;lt; b.len) return -1;
+	for(int i=a.len-1;i&amp;gt;=0;i--)
+	{
+		if(a.m[i] &amp;gt; b.m[i]) return 1;
+		if(a.m[i] &amp;lt; b.m[i]) return -1;
+	}
+	return 0;
+}
+
+bignum Minus(bignum a,bignum b)
+{
+	if(judge(a,b) == -1)
+	{
+		printf(&amp;quot;-&amp;quot;);
+		return Minus(b,a);
+	}
+
+	bignum c;
+	c.len=a.len;
+	for(int i=0;i&amp;lt;c.len;i++) c.m[i]=a.m[i]-b.m[i];
+	for(int i=0;i&amp;lt;c.len;i++)
+		if(c.m[i] &amp;lt; 0)
+		{
+			c.m[i+1]-=1;
+			c.m[i]+=10;
+		}
+	while(c.len &amp;gt; 1 &amp;amp;&amp;amp; !c.m[c.len-1]) c.len--;
+	return c;
+}
+
+int main()
+{
+	scanf(&amp;quot;%s&amp;quot;,s);
+	bignum a,b;
+	int len=strlen(s);
+	a.len=len;
+	for(int i=0;i&amp;lt;len;i++)
+		a.m[len-i-1]=s[i]-&#39;0&#39;;
+	
+	scanf(&amp;quot;%s&amp;quot;,s);
+	len=strlen(s);
+	b.len=len;
+	for(int i=0;i&amp;lt;len;i++)
+		b.m[len-i-1]=s[i]-&#39;0&#39;;
+	bignum c=Minus(a,b);
+	for(int i=c.len-1;i&amp;gt;=0;i--)
+		printf(&amp;quot;%d&amp;quot;,c.m[i]);
+	puts(&amp;quot;&amp;quot;);
+	return 0;
+}
+
+高精度乘法
+1.高精*低精
+将加法运算改为乘法运算即可。
+注意：
+
+进位的运算
+最高位进位的处理，可能不止进一位
+模板题
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+const int N=100010;
+char s[N];
+struct bignum
+{
+	int m[N],len;
+	bignum()
+	{
+		memset(m,0,sizeof m);
+		len=0;
+	}
+};
+
+bignum mul(bignum a,int b)
+{
+	bignum c;
+	c.len=a.len;
+	for(int i=0;i&amp;lt;c.len;i++) c.m[i]=a.m[i]*b;
+	for(int i=0;i&amp;lt;c.len;i++)
+	{
+		c.m[i+1]+=c.m[i]/10;
+		c.m[i]%=10;
+		if(i == c.len-1 &amp;amp;&amp;amp; c.m[i+1]) c.len++;
+	}
+
+	return c;
+}
+
+int main()
+{
+	scanf(&amp;quot;%s&amp;quot;,s);
+	bignum a;
+	int len=strlen(s);
+	a.len=len;
+	for(int i=0;i&amp;lt;len;i++)
+		a.m[len-i-1]=s[i]-&#39;0&#39;;
+	
+	int b;
+	scanf(&amp;quot;%d&amp;quot;,&amp;amp;b);
+
+	bignum c=mul(a,b);
+	for(int i=c.len-1;i&amp;gt;=0;i--)
+		printf(&amp;quot;%d&amp;quot;,c.m[i]);
+	puts(&amp;quot;&amp;quot;);
+	return 0;
+}
+
+2.高精*高精
+乘法竖式中，a.num[i]和b.num[j]相乘的结果，放在了ans.num[i+j]的位置。
+a,b都为正整数时，长度为a.len和b.len的数字相乘得到ans，则
+
+模拟上例竖式运算过程即可
+{模板题](https://www.luogu.com.cn/problem/P1303}
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+const int N=4010;
+char s[N];
+struct bignum
+{
+	int m[N],len;
+	bignum()
+	{
+		memset(m,0,sizeof m);
+		len=0;
+	}
+};
+
+bignum mul(bignum a,bignum b)
+{
+	bignum c;
+	c.len=a.len+b.len;
+	for(int i=0;i&amp;lt;a.len;i++)
+		for(int j=0;j&amp;lt;b.len;j++)
+			c.m[i+j]+=a.m[i]*b.m[j];
+	for(int i=0;i&amp;lt;c.len;i++)
+	{
+		c.m[i+1]+=c.m[i]/10;
+		c.m[i]%=10;
+	}
+	while(c.len &amp;gt; 1 &amp;amp;&amp;amp; !c.m[c.len-1]) c.len--;
+	return c;
+}
+
+int main()
+{
+	scanf(&amp;quot;%s&amp;quot;,s);
+	bignum a,b;
+	int len=strlen(s);
+	a.len=len;
+	for(int i=0;i&amp;lt;len;i++)
+		a.m[len-i-1]=s[i]-&#39;0&#39;;
+	
+	scanf(&amp;quot;%s&amp;quot;,s);
+	b.len=len=strlen(s);
+	for(int i=0;i&amp;lt;len;i++)
+		b.m[len-i-1]=s[i]-&#39;0&#39;;
+	bignum c=mul(a,b);
+	for(int i=c.len-1;i&amp;gt;=0;i--)
+		printf(&amp;quot;%d&amp;quot;,c.m[i]);
+	puts(&amp;quot;&amp;quot;);
+	return 0;
+}
+
+高精度除法
+1.高精/低精
+除法是从高位到低位进行运算的。使用一个临时变量来记录余数，注意细节
+模板题
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+const int N=100010;
+char s[N];
+struct bignum
+{
+	int m[N],len;
+	bignum()
+	{
+		memset(m,0,sizeof m);
+		len=0;
+	}
+};
+int t;
+
+bignum Div(bignum a,int b)
+{
+	bignum c;
+	c.len=a.len;
+	t=0;
+	for(int i=c.len-1;i&amp;gt;=0;i--)
+	{
+		t=t*10+a.m[i];
+		c.m[i]=t/b;
+		t%=b;
+	}
+	while(c.len &amp;gt; 1 &amp;amp;&amp;amp; !c.m[c.len-1]) c.len--;
+	return c;
+}
+
+int main()
+{
+	scanf(&amp;quot;%s&amp;quot;,s);
+	bignum a;
+	int len=strlen(s);
+	a.len=len;
+	for(int i=0;i&amp;lt;len;i++)
+		a.m[len-i-1]=s[i]-&#39;0&#39;;
+	
+	int b;
+	scanf(&amp;quot;%d&amp;quot;,&amp;amp;b);
+	bignum c=Div(a,b);
+	for(int i=c.len-1;i&amp;gt;=0;i--)
+		printf(&amp;quot;%d&amp;quot;,c.m[i]);
+	puts(&amp;quot;&amp;quot;);
+	printf(&amp;quot;%d\n&amp;quot;,t);
+
+	return 0;
+}
+
+数楼梯
+斐波那契递推
+code
+P1249
+【思路】
+1、这道题预先需要知道的一点是：数越多，乘积越大。
+“1”对于乘积是没有收益的，我们要从2~n-1中选出尽可能多的数，使它们的和为n。然后把选出的数相乘就是答案。
+2、两个特例，“3”和“4”。这两个只能从拆成“1+2”和“1+3”
+【流程】
+输入——选数——高精度乘法——输出。（选数时和高精度乘法无关）
+【如何选数】
+我们就以13为例，“2”、“3”、“4”都可以选，但是“5”如果选了，sum（2，3，4，5）=14超过13，5不能选。此时sum（2，3，4）=9，还余4，我们把4这个值分配到“2”、“3”、“4”这三个数上。
+怎么分最好？这里有两个原则：
+（1）增长的数的个数越多，乘积越大。“2+1”、“3+1”、“4+2”优于“2”、“3”、“4+4”；
+（2）若只有部分数能增长，那么本身大的增长后，乘积更大。“2”、“3”、“4+1”优于“2+1”、“3”、“4”
+所以对于 “2”、“3”、“4”，余4 来说。
+可以都增长，那么变成 “2+1”、“3+1”、“4+1”，余1 。
+不能都增长，那么变成 “3”、“4”、“5+1”，余0
+【高精度乘法】
+选数之后就是把所有选择的数相乘，因为最终值可能很大，所以需要用到高精度乘法，关于高精度乘法，不赘述。
+【代码】
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;vector&amp;gt;
+using namespace std;
+const int N=40010;
+struct bignum
+{
+	int m[N];
+	int len;
+	bignum()
+	{
+		memset(m,0,sizeof m);
+		len=0;
+	}
+};
+vector&amp;lt;int&amp;gt; num;
+int n;
+
+void init()
+{
+	int sum=0;
+	for(int i=2;i&amp;lt;n;i++)
+		if(sum + i &amp;gt; n)
+		{
+			int remain=n-sum;
+			while(remain)
+			{
+				for(int j=num.size()-1;j&amp;gt;=0;j--)
+				{
+					remain--;
+					num[j]++;
+					if(!remain) return;
+				}
+			}
+		}
+		else num.push_back(i),sum+=i;
+}
+
+bignum mul(bignum a,int b)
+{
+	bignum c;
+	c.len=a.len;
+	for(int i=0;i&amp;lt;c.len;i++) c.m[i]=a.m[i]*b;
+	for(int i=0;i&amp;lt;c.len;i++)
+	{
+		c.m[i+1]+=c.m[i]/10;
+		c.m[i]%=10;
+		if(i == c.len-1 &amp;amp;&amp;amp; c.m[i+1]) c.len++;
+	}
+	return c;
+}
+
+int main()
+{
+	cin&amp;gt;&amp;gt;n;
+	
+	if(n == 3)
+	{
+		cout&amp;lt;&amp;lt;1&amp;lt;&amp;lt;&#39; &#39;&amp;lt;&amp;lt;2&amp;lt;&amp;lt;endl;
+		cout&amp;lt;&amp;lt;2&amp;lt;&amp;lt;endl;
+	}
+	else if(n == 4)
+	{
+		cout&amp;lt;&amp;lt;1&amp;lt;&amp;lt;&#39; &#39;&amp;lt;&amp;lt;3&amp;lt;&amp;lt;endl;
+		cout&amp;lt;&amp;lt;3&amp;lt;&amp;lt;endl;
+	}
+	else 
+	{
+		init();
+		
+		bignum ans;
+		ans.m[0]=1,ans.len=1;
+		
+		for(int i=0;i&amp;lt;num.size();i++)
+			ans=mul(ans,num[i]);
+		
+		for(int i=0;i&amp;lt;num.size();i++)
+			cout&amp;lt;&amp;lt;num[i]&amp;lt;&amp;lt;&#39; &#39;;
+		cout&amp;lt;&amp;lt;endl;
+		
+		for(int i=ans.len-1;i&amp;gt;=0;i--)
+			printf(&amp;quot;%d&amp;quot;,ans.m[i]);
+		puts(&amp;quot;&amp;quot;);
+	}
+	return 0;
+}
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;vector&amp;gt;
+#include&amp;lt;cmath&amp;gt;
+using namespace std;
+const int N=10010,M=40010,INF=0x3f3f3f3f;
+struct bignum
+{
+	int m[M];
+	int len;
+	bignum()
+	{
+		memset(m,0,sizeof m);
+		len=0;
+	}
+};
+double w[N];
+double f[N];
+int trans[N];
+vector&amp;lt;int&amp;gt; num;
+int n;
+
+bignum mul(bignum a,int b)
+{
+	bignum c;
+	c.len=a.len;
+	for(int i=0;i&amp;lt;c.len;i++) c.m[i]=a.m[i]*b;
+	
+	for(int i=0;i&amp;lt;c.len;i++)
+	{
+		c.m[i+1]+=c.m[i]/10;
+		c.m[i]%=10;
+		if(i == c.len-1 &amp;amp;&amp;amp; c.m[i+1]) c.len++;
+	}
+	return c;
+}
+
+int main()
+{
+	cin&amp;gt;&amp;gt;n;
+	
+	for(int i=1;i&amp;lt;=n;i++) w[i]=log(i);
+	
+	for(int i=1;i&amp;lt;=n;i++) f[i]=-INF;
+	
+	for(int i=1;i&amp;lt;=n;i++)
+		for(int j=n;j&amp;gt;=i;j--)
+			if(f[j-i]+w[i] &amp;gt; f[j])
+				f[j]=f[j-i]+w[i],trans[j]=j-i;
+				
+	for(int p=n;p;p=trans[p])
+		num.push_back(p-trans[p]);
+ 
+	bignum ans;
+	ans.m[0]=1,ans.len=1;
+	
+	for(int i=num.size()-1;i&amp;gt;=0;i--)
+		ans=mul(ans,num[i]);
+	
+	for(int i=num.size()-1;i&amp;gt;=0;i--)
+		cout&amp;lt;&amp;lt;num[i]&amp;lt;&amp;lt;&#39; &#39;;
+	cout&amp;lt;&amp;lt;endl;
+	
+	for(int i=ans.len-1;i&amp;gt;=0;i--)
+		printf(&amp;quot;%d&amp;quot;,ans.m[i]);
+	puts(&amp;quot;&amp;quot;);
+	
+	return 0;
+}
+
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://caifxh.github.io/post/gao-jing-du/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+                <!-- 翻页 -->
+                
+    <div class="pagination-container">
+        
+            <a href="https://caifxh.github.io/" class="page-btn btn">上一页</a>
+            
+                
+                    <a href="https://caifxh.github.io/page/3/" class="page-btn btn">下一页</a>
+                    
+    </div>
+    
+                </div>
+                <!--  -->
+                <div class="main-container-middle"></div>
+                <!--  -->
+                <div id="sidebar" class="main-container-right">
+
+                    <!-- 个人信息 -->
+                    
+    <div class="id_card i-card">
+        <div class="id_card-avatar" style="background-image: url(https://caifxh.github.io/images/avatar.png?v=1594530133163)">
+        </div>
+        <h1 class="id_card-title">
+            Gridea
+        </h1>
+        <h2 class="id_card-description">
+            温故而知新
+        </h2>
+        <!--  -->
+        <div class="id_card-sns">
+            <!-- github -->
+            
+                    <!-- twitter -->
+                    
+                            <!-- weibo -->
+                            
+                                    <!-- facebook -->
+                                    
+
+        </div>
+    </div>
+    
+
+                        <!-- 公告栏 -->
+                        
+
+                </div>
+            </div>
+
+
+
+            <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://caifxh.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+    <script>
+        $('#sidebar').stickySidebar({
+            topSpacing: 80,
+            // bottomSpacing: 60
+        });
+    </script>
 </body>
-<script src="//cdnjs.loli.net/ajax/libs/mdui/0.4.3/js/mdui.min.js"></script>
-<script src="media/js/index.js"></script>
+
 </html>

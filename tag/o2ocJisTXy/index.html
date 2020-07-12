@@ -1,128 +1,853 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <title>Gridea</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="Cache-Control" content="no-siteapp"/>
-    <link rel="stylesheet" href="/styles/main.css">
-    <link rel="stylesheet" href="//cdnjs.loli.net/ajax/libs/mdui/0.4.3/css/mdui.min.css">
-    <link rel="stylesheet" href="media/live2d/css/live2d.css" />
-    
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>
+    高级数据结构 | Gridea
+</title>
+<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1594530133163">
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://caifxh.github.io/styles/main.css">
+<!-- js -->
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://caifxh.github.io/media/js/jquery.sticky-sidebar.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
 </head>
-<body class=" mdui-appbar-with-toolbar  mdui-theme-primary-pink mdui-theme-accent-pink">
-        <header class="mdui-toolbar mdui-color-pink mdui-appbar-fixed mdui-appbar-scroll-toolbar-hide" style="z-index: 1000">
-    <a href="javascript:;" mdui-drawer="{target: '#left-drawer',overlay:true}" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">menu</i></a>
-    <span class="mdui-typo-title">Gridea</span>
-    <div class="mdui-toolbar-spacer"></div>
-<!--    <a href="javascript:history.go(0);" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
-    <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">more_vert</i></a>
-</header>
 
-        <div class="mdui-drawer mdui-color-white mdui-drawer-full-height mdui-drawer-close" id="left-drawer">
-    <ul class="mdui-list">
-        <li class="mdui-subheader">菜单</li>
-        
-        <li class="mdui-list-item mdui-ripple">
-            <a href="/" class="mdui-list-item-content">首页</a>
-        </li>
-        
-        <li class="mdui-list-item mdui-ripple">
-            <a href="/archives" class="mdui-list-item-content">归档</a>
-        </li>
-        
-        <li class="mdui-list-item mdui-ripple">
-            <a href="/tags" class="mdui-list-item-content">标签</a>
-        </li>
-        
-        <li class="mdui-list-item mdui-ripple">
-            <a href="/post/about" class="mdui-list-item-content">关于</a>
-        </li>
-        
-    </ul>
+<body>
+    <div class="main">
+        <div class="header">
+    <div class="nav">
+        <div class="logo">
+            <a href="https://caifxh.github.io">
+                <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1594530133163" alt="">
+            </a>
+            <div class="site-title">
+                <h1>
+                    Gridea
+                </h1>
+            </div>
+        </div>
+        <span class="menu-btn fa fa-align-justify"></span>
+        <div class="menu-container">
+            <ul>
+                
+                    
+                            <li>
+                                <a href="/" class="menu">
+                                    首页
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/archives" class="menu">
+                                    归档
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/tags" class="menu">
+                                    标签
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/post/about" class="menu">
+                                    关于
+                                </a>
+                            </li>
+                            
+                                
+            </ul>
+        </div>
+    </div>
 </div>
 
-        <div class="mdui-container">
-            <div class="mdui-row mdui-row-gapless">
-                <div class="k-container">
-                    <div class="head_card-offset"></div>
-                    
-    <div class="mdui-card">
-        <div class="mdui-card-media">
-            <img src="https://caifxh.github.io/media/img/bai.jpg"/>
-            <div class="mdui-card-media-covered">
-                <div class="mdui-card-primary">
-                    <div class="mdui-card-primary-title">树状数组</div>
-                    <div class="mdui-card-primary-subtitle"></div>
-                </div>
-                <div class="mdui-card-actions" style="float:right;">
-                    <a href="https://caifxh.github.io/post/shu-zhuang-shu-zu/" class="mdui-btn mdui-ripple mdui-ripple-white">点击查看</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="head_card-offset"></div>
-
-
-                </div>
-            </div>
-            <div class="mdui-row mdui-row-gapless">
-                <div class="k-container">
-                    
-
-                </div>
-            </div>
-        </div>
-        <footer class="mdui-container footer ">
-    <div class="head_card-offset"></div>
-    <div class="mdui-row mdui-row-gapless">
-        <div class="k-container">
-            <img width="100%" src="/media/img/skirt.png">
-        </div>
-    </div>
-
-    <div class="site-info">
-        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
-    </div>
-</footer>
-<div id="landlord" style="left:5px;bottom:0px;">
-    <div class="message" style="opacity:0"></div>
-    <canvas id="live2d" width="500" height="560" class="live2d"></canvas>
-    <div class="live_talk_input_body">
-        <div class="live_talk_input_name_body">
-            <input name="name" type="text" class="live_talk_name white_input" id="AIuserName" autocomplete="off" placeholder="你的名字" />
-        </div>
-        <div class="live_talk_input_text_body">
-            <input name="talk" type="text" class="live_talk_talk white_input" id="AIuserText" autocomplete="off" placeholder="要和我聊什么呀？"/>
-            <button type="button" class="live_talk_send_btn" id="talk_send">发送</button>
-        </div>
-    </div>
-    <input name="live_talk" id="live_talk" value="1" type="hidden" />
-    <div class="live_ico_box">
-        <div class="live_ico_item type_info" id="showInfoBtn"></div>
-        <div class="live_ico_item type_talk" id="showTalkBtn"></div>
-        <div class="live_ico_item type_music" id="musicButton"></div>
-        <div class="live_ico_item type_youdu" id="youduButton"></div>
-        <div class="live_ico_item type_quit" id="hideButton"></div>
-        <input name="live_statu_val" id="live_statu_val" value="0" type="hidden" />
-        <audio src="" style="display:none;" id="live2d_bgm" data-bgm="0" preload="none"></audio>
-        <input name="live2dBGM" value="https://img.apa70.com/123.mp3" type="hidden">
-        <input name="live2dBGM" value="https://img.apa70.com/123.mp3" type="hidden">
-        <input id="duType" value="douqilai,l2d_caihong" type="hidden">
-    </div>
-</div>
-<div id="open_live2d">召唤伊斯特瓦尔</div>
 <script>
-    var message_Path = '/media/live2d/';//资源目录，如果目录不对请更改
-    var talkAPI = "";//如果有类似图灵机器人的聊天接口请填写接口路径
-</script>
-<!--<script src="/media/js/jquery-3.3.1.min.js"></script>-->
-<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-<script type="text/javascript" src="/media/live2d/js/live2d.js"></script>
-<script type="text/javascript" src="/media/live2d/js/message.js"></script>
+    $(document).ready(function() {
+        $(".menu-btn").click(function() {
+            $(".menu-container").slideToggle();
+        });
+        $(window).resize(function() {
 
-    </body>
-<script src="//cdnjs.loli.net/ajax/libs/mdui/0.4.3/js/mdui.min.js"></script>
+            if (window.matchMedia('(min-width: 960px)').matches) {
+                $(".menu-container").css('display', 'block')
+            } else {
+                $(".menu-container").css('display', 'none')
+            }
+
+        });
+    });
+</script>
+
+            <div id="main-content" class="post-container main-container">
+                <div id="content" class="main-container-left">
+                    
+    <div class="i-card">
+        <b>标签：#
+        高级数据结构</b>
+    </div>
+    
+        
+            <article class="post i-card">
+                <h2 class="post-title">
+                    <a href="https://caifxh.github.io/post/shu-zhuang-shu-zu/">
+                        树状数组
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2020-03-27</time>
+                    
+                        <a href="https://caifxh.github.io/tag/o2ocJisTXy/" class="post-tag i-tag
+                            i-tag-banana">
+            #高级数据结构
+        </a>
+                        
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            树状数组
+
+
+
+
+sum[9]=c[9]+c[8];
+
+
+
+
+
+
+
+
+
+
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int maxn=10000;
+int n,a[maxn],c[maxn],s[maxn];
+
+int lowbit(int i)//c[i]的区间长度 
+{
+	return (-i)&amp;amp;i;
+}
+
+void add(int i,int z)//a[i]加上z
+{
+	for(;i&amp;lt;=n;i+=lowbit(i))//直接后继，即父亲i+=lowbit(i)
+		c[i]+=z;	
+} 
+
+int sum(int i)//求前缀和a[1]..a[i] 
+{
+	int s=0;
+	for(;i&amp;gt;0;i-=lowbit(i))//直接前驱 i-=lowbit(i);
+		s+=c[i];
+	return s; 
+}
+
+int sum(int i,int j)//求区间和a[i]..a[j] 
+{
+	return sum(j)-sum(i-1); 
+}
+
+int main()
+{
+	memset(c,0,sizeof(c));
+	cin&amp;gt;&amp;gt;n;
+	for(int i=1;i&amp;lt;=n;i++)
+	{
+		cin&amp;gt;&amp;gt;a[i];
+		add(i,a[i]);//加入树状数组 
+	} 
+	int x1,x2;
+	cin&amp;gt;&amp;gt;x1;
+	cout&amp;lt;&amp;lt;sum(x1)&amp;lt;&amp;lt;endl;
+	cin&amp;gt;&amp;gt;x1&amp;gt;&amp;gt;x2;
+	cout&amp;lt;&amp;lt;sum(x1,x2)&amp;lt;&amp;lt;endl;
+	return 0;
+}
+
+
+
+
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+using namespace std;
+const int maxn=10000;
+int n,a[maxn][maxn],c[maxn][maxn];//二维树状数组 
+
+int lowbit(int i)//区间长度 
+{
+	return (-i)&amp;amp;i;
+}
+
+void add(int x,int y,int z)//a[x][y]加上z
+{
+	for(int i=x;i&amp;lt;=n;i+=lowbit(i))
+		for(int j=y;j&amp;lt;=n;j+=lowbit(j))
+			c[i][j]+=z;
+} 
+
+int sum(int x,int y)//求左上角(1,1)到右下角(x,y)矩阵区间和 
+{
+	int s=0;
+	for(int i=x;i&amp;gt;0;i-=lowbit(i))
+		for(int j=y;j&amp;gt;0;j-=lowbit(j))
+			s+=c[i][j];
+	return s; 
+}
+
+int sum(int x1,int y1,int x2,int y2)//求左上角(x1,y1)到右下角(x2,y2)子矩阵区间和 
+{
+	return sum(x2,y2)-sum(x1-1,y2)-sum(x2,y1-1)+sum(x1-1,y1-1); 
+}
+
+int main()
+{
+	for(int i=1;i&amp;lt;=n;i++)
+		memset(c[i],0,sizeof(c[i]));
+	cin&amp;gt;&amp;gt;n;
+	for(int i=1;i&amp;lt;=n;i++)
+		for(int j=1;j&amp;lt;=n;j++)
+		{
+			cin&amp;gt;&amp;gt;a[i][j];
+			add(i,j,a[i][j]);//加入树状数组 
+		} 
+	int x1,y1,x2,y2;
+	cin&amp;gt;&amp;gt;x1&amp;gt;&amp;gt;y1;
+	cout&amp;lt;&amp;lt;sum(x1,y1)&amp;lt;&amp;lt;endl;
+	cin&amp;gt;&amp;gt;x1&amp;gt;&amp;gt;y1&amp;gt;&amp;gt;x2&amp;gt;&amp;gt;y2;
+	cout&amp;lt;&amp;lt;sum(x1,y1,x2,y2)&amp;lt;&amp;lt;endl;
+	return 0;
+}
+
+poj2352
+统计x前面比它小的星星的个数。注意的是：给的点的坐标是从0开始的，树状数组下标为0的位置不可用，所以我们需要在输入x坐标时+1。
+因为本题给出的数据就是已经按照y从小到大排好序的,也就是说，当前读到一个点的时候，当前点的y坐标肯定比已经读入的大，或者等于。就算是等于的话，也是x坐标比我当前点的x坐标小，所以我们每次只要算x坐标比我们小的就行了 。
+
+
+#include&amp;lt;cstdio&amp;gt;
+using namespace std;
+#define maxn 32010
+int ans[maxn],tr[maxn];//等级统计，每个值的数量 
+int n;
+
+int lowbit(int x)
+{
+	return x&amp;amp;-x;
+}
+
+void add(int x,int c)//将第i个元素增加val，其后继也要增加
+{
+	for(int i=x;i&amp;lt;=maxn;i+=lowbit(i))//是x点的范围，注意不是星星的个数n 
+		tr[i]+=c;//i的后继（父结点） 
+}
+
+int sum(int x)//前缀和 
+{
+	int res=0;
+	for(int i=x;i;i-=lowbit(i))
+		res+=tr[i];//i的前驱
+	return res;
+}
+
+int main()
+{
+    scanf(&amp;quot;%d&amp;quot;,&amp;amp;n);
+    int x,y;
+    for(int i=0;i&amp;lt;n;i++)
+    {
+        scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;x,&amp;amp;y);
+        x++;
+        ans[sum(x)]++;
+        add(x,1);//x的数量c[x]增1,若是统计小于等于x的数量，则先执行add操作再查询 
+    }
+    for(int i=0;i&amp;lt;n;i++)
+        printf(&amp;quot;%d\n&amp;quot;,ans[i]);
+	return 0;
+}
+
+树状数组求逆序对
+1）逆序数问题定义
+给一个1~n的排列，求满足i&amp;lt;j且a[i]&amp;gt;a[j]的二元组对数，比如[4,2,1,5,3]这个序列，满足条件的二元组为{&amp;lt;4,2&amp;gt;, &amp;lt;4,1&amp;gt;, &amp;lt;4,3&amp;gt;, &amp;lt;2,1&amp;gt;, &amp;lt;5,3&amp;gt;}，故逆序数是5
+2）树状数组求逆序数的原理
+首先明确树状数组在此问题中维护信息是某个区间中数字出现的个数，sum(a[i])可求得[1, a[i]]的区间和，这恰好代表第i个数字前小于它的个数，，那么大于它的显然就有sum(n)-sum(a[i])个,然后将源数据按其原本顺序插入树状数组，第i个数字插入的方式为将树状数组的第a[i]位设为1，同时更新覆盖到它的父区间。
+for (int i = 1; i &amp;lt;= n; i++) 
+{
+    ans += sum(n) - sum(a[i]);
+    add(a[i], 1);
+}
+
+累加每步的结果后可得逆序数为5，用树状数组的好处在于add操作和sum的操作时间复杂度都为O(logn)，非常的巧妙
+poj3067
+由于x是从小到大排序的，假设当前我们在处理第k条边，那么第1~k-1条边的x必然是小于（等于时候暂且不讨论）第k条边的 x 的，那么前k-1条边中，与第k条边相交的边的y值必然大于yk的，所以此时我们只需要求出在前k-1条边中有多少条边的y值在区间[yk, M]即可,也就是求yk的逆序数，M为西岸城市个数，即y的最大值。
+所以就将问题转化成区间求和的问题，树状数组解决。当两条边的x相同时，我们记这两条边的y值分别为ya，yb（ya&amp;lt;yb),我们先处理（x，ya），再处理（x，yb），原因很明显，因为当x相同时，这两条边是认为没有交点的，若先处理（x，yb），那么下次处理（x，ya）时，（x，ya）就会给（x，yb）增加一个逆序，也就是将这两条边做相交处理了。
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+const int N=1010,M=1000010;
+int tr[N];
+int n,m,k;
+struct Edge 
+{
+    int x, y;
+    bool operator&amp;lt; (const Edge &amp;amp;W) const 
+    {
+    	if(x == W.x)
+    		return y&amp;lt;W.y;
+    	else
+    		return x&amp;lt;W.x;
+	}
+}e[M];
+typedef long long LL;
+
+int lowbit(int x)
+{
+	return x&amp;amp;-x;
+}
+
+void add(int x)//加1操作，参数省略
+{
+	for(int i=x;i&amp;lt;=m;i+=lowbit(i))//y点有m个
+		tr[i]++;
+}
+
+int sum(int x)
+{
+    int res=0;
+    for(int i=x;i;i-=lowbit(i))
+    	res+=tr[i];
+    return res;
+}
+
+int main()
+{
+    int T;
+    scanf(&amp;quot;%d&amp;quot;,&amp;amp;T);
+    for(int kase=1;kase&amp;lt;=T;kase++)
+	{
+		memset(tr,0,sizeof tr);
+	    scanf(&amp;quot;%d%d%d&amp;quot;,&amp;amp;n,&amp;amp;m,&amp;amp;k);
+	    for(int i=1;i&amp;lt;=k;i++)
+			scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;e[i].x,&amp;amp;e[i].y);
+	    sort(e+1,e+k+1);
+	    LL ans=0;
+	    for(int i=1;i&amp;lt;=k;i++)
+		{
+			ans+=sum(m)-sum(e[i].y);
+			add(e[i].y);
+	    }
+	    printf(&amp;quot;Test case %d: %lld\n&amp;quot;,kase,ans);
+	}
+    return 0;
+}
+
+acwing241
+
+#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;cstring&amp;gt;
+#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;algorithm&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N = 200010;
+int n;
+int a[N];
+int tr[N];
+int bigger[N], lower[N];
+
+int lowbit(int x)
+{
+    return x &amp;amp; -x;
+}
+
+void add(int x, int c)
+{
+    for (int i = x; i &amp;lt;= n; i += lowbit(i)) tr[i] += c;
+}
+
+int sum(int x)
+{
+    int res = 0;
+    for (int i = x; i; i -= lowbit(i)) res += tr[i];
+    return res;
+}
+
+int main()
+{
+    scanf(&amp;quot;%d&amp;quot;, &amp;amp;n);
+
+    for (int i = 1; i &amp;lt;= n; i ++ ) scanf(&amp;quot;%d&amp;quot;, &amp;amp;a[i]);
+
+    for (int i = 1; i &amp;lt;= n; i ++ )//从左向右扫
+    {
+        bigger[i] = sum(n) - sum(a[i]);//1~i-1有多少数大于y（y+1~n）
+        lower[i] = sum(a[i]);//1~i-1有多少数小于y（1~y-1）
+        add(a[i], 1);
+    }
+
+    memset(tr, 0, sizeof tr);
+    LL res1 = 0, res2 = 0;
+    for (int i = n; i; i -- )//从右向左扫
+    {
+        res1 += bigger[i] * (LL)(sum(n) - sum(a[i]));//i+1~n有多少数大于y
+        res2 += lower[i] * (LL)(sum(a[i]));//i+1~n有多少数小于y
+        add(a[i], 1);
+    }
+
+    printf(&amp;quot;%lld %lld\n&amp;quot;, res1, res2);
+
+    return 0;
+}
+
+拓展应用
+1.树状数组基本应用. 单点修改 + 区间查询
+2.区间修改 + 单点查询
+
+acwing242
+#include&amp;lt;iostream&amp;gt;
+using namespace std;
+const int N=100010;
+int a[N];
+int n,m;
+int tr[N];
+typedef long long LL;
+
+int lowbit(int x)
+{
+	return x&amp;amp;-x;
+}
+
+void add(int x,int c)
+{
+	for(int i=x;i&amp;lt;=n;i+=lowbit(i))
+		tr[i]+=c;
+}
+
+int sum(int x)
+{
+	int res=0;
+	for(int i=x;i;i-=lowbit(i))
+		res+=tr[i];
+	return res;
+}
+
+int main()
+{
+	cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m;
+	
+	for(int i=1;i&amp;lt;=n;i++)
+	{
+		scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]);
+		add(i,a[i]-a[i-1]);
+	}
+	
+	while(m--)
+	{
+		char op[2];
+		scanf(&amp;quot;%s&amp;quot;,op);
+		if(*op == &#39;C&#39;)
+		{
+		    int l,r,d;
+			scanf(&amp;quot;%d%d%d&amp;quot;,&amp;amp;l,&amp;amp;r,&amp;amp;d);
+			add(l,d);
+			add(r+1,-d);
+		}
+		else
+		{
+		    int x;
+		    scanf(&amp;quot;%d&amp;quot;,&amp;amp;x);
+			printf(&amp;quot;%d\n&amp;quot;,sum(x));
+		}
+	}
+	return 0;
+ } 
+
+3.区间修改 + 区间查询
+acwing243
+
+
+//区间加
+//区间和
+#include&amp;lt;iostream&amp;gt;
+using namespace std;
+typedef long long LL;
+const int N=100010;
+int n,m;
+int a[N];
+LL tr1[N];//维护b[i]的前缀和
+LL tr2[N];//维护b[i]*i的前缀和
+
+int lowbit(int x)
+{
+    return x&amp;amp;-x;
+}
+
+void add(LL tr[],int x,LL c)
+{
+    for(int i=x;i&amp;lt;=n;i+=lowbit(i))
+        tr[i]+=c;
+}
+
+LL sum(LL tr[],int x)
+{
+    LL res=0;
+    for(int i=x;i;i-=lowbit(i))
+        res+=tr[i];
+    return res;
+}
+
+LL prefix_sum(int x)
+{
+    return sum(tr1,x)*(x+1)-sum(tr2,x);
+}
+
+int main()
+{
+    scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;m);
+    for(int i=1;i&amp;lt;=n;i++)
+        scanf(&amp;quot;%d&amp;quot;,&amp;amp;a[i]);
+    for(int i=1;i&amp;lt;=n;i++)
+    {
+        int b=a[i]-a[i-1];//最大为1e9
+        add(tr1,i,b);
+        add(tr2,i,(LL)i*b);
+    }
+    
+    while(m--)
+    {
+        char op[2];
+        int l,r,d;
+        scanf(&amp;quot;%s%d%d&amp;quot;,op,&amp;amp;l,&amp;amp;r);
+        if(*op == &#39;Q&#39;)
+            printf(&amp;quot;%lld\n&amp;quot;,prefix_sum(r)-prefix_sum(l-1));
+        else
+        {
+            scanf(&amp;quot;%d&amp;quot;,&amp;amp;d);
+            add(tr1,l,d);
+            add(tr1,r+1,-d);
+            add(tr2,l,l*d);
+            add(tr2,r+1,(r+1)*-d);
+        }
+    }
+    return 0;
+}
+
+acwing244
+我们发现,如果说第K头牛的前面有Ak头牛比它矮,那么它的身高Hk就是数值1 n中第Ak+1小的没有在Hk+1,Hk+2,…,HnH_{k+1},H_{k+2},…,H_{n}Hk+1​,Hk+2​,…,Hn​中出现过的数
+所以说,我们需要建立一个长度为n的01序列b,刚开始都是1,然后n到1倒序扫描每一个AiA_iAi​,对于每个AiA_iAi​
+执行查询和修改操作.
+也就是说这道题目的题意就是让我们,动态维护一个01序列,支持查询第k个1所在的位置,以及修改序列中的一个数值
+#include&amp;lt;iostream&amp;gt;
+using namespace std;
+const int N=100010;
+int h[N];
+int n;
+int tr[N];
+int ans[N];
+
+int lowbit(int x)
+{
+    return x&amp;amp;-x;
+}
+
+void add(int x,int c)
+{
+    for(int i=x;i&amp;lt;=n;i+=lowbit(i))
+        tr[i]+=c;
+}
+
+int sum(int x)
+{
+    int res=0;
+    for(int i=x;i;i-=lowbit(i))  
+        res+=tr[i];
+    return res;
+}
+
+int main()
+{
+    cin&amp;gt;&amp;gt;n;
+    for(int i=2;i&amp;lt;=n;i++)
+        cin&amp;gt;&amp;gt;h[i];
+        
+    for(int i=1;i&amp;lt;=n;i++)   
+        tr[i]=lowbit(i);//相当于add(i,1);
+    
+    for(int i=n;i;i--)
+    {
+        int k=h[i]+1;
+        int l=1,r=n;
+        while(l&amp;lt;r)
+        {
+            int mid=l+r&amp;gt;&amp;gt;1;
+            if(sum(mid) &amp;gt;= k)
+                r=mid;
+            else
+                l=mid+1;
+        }
+        ans[i]=l;
+        add(l,-1);
+    }
+    
+    for(int i=1;i&amp;lt;=n;i++)
+        cout&amp;lt;&amp;lt;ans[i]&amp;lt;&amp;lt;endl;
+    return 0;
+}
+
+poj1195
+
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#define maxn 1050
+#define lowbit(x) (x)&amp;amp;(-x)
+int c[maxn][maxn],n;
+
+void add(int x,int y,int z)//单点更新 
+{
+    for(int i=x;i&amp;lt;=n;i+=lowbit(i))
+        for(int j=y;j&amp;lt;=n;j+=lowbit(j))
+            c[i][j]+=z;
+}
+
+int sum(int x,int y)//区间和：左上角(1,1)到右下角(x,y)矩阵区间和 
+{
+    int s=0;
+    for(int i=x;i&amp;gt;0;i-=lowbit(i))
+        for(int j=y;j&amp;gt;0;j-=lowbit(j))
+            s+=c[i][j];
+    return s;
+}
+
+int sum(int x1,int y1,int x2,int y2)//求左上角(x1,y1)到右下角(x2,y2)子矩阵区间和 
+{
+	return sum(x2,y2)-sum(x1-1,y2)-sum(x2,y1-1)+sum(x1-1,y1-1);
+}
+
+int main()
+{
+    int opt,x,y,a,l,b,r,t;
+	while(scanf(&amp;quot;%d&amp;quot;,&amp;amp;opt)!=EOF)
+	{
+		if(opt==3) break;
+		if(opt==0)
+		{
+			scanf(&amp;quot;%d&amp;quot;,&amp;amp;n);
+    		memset(c,0,sizeof(c));
+		}
+		else if(opt==1)
+		{
+            scanf(&amp;quot;%d%d%d&amp;quot;,&amp;amp;x,&amp;amp;y,&amp;amp;a);
+            ++x;++y;
+            add(x,y,a);
+        }
+        else
+		{
+            scanf(&amp;quot;%d%d%d%d&amp;quot;,&amp;amp;l,&amp;amp;b,&amp;amp;r,&amp;amp;t);
+            ++l,++b,++r,++t;
+            printf(&amp;quot;%d\n&amp;quot;,sum(l,b,r,t));
+        }
+	}
+    return 0;
+}
+
+poj3321
+
+
+
+
+#include&amp;lt;stdio.h&amp;gt;
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cmath&amp;gt;
+using namespace std;
+const int maxn=1e5+10;
+int n,q;
+int c[maxn];
+int a[maxn];
+int L[maxn],R[maxn];
+int head[maxn];
+int cnt;
+int dfn;
+struct edge{
+    int u,v;
+    int next;
+}E[2*maxn];
+
+void adde(int u,int v)
+{
+    E[++cnt].u=u;
+    E[cnt].v=v;
+    E[cnt].next=head[u];
+    head[u]=cnt;
+}
+
+int lowbit(int x)
+{
+    return x&amp;amp;(-x);
+}
+
+void add(int x,int v)
+{
+    for(int i=x;i&amp;lt;=n;i+=lowbit(i))
+        c[i]+=v;
+}
+
+int sum(int x)
+{
+    int ans=0;
+    for(int i=x;i;i-=lowbit(i))
+    {
+        ans+=c[i];
+    }
+    return ans;
+}
+
+
+void dfs(int u,int fa)
+{
+    L[u]=++dfn;
+    for(int i=head[u];i;i=E[i].next)
+    {
+        int v=E[i].v;
+        if(v==fa) continue;
+        dfs(v,u);
+    }
+    R[u]=dfn;
+}
+
+int main()
+{
+    scanf(&amp;quot;%d&amp;quot;,&amp;amp;n);
+    int u,v;
+    for(int i=1;i&amp;lt;=n;i++)
+    {
+        c[i]=lowbit(i);
+        a[i]=1;
+    }
+    for(int i=1;i&amp;lt;n;i++)
+    {
+        scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;u,&amp;amp;v);
+        adde(u,v);
+    }
+    dfs(1,-1);
+//	for(int i=1;i&amp;lt;=n;i++)//测试dfs序列 
+//    	printf(&amp;quot;--%d %d\n&amp;quot;,L[i],R[i]);
+//  	printf(&amp;quot;\n&amp;quot;);	
+    scanf(&amp;quot;%d&amp;quot;,&amp;amp;q);
+    char op[10];
+    for(int i=1;i&amp;lt;=q;i++)
+    {
+        scanf(&amp;quot;%s%d&amp;quot;,op,&amp;amp;v);
+        if(op[0]==&#39;C&#39;)
+        {
+        	int j=L[v];
+            if(a[j])//由于每个节点的dfn编号就是它的左值，所以直接修改左节点
+                add(j,-1);
+            else
+                add(j,1);
+            a[j]^=1;
+        }
+        else
+        {
+            int s1=sum(R[v]);
+            int s2=sum(L[v]-1);
+            printf(&amp;quot;%d\n&amp;quot;,s1-s2);
+        }
+    }
+    return 0;
+}
+
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://caifxh.github.io/post/shu-zhuang-shu-zu/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+                <!-- 翻页 -->
+                
+                </div>
+                <!--  -->
+                <div class="main-container-middle"></div>
+                <!--  -->
+                <div id="sidebar" class="main-container-right">
+
+                    <!-- 个人信息 -->
+                    
+    <div class="id_card i-card">
+        <div class="id_card-avatar" style="background-image: url(https://caifxh.github.io/images/avatar.png?v=1594530133163)">
+        </div>
+        <h1 class="id_card-title">
+            Gridea
+        </h1>
+        <h2 class="id_card-description">
+            温故而知新
+        </h2>
+        <!--  -->
+        <div class="id_card-sns">
+            <!-- github -->
+            
+                    <!-- twitter -->
+                    
+                            <!-- weibo -->
+                            
+                                    <!-- facebook -->
+                                    
+
+        </div>
+    </div>
+    
+
+                        <!-- 公告栏 -->
+                        
+
+                </div>
+            </div>
+
+
+
+            <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://caifxh.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+    <script>
+        $('#sidebar').stickySidebar({
+            topSpacing: 80,
+            // bottomSpacing: 60
+        });
+    </script>
+</body>
+
 </html>
