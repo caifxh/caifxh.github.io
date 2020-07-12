@@ -1,563 +1,925 @@
-<html>
-  <head>
-    <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Gridea</title>
-<link rel="shortcut icon" href="https://caifxh.github.io/favicon.ico?v=1594373367136">
-<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
-<link rel="stylesheet" href="https://caifxh.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="Gridea - Atom Feed" href="https://caifxh.github.io/atom.xml">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gridea</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="//cdnjs.loli.net/ajax/libs/mdui/0.4.3/css/mdui.min.css">
+    <link rel="stylesheet" href="media/live2d/css/live2d.css" />
+    
+</head>
+<body class=" mdui-appbar-with-toolbar  mdui-theme-primary-pink mdui-theme-accent-pink">
+<header class="mdui-toolbar mdui-color-pink mdui-appbar-fixed mdui-appbar-scroll-toolbar-hide" style="z-index: 1000">
+    <a href="javascript:;" mdui-drawer="{target: '#left-drawer',overlay:true}" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">menu</i></a>
+    <span class="mdui-typo-title">Gridea</span>
+    <div class="mdui-toolbar-spacer"></div>
+<!--    <a href="javascript:history.go(0);" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+    <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">more_vert</i></a>
+</header>
 
-
-
-    <meta name="description" content="温故而知新" />
-  </head>
-  <body>
-    <div class="main">
-      <div class="main-content">
-        <div class="site-header">
-  <a href="https://caifxh.github.io">
-  <img class="avatar" src="https://caifxh.github.io/images/avatar.png?v=1594373367136" alt="">
-  </a>
-  <h1 class="site-title">
-    Gridea
-  </h1>
-  <p class="site-description">
-    温故而知新
-  </p>
-  <div class="menu-container">
-    
-      
-        <a href="/" class="menu">
-          首页
-        </a>
-      
-    
-      
-        <a href="/archives" class="menu">
-          归档
-        </a>
-      
-    
-      
-        <a href="/tags" class="menu">
-          标签
-        </a>
-      
-    
-      
-        <a href="/post/about" class="menu">
-          关于
-        </a>
-      
-    
-  </div>
-  <div class="social-container">
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  </div>
+<div class="mdui-drawer mdui-color-white mdui-drawer-full-height mdui-drawer-close" id="left-drawer">
+    <ul class="mdui-list">
+        <li class="mdui-subheader">菜单</li>
+        
+        <li class="mdui-list-item mdui-ripple">
+            <a href="/" class="mdui-list-item-content">首页</a>
+        </li>
+        
+        <li class="mdui-list-item mdui-ripple">
+            <a href="/archives" class="mdui-list-item-content">归档</a>
+        </li>
+        
+        <li class="mdui-list-item mdui-ripple">
+            <a href="/tags" class="mdui-list-item-content">标签</a>
+        </li>
+        
+        <li class="mdui-list-item mdui-ripple">
+            <a href="/post/about" class="mdui-list-item-content">关于</a>
+        </li>
+        
+    </ul>
 </div>
 
-    
+<div class="mdui-container">
+    <div class="mdui-row">
+        <div class="mdui-col-md-10 mdui-col-offset-md-1 ">
+            
+            
+                <div class="mdui-typo-display-1 mdui-m-b-2 mdui-m-l-1">
+                    <div class="mdui-row">
+                        <div class="mdui-col-xs-12">2020</div>
+                    </div>
+                    <div class="mdui-row">
+                        
+                        
+                            <div class="mdui-col-xs-6 mdui-p-a-1">
+                                <div class="mdui-card">
+                                    <div class="mdui-card-media">
+                                        <img width=536px height=300px src="media/img/bai.jpg"/>
+                                        <div class="mdui-card-primary">
+                                            <div class="mdui-card-primary-title">搜索</div>
+                                            <div class="mdui-card-primary-subtitle">2020-05-30</div>
+                                        </div>
+                                    </div>
+                                    <div class="mdui-card-actions" style="float:right;">
+                                        <a href="https://caifxh.github.io/post/sou-suo/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        
+                        
+                            <div class="mdui-col-xs-6 mdui-p-a-1">
+                                <div class="mdui-card">
+                                    <div class="mdui-card-media">
+                                        <img width=536px height=300px src="media/img/bai.jpg"/>
+                                        <div class="mdui-card-primary">
+                                            <div class="mdui-card-primary-title">优先队列</div>
+                                            <div class="mdui-card-primary-subtitle">2020-05-05</div>
+                                        </div>
+                                    </div>
+                                    <div class="mdui-card-actions" style="float:right;">
+                                        <a href="https://caifxh.github.io/post/you-xian-dui-lie/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        
+                        
+                            <div class="mdui-col-xs-6 mdui-p-a-1">
+                                <div class="mdui-card">
+                                    <div class="mdui-card-media">
+                                        <img width=536px height=300px src="media/img/bai.jpg"/>
+                                        <div class="mdui-card-primary">
+                                            <div class="mdui-card-primary-title">STL</div>
+                                            <div class="mdui-card-primary-subtitle">2020-04-30</div>
+                                        </div>
+                                    </div>
+                                    <div class="mdui-card-actions" style="float:right;">
+                                        <a href="https://caifxh.github.io/post/stl/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        
+                        
+                            <div class="mdui-col-xs-6 mdui-p-a-1">
+                                <div class="mdui-card">
+                                    <div class="mdui-card-media">
+                                        <img width=536px height=300px src="media/img/bai.jpg"/>
+                                        <div class="mdui-card-primary">
+                                            <div class="mdui-card-primary-title">Codeforces Round #636 (Div. 3)</div>
+                                            <div class="mdui-card-primary-subtitle">2020-04-23</div>
+                                        </div>
+                                    </div>
+                                    <div class="mdui-card-actions" style="float:right;">
+                                        <a href="https://caifxh.github.io/post/codeforces-round-636-div-3/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        
+                        
+                            <div class="mdui-col-xs-6 mdui-p-a-1">
+                                <div class="mdui-card">
+                                    <div class="mdui-card-media">
+                                        <img width=536px height=300px src="media/img/bai.jpg"/>
+                                        <div class="mdui-card-primary">
+                                            <div class="mdui-card-primary-title">进阶指南第一章</div>
+                                            <div class="mdui-card-primary-subtitle">2020-04-17</div>
+                                        </div>
+                                    </div>
+                                    <div class="mdui-card-actions" style="float:right;">
+                                        <a href="https://caifxh.github.io/post/jin-jie-zhi-nan-di-yi-zhang/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        
+                        
+                            <div class="mdui-col-xs-6 mdui-p-a-1">
+                                <div class="mdui-card">
+                                    <div class="mdui-card-media">
+                                        <img width=536px height=300px src="media/img/bai.jpg"/>
+                                        <div class="mdui-card-primary">
+                                            <div class="mdui-card-primary-title">康托展开</div>
+                                            <div class="mdui-card-primary-subtitle">2020-04-15</div>
+                                        </div>
+                                    </div>
+                                    <div class="mdui-card-actions" style="float:right;">
+                                        <a href="https://caifxh.github.io/post/kang-tuo-zhan-kai/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        
+                        
+                            <div class="mdui-col-xs-6 mdui-p-a-1">
+                                <div class="mdui-card">
+                                    <div class="mdui-card-media">
+                                        <img width=536px height=300px src="media/img/bai.jpg"/>
+                                        <div class="mdui-card-primary">
+                                            <div class="mdui-card-primary-title">牛客寒假第三场</div>
+                                            <div class="mdui-card-primary-subtitle">2020-04-14</div>
+                                        </div>
+                                    </div>
+                                    <div class="mdui-card-actions" style="float:right;">
+                                        <a href="https://caifxh.github.io/post/niu-ke-han-jia-di-san-chang/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        
+                        
+                            <div class="mdui-col-xs-6 mdui-p-a-1">
+                                <div class="mdui-card">
+                                    <div class="mdui-card-media">
+                                        <img width=536px height=300px src="media/img/bai.jpg"/>
+                                        <div class="mdui-card-primary">
+                                            <div class="mdui-card-primary-title">贪心</div>
+                                            <div class="mdui-card-primary-subtitle">2020-04-14</div>
+                                        </div>
+                                    </div>
+                                    <div class="mdui-card-actions" style="float:right;">
+                                        <a href="https://caifxh.github.io/post/tan-xin/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        
+                        
+                            <div class="mdui-col-xs-6 mdui-p-a-1">
+                                <div class="mdui-card">
+                                    <div class="mdui-card-media">
+                                        <img width=536px height=300px src="media/img/bai.jpg"/>
+                                        <div class="mdui-card-primary">
+                                            <div class="mdui-card-primary-title">牛客寒假第二场</div>
+                                            <div class="mdui-card-primary-subtitle">2020-04-14</div>
+                                        </div>
+                                    </div>
+                                    <div class="mdui-card-actions" style="float:right;">
+                                        <a href="https://caifxh.github.io/post/niu-ke-han-jia-di-er-chang/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        
+                        
+                            <div class="mdui-col-xs-6 mdui-p-a-1">
+                                <div class="mdui-card">
+                                    <div class="mdui-card-media">
+                                        <img width=536px height=300px src="media/img/bai.jpg"/>
+                                        <div class="mdui-card-primary">
+                                            <div class="mdui-card-primary-title">二分</div>
+                                            <div class="mdui-card-primary-subtitle">2020-04-13</div>
+                                        </div>
+                                    </div>
+                                    <div class="mdui-card-actions" style="float:right;">
+                                        <a href="https://caifxh.github.io/post/er-fen/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        
+                        
+                            <div class="mdui-col-xs-6 mdui-p-a-1">
+                                <div class="mdui-card">
+                                    <div class="mdui-card-media">
+                                        <img width=536px height=300px src="media/img/bai.jpg"/>
+                                        <div class="mdui-card-primary">
+                                            <div class="mdui-card-primary-title">线段树（一）单点修改</div>
+                                            <div class="mdui-card-primary-subtitle">2020-04-12</div>
+                                        </div>
+                                    </div>
+                                    <div class="mdui-card-actions" style="float:right;">
+                                        <a href="https://caifxh.github.io/post/xian-duan-shu-yi-dan-dian-xiu-gai/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        
+                        
+                            <div class="mdui-col-xs-6 mdui-p-a-1">
+                                <div class="mdui-card">
+                                    <div class="mdui-card-media">
+                                        <img width=536px height=300px src="media/img/bai.jpg"/>
+                                        <div class="mdui-card-primary">
+                                            <div class="mdui-card-primary-title">AC自动机</div>
+                                            <div class="mdui-card-primary-subtitle">2020-04-10</div>
+                                        </div>
+                                    </div>
+                                    <div class="mdui-card-actions" style="float:right;">
+                                        <a href="https://caifxh.github.io/post/ac-zi-dong-ji/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        
+                        
+                            <div class="mdui-col-xs-6 mdui-p-a-1">
+                                <div class="mdui-card">
+                                    <div class="mdui-card-media">
+                                        <img width=536px height=300px src="media/img/bai.jpg"/>
+                                        <div class="mdui-card-primary">
+                                            <div class="mdui-card-primary-title">Trie</div>
+                                            <div class="mdui-card-primary-subtitle">2020-04-10</div>
+                                        </div>
+                                    </div>
+                                    <div class="mdui-card-actions" style="float:right;">
+                                        <a href="https://caifxh.github.io/post/trie/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        
+                        
+                            <div class="mdui-col-xs-6 mdui-p-a-1">
+                                <div class="mdui-card">
+                                    <div class="mdui-card-media">
+                                        <img width=536px height=300px src="media/img/bai.jpg"/>
+                                        <div class="mdui-card-primary">
+                                            <div class="mdui-card-primary-title">Manacher</div>
+                                            <div class="mdui-card-primary-subtitle">2020-04-10</div>
+                                        </div>
+                                    </div>
+                                    <div class="mdui-card-actions" style="float:right;">
+                                        <a href="https://caifxh.github.io/post/manacher/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        
+                        
+                            <div class="mdui-col-xs-6 mdui-p-a-1">
+                                <div class="mdui-card">
+                                    <div class="mdui-card-media">
+                                        <img width=536px height=300px src="media/img/bai.jpg"/>
+                                        <div class="mdui-card-primary">
+                                            <div class="mdui-card-primary-title">尺取法</div>
+                                            <div class="mdui-card-primary-subtitle">2020-04-10</div>
+                                        </div>
+                                    </div>
+                                    <div class="mdui-card-actions" style="float:right;">
+                                        <a href="https://caifxh.github.io/post/chi-qu-fa/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        
+                        
+                            <div class="mdui-col-xs-6 mdui-p-a-1">
+                                <div class="mdui-card">
+                                    <div class="mdui-card-media">
+                                        <img width=536px height=300px src="media/img/bai.jpg"/>
+                                        <div class="mdui-card-primary">
+                                            <div class="mdui-card-primary-title">四边形不等式</div>
+                                            <div class="mdui-card-primary-subtitle">2020-04-09</div>
+                                        </div>
+                                    </div>
+                                    <div class="mdui-card-actions" style="float:right;">
+                                        <a href="https://caifxh.github.io/post/si-bian-xing-bu-deng-shi/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        
+                        
+                            <div class="mdui-col-xs-6 mdui-p-a-1">
+                                <div class="mdui-card">
+                                    <div class="mdui-card-media">
+                                        <img width=536px height=300px src="media/img/bai.jpg"/>
+                                        <div class="mdui-card-primary">
+                                            <div class="mdui-card-primary-title">斜率优化</div>
+                                            <div class="mdui-card-primary-subtitle">2020-04-08</div>
+                                        </div>
+                                    </div>
+                                    <div class="mdui-card-actions" style="float:right;">
+                                        <a href="https://caifxh.github.io/post/xie-lu-you-hua/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        
+                        
+                            <div class="mdui-col-xs-6 mdui-p-a-1">
+                                <div class="mdui-card">
+                                    <div class="mdui-card-media">
+                                        <img width=536px height=300px src="media/img/bai.jpg"/>
+                                        <div class="mdui-card-primary">
+                                            <div class="mdui-card-primary-title">前缀和 差分</div>
+                                            <div class="mdui-card-primary-subtitle">2020-04-08</div>
+                                        </div>
+                                    </div>
+                                    <div class="mdui-card-actions" style="float:right;">
+                                        <a href="https://caifxh.github.io/post/qian-zhui-he-chai-fen/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        
+                        
+                            <div class="mdui-col-xs-6 mdui-p-a-1">
+                                <div class="mdui-card">
+                                    <div class="mdui-card-media">
+                                        <img width=536px height=300px src="media/img/bai.jpg"/>
+                                        <div class="mdui-card-primary">
+                                            <div class="mdui-card-primary-title">单调数据结构</div>
+                                            <div class="mdui-card-primary-subtitle">2020-04-08</div>
+                                        </div>
+                                    </div>
+                                    <div class="mdui-card-actions" style="float:right;">
+                                        <a href="https://caifxh.github.io/post/dan-diao-shu-ju-jie-gou/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        
+                        
+                            <div class="mdui-col-xs-6 mdui-p-a-1">
+                                <div class="mdui-card">
+                                    <div class="mdui-card-media">
+                                        <img width=536px height=300px src="media/img/bai.jpg"/>
+                                        <div class="mdui-card-primary">
+                                            <div class="mdui-card-primary-title">高精度</div>
+                                            <div class="mdui-card-primary-subtitle">2020-04-08</div>
+                                        </div>
+                                    </div>
+                                    <div class="mdui-card-actions" style="float:right;">
+                                        <a href="https://caifxh.github.io/post/gao-jing-du/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        
+                        
+                            <div class="mdui-col-xs-6 mdui-p-a-1">
+                                <div class="mdui-card">
+                                    <div class="mdui-card-media">
+                                        <img width=536px height=300px src="media/img/bai.jpg"/>
+                                        <div class="mdui-card-primary">
+                                            <div class="mdui-card-primary-title">树形dp</div>
+                                            <div class="mdui-card-primary-subtitle">2020-04-06</div>
+                                        </div>
+                                    </div>
+                                    <div class="mdui-card-actions" style="float:right;">
+                                        <a href="https://caifxh.github.io/post/shu-xing-dp/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        
+                        
+                            <div class="mdui-col-xs-6 mdui-p-a-1">
+                                <div class="mdui-card">
+                                    <div class="mdui-card-media">
+                                        <img width=536px height=300px src="media/img/bai.jpg"/>
+                                        <div class="mdui-card-primary">
+                                            <div class="mdui-card-primary-title">LCA</div>
+                                            <div class="mdui-card-primary-subtitle">2020-04-06</div>
+                                        </div>
+                                    </div>
+                                    <div class="mdui-card-actions" style="float:right;">
+                                        <a href="https://caifxh.github.io/post/lca/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        
+                        
+                            <div class="mdui-col-xs-6 mdui-p-a-1">
+                                <div class="mdui-card">
+                                    <div class="mdui-card-media">
+                                        <img width=536px height=300px src="media/img/bai.jpg"/>
+                                        <div class="mdui-card-primary">
+                                            <div class="mdui-card-primary-title">状态机</div>
+                                            <div class="mdui-card-primary-subtitle">2020-04-05</div>
+                                        </div>
+                                    </div>
+                                    <div class="mdui-card-actions" style="float:right;">
+                                        <a href="https://caifxh.github.io/post/zhuang-tai-ji/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        
+                        
+                            <div class="mdui-col-xs-6 mdui-p-a-1">
+                                <div class="mdui-card">
+                                    <div class="mdui-card-media">
+                                        <img width=536px height=300px src="media/img/bai.jpg"/>
+                                        <div class="mdui-card-primary">
+                                            <div class="mdui-card-primary-title">欧拉路径</div>
+                                            <div class="mdui-card-primary-subtitle">2020-04-04</div>
+                                        </div>
+                                    </div>
+                                    <div class="mdui-card-actions" style="float:right;">
+                                        <a href="https://caifxh.github.io/post/ou-la-lu-jing/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        
+                        
+                            <div class="mdui-col-xs-6 mdui-p-a-1">
+                                <div class="mdui-card">
+                                    <div class="mdui-card-media">
+                                        <img width=536px height=300px src="media/img/bai.jpg"/>
+                                        <div class="mdui-card-primary">
+                                            <div class="mdui-card-primary-title">扩展KMP</div>
+                                            <div class="mdui-card-primary-subtitle">2020-04-03</div>
+                                        </div>
+                                    </div>
+                                    <div class="mdui-card-actions" style="float:right;">
+                                        <a href="https://caifxh.github.io/post/kuo-zhan-kmp/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        
+                        
+                            <div class="mdui-col-xs-6 mdui-p-a-1">
+                                <div class="mdui-card">
+                                    <div class="mdui-card-media">
+                                        <img width=536px height=300px src="media/img/bai.jpg"/>
+                                        <div class="mdui-card-primary">
+                                            <div class="mdui-card-primary-title">二分图</div>
+                                            <div class="mdui-card-primary-subtitle">2020-04-03</div>
+                                        </div>
+                                    </div>
+                                    <div class="mdui-card-actions" style="float:right;">
+                                        <a href="https://caifxh.github.io/post/er-fen-tu/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        
+                        
+                            <div class="mdui-col-xs-6 mdui-p-a-1">
+                                <div class="mdui-card">
+                                    <div class="mdui-card-media">
+                                        <img width=536px height=300px src="media/img/bai.jpg"/>
+                                        <div class="mdui-card-primary">
+                                            <div class="mdui-card-primary-title">树上差分</div>
+                                            <div class="mdui-card-primary-subtitle">2020-04-03</div>
+                                        </div>
+                                    </div>
+                                    <div class="mdui-card-actions" style="float:right;">
+                                        <a href="https://caifxh.github.io/post/shu-shang-chai-fen/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        
+                        
+                            <div class="mdui-col-xs-6 mdui-p-a-1">
+                                <div class="mdui-card">
+                                    <div class="mdui-card-media">
+                                        <img width=536px height=300px src="media/img/bai.jpg"/>
+                                        <div class="mdui-card-primary">
+                                            <div class="mdui-card-primary-title">牛客寒假第一场</div>
+                                            <div class="mdui-card-primary-subtitle">2020-04-02</div>
+                                        </div>
+                                    </div>
+                                    <div class="mdui-card-actions" style="float:right;">
+                                        <a href="https://caifxh.github.io/post/niu-ke-han-jia-di-yi-chang/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        
+                        
+                            <div class="mdui-col-xs-6 mdui-p-a-1">
+                                <div class="mdui-card">
+                                    <div class="mdui-card-media">
+                                        <img width=536px height=300px src="media/img/bai.jpg"/>
+                                        <div class="mdui-card-primary">
+                                            <div class="mdui-card-primary-title">DP其他优化</div>
+                                            <div class="mdui-card-primary-subtitle">2020-04-02</div>
+                                        </div>
+                                    </div>
+                                    <div class="mdui-card-actions" style="float:right;">
+                                        <a href="https://caifxh.github.io/post/dp-you-hua/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        
+                        
+                            <div class="mdui-col-xs-6 mdui-p-a-1">
+                                <div class="mdui-card">
+                                    <div class="mdui-card-media">
+                                        <img width=536px height=300px src="media/img/bai.jpg"/>
+                                        <div class="mdui-card-primary">
+                                            <div class="mdui-card-primary-title">状压dp</div>
+                                            <div class="mdui-card-primary-subtitle">2020-04-01</div>
+                                        </div>
+                                    </div>
+                                    <div class="mdui-card-actions" style="float:right;">
+                                        <a href="https://caifxh.github.io/post/zhuang-ya-dp/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        
+                        
+                            <div class="mdui-col-xs-6 mdui-p-a-1">
+                                <div class="mdui-card">
+                                    <div class="mdui-card-media">
+                                        <img width=536px height=300px src="media/img/bai.jpg"/>
+                                        <div class="mdui-card-primary">
+                                            <div class="mdui-card-primary-title">无向图/有向图的连通性复习</div>
+                                            <div class="mdui-card-primary-subtitle">2020-04-01</div>
+                                        </div>
+                                    </div>
+                                    <div class="mdui-card-actions" style="float:right;">
+                                        <a href="https://caifxh.github.io/post/wu-xiang-tu-you-xiang-tu-de-lian-tong-xing-fu-xi/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        
+                        
+                            <div class="mdui-col-xs-6 mdui-p-a-1">
+                                <div class="mdui-card">
+                                    <div class="mdui-card-media">
+                                        <img width=536px height=300px src="media/img/bai.jpg"/>
+                                        <div class="mdui-card-primary">
+                                            <div class="mdui-card-primary-title">求组合数</div>
+                                            <div class="mdui-card-primary-subtitle">2020-03-28</div>
+                                        </div>
+                                    </div>
+                                    <div class="mdui-card-actions" style="float:right;">
+                                        <a href="https://caifxh.github.io/post/qiu-zu-he-shu/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        
+                        
+                            <div class="mdui-col-xs-6 mdui-p-a-1">
+                                <div class="mdui-card">
+                                    <div class="mdui-card-media">
+                                        <img width=536px height=300px src="media/img/bai.jpg"/>
+                                        <div class="mdui-card-primary">
+                                            <div class="mdui-card-primary-title">倍增 ST表 RMQ</div>
+                                            <div class="mdui-card-primary-subtitle">2020-03-28</div>
+                                        </div>
+                                    </div>
+                                    <div class="mdui-card-actions" style="float:right;">
+                                        <a href="https://caifxh.github.io/post/bei-zeng-st-biao-rmq/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        
+                        
+                            <div class="mdui-col-xs-6 mdui-p-a-1">
+                                <div class="mdui-card">
+                                    <div class="mdui-card-media">
+                                        <img width=536px height=300px src="media/img/bai.jpg"/>
+                                        <div class="mdui-card-primary">
+                                            <div class="mdui-card-primary-title">数位dp</div>
+                                            <div class="mdui-card-primary-subtitle">2020-03-28</div>
+                                        </div>
+                                    </div>
+                                    <div class="mdui-card-actions" style="float:right;">
+                                        <a href="https://caifxh.github.io/post/shu-wei-dp/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        
+                        
+                            <div class="mdui-col-xs-6 mdui-p-a-1">
+                                <div class="mdui-card">
+                                    <div class="mdui-card-media">
+                                        <img width=536px height=300px src="media/img/bai.jpg"/>
+                                        <div class="mdui-card-primary">
+                                            <div class="mdui-card-primary-title">字符串复习（二）</div>
+                                            <div class="mdui-card-primary-subtitle">2020-03-27</div>
+                                        </div>
+                                    </div>
+                                    <div class="mdui-card-actions" style="float:right;">
+                                        <a href="https://caifxh.github.io/post/zi-fu-chuan-fu-xi-er/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        
+                        
+                            <div class="mdui-col-xs-6 mdui-p-a-1">
+                                <div class="mdui-card">
+                                    <div class="mdui-card-media">
+                                        <img width=536px height=300px src="media/img/bai.jpg"/>
+                                        <div class="mdui-card-primary">
+                                            <div class="mdui-card-primary-title">单调队列优化dp</div>
+                                            <div class="mdui-card-primary-subtitle">2020-03-27</div>
+                                        </div>
+                                    </div>
+                                    <div class="mdui-card-actions" style="float:right;">
+                                        <a href="https://caifxh.github.io/post/dan-diao-dui-lie-you-hua-dp/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        
+                        
+                            <div class="mdui-col-xs-6 mdui-p-a-1">
+                                <div class="mdui-card">
+                                    <div class="mdui-card-media">
+                                        <img width=536px height=300px src="media/img/bai.jpg"/>
+                                        <div class="mdui-card-primary">
+                                            <div class="mdui-card-primary-title">树状数组</div>
+                                            <div class="mdui-card-primary-subtitle">2020-03-27</div>
+                                        </div>
+                                    </div>
+                                    <div class="mdui-card-actions" style="float:right;">
+                                        <a href="https://caifxh.github.io/post/shu-zhuang-shu-zu/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        
+                        
+                            <div class="mdui-col-xs-6 mdui-p-a-1">
+                                <div class="mdui-card">
+                                    <div class="mdui-card-media">
+                                        <img width=536px height=300px src="media/img/bai.jpg"/>
+                                        <div class="mdui-card-primary">
+                                            <div class="mdui-card-primary-title">数论</div>
+                                            <div class="mdui-card-primary-subtitle">2020-03-26</div>
+                                        </div>
+                                    </div>
+                                    <div class="mdui-card-actions" style="float:right;">
+                                        <a href="https://caifxh.github.io/post/shu-lun/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        
+                        
+                            <div class="mdui-col-xs-6 mdui-p-a-1">
+                                <div class="mdui-card">
+                                    <div class="mdui-card-media">
+                                        <img width=536px height=300px src="media/img/bai.jpg"/>
+                                        <div class="mdui-card-primary">
+                                            <div class="mdui-card-primary-title">快速幂&amp;矩阵快速幂</div>
+                                            <div class="mdui-card-primary-subtitle">2020-03-26</div>
+                                        </div>
+                                    </div>
+                                    <div class="mdui-card-actions" style="float:right;">
+                                        <a href="https://caifxh.github.io/post/kuai-su-mi-andju-zhen-kuai-su-mi/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        
+                        
+                            <div class="mdui-col-xs-6 mdui-p-a-1">
+                                <div class="mdui-card">
+                                    <div class="mdui-card-media">
+                                        <img width=536px height=300px src="media/img/bai.jpg"/>
+                                        <div class="mdui-card-primary">
+                                            <div class="mdui-card-primary-title">线性dp</div>
+                                            <div class="mdui-card-primary-subtitle">2020-03-26</div>
+                                        </div>
+                                    </div>
+                                    <div class="mdui-card-actions" style="float:right;">
+                                        <a href="https://caifxh.github.io/post/xian-xing-dp/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        
+                        
+                            <div class="mdui-col-xs-6 mdui-p-a-1">
+                                <div class="mdui-card">
+                                    <div class="mdui-card-media">
+                                        <img width=536px height=300px src="media/img/bai.jpg"/>
+                                        <div class="mdui-card-primary">
+                                            <div class="mdui-card-primary-title">字符串复习（一）</div>
+                                            <div class="mdui-card-primary-subtitle">2020-03-26</div>
+                                        </div>
+                                    </div>
+                                    <div class="mdui-card-actions" style="float:right;">
+                                        <a href="https://caifxh.github.io/post/zi-fu-chuan-fu-xi-yi/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        
+                        
+                        
+                    </div>
+                </div>
+            
+                <div class="mdui-typo-display-1 mdui-m-b-2 mdui-m-l-1">
+                    <div class="mdui-row">
+                        <div class="mdui-col-xs-12">2018</div>
+                    </div>
+                    <div class="mdui-row">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                            <div class="mdui-col-xs-6 mdui-p-a-1">
+                                <div class="mdui-card">
+                                    <div class="mdui-card-media">
+                                        <img width=536px height=300px src=" https://caifxh.github.io/post-images/hello-gridea.png"/>
+                                        <div class="mdui-card-primary">
+                                            <div class="mdui-card-primary-title">Hello Gridea</div>
+                                            <div class="mdui-card-primary-subtitle">2018-12-12</div>
+                                        </div>
+                                    </div>
+                                    <div class="mdui-card-actions" style="float:right;">
+                                        <a href="https://caifxh.github.io/post/hello-gridea/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        
+                    </div>
+                </div>
+            
+        </div>
+    </div>
+    <div class="mdui-row">
         
 
-<div class="archives-container">
-  
-    <h2 class="year">2020</h2>
-    
-      
-        <a href="https://caifxh.github.io/post/sou-suo/" class="post">
-          <h2 class="post-title">
-            搜索
-          </h2>
-          <div class="time">2020-05-30</div>
-        </a>
-      
-    
-      
-        <a href="https://caifxh.github.io/post/you-xian-dui-lie/" class="post">
-          <h2 class="post-title">
-            优先队列
-          </h2>
-          <div class="time">2020-05-05</div>
-        </a>
-      
-    
-      
-        <a href="https://caifxh.github.io/post/stl/" class="post">
-          <h2 class="post-title">
-            STL
-          </h2>
-          <div class="time">2020-04-30</div>
-        </a>
-      
-    
-      
-        <a href="https://caifxh.github.io/post/codeforces-round-636-div-3/" class="post">
-          <h2 class="post-title">
-            Codeforces Round #636 (Div. 3)
-          </h2>
-          <div class="time">2020-04-23</div>
-        </a>
-      
-    
-      
-        <a href="https://caifxh.github.io/post/jin-jie-zhi-nan-di-yi-zhang/" class="post">
-          <h2 class="post-title">
-            进阶指南第一章
-          </h2>
-          <div class="time">2020-04-17</div>
-        </a>
-      
-    
-      
-        <a href="https://caifxh.github.io/post/kang-tuo-zhan-kai/" class="post">
-          <h2 class="post-title">
-            康托展开
-          </h2>
-          <div class="time">2020-04-15</div>
-        </a>
-      
-    
-      
-        <a href="https://caifxh.github.io/post/niu-ke-han-jia-di-san-chang/" class="post">
-          <h2 class="post-title">
-            牛客寒假第三场
-          </h2>
-          <div class="time">2020-04-14</div>
-        </a>
-      
-    
-      
-        <a href="https://caifxh.github.io/post/tan-xin/" class="post">
-          <h2 class="post-title">
-            贪心
-          </h2>
-          <div class="time">2020-04-14</div>
-        </a>
-      
-    
-      
-        <a href="https://caifxh.github.io/post/niu-ke-han-jia-di-er-chang/" class="post">
-          <h2 class="post-title">
-            牛客寒假第二场
-          </h2>
-          <div class="time">2020-04-14</div>
-        </a>
-      
-    
-      
-        <a href="https://caifxh.github.io/post/er-fen/" class="post">
-          <h2 class="post-title">
-            二分
-          </h2>
-          <div class="time">2020-04-13</div>
-        </a>
-      
-    
-      
-        <a href="https://caifxh.github.io/post/xian-duan-shu-yi-dan-dian-xiu-gai/" class="post">
-          <h2 class="post-title">
-            线段树（一）单点修改
-          </h2>
-          <div class="time">2020-04-12</div>
-        </a>
-      
-    
-      
-        <a href="https://caifxh.github.io/post/ac-zi-dong-ji/" class="post">
-          <h2 class="post-title">
-            AC自动机
-          </h2>
-          <div class="time">2020-04-10</div>
-        </a>
-      
-    
-      
-        <a href="https://caifxh.github.io/post/trie/" class="post">
-          <h2 class="post-title">
-            Trie
-          </h2>
-          <div class="time">2020-04-10</div>
-        </a>
-      
-    
-      
-        <a href="https://caifxh.github.io/post/manacher/" class="post">
-          <h2 class="post-title">
-            Manacher
-          </h2>
-          <div class="time">2020-04-10</div>
-        </a>
-      
-    
-      
-        <a href="https://caifxh.github.io/post/chi-qu-fa/" class="post">
-          <h2 class="post-title">
-            尺取法
-          </h2>
-          <div class="time">2020-04-10</div>
-        </a>
-      
-    
-      
-        <a href="https://caifxh.github.io/post/si-bian-xing-bu-deng-shi/" class="post">
-          <h2 class="post-title">
-            四边形不等式
-          </h2>
-          <div class="time">2020-04-09</div>
-        </a>
-      
-    
-      
-        <a href="https://caifxh.github.io/post/xie-lu-you-hua/" class="post">
-          <h2 class="post-title">
-            斜率优化
-          </h2>
-          <div class="time">2020-04-08</div>
-        </a>
-      
-    
-      
-        <a href="https://caifxh.github.io/post/qian-zhui-he-chai-fen/" class="post">
-          <h2 class="post-title">
-            前缀和 差分
-          </h2>
-          <div class="time">2020-04-08</div>
-        </a>
-      
-    
-      
-        <a href="https://caifxh.github.io/post/dan-diao-shu-ju-jie-gou/" class="post">
-          <h2 class="post-title">
-            单调数据结构
-          </h2>
-          <div class="time">2020-04-08</div>
-        </a>
-      
-    
-      
-        <a href="https://caifxh.github.io/post/gao-jing-du/" class="post">
-          <h2 class="post-title">
-            高精度
-          </h2>
-          <div class="time">2020-04-08</div>
-        </a>
-      
-    
-      
-        <a href="https://caifxh.github.io/post/shu-xing-dp/" class="post">
-          <h2 class="post-title">
-            树形dp
-          </h2>
-          <div class="time">2020-04-06</div>
-        </a>
-      
-    
-      
-        <a href="https://caifxh.github.io/post/lca/" class="post">
-          <h2 class="post-title">
-            LCA
-          </h2>
-          <div class="time">2020-04-06</div>
-        </a>
-      
-    
-      
-        <a href="https://caifxh.github.io/post/zhuang-tai-ji/" class="post">
-          <h2 class="post-title">
-            状态机
-          </h2>
-          <div class="time">2020-04-05</div>
-        </a>
-      
-    
-      
-        <a href="https://caifxh.github.io/post/ou-la-lu-jing/" class="post">
-          <h2 class="post-title">
-            欧拉路径
-          </h2>
-          <div class="time">2020-04-04</div>
-        </a>
-      
-    
-      
-        <a href="https://caifxh.github.io/post/kuo-zhan-kmp/" class="post">
-          <h2 class="post-title">
-            扩展KMP
-          </h2>
-          <div class="time">2020-04-03</div>
-        </a>
-      
-    
-      
-        <a href="https://caifxh.github.io/post/er-fen-tu/" class="post">
-          <h2 class="post-title">
-            二分图
-          </h2>
-          <div class="time">2020-04-03</div>
-        </a>
-      
-    
-      
-        <a href="https://caifxh.github.io/post/shu-shang-chai-fen/" class="post">
-          <h2 class="post-title">
-            树上差分
-          </h2>
-          <div class="time">2020-04-03</div>
-        </a>
-      
-    
-      
-        <a href="https://caifxh.github.io/post/niu-ke-han-jia-di-yi-chang/" class="post">
-          <h2 class="post-title">
-            牛客寒假第一场
-          </h2>
-          <div class="time">2020-04-02</div>
-        </a>
-      
-    
-      
-        <a href="https://caifxh.github.io/post/dp-you-hua/" class="post">
-          <h2 class="post-title">
-            DP其他优化
-          </h2>
-          <div class="time">2020-04-02</div>
-        </a>
-      
-    
-      
-        <a href="https://caifxh.github.io/post/zhuang-ya-dp/" class="post">
-          <h2 class="post-title">
-            状压dp
-          </h2>
-          <div class="time">2020-04-01</div>
-        </a>
-      
-    
-      
-        <a href="https://caifxh.github.io/post/wu-xiang-tu-you-xiang-tu-de-lian-tong-xing-fu-xi/" class="post">
-          <h2 class="post-title">
-            无向图/有向图的连通性复习
-          </h2>
-          <div class="time">2020-04-01</div>
-        </a>
-      
-    
-      
-        <a href="https://caifxh.github.io/post/qiu-zu-he-shu/" class="post">
-          <h2 class="post-title">
-            求组合数
-          </h2>
-          <div class="time">2020-03-28</div>
-        </a>
-      
-    
-      
-        <a href="https://caifxh.github.io/post/bei-zeng-st-biao-rmq/" class="post">
-          <h2 class="post-title">
-            倍增 ST表 RMQ
-          </h2>
-          <div class="time">2020-03-28</div>
-        </a>
-      
-    
-      
-        <a href="https://caifxh.github.io/post/shu-wei-dp/" class="post">
-          <h2 class="post-title">
-            数位dp
-          </h2>
-          <div class="time">2020-03-28</div>
-        </a>
-      
-    
-      
-        <a href="https://caifxh.github.io/post/zi-fu-chuan-fu-xi-er/" class="post">
-          <h2 class="post-title">
-            字符串复习（二）
-          </h2>
-          <div class="time">2020-03-27</div>
-        </a>
-      
-    
-      
-        <a href="https://caifxh.github.io/post/dan-diao-dui-lie-you-hua-dp/" class="post">
-          <h2 class="post-title">
-            单调队列优化dp
-          </h2>
-          <div class="time">2020-03-27</div>
-        </a>
-      
-    
-      
-        <a href="https://caifxh.github.io/post/shu-zhuang-shu-zu/" class="post">
-          <h2 class="post-title">
-            树状数组
-          </h2>
-          <div class="time">2020-03-27</div>
-        </a>
-      
-    
-      
-        <a href="https://caifxh.github.io/post/shu-lun/" class="post">
-          <h2 class="post-title">
-            数论
-          </h2>
-          <div class="time">2020-03-26</div>
-        </a>
-      
-    
-      
-        <a href="https://caifxh.github.io/post/kuai-su-mi-andju-zhen-kuai-su-mi/" class="post">
-          <h2 class="post-title">
-            快速幂&amp;矩阵快速幂
-          </h2>
-          <div class="time">2020-03-26</div>
-        </a>
-      
-    
-      
-        <a href="https://caifxh.github.io/post/xian-xing-dp/" class="post">
-          <h2 class="post-title">
-            线性dp
-          </h2>
-          <div class="time">2020-03-26</div>
-        </a>
-      
-    
-      
-        <a href="https://caifxh.github.io/post/zi-fu-chuan-fu-xi-yi/" class="post">
-          <h2 class="post-title">
-            字符串复习（一）
-          </h2>
-          <div class="time">2020-03-26</div>
-        </a>
-      
-    
-      
-    
-  
-    <h2 class="year">2018</h2>
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-        <a href="https://caifxh.github.io/post/hello-gridea/" class="post">
-          <h2 class="post-title">
-            Hello Gridea
-          </h2>
-          <div class="time">2018-12-12</div>
-        </a>
-      
-    
-  
-</div>
-
-    
-        <div class="pagination-container">
-  
-  
-</div>
-
-    
-        <div class="site-footer">
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
-  <a class="rss" href="https://caifxh.github.io/atom.xml" target="_blank">
-    <i class="ri-rss-line"></i> RSS
-  </a>
-</div>
-
-      </div>
     </div>
-  </body>
+</div>
+<footer class="mdui-container footer ">
+    <div class="head_card-offset"></div>
+    <div class="mdui-row mdui-row-gapless">
+        <div class="k-container">
+            <img width="100%" src="/media/img/skirt.png">
+        </div>
+    </div>
+
+    <div class="site-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+</footer>
+<div id="landlord" style="left:5px;bottom:0px;">
+    <div class="message" style="opacity:0"></div>
+    <canvas id="live2d" width="500" height="560" class="live2d"></canvas>
+    <div class="live_talk_input_body">
+        <div class="live_talk_input_name_body">
+            <input name="name" type="text" class="live_talk_name white_input" id="AIuserName" autocomplete="off" placeholder="你的名字" />
+        </div>
+        <div class="live_talk_input_text_body">
+            <input name="talk" type="text" class="live_talk_talk white_input" id="AIuserText" autocomplete="off" placeholder="要和我聊什么呀？"/>
+            <button type="button" class="live_talk_send_btn" id="talk_send">发送</button>
+        </div>
+    </div>
+    <input name="live_talk" id="live_talk" value="1" type="hidden" />
+    <div class="live_ico_box">
+        <div class="live_ico_item type_info" id="showInfoBtn"></div>
+        <div class="live_ico_item type_talk" id="showTalkBtn"></div>
+        <div class="live_ico_item type_music" id="musicButton"></div>
+        <div class="live_ico_item type_youdu" id="youduButton"></div>
+        <div class="live_ico_item type_quit" id="hideButton"></div>
+        <input name="live_statu_val" id="live_statu_val" value="0" type="hidden" />
+        <audio src="" style="display:none;" id="live2d_bgm" data-bgm="0" preload="none"></audio>
+        <input name="live2dBGM" value="https://img.apa70.com/123.mp3" type="hidden">
+        <input name="live2dBGM" value="https://img.apa70.com/123.mp3" type="hidden">
+        <input id="duType" value="douqilai,l2d_caihong" type="hidden">
+    </div>
+</div>
+<div id="open_live2d">召唤伊斯特瓦尔</div>
+<script>
+    var message_Path = '/media/live2d/';//资源目录，如果目录不对请更改
+    var talkAPI = "";//如果有类似图灵机器人的聊天接口请填写接口路径
+</script>
+<!--<script src="/media/js/jquery-3.3.1.min.js"></script>-->
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" src="/media/live2d/js/live2d.js"></script>
+<script type="text/javascript" src="/media/live2d/js/message.js"></script>
+
+</body>
+<script src="//cdnjs.loli.net/ajax/libs/mdui/0.4.3/js/mdui.min.js"></script>
 </html>
